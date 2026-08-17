@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sparziel-Planer · HeiBen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;1,400&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f3eee5;--bg2:#ebe3d4;--paper:#fffdf8;--ink:#1f1c17;--ink2:#524a3e;--rule:#d8cdb7;--terra:#b04a31;--ochre:#a97a1d;--moss:#4a5c39;--burg:#792d29;--aub:#6b3951}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:'Manrope',system-ui,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:760px;margin:0 auto;padding:1.6rem 1.1rem 5rem}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.32em;text-transform:uppercase;color:var(--terra)}
+h1{font-family:'Fraunces',serif;font-weight:400;font-size:clamp(2rem,6.5vw,3.2rem);line-height:1.02;letter-spacing:-.02em;margin:.45rem 0 .5rem}
+h1 em{font-style:italic;color:var(--terra)}
+.lead{color:var(--ink2);max-width:60ch;font-size:1.02rem}
+.card{background:var(--paper);border:1px solid var(--rule);border-radius:16px;padding:1.1rem 1.15rem;margin-top:1.1rem}
+.card h3{font-family:'Fraunces',serif;font-weight:500;font-size:1.2rem;margin-bottom:.5rem}
+.field{margin-top:.7rem}
+.field label{display:block;font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink2);margin-bottom:.22rem}
+.field input{width:100%;padding:.55rem .6rem;border:1px solid var(--rule);border-radius:9px;background:var(--bg);color:var(--ink);font:inherit;font-weight:600}
+.field input:focus{outline:none;border-color:var(--terra);background:#fff}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:.7rem}
+.seg{display:inline-flex;background:var(--bg2);border:1px solid var(--rule);border-radius:999px;padding:.25rem;gap:.2rem;margin-top:.5rem}
+.seg button{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;border:none;background:transparent;color:var(--ink2);padding:.5rem .85rem;border-radius:999px;cursor:pointer}
+.seg button.on{background:var(--ink);color:var(--bg)}
+.hidden{display:none}
+.hero{background:var(--ink);color:var(--bg);border-radius:18px;padding:1.5rem 1.3rem;margin-top:1.2rem;display:flex;gap:1.3rem;align-items:center;flex-wrap:wrap;justify-content:center}
+.ring{position:relative;width:150px;height:150px;flex:none}
+.ring canvas{width:150px;height:150px}
+.ring .pct{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.ring .pct b{font-family:'Fraunces',serif;font-size:2rem;color:var(--ochre)}
+.ring .pct span{font-family:'JetBrains Mono',monospace;font-size:.5rem;letter-spacing:.1em;text-transform:uppercase;color:#cdbfa8}
+.heroinfo{flex:1;min-width:200px}
+.heroinfo .cap{font-family:'JetBrains Mono',monospace;font-size:.56rem;letter-spacing:.12em;text-transform:uppercase;color:#cdbfa8}
+.heroinfo .big{font-family:'Fraunces',serif;font-size:1.9rem;line-height:1.1;margin:.1rem 0}
+.heroinfo .status{font-size:.95rem;margin-top:.5rem;color:#e8e0d0}
+.heroinfo .status b{color:var(--ochre)}
+.heroinfo .status .ok{color:#9ec27f}.heroinfo .status .bad{color:#e7a48f}
+.add{display:flex;gap:.5rem;flex-wrap:wrap;align-items:center;margin-top:.4rem}
+.add input{width:120px;padding:.5rem .6rem;border:1px solid var(--rule);border-radius:9px;background:var(--bg);font:inherit;font-weight:700}
+.btn{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;border:1px solid var(--ink);background:var(--terra);color:var(--bg);padding:.55rem .9rem;border-radius:9px;cursor:pointer}
+.btn:hover{background:var(--ink)}
+.quick{border:1px solid var(--rule);background:var(--bg);color:var(--ink);padding:.5rem .8rem;border-radius:9px;cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:.64rem;font-weight:600}
+.quick:hover{border-color:var(--terra)}
+.miles{display:flex;justify-content:space-between;margin-top:1rem;gap:.3rem}
+.mstone{flex:1;text-align:center;font-family:'JetBrains Mono',monospace;font-size:.56rem;letter-spacing:.04em;text-transform:uppercase;color:var(--ink2);padding:.4rem .2rem;border-radius:8px;border:1px solid var(--rule);background:var(--bg)}
+.mstone.hit{background:var(--moss);color:#fff;border-color:var(--moss)}
+.log{margin-top:.6rem}
+.logrow{display:flex;justify-content:space-between;align-items:center;padding:.4rem .1rem;border-bottom:1px solid var(--rule);font-size:.9rem}
+.logrow:last-child{border-bottom:none}
+.logrow .x{border:none;background:none;color:var(--burg);cursor:pointer;font-weight:700;font-size:1rem}
+.empty{color:var(--ink2);font-style:italic;font-size:.88rem;padding:.5rem .1rem}
+.foot{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink2);text-align:center;margin-top:2rem}
+</style>
+<link rel="stylesheet" href="heiben-design.css">
+<script src="heiben-nav.js" defer></script>
+</head>
+<body data-hb-welt="wissen">
+<div class="wrap">
+  <p class="eyebrow">HeiBen · Ziele erreichen</p>
+  <h1>Dein <em>Sparziel</em> — Schritt für Schritt</h1>
+  <p class="lead">Egal ob Notgroschen, Führerschein, Eurotrip oder Wohnungskaution: Ein Ziel mit Plan erreichst du dreimal so wahrscheinlich. Leg es an, schreib deine Einzahlungen mit und sieh den Fortschritt wachsen. Alles bleibt lokal in diesem Gerät.</p>
+
+  <div class="card">
+    <h3>Dein Ziel</h3>
+    <div class="field"><label>Wofür sparst du?</label><input id="g_name" placeholder="z. B. Eurotrip" value="Eurotrip"></div>
+    <div class="frow">
+      <div class="field"><label>Zielbetrag (€)</label><input id="g_ziel" type="number" value="2000" step="50"></div>
+      <div class="field"><label>Schon gespart (€)</label><input id="g_start" type="number" value="0" step="50"></div>
+    </div>
+    <div class="seg" id="mode">
+      <button data-m="datum" class="on">Bis Wunschdatum</button>
+      <button data-m="rate">Mit fester Rate</button>
+    </div>
+    <div class="field" id="p_datum"><label>Wunschdatum</label><input id="g_datum" type="date"></div>
+    <div class="field hidden" id="p_rate"><label>Sparrate pro Monat (€)</label><input id="g_rate" type="number" value="150" step="10"></div>
+  </div>
+
+  <div class="hero" id="hero"></div>
+
+  <div class="card">
+    <h3>Einzahlung eintragen</h3>
+    <div class="add">
+      <input id="dep" type="number" placeholder="Betrag €" step="10">
+      <button class="btn" id="depBtn">Eintragen</button>
+      <button class="quick" data-q="rate">+ Sparrate</button>
+      <button class="quick" data-q="50">+ 50</button>
+      <button class="quick" data-q="100">+ 100</button>
+    </div>
+    <div class="miles" id="miles"></div>
+    <div class="log" id="log"></div>
+  </div>
+
+  <p class="foot">HeiBen GmbH i. G. · „Heimat leben" · <a href="mein-heiben.html" style="color:var(--aub)">Mein HeiBen</a> · deine Daten bleiben lokal in diesem Gerät</p>
+</div>
+
+<script>
+var KEY="heiben_sparziel_v1";
+var g={name:"Eurotrip",ziel:2000,start:0,mode:"datum",datum:"",rate:150,created:null,deposits:[]};
+try{var sv=JSON.parse(localStorage.getItem(KEY));if(sv&&sv.ziel!=null)g=sv;}catch(e){}
+if(!g.created)g.created=new Date().toISOString().slice(0,10);
+if(!g.datum){var dd=new Date();dd.setMonth(dd.getMonth()+12);g.datum=dd.toISOString().slice(0,10);}
+
+function $(id){return document.getElementById(id);}
+function eur(n){return (Math.round(n)).toLocaleString("de-DE")+" €";}
+function eur2(n){return (Math.round(n)).toLocaleString("de-DE");}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(g));}catch(e){}}
+function monthsBetween(a,b){return (new Date(b)-new Date(a))/(1000*60*60*24*30.44);}
+function fmtDate(d){return new Date(d).toLocaleDateString("de-DE",{month:"long",year:"numeric"});}
+
+// init fields
+$("g_name").value=g.name;$("g_ziel").value=g.ziel;$("g_start").value=g.start;$("g_datum").value=g.datum;$("g_rate").value=g.rate;
+$("dep").value="";
+
+function gespart(){return (+g.start||0)+g.deposits.reduce(function(s,d){return s+(+d.b||0);},0);}
+
+function render(){
+  save();
+  document.querySelectorAll("#mode button").forEach(function(b){b.classList.toggle("on",b.dataset.m===g.mode);});
+  $("p_datum").classList.toggle("hidden",g.mode!=="datum");
+  $("p_rate").classList.toggle("hidden",g.mode!=="rate");
+  var sp=gespart(), ziel=+g.ziel||0, rest=Math.max(0,ziel-sp), pct=ziel>0?Math.min(100,sp/ziel*100):0;
+
+  // Hero
+  var statusLine="", finishLine="", reached=sp>=ziel&&ziel>0;
+  if(g.mode==="datum"){
+    var totM=Math.max(0.1,monthsBetween(g.created,g.datum));
+    var benoetigt=(ziel-(+g.start||0))/totM;
+    var elapsed=Math.max(0,monthsBetween(g.created,new Date().toISOString().slice(0,10)));
+    var soll=(+g.start||0)+benoetigt*Math.min(elapsed,totM);
+    var diff=sp-soll;
+    finishLine="<div class=\"cap\">Dafür brauchst du</div><div class=\"big\">"+eur(Math.max(0,benoetigt))+" / Monat</div>";
+    if(reached)statusLine="<span class=\"ok\">Ziel erreicht — stark!</span>";
+    else statusLine = diff>=0 ? "Du bist <b class=\"ok\">"+eur(diff)+" vor Plan</b>. Weiter so." : "Du bist <b class=\"bad\">"+eur(-diff)+" hinter Plan</b> — leg etwas nach.";
+  } else {
+    var rate=Math.max(1,+g.rate||0);
+    var restM=Math.ceil(rest/rate);
+    var fin=new Date();fin.setMonth(fin.getMonth()+restM);
+    finishLine="<div class=\"cap\">Fertig voraussichtlich</div><div class=\"big\">"+(reached?"Erreicht!":fmtDate(fin))+"</div>";
+    statusLine=reached?"<span class=\"ok\">Ziel erreicht — stark!</span>":"Noch <b>"+restM+" Einzahlungen</b> à "+eur(rate)+" bis zum Ziel.";
+  }
+  $("hero").innerHTML=
+    '<div class="ring"><canvas id="ringc" width="150" height="150"></canvas><div class="pct"><b id="pctNum">0%</b><span>'+eur2(sp)+' / '+eur2(ziel)+' €</span></div></div>'+
+    '<div class="heroinfo">'+finishLine+'<div class="status">'+(reached?'<span class="ok">Geschafft! Du hast '+eur(sp)+' beisammen.</span>':'Noch <b>'+eur(rest)+'</b> bis „'+(g.name||"Ziel")+'". '+statusLine)+'</div></div>';
+  drawRing(pct);
+  animatePct(pct);
+
+  // Meilensteine
+  $("miles").innerHTML=[25,50,75,100].map(function(m){return '<div class="mstone'+(pct>=m?" hit":"")+'">'+m+'%</div>';}).join("");
+
+  // Log
+  var log=$("log");
+  if(!g.deposits.length){log.innerHTML='<div class="empty">Noch keine Einzahlung. Trag deine erste oben ein.</div>';}
+  else{
+    log.innerHTML=g.deposits.slice().reverse().map(function(d,ri){var idx=g.deposits.length-1-ri;
+      return '<div class="logrow"><span>'+new Date(d.t).toLocaleDateString("de-DE")+'</span><span><b>+ '+eur(d.b)+'</b> <button class="x" data-del="'+idx+'">×</button></span></div>';}).join("");
+    log.querySelectorAll(".x").forEach(function(b){b.onclick=function(){g.deposits.splice(+b.dataset.del,1);render();};});
+  }
+}
+
+var curPct=0;
+function animatePct(to){var from=curPct;curPct=to;var t0=null;function s(ts){if(!t0)t0=ts;var p=Math.min(1,(ts-t0)/600);var e=1-Math.pow(1-p,3);var v=from+(to-from)*e;var el=$("pctNum");if(el)el.textContent=Math.round(v)+"%";drawRing(v);if(p<1)requestAnimationFrame(s);}requestAnimationFrame(s);}
+function drawRing(pct){var cv=$("ringc");if(!cv)return;var ctx=cv.getContext("2d"),cx=75,cy=75,r=60;ctx.clearRect(0,0,150,150);
+  ctx.lineWidth=14;ctx.strokeStyle="rgba(255,255,255,.14)";ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.stroke();
+  ctx.strokeStyle="#a97a1d";ctx.lineCap="round";ctx.beginPath();ctx.arc(cx,cy,r,-Math.PI/2,-Math.PI/2+Math.PI*2*Math.min(1,pct/100));ctx.stroke();}
+
+function addDep(amount){if(!amount||amount<=0)return;g.deposits.push({t:new Date().toISOString(),b:Math.round(amount)});render();}
+
+["g_name","g_ziel","g_start","g_datum","g_rate"].forEach(function(id){$(id).addEventListener("input",function(){
+  g.name=$("g_name").value;g.ziel=parseFloat($("g_ziel").value)||0;g.start=parseFloat($("g_start").value)||0;g.datum=$("g_datum").value;g.rate=parseFloat($("g_rate").value)||0;render();
+});});
+document.querySelectorAll("#mode button").forEach(function(b){b.onclick=function(){g.mode=b.dataset.m;render();};});
+$("depBtn").onclick=function(){var v=parseFloat(String($("dep").value).replace(",","."));addDep(v);$("dep").value="";};
+document.querySelectorAll(".quick").forEach(function(b){b.onclick=function(){var q=b.dataset.q;addDep(q==="rate"?(+g.rate||50):+q);};});
+render();
+</script>
+</body>
+</html>

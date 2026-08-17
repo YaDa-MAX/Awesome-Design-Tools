@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HeiBen Kulinarik · Mealplanner &amp; Nährwerte</title>
+<meta name="description" content="Mealplanner der HeiBen Kulinarik-App: Tages- und Wochenbedarf an Energie, Makros und Vitaminen, Mahlzeiten-Tracking und eigene Rezepte.">
+<style>
+:root{--bg:#f3eee5;--bg-soft:#ebe3d4;--ink:#1f1c17;--ink-soft:#524a3e;--rule:#d8cdb7;--terracotta:#b04a31;--kuli:#6b3951;--ochre:#a97a1d;--wohnen:#4a5c39;--immo:#792d29;}
+*{box-sizing:border-box;}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Manrope',-apple-system,Segoe UI,sans-serif;line-height:1.5;}
+.wrap{max-width:1000px;margin:0 auto;padding:0 1.5rem;}
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:1.1rem 0;border-bottom:1px solid var(--rule);}
+.wm{font-family:'Fraunces',serif;font-weight:700;font-size:1.4rem;}.wm .a{color:var(--terracotta);}
+.back{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);text-decoration:none;}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:.64rem;letter-spacing:.18em;text-transform:uppercase;color:var(--kuli);}
+h1{font-family:'Fraunces',serif;font-weight:340;font-size:clamp(1.8rem,4.5vw,2.6rem);margin:1rem 0 .2rem;}
+h2{font-family:'Fraunces',serif;font-weight:440;font-size:1.3rem;margin:2rem 0 .7rem;}
+.muted{color:var(--ink-soft);font-size:.9rem;}
+.card{background:#fff;border:1px solid var(--rule);border-radius:16px;padding:18px;margin:.8rem 0;}
+.disc{background:var(--bg-soft);border:1px solid var(--rule);border-radius:12px;padding:.8rem 1rem;font-size:.82rem;color:var(--ink-soft);}
+.grid{display:grid;gap:12px;}
+.g4{grid-template-columns:repeat(4,1fr);}.g3{grid-template-columns:repeat(3,1fr);}.g2{grid-template-columns:1fr 1fr;}
+@media(max-width:720px){.g4,.g3,.g2{grid-template-columns:1fr 1fr;}}
+@media(max-width:460px){.g4,.g3,.g2{grid-template-columns:1fr;}}
+.field{display:flex;flex-direction:column;gap:4px;}
+.field label{font-size:.74rem;color:var(--ink-soft);}
+.field input,.field select{border:1px solid var(--rule);background:var(--bg);border-radius:8px;padding:.55rem .6rem;font:inherit;}
+.btn{display:inline-block;border:0;cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;padding:.7rem 1.05rem;border-radius:9px;text-decoration:none;margin:.3rem .3rem 0 0;}
+.btn.primary{background:var(--kuli);color:#f3eee5;}.btn.terra{background:var(--terracotta);color:#f3eee5;}.btn.dark{background:var(--ink);color:#f3eee5;}
+.btn.ghost{background:none;border:1px solid var(--ink);color:var(--ink);}
+.btn.sm{padding:.4rem .7rem;font-size:.58rem;}
+.bmi{display:flex;gap:1.6rem;flex-wrap:wrap;align-items:flex-end;}
+.bmi .b{font-family:'Fraunces',serif;font-size:2.2rem;font-weight:560;color:var(--kuli);}
+.bmi .l{font-family:'JetBrains Mono',monospace;font-size:.56rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);}
+.nut{display:flex;align-items:center;gap:.7rem;margin:.4rem 0;font-size:.86rem;}
+.nut .lab{flex:0 0 130px;}
+.nut .track{flex:1;background:var(--bg-soft);border-radius:7px;height:20px;overflow:hidden;}
+.nut .fill{height:100%;background:linear-gradient(90deg,var(--kuli),var(--terracotta));}
+.nut .val{flex:0 0 132px;text-align:right;font-variant-numeric:tabular-nums;color:var(--ink-soft);}
+.slot{border:1px solid var(--rule);border-radius:12px;padding:12px;}
+.slot h3{font-family:'Fraunces',serif;font-weight:480;font-size:1rem;margin:0 0 .4rem;display:flex;justify-content:space-between;align-items:center;}
+.item{display:flex;justify-content:space-between;align-items:center;gap:.5rem;padding:.35rem 0;border-bottom:1px dotted var(--rule);font-size:.86rem;}
+.item .x{cursor:pointer;color:var(--immo);border:0;background:none;font-size:1rem;line-height:1;}
+.daynav{display:flex;align-items:center;gap:.6rem;}
+.week{display:flex;align-items:flex-end;gap:6px;height:120px;}
+.week .col{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;justify-content:flex-end;}
+.week .bar{width:60%;background:linear-gradient(180deg,var(--terracotta),var(--kuli));border-radius:5px 5px 0 0;}
+.week .d{font-family:'JetBrains Mono',monospace;font-size:.54rem;color:var(--ink-soft);}
+.tag{font-family:'JetBrains Mono',monospace;font-size:.56rem;letter-spacing:.06em;text-transform:uppercase;padding:.15rem .5rem;border-radius:999px;background:var(--bg-soft);color:var(--ink-soft);}
+.lock-note{background:#1f1c17;color:#f3eee5;border-radius:14px;padding:1rem 1.2rem;margin:.8rem 0;display:flex;gap:1rem;align-items:center;flex-wrap:wrap;justify-content:space-between;}
+.addpanel{border:1px dashed var(--rule);border-radius:12px;padding:14px;margin-top:.6rem;}
+.tabs{display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:.6rem;}
+.tab{border:1px solid var(--rule);background:var(--bg);border-radius:8px;padding:.4rem .7rem;font-size:.74rem;cursor:pointer;}
+.tab.on{background:var(--ink);color:#fff;border-color:var(--ink);}
+footer{margin-top:3rem;border-top:1px solid var(--rule);padding:1.4rem 0;color:var(--ink-soft);font-size:.8rem;}
+.note{font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--ink-soft);}
+.hide{display:none!important;}
+</style>
+<link rel="stylesheet" href="heiben-design.css">
+<script src="heiben-nav.js" defer></script>
+</head>
+<body data-hb-welt="kulinarik">
+<div class="wrap">
+  <div class="topbar"><div class="wm"><span class="a">H</span>ei<span class="a">B</span>en <span style="font-weight:400;font-size:.9rem;color:var(--ink-soft)">· Mealplanner</span></div><a class="back" href="kulinarik-app.html">← App</a></div>
+  <div class="eyebrow">Kulinarik-App · Ernährung</div>
+  <h1>Mealplanner &amp; Nährwerte</h1>
+  <p class="disc">Hinweis: Dieser Planer liefert <b>allgemeine Orientierungswerte</b> (Referenzmengen nach DGE/EU) und ersetzt keine ärztliche oder ernährungstherapeutische Beratung. Bei besonderen Bedürfnissen, Erkrankungen, Schwangerschaft oder Beschwerden sprich bitte mit Fachpersonal.</p>
+
+  <div id="lockNote" class="lock-note hide">
+    <div><b>Mealplanner ist Teil des App-Abos.</b><br><span style="color:#d8cdb7;font-size:.86rem;">Profil &amp; Tagesbedarf siehst du frei — Tracking, Wochenüberblick und eigene Rezepte mit dem Probemonat.</span></div>
+    <button class="btn terra" id="trialBtn">Probemonat starten</button>
+  </div>
+
+  <h2>1 · Dein Istzustand</h2>
+  <div class="card">
+    <div class="grid g4">
+      <div class="field"><label>Geschlecht</label><select id="pSex"><option value="w">weiblich</option><option value="m">männlich</option></select></div>
+      <div class="field"><label>Alter (Jahre)</label><input id="pAge" type="number" min="14" max="100" value="34"></div>
+      <div class="field"><label>Größe (cm)</label><input id="pH" type="number" min="120" max="220" value="172"></div>
+      <div class="field"><label>Gewicht (kg)</label><input id="pW" type="number" min="35" max="250" value="70"></div>
+      <div class="field"><label>Aktivität</label><select id="pAct"><option value="1.2">wenig (sitzend)</option><option value="1.375" selected>leicht aktiv</option><option value="1.55">moderat aktiv</option><option value="1.725">sehr aktiv</option></select></div>
+      <div class="field"><label>Ziel</label><select id="pGoal"><option value="halten" selected>Gewicht halten</option><option value="reduzieren">sanft reduzieren</option><option value="aufbauen">aufbauen</option></select></div>
+    </div>
+    <button class="btn primary" id="calcBtn" style="margin-top:.8rem;">Bedarf berechnen &amp; speichern</button>
+    <div id="bmiBox" class="bmi" style="margin-top:1rem;"></div>
+  </div>
+
+  <h2>2 · Tages- &amp; Wochenbedarf</h2>
+  <div class="card">
+    <div class="tabs"><div class="tab on" data-period="tag">pro Tag</div><div class="tab" data-period="woche">pro Woche</div></div>
+    <div id="targetBox"><p class="muted">Erst oben den Bedarf berechnen.</p></div>
+  </div>
+
+  <h2>3 · Mahlzeiten tracken</h2>
+  <div class="card">
+    <div class="daynav">
+      <button class="btn ghost sm" id="dPrev">‹ Tag</button>
+      <b id="dLabel" style="font-family:'Fraunces',serif;"></b>
+      <button class="btn ghost sm" id="dNext">Tag ›</button>
+      <button class="btn ghost sm" id="dToday">heute</button>
+    </div>
+    <div class="grid g4" id="slots" style="margin-top:.8rem;"></div>
+
+    <div class="addpanel">
+      <b style="font-size:.9rem;">Mahlzeit hinzufügen</b>
+      <div class="tabs" style="margin-top:.5rem;">
+        <div class="tab on" data-src="rezepte">Aus Rezepten</div>
+        <div class="tab" data-src="eigene">Eigene Rezepte</div>
+        <div class="tab" data-src="food">Lebensmittel</div>
+        <div class="tab" data-src="frei">Freie Eingabe</div>
+      </div>
+      <div class="grid g2">
+        <div class="field"><label>Mahlzeit</label><select id="aSlot"><option value="fruh">Frühstück</option><option value="mittag">Mittag</option><option value="abend">Abend</option><option value="snack">Snack</option></select></div>
+        <div class="field"><label>Portionen</label><input id="aServ" type="number" min="0.25" step="0.25" value="1"></div>
+      </div>
+      <div id="srcRezepte"><div class="field"><label>Rezept</label><select id="aRecipe"></select></div></div>
+      <div id="srcEigene" class="hide"><div class="field"><label>Eigenes Rezept</label><select id="aOwn"></select></div></div>
+      <div id="srcFrei" class="hide">
+        <div class="field"><label>Bezeichnung</label><input id="fName" placeholder="z. B. Apfel, Müsli, Restaurantbesuch"></div>
+        <div class="grid g4" style="margin-top:.5rem;">
+          <div class="field"><label>kcal</label><input id="fEnergie" type="number" min="0" value="0"></div>
+          <div class="field"><label>Eiweiß g</label><input id="fEiweiss" type="number" min="0" value="0"></div>
+          <div class="field"><label>KH g</label><input id="fKh" type="number" min="0" value="0"></div>
+          <div class="field"><label>Fett g</label><input id="fFett" type="number" min="0" value="0"></div>
+        </div>
+        <p class="note" style="margin-top:.3rem;">Ballaststoffe/Vitamine optional — frei eingetragene Mahlzeiten zählen für Energie &amp; Makros, Mikronährstoffe nur wenn angegeben.</p>
+      </div>
+      <div id="srcFood" class="hide">
+        <div class="grid g2"><div class="field"><label>Lebensmittel suchen</label><input id="aFoodSearch" placeholder="z. B. Banane, Haferflocken"></div><div class="field"><label>Menge (g)</label><input id="aFoodGram" type="number" min="1" value="100"></div></div><select id="aFoodPick" style="width:100%;margin-top:.4rem;border:1px solid var(--rule);border-radius:8px;padding:.5rem;font:inherit;"></select><p class="note" style="margin-top:.3rem;">Aus der Lebensmittel-Datenbank (Nährwerte je 100 g, auf die Menge skaliert).</p></div>
+      <button class="btn dark" id="addBtn" style="margin-top:.6rem;">Eintragen</button>
+    </div>
+
+    <h3 style="font-family:'Fraunces',serif;font-weight:480;margin:1.2rem 0 .4rem;">Soll-Ist-Abgleich (dieser Tag)</h3>
+    <div id="dayCompare"></div>
+  </div>
+
+  <h2 id="weekH">4 · Wochenüberblick</h2>
+  <div class="card" id="weekCard">
+    <div class="muted" style="margin-bottom:.5rem;">Energie der letzten 7 Tage</div>
+    <div class="week" id="weekBars"></div>
+    <div style="margin-top:1rem;" id="weekCompare"></div>
+  </div>
+
+  <h2 id="einkaufH">5 · Einkaufsliste aus dem Plan</h2>
+  <div class="card" id="einkaufCard">
+    <p class="muted">Aus den Rezept-Mahlzeiten der letzten 7 Tage zusammengestellt — wird auch in die App-Einkaufsliste übernommen.</p>
+    <button class="btn primary" id="genEinkauf">Einkaufsliste erzeugen</button>
+    <button class="btn ghost" id="clrEinkauf">leeren</button>
+    <div id="einkaufList" style="margin-top:.8rem;"></div>
+  </div>
+
+  <h2 id="verlaufH">6 · Verlauf &amp; Trends</h2>
+  <div class="card" id="verlaufCard">
+    <div class="grid g2"><div class="field"><label>Gewicht heute (kg)</label><input id="wToday" type="number" step="0.1" min="35" max="250"></div><div style="display:flex;align-items:flex-end;"><button class="btn dark" id="wLog">Gewicht eintragen</button></div></div>
+    <div style="margin-top:1rem;"><div class="muted" style="margin-bottom:.3rem;">Gewichtsverlauf</div><div id="wChart"></div></div>
+    <div style="margin-top:1rem;"><div class="muted" style="margin-bottom:.3rem;">Energie (letzte 14 Tage)</div><div class="week" id="kcalChart"></div></div>
+  </div>
+
+  <h2 id="ownH">7 · Eigene Rezepte (Blaupausen)</h2>
+  <div class="card" id="ownCard">
+    <p class="muted" id="ownWhere"></p>
+    <div class="grid g4">
+      <div class="field" style="grid-column:span 2"><label>Name</label><input id="rName" placeholder="z. B. Mein Overnight-Porridge"></div>
+      <div class="field"><label>Portionen</label><input id="rPort" type="number" min="1" value="1"></div>
+      <div class="field"><label>kcal / Portion</label><input id="rEnergie" type="number" min="0" value="0"></div>
+      <div class="field"><label>Eiweiß g</label><input id="rEiweiss" type="number" min="0" value="0"></div>
+      <div class="field"><label>KH g</label><input id="rKh" type="number" min="0" value="0"></div>
+      <div class="field"><label>Fett g</label><input id="rFett" type="number" min="0" value="0"></div>
+      <div class="field"><label>Ballaststoffe g</label><input id="rBallast" type="number" min="0" value="0"></div>
+      <div class="field"><label>Vitamin C mg</label><input id="rVitc" type="number" min="0" value="0"></div>
+      <div class="field"><label>Eisen mg</label><input id="rEisen" type="number" min="0" value="0"></div>
+      <div class="field"><label>Calcium mg</label><input id="rCalcium" type="number" min="0" value="0"></div>
+    </div>
+    <div class="addpanel" id="ingBuilder"><b style="font-size:.85rem;">Nährwerte automatisch aus Zutaten berechnen (optional)</b><div class="grid g3" style="margin-top:.4rem;"><div class="field" style="grid-column:span 2"><label>Lebensmittel suchen</label><input id="ingSearch" placeholder="z. B. Haferflocken"></div><div class="field"><label>Menge (g)</label><input id="ingGram" type="number" min="1" value="100"></div></div><select id="ingPick" style="width:100%;margin-top:.4rem;border:1px solid var(--rule);border-radius:8px;padding:.5rem;font:inherit;"></select><button class="btn ghost sm" id="ingAdd" style="margin-top:.4rem;">+ Zutat hinzufügen</button><div id="ingList" style="margin-top:.5rem;"></div><p class="note" id="ingNote" style="margin-top:.3rem;">Zutaten füllen die Nährwertfelder automatisch (pro Portion). Du kannst sie danach noch anpassen.</p></div><textarea id="rZut" placeholder="Zutaten / Zubereitung (optional, für dich notiert)" style="width:100%;margin-top:.6rem;border:1px solid var(--rule);border-radius:8px;padding:.6rem;font:inherit;min-height:64px;"></textarea>
+    <button class="btn primary" id="rSave" style="margin-top:.5rem;">Rezept speichern</button>
+    <div id="ownList" style="margin-top:1rem;"></div>
+  </div>
+
+  <footer>HeiBen Holding GmbH (i.&nbsp;G.) · Köln · <span class="note">Orientierungswerte, keine medizinische Beratung · Daten bleiben auf deinem Gerät/Konto.</span></footer>
+</div>
+
+<script src="heiben-konto.js"></script>
+<script src="heiben-analytics.js"></script>
+<script src="kulinarik-lebensmittel.js"></script>
+<script src="heiben-produkt.js"></script>
+<script>
+(function(){
+  var HP=window.HeiBenProdukt, K=window.HeiBenKonto||null;
+  var round=Math.round;
+  var NUTRI=[
+    {k:'energie',l:'Energie',u:'kcal'},{k:'eiweiss',l:'Eiweiß',u:'g'},{k:'kh',l:'Kohlenhydrate',u:'g'},
+    {k:'fett',l:'Fett',u:'g'},{k:'ballast',l:'Ballaststoffe',u:'g'},{k:'vitc',l:'Vitamin C',u:'mg'},
+    {k:'vitd',l:'Vitamin D',u:'µg'},{k:'eisen',l:'Eisen',u:'mg'},{k:'calcium',l:'Calcium',u:'mg'},{k:'magnesium',l:'Magnesium',u:'mg'}
+  ];
+  // Rezept-Nährwerte (je Portion, Richtwerte)
+  var RECIPES=[
+    {id:'r1',n:'Linsen-Eintopf mit Röstgemüse',nutri:{energie:420,eiweiss:22,kh:55,fett:9,ballast:14,vitc:18,vitd:0,eisen:6,calcium:80,magnesium:90}},
+    {id:'r2',n:'Ofen-Hähnchen mit Zitrone & Thymian',nutri:{energie:540,eiweiss:38,kh:40,fett:22,ballast:6,vitc:30,vitd:0.5,eisen:3,calcium:60,magnesium:70}},
+    {id:'r3',n:'Shakshuka mit Feta',nutri:{energie:380,eiweiss:22,kh:18,fett:24,ballast:6,vitc:60,vitd:1.5,eisen:4,calcium:220,magnesium:50}},
+    {id:'r4',n:'Kürbis-Risotto',nutri:{energie:480,eiweiss:12,kh:70,fett:14,ballast:6,vitc:15,vitd:0,eisen:2,calcium:150,magnesium:60}},
+    {id:'r5',n:'Gefüllte Auberginen',nutri:{energie:410,eiweiss:14,kh:45,fett:18,ballast:12,vitc:20,vitd:0,eisen:3,calcium:180,magnesium:70}},
+    {id:'r6',n:'Lauch-Quiche (vegetarisch)',nutri:{energie:520,eiweiss:18,kh:38,fett:32,ballast:5,vitc:12,vitd:1,eisen:2.5,calcium:250,magnesium:40}},
+    {id:'r7',n:'Couscous-Salat mit Granatapfel',nutri:{energie:350,eiweiss:9,kh:55,fett:10,ballast:8,vitc:25,vitd:0,eisen:3,calcium:70,magnesium:60}},
+    {id:'r8',n:'Kichererbsen-Spinat-Curry (vegan)',nutri:{energie:520,eiweiss:18,kh:60,fett:22,ballast:13,vitc:22,vitd:0,eisen:5,calcium:120,magnesium:95}}
+  ];
+  var ZUT={
+    r1:['Berglinsen 250 g','Karotten 3','Sellerie 1/4','Zwiebel 1','Gemüsebrühe 1 l'],
+    r2:['Hähnchenschenkel 4','Zitrone 1','Thymian','Kartoffeln 600 g','Olivenöl'],
+    r3:['Eier 4','Tomaten 400 g','Paprika 2','Feta 150 g','Kreuzkümmel'],
+    r4:['Risottoreis 250 g','Hokkaido 1/2','Parmesan 60 g','Weißwein 100 ml','Zwiebel 1'],
+    r5:['Auberginen 2','Bulgur 150 g','Tomaten 2','Minze','Joghurt 200 g'],
+    r6:['Lauch 2','Eier 3','Sahne 200 ml','Mürbeteig 1','Bergkäse 100 g'],
+    r7:['Couscous 200 g','Granatapfel 1','Gurke 1','Petersilie','Zitrone 1'],
+    r8:['Kichererbsen 400 g','Spinat 200 g','Kokosmilch 400 ml','Curry','Reis 200 g']
+  };
+  RECIPES.forEach(function(r){ r.zut=ZUT[r.id]||[]; });
+  function ld(k,d){ try{ var v=JSON.parse(localStorage.getItem(k)); return v==null?d:v; }catch(e){ return d; } }
+  function sv(k,v){ try{ localStorage.setItem(k,JSON.stringify(v)); }catch(e){} }
+  function uid(){ try{ var u=K&&K.current&&K.current(); return u?u.id:'gast'; }catch(e){ return 'gast'; } }
+  function recKey(){ return 'heiben-recipes-'+uid(); }
+  function profile(){ return ld('heiben-nutri-profile',null); }
+  function emptyN(){ var o={}; NUTRI.forEach(function(x){o[x.k]=0;}); return o; }
+
+  function targets(p){
+    if(!p) return null;
+    var kg=+p.w, cm=+p.h, age=+p.age;
+    var bmr = p.sex==='m' ? 10*kg+6.25*cm-5*age+5 : 10*kg+6.25*cm-5*age-161;
+    var kcal = bmr*(+p.act) + (p.goal==='reduzieren'?-400:(p.goal==='aufbauen'?300:0));
+    var eiweiss=round(1.4*kg), fett=round(kcal*0.30/9), kh=round((kcal-eiweiss*4-fett*9)/4);
+    return {
+      energie:round(kcal), eiweiss:eiweiss, kh:Math.max(0,kh), fett:fett, ballast:30,
+      vitc:100, vitd:20, eisen:(p.sex==='w'?15:10), calcium:1000, magnesium:(p.sex==='w'?300:350)
+    };
+  }
+  function bmiOf(p){ var m=(+p.h)/100; return (+p.w)/(m*m); }
+  function bmiCat(b){ return b<18.5?'Untergewicht':(b<25?'Normalgewicht':(b<30?'Übergewicht':'Adipositas')); }
+
+  // ---- Profil ----
+  function loadProfileInputs(){ var p=profile(); if(!p) return;
+    pSex.value=p.sex; pAge.value=p.age; pH.value=p.h; pW.value=p.w; pAct.value=p.act; pGoal.value=p.goal; }
+  var pSex=document.getElementById('pSex'),pAge=document.getElementById('pAge'),pH=document.getElementById('pH'),
+      pW=document.getElementById('pW'),pAct=document.getElementById('pAct'),pGoal=document.getElementById('pGoal');
+  document.getElementById('calcBtn').addEventListener('click',function(){
+    var p={sex:pSex.value,age:+pAge.value,h:+pH.value,w:+pW.value,act:pAct.value,goal:pGoal.value};
+    if(!(p.age>0&&p.h>0&&p.w>0)){ HP.toast('Bitte Alter, Größe und Gewicht prüfen.'); return; }
+    sv('heiben-nutri-profile',p); if(window.HeiBenTrack)HeiBenTrack.ev('nutri_profile',{}); HP.toast('Bedarf berechnet ✓'); renderAll();
+  });
+  function renderBmi(){
+    var p=profile(); var box=document.getElementById('bmiBox'); if(!p){ box.innerHTML=''; return; }
+    var b=bmiOf(p), t=targets(p);
+    box.innerHTML='<div><div class="b">'+b.toFixed(1)+'</div><div class="l">BMI · '+bmiCat(b)+'</div></div>'+
+      '<div><div class="b">'+t.energie+'</div><div class="l">kcal Tagesbedarf</div></div>'+
+      '<div><div class="b">'+t.eiweiss+' g</div><div class="l">Eiweiß / Tag</div></div>'+
+      '<div><div class="b">'+round((+p.w)*35)+' ml</div><div class="l">Wasser-Richtwert</div></div>';
+  }
+
+  // ---- Bedarf-Tabelle (Tag/Woche) ----
+  var period='tag';
+  document.querySelectorAll('[data-period]').forEach(function(t){ t.addEventListener('click',function(){
+    period=t.dataset.period; document.querySelectorAll('[data-period]').forEach(function(x){x.classList.toggle('on',x===t);}); renderTargets(); }); });
+  function renderTargets(){
+    var p=profile(), box=document.getElementById('targetBox'); var t=targets(p);
+    if(!t){ box.innerHTML='<p class="muted">Erst oben den Bedarf berechnen.</p>'; return; }
+    var mult=period==='woche'?7:1;
+    box.innerHTML='<table style="width:100%;border-collapse:collapse;font-size:.9rem;">'+
+      NUTRI.map(function(x){ return '<tr><td style="padding:.35rem 0;border-bottom:1px dotted var(--rule)">'+x.l+'</td>'+
+        '<td style="text-align:right;border-bottom:1px dotted var(--rule);font-variant-numeric:tabular-nums">'+round(t[x.k]*mult)+' '+x.u+'</td></tr>'; }).join('')+'</table>';
+  }
+
+  // ---- Tracking ----
+  var curDate=new Date().toISOString().slice(0,10);
+  function logAll(){ return ld('heiben-nutri-log',{}); }
+  function dayLog(d){ var l=logAll(); return l[d]||{fruh:[],mittag:[],abend:[],snack:[]}; }
+  function setDay(d,obj){ var l=logAll(); l[d]=obj; sv('heiben-nutri-log',l); }
+  function dayTotals(d){ var dl=dayLog(d); var tot=emptyN();
+    ['fruh','mittag','abend','snack'].forEach(function(s){ (dl[s]||[]).forEach(function(it){ NUTRI.forEach(function(x){ tot[x.k]+=(it.v[x.k]||0)*(it.s||1); }); }); });
+    return tot; }
+  var SLOTS=[['fruh','Frühstück'],['mittag','Mittag'],['abend','Abend'],['snack','Snack']];
+  function renderSlots(){
+    var dl=dayLog(curDate);
+    document.getElementById('dLabel').textContent=new Date(curDate).toLocaleDateString('de-DE',{weekday:'short',day:'2-digit',month:'2-digit'});
+    document.getElementById('slots').innerHTML=SLOTS.map(function(s){
+      var items=dl[s[0]]||[]; var kc=items.reduce(function(a,it){return a+(it.v.energie||0)*(it.s||1);},0);
+      return '<div class="slot"><h3>'+s[1]+' <span class="tag">'+round(kc)+' kcal</span></h3>'+
+        (items.length?items.map(function(it,i){ return '<div class="item"><span>'+it.n+(it.s!=1?' ×'+it.s:'')+'</span><button class="x" data-del="'+s[0]+'|'+i+'">×</button></div>'; }).join('')
+          :'<p class="note">noch nichts eingetragen</p>')+'</div>';
+    }).join('');
+  }
+  function renderDayCompare(){
+    var p=profile(), t=targets(p); var box=document.getElementById('dayCompare');
+    if(!t){ box.innerHTML='<p class="muted">Bedarf berechnen, dann erscheint der Abgleich.</p>'; return; }
+    var tot=dayTotals(curDate);
+    box.innerHTML=NUTRI.map(function(x){
+      var soll=t[x.k], ist=tot[x.k], pct=soll>0?Math.round(ist/soll*100):0;
+      var rest=Math.max(0,soll-ist); var over=ist>soll;
+      return '<div class="nut"><span class="lab">'+x.l+'</span>'+
+        '<span class="track"><span class="fill" style="width:'+Math.min(100,pct)+'%;'+(over?'background:linear-gradient(90deg,var(--ochre),var(--immo));':'')+'"></span></span>'+
+        '<span class="val">'+round(ist)+'/'+round(soll)+' '+x.u+' · '+pct+'%</span></div>';
+    }).join('')+'<p class="note" style="margin-top:.4rem;">Grün = im Aufbau zum Tagesziel · Orange = über dem Richtwert.</p>';
+  }
+  // Add-Panel
+  var addSrc='rezepte';
+  document.querySelectorAll('[data-src]').forEach(function(t){ t.addEventListener('click',function(){
+    addSrc=t.dataset.src; document.querySelectorAll('[data-src]').forEach(function(x){x.classList.toggle('on',x===t);});
+    document.getElementById('srcRezepte').classList.toggle('hide',addSrc!=='rezepte');
+    document.getElementById('srcEigene').classList.toggle('hide',addSrc!=='eigene');
+    document.getElementById('srcFood').classList.toggle('hide',addSrc!=='food');
+    document.getElementById('srcFrei').classList.toggle('hide',addSrc!=='frei');
+  }); });
+  function fillRecipeSelect(){
+    document.getElementById('aRecipe').innerHTML=RECIPES.map(function(r){return '<option value="'+r.id+'">'+r.n+'</option>';}).join('');
+    var own=myRecipes();
+    document.getElementById('aOwn').innerHTML=own.length?own.map(function(r,i){return '<option value="'+i+'">'+r.n+'</option>';}).join('')
+      :'<option value="">— noch keine eigenen Rezepte —</option>';
+  }
+  document.getElementById('addBtn').addEventListener('click',function(){
+    var slot=document.getElementById('aSlot').value, serv=+document.getElementById('aServ').value||1;
+    var name, v, zut=[];
+    if(addSrc==='rezepte'){ var r=RECIPES.filter(function(x){return x.id===document.getElementById('aRecipe').value;})[0]; if(!r)return; name=r.n; v=r.nutri; zut=r.zut||[]; }
+    else if(addSrc==='eigene'){ var idx=document.getElementById('aOwn').value; var own=myRecipes(); if(idx===''||!own[idx]){ HP.toast('Erst ein eigenes Rezept anlegen.'); return; } name=own[idx].n; v=own[idx].nutri; zut=(own[idx].zut||'').split('\n').filter(Boolean); }
+    else if(addSrc==='food'){ var fo=window.HeiBenFood&&HeiBenFood.byId(document.getElementById('aFoodPick').value); if(!fo){ HP.toast('Bitte ein Lebensmittel wählen.'); return; } var g=+document.getElementById('aFoodGram').value||100; v=Object.assign(emptyN(),HeiBenFood.scale(fo.per100,g)); name=fo.n+' ('+g+' g)'; zut=[fo.n+' '+g+' g']; }
+    else { name=(document.getElementById('fName').value||'').trim()||'Eintrag'; v=Object.assign(emptyN(),{
+        energie:+document.getElementById('fEnergie').value||0, eiweiss:+document.getElementById('fEiweiss').value||0,
+        kh:+document.getElementById('fKh').value||0, fett:+document.getElementById('fFett').value||0 }); }
+    var dl=dayLog(curDate); dl[slot]=dl[slot]||[]; dl[slot].push({n:name,s:serv,v:v,zut:zut}); setDay(curDate,dl);
+    if(window.HeiBenTrack)HeiBenTrack.ev('meal_logged',{src:addSrc}); HP.toast('Eingetragen ✓');
+    renderSlots(); renderDayCompare(); renderWeek();
+  });
+  document.getElementById('slots').addEventListener('click',function(e){ var b=e.target.closest('[data-del]'); if(!b)return;
+    var pp=b.dataset.del.split('|'); var dl=dayLog(curDate); (dl[pp[0]]||[]).splice(+pp[1],1); setDay(curDate,dl); renderSlots(); renderDayCompare(); renderWeek(); });
+  function shiftDay(n){ var d=new Date(curDate); d.setDate(d.getDate()+n); curDate=d.toISOString().slice(0,10); renderSlots(); renderDayCompare(); }
+  document.getElementById('dPrev').onclick=function(){ shiftDay(-1); };
+  document.getElementById('dNext').onclick=function(){ shiftDay(1); };
+  document.getElementById('dToday').onclick=function(){ curDate=new Date().toISOString().slice(0,10); renderSlots(); renderDayCompare(); };
+
+  // ---- Woche ----
+  function renderWeek(){
+    var p=profile(), t=targets(p);
+    var days=[], sums=emptyN(), kcals=[];
+    for(var i=6;i>=0;i--){ var d=new Date(); d.setDate(d.getDate()-i); var ds=d.toISOString().slice(0,10);
+      var tot=dayTotals(ds); kcals.push({d:d.toLocaleDateString('de-DE',{weekday:'short'}),v:tot.energie});
+      NUTRI.forEach(function(x){ sums[x.k]+=tot[x.k]; }); }
+    var maxk=Math.max(1,Math.max.apply(null,kcals.map(function(c){return c.v;})), t?t.energie:1);
+    document.getElementById('weekBars').innerHTML=kcals.map(function(c){
+      var h=Math.round(c.v/maxk*110); return '<div class="col"><div class="bar" style="height:'+Math.max(2,h)+'px"></div><div class="d">'+c.d+'</div><div class="d">'+round(c.v)+'</div></div>'; }).join('');
+    var box=document.getElementById('weekCompare');
+    if(!t){ box.innerHTML='<p class="muted">Für den Wochen-Abgleich erst den Bedarf berechnen.</p>'; return; }
+    box.innerHTML='<div class="muted" style="margin-bottom:.4rem;">Ø-Deckung pro Tag (letzte 7 Tage)</div>'+NUTRI.map(function(x){
+      var avg=sums[x.k]/7, pct=t[x.k]>0?Math.round(avg/t[x.k]*100):0;
+      return '<div class="nut"><span class="lab">'+x.l+'</span><span class="track"><span class="fill" style="width:'+Math.min(100,pct)+'%"></span></span><span class="val">Ø '+round(avg)+' '+x.u+' · '+pct+'%</span></div>';
+    }).join('');
+  }
+
+  // ---- Eigene Rezepte ----
+  function myRecipes(){ return ld(recKey(),[]); }
+  function renderOwn(){
+    var u=uid();
+    document.getElementById('ownWhere').textContent = u==='gast'
+      ? 'Aktuell lokal auf diesem Gerät gespeichert. Melde dich an, um deine Rezepte im Konto zu sichern.'
+      : 'Gespeichert in deinem Konto.';
+    var own=myRecipes();
+    document.getElementById('ownList').innerHTML = own.length? own.map(function(r,i){
+      return '<div class="item"><span><b>'+r.n+'</b> <span class="note">'+r.nutri.energie+' kcal · '+r.nutri.eiweiss+' g EW</span></span>'+
+        '<span><button class="btn ghost sm" data-use="'+i+'">+ in Tag</button> <button class="btn ghost sm" data-rdel="'+i+'">löschen</button></span></div>';
+    }).join(''): '<p class="note">Noch keine eigenen Rezepte.</p>';
+    fillRecipeSelect();
+  }
+  document.getElementById('rSave').addEventListener('click',function(){
+    var name=(document.getElementById('rName').value||'').trim(); if(!name){ HP.toast('Bitte einen Namen vergeben.'); return; }
+    var nutri = window.__ingNutri ? Object.assign(emptyN(),window.__ingNutri) : Object.assign(emptyN(),{
+      energie:+rEnergie.value||0,eiweiss:+rEiweiss.value||0,kh:+rKh.value||0,fett:+rFett.value||0,
+      ballast:+rBallast.value||0,vitc:+rVitc.value||0,eisen:+rEisen.value||0,calcium:+rCalcium.value||0});
+    var own=myRecipes(); own.push({n:name,port:+document.getElementById('rPort').value||1,nutri:nutri,zut:document.getElementById('rZut').value||''});
+    sv(recKey(),own); if(window.HeiBenTrack)HeiBenTrack.ev('own_recipe',{}); HP.toast('Rezept gespeichert ✓');
+    document.getElementById('rName').value=''; window.__ingNutri=null; ingredients=[]; renderIng(); renderOwn();
+  });
+  var rEnergie=document.getElementById('rEnergie'),rEiweiss=document.getElementById('rEiweiss'),rKh=document.getElementById('rKh'),
+      rFett=document.getElementById('rFett'),rBallast=document.getElementById('rBallast'),rVitc=document.getElementById('rVitc'),
+      rEisen=document.getElementById('rEisen'),rCalcium=document.getElementById('rCalcium');
+  document.getElementById('ownList').addEventListener('click',function(e){
+    var del=e.target.closest('[data-rdel]'), use=e.target.closest('[data-use]');
+    if(del){ var own=myRecipes(); own.splice(+del.dataset.rdel,1); sv(recKey(),own); renderOwn(); }
+    else if(use){ var own2=myRecipes(); var r=own2[+use.dataset.use]; if(!r)return; var dl=dayLog(curDate); dl.mittag=dl.mittag||[]; dl.mittag.push({n:r.n,s:1,v:r.nutri}); setDay(curDate,dl); HP.toast('„'+r.n+'" zum Mittag hinzugefügt ✓'); renderSlots(); renderDayCompare(); renderWeek(); }
+  });
+
+  // ---- Gate (App-Abo) ----
+  function applyGate(){
+    var locked=!HP.hasAccess('app');
+    document.getElementById('lockNote').classList.toggle('hide',!locked);
+    ['weekH','weekCard','einkaufH','einkaufCard','verlaufH','verlaufCard','ownH','ownCard'].forEach(function(id){ document.getElementById(id).style.opacity=locked?'.5':'1'; });
+  }
+  document.getElementById('trialBtn').addEventListener('click',function(){ var r=HP.startTrial('app'); HP.toast(r.ok?'Probemonat aktiv — voller Mealplanner ✓':r.error); applyGate(); });
+
+  // ---- Lebensmittel-Suche (Tracking) ----
+  function fillFoodPick(q){ var sel=document.getElementById('aFoodPick'); var res=(window.HeiBenFood?HeiBenFood.search(q):[]);
+    sel.innerHTML=res.length?res.map(function(x){return '<option value="'+x.id+'">'+x.n+' · '+x.per100.energie+' kcal/100g</option>';}).join(''):'<option value="">— nichts gefunden —</option>'; }
+  var afs=document.getElementById('aFoodSearch'); if(afs) afs.addEventListener('input',function(){ fillFoodPick(afs.value); });
+
+  // ---- Zutaten-Builder (eigene Rezepte) ----
+  var ingredients=[];
+  function fillIngPick(q){ var sel=document.getElementById('ingPick'); if(!sel)return; var res=(window.HeiBenFood?HeiBenFood.search(q):[]);
+    sel.innerHTML=res.length?res.map(function(x){return '<option value="'+x.id+'">'+x.n+'</option>';}).join(''):'<option value="">— nichts gefunden —</option>'; }
+  function renderIng(){ var el=document.getElementById('ingList'); if(!el)return; el.innerHTML=ingredients.length?ingredients.map(function(it,i){return '<div class="item"><span>'+it.n+' · '+it.g+' g</span><button class="x" data-ingdel="'+i+'">×</button></div>';}).join(''):''; }
+  function recomputeIng(){ var port=+document.getElementById('rPort').value||1; var tot=emptyN();
+    ingredients.forEach(function(it){ var sc=HeiBenFood.scale(it.per100,it.g); NUTRI.forEach(function(x){ tot[x.k]+=(sc[x.k]||0); }); });
+    var per={}; NUTRI.forEach(function(x){ per[x.k]=Math.round(tot[x.k]/port*10)/10; });
+    window.__ingNutri = ingredients.length? per : null;
+    if(ingredients.length){ rEnergie.value=Math.round(per.energie); rEiweiss.value=per.eiweiss; rKh.value=per.kh; rFett.value=per.fett; rBallast.value=per.ballast; rVitc.value=per.vitc; rEisen.value=per.eisen; rCalcium.value=per.calcium;
+      document.getElementById('rZut').value=ingredients.map(function(it){return it.n+' '+it.g+' g';}).join('\n'); }
+    renderIng();
+  }
+  var igs=document.getElementById('ingSearch'); if(igs) igs.addEventListener('input',function(){ fillIngPick(igs.value); });
+  var iga=document.getElementById('ingAdd'); if(iga) iga.addEventListener('click',function(){ var fo=window.HeiBenFood&&HeiBenFood.byId(document.getElementById('ingPick').value); if(!fo){ HP.toast('Bitte ein Lebensmittel wählen.'); return; } ingredients.push({id:fo.id,n:fo.n,per100:fo.per100,g:+document.getElementById('ingGram').value||100}); recomputeIng(); });
+  var igl=document.getElementById('ingList'); if(igl) igl.addEventListener('click',function(e){ var b=e.target.closest('[data-ingdel]'); if(!b)return; ingredients.splice(+b.dataset.ingdel,1); recomputeIng(); });
+  document.getElementById('rPort').addEventListener('input',function(){ if(ingredients.length) recomputeIng(); });
+
+  // ---- Einkaufsliste aus dem Plan ----
+  function einkauf(){ return ld('heiben-einkauf',[]); }
+  function genEinkauf(){ var seen={}, list=[];
+    for(var i=6;i>=0;i--){ var d=new Date(); d.setDate(d.getDate()-i); var dl=dayLog(d.toISOString().slice(0,10));
+      ['fruh','mittag','abend','snack'].forEach(function(sl){ (dl[sl]||[]).forEach(function(it){ (it.zut||[]).forEach(function(z){ var key=z.toLowerCase(); if(!seen[key]){ seen[key]=1; list.push({item:z,done:false}); } }); }); }); }
+    sv('heiben-einkauf',list); if(window.HeiBenTrack)HeiBenTrack.ev('shoppinglist_gen',{n:list.length}); renderEinkauf();
+    HP.toast(list.length?(list.length+' Zutaten in der Liste ✓'):'Keine Rezept-Zutaten in der Woche gefunden.');
+  }
+  function renderEinkauf(){ var l=einkauf(); var el=document.getElementById('einkaufList');
+    el.innerHTML=l.length?l.map(function(it,i){return '<label class="chk"><input type="checkbox" data-eick="'+i+'"'+(it.done?' checked':'')+'><span style="'+(it.done?'text-decoration:line-through;color:var(--ink-soft);':'')+'">'+it.item+'</span></label>';}).join(''):'<p class="note">Liste leer — „Einkaufsliste erzeugen".</p>'; }
+  document.getElementById('genEinkauf').addEventListener('click',genEinkauf);
+  document.getElementById('clrEinkauf').addEventListener('click',function(){ sv('heiben-einkauf',[]); renderEinkauf(); });
+  document.getElementById('einkaufList').addEventListener('change',function(e){ var c=e.target.closest('[data-eick]'); if(!c)return; var l=einkauf(); l[+c.dataset.eick].done=c.checked; sv('heiben-einkauf',l); renderEinkauf(); });
+
+  // ---- Verlauf & Trends ----
+  function weightLog(){ return ld('heiben-weight-log',{}); }
+  document.getElementById('wLog').addEventListener('click',function(){ var v=+document.getElementById('wToday').value; if(!(v>0)){ HP.toast('Bitte ein Gewicht eingeben.'); return; } var wl=weightLog(); wl[new Date().toISOString().slice(0,10)]=v; sv('heiben-weight-log',wl); if(window.HeiBenTrack)HeiBenTrack.ev('weight_log',{}); HP.toast('Gewicht gespeichert ✓'); renderVerlauf(); });
+  function renderVerlauf(){
+    var wl=weightLog(); var keys=Object.keys(wl).sort().slice(-14); var wc=document.getElementById('wChart');
+    if(!keys.length){ wc.innerHTML='<p class="note">Noch keine Gewichtseinträge.</p>'; }
+    else { var vals=keys.map(function(k){return wl[k];}); var mn=Math.min.apply(null,vals), mx=Math.max.apply(null,vals); var rng=(mx-mn)||1;
+      var W=Math.max(260,keys.length*40), H=90, pad=8;
+      var pts=keys.map(function(k,i){ var x=pad+(keys.length<2?0:i*((W-2*pad)/(keys.length-1))); var y=pad+(H-2*pad)*(1-(wl[k]-mn)/rng); return x.toFixed(1)+','+y.toFixed(1); });
+      wc.innerHTML='<svg viewBox="0 0 '+W+' '+H+'" width="100%" height="100" preserveAspectRatio="none">'+
+        '<polyline fill="none" stroke="#6b3951" stroke-width="2" points="'+pts.join(' ')+'"/>'+
+        pts.map(function(pt){var xy=pt.split(',');return '<circle cx="'+xy[0]+'" cy="'+xy[1]+'" r="2.6" fill="#b04a31"/>';}).join('')+'</svg>'+
+        '<div class="note">'+keys[0]+' … '+keys[keys.length-1]+' · '+mn+'–'+mx+' kg</div>'; }
+    var kc=[]; for(var i=13;i>=0;i--){ var d=new Date(); d.setDate(d.getDate()-i); kc.push({d:d.getDate(),v:dayTotals(d.toISOString().slice(0,10)).energie}); }
+    var maxk=Math.max(1,Math.max.apply(null,kc.map(function(c){return c.v;})));
+    document.getElementById('kcalChart').innerHTML=kc.map(function(c){ var h=Math.round(c.v/maxk*110); return '<div class="col"><div class="bar" style="height:'+Math.max(2,h)+'px"></div><div class="d">'+c.d+'</div></div>'; }).join('');
+    var p=profile(); var wt=document.getElementById('wToday'); if(p&&!wt.value) wt.value=p.w;
+  }
+
+  function renderAll(){ loadProfileInputs(); renderBmi(); renderTargets(); renderSlots(); renderDayCompare(); renderWeek(); fillFoodPick(''); fillIngPick(''); renderIng(); renderEinkauf(); renderVerlauf(); renderOwn(); applyGate(); }
+
+  renderAll();
+})();
+</script>
+<script src="heiben-legal.js"></script>
+</body>
+</html>

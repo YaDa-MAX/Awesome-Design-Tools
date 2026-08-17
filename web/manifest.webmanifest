@@ -1,0 +1,28 @@
+{
+  "id": "/?app=heiben",
+  "name": "HeiBen — Heimat leben",
+  "short_name": "HeiBen",
+  "description": "Eine Kölner Unternehmensfamilie aus fünf Häusern: Reisen, Wohnen, Immobilien, Studio und Kulinarik. Mit Rezepten, Wochenplaner, Lebenswissen und mehr.",
+  "lang": "de",
+  "dir": "ltr",
+  "start_url": "index.html?app=heiben",
+  "scope": "./",
+  "display": "standalone",
+  "display_override": ["standalone", "minimal-ui"],
+  "orientation": "portrait-primary",
+  "background_color": "#f3eee5",
+  "theme_color": "#f3eee5",
+  "categories": ["lifestyle", "food", "education", "reference"],
+  "icons": [
+    { "src": "assets/favicon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "assets/favicon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "assets/maskable-192.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable" },
+    { "src": "assets/maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    { "name": "Suche", "short_name": "Suche", "url": "suche.html?app=heiben", "icons": [{ "src": "assets/favicon-192.png", "sizes": "192x192" }] },
+    { "name": "Wochenplan", "short_name": "Wochenplan", "url": "kulinarik-wochenplan.html?app=heiben", "icons": [{ "src": "assets/favicon-192.png", "sizes": "192x192" }] },
+    { "name": "Rezept-Würfel", "short_name": "Würfel", "url": "kulinarik-rezeptwuerfel.html?app=heiben", "icons": [{ "src": "assets/favicon-192.png", "sizes": "192x192" }] },
+    { "name": "Lebenswissen", "short_name": "Lebenswissen", "url": "studio-lebenswissen.html?app=heiben", "icons": [{ "src": "assets/favicon-192.png", "sizes": "192x192" }] }
+  ]
+}

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tagesdosis · HeiBen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;1,400&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f3eee5;--bg2:#ebe3d4;--paper:#fffdf8;--ink:#1f1c17;--ink2:#524a3e;--rule:#d8cdb7;--terra:#b04a31;--ochre:#a97a1d;--moss:#4a5c39;--burg:#792d29;--aub:#6b3951;--good:#6f8f4e;--bad:#b04a31}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:'Manrope',system-ui,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:680px;margin:0 auto;padding:1.6rem 1.1rem 5rem}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.32em;text-transform:uppercase;color:var(--aub)}
+h1{font-family:'Fraunces',serif;font-weight:400;font-size:clamp(1.9rem,6vw,3rem);line-height:1.04;letter-spacing:-.02em;margin:.45rem 0 .4rem}
+h1 em{font-style:italic;color:var(--aub)}
+.lead{color:var(--ink2);max-width:56ch;font-size:1.0rem}
+.date{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink2);margin-top:.5rem}
+.streak{display:flex;gap:.6rem;margin:1.2rem 0 .2rem}
+.streak .s{flex:1 1 0;background:var(--ink);color:var(--bg);border-radius:14px;padding:.75rem .6rem;text-align:center}
+.streak .s.hot{background:linear-gradient(160deg,#b04a31,#a97a1d)}
+.streak .v{font-family:'Fraunces',serif;font-size:1.9rem;line-height:1;color:var(--ochre)}
+.streak .s.hot .v{color:#fff}
+.streak .l{font-family:'JetBrains Mono',monospace;font-size:.5rem;letter-spacing:.08em;text-transform:uppercase;color:#cdbfa8;margin-top:.25rem}
+.streak .s.hot .l{color:#ffe9cf}
+.card{background:var(--paper);border:1px solid var(--rule);border-radius:18px;padding:1.2rem 1.2rem 1.3rem;margin-top:1.1rem}
+.kicker{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.16em;text-transform:uppercase;color:var(--terra)}
+.kat{font-family:'JetBrains Mono',monospace;font-size:.56rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink2);float:right}
+.term{font-family:'Fraunces',serif;font-size:1.5rem;line-height:1.18;margin:.5rem 0 .2rem}
+.btn{appearance:none;border:none;cursor:pointer;font:inherit;font-weight:700;background:var(--ink);color:var(--bg);border-radius:11px;padding:.6rem 1rem;margin-top:.7rem}
+.btn:hover{background:#2c2620}
+.btn.ghost{background:none;color:var(--terra);border:1px solid var(--rule);font-weight:600}
+.btn.ghost:hover{border-color:var(--terra)}
+.answer{display:none;margin-top:.6rem;padding-top:.7rem;border-top:1px solid var(--rule)}
+.answer.show{display:block}
+.def{font-size:1.0rem;color:var(--ink)}
+.ext{margin-top:.7rem;background:var(--bg);border-left:3px solid var(--ochre);border-radius:0 10px 10px 0;padding:.6rem .8rem;font-size:.92rem;color:var(--ink2)}
+.ext .h{font-family:'JetBrains Mono',monospace;font-size:.54rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ochre);margin-bottom:.2rem}
+.deep{display:inline-block;margin-top:.7rem;font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.06em;text-transform:uppercase;color:var(--terra);text-decoration:none;border:1px solid var(--rule);border-radius:8px;padding:.35rem .6rem}
+.deep:hover{border-color:var(--terra)}
+.prompt{font-size:1.0rem;color:var(--ink);margin:.5rem 0 .2rem}
+.opts{display:grid;gap:.5rem;margin-top:.6rem}
+.opt{display:block;width:100%;text-align:left;background:var(--bg);border:1px solid var(--rule);border-radius:11px;padding:.6rem .8rem;font:inherit;cursor:pointer;line-height:1.3}
+.opt:hover{border-color:var(--aub)}
+.opt:disabled{cursor:default}
+.opt.correct{background:rgba(111,143,78,.16);border-color:var(--good);color:#3c4a2c;font-weight:600}
+.opt.wrong{background:rgba(176,74,49,.12);border-color:var(--bad);color:#7a2f1f}
+.fb{margin-top:.7rem;font-size:.95rem;display:none}
+.fb.show{display:block}
+.fb.ok{color:var(--moss)}.fb.no{color:var(--burg)}
+.done{margin-top:1.1rem;background:rgba(111,143,78,.13);border:1px solid rgba(111,143,78,.4);border-radius:14px;padding:.9rem 1rem;color:#3c4a2c;display:none}
+.done.show{display:block}
+.done b{color:var(--moss)}
+.foot{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink2);text-align:center;margin-top:2.2rem}
+.foot a{color:var(--aub)}
+</style>
+<link rel="stylesheet" href="heiben-design.css">
+<script src="heiben-nav.js" defer></script>
+</head>
+<body data-hb-welt="wissen">
+<div class="wrap">
+  <p class="eyebrow">HeiBen · Wissen</p>
+  <h1>Tages<em>dosis</em></h1>
+  <p class="lead">Ein Begriff, eine Frage — jeden Tag. Klein genug für die Kaffeepause, oft genug, dass es bleibt. Komm morgen wieder, dann wächst deine Serie.</p>
+  <div class="date" id="date"></div>
+
+  <div class="streak" id="streak"></div>
+
+  <div class="card">
+    <span class="kat" id="kat1"></span>
+    <div class="kicker">Begriff des Tages</div>
+    <div class="term" id="term"></div>
+    <button class="btn" id="reveal">Antwort zeigen</button>
+    <div class="answer" id="answer">
+      <div class="def" id="def"></div>
+      <div class="ext" id="ext" style="display:none"><div class="h">Mehr zum Thema</div><div id="extt"></div></div>
+      <a class="deep" id="deep" href="#">Diesen Bereich vertiefen →</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <span class="kat" id="kat2"></span>
+    <div class="kicker">Mini-Frage des Tages</div>
+    <div class="prompt" id="prompt"></div>
+    <div class="opts" id="opts"></div>
+    <div class="fb" id="fb"></div>
+  </div>
+
+  <div class="done" id="donebox"></div>
+
+  <p class="foot">HeiBen GmbH i. G. · „Heimat leben" · <a href="mein-heiben.html">Mein HeiBen</a> · <a href="lernpfade.html">Lernpfade</a> · <a href="begriffskarten.html">Begriffskarten</a></p>
+</div>
+
+<script src="tagesdosis-daten.js"></script>
+<script>
+var KATLBL={gemischt:"Alles gemischt",geo:"Geografie",natur:"Natur & Wissenschaft",gesch:"Geschichte",kultur:"Kultur & Sprache",koerper:"Körper & Gesundheit",geld:"Geld & Recht",alltag:"Alltag & Technik",tech:"Technik & Internet",staat:"Politik & Staat",mathe:"Mathe & Logik",ersthilfe:"Erste Hilfe",redewendung:"Redewendungen",weltraum:"Weltraum & Astronomie",tiere:"Tierwelt",essen:"Essen & Küche",sport:"Sport",musik:"Musik",chemie:"Chemie",physik:"Physik",umwelt:"Umwelt & Klima",verkehr:"Verkehr & Auto",wetter:"Wetter & Natur",psychologie:"Psychologie",religion:"Religionen & Feste",kunst:"Kunst & Architektur",wirtschaft:"Wirtschaft",philosophie:"Philosophie & Denken",erfindungen:"Erfindungen & Entdeckungen",mythologie:"Mythologie & Sagen",botanik:"Pflanzen & Garten",sprache:"Sprachen & Wörter",computer:"Computer & Code",recht:"Recht & Alltag",medizin:"Gesundheit & Medizin",erde:"Erde & Geologie",kommunikation:"Medien & Kommunikation"};
+function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
+function el(id){return document.getElementById(id);}
+function hash(str){var h=2166136261;for(var i=0;i<str.length;i++){h^=str.charCodeAt(i);h=Math.imul(h,16777619);}return (h>>>0);}
+function pad(n){return n<10?"0"+n:""+n;}
+function dstr(d){return d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate());}
+
+var BANK=(typeof TD_BANK!=="undefined")?TD_BANK:[];
+var EXT=(typeof TD_EXT!=="undefined")?TD_EXT:{};
+var N=BANK.length;
+var today=new Date(); var TODAY=dstr(today);
+var yd=new Date(today.getTime()-86400000); var YESTERDAY=dstr(yd);
+
+// — Tages-Auswahl, deterministisch —
+var idxA=hash(TODAY+"|begriff")%N;
+var idxB=hash(TODAY+"|frage")%N; if(idxB===idxA)idxB=(idxB+1)%N;
+var cardA=BANK[idxA], cardB=BANK[idxB];
+
+// Monats-/Wochentagsanzeige
+var WT=["Sonntag","Montag","Dienstag","Mittwoch","Donnerstag","Freitag","Samstag"];
+var MO=["Januar","Februar","März","April","Mai","Juni","Juli","August","September","Oktober","November","Dezember"];
+el("date").textContent=WT[today.getDay()]+", "+today.getDate()+". "+MO[today.getMonth()]+" "+today.getFullYear();
+
+// — Begriff des Tages —
+el("kat1").textContent=KATLBL[cardA.k]||cardA.k;
+el("term").textContent=cardA.t;
+el("def").textContent=cardA.d;
+if(EXT[cardA.t]){ el("extt").textContent=EXT[cardA.t]; el("ext").style.display="block"; }
+el("deep").setAttribute("href","begriffskarten.html?kat="+encodeURIComponent(cardA.k));
+el("reveal").addEventListener("click",function(){ el("answer").classList.add("show"); this.style.display="none"; });
+
+// — Mini-Frage: Antwort der Zuordnung —
+el("kat2").textContent=KATLBL[cardB.k]||cardB.k;
+el("prompt").innerHTML='<b>Diese Antwort</b> — zu welcher Frage gehört sie?<br><span style="color:var(--ink2)">„'+esc(cardB.d)+'"</span>';
+// Distraktoren: 3 weitere, deterministisch, mit unterschiedlichem Fragetext
+var used={}; used[cardB.t]=1; var opts=[cardB.t]; var step=1;
+while(opts.length<4 && step< N+4){
+  var j=hash(TODAY+"|distr"+step)%N; step++;
+  var t=BANK[j].t; if(!used[t]){ used[t]=1; opts.push(t); }
+}
+// deterministisch mischen
+opts.sort(function(a,b){return hash(TODAY+a)-hash(TODAY+b);});
+var answered=false;
+function buildOpts(lock){
+  el("opts").innerHTML=opts.map(function(t){return '<button class="opt" data-t="'+esc(t)+'"'+(lock?' disabled':'')+'>'+esc(t)+'</button>';}).join('');
+  if(!lock){ Array.prototype.forEach.call(document.querySelectorAll(".opt"),function(b){ b.addEventListener("click",function(){ choose(this.getAttribute("data-t")); }); }); }
+}
+function markOpts(){
+  Array.prototype.forEach.call(document.querySelectorAll(".opt"),function(b){
+    b.disabled=true; var t=b.getAttribute("data-t");
+    if(t===cardB.t)b.classList.add("correct"); else if(b.classList.contains("_picked"))b.classList.add("wrong");
+  });
+}
+function choose(t){
+  if(answered)return; answered=true;
+  var correct=(t===cardB.t);
+  Array.prototype.forEach.call(document.querySelectorAll(".opt"),function(b){ if(b.getAttribute("data-t")===t)b.classList.add("_picked"); });
+  markOpts();
+  var fb=el("fb"); fb.className="fb show "+(correct?"ok":"no");
+  fb.textContent=correct?"Richtig — sitzt!":"Knapp daneben — die richtige Frage ist oben grün markiert.";
+  completeToday(correct);
+}
+
+// — Streak —
+var SK="heiben-tagesdosis";
+var st; try{st=JSON.parse(localStorage.getItem(SK))||{};}catch(e){st={};}
+if(typeof st.streak!=="number")st.streak=0;
+if(typeof st.best!=="number")st.best=0;
+if(typeof st.total!=="number")st.total=0;
+
+function paintStreak(){
+  var hot=st.streak>=3?" hot":"";
+  el("streak").innerHTML=
+    '<div class="s'+hot+'"><div class="v">'+st.streak+'</div><div class="l">Tage in Folge</div></div>'+
+    '<div class="s"><div class="v">'+st.best+'</div><div class="l">Bestmarke</div></div>'+
+    '<div class="s"><div class="v">'+st.total+'</div><div class="l">Tage gesamt</div></div>';
+}
+function writeDash(){
+  try{var R=JSON.parse(localStorage.getItem("heiben_results")||"{}");
+    R.tagesdosis={t:"Tagesdosis",v:st.streak+" Tage Serie · "+st.total+" gesamt",u:"tagesdosis.html",ts:Date.now()};
+    localStorage.setItem("heiben_results",JSON.stringify(R));}catch(e){}
+}
+function showDone(){
+  el("donebox").classList.add("show");
+  var more=st.streak>=2?'Deine Serie steht bei <b>'+st.streak+' Tagen</b>. ':'';
+  el("donebox").innerHTML='<b>Heute erledigt.</b> '+more+'Komm morgen wieder — dann wächst sie weiter.';
+}
+function completeToday(correct){
+  if(st.last===TODAY){ showDone(); return; } // schon gezählt
+  if(st.last===YESTERDAY) st.streak=st.streak+1; else st.streak=1;
+  st.last=TODAY; st.total=st.total+1; if(st.streak>st.best)st.best=st.streak;
+  try{localStorage.setItem(SK,JSON.stringify(st));}catch(e){}
+  paintStreak(); writeDash(); showDone();
+}
+
+paintStreak(); writeDash();
+if(st.last===TODAY){ // heute schon gemacht: Frage gelöst zeigen, Streak-Box anzeigen
+  buildOpts(true);
+  Array.prototype.forEach.call(document.querySelectorAll(".opt"),function(b){ if(b.getAttribute("data-t")===cardB.t)b.classList.add("correct"); });
+  answered=true; var fb=el("fb"); fb.className="fb show ok"; fb.textContent="Heute bereits beantwortet — die richtige Zuordnung ist grün.";
+  showDone();
+} else {
+  buildOpts(false);
+}
+</script>
+</body>
+</html>

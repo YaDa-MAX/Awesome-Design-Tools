@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HeiBen Reisen · Kuratierte Reisen</title>
+<meta name="description" content="Kuratierte Reisen von HeiBen Reisen — vom Rheinland bis Europa. Finde mit dem Reise-Kompass die passende Auszeit.">
+<style>
+:root{--bg:#f3eee5;--bg-soft:#ebe3d4;--ink:#1f1c17;--ink-soft:#524a3e;--rule:#d8cdb7;--terracotta:#b04a31;--accent:#a97a1d;--accent-d:#9c6f1f;}
+*{box-sizing:border-box;}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Manrope',-apple-system,Segoe UI,sans-serif;line-height:1.5;}
+.wrap{max-width:1040px;margin:0 auto;padding:0 1.5rem;}
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:1.1rem 0;border-bottom:1px solid var(--rule);}
+.wm{font-family:'Fraunces',serif;font-weight:700;font-size:1.4rem;}.wm .a{color:var(--terracotta);}
+.wm span{font-weight:400;font-size:.9rem;color:var(--ink-soft);}
+.back{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);text-decoration:none;}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:.64rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent-d);}
+h1{font-family:'Fraunces',serif;font-weight:340;font-size:clamp(2rem,5vw,3rem);margin:1rem 0 .2rem;}
+.lede{color:var(--ink-soft);max-width:60ch;}
+h2{font-family:'Fraunces',serif;font-weight:440;font-size:1.3rem;margin:2.2rem 0 .6rem;}
+.compass{background:#fff;border:1px solid var(--rule);border-radius:18px;padding:1.2rem 1.3rem;margin-top:1rem;}
+.compass .row{display:flex;gap:1rem;flex-wrap:wrap;align-items:flex-end;}
+.field{display:flex;flex-direction:column;gap:4px;}
+.field label{font-size:.74rem;color:var(--ink-soft);}
+.field select{border:1px solid var(--rule);background:var(--bg);border-radius:8px;padding:.55rem .7rem;font:inherit;min-width:160px;}
+.btn{display:inline-block;border:0;cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;padding:.7rem 1.1rem;border-radius:9px;text-decoration:none;margin:.3rem .3rem 0 0;}
+.btn.primary{background:var(--accent);color:#1f1c17;}.btn.ink{background:var(--ink);color:#f3eee5;}
+.btn.ghost{background:none;border:1px solid var(--ink);color:var(--ink);}
+.btn.sm{padding:.45rem .7rem;font-size:.58rem;}
+.chips{display:flex;gap:.4rem;flex-wrap:wrap;margin:.8rem 0;}
+.chip{border:1px solid var(--rule);background:#fff;border-radius:999px;padding:.4rem .85rem;font-size:.78rem;cursor:pointer;}
+.chip.on{background:var(--accent);border-color:var(--accent);color:#1f1c17;font-weight:600;}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;margin-top:1rem;}
+.card{background:#fff;border:1px solid var(--rule);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;}
+.card .ph{height:120px;background:linear-gradient(150deg,var(--accent),#1f1c17);display:flex;align-items:flex-end;padding:.7rem .9rem;}
+.card .ph .reg{font-family:'JetBrains Mono',monospace;font-size:.56rem;letter-spacing:.1em;text-transform:uppercase;color:#f3eee5;background:rgba(31,28,23,.4);padding:.15rem .5rem;border-radius:999px;}
+.card .body{padding:14px;display:flex;flex-direction:column;gap:.4rem;flex:1;}
+.card h3{font-family:'Fraunces',serif;font-weight:480;font-size:1.1rem;margin:0;}
+.card .meta{font-size:.78rem;color:var(--ink-soft);}
+.tags{display:flex;gap:.3rem;flex-wrap:wrap;}
+.tag{font-family:'JetBrains Mono',monospace;font-size:.54rem;letter-spacing:.05em;text-transform:uppercase;background:var(--bg-soft);color:var(--ink-soft);padding:.12rem .45rem;border-radius:999px;}
+.price{font-family:'Fraunces',serif;font-weight:560;color:var(--accent-d);}
+.acts{display:flex;gap:.4rem;margin-top:auto;padding-top:.5rem;}
+.detail{border-top:1px dashed var(--rule);margin-top:.5rem;padding-top:.5rem;font-size:.85rem;color:var(--ink-soft);}
+.detail ul{margin:.3rem 0 0;padding-left:1.1rem;}
+.disc{background:var(--bg-soft);border:1px solid var(--rule);border-radius:12px;padding:.7rem 1rem;font-size:.82rem;color:var(--ink-soft);margin:1.2rem 0;}
+footer{margin-top:3rem;border-top:1px solid var(--rule);padding:1.4rem 0;color:var(--ink-soft);font-size:.8rem;}
+.note{font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--ink-soft);}
+.hide{display:none!important;}
+</style>
+<link rel="stylesheet" href="heiben-design.css">
+<script src="heiben-nav.js" defer></script>
+</head>
+<body data-hb-welt="reisen">
+<div class="wrap">
+  <div class="topbar"><div class="wm"><span class="a">H</span>ei<span class="a">B</span>en <span>· Reisen</span></div><a class="back" href="reisen.html">← HeiBen Reisen</a></div>
+  <div class="eyebrow">Kuratierte Reisen</div>
+  <h1>Heimat entdecken — <em style="color:var(--accent-d);font-style:italic;">nah und fern</em></h1>
+  <p class="lede">Handverlesene Reisen mit Charakter: vom Rheinland vor der Haustür bis zu Europas Küsten. Sag uns kurz, wonach dir ist — der Reise-Kompass schlägt das Passende vor.</p>
+  <div style="margin:.8rem 0 0;"><a class="btn ink" href="reisen-planer.html">★ Eigene Reise planen (Köln +100 km) →</a></div>
+
+  <div class="compass">
+    <b style="font-family:'Fraunces',serif;font-size:1.05rem;">Reise-Kompass</b>
+    <div class="row" style="margin-top:.6rem;">
+      <div class="field"><label>Wonach ist dir?</label>
+        <select id="kMood"><option value="">egal</option><option value="auszeit">Erholung &amp; Auszeit</option><option value="kultur">Entdecken &amp; Kultur</option><option value="aktiv">Aktiv &amp; Natur</option><option value="kulinarik">Genuss &amp; Kulinarik</option></select></div>
+      <div class="field"><label>Wie lange?</label>
+        <select id="kLen"><option value="">egal</option><option value="kurz">Kurztrip (bis 4 Tage)</option><option value="woche">Eine Woche</option><option value="lang">Länger</option></select></div>
+      <button class="btn primary" id="kGo">Vorschläge zeigen</button>
+      <button class="btn ghost sm" id="kReset">Alle anzeigen</button>
+    </div>
+  </div>
+
+  <h2>Reisen</h2>
+  <div class="chips" id="themeChips"></div>
+  <div id="count" class="note"></div>
+  <div class="grid" id="grid"></div>
+
+  <div class="disc">HeiBen Reisen vermittelt und kuratiert Reisen. Preise sind <b>Richtwerte „ab" pro Person</b> und variieren je nach Saison, Verfügbarkeit und Leistungen. Verbindliche Angebote nach Anfrage.</div>
+
+  <footer>HeiBen Reisen · Köln · <span class="note">„Heimat leben" — auch unterwegs.</span></footer>
+</div>
+
+<script src="heiben-analytics.js"></script>
+<script>
+(function(){
+  var T=window.HeiBenTrack;
+  var TRIPS=[
+    {id:'rheinromantik',t:'Rheinromantik',reg:'Rheinland',themes:['kultur','auszeit'],tage:3,band:'kurz',preis:390,
+      kurz:'Weindörfer, Burgen und eine Schiffspassage auf dem Rhein.',
+      hi:['Schifffahrt Rüdesheim–Koblenz','Weinprobe im Winzerdorf','Burg-Besichtigung'],incl:['2 Ü/F','Schiffsticket','geführte Weinprobe'],season:'Mai–Okt'},
+    {id:'eifel',t:'Eifel-Auszeit',reg:'Rheinland',themes:['auszeit','aktiv'],tage:4,band:'kurz',preis:450,
+      kurz:'Wälder, Maare und Slow-Wellness im Nationalpark Eifel.',
+      hi:['Wanderung zu den Maaren','Sterngucker-Abend (Sternenpark)','Spa-Nachmittag'],incl:['3 Ü/HP','Wanderkarte','Spa-Eintritt'],season:'ganzjährig'},
+    {id:'toskana',t:'Toskana-Genuss',reg:'Europa',themes:['kulinarik','kultur'],tage:7,band:'woche',preis:1290,
+      kurz:'Weingüter, Olivenhaine und ein Tag in Florenz.',
+      hi:['Weingut-Tour im Chianti','Kochkurs','Florenz mit Guide'],incl:['6 Ü/F','2 Verkostungen','Kochkurs'],season:'Apr–Okt'},
+    {id:'fjorde',t:'Norwegens Fjorde',reg:'Europa',themes:['aktiv','auszeit'],tage:8,band:'lang',preis:1890,
+      kurz:'Wandern über Fjorde, Wasserfälle und stille Dörfer.',
+      hi:['Wanderung am Geirangerfjord','Panorama-Bahn','Bootsfahrt'],incl:['7 Ü/F','Bahn- &amp; Boottickets','2 geführte Touren'],season:'Jun–Sep'},
+    {id:'lissabon',t:'Lissabon &amp; Küste',reg:'Europa',themes:['kultur','kulinarik'],tage:5,band:'woche',preis:980,
+      kurz:'Azulejos, Pastéis und die Atlantikküste bei Sintra.',
+      hi:['Altstadt-Rundgang','Tagesausflug Sintra','Fado-Abend'],incl:['4 Ü/F','Stadtführung','Sintra-Ausflug'],season:'Mär–Nov'},
+    {id:'allgaeu',t:'Allgäu Aktiv',reg:'Deutschland',themes:['aktiv','auszeit'],tage:6,band:'woche',preis:760,
+      kurz:'Bergwandern, Bergseen und Hüttenabende.',
+      hi:['Gipfeltour mit Guide','Bergsee-Baden','Hüttenabend'],incl:['5 Ü/HP','2 geführte Touren','Bergbahn'],season:'Jun–Okt'},
+    {id:'ostsee',t:'Ostsee-Slowtravel',reg:'Deutschland',themes:['auszeit','kulinarik'],tage:5,band:'woche',preis:690,
+      kurz:'Strandtage, Räucherfisch und Backsteinstädte.',
+      hi:['Strand &amp; Dünen','Fischräucherei','Hansestadt-Bummel'],incl:['4 Ü/F','Leihräder','Stadtführung'],season:'Mai–Sep'},
+    {id:'andalusien',t:'Andalusien Kultur',reg:'Europa',themes:['kultur','kulinarik'],tage:7,band:'woche',preis:1150,
+      kurz:'Alhambra, Flamenco und Tapas zwischen Sevilla und Granada.',
+      hi:['Alhambra mit Guide','Flamenco-Abend','Tapas-Tour'],incl:['6 Ü/F','Alhambra-Ticket','2 Führungen'],season:'Mär–Jun, Sep–Nov'}
+  ];
+  var THEMES=[['auszeit','Auszeit'],['kultur','Kultur'],['aktiv','Aktiv & Natur'],['kulinarik','Kulinarik']];
+  var REGIONS=[['Rheinland','Rheinland'],['Deutschland','Deutschland'],['Europa','Europa']];
+  var activeTheme='', activeRegion='', mood='', len='';
+
+  function chipsHtml(){
+    var h='<span class="chip'+(activeTheme===''&&activeRegion===''?' on':'')+'" data-all="1">Alle</span>';
+    h+=THEMES.map(function(t){return '<span class="chip'+(activeTheme===t[0]?' on':'')+'" data-theme="'+t[0]+'">'+t[1]+'</span>';}).join('');
+    h+=REGIONS.map(function(r){return '<span class="chip'+(activeRegion===r[0]?' on':'')+'" data-region="'+r[0]+'">'+r[1]+'</span>';}).join('');
+    return h;
+  }
+  function match(tr){
+    if(activeTheme && tr.themes.indexOf(activeTheme)<0) return false;
+    if(activeRegion && tr.reg!==activeRegion) return false;
+    if(mood && tr.themes.indexOf(mood)<0) return false;
+    if(len && tr.band!==len) return false;
+    return true;
+  }
+  function card(tr){
+    return '<div class="card"><div class="ph"><span class="reg">'+tr.reg+'</span></div>'+
+      '<div class="body"><h3>'+tr.t+'</h3>'+
+      '<div class="tags">'+tr.themes.map(function(x){var l={auszeit:'Auszeit',kultur:'Kultur',aktiv:'Aktiv',kulinarik:'Kulinarik'}[x];return '<span class="tag">'+l+'</span>';}).join('')+'</div>'+
+      '<div class="meta">'+tr.tage+' Tage · beste Zeit '+tr.season+'</div>'+
+      '<div>'+tr.kurz+'</div>'+
+      '<div class="price">ab '+tr.preis+'&nbsp;€ p.&nbsp;P.</div>'+
+      '<div class="acts"><button class="btn ghost sm" data-detail="'+tr.id+'">Details</button>'+
+      '<a class="btn ink sm" href="reisen-anfrage.html?reise='+tr.id+'" data-anfrage="'+tr.id+'">Anfragen</a></div>'+
+      '<div class="detail hide" id="d-'+tr.id+'"><b>Highlights:</b><ul>'+tr.hi.map(function(x){return '<li>'+x+'</li>';}).join('')+'</ul>'+
+      '<b>Inklusive:</b> '+tr.incl.join(' · ')+'</div></div></div>';
+  }
+  function render(){
+    document.getElementById('themeChips').innerHTML=chipsHtml();
+    var list=TRIPS.filter(match);
+    document.getElementById('count').textContent=list.length+' von '+TRIPS.length+' Reisen';
+    document.getElementById('grid').innerHTML=list.map(card).join('') || '<p class="note">Keine Reise passt zu dieser Auswahl — Filter zurücksetzen.</p>';
+  }
+  document.getElementById('themeChips').addEventListener('click',function(e){
+    var c=e.target.closest('.chip'); if(!c)return;
+    if(c.dataset.all!==undefined){ activeTheme='';activeRegion=''; }
+    else if(c.dataset.theme!==undefined){ activeTheme = activeTheme===c.dataset.theme?'':c.dataset.theme; }
+    else if(c.dataset.region!==undefined){ activeRegion = activeRegion===c.dataset.region?'':c.dataset.region; }
+    render();
+  });
+  document.getElementById('grid').addEventListener('click',function(e){
+    var d=e.target.closest('[data-detail]'); if(d){ document.getElementById('d-'+d.dataset.detail).classList.toggle('hide'); return; }
+    var a=e.target.closest('[data-anfrage]'); if(a && T){ T.ev('reise_anfrage',{reise:a.dataset.anfrage}); }
+  });
+  document.getElementById('kGo').addEventListener('click',function(){
+    mood=document.getElementById('kMood').value; len=document.getElementById('kLen').value;
+    activeTheme='';activeRegion=''; if(T)T.ev('reise_kompass',{mood:mood,len:len}); render();
+    document.getElementById('count').scrollIntoView({behavior:'smooth',block:'start'});
+  });
+  document.getElementById('kReset').addEventListener('click',function(){ mood='';len='';activeTheme='';activeRegion='';
+    document.getElementById('kMood').value='';document.getElementById('kLen').value=''; render(); });
+  render();
+})();
+</script>
+<script src="heiben-legal.js"></script>
+</body>
+</html>

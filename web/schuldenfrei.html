@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Schuldenfrei werden · HeiBen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;1,400&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f3eee5;--bg2:#ebe3d4;--paper:#fffdf8;--ink:#1f1c17;--ink2:#524a3e;--rule:#d8cdb7;--terra:#b04a31;--ochre:#a97a1d;--moss:#4a5c39;--burg:#792d29;--aub:#6b3951}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:'Manrope',system-ui,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:840px;margin:0 auto;padding:1.6rem 1.1rem 5rem}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.32em;text-transform:uppercase;color:var(--terra)}
+h1{font-family:'Fraunces',serif;font-weight:400;font-size:clamp(2rem,6.5vw,3.2rem);line-height:1.02;letter-spacing:-.02em;margin:.45rem 0 .5rem}
+h1 em{font-style:italic;color:var(--terra)}
+.lead{color:var(--ink2);max-width:60ch;font-size:1.02rem}
+.card{background:var(--paper);border:1px solid var(--rule);border-radius:16px;padding:1.1rem 1.15rem;margin-top:1.1rem}
+.card h3{font-family:'Fraunces',serif;font-weight:500;font-size:1.25rem;margin-bottom:.5rem;display:flex;justify-content:space-between;align-items:center}
+.dhead,.drow{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr 32px;gap:.5rem;align-items:center}
+.dhead{font-family:'JetBrains Mono',monospace;font-size:.54rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink2);margin-bottom:.3rem;padding:0 .1rem}
+.drow{margin-top:.4rem}
+.drow input{width:100%;padding:.45rem .5rem;border:1px solid var(--rule);border-radius:8px;background:var(--bg);color:var(--ink);font:inherit;font-weight:600;font-size:.9rem}
+.drow input:focus{outline:none;border-color:var(--terra);background:#fff}
+.del{border:1px solid var(--rule);background:var(--bg);border-radius:8px;height:34px;cursor:pointer;color:var(--burg);font-weight:700}
+.addbtn{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;border:1px dashed var(--rule);background:transparent;color:var(--ink2);padding:.45rem .8rem;border-radius:9px;cursor:pointer;margin-top:.6rem}
+.budget{display:flex;align-items:center;gap:.8rem;flex-wrap:wrap;margin-top:.4rem}
+.budget label{font-weight:600}
+.budget input{width:130px;padding:.5rem .6rem;border:1px solid var(--rule);border-radius:9px;background:var(--bg);font:inherit;font-weight:700}
+.warn{color:var(--burg);font-size:.85rem;margin-top:.5rem;font-weight:600}
+.seg{display:inline-flex;background:var(--bg2);border:1px solid var(--rule);border-radius:999px;padding:.25rem;gap:.2rem;margin-top:.2rem}
+.seg button{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;border:none;background:transparent;color:var(--ink2);padding:.5rem .85rem;border-radius:999px;cursor:pointer}
+.seg button.on{background:var(--ink);color:var(--bg)}
+.result{margin-top:1.5rem;background:var(--ink);color:var(--bg);border-radius:18px;padding:1.4rem 1.3rem 1.5rem}
+.result .eyebrow{color:var(--ochre)}
+.bigdate{font-family:'Fraunces',serif;font-weight:500;font-size:clamp(2rem,9vw,3rem);color:#9ec27f;margin:.2rem 0 .1rem}
+.verdict{font-size:.98rem;color:#e8e0d0;margin-top:.5rem}
+.verdict b{color:var(--ochre)}
+.cmp{display:grid;grid-template-columns:1fr 1fr;gap:.9rem;margin-top:1.1rem}
+.cmp .box{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);border-radius:12px;padding:.8rem .9rem}
+.cmp .box.on{border-color:var(--ochre);box-shadow:0 0 0 1px var(--ochre)}
+.cmp .t{font-family:'JetBrains Mono',monospace;font-size:.56rem;letter-spacing:.08em;text-transform:uppercase;color:#cdbfa8}
+.cmp .v{font-family:'Fraunces',serif;font-size:1.4rem;margin:.15rem 0}
+.cmp .s{font-size:.8rem;color:#cdbfa8}
+.chart-card{background:var(--paper);border:1px solid var(--rule);border-radius:16px;padding:1.05rem 1.1rem 1.2rem;margin-top:1.1rem}
+.chart-card h4{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--terra);margin-bottom:.3rem}
+canvas{width:100%;height:auto;display:block;margin-top:.3rem}
+.foot{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink2);text-align:center;margin-top:2rem}
+</style>
+<link rel="stylesheet" href="heiben-design.css">
+<script src="heiben-nav.js" defer></script>
+</head>
+<body data-hb-welt="wissen">
+<div class="wrap">
+  <p class="eyebrow">HeiBen · Raus aus den Schulden</p>
+  <h1>Schuldenfrei werden — <em>mit Plan</em></h1>
+  <p class="lead">Mehrere Schulden gleichzeitig fühlen sich aussichtslos an. Mit der richtigen Reihenfolge bist du schneller und billiger raus. Trag deine Schulden ein und vergleiche die zwei besten Strategien. Alles bleibt lokal in diesem Gerät.</p>
+
+  <div class="card">
+    <h3>Deine Schulden</h3>
+    <div class="dhead"><span>Bezeichnung</span><span>Restschuld €</span><span>Zins % p.a.</span><span>Mindestrate €</span><span></span></div>
+    <div id="debtRows"></div>
+    <button class="addbtn" id="addDebt">+ Schuld hinzufügen</button>
+  </div>
+
+  <div class="card">
+    <h3>Dein Plan</h3>
+    <div class="budget">
+      <label>Monatliches Budget für Tilgung:</label>
+      <input type="number" id="budget" value="450" step="10">
+      <span class="seg" id="strat">
+        <button data-s="lawine" class="on">Lawine (Zins)</button>
+        <button data-s="snow">Schneeball (Restschuld)</button>
+      </span>
+    </div>
+    <div class="warn" id="warn"></div>
+  </div>
+
+  <div class="result" id="result"></div>
+
+  <div class="chart-card">
+    <h4>Restschuld über die Zeit</h4>
+    <canvas id="chart" width="800" height="280"></canvas>
+  </div>
+
+  <p class="foot">HeiBen GmbH i. G. · „Heimat leben" · <a href="mein-heiben.html" style="color:var(--aub)">Mein HeiBen</a> · Modellrechnung · keine Schuldnerberatung</p>
+</div>
+
+<script>
+var KEY="heiben_debt_v1";
+var debts, budget=450, strat="lawine";
+var DEF=[{name:"Dispo",bal:1800,rate:11.5,min:50},{name:"Kreditkarte",bal:1200,rate:18,min:40},{name:"Ratenkredit",bal:4000,rate:6.5,min:120}];
+try{var sv=JSON.parse(localStorage.getItem(KEY));if(sv&&sv.debts){debts=sv.debts;budget=sv.budget;strat=sv.strat||"lawine";}}catch(e){}
+if(!debts)debts=JSON.parse(JSON.stringify(DEF));
+document.getElementById("budget").value=budget;
+
+function eur(n){return (Math.round(n)).toLocaleString("de-DE")+" €";}
+function save(){try{localStorage.setItem(KEY,JSON.stringify({debts:debts,budget:budget,strat:strat}));}catch(e){}}
+
+function renderRows(){
+  var c=document.getElementById("debtRows");c.innerHTML="";
+  debts.forEach(function(d,i){
+    var row=document.createElement("div");row.className="drow";
+    row.innerHTML='<input data-i="'+i+'" data-k="name" value="'+(d.name||"")+'">'+
+      '<input data-i="'+i+'" data-k="bal" type="number" value="'+d.bal+'">'+
+      '<input data-i="'+i+'" data-k="rate" type="number" step="0.1" value="'+d.rate+'">'+
+      '<input data-i="'+i+'" data-k="min" type="number" value="'+d.min+'">'+
+      '<button class="del" data-del="'+i+'">×</button>';
+    c.appendChild(row);
+  });
+  c.querySelectorAll("input").forEach(function(inp){inp.addEventListener("input",function(){
+    var i=+inp.dataset.i,k=inp.dataset.k;debts[i][k]=k==="name"?inp.value:(parseFloat(String(inp.value).replace(",","."))||0);compute();
+  });});
+  c.querySelectorAll(".del").forEach(function(b){b.onclick=function(){debts.splice(+b.dataset.del,1);renderRows();compute();};});
+}
+
+function simulate(strategy){
+  var ds=debts.map(function(d){return {bal:+d.bal||0,rate:+d.rate||0,min:+d.min||0};}).filter(function(d){return d.bal>0;});
+  var minSum=ds.reduce(function(s,d){return s+d.min;},0);
+  var eff=Math.max(budget,minSum);
+  var months=0,totInt=0,series=[ds.reduce(function(s,d){return s+d.bal;},0)],firstPayoff=null;
+  var active=ds.length;
+  while(ds.some(function(d){return d.bal>0.01;}) && months<720){
+    months++;
+    ds.forEach(function(d){if(d.bal>0.01){var it=d.bal*d.rate/100/12;d.bal+=it;totInt+=it;}});
+    var rem=eff;
+    ds.forEach(function(d){if(d.bal>0.01){var p=Math.min(d.min,d.bal,rem);d.bal-=p;rem-=p;}});
+    var order=ds.filter(function(d){return d.bal>0.01;}).sort(strategy==="snow"?function(a,b){return a.bal-b.bal;}:function(a,b){return b.rate-a.rate;});
+    for(var i=0;i<order.length&&rem>0.01;i++){var p=Math.min(rem,order[i].bal);order[i].bal-=p;rem-=p;}
+    var nowActive=ds.filter(function(d){return d.bal>0.01;}).length;
+    if(firstPayoff===null&&nowActive<active)firstPayoff=months;
+    active=nowActive;
+    series.push(ds.reduce(function(s,d){return s+Math.max(0,d.bal);},0));
+  }
+  return {months:months,totInt:totInt,series:series,done:months<720,firstPayoff:firstPayoff,minSum:minSum};
+}
+
+function fmtDate(months){var d=new Date();d.setMonth(d.getMonth()+months);return d.toLocaleDateString("de-DE",{month:"long",year:"numeric"});}
+function dauer(months){var y=Math.floor(months/12),m=months%12;return (y?y+" J ":"")+(m?m+" Mon":"")||"0 Mon";}
+
+function compute(){
+  save();
+  var totalBal=debts.reduce(function(s,d){return s+(+d.bal||0);},0);
+  var law=simulate("lawine"), snow=simulate("snow");
+  var sel=strat==="lawine"?law:snow, other=strat==="lawine"?snow:law;
+  var minSum=law.minSum;
+  document.getElementById("warn").textContent = budget<minSum ? ("Achtung: Dein Budget liegt unter der Summe der Mindestraten ("+eur(minSum)+"). Gerechnet wird mit "+eur(minSum)+".") : "";
+  var res=document.getElementById("result");
+  if(totalBal<=0){res.innerHTML='<p class="eyebrow">Glückwunsch</p><div class="bigdate">Schuldenfrei!</div><div class="verdict">Keine Schulden erfasst. Genieß das Gefühl — und richte jetzt einen Sparplan ein.</div>';drawChart([0]);return;}
+  if(!sel.done){res.innerHTML='<p class="eyebrow">Zu wenig Budget</p><div class="bigdate" style="color:#e7a48f">über 60 Jahre</div><div class="verdict">Mit diesem Budget wachsen die Zinsen schneller, als du tilgst. Erhöhe die monatliche Rate — schon kleine Schritte verändern alles.</div>';drawChart(sel.series);return;}
+  var saveInt=Math.abs(law.totInt-snow.totInt);
+  var fasterStrat = law.months<=snow.months?"Lawine":"Schneeball";
+  var cheaperStrat = law.totInt<=snow.totInt?"Lawine":"Schneeball";
+  var verdict="Mit der <b>"+(strat==="lawine"?"Lawine":"Schneeball")+"</b>-Strategie bist du in <b>"+dauer(sel.months)+"</b> schuldenfrei und zahlst <b>"+eur(sel.totInt)+"</b> Zinsen. ";
+  if(cheaperStrat==="Lawine"&&strat!=="lawine")verdict+="Die <b>Lawine</b> würde dich "+eur(saveInt)+" Zinsen sparen — sie tilgt zuerst den teuersten Kredit.";
+  else if(strat==="lawine")verdict+="Das ist die mathematisch günstigste Reihenfolge (höchster Zins zuerst). Der Schneeball wäre "+eur(saveInt)+" teurer, killt aber deine erste Schuld schon in "+dauer(snow.firstPayoff||0)+" — der Motivationskick.";
+  else verdict+="Der Schneeball belohnt dich mit dem ersten erledigten Kredit nach "+dauer(sel.firstPayoff||0)+".";
+  res.innerHTML='<p class="eyebrow">Schuldenfrei am</p><div class="bigdate">'+fmtDate(sel.months)+'</div><div class="verdict">'+verdict+'</div>'+
+    '<div class="cmp">'+
+      '<div class="box'+(strat==="lawine"?" on":"")+'"><div class="t">Lawine · Zins zuerst</div><div class="v">'+dauer(law.months)+'</div><div class="s">'+eur(law.totInt)+' Zinsen</div></div>'+
+      '<div class="box'+(strat==="snow"?" on":"")+'"><div class="t">Schneeball · klein zuerst</div><div class="v">'+dauer(snow.months)+'</div><div class="s">'+eur(snow.totInt)+' Zinsen</div></div>'+
+    '</div>';
+  drawChart(sel.series, other.series);
+}
+
+function drawChart(series, series2){
+  var cv=document.getElementById("chart"),ctx=cv.getContext("2d"),W=cv.width,H=cv.height;ctx.clearRect(0,0,W,H);
+  var padL=58,padR=14,padT=16,padB=26,pw=W-padL-padR,ph=H-padT-padB;
+  var mx=Math.max.apply(null,series)||1,n=series.length;
+  function X(i){return padL+(n<=1?0:i/(n-1)*pw);}function Y(v){return padT+(1-v/mx)*ph;}
+  ctx.strokeStyle="#e6dcc8";ctx.fillStyle="#9a9079";ctx.font="10px 'JetBrains Mono',monospace";
+  for(var g=0;g<=4;g++){var v=mx*g/4,yy=Y(v);ctx.beginPath();ctx.moveTo(padL,yy);ctx.lineTo(W-padR,yy);ctx.stroke();ctx.fillText(Math.round(v/1000)+"k",6,yy+3);}
+  if(series2){ctx.beginPath();ctx.moveTo(X(0),Y(series2[0]));for(var k=1;k<series2.length;k++)ctx.lineTo(X(k*(n-1)/(series2.length-1)),Y(series2[k]));ctx.strokeStyle="#cbb89a";ctx.lineWidth=1.5;ctx.setLineDash([4,4]);ctx.stroke();ctx.setLineDash([]);}
+  ctx.beginPath();ctx.moveTo(X(0),Y(series[0]));for(var i=1;i<n;i++)ctx.lineTo(X(i),Y(series[i]));
+  ctx.lineTo(X(n-1),Y(0));ctx.lineTo(X(0),Y(0));ctx.closePath();ctx.fillStyle="rgba(176,74,49,0.14)";ctx.fill();
+  ctx.beginPath();ctx.moveTo(X(0),Y(series[0]));for(var j=1;j<n;j++)ctx.lineTo(X(j),Y(series[j]));ctx.strokeStyle="#b04a31";ctx.lineWidth=2.5;ctx.stroke();
+  ctx.fillStyle="#524a3e";ctx.font="10px 'JetBrains Mono',monospace";ctx.textAlign="center";
+  ctx.fillText("heute",X(0),H-9);ctx.fillText(dauer(n-1),X(n-1),H-9);ctx.textAlign="left";
+}
+
+document.getElementById("addDebt").onclick=function(){debts.push({name:"Neue Schuld",bal:1000,rate:10,min:30});renderRows();compute();};
+document.getElementById("budget").addEventListener("input",function(){budget=parseFloat(String(this.value).replace(",","."))||0;compute();});
+document.querySelectorAll("#strat button").forEach(function(b){b.onclick=function(){strat=b.dataset.s;document.querySelectorAll("#strat button").forEach(function(x){x.classList.toggle("on",x===b);});compute();};});
+document.querySelectorAll("#strat button").forEach(function(x){x.classList.toggle("on",x.dataset.s===strat);});
+renderRows();compute();
+</script>
+</body>
+</html>

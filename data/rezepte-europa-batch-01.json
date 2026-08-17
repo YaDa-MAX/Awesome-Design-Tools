@@ -1,0 +1,516 @@
+{
+  "batch": 1,
+  "region": "Europa",
+  "schema_version": 1,
+  "note": "Traditionelle, historisch etablierte Gerichte. Auswahl ohne Schweinefleisch; Feld 'substitution' nur dort, wo das Original mit Schwein zubereitet wird. Bilder als Platzhalter (lizenzgeprüfte Fotos folgen separat). Generisches Schema, direkt importierbar in PostgreSQL/Supabase/Directus/Strapi/Sanity.",
+  "recipes": [
+    {
+      "country": "Albanien",
+      "continent": "Europa",
+      "recipe_name": "Tavë kosi",
+      "categories": ["Fleisch", "Hauptgericht"],
+      "short_description": "Im Ofen gebackenes Lamm unter einer Haube aus Joghurt und Ei, die beim Backen zu einer goldenen, souffléartigen Schicht stockt. Albaniens inoffizielles Nationalgericht, herzhaft und zugleich erstaunlich leicht.",
+      "history": "Tavë kosi gilt vielen als das Nationalgericht Albaniens und stammt ursprünglich aus der Region um Elbasan, weshalb es auch „Elbasani tavë“ genannt wird. Das Gericht verbindet zwei Einflüsse, die die albanische Küche prägen: die Lammtradition des Balkans und die Joghurt- und Auflauftechniken, die während der osmanischen Zeit verbreitet wurden. Der Name beschreibt das Gericht wörtlich — „tavë“ ist die irdene oder kupferne Backform, „kosi“ der Joghurt. Über Jahrhunderte war es ein Festtagsessen, das man sonntags und zu religiösen Anlässen zubereitete, weil Lamm und Eier kostbar waren. Die joghurtbasierte Haube ist typisch für eine Küche, die Milchprodukte fermentiert haltbar machte. Bis heute steht Tavë kosi in fast jedem traditionellen Lokal des Landes und wird als verbindendes, identitätsstiftendes Gericht verstanden.",
+      "ingredients": [
+        { "quantity": "800", "unit": "g", "item": "Lammschulter oder -keule, in Stücken" },
+        { "quantity": "50", "unit": "g", "item": "Butter" },
+        { "quantity": "2", "unit": "EL", "item": "Mehl" },
+        { "quantity": "60", "unit": "g", "item": "Reis" },
+        { "quantity": "500", "unit": "g", "item": "Naturjoghurt (vollfett)" },
+        { "quantity": "3", "unit": "", "item": "Eier" },
+        { "quantity": "2", "unit": "Zehen", "item": "Knoblauch" },
+        { "quantity": "1", "unit": "TL", "item": "getrockneter Oregano" },
+        { "quantity": "", "unit": "", "item": "Salz und Pfeffer" }
+      ],
+      "instructions": [
+        "Lammstücke in etwas Butter rundum anbraten, salzen, pfeffern und mit dem Knoblauch in eine Backform geben.",
+        "Mit wenig Wasser begießen und im Ofen bei 180 °C etwa 30 Minuten vorgaren; den Reis roh untermischen.",
+        "Aus der restlichen Butter und dem Mehl eine helle Mehlschwitze rühren, leicht abkühlen lassen.",
+        "Joghurt mit Eiern und der Mehlschwitze glatt verquirlen, salzen und über das Lamm gießen.",
+        "Bei 180 °C weitere 35–45 Minuten backen, bis die Oberfläche goldgelb gestockt und leicht aufgegangen ist.",
+        "Vor dem Servieren 10 Minuten ruhen lassen, damit sich die Haube setzt."
+      ],
+      "tips": [
+        "Der Joghurt sollte Zimmertemperatur haben, damit er beim Backen nicht gerinnt.",
+        "Statt Lamm funktioniert auch Hähnchen; die Garzeit verkürzt sich dann etwas.",
+        "Ein Spritzer Zitrone im Joghurt verstärkt die typische Säure."
+      ],
+      "tags": ["Albanien", "Balkan", "Lamm", "Auflauf", "Joghurt", "Ofengericht", "Festtag", "osmanisch geprägt", "Nationalgericht", "Elbasan", "herzhaft", "Sonntagsessen"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Albanien",
+      "continent": "Europa",
+      "recipe_name": "Fërgesë",
+      "categories": ["Vegetarisch", "Vorspeise", "Beilage"],
+      "short_description": "Ein warmes Schmorgericht aus Paprika und Tomaten, gebunden mit zerbröseltem Frischkäse (gjizë). In der Hauptstadt als „Fërgesë Tirane“ bekannt, sämig und mild-würzig.",
+      "history": "Fërgesë ist ein Eckpfeiler der zentralalbanischen Küche und besonders eng mit Tirana verbunden, wo die vegetarische Variante als „Fërgesë Tirane“ gilt. Das Gericht entstand aus der bäuerlichen Notwendigkeit, mit wenigen, im Sommer reichlich vorhandenen Zutaten — Paprika, Tomaten, frischem Käse — ein nahrhaftes, warmes Essen zuzubereiten. Der albanische Frischkäse gjizë, ein Molkenkäse ähnlich Ricotta, ist die charakteristische Zutat und gibt der Fërgesë ihre cremige Bindung. Traditionell wurde das Gericht in einer kleinen irdenen Pfanne (ebenfalls „tavë“) am Herdrand fertig geschmort und direkt darin serviert. Es gibt eine zweite, herzhaftere Variante mit Kalbsleber, doch die fleischlose Paprika-Käse-Fassung ist die alltäglichere und in ländlichen Haushalten verbreitete. Fërgesë steht für die mediterran geprägte Seite Albaniens und wird als geteilte Vorspeise mit viel Brot gegessen.",
+      "ingredients": [
+        { "quantity": "4", "unit": "", "item": "rote Spitzpaprika" },
+        { "quantity": "4", "unit": "", "item": "reife Tomaten, gehäutet und gewürfelt" },
+        { "quantity": "250", "unit": "g", "item": "gjizë (ersatzweise Ricotta oder Quark)" },
+        { "quantity": "100", "unit": "g", "item": "Feta, zerbröselt" },
+        { "quantity": "1", "unit": "", "item": "Zwiebel, fein gewürfelt" },
+        { "quantity": "2", "unit": "Zehen", "item": "Knoblauch" },
+        { "quantity": "3", "unit": "EL", "item": "Olivenöl" },
+        { "quantity": "1", "unit": "Prise", "item": "getrocknete Chiliflocken" },
+        { "quantity": "", "unit": "", "item": "Salz und Pfeffer" }
+      ],
+      "instructions": [
+        "Paprika über offener Flamme oder im Ofen rösten, häuten und in Streifen schneiden.",
+        "Zwiebel und Knoblauch in Olivenöl glasig dünsten.",
+        "Tomaten zugeben und einköcheln, bis eine dicke Sauce entsteht; mit Chili, Salz und Pfeffer würzen.",
+        "Paprikastreifen unterheben und kurz mitschmoren.",
+        "Hitze reduzieren, gjizë und Feta einrühren, nur erwärmen, nicht aufkochen.",
+        "Heiß in der Pfanne servieren, mit Weißbrot zum Tunken."
+      ],
+      "tips": [
+        "Frisch geröstete Paprika schmeckt deutlich besser als eingelegte.",
+        "Wer es würziger mag, gibt mehr Chili oder eine Prise Paprikapulver dazu.",
+        "Die Fërgesë bindet besser, wenn der Käse erst am Ende und bei kleiner Hitze hineinkommt."
+      ],
+      "tags": ["Albanien", "Tirana", "vegetarisch", "Paprika", "Frischkäse", "Schmorgericht", "Vorspeise", "mediterran", "Sommerküche", "gjizë", "geteilte Vorspeise", "bäuerlich"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Albanien",
+      "continent": "Europa",
+      "recipe_name": "Byrek me spinaq",
+      "categories": ["Vegetarisch", "Hauptgericht", "Snack"],
+      "short_description": "Eine knusprige Blätterteigpastete mit Spinat und Frischkäse, in dünnen, handgezogenen Teigblättern geschichtet. Allgegenwärtiges Alltags- und Straßenessen Albaniens.",
+      "history": "Der Byrek (im weiteren Balkan „Burek“) gehört zu den verbreitetsten Gebäcken Südosteuropas und kam mit der osmanischen Küche in die Region, wo er auf eine ältere Tradition dünn ausgezogener Teige traf. In Albanien ist Byrek tief im Alltag verankert: Er wird zum Frühstück, als schnelle Mahlzeit unterwegs und zu Feiertagen gebacken. Charakteristisch ist der hauchdünne, von Hand gezogene Teig (petë), den geübte Bäckerinnen über den Handrücken bis zur Durchsichtigkeit dehnen — heute greifen viele Haushalte ersatzweise zu fertigem Filo- oder Yufka-Teig. Die Spinat-Käse-Füllung ist neben der mit Lauch oder der mit Hackfleisch die klassische vegetarische Variante. Regional unterscheidet sich der Byrek in Form (rund in der Pfanne, gerollt oder als Blech) und im verwendeten Käse. Als Sinnbild gastfreundlicher Hausmannskost steht er in jeder Bäckerei des Landes.",
+      "ingredients": [
+        { "quantity": "400", "unit": "g", "item": "Filo- oder Yufka-Teigblätter" },
+        { "quantity": "500", "unit": "g", "item": "frischer Spinat" },
+        { "quantity": "200", "unit": "g", "item": "Feta oder gjizë, zerbröselt" },
+        { "quantity": "2", "unit": "", "item": "Frühlingszwiebeln" },
+        { "quantity": "2", "unit": "", "item": "Eier" },
+        { "quantity": "120", "unit": "ml", "item": "Olivenöl zum Bestreichen" },
+        { "quantity": "", "unit": "", "item": "Salz und Pfeffer" }
+      ],
+      "instructions": [
+        "Spinat waschen, grob hacken und mit etwas Salz zusammenfallen lassen; gut ausdrücken.",
+        "Spinat mit Käse, gehackten Frühlingszwiebeln und einem Ei vermengen, pfeffern.",
+        "Eine Form mit Öl auspinseln, ein Teigblatt einlegen und mit Öl bestreichen; mehrere Blätter so schichten.",
+        "Die Spinatfüllung gleichmäßig verteilen, mit weiteren geölten Teigblättern abdecken.",
+        "Oberfläche mit verquirltem Ei und Öl bestreichen, in Stücke vorritzen.",
+        "Bei 190 °C 35–40 Minuten goldbraun und knusprig backen; lauwarm servieren."
+      ],
+      "tips": [
+        "Den Teig zwischen den Schichten reichlich ölen — das macht den Byrek knusprig.",
+        "Spinat unbedingt gut ausdrücken, sonst weicht der Boden durch.",
+        "Reste schmecken am nächsten Tag kalt fast noch besser."
+      ],
+      "tags": ["Albanien", "Balkan", "vegetarisch", "Blätterteig", "Spinat", "Filo", "Straßenessen", "Frühstück", "osmanisch geprägt", "Pastete", "Snack", "Hausmannskost"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Andorra",
+      "continent": "Europa",
+      "recipe_name": "Trinxat",
+      "categories": ["Vegetarisch", "Hauptgericht", "Beilage"],
+      "short_description": "Ein deftiges Bergmahl aus zerstampftem Wirsing und Kartoffeln, in der Pfanne knusprig gebraten. Winterküche der Pyrenäen, sättigend und einfach.",
+      "history": "Trinxat stammt aus der Hochgebirgsregion der Pyrenäen, die Andorra mit der katalanischen Cerdanya teilt. Der Name leitet sich vom katalanischen „trinxar“ (zerkleinern, zerhacken) ab und beschreibt die Zubereitung: Wirsing und Kartoffeln werden gekocht und zu einer groben Masse zerstampft. Das Gericht ist klassische Winterkost — Wirsing übersteht Frost und wird sogar süßer, weshalb er in den kalten Monaten reichlich verfügbar war, als frisches Gemüse knapp wurde. Trinxat entstand als nahrhaftes Essen der Bergbauern, das aus wenigen lagerfähigen Zutaten satt machte. Traditionell wird es mit Speck zubereitet; in dieser Fassung wählen wir bewusst eine schweinefreie Variante. Bis heute gilt Trinxat als eines der identitätsstiftenden Gerichte Andorras und der angrenzenden Pyrenäentäler und steht im Winter auf vielen Speisekarten.",
+      "ingredients": [
+        { "quantity": "1", "unit": "", "item": "kleiner Wirsing" },
+        { "quantity": "600", "unit": "g", "item": "mehligkochende Kartoffeln" },
+        { "quantity": "3", "unit": "Zehen", "item": "Knoblauch" },
+        { "quantity": "4", "unit": "EL", "item": "Olivenöl" },
+        { "quantity": "100", "unit": "g", "item": "geräuchertes Rind oder luftgetrocknetes Lamm, gewürfelt" },
+        { "quantity": "", "unit": "", "item": "Salz und Pfeffer" }
+      ],
+      "instructions": [
+        "Wirsing in Streifen schneiden und mit den geschälten, gewürfelten Kartoffeln in Salzwasser weich kochen.",
+        "Abgießen, gut abtropfen lassen und grob zerstampfen, mit Salz und Pfeffer abschmecken.",
+        "Knoblauch in Olivenöl anbraten, das geräucherte Rind kurz mitbraten.",
+        "Die Wirsing-Kartoffel-Masse zugeben und in der Pfanne zu einem flachen Fladen drücken.",
+        "Bei mittlerer Hitze braten, bis sich unten eine knusprige Kruste bildet, dann wenden.",
+        "Heiß servieren, mit dem ausgelassenen Knoblauchöl beträufelt."
+      ],
+      "tips": [
+        "Den Trinxat nicht zu fein stampfen — etwas Struktur gehört dazu.",
+        "Die Kruste gelingt am besten in einer gut erhitzten Gusspfanne.",
+        "Statt geräuchertem Rind passt auch geröstetes Brot oder Walnuss für eine vegetarische Variante."
+      ],
+      "tags": ["Andorra", "Pyrenäen", "Cerdanya", "Wirsing", "Kartoffeln", "Winterküche", "Bergküche", "katalanisch geprägt", "vegetarisch möglich", "deftig", "Bauernküche", "Beilage"],
+      "substitution": "Trinxat wird traditionell mit Speck oder Bauch vom Schwein zubereitet. Wir verwenden stattdessen geräuchertes Rind oder luftgetrocknetes Lamm — beides liefert die rauchig-herzhafte Note, ohne Schwein. Für eine rein vegetarische Fassung sorgen geröstete Walnüsse oder knusprige Brotwürfel für Biss.",
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Andorra",
+      "continent": "Europa",
+      "recipe_name": "Truita de riu a l'andorrana",
+      "categories": ["Fisch", "Hauptgericht"],
+      "short_description": "Bachforelle aus den Gebirgsbächen, in Mehl gewendet und in Olivenöl mit Knoblauch und Kräutern gebraten. Schlichte Bergküche, die den Fisch in den Mittelpunkt stellt.",
+      "history": "Die Bäche und Flüsse der andorranischen Hochtäler sind reich an Bachforellen, und der Fisch gehört seit jeher zur Ernährung der Bergbevölkerung. „Truita de riu“ bedeutet schlicht Flussforelle — nicht zu verwechseln mit „truita“ als katalanischem Wort für Omelett. In einer Region, in der frischer Seefisch über Jahrhunderte unerreichbar war, lieferten die heimischen Forellen wertvolles, frisches Eiweiß. Die Zubereitung ist bewusst einfach gehalten und folgt der Logik der Bergküche: Der Fisch wird in Mehl gewendet und in reichlich Olivenöl knusprig gebraten, oft mit viel Knoblauch und etwas Kräutern. Manche Varianten umwickeln die Forelle mit Schinken; in dieser Fassung bleibt der reine Fischgeschmack im Vordergrund. Das Gericht steht für die enge Bindung Andorras an seine Berglandschaft und seine Gewässer und wird häufig mit einfachem Gemüse oder Kartoffeln gereicht.",
+      "ingredients": [
+        { "quantity": "4", "unit": "", "item": "küchenfertige Bachforellen" },
+        { "quantity": "4", "unit": "EL", "item": "Mehl" },
+        { "quantity": "6", "unit": "EL", "item": "Olivenöl" },
+        { "quantity": "4", "unit": "Zehen", "item": "Knoblauch, in Scheiben" },
+        { "quantity": "1", "unit": "", "item": "Zitrone" },
+        { "quantity": "1", "unit": "Bund", "item": "glatte Petersilie" },
+        { "quantity": "", "unit": "", "item": "Salz und Pfeffer" }
+      ],
+      "instructions": [
+        "Forellen innen und außen salzen und pfeffern, in Mehl wenden und überschüssiges Mehl abklopfen.",
+        "Olivenöl in einer großen Pfanne erhitzen und die Knoblauchscheiben goldgelb braten, herausnehmen.",
+        "Forellen im aromatisierten Öl je Seite 4–5 Minuten knusprig braten.",
+        "Den gebratenen Knoblauch zurück in die Pfanne geben.",
+        "Mit Zitronensaft beträufeln und gehackte Petersilie darüberstreuen.",
+        "Sofort servieren, dazu passen Salzkartoffeln oder gedünstetes Gemüse."
+      ],
+      "tips": [
+        "Das Öl muss heiß genug sein, damit die Haut knusprig wird und nicht festklebt.",
+        "Die Forelle nur einmal wenden, sonst zerfällt sie.",
+        "Frische Kräuter erst zum Schluss zugeben, damit sie ihr Aroma behalten."
+      ],
+      "tags": ["Andorra", "Pyrenäen", "Forelle", "Fisch", "Bergküche", "Olivenöl", "Knoblauch", "schlicht", "Süßwasserfisch", "katalanisch geprägt", "regional", "Hauptgericht"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Andorra",
+      "continent": "Europa",
+      "recipe_name": "Coca",
+      "categories": ["Dessert", "Snack", "Vegetarisch"],
+      "short_description": "Ein flaches Hefegebäck der katalanischen Pyrenäen, in süßer Form mit Zucker und Pinienkernen bestreut. Festtagsgebäck, das zu Feiern und Jahreswenden gehört.",
+      "history": "Die Coca ist ein flaches Backwerk, das im gesamten katalanischsprachigen Raum verbreitet ist — von Katalonien über Valencia bis nach Andorra — und in unzähligen süßen wie herzhaften Varianten existiert. Ihr Ursprung reicht weit zurück; sie gilt als das katalanische Gegenstück zu Fladenbroten und Focacce des Mittelmeerraums. In Andorra hat die süße Coca, oft mit Zucker, Anis und Pinienkernen, einen festen Platz im Festtagskalender und ist besonders mit der Sommersonnenwende (Sant Joan) verbunden, zu der die „coca de Sant Joan“ gebacken wird. Die Form ist charakteristisch länglich und flach, der Teig je nach Rezept brotartig oder feiner und süßer. Coca war lange ein Gebäck, das man zu Hause oder beim Dorfbäcker zu besonderen Anlässen herstellte, und steht damit für die gemeinschaftlichen Feste der Region. Schweinefleisch kommt in der süßen Variante ohnehin nicht vor.",
+      "ingredients": [
+        { "quantity": "300", "unit": "g", "item": "Mehl" },
+        { "quantity": "120", "unit": "ml", "item": "lauwarme Milch" },
+        { "quantity": "15", "unit": "g", "item": "frische Hefe" },
+        { "quantity": "60", "unit": "g", "item": "Zucker (plus etwas zum Bestreuen)" },
+        { "quantity": "1", "unit": "", "item": "Ei" },
+        { "quantity": "50", "unit": "ml", "item": "Olivenöl" },
+        { "quantity": "40", "unit": "g", "item": "Pinienkerne" },
+        { "quantity": "1", "unit": "Prise", "item": "Anis oder abgeriebene Zitronenschale" }
+      ],
+      "instructions": [
+        "Hefe in der lauwarmen Milch mit etwas Zucker auflösen und 10 Minuten anspringen lassen.",
+        "Mehl mit Zucker, Ei, Öl, Anis und der Hefemilch zu einem geschmeidigen Teig kneten.",
+        "Zugedeckt an einem warmen Ort etwa 1 Stunde gehen lassen, bis er sich verdoppelt.",
+        "Teig flach und länglich auf ein Blech ausstreichen.",
+        "Mit Olivenöl bestreichen, mit Zucker und Pinienkernen bestreuen.",
+        "Bei 200 °C 18–22 Minuten goldbraun backen; lauwarm oder kalt servieren."
+      ],
+      "tips": [
+        "Den Teig nicht zu dick ausrollen — die Coca soll flach und knusprig sein.",
+        "Pinienkerne vor dem Backen leicht andrücken, damit sie nicht abfallen.",
+        "Mit kandierten Früchten wird daraus die festliche Coca de Sant Joan."
+      ],
+      "tags": ["Andorra", "Katalonien", "Pyrenäen", "Hefegebäck", "süß", "Pinienkerne", "Festtag", "Sant Joan", "vegetarisch", "Dessert", "mediterran", "Tradition"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Belgien",
+      "continent": "Europa",
+      "recipe_name": "Moules-frites",
+      "categories": ["Fisch", "Hauptgericht"],
+      "short_description": "Miesmuscheln, in Weißwein mit Sellerie und Zwiebeln gedämpft, serviert mit knusprigen Pommes frites. Das belgische Nationalgericht schlechthin.",
+      "history": "Moules-frites verbindet zwei belgische Wahrzeichen: die Miesmuschel und die frittierte Kartoffel. Die Kombination etablierte sich im 19. und frühen 20. Jahrhundert, als Muscheln von der Nordseeküste preiswert ins Binnenland gelangten und Pommes frites — die Belgien für sich als Erfindung beansprucht — zur volkstümlichen Beilage wurden. Gemeinsam ergaben sie eine günstige, sättigende Mahlzeit, die in Brasserien und Frituren des ganzen Landes heimisch wurde. Klassisch werden die Muscheln „marinière“ zubereitet: rasch in einem Sud aus Weißwein, Zwiebel und Sellerie gedämpft, bis sich die Schalen öffnen. Serviert wird im schwarzen Topf, aus dem heraus gegessen wird, die Pommes dazu in Papier oder Schälchen, oft mit Mayonnaise. Die Hochsaison fällt traditionell in die Monate mit „R“ im Namen. Moules-frites steht für die unkomplizierte, gesellige Esskultur Belgiens.",
+      "ingredients": [
+        { "quantity": "2", "unit": "kg", "item": "frische Miesmuscheln" },
+        { "quantity": "2", "unit": "", "item": "Zwiebeln, gewürfelt" },
+        { "quantity": "3", "unit": "Stangen", "item": "Staudensellerie, in Scheiben" },
+        { "quantity": "200", "unit": "ml", "item": "trockener Weißwein" },
+        { "quantity": "50", "unit": "g", "item": "Butter" },
+        { "quantity": "1", "unit": "Bund", "item": "Petersilie" },
+        { "quantity": "1", "unit": "kg", "item": "Kartoffeln (zum Frittieren)" },
+        { "quantity": "", "unit": "", "item": "Salz und Pfeffer" }
+      ],
+      "instructions": [
+        "Muscheln gründlich waschen, Bärte entfernen; geöffnete, die sich nicht schließen, aussortieren.",
+        "Kartoffeln in Stifte schneiden, wässern, trocknen und zweifach frittieren (erst bei 150 °C, dann bei 180 °C goldbraun).",
+        "Butter in einem großen Topf schmelzen, Zwiebeln und Sellerie andünsten.",
+        "Weißwein angießen, aufkochen, Muscheln zugeben und zugedeckt 4–6 Minuten dämpfen, bis sie sich öffnen.",
+        "Geschlossen gebliebene Muscheln entfernen, mit Pfeffer und Petersilie abschmecken.",
+        "Im Topf mit den frischen Pommes und Mayonnaise servieren."
+      ],
+      "tips": [
+        "Muscheln nur kurz dämpfen, sonst werden sie zäh.",
+        "Den Muschelsud nicht wegschütten — er ist als Brühe köstlich.",
+        "Für extra Aroma einen Lorbeer und etwas Thymian mitdämpfen."
+      ],
+      "tags": ["Belgien", "Nordsee", "Muscheln", "Meeresfrüchte", "Pommes frites", "Nationalgericht", "Brasserie", "Weißwein", "gesellig", "Küstenküche", "Hauptgericht", "Klassiker"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Belgien",
+      "continent": "Europa",
+      "recipe_name": "Carbonade flamande",
+      "categories": ["Fleisch", "Hauptgericht"],
+      "short_description": "Ein flämischer Rindfleischeintopf, langsam in dunklem Bier geschmort und mit etwas Lebkuchen und Senf gebunden. Süßlich-herb und tiefdunkel.",
+      "history": "Die Carbonade flamande (niederländisch „stoofvlees“ oder „stoverij“) ist der flämische Klassiker der Schmorküche und das bierbasierte Gegenstück zum französischen Bœuf bourguignon. Statt Wein verwendet sie das, was in Flandern reichlich vorhanden war: dunkles, oft leicht süßes Bier. Das Gericht entstand als Art, zähere, günstige Rindfleischstücke durch langes, sanftes Schmoren mürbe und schmackhaft zu machen. Charakteristisch ist die Bindung und Süße durch eine Scheibe mit Senf bestrichenen Lebkuchen (pain d'épices), die im Sud zerfällt, sowie ein Schuss Essig oder etwas Zucker für die typische süß-saure Balance. Die Carbonade wird traditionell mit Pommes frites serviert und gehört zum festen Repertoire der flämischen Brasserien. Sie ist von Natur aus ohne Schweinefleisch und zeigt, wie eng belgische Ess- und Bierkultur miteinander verwoben sind.",
+      "ingredients": [
+        { "quantity": "1", "unit": "kg", "item": "Rindfleisch zum Schmoren, in Würfeln" },
+        { "quantity": "3", "unit": "", "item": "Zwiebeln, in Ringen" },
+        { "quantity": "330", "unit": "ml", "item": "dunkles belgisches Bier" },
+        { "quantity": "2", "unit": "Scheiben", "item": "Lebkuchen (pain d'épices)" },
+        { "quantity": "2", "unit": "EL", "item": "scharfer Senf" },
+        { "quantity": "1", "unit": "EL", "item": "Rotweinessig" },
+        { "quantity": "1", "unit": "", "item": "Lorbeerblatt" },
+        { "quantity": "40", "unit": "g", "item": "Butter" },
+        { "quantity": "", "unit": "", "item": "Salz und Pfeffer" }
+      ],
+      "instructions": [
+        "Rindfleischwürfel salzen, pfeffern und in Butter portionsweise kräftig anbraten, herausnehmen.",
+        "Zwiebeln im Bratfett goldbraun dünsten.",
+        "Fleisch zurückgeben, mit Bier ablöschen und Essig sowie Lorbeer zugeben.",
+        "Lebkuchenscheiben mit Senf bestreichen und mit der Senfseite nach unten auflegen.",
+        "Zugedeckt bei kleiner Hitze 2,5–3 Stunden schmoren, bis das Fleisch zerfällt und die Sauce sämig ist.",
+        "Mit Salz und Pfeffer abschmecken und mit Pommes frites servieren."
+      ],
+      "tips": [
+        "Je länger die Carbonade schmort, desto zarter wird sie — Eile lohnt nicht.",
+        "Ein leicht süßes Bier ergibt die typische Balance; sehr bittere Sorten meiden.",
+        "Am zweiten Tag aufgewärmt schmeckt sie noch intensiver."
+      ],
+      "tags": ["Belgien", "Flandern", "Rind", "Schmorgericht", "Bier", "Lebkuchen", "süß-herb", "Eintopf", "Brasserie", "Winterküche", "Hauptgericht", "Klassiker"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Belgien",
+      "continent": "Europa",
+      "recipe_name": "Gaufre de Liège",
+      "categories": ["Dessert", "Snack", "Vegetarisch"],
+      "short_description": "Eine dichte, karamellisierte Hefewaffel aus Lüttich mit knusprigen Stücken aus Hagelzucker. Süßes Wahrzeichen Belgiens, warm aus dem Eisen am besten.",
+      "history": "Die Lütticher Waffel (Gaufre de Liège) unterscheidet sich grundlegend von der leichteren, rechteckigen Brüsseler Waffel: Sie wird aus einem schweren Hefeteig gebacken, in den grober Hagelzucker (perlzucker) eingearbeitet ist. Beim Backen schmilzt dieser Zucker teilweise und karamellisiert an der Oberfläche, was der Waffel ihre charakteristische knusprige, leicht klebrige Kruste und unregelmäßige Form gibt. Ihren Ursprung hat sie in der Region um Lüttich; einer verbreiteten Erzählung nach soll sie im 18. Jahrhundert am Hof des Fürstbischofs entstanden sein. Über die Jahrhunderte wurde sie vom feinen Gebäck zum allgegenwärtigen Straßenessen, das man warm und ohne weiteres Topping aus der Hand isst. Heute ist sie eines der bekanntesten süßen Symbole Belgiens und an Ständen im ganzen Land zu finden. Als reines Hefegebäck ist sie selbstverständlich ohne Schweinefleisch.",
+      "ingredients": [
+        { "quantity": "250", "unit": "g", "item": "Mehl" },
+        { "quantity": "120", "unit": "ml", "item": "lauwarme Milch" },
+        { "quantity": "15", "unit": "g", "item": "frische Hefe" },
+        { "quantity": "1", "unit": "", "item": "Ei" },
+        { "quantity": "125", "unit": "g", "item": "weiche Butter" },
+        { "quantity": "150", "unit": "g", "item": "Hagelzucker (Perlzucker)" },
+        { "quantity": "1", "unit": "Prise", "item": "Salz" },
+        { "quantity": "1", "unit": "TL", "item": "Vanillezucker" }
+      ],
+      "instructions": [
+        "Hefe in der lauwarmen Milch auflösen und kurz anspringen lassen.",
+        "Mehl, Ei, Salz, Vanillezucker und die Hefemilch zu einem Teig verkneten.",
+        "Die weiche Butter stückweise einarbeiten, bis ein glatter, klebriger Teig entsteht.",
+        "Zugedeckt etwa 1 Stunde gehen lassen, dann den Hagelzucker unterheben.",
+        "Portionen formen und im vorgeheizten Waffeleisen 3–5 Minuten goldbraun backen.",
+        "Kurz abkühlen lassen, damit der karamellisierte Zucker fest wird; warm servieren."
+      ],
+      "tips": [
+        "Echten Hagelzucker verwenden — normaler Zucker karamellisiert nicht in Stücken.",
+        "Den Teig nicht zu lange gehen lassen, sonst wird die Waffel zu locker.",
+        "Frisch gebacken und leicht abgekühlt schmecken sie am besten."
+      ],
+      "tags": ["Belgien", "Lüttich", "Waffel", "Hefegebäck", "Hagelzucker", "süß", "Straßenessen", "karamellisiert", "vegetarisch", "Dessert", "Wahrzeichen", "warm"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Bosnien und Herzegowina",
+      "continent": "Europa",
+      "recipe_name": "Ćevapi",
+      "categories": ["Fleisch", "Hauptgericht"],
+      "short_description": "Kleine, gegrillte Hackfleischröllchen aus Rind und Lamm, serviert im fladenartigen Somun mit rohen Zwiebeln und Ajvar. Bosniens beliebtestes Grillgericht.",
+      "history": "Ćevapi (oder Ćevapčići) gehören zu den bekanntesten Gerichten des Balkans und sind in Bosnien und Herzegowina besonders identitätsstiftend, allen voran die Sarajevoer und Banja-Luka-Schulen mit jeweils eigenem Stil. Ihre Wurzeln liegen in der osmanischen Grillküche (kebab), die sich über Jahrhunderte in der Region zu einer eigenständigen Tradition entwickelte. Charakteristisch ist die Würzung aus überwiegend Rind- und Lammfleisch — in der mehrheitlich muslimisch geprägten Region traditionell ohne Schwein — fein gewolft, nur dezent gewürzt und über Holzkohle gegrillt. Serviert werden Ćevapi in einer Portion von fünf oder zehn Stück im warmen Fladenbrot Somun, dazu reichlich rohe Zwiebeln, manchmal Kajmak oder Ajvar. Das Gericht ist fest in der Alltags- und Ausgehkultur verankert und wird in spezialisierten Lokalen, den Ćevabdžinicas, gegessen. Es steht sinnbildlich für die geteilte Esskultur Südosteuropas.",
+      "ingredients": [
+        { "quantity": "500", "unit": "g", "item": "Rinderhackfleisch" },
+        { "quantity": "300", "unit": "g", "item": "Lammhackfleisch" },
+        { "quantity": "3", "unit": "Zehen", "item": "Knoblauch, fein gerieben" },
+        { "quantity": "1", "unit": "TL", "item": "Natron" },
+        { "quantity": "1", "unit": "TL", "item": "Salz" },
+        { "quantity": "0.5", "unit": "TL", "item": "Pfeffer" },
+        { "quantity": "4", "unit": "", "item": "Fladenbrote (Somun oder Pita)" },
+        { "quantity": "2", "unit": "", "item": "Zwiebeln, fein gewürfelt" },
+        { "quantity": "", "unit": "", "item": "Ajvar zum Servieren" }
+      ],
+      "instructions": [
+        "Beide Hackfleischsorten mit Knoblauch, Natron, Salz und Pfeffer gründlich verkneten.",
+        "Die Masse abgedeckt mehrere Stunden, am besten über Nacht, kühl ruhen lassen.",
+        "Mit feuchten Händen kleine, fingerdicke Röllchen formen.",
+        "Über Holzkohle oder in einer heißen Grillpfanne rundum kräftig grillen.",
+        "Fladenbrot kurz mit aufwärmen und aufschneiden.",
+        "Ćevapi im Brot mit rohen Zwiebeln und Ajvar servieren."
+      ],
+      "tips": [
+        "Das Natron macht die Ćevapi locker — nicht weglassen, aber sparsam dosieren.",
+        "Die Ruhezeit ist entscheidend für Bindung und Geschmack.",
+        "Nicht zu lange grillen, sonst werden sie trocken."
+      ],
+      "tags": ["Bosnien", "Balkan", "Rind", "Lamm", "Hackfleisch", "Grillgericht", "Somun", "Ajvar", "osmanisch geprägt", "Sarajevo", "Straßenessen", "Hauptgericht"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Bosnien und Herzegowina",
+      "continent": "Europa",
+      "recipe_name": "Bosanski lonac",
+      "categories": ["Fleisch", "Hauptgericht", "Suppe"],
+      "short_description": "Ein geschichteter Schmortopf aus Rind oder Lamm und vielerlei Gemüse, der über Stunden langsam gart. Der bosnische Eintopf für lange Tafeln.",
+      "history": "Bosanski lonac — der „bosnische Topf“ — ist ein Schmorgericht, das nach dem Gefäß benannt ist, in dem es zubereitet wird: einem hohen, bauchigen Tontopf. Charakteristisch ist die Zubereitung, bei der Fleisch und Gemüse nicht angebraten, sondern roh in Schichten in den Topf gelegt und dann sehr langsam, traditionell stundenlang über niedriger Glut oder im Backofen, gegart werden. Dabei vermischen sich die Säfte zu einem aromatischen Sud. Das Gericht stammt aus der ländlichen Küche und war ein praktisches Essen, das man ansetzen und sich selbst überlassen konnte, während die Arbeit weiterging. Verwendet werden meist Rind und Lamm — in der Region traditionell ohne Schwein — sowie Kartoffeln, Kohl, Möhren, Paprika und Tomaten, je nach Saison und Vorrat. Bosanski lonac gilt als geselliges Gericht für viele Esser und steht für die unaufgeregte, geduldige Hausmannskost Bosniens.",
+      "ingredients": [
+        { "quantity": "400", "unit": "g", "item": "Rindfleisch, in Würfeln" },
+        { "quantity": "400", "unit": "g", "item": "Lammfleisch, in Würfeln" },
+        { "quantity": "4", "unit": "", "item": "Kartoffeln, in Stücken" },
+        { "quantity": "0.5", "unit": "", "item": "Weißkohl, in Streifen" },
+        { "quantity": "3", "unit": "", "item": "Möhren, in Scheiben" },
+        { "quantity": "2", "unit": "", "item": "Paprika, in Stücken" },
+        { "quantity": "3", "unit": "", "item": "Tomaten, gewürfelt" },
+        { "quantity": "2", "unit": "", "item": "Zwiebeln, in Ringen" },
+        { "quantity": "300", "unit": "ml", "item": "Brühe oder Wasser" },
+        { "quantity": "", "unit": "", "item": "Salz, Pfeffer, Lorbeer" }
+      ],
+      "instructions": [
+        "Fleisch und Gemüse vorbereiten und in mundgerechte Stücke schneiden.",
+        "Topf abwechselnd mit Fleisch und Gemüse schichten, dazwischen salzen und pfeffern.",
+        "Lorbeer einlegen und mit Brühe angießen, bis etwa zwei Drittel bedeckt sind.",
+        "Zugedeckt bei sehr niedriger Hitze auf dem Herd oder im Ofen bei 150 °C 3–4 Stunden garen.",
+        "Nicht umrühren, nur gelegentlich den Topf bewegen, damit die Schichtung erhalten bleibt.",
+        "Direkt aus dem Topf mit Brot servieren."
+      ],
+      "tips": [
+        "Geduld ist entscheidend — das lange, sanfte Garen macht das Gericht aus.",
+        "Festkochende Kartoffeln behalten besser ihre Form.",
+        "Die Zusammenstellung des Gemüses lässt sich nach Saison frei anpassen."
+      ],
+      "tags": ["Bosnien", "Balkan", "Rind", "Lamm", "Eintopf", "Schmorgericht", "Tontopf", "Gemüse", "langsam gegart", "Hausmannskost", "gesellig", "Hauptgericht"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Bosnien und Herzegowina",
+      "continent": "Europa",
+      "recipe_name": "Tufahije",
+      "categories": ["Dessert", "Vegetarisch"],
+      "short_description": "Ganze, in Zuckersirup pochierte Äpfel, gefüllt mit gezuckerten Walnüssen und gekrönt mit Schlagsahne. Ein elegantes Dessert mit osmanischen Wurzeln.",
+      "history": "Tufahije ist ein traditionelles Dessert Bosniens, dessen Name sich vom arabischen Wort für Apfel („tuffah“) ableitet — ein deutlicher Hinweis auf seinen osmanisch-orientalischen Ursprung. Es kam mit der osmanischen Herrschaft auf den Balkan und wurde in Bosnien zu einem festen Bestandteil der Süßspeisenkultur, die für ihre sirupgetränkten und nussgefüllten Spezialitäten bekannt ist. Zubereitet werden ganze, geschälte Äpfel, die schonend in Zuckersirup weichgekocht und anschließend mit einer Füllung aus gemahlenen Walnüssen und Zucker gefüllt werden. Gekrönt wird das Dessert mit einer Haube aus Schlagsahne und oft einer einzelnen Walnusshälfte. Tufahije wird traditionell gekühlt in Glasschalen serviert und gehört zu festlichen Anlässen, Gästebewirtung und dem Ende üppiger Mahlzeiten. Es zeigt die Vorliebe der bosnischen Küche für Desserts, die Süße mit der Frische von Obst und der Textur von Nüssen verbinden, und ist selbstverständlich ohne Schweinefleisch.",
+      "ingredients": [
+        { "quantity": "4", "unit": "", "item": "feste, säuerliche Äpfel" },
+        { "quantity": "150", "unit": "g", "item": "gemahlene Walnüsse" },
+        { "quantity": "200", "unit": "g", "item": "Zucker" },
+        { "quantity": "500", "unit": "ml", "item": "Wasser" },
+        { "quantity": "1", "unit": "", "item": "Zitrone (Saft)" },
+        { "quantity": "200", "unit": "ml", "item": "Schlagsahne" },
+        { "quantity": "1", "unit": "TL", "item": "Vanillezucker" },
+        { "quantity": "4", "unit": "", "item": "Walnusshälften zum Garnieren" }
+      ],
+      "instructions": [
+        "Äpfel schälen und das Kerngehäuse vorsichtig aushöhlen, ohne sie zu durchbrechen.",
+        "Aus Wasser, Zucker und Zitronensaft einen Sirup aufkochen.",
+        "Äpfel im Sirup bei kleiner Hitze 10–15 Minuten weich, aber formstabil pochieren; herausnehmen und abkühlen lassen.",
+        "Gemahlene Walnüsse mit etwas Sirup zu einer formbaren Masse verkneten.",
+        "Die abgekühlten Äpfel mit der Walnussmasse füllen.",
+        "Sahne mit Vanillezucker steif schlagen, auf die Äpfel setzen und mit einer Walnusshälfte garnieren; gekühlt servieren."
+      ],
+      "tips": [
+        "Säuerliche Äpfel halten besser ihre Form und balancieren die Süße.",
+        "Etwas vom Sirup über die fertigen Tufahije träufeln für mehr Glanz und Aroma.",
+        "Vor dem Servieren gut durchkühlen lassen."
+      ],
+      "tags": ["Bosnien", "Balkan", "Dessert", "Apfel", "Walnuss", "Sirup", "osmanisch geprägt", "Sahne", "Festtag", "vegetarisch", "gefülltes Obst", "Süßspeise"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Bulgarien",
+      "continent": "Europa",
+      "recipe_name": "Banitsa",
+      "categories": ["Vegetarisch", "Frühstück", "Snack"],
+      "short_description": "Eine gewundene Blätterteigpastete mit bulgarischem Sirene-Käse und Eiern, knusprig gebacken. Frühstücks- und Festtagsklassiker, oft in Spiralform.",
+      "history": "Banitsa ist eines der bekanntesten Gebäcke Bulgariens und steht im Land sowohl für den Alltag als auch für besondere Anlässe. Sie besteht aus dünn ausgezogenen Teigblättern (kori), die mit einer Mischung aus bulgarischem Sirene (Salzlakenkäse), Eiern und Joghurt geschichtet oder gerollt und dann gebacken werden. Die Tradition dünn gezogener Teige teilt Bulgarien mit dem gesamten Balkan und reicht über die osmanische Zeit zurück. Eine besondere Rolle spielt die Banitsa zu Silvester und Neujahr: In die festliche „Banitsa s kasmeti“ werden kleine Botschaften oder ein Münzchen eingebacken, die dem Finder Glück für das kommende Jahr verheißen. Auch zum Frühstück, oft begleitet von Ayran oder dem Getränk Boza, ist sie allgegenwärtig. Regional variiert die Form von der klassischen Spirale bis zu geschichteten Blechen. Banitsa gilt als Inbegriff bulgarischer Gastlichkeit und Hausbäckerei und kommt ganz ohne Schweinefleisch aus.",
+      "ingredients": [
+        { "quantity": "400", "unit": "g", "item": "Filo-/Yufka-Teigblätter (kori)" },
+        { "quantity": "300", "unit": "g", "item": "bulgarisches Sirene oder Feta, zerbröselt" },
+        { "quantity": "3", "unit": "", "item": "Eier" },
+        { "quantity": "150", "unit": "g", "item": "Naturjoghurt" },
+        { "quantity": "80", "unit": "g", "item": "Butter, geschmolzen" },
+        { "quantity": "0.5", "unit": "TL", "item": "Natron" },
+        { "quantity": "", "unit": "", "item": "etwas Öl für die Form" }
+      ],
+      "instructions": [
+        "Eier mit Joghurt, Natron und dem zerbröselten Käse verrühren.",
+        "Jeweils ein Teigblatt mit geschmolzener Butter bestreichen und etwas Füllung darauf verteilen.",
+        "Das Blatt locker zu einer Rolle aufwickeln.",
+        "Die Rollen schneckenförmig in eine geölte runde Form legen.",
+        "Mit restlicher Butter bestreichen und bei 180 °C 35–40 Minuten goldbraun backen.",
+        "Kurz ruhen lassen, dann lauwarm in Stücken servieren."
+      ],
+      "tips": [
+        "Die Teigblätter nicht austrocknen lassen — abgedeckt halten.",
+        "Etwas Mineralwasser über die fertige Banitsa geträufelt macht sie besonders saftig.",
+        "Zu Silvester eine in Folie gewickelte Münze einbacken — bulgarische Glückstradition."
+      ],
+      "tags": ["Bulgarien", "Balkan", "vegetarisch", "Blätterteig", "Sirene", "Käse", "Frühstück", "Festtag", "Silvester", "Pastete", "Spirale", "Hausbäckerei"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Bulgarien",
+      "continent": "Europa",
+      "recipe_name": "Shopska salata",
+      "categories": ["Vegetarisch", "Vorspeise", "Beilage"],
+      "short_description": "Ein frischer Salat aus Tomaten, Gurken, Paprika und Zwiebeln, großzügig mit geriebenem Sirene-Käse bedeckt. Bulgariens bekanntester Salat, in den Landesfarben.",
+      "history": "Die Shopska salata gilt als nationaler Salat Bulgariens und ist im ganzen Land sowie weit über die Grenzen hinaus bekannt. Ihr Name verweist auf die Region Shopluk rund um Sofia, doch ihre heutige, standardisierte Form entstand maßgeblich im 20. Jahrhundert, als sie unter anderem touristisch als bulgarische Spezialität beworben wurde. Die Zutaten — rote Tomaten, grüne Paprika und Gurken, weißer Sirene-Käse — werden gern mit den Farben der bulgarischen Flagge in Verbindung gebracht. Der Salat folgt dem mediterran-balkanischen Prinzip frischer, roher Gemüse, abgerundet mit dem salzigen Lakenkäse, der fein gerieben wie Schnee über das Gericht gehäuft wird. Traditionell wird die Shopska salata als Vorspeise gegessen und oft von Rakija, dem heimischen Obstbrand, begleitet. Sie ist von Natur aus vegetarisch und ohne Schweinefleisch und steht für die einfache, frische Seite der bulgarischen Küche.",
+      "ingredients": [
+        { "quantity": "4", "unit": "", "item": "reife Tomaten" },
+        { "quantity": "1", "unit": "", "item": "Salatgurke" },
+        { "quantity": "1", "unit": "", "item": "grüne Paprika" },
+        { "quantity": "1", "unit": "", "item": "kleine Zwiebel" },
+        { "quantity": "150", "unit": "g", "item": "bulgarisches Sirene oder Feta" },
+        { "quantity": "3", "unit": "EL", "item": "Sonnenblumen- oder Olivenöl" },
+        { "quantity": "1", "unit": "EL", "item": "Rotweinessig" },
+        { "quantity": "1", "unit": "Bund", "item": "Petersilie" },
+        { "quantity": "", "unit": "", "item": "Salz" }
+      ],
+      "instructions": [
+        "Tomaten, Gurke und Paprika in mundgerechte Stücke schneiden.",
+        "Zwiebel in feine Ringe oder Würfel schneiden.",
+        "Alles in einer Schüssel mischen, salzen und mit Öl und Essig anmachen.",
+        "Den Salat auf Tellern anrichten.",
+        "Das Sirene grob reiben und großzügig über den Salat häufen.",
+        "Mit gehackter Petersilie bestreuen und sofort servieren."
+      ],
+      "tips": [
+        "Den Käse erst zum Schluss darüberreiben, damit er locker bleibt.",
+        "Geröstete Paprika statt roher gibt eine rauchigere Note.",
+        "Am besten mit sonnengereiften Sommertomaten."
+      ],
+      "tags": ["Bulgarien", "Balkan", "Salat", "vegetarisch", "Tomaten", "Gurke", "Sirene", "Vorspeise", "frisch", "Sommerküche", "Rakija", "Nationalgericht"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Bulgarien",
+      "continent": "Europa",
+      "recipe_name": "Tarator",
+      "categories": ["Vegetarisch", "Suppe", "Vorspeise"],
+      "short_description": "Eine kalte Sommersuppe aus Joghurt, Gurke, Knoblauch, Walnüssen und Dill. Erfrischend, leicht und an heißen Tagen allgegenwärtig.",
+      "history": "Tarator ist die klassische kalte Joghurtsuppe Bulgariens und ein Inbegriff der sommerlichen Küche des Landes. Sie beruht auf zwei Säulen der balkanischen Ernährung: dem fermentierten Joghurt, für den Bulgarien berühmt ist, und frischen Gurken. Verwandte kalte Joghurt-Gurken-Speisen finden sich im gesamten ehemals osmanischen Raum, von der Türkei bis zum Nahen Osten, wo „Tarator“ teils auch eine Sauce bezeichnet. In Bulgarien hat sich die flüssige, löffelbare Suppenform durchgesetzt, verfeinert mit Knoblauch, Dill, etwas Öl und gehackten Walnüssen. Sie wird eiskalt serviert und gilt als ideale Erfrischung in der Sommerhitze, oft als Vorspeise oder leichtes Mittagessen. Tarator zeigt die zentrale Rolle des Joghurts in der bulgarischen Esskultur und ist von Natur aus vegetarisch und ohne Schweinefleisch. Eine dickere Variante kann auch als Dip gereicht werden.",
+      "ingredients": [
+        { "quantity": "500", "unit": "g", "item": "Naturjoghurt" },
+        { "quantity": "1", "unit": "", "item": "Salatgurke" },
+        { "quantity": "2", "unit": "Zehen", "item": "Knoblauch" },
+        { "quantity": "40", "unit": "g", "item": "Walnüsse, gehackt" },
+        { "quantity": "2", "unit": "EL", "item": "Olivenöl" },
+        { "quantity": "1", "unit": "Bund", "item": "Dill" },
+        { "quantity": "150", "unit": "ml", "item": "kaltes Wasser" },
+        { "quantity": "", "unit": "", "item": "Salz" },
+        { "quantity": "", "unit": "", "item": "Eiswürfel zum Servieren" }
+      ],
+      "instructions": [
+        "Gurke schälen und fein würfeln oder grob raspeln.",
+        "Knoblauch mit etwas Salz zu einer Paste zerdrücken.",
+        "Joghurt glatt rühren und mit kaltem Wasser auf die gewünschte Konsistenz verdünnen.",
+        "Gurke, Knoblauch, Walnüsse, Olivenöl und gehackten Dill unterrühren.",
+        "Mit Salz abschmecken und mindestens eine Stunde kühl stellen.",
+        "Eiskalt, gern mit Eiswürfeln und etwas Dill, servieren."
+      ],
+      "tips": [
+        "Sehr kalt servieren — Tarator ist eine Erfrischung, keine warme Suppe.",
+        "Die Konsistenz nach Geschmack regeln: dünner als Suppe, dicker als Dip.",
+        "Geröstete Walnüsse intensivieren das Aroma."
+      ],
+      "tags": ["Bulgarien", "Balkan", "kalte Suppe", "Joghurt", "Gurke", "Walnuss", "Dill", "vegetarisch", "Sommerküche", "erfrischend", "osmanisch geprägt", "Vorspeise"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    }
+  ],
+  "batch_summary": {
+    "batch": 1,
+    "region": "Europa",
+    "countries_processed": ["Albanien", "Andorra", "Belgien", "Bosnien und Herzegowina", "Bulgarien"],
+    "recipes_created": 15,
+    "recipes_with_images": 0,
+    "recipes_with_placeholders": 15,
+    "recipes_with_pork_substitution": 1
+  }
+}

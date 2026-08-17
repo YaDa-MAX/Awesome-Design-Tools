@@ -1,0 +1,503 @@
+{
+  "batch": 3,
+  "region": "Europa",
+  "schema_version": 1,
+  "note": "Traditionelle, historisch etablierte Gerichte. Auswahl ohne Schweinefleisch; Feld 'substitution' nur dort, wo das Original mit Schwein zubereitet wird. Bilder als Platzhalter. Generisches Schema, direkt importierbar in PostgreSQL/Supabase/Directus/Strapi/Sanity.",
+  "recipes": [
+    {
+      "country": "Griechenland",
+      "continent": "Europa",
+      "recipe_name": "Moussaka",
+      "categories": ["Fleisch", "Hauptgericht"],
+      "short_description": "Ein geschichteter Auflauf aus Auberginen, Kartoffeln und gewürztem Lamm- oder Rinderhack, gekrönt von einer dicken Béchamelhaube. Griechenlands berühmtester Ofenauflauf.",
+      "history": "Die griechische Moussaka in ihrer heutigen Form gilt als vergleichsweise modernes Gericht: Sie wurde Anfang des 20. Jahrhunderts maßgeblich vom griechischen Koch Nikolaos Tselementes geprägt, der die mit Béchamel überbackene Variante popularisierte. Ihre Wurzeln reichen jedoch weiter zurück in die Tradition geschichteter Auberginengerichte des östlichen Mittelmeers und des Nahen Ostens, wo verwandte Speisen existieren. Charakteristisch für die griechische Fassung sind die Schichten aus gebratenen Auberginen (und oft Kartoffeln), einer würzigen, mit Zimt und Tomate aromatisierten Hackfleischfüllung und der abschließenden, im Ofen goldbraun gebackenen Béchamelhaube. Verwendet werden traditionell Lamm oder Rind, weshalb die Moussaka von Natur aus ohne Schweinefleisch auskommt. Das Gericht erfordert mehrere Arbeitsschritte und gilt daher als Sonntags- und Festtagsessen. Heute ist es eines der bekanntesten Symbole der griechischen Küche und in Tavernen im ganzen Land verbreitet.",
+      "ingredients": [
+        { "quantity": "2", "unit": "", "item": "große Auberginen" },
+        { "quantity": "3", "unit": "", "item": "Kartoffeln" },
+        { "quantity": "600", "unit": "g", "item": "Lamm- oder Rinderhack" },
+        { "quantity": "2", "unit": "", "item": "Zwiebeln" },
+        { "quantity": "400", "unit": "g", "item": "passierte Tomaten" },
+        { "quantity": "1", "unit": "TL", "item": "Zimt, 1 Lorbeerblatt" },
+        { "quantity": "60", "unit": "g", "item": "Butter, 60 g Mehl, 600 ml Milch (Béchamel)" },
+        { "quantity": "1", "unit": "", "item": "Ei, 80 g geriebener Käse" },
+        { "quantity": "", "unit": "", "item": "Olivenöl, Salz, Pfeffer, Muskat" }
+      ],
+      "instructions": [
+        "Auberginen und Kartoffeln in Scheiben schneiden, salzen und in Olivenöl goldbraun braten.",
+        "Zwiebeln dünsten, Hack anbraten, mit Tomaten, Zimt und Lorbeer zu einer dicken Sauce einkochen.",
+        "Aus Butter, Mehl und Milch eine dicke Béchamel rühren, mit Muskat würzen und Ei sowie Käse einrühren.",
+        "In einer Form Kartoffeln, dann Auberginen, dann die Hackfüllung schichten.",
+        "Mit der Béchamel bedecken und bei 180 °C 40–45 Minuten goldbraun backen.",
+        "Vor dem Anschneiden 20 Minuten ruhen lassen, damit die Schichten halten."
+      ],
+      "tips": [
+        "Die Auberginen salzen und ziehen lassen nimmt Bitterstoffe und Wasser.",
+        "Die Béchamel ruhig dick führen — sie soll eine stabile Haube bilden.",
+        "Das Ruhenlassen ist entscheidend für saubere Stücke."
+      ],
+      "tags": ["Griechenland", "Moussaka", "Aubergine", "Lamm", "Rind", "Auflauf", "Béchamel", "Ofengericht", "mediterran", "Festtag", "Taverne", "Hauptgericht"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Griechenland",
+      "continent": "Europa",
+      "recipe_name": "Horiatiki salata",
+      "categories": ["Vegetarisch", "Vorspeise", "Beilage"],
+      "short_description": "Der „Bauernsalat“ aus Tomaten, Gurke, Paprika, Zwiebel und Oliven, gekrönt von einem ganzen Stück Feta und Oregano. Ohne Blattsalat, ganz mediterran.",
+      "history": "Die Horiatiki salata — wörtlich „dörflicher“ oder „Bauernsalat“ — ist der klassische griechische Salat und ein Sinnbild der mediterranen Küche. Anders als oft angenommen enthält er traditionell keinen Blattsalat, sondern besteht aus grob geschnittenem, sonnengereiftem Gemüse: Tomaten, Gurke, grüne Paprika, rote Zwiebel und Kalamata-Oliven, abgerundet mit einem ganzen Stück oder dicken Scheiben Feta und reichlich getrocknetem Oregano. Begossen wird er großzügig mit gutem Olivenöl. Der Salat spiegelt die Logik der ländlichen griechischen Ernährung wider, die auf frischen, lokal verfügbaren Zutaten und hochwertigem Öl beruht. In seiner heutigen Form ist er eng mit der Sommerküche und der Tavernenkultur verbunden und wird als geteilte Vorspeise oder Beilage zu vielen Gerichten gereicht, stets mit Brot zum Auftunken des aromatischen Öls. Er ist von Natur aus vegetarisch und ohne Schweinefleisch und gilt international als einer der bekanntesten Salate.",
+      "ingredients": [
+        { "quantity": "4", "unit": "", "item": "reife Tomaten" },
+        { "quantity": "1", "unit": "", "item": "Salatgurke" },
+        { "quantity": "1", "unit": "", "item": "grüne Paprika" },
+        { "quantity": "1", "unit": "", "item": "rote Zwiebel" },
+        { "quantity": "100", "unit": "g", "item": "Kalamata-Oliven" },
+        { "quantity": "200", "unit": "g", "item": "Feta (am Stück)" },
+        { "quantity": "5", "unit": "EL", "item": "Olivenöl extra vergine" },
+        { "quantity": "1", "unit": "TL", "item": "getrockneter Oregano" },
+        { "quantity": "", "unit": "", "item": "Salz, etwas Rotweinessig" }
+      ],
+      "instructions": [
+        "Tomaten in Spalten, Gurke und Paprika in grobe Stücke schneiden.",
+        "Zwiebel in feine Ringe schneiden.",
+        "Gemüse mit den Oliven in einer Schüssel locker mischen, leicht salzen.",
+        "Mit Olivenöl und einem Spritzer Essig beträufeln.",
+        "Das Feta-Stück obenauf legen, nicht unterheben.",
+        "Mit Oregano bestreuen und sofort mit Brot servieren."
+      ],
+      "tips": [
+        "Keinen Blattsalat zugeben — das ist untypisch.",
+        "Der Feta kommt als ganzes Stück oben drauf, nicht zerkrümelt.",
+        "Reife Sommertomaten und gutes Olivenöl machen den Unterschied."
+      ],
+      "tags": ["Griechenland", "Horiatiki", "Bauernsalat", "Salat", "vegetarisch", "Feta", "Oliven", "Tomaten", "mediterran", "Sommerküche", "Olivenöl", "Vorspeise"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Griechenland",
+      "continent": "Europa",
+      "recipe_name": "Baklava",
+      "categories": ["Dessert", "Vegetarisch"],
+      "short_description": "Hauchdünne Filoteig-Schichten mit gehackten Nüssen, gebacken und mit Honigsirup getränkt. Ein süßes, sirupschweres Gebäck mit langer Geschichte.",
+      "history": "Baklava ist ein Gebäck mit langer Geschichte, das im gesamten Raum des früheren Osmanischen Reiches und des östlichen Mittelmeers verbreitet ist und von vielen Ländern als Teil ihrer Tradition beansprucht wird, darunter Griechenland. Es besteht aus zahlreichen hauchdünnen Filoteig-Schichten, zwischen die gehackte Nüsse — in Griechenland häufig Walnüsse, oft mit Zimt — geschichtet werden. Nach dem Backen wird das Gebäck mit einem Sirup aus Honig und Zucker getränkt, der ihm seine charakteristische Süße und klebrige Saftigkeit gibt. Die Kunst dünn ausgezogener Teige reicht weit zurück; die heutige geschichtete Form festigte sich in der osmanischen Hofküche. In Griechenland gehört Baklava zu festlichen Anlässen, Feiertagen und der Gästebewirtung und wird in kleinen, rautenförmigen Stücken serviert. Es zeigt die Vorliebe der Region für nuss- und sirupbasierte Süßspeisen und ist als reines Teig-Nuss-Gebäck selbstverständlich ohne Schweinefleisch.",
+      "ingredients": [
+        { "quantity": "400", "unit": "g", "item": "Filoteig" },
+        { "quantity": "400", "unit": "g", "item": "Walnüsse, gehackt" },
+        { "quantity": "2", "unit": "TL", "item": "Zimt" },
+        { "quantity": "200", "unit": "g", "item": "Butter, geschmolzen" },
+        { "quantity": "250", "unit": "g", "item": "Zucker" },
+        { "quantity": "200", "unit": "g", "item": "Honig" },
+        { "quantity": "250", "unit": "ml", "item": "Wasser" },
+        { "quantity": "1", "unit": "", "item": "Zitrone (Saft)" }
+      ],
+      "instructions": [
+        "Walnüsse mit Zimt mischen.",
+        "Filoblätter einzeln in eine gebutterte Form legen, jedes mit Butter bestreichen; nach einigen Blättern eine Nussschicht einstreuen.",
+        "So fortfahren, bis Teig und Nüsse aufgebraucht sind, mit Teigblättern abschließen.",
+        "Das Baklava in Rauten vorschneiden und bei 170 °C 40–45 Minuten goldbraun backen.",
+        "Aus Zucker, Honig, Wasser und Zitronensaft einen Sirup kochen.",
+        "Den heißen Sirup über das gebackene, leicht abgekühlte Baklava gießen und mehrere Stunden durchziehen lassen."
+      ],
+      "tips": [
+        "Heißer Sirup auf warmes Gebäck (oder umgekehrt kalt auf heiß) — nie beides heiß, sonst wird es matschig.",
+        "Die Filoblätter abgedeckt halten, damit sie nicht austrocknen.",
+        "Das Baklava vor dem Backen vorschneiden, dann lässt es sich später sauber teilen."
+      ],
+      "tags": ["Griechenland", "Baklava", "Filoteig", "Walnüsse", "Honig", "Sirup", "süß", "osmanisch geprägt", "Festtag", "vegetarisch", "Zimt", "Dessert"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Irland",
+      "continent": "Europa",
+      "recipe_name": "Irish Stew",
+      "categories": ["Fleisch", "Suppe", "Hauptgericht"],
+      "short_description": "Ein schlichter Eintopf aus Lamm oder Hammel, Kartoffeln, Zwiebeln und Möhren, langsam in eigener Brühe geschmort. Das irische Nationalgericht.",
+      "history": "Der Irish Stew gilt als Nationalgericht Irlands und verkörpert die bodenständige Tradition der irischen Landküche. In seiner ursprünglichen, einfachsten Form besteht er aus nur wenigen Zutaten: Hammel- oder Lammfleisch, Kartoffeln, Zwiebeln und Wasser, langsam zu einem nahrhaften Eintopf geschmort. Diese Schlichtheit hat historische Gründe — Schafe lieferten Wolle und Fleisch, Kartoffeln waren das wichtigste Grundnahrungsmittel, und Brennstoff zum langen Kochen musste sparsam eingesetzt werden. Über die Authentizität späterer Zutaten wie Möhren oder Graupen wird unter Puristen bis heute diskutiert. Traditionell wird Hammel verwendet, dessen kräftiger Geschmack durch langes Garen mild und das zähe Fleisch zart wird; das Gericht ist von Natur aus ohne Schweinefleisch. Der Irish Stew steht sinnbildlich für die Geschichte der irischen Bevölkerung und ihre enge Bindung an Schaf und Kartoffel und wird bis heute als wärmendes Wohlfühlessen geschätzt.",
+      "ingredients": [
+        { "quantity": "800", "unit": "g", "item": "Lamm- oder Hammelfleisch mit Knochen, in Stücken" },
+        { "quantity": "1", "unit": "kg", "item": "Kartoffeln" },
+        { "quantity": "3", "unit": "", "item": "Zwiebeln" },
+        { "quantity": "3", "unit": "", "item": "Möhren" },
+        { "quantity": "1", "unit": "l", "item": "Wasser oder Lammbrühe" },
+        { "quantity": "1", "unit": "Zweig", "item": "Thymian, 1 Lorbeerblatt" },
+        { "quantity": "1", "unit": "Bund", "item": "Petersilie" },
+        { "quantity": "", "unit": "", "item": "Salz und Pfeffer" }
+      ],
+      "instructions": [
+        "Fleisch in einem großen Topf mit Wasser oder Brühe aufsetzen, aufkochen und abschäumen.",
+        "Zwiebeln und Möhren grob schneiden und zugeben, mit Thymian und Lorbeer würzen.",
+        "Etwa 1 Stunde sanft köcheln lassen, bis das Fleisch zart wird.",
+        "Kartoffeln in Stücken zugeben; ein Teil darf zerfallen und die Brühe binden.",
+        "Weitere 30 Minuten garen, bis alles weich ist; mit Salz und Pfeffer abschmecken.",
+        "Mit reichlich gehackter Petersilie bestreut servieren."
+      ],
+      "tips": [
+        "Etwas Kartoffel zerdrücken bindet den Eintopf auf natürliche Weise.",
+        "Hammel gibt mehr Geschmack, braucht aber längere Garzeit.",
+        "Am nächsten Tag schmeckt der Stew noch besser."
+      ],
+      "tags": ["Irland", "Irish Stew", "Lamm", "Hammel", "Eintopf", "Kartoffeln", "Landküche", "Nationalgericht", "Wohlfühlessen", "Winterküche", "schlicht", "Hauptgericht"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Irland",
+      "continent": "Europa",
+      "recipe_name": "Colcannon",
+      "categories": ["Vegetarisch", "Beilage", "Hauptgericht"],
+      "short_description": "Cremiges Kartoffelpüree, durchzogen von Grünkohl oder Wirsing und Frühlingszwiebeln, mit reichlich Butter. Irische Beilage mit Bezug zu Halloween.",
+      "history": "Colcannon ist ein traditionelles irisches Gericht aus Kartoffelpüree, das mit gekochtem Grünkohl oder Wirsing und Frühlingszwiebeln (oder Lauch) vermengt und mit reichlich Butter angereichert wird. Der Name leitet sich vermutlich vom gälischen „cál ceannann“ (weißköpfiger Kohl) ab. Als Gericht der Kartoffel- und Kohlküche spiegelt es die Grundnahrungsmittel der irischen Landbevölkerung wider und war ein günstiges, sättigendes Alltagsessen. Besonders verbunden ist Colcannon mit Halloween (Samhain): Traditionell wurden kleine Gegenstände wie eine Münze oder ein Ring in die Schüssel gemischt, die dem Finder Glück oder eine bevorstehende Heirat verheißen sollten. Auch in Liedern und Volksbräuchen findet das Gericht Erwähnung. Während manche Varianten Speck enthalten, ist die klassische Fassung mit Butter, Kohl und Zwiebeln rein vegetarisch und ohne Schweinefleisch. Colcannon wird als Beilage zu Fleischgerichten oder als eigenständiges, herzhaftes Essen serviert.",
+      "ingredients": [
+        { "quantity": "1", "unit": "kg", "item": "mehligkochende Kartoffeln" },
+        { "quantity": "300", "unit": "g", "item": "Grünkohl oder Wirsing" },
+        { "quantity": "4", "unit": "", "item": "Frühlingszwiebeln" },
+        { "quantity": "100", "unit": "g", "item": "Butter" },
+        { "quantity": "150", "unit": "ml", "item": "Milch oder Sahne" },
+        { "quantity": "", "unit": "", "item": "Salz und Pfeffer" }
+      ],
+      "instructions": [
+        "Kartoffeln schälen, in Salzwasser weich kochen und abgießen.",
+        "Grünkohl oder Wirsing in Streifen schneiden und in wenig Wasser oder Butter weich dünsten.",
+        "Frühlingszwiebeln kurz in etwas Milch erwärmen.",
+        "Kartoffeln mit Milch und der Hälfte der Butter zu einem cremigen Püree stampfen.",
+        "Kohl und Frühlingszwiebeln unterheben, mit Salz und Pfeffer abschmecken.",
+        "In einer Mulde die restliche Butter zerlaufen lassen und heiß servieren."
+      ],
+      "tips": [
+        "Mehligkochende Kartoffeln ergeben das cremigste Püree.",
+        "Den Kohl nicht zu fein hacken — etwas Biss gehört dazu.",
+        "Die klassische Buttermulde in der Mitte ist Tradition."
+      ],
+      "tags": ["Irland", "Colcannon", "Kartoffeln", "Grünkohl", "Wirsing", "vegetarisch", "Beilage", "Halloween", "Butter", "Landküche", "Wohlfühlessen", "Püree"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Irland",
+      "continent": "Europa",
+      "recipe_name": "Soda Bread",
+      "categories": ["Vegetarisch", "Frühstück", "Beilage"],
+      "short_description": "Ein rustikales Brot ohne Hefe, das mit Natron und Buttermilch getrieben und schnell gebacken wird. Mit charakteristischem Kreuz auf der Kruste.",
+      "history": "Irisches Soda Bread ist ein hefefreies Brot, das mit Natron (baking soda) und Buttermilch zubereitet wird — die Säure der Buttermilch reagiert mit dem Natron und lässt den Teig aufgehen, ganz ohne lange Geh- und Knetzeiten. Diese Backweise verbreitete sich in Irland im 19. Jahrhundert, nachdem Natron als Backtriebmittel verfügbar wurde. Sie passte ideal zu den Bedingungen vieler irischer Haushalte: Der weiche irische Weizen eignete sich schlecht für Hefeteige, und viele Familien hatten weder einen Backofen noch Zugang zu frischer Hefe, sondern buken in einer gusseisernen Topfform über dem Torffeuer. Charakteristisch ist das tiefe Kreuz, das vor dem Backen in den Laib geschnitten wird — praktisch zum gleichmäßigen Durchbacken, volkstümlich auch als Segens- oder Glückszeichen gedeutet. Soda Bread gehört zum irischen Frühstück und zur Tafel, wird zu Suppen und Eintöpfen gereicht und ist als einfaches Getreidebrot selbstverständlich ohne Schweinefleisch.",
+      "ingredients": [
+        { "quantity": "450", "unit": "g", "item": "Weizenmehl (oder Mischung mit Vollkorn)" },
+        { "quantity": "1", "unit": "TL", "item": "Natron" },
+        { "quantity": "1", "unit": "TL", "item": "Salz" },
+        { "quantity": "400", "unit": "ml", "item": "Buttermilch" },
+        { "quantity": "1", "unit": "EL", "item": "Haferflocken (optional)" }
+      ],
+      "instructions": [
+        "Mehl, Natron und Salz in einer Schüssel gut vermischen.",
+        "Die Buttermilch zügig einarbeiten, bis ein weicher, klebriger Teig entsteht; nicht lange kneten.",
+        "Den Teig zu einem runden Laib formen und auf ein Blech setzen.",
+        "Ein tiefes Kreuz in die Oberfläche schneiden, optional mit Haferflocken bestreuen.",
+        "Bei 220 °C etwa 35–40 Minuten backen, bis der Laib hohl klingt.",
+        "Auf einem Gitter abkühlen lassen und frisch mit Butter servieren."
+      ],
+      "tips": [
+        "Den Teig nur kurz zusammenfügen — zu viel Kneten macht das Brot zäh.",
+        "Frische Buttermilch sorgt für die beste Triebwirkung.",
+        "Am ersten Tag frisch genießen; danach toasten."
+      ],
+      "tags": ["Irland", "Soda Bread", "Brot", "hefefrei", "Buttermilch", "Natron", "vegetarisch", "Frühstück", "rustikal", "Landküche", "schnell gebacken", "Beilage"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Island",
+      "continent": "Europa",
+      "recipe_name": "Plokkfiskur",
+      "categories": ["Fisch", "Hauptgericht"],
+      "short_description": "Ein cremiger Auflauf bzw. Stampf aus gekochtem Weißfisch und Kartoffeln, gebunden mit Béchamel und Zwiebeln. Isländisches Resteessen, das zum Klassiker wurde.",
+      "history": "Plokkfiskur — wörtlich „gepflückter Fisch“ — ist ein traditionelles isländisches Gericht, das ursprünglich aus der sparsamen Verwertung von Resten entstand: Übrig gebliebener gekochter Fisch (meist Kabeljau oder Schellfisch) und Kartoffeln wurden zerpflückt und zu einem sättigenden Eintopf oder Stampf verarbeitet. In einer fischreichen Inselnation, in der Kabeljau über Jahrhunderte das wichtigste Nahrungs- und Handelsgut war, lag eine solche Resteküche nahe. Mit der Zeit wurde aus dem schlichten Resteessen ein eigenständiger Klassiker, der oft mit einer Béchamelsauce und gedünsteten Zwiebeln verfeinert wird. Serviert wird Plokkfiskur klassisch mit dunklem Roggenbrot (rúgbrauð) und Butter. Es gilt als isländisches Wohlfühlessen und steht auf vielen Speisekarten, vom Hausmannskost-Lokal bis zur gehobenen Interpretation. Als Fischgericht ist es selbstverständlich ohne Schweinefleisch und spiegelt die enge Bindung Islands an den Fischfang wider.",
+      "ingredients": [
+        { "quantity": "600", "unit": "g", "item": "Kabeljau- oder Schellfischfilet" },
+        { "quantity": "500", "unit": "g", "item": "Kartoffeln, gekocht" },
+        { "quantity": "1", "unit": "", "item": "große Zwiebel" },
+        { "quantity": "40", "unit": "g", "item": "Butter" },
+        { "quantity": "40", "unit": "g", "item": "Mehl" },
+        { "quantity": "500", "unit": "ml", "item": "Milch" },
+        { "quantity": "", "unit": "", "item": "Salz, Pfeffer, Muskat" },
+        { "quantity": "", "unit": "", "item": "dunkles Roggenbrot zum Servieren" }
+      ],
+      "instructions": [
+        "Fisch in leicht gesalzenem Wasser gar ziehen lassen, abtropfen und in Stücke zerpflücken.",
+        "Zwiebel würfeln und in Butter glasig dünsten.",
+        "Mehl darüberstäuben, kurz anschwitzen und mit Milch zu einer Béchamel aufgießen.",
+        "Mit Salz, Pfeffer und Muskat würzen.",
+        "Fisch und in Stücke gebrochene Kartoffeln vorsichtig unterheben und erwärmen.",
+        "Heiß mit gebuttertem Roggenbrot servieren."
+      ],
+      "tips": [
+        "Den Fisch nur grob zerpflücken — Stücke geben Struktur.",
+        "Die Sauce nicht zu dünn führen, damit der Plokkfiskur sämig bleibt.",
+        "Roggenbrot gehört traditionell dazu."
+      ],
+      "tags": ["Island", "Plokkfiskur", "Kabeljau", "Fisch", "Kartoffeln", "Béchamel", "Resteküche", "Wohlfühlessen", "Roggenbrot", "nordisch", "Hausmannskost", "Hauptgericht"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Island",
+      "continent": "Europa",
+      "recipe_name": "Kjötsúpa",
+      "categories": ["Fleisch", "Suppe", "Hauptgericht"],
+      "short_description": "Eine klare, kräftige Lammsuppe mit Wurzelgemüse, Kartoffeln und Kohl. Wärmendes Eintopfgericht der isländischen Schafzucht.",
+      "history": "Kjötsúpa — die isländische Fleisch- bzw. Lammsuppe — gehört zu den ältesten und beständigsten Gerichten der isländischen Küche. Das Schaf war über Jahrhunderte das wichtigste Nutztier der kargen Insel und lieferte Wolle, Milch und Fleisch; entsprechend zentral ist Lamm in der isländischen Ernährung. Die Suppe verbindet Lammfleisch mit dem Gemüse, das im rauen Klima gedeiht oder lagerfähig war: Kartoffeln, Möhren, Steckrübe, Lauch und Kohl. Gewürzt wird sie meist schlicht, traditionell auch mit getrockneten Suppenkräutern. Kjötsúpa war ein praktisches, nahrhaftes Essen, das aus einem Topf eine ganze Familie sättigte und sich gut über die langen, kalten Monate kochen ließ. Bis heute gilt sie als Inbegriff isländischer Hausmannskost und wird besonders im Herbst, zur Schlachtsaison, und im Winter gekocht. Als reines Lamm-Gemüse-Gericht ist sie selbstverständlich ohne Schweinefleisch.",
+      "ingredients": [
+        { "quantity": "800", "unit": "g", "item": "Lammfleisch mit Knochen, in Stücken" },
+        { "quantity": "4", "unit": "", "item": "Kartoffeln" },
+        { "quantity": "3", "unit": "", "item": "Möhren" },
+        { "quantity": "0.25", "unit": "", "item": "Steckrübe" },
+        { "quantity": "1", "unit": "", "item": "Lauchstange" },
+        { "quantity": "0.25", "unit": "", "item": "Weißkohl" },
+        { "quantity": "1.5", "unit": "l", "item": "Wasser" },
+        { "quantity": "", "unit": "", "item": "Salz, Pfeffer, getrocknete Suppenkräuter" }
+      ],
+      "instructions": [
+        "Lammfleisch mit Wasser aufsetzen, aufkochen und sorgfältig abschäumen.",
+        "Salzen und etwa 45 Minuten sanft köcheln, bis das Fleisch zart wird.",
+        "Gemüse grob schneiden und zugeben.",
+        "Weitere 25–30 Minuten garen, bis alles weich ist.",
+        "Mit Salz, Pfeffer und Suppenkräutern abschmecken.",
+        "Heiß als sättigender Eintopf servieren."
+      ],
+      "tips": [
+        "Gründliches Abschäumen ergibt eine klare, saubere Brühe.",
+        "Das Gemüse je nach Garzeit gestaffelt zugeben.",
+        "Aufgewärmt schmeckt die Suppe noch intensiver."
+      ],
+      "tags": ["Island", "Kjötsúpa", "Lamm", "Lammsuppe", "Wurzelgemüse", "Kohl", "Eintopf", "nordisch", "Winterküche", "Hausmannskost", "Schafzucht", "Suppe"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Island",
+      "continent": "Europa",
+      "recipe_name": "Skyr með berjum",
+      "categories": ["Dessert", "Frühstück", "Vegetarisch"],
+      "short_description": "Cremiges isländisches Skyr, serviert mit frischen Beeren, etwas Milch und Honig. Eiweißreiche Spezialität mit jahrhundertealter Tradition.",
+      "history": "Skyr ist eine der ältesten und charakteristischsten Spezialitäten Islands und wird seit der Zeit der Besiedlung im Mittelalter hergestellt. Technisch handelt es sich um einen säuerlichen, dickgelegten Frischkäse, der jedoch wie ein Joghurt gegessen wird. Über Jahrhunderte war Skyr ein zentrales, haltbares Milchprodukt, das die isländische Bevölkerung mit wertvollem Eiweiß versorgte, als andere Nahrung knapp war. Traditionell wurde es aus entrahmter Milch unter Zugabe von Lab und einer Skyr-Kultur hergestellt; ein Teil der alten Charge diente als Starter für die neue. Skyr ist dick, fettarm und eiweißreich und wird klassisch mit etwas Milch glatt gerührt und mit Zucker oder Honig sowie frischen Beeren — etwa Blaubeeren oder den isländischen Krähenbeeren — gegessen. Es wird zum Frühstück, als Dessert und als Zwischenmahlzeit verzehrt. Als reines Milchprodukt mit Früchten ist es selbstverständlich vegetarisch und ohne Schweinefleisch.",
+      "ingredients": [
+        { "quantity": "500", "unit": "g", "item": "Skyr (ersatzweise sehr dicker Naturjoghurt)" },
+        { "quantity": "100", "unit": "ml", "item": "Milch" },
+        { "quantity": "200", "unit": "g", "item": "frische Beeren (z. B. Blaubeeren)" },
+        { "quantity": "2", "unit": "EL", "item": "Honig" },
+        { "quantity": "1", "unit": "Prise", "item": "Vanille (optional)" }
+      ],
+      "instructions": [
+        "Skyr mit der Milch glatt und cremig rühren.",
+        "Nach Geschmack mit Honig und etwas Vanille süßen.",
+        "In Schalen anrichten.",
+        "Frische Beeren darüber verteilen.",
+        "Mit einem zusätzlichen Faden Honig beträufeln und sofort servieren."
+      ],
+      "tips": [
+        "Echtes Skyr ist dicker als Joghurt — bei Ersatz sehr dicken Joghurt wählen.",
+        "Saisonale Beeren passen am besten.",
+        "Auch mit Haferflocken ein nahrhaftes Frühstück."
+      ],
+      "tags": ["Island", "Skyr", "Milchprodukt", "Beeren", "Honig", "eiweißreich", "vegetarisch", "Frühstück", "nordisch", "traditionell", "Dessert", "fettarm"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Italien",
+      "continent": "Europa",
+      "recipe_name": "Risotto alla milanese",
+      "categories": ["Vegetarisch", "Hauptgericht", "Beilage"],
+      "short_description": "Cremiges Safranrisotto aus Mailand, leuchtend goldgelb und mit Parmesan vollendet. Klassiker der lombardischen Küche.",
+      "history": "Das Risotto alla milanese ist das Wahrzeichengericht der lombardischen Hauptstadt Mailand und verdankt seine leuchtend goldgelbe Farbe und sein feines Aroma dem Safran. Einer verbreiteten Legende nach soll der Safran im 16. Jahrhundert von einem Glasmaler des Mailänder Doms ins Risotto gelangt sein, der das Gewürz zum Färben seiner Glasfenster nutzte — ob historisch belegt oder nicht, die Geschichte ist fest mit dem Gericht verbunden. Risotto als Zubereitungsart spiegelt die Bedeutung des Reisanbaus in der Po-Ebene Norditaliens wider. Der Reis wird angeschwitzt, nach und nach mit heißer Brühe aufgegossen und unter Rühren cremig gekocht, bis er die typische sämige Konsistenz erreicht, und zuletzt mit Butter und Parmesan „mantecato“ (montiert). Traditionell wird Rinderbrühe und teils Rindermark verwendet; das Gericht kommt ohne Schweinefleisch aus und lässt sich mit Gemüsebrühe auch rein vegetarisch zubereiten. Es gilt als Begleiter des Ossobuco, wird aber ebenso solo geschätzt.",
+      "ingredients": [
+        { "quantity": "320", "unit": "g", "item": "Risottoreis (Carnaroli oder Arborio)" },
+        { "quantity": "1", "unit": "", "item": "Zwiebel, fein gewürfelt" },
+        { "quantity": "1", "unit": "l", "item": "Rinder- oder Gemüsebrühe, heiß" },
+        { "quantity": "1", "unit": "Briefchen", "item": "Safranfäden" },
+        { "quantity": "100", "unit": "ml", "item": "Weißwein" },
+        { "quantity": "60", "unit": "g", "item": "Butter" },
+        { "quantity": "80", "unit": "g", "item": "Parmesan, gerieben" },
+        { "quantity": "", "unit": "", "item": "Salz" }
+      ],
+      "instructions": [
+        "Safran in etwas heißer Brühe einweichen.",
+        "Zwiebel in der Hälfte der Butter glasig dünsten, Reis zugeben und glasig anschwitzen.",
+        "Mit Weißwein ablöschen und einkochen lassen.",
+        "Nach und nach heiße Brühe angießen und unter Rühren cremig kochen; die Safranbrühe einrühren.",
+        "Nach etwa 18 Minuten vom Herd nehmen.",
+        "Mit restlicher Butter und Parmesan kräftig montieren, salzen und sofort servieren."
+      ],
+      "tips": [
+        "Die Brühe stets heiß angießen, sonst stockt der Garprozess.",
+        "Das abschließende Montieren mit Butter und Käse macht die Cremigkeit.",
+        "Risotto wartet nicht — direkt nach dem Fertigstellen servieren."
+      ],
+      "tags": ["Italien", "Mailand", "Lombardei", "Risotto", "Safran", "Reis", "vegetarisch", "Parmesan", "cremig", "norditalienisch", "Klassiker", "Hauptgericht"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Italien",
+      "continent": "Europa",
+      "recipe_name": "Spaghetti al pomodoro e basilico",
+      "categories": ["Vegetarisch", "Vegan", "Hauptgericht"],
+      "short_description": "Spaghetti mit einer einfachen Sauce aus reifen Tomaten, Knoblauch, Olivenöl und frischem Basilikum. Die Essenz der italienischen Küche.",
+      "history": "Spaghetti mit Tomatensauce und Basilikum gelten als Inbegriff der italienischen Küche und als Paradebeispiel der „cucina povera“ — der Kochkunst, aus wenigen, guten Zutaten Großes zu machen. Die Tomate kam nach der Entdeckung Amerikas nach Europa und setzte sich in Italien, besonders im Süden um Neapel, ab dem 18. und 19. Jahrhundert als Saucengrundlage durch. In Verbindung mit der industriellen Herstellung getrockneter Pasta in Kampanien entstand eines der bekanntesten Gerichte der Welt. Das Rezept lebt von der Qualität weniger Komponenten: reife Tomaten, gutes Olivenöl, Knoblauch und frisches Basilikum, das erst zum Schluss zugegeben wird, um sein Aroma zu bewahren. Wichtig ist die richtige Garung der Pasta „al dente“ und das Verbinden von Nudeln und Sauce in der Pfanne. Das Gericht ist von Natur aus vegan und ohne Schweinefleisch und steht sinnbildlich für die Philosophie der italienischen Küche, mit Zurückhaltung den Eigengeschmack der Zutaten zu feiern.",
+      "ingredients": [
+        { "quantity": "400", "unit": "g", "item": "Spaghetti" },
+        { "quantity": "600", "unit": "g", "item": "reife Tomaten (oder gute Dosentomaten)" },
+        { "quantity": "2", "unit": "Zehen", "item": "Knoblauch" },
+        { "quantity": "5", "unit": "EL", "item": "Olivenöl extra vergine" },
+        { "quantity": "1", "unit": "Bund", "item": "frisches Basilikum" },
+        { "quantity": "", "unit": "", "item": "Salz" },
+        { "quantity": "", "unit": "", "item": "Parmesan zum Servieren (optional)" }
+      ],
+      "instructions": [
+        "Tomaten häuten und grob würfeln (bei Dosentomaten zerdrücken).",
+        "Knoblauch in Olivenöl sanft anduften lassen, nicht bräunen.",
+        "Tomaten zugeben, salzen und 15–20 Minuten zu einer sämigen Sauce einkochen.",
+        "Spaghetti in reichlich Salzwasser al dente kochen.",
+        "Pasta abgießen, mit etwas Nudelwasser zur Sauce geben und schwenken.",
+        "Frisches Basilikum unterheben und sofort, nach Wunsch mit Parmesan, servieren."
+      ],
+      "tips": [
+        "Basilikum erst zum Schluss zugeben, damit das Aroma erhalten bleibt.",
+        "Etwas Nudelwasser bindet Sauce und Pasta zu einer Einheit.",
+        "Die Qualität von Tomaten und Olivenöl entscheidet über das Gericht."
+      ],
+      "tags": ["Italien", "Neapel", "Spaghetti", "Pasta", "Tomaten", "Basilikum", "vegan", "vegetarisch", "cucina povera", "mediterran", "Klassiker", "Hauptgericht"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Italien",
+      "continent": "Europa",
+      "recipe_name": "Tiramisù",
+      "categories": ["Dessert", "Vegetarisch"],
+      "short_description": "Eine kühle Schichtspeise aus in Espresso getränkten Löffelbiskuits und einer Creme aus Mascarpone und Ei, bestäubt mit Kakao. Italiens berühmtestes Dessert.",
+      "history": "Tiramisù — wörtlich „zieh mich hinauf“ — ist eines der bekanntesten Desserts Italiens und international ein Synonym für italienische Süßspeisen. Seine Entstehung wird überwiegend der Region Venetien, genauer der Stadt Treviso, und den 1960er- bis 1970er-Jahren zugeschrieben, auch wenn mehrere Lokale und Regionen die Urheberschaft beanspruchen. Das Dessert besteht aus Löffelbiskuits (Savoiardi), die in Espresso getränkt und mit einer luftigen Creme aus Mascarpone, Eigelb und Zucker geschichtet werden; den Abschluss bildet eine Staubschicht aus Kakaopulver. Charakteristisch ist das Zusammenspiel von bitterem Kaffee, süßer Creme und Kakao. Tiramisù wird kalt serviert und muss vor dem Genuss durchziehen, damit sich die Aromen verbinden und die Biskuits weich werden. Es hat sich von einer regionalen Spezialität zu einem weltweit nachgekochten Klassiker entwickelt. Als Süßspeise auf Ei-, Käse- und Kaffeebasis ist es selbstverständlich ohne Schweinefleisch.",
+      "ingredients": [
+        { "quantity": "300", "unit": "g", "item": "Löffelbiskuits (Savoiardi)" },
+        { "quantity": "500", "unit": "g", "item": "Mascarpone" },
+        { "quantity": "4", "unit": "", "item": "Eier (getrennt)" },
+        { "quantity": "100", "unit": "g", "item": "Zucker" },
+        { "quantity": "300", "unit": "ml", "item": "starker Espresso, abgekühlt" },
+        { "quantity": "2", "unit": "EL", "item": "Kakaopulver" },
+        { "quantity": "", "unit": "", "item": "optional etwas Marsala oder Amaretto" }
+      ],
+      "instructions": [
+        "Eigelb mit Zucker cremig schlagen, Mascarpone unterrühren.",
+        "Eiweiß steif schlagen und vorsichtig unter die Mascarponecreme heben.",
+        "Espresso (nach Wunsch mit etwas Likör) in einen flachen Teller geben.",
+        "Löffelbiskuits kurz darin wenden und eine Lage in eine Form legen.",
+        "Mit Creme bedecken, dann erneut Biskuits und Creme schichten.",
+        "Mit Kakao bestäuben und mindestens 4 Stunden, besser über Nacht, kühlen."
+      ],
+      "tips": [
+        "Die Biskuits nur kurz tunken, sonst werden sie matschig.",
+        "Das Durchziehen über Nacht macht das Tiramisù am besten.",
+        "Den Kakao erst kurz vor dem Servieren aufstäuben."
+      ],
+      "tags": ["Italien", "Venetien", "Treviso", "Tiramisù", "Mascarpone", "Espresso", "Löffelbiskuit", "Kakao", "süß", "vegetarisch", "Schichtdessert", "Dessert"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Kosovo",
+      "continent": "Europa",
+      "recipe_name": "Flia",
+      "categories": ["Vegetarisch", "Hauptgericht"],
+      "short_description": "Ein geduldig geschichtetes Fladengericht aus dünnen Teiglagen, das über Glut gebacken und mit Joghurt oder saurer Sahne serviert wird. Festtagsspeise des Hochlands.",
+      "history": "Flia (auch Fli oder Flija) ist eine traditionelle Spezialität des Kosovo und der albanischen Hochlandregionen und gilt als eines der identitätsstiftenden Gerichte. Charakteristisch ist die aufwendige Zubereitung: Ein dünner Teig aus Mehl, Wasser und Salz wird Schicht für Schicht aufgetragen, wobei jede Lage einzeln über offener Glut oder unter einer mit Glut bedeckten Metallhaube (saç) gebacken wird, bevor die nächste folgt. So entsteht ein vielschichtiges, fächerartiges Gebäck — der Name wird mit „Schichten“ in Verbindung gebracht. Die Zubereitung ist zeitintensiv und traditionell ein gemeinschaftliches, oft weibliches Ereignis, das mit Festen, Familienzusammenkünften und Feiertagen verbunden ist. Serviert wird Flia mit Joghurt, saurer Sahne (kajmak) oder Honig. Das Gericht steht für Gastfreundschaft und Geduld und ist von Natur aus vegetarisch und ohne Schweinefleisch. Es spiegelt die ländliche Tradition des Backens über dem Feuer wider.",
+      "ingredients": [
+        { "quantity": "500", "unit": "g", "item": "Mehl" },
+        { "quantity": "700", "unit": "ml", "item": "Wasser" },
+        { "quantity": "1", "unit": "TL", "item": "Salz" },
+        { "quantity": "100", "unit": "g", "item": "Butter, geschmolzen" },
+        { "quantity": "200", "unit": "g", "item": "saure Sahne oder kajmak (zum Bestreichen/Servieren)" },
+        { "quantity": "", "unit": "", "item": "Joghurt zum Servieren" }
+      ],
+      "instructions": [
+        "Mehl, Wasser und Salz zu einem dünnflüssigen, glatten Teig verrühren.",
+        "Eine gebutterte Form (oder eine schwere Pfanne) im heißen Ofen vorwärmen.",
+        "Mit einem Löffel strahlenförmig dünne Teigstreifen auftragen und unter Oberhitze (Grill) backen, bis sie stocken.",
+        "Die nächste Lage versetzt darüber auftragen, mit Butter bestreichen und erneut backen.",
+        "Den Vorgang vielfach wiederholen, bis ein dicker, geschichteter Fladen entsteht.",
+        "Lauwarm in Stücke schneiden und mit Joghurt oder saurer Sahne servieren."
+      ],
+      "tips": [
+        "Geduld ist entscheidend — jede Schicht muss einzeln stocken.",
+        "Die Oberhitze (Grillfunktion) ersetzt im Ofen die traditionelle Gluthaube.",
+        "Reichlich Butter zwischen den Lagen macht die Flia zart."
+      ],
+      "tags": ["Kosovo", "Flia", "Balkan", "Schichtteig", "über Glut gebacken", "saç", "vegetarisch", "Festtag", "Hochland", "Gastfreundschaft", "albanisch geprägt", "Hauptgericht"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Kosovo",
+      "continent": "Europa",
+      "recipe_name": "Speca të mbushur",
+      "categories": ["Fleisch", "Hauptgericht"],
+      "short_description": "Paprikaschoten, gefüllt mit gewürztem Reis und Rinderhack, in Tomatensud geschmort. Gefülltes Gemüse in der Tradition des Balkans.",
+      "history": "Speca të mbushur — gefüllte Paprika — gehören zur großen Familie der gefüllten Gemüse (Dolma/Japrak), die im gesamten Balkan, im Nahen Osten und im früheren osmanischen Raum verbreitet sind und über Jahrhunderte zur Alltags- wie Festküche gehören. Im Kosovo und in den albanisch geprägten Regionen sind sie ein beliebtes Sommer- und Herbstgericht, wenn Paprika reif und reichlich vorhanden ist. Gefüllt werden die Schoten mit einer Mischung aus Reis und Hackfleisch — in der mehrheitlich muslimisch geprägten Region traditionell aus Rind oder Lamm, also ohne Schwein — gewürzt mit Zwiebel, Kräutern und Paprikapulver. Die gefüllten Schoten werden anschließend in einem Tomaten- oder Brühesud sanft geschmort, bis Reis und Gemüse weich sind und die Aromen sich verbunden haben. Das Gericht steht für die Tradition, Gemüse sättigend und haltbar zu verwerten, und wird oft mit Joghurt serviert. Es spiegelt die geteilte Küchentradition Südosteuropas wider.",
+      "ingredients": [
+        { "quantity": "6", "unit": "", "item": "mittelgroße Paprika" },
+        { "quantity": "150", "unit": "g", "item": "Reis" },
+        { "quantity": "400", "unit": "g", "item": "Rinderhack" },
+        { "quantity": "2", "unit": "", "item": "Zwiebeln" },
+        { "quantity": "2", "unit": "EL", "item": "Tomatenmark" },
+        { "quantity": "400", "unit": "g", "item": "passierte Tomaten" },
+        { "quantity": "1", "unit": "TL", "item": "Paprikapulver" },
+        { "quantity": "1", "unit": "Bund", "item": "Petersilie" },
+        { "quantity": "", "unit": "", "item": "Olivenöl, Salz, Pfeffer" }
+      ],
+      "instructions": [
+        "Bei den Paprika die Deckel abschneiden und die Kerne entfernen.",
+        "Zwiebeln in Öl dünsten, Hack anbraten, Reis, Paprikapulver und Tomatenmark zugeben und kurz mitrösten.",
+        "Mit gehackter Petersilie, Salz und Pfeffer würzen; die Füllung soll noch leicht roh sein.",
+        "Paprika mit der Reis-Hack-Mischung füllen und dicht in einen Topf stellen.",
+        "Passierte Tomaten mit etwas Wasser angießen, bis die Schoten zur Hälfte bedeckt sind.",
+        "Zugedeckt 45–55 Minuten sanft schmoren, bis Reis und Paprika weich sind; mit Joghurt servieren."
+      ],
+      "tips": [
+        "Den Reis nur halb garen lassen — er quillt beim Schmoren nach.",
+        "Die Paprika dicht stellen, damit sie aufrecht bleiben.",
+        "Ein Klecks Joghurt rundet das Gericht ab."
+      ],
+      "tags": ["Kosovo", "Speca të mbushur", "gefüllte Paprika", "Dolma", "Rind", "Reis", "Balkan", "osmanisch geprägt", "Schmorgericht", "Sommerküche", "Joghurt", "Hauptgericht"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Kosovo",
+      "continent": "Europa",
+      "recipe_name": "Sheqerpare",
+      "categories": ["Dessert", "Vegetarisch"],
+      "short_description": "Zarte, mürbe Grießküchlein, nach dem Backen in Zuckersirup getränkt. Süßes Festtagsgebäck mit osmanischen Wurzeln.",
+      "history": "Sheqerpare (von türkisch „şekerpare“, sinngemäß „Zuckerstück“) sind ein süßes Gebäck, das im Kosovo, in Albanien, der Türkei und weiten Teilen des früheren osmanischen Raums verbreitet ist. Es handelt sich um kleine, mürbe Küchlein aus einem Teig mit Grieß oder Mehl, Butter und Ei, die gebacken und anschließend, noch warm, in einem kalten Zuckersirup getränkt werden. Dadurch erhalten sie ihre charakteristische Saftigkeit und intensive Süße. Wie viele sirupgetränkte Süßspeisen der Region gehen Sheqerpare auf die osmanische Hofküche und deren Tradition der „şerbet“-getränkten Gebäcke zurück. Im Kosovo sind sie ein beliebtes Festtags- und Gästegebäck, das besonders zu religiösen Feiertagen, Hochzeiten und Familienanlässen gereicht wird. Oft wird jedes Küchlein mit einer Mandel oder Nuss verziert. Sie spiegeln die ausgeprägte Süßspeisenkultur Südosteuropas wider und sind als reines Teig- und Zuckergebäck selbstverständlich ohne Schweinefleisch.",
+      "ingredients": [
+        { "quantity": "200", "unit": "g", "item": "Mehl" },
+        { "quantity": "80", "unit": "g", "item": "feiner Grieß" },
+        { "quantity": "120", "unit": "g", "item": "weiche Butter" },
+        { "quantity": "1", "unit": "", "item": "Ei" },
+        { "quantity": "1", "unit": "TL", "item": "Backpulver" },
+        { "quantity": "16", "unit": "", "item": "Mandeln zum Verzieren" },
+        { "quantity": "300", "unit": "g", "item": "Zucker (Sirup)" },
+        { "quantity": "300", "unit": "ml", "item": "Wasser (Sirup)" },
+        { "quantity": "1", "unit": "", "item": "Zitrone (Saft)" }
+      ],
+      "instructions": [
+        "Aus Zucker, Wasser und Zitronensaft einen Sirup kochen und vollständig abkühlen lassen.",
+        "Butter, Ei, Mehl, Grieß und Backpulver zu einem geschmeidigen Teig verkneten.",
+        "Kleine Kugeln formen, leicht flach drücken und je eine Mandel eindrücken.",
+        "Auf ein Blech setzen und bei 175 °C 18–22 Minuten goldgelb backen.",
+        "Die noch warmen Küchlein in den kalten Sirup legen.",
+        "Den Sirup einige Stunden einziehen lassen, bis die Sheqerpare saftig sind."
+      ],
+      "tips": [
+        "Warmes Gebäck in kalten Sirup — so saugen sich die Küchlein gleichmäßig voll.",
+        "Den Teig nicht zu lange kneten, damit die Küchlein mürbe bleiben.",
+        "Vor dem Servieren vollständig durchziehen lassen."
+      ],
+      "tags": ["Kosovo", "Sheqerpare", "Grießgebäck", "Sirup", "süß", "osmanisch geprägt", "Festtag", "Mandeln", "vegetarisch", "Gästegebäck", "Balkan", "Dessert"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    }
+  ],
+  "batch_summary": {
+    "batch": 3,
+    "region": "Europa",
+    "countries_processed": ["Griechenland", "Irland", "Island", "Italien", "Kosovo"],
+    "recipes_created": 15,
+    "recipes_with_images": 0,
+    "recipes_with_placeholders": 15,
+    "recipes_with_pork_substitution": 0
+  }
+}

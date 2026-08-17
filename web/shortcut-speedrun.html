@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Shortcut-Speedrun · HeiBen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;1,400&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f3eee5;--bg2:#ebe3d4;--paper:#fffdf8;--ink:#1f1c17;--ink2:#524a3e;--rule:#d8cdb7;--terra:#b04a31;--ochre:#a97a1d;--moss:#4a5c39;--burg:#792d29;--aub:#6b3951;--good:#9ec27f;--bad:#e7a48f}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:'Manrope',system-ui,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:720px;margin:0 auto;padding:1.6rem 1.1rem 5rem}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.32em;text-transform:uppercase;color:var(--terra)}
+h1{font-family:'Fraunces',serif;font-weight:400;font-size:clamp(2rem,6.5vw,3.2rem);line-height:1.02;letter-spacing:-.02em;margin:.45rem 0 .5rem}
+h1 em{font-style:italic;color:var(--terra)}
+.lead{color:var(--ink2);max-width:60ch;font-size:1.02rem}
+.os{margin-top:1rem;font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink2);display:flex;gap:.4rem;align-items:center}
+.os button{border:1px solid var(--rule);background:var(--paper);border-radius:8px;padding:.3rem .55rem;cursor:pointer;font:inherit;font-size:.62rem;color:var(--ink2)}
+.os button.on{background:var(--moss);color:#fff;border-color:var(--moss)}
+.panel{position:sticky;top:.6rem;z-index:5;background:var(--ink);color:var(--bg);border-radius:18px;padding:1.1rem 1.3rem 1.2rem;margin-top:1.1rem}
+.panel .eyebrow{color:var(--ochre)}
+.prow{display:flex;gap:1.6rem;align-items:baseline;margin-top:.2rem}
+.prow .v{font-family:'Fraunces',serif;font-weight:500;font-size:clamp(2.6rem,13vw,3.8rem);line-height:1}
+.prow .l{font-family:'JetBrains Mono',monospace;font-size:.54rem;letter-spacing:.1em;text-transform:uppercase;color:#cdbfa8}
+.tmr{margin-top:.7rem}
+.tmrtop{display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:#cdbfa8;margin-bottom:.25rem}
+.tmrtrack{background:rgba(255,255,255,.12);border-radius:6px;height:10px;overflow:hidden}
+.tmrfill{height:100%;border-radius:6px;background:var(--good);transition:width .12s linear}
+.band{font-family:'Fraunces',serif;font-style:italic;font-size:1.5rem;margin-top:.5rem;color:var(--ochre)}
+.rsub{color:#cdbfa8;font-size:.9rem;margin-top:.25rem}
+.stage{background:var(--paper);border:1px solid var(--rule);border-radius:16px;padding:1.6rem 1.2rem;margin-top:1.1rem;text-align:center;min-height:150px;display:flex;flex-direction:column;justify-content:center}
+.intro p{color:var(--ink2);font-size:.96rem;max-width:46ch;margin:0 auto}
+.action{font-family:'Fraunces',serif;font-size:clamp(1.8rem,7.5vw,2.6rem);margin:.1rem 0}
+.hint{font-size:.84rem;color:var(--ink2)}
+.keys{display:flex;justify-content:center;gap:.4rem;flex-wrap:wrap;margin-top:.8rem;min-height:42px}
+.kc{font-family:'JetBrains Mono',monospace;font-weight:600;font-size:1rem;background:var(--bg2);border:1px solid var(--rule);border-bottom-width:3px;border-radius:8px;padding:.45rem .75rem;color:var(--ink)}
+.btn{border:0;background:var(--ink);color:var(--bg);font:inherit;font-weight:700;border-radius:12px;padding:.8rem 1.8rem;cursor:pointer;font-size:1.05rem}
+.btn.pri{background:var(--terra)}
+.row{display:flex;gap:.5rem;justify-content:center;flex-wrap:wrap;margin-top:.4rem}
+.row .btn{font-size:.95rem;padding:.65rem 1.2rem}
+.flash-ok{animation:fok .35s}.flash-no{animation:fno .35s}
+@keyframes fok{0%{background:#eaf3e0}100%{background:var(--paper)}}
+@keyframes fno{0%{background:#f7e6e0}100%{background:var(--paper)}}
+.miss{font-size:.8rem;color:var(--burg);min-height:20px;margin-top:.5rem}
+.xlink{text-align:center;margin-top:1.3rem}
+.xlink a{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink2);text-decoration:none;border-bottom:1px solid var(--rule)}
+.foot{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink2);text-align:center;margin-top:1.6rem}
+</style>
+<link rel="stylesheet" href="heiben-design.css">
+<script src="heiben-nav.js" defer></script>
+</head>
+<body data-hb-welt="wissen">
+<div class="wrap">
+  <p class="eyebrow">HeiBen · Büro &amp; Software</p>
+  <h1>Shortcut-<em>Speedrun</em></h1>
+  <p class="lead">60 Sekunden, so viele Tastenkürzel wie möglich. Drück die echte Kombination — richtig zählt, Tempo entscheidet. Wie weit kommst du?</p>
+
+  <div class="os" id="osbar">
+    <span>System</span>
+    <button data-os="win" class="on">Windows / Linux</button>
+    <button data-os="mac">Mac</button>
+  </div>
+
+  <div class="panel" id="panel"></div>
+  <div class="stage" id="stage"></div>
+  <div class="miss" id="miss">&nbsp;</div>
+
+  <div class="xlink"><a href="tastentrainer.html">In Ruhe üben → Tastenkürzel-Trainer</a></div>
+  <p class="foot">HeiBen GmbH i. G. · „Heimat leben" · <a href="mein-heiben.html" style="color:var(--aub)">Mein HeiBen</a> · Nur sicher abfragbare Kürzel — System-Kombis wie Alt+Tab fängt das OS ab</p>
+</div>
+
+<script>
+var KEY="heiben_speedrun_v1";
+var OS="win";
+var START=60;
+(function(){var t=parseInt(new URLSearchParams(location.search).get("t"),10);if(!isNaN(t))START=Math.max(5,Math.min(180,t));})();
+
+var DATA=[
+ {action:"Kopieren",win:["ctrl+c"],mac:["meta+c"]},
+ {action:"Einfügen",win:["ctrl+v"],mac:["meta+v"]},
+ {action:"Ausschneiden",win:["ctrl+x"],mac:["meta+x"]},
+ {action:"Rückgängig",win:["ctrl+z"],mac:["meta+z"]},
+ {action:"Wiederholen",win:["ctrl+y","ctrl+shift+z"],mac:["meta+shift+z"]},
+ {action:"Alles markieren",win:["ctrl+a"],mac:["meta+a"]},
+ {action:"Speichern",win:["ctrl+s"],mac:["meta+s"]},
+ {action:"Suchen",win:["ctrl+f"],mac:["meta+f"]},
+ {action:"Drucken",win:["ctrl+p"],mac:["meta+p"]},
+ {action:"Fett",win:["ctrl+b"],mac:["meta+b"]},
+ {action:"Kursiv",win:["ctrl+i"],mac:["meta+i"]},
+ {action:"Unterstreichen",win:["ctrl+u"],mac:["meta+u"]},
+ {action:"Ein Wort nach links",win:["ctrl+arrowleft"],mac:["alt+arrowleft"]},
+ {action:"Ein Wort nach rechts",win:["ctrl+arrowright"],mac:["alt+arrowright"]},
+ {action:"Vorheriges Wort löschen",win:["ctrl+backspace"],mac:["alt+backspace"]},
+ {action:"Zeilenanfang",win:["home"],mac:["meta+arrowleft","home"]},
+ {action:"Zeilenende",win:["end"],mac:["meta+arrowright","end"]},
+ {action:"Zum Dokumentanfang",win:["ctrl+home"],mac:["meta+arrowup","ctrl+home"]},
+ {action:"Zum Dokumentende",win:["ctrl+end"],mac:["meta+arrowdown","ctrl+end"]},
+ {action:"Zelle bearbeiten (Excel)",win:["f2"],mac:["f2"]},
+ {action:"Heutiges Datum (Excel)",win:["ctrl+;"],mac:["ctrl+;","meta+;"]}
+];
+
+var SYM_WIN={ctrl:"Strg",alt:"Alt",shift:"Umschalt",meta:"Win"};
+var SYM_MAC={ctrl:"⌃",alt:"⌥",shift:"⇧",meta:"⌘"};
+var KEYLBL={arrowleft:"←",arrowright:"→",arrowup:"↑",arrowdown:"↓",home:"Pos1",end:"Ende",backspace:"⌫",f2:"F2",";":";"};
+function comboLabel(c){var sym=OS==="mac"?SYM_MAC:SYM_WIN;return c.split("+").map(function(t){return sym[t]||KEYLBL[t]||(t.length===1?t.toUpperCase():t);});}
+function keysHTML(parts){return '<div class="keys">'+parts.map(function(p){return '<span class="kc">'+p+'</span>';}).join("")+'</div>';}
+
+var st={best:0,bestStreak:0};
+try{var sv=JSON.parse(localStorage.getItem(KEY));if(sv){st.best=sv.best||0;st.bestStreak=sv.bestStreak||0;}}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(st));}catch(e){}}
+
+var running=false, score=0, attempts=0, streak=0, runBestStreak=0, current=null, lastIdx=-1, t=START, timer=null;
+
+function canon(e){
+  if(["Control","Alt","Shift","Meta"].indexOf(e.key)>=0)return null;
+  var m=[];
+  if(e.altKey)m.push("alt");
+  if(e.ctrlKey)m.push("ctrl");
+  if(e.metaKey)m.push("meta");
+  if(e.shiftKey)m.push("shift");
+  var k=e.key, key=(k===" "||e.code==="Space")?"space":k.toLowerCase();
+  return (m.length?m.join("+")+"+":"")+key;
+}
+function pick(){var i;do{i=Math.floor(Math.random()*DATA.length);}while(DATA.length>1&&i===lastIdx);lastIdx=i;current=DATA[i];}
+function accepted(){return OS==="mac"?current.mac:current.win;}
+
+function band(s){
+  if(s>=32)return["Tasten-Sturm ⚡","Das war Tempo. Beeindruckend."];
+  if(s>=24)return["Sehr schnell","Die Finger kennen die Wege."];
+  if(s>=16)return["Schnell unterwegs","Starke Quote — da geht noch was."];
+  if(s>=9)return["Solide","Gute Basis. Nochmal für mehr Tempo."];
+  return["Noch am Aufwärmen","Erst der Trainer, dann zurück zum Run."];
+}
+
+function panelLive(){
+  var pct=Math.max(0,t/START*100);
+  var col=t>START*.33?"var(--good)":(t>START*.15?"var(--ochre)":"var(--bad)");
+  document.getElementById("panel").innerHTML=
+    '<p class="eyebrow">Speedrun läuft</p>'+
+    '<div class="prow">'+
+      '<div><div class="v">'+score+'</div><div class="l">Punkte</div></div>'+
+      '<div><div class="v" style="font-size:1.8rem">'+streak+'</div><div class="l">Serie</div></div>'+
+    '</div>'+
+    '<div class="tmr"><div class="tmrtop"><span>Zeit</span><span>'+Math.ceil(t)+'s</span></div>'+
+    '<div class="tmrtrack"><div class="tmrfill" style="width:'+pct+'%;background:'+col+'"></div></div></div>';
+}
+function panelIdle(){
+  document.getElementById("panel").innerHTML=
+    '<p class="eyebrow">Bereit</p>'+
+    '<div class="prow"><div><div class="v">'+st.best+'</div><div class="l">Bestwert</div></div>'+
+    '<div><div class="v" style="font-size:1.8rem">'+st.bestStreak+'</div><div class="l">Beste Serie</div></div></div>'+
+    '<div class="tmr"><div class="tmrtop"><span>Zeit</span><span>'+START+'s</span></div>'+
+    '<div class="tmrtrack"><div class="tmrfill" style="width:100%"></div></div></div>';
+}
+
+function showStart(){
+  running=false; panelIdle();
+  document.getElementById("stage").innerHTML=
+    '<div class="intro"><p>'+START+' Sekunden. Es erscheint eine Aktion — drück die passende Kombination. Jede richtige zählt einen Punkt. Los geht\u2019s, sobald du startest.</p>'+
+    '<div class="row" style="margin-top:1rem"><button class="btn pri" id="go">Start</button></div></div>';
+  document.getElementById("go").addEventListener("click",startRun);
+}
+
+function renderCard(){
+  document.getElementById("stage").innerHTML=
+    '<div class="hint">Welche Kombination?</div>'+
+    '<div class="action">'+current.action+'</div>'+
+    '<div class="keys" id="keys"></div>';
+}
+
+function startRun(){
+  running=true; score=0; attempts=0; streak=0; runBestStreak=0; t=START;
+  document.getElementById("miss").innerHTML="&nbsp;";
+  pick(); renderCard(); panelLive();
+  if(timer)clearInterval(timer);
+  timer=setInterval(function(){
+    t-=0.1;
+    if(t<=0){t=0;panelLive();finish();}
+    else panelLive();
+  },100);
+}
+
+function finish(){
+  running=false; if(timer){clearInterval(timer);timer=null;}
+  if(score>st.best)st.best=score;
+  if(runBestStreak>st.bestStreak)st.bestStreak=runBestStreak;
+  save();
+  var acc=attempts?Math.round(score/attempts*100):0;
+  var bd=band(score);
+  document.getElementById("panel").innerHTML=
+    '<p class="eyebrow">Zeit abgelaufen</p>'+
+    '<div class="prow"><div><div class="v">'+score+'</div><div class="l">Punkte</div></div>'+
+    '<div><div class="v" style="font-size:1.8rem">'+acc+'%</div><div class="l">Trefferquote</div></div>'+
+    '<div><div class="v" style="font-size:1.8rem">'+runBestStreak+'</div><div class="l">Beste Serie</div></div></div>'+
+    '<div class="band">'+bd[0]+'</div><div class="rsub">'+bd[1]+'</div>'+
+    '<div class="rsub" style="margin-top:.4rem">Bestwert: '+st.best+' · Beste Serie gesamt: '+st.bestStreak+'</div>';
+  document.getElementById("stage").innerHTML=
+    '<div class="row"><button class="btn pri" id="again">Nochmal</button></div>';
+  document.getElementById("again").addEventListener("click",startRun);
+  document.getElementById("miss").innerHTML="&nbsp;";
+}
+
+function handle(e){
+  if(e.ctrlKey||e.metaKey||e.altKey||["F2","Home","End","ArrowLeft","ArrowRight","ArrowUp","ArrowDown","Backspace"].indexOf(e.key)>=0){e.preventDefault();}
+  if(!running)return;
+  var c=canon(e); if(c===null)return;
+  e.preventDefault();
+  attempts++;
+  var stage=document.getElementById("stage");
+  if(accepted().indexOf(c)>=0){
+    score++; streak++; if(streak>runBestStreak)runBestStreak=streak;
+    stage.classList.remove("flash-no");stage.classList.add("flash-ok");
+    document.getElementById("miss").innerHTML="&nbsp;";
+  }else{
+    streak=0;
+    stage.classList.remove("flash-ok");stage.classList.add("flash-no");
+    document.getElementById("miss").innerHTML='Richtig wäre: '+comboLabel(accepted()[0]).join(" + ");
+  }
+  setTimeout(function(){stage.classList.remove("flash-ok","flash-no");},340);
+  pick(); renderCard(); panelLive();
+}
+
+// OS
+if(/Mac|iPhone|iPad/i.test(navigator.platform||navigator.userAgent))OS="mac";
+function syncOS(){Array.prototype.forEach.call(document.querySelectorAll('#osbar button'),function(b){b.classList.toggle("on",b.getAttribute("data-os")===OS);});}
+Array.prototype.forEach.call(document.querySelectorAll('#osbar button'),function(b){
+  b.addEventListener("click",function(){if(running)return;OS=b.getAttribute("data-os");syncOS();});
+});
+
+document.addEventListener("keydown",handle,true);
+syncOS(); showStart();
+</script>
+</body>
+</html>

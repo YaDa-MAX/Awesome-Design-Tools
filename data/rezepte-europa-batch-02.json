@@ -1,0 +1,512 @@
+{
+  "batch": 2,
+  "region": "Europa",
+  "schema_version": 1,
+  "note": "Traditionelle, historisch etablierte Gerichte. Auswahl ohne Schweinefleisch; Feld 'substitution' nur dort, wo das Original mit Schwein zubereitet wird. Bilder als Platzhalter. Generisches Schema, direkt importierbar in PostgreSQL/Supabase/Directus/Strapi/Sanity.",
+  "recipes": [
+    {
+      "country": "Dänemark",
+      "continent": "Europa",
+      "recipe_name": "Smørrebrød med karrysild",
+      "categories": ["Fisch", "Vorspeise", "Frühstück"],
+      "short_description": "Offenes Butterbrot auf dunklem Roggenbrot, belegt mit Hering in cremiger Currysauce und Ei. Das dänische Smørrebrød in einer seiner klassischen Fassungen.",
+      "history": "Smørrebrød — wörtlich „Butterbrot“ — ist das Herzstück der dänischen Esskultur und entwickelte sich im 19. Jahrhundert von der einfachen Pausenmahlzeit der Arbeiter zur kunstvoll belegten Spezialität. Grundlage ist stets das dichte, dunkle Roggenbrot (rugbrød), dünn mit Butter bestrichen und sorgfältig garniert. Hering gehört zu den ältesten und wichtigsten Belägen, denn der eingelegte Fisch war über Jahrhunderte ein Grundnahrungsmittel im Ostseeraum und ein zentrales Handelsgut. Die Variante „karrysild“ — Hering in einer mit Curry gewürzten Mayonnaise- oder Remouladensauce — entstand, als Currypulver im 20. Jahrhundert populär wurde, und gehört heute zum festen Repertoire des dänischen Mittagstisches und der Festtafel, etwa beim Julefrokost. Smørrebrød folgt klaren Regeln in Reihenfolge und Garnitur und wird mit Messer und Gabel gegessen. Es steht für die dänische Verbindung von Schlichtheit, Handwerk und Sorgfalt.",
+      "ingredients": [
+        { "quantity": "4", "unit": "Scheiben", "item": "dänisches Roggenbrot (rugbrød)" },
+        { "quantity": "300", "unit": "g", "item": "Matjes- oder Salzheringsfilets, gewässert" },
+        { "quantity": "4", "unit": "EL", "item": "Mayonnaise" },
+        { "quantity": "100", "unit": "ml", "item": "Schmand oder Crème fraîche" },
+        { "quantity": "1", "unit": "EL", "item": "mildes Currypulver" },
+        { "quantity": "1", "unit": "TL", "item": "Apfelessig" },
+        { "quantity": "2", "unit": "", "item": "hartgekochte Eier" },
+        { "quantity": "1", "unit": "", "item": "Apfel, fein gewürfelt" },
+        { "quantity": "", "unit": "", "item": "Butter, Schnittlauch, Salz" }
+      ],
+      "instructions": [
+        "Heringsfilets gut abtropfen lassen und in mundgerechte Stücke schneiden.",
+        "Mayonnaise, Schmand, Currypulver und Essig zu einer Sauce verrühren, leicht salzen.",
+        "Heringsstücke und Apfelwürfel unterheben und mindestens 1 Stunde durchziehen lassen.",
+        "Roggenbrot dünn mit Butter bestreichen.",
+        "Den Curryhering großzügig auf das Brot setzen.",
+        "Mit Eierscheiben und Schnittlauch garnieren und mit Messer und Gabel servieren."
+      ],
+      "tips": [
+        "Salzhering vor der Verwendung ausreichend wässern, sonst wird es zu salzig.",
+        "Die Currysauce schmeckt am nächsten Tag noch runder.",
+        "Echtes dunkles Roggenbrot ist für den typischen Geschmack entscheidend."
+      ],
+      "tags": ["Dänemark", "Smørrebrød", "Hering", "Fisch", "Roggenbrot", "Curry", "offenes Sandwich", "Skandinavien", "Mittagstisch", "Julefrokost", "eingelegt", "Vorspeise"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Dänemark",
+      "continent": "Europa",
+      "recipe_name": "Frikadeller",
+      "categories": ["Fleisch", "Hauptgericht"],
+      "short_description": "Flache, in Butter goldbraun gebratene Hackfleischbuletten aus Rind und Kalb. Dänische Alltags- und Familienküche, mit Kartoffeln und Soße.",
+      "history": "Frikadeller sind ein fester Bestandteil der dänischen Hausmannskost und gelten als inoffizielles Trostessen des Landes. Die flachen, ovalen Buletten gehen auf eine in ganz Nordeuropa verbreitete Tradition gebratener Hackfleischklöße zurück und etablierten sich in Dänemark spätestens im 19. Jahrhundert als erschwingliches, sättigendes Familienessen. Traditionell mischt man Hackfleisch mit Mehl oder Semmelbröseln, Ei, Zwiebel und Milch zu einer geschmeidigen Masse, die in Butter oder Margarine gebraten wird. Während dänische Frikadeller oft auch mit Schweineanteil zubereitet werden, lassen sie sich ebenso gut und traditionell aus Rind und Kalb herstellen — diese Fassung kommt ganz ohne Schwein aus. Serviert werden sie warm mit Kartoffeln und brauner Soße oder kalt als Smørrebrød-Belag. Frikadeller stehen für die unprätentiöse, herzhafte Seite der dänischen Küche und gehören zum Repertoire fast jedes Haushalts.",
+      "ingredients": [
+        { "quantity": "400", "unit": "g", "item": "Rinderhackfleisch" },
+        { "quantity": "200", "unit": "g", "item": "Kalbshackfleisch" },
+        { "quantity": "1", "unit": "", "item": "Zwiebel, fein gerieben" },
+        { "quantity": "1", "unit": "", "item": "Ei" },
+        { "quantity": "3", "unit": "EL", "item": "Mehl" },
+        { "quantity": "100", "unit": "ml", "item": "Milch" },
+        { "quantity": "40", "unit": "g", "item": "Butter zum Braten" },
+        { "quantity": "", "unit": "", "item": "Salz, Pfeffer, Muskat" }
+      ],
+      "instructions": [
+        "Hackfleischsorten mit Zwiebel, Ei, Mehl und Milch zu einer glatten Masse verrühren.",
+        "Mit Salz, Pfeffer und Muskat würzen und 20 Minuten kühl ruhen lassen.",
+        "Mit einem Esslöffel ovale Portionen abstechen und leicht flach formen.",
+        "Butter in der Pfanne erhitzen, bis sie zu schäumen beginnt.",
+        "Frikadeller bei mittlerer Hitze je Seite 4–5 Minuten goldbraun braten.",
+        "Mit Salzkartoffeln und brauner Soße oder Rotkohl servieren."
+      ],
+      "tips": [
+        "Die Masse vor dem Braten ruhen lassen — so halten die Frikadeller besser zusammen.",
+        "In schäumender Butter braten gibt das typische Aroma.",
+        "Kalt schmecken sie hervorragend auf Roggenbrot."
+      ],
+      "tags": ["Dänemark", "Frikadeller", "Rind", "Kalb", "Hackfleisch", "Hausmannskost", "Skandinavien", "gebraten", "Familienessen", "Trostessen", "Kartoffeln", "Hauptgericht"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Dänemark",
+      "continent": "Europa",
+      "recipe_name": "Æbleskiver",
+      "categories": ["Dessert", "Snack", "Vegetarisch"],
+      "short_description": "Kugelrunde, fluffige Pfannküchlein aus einer speziellen Mulden-Pfanne, bestäubt mit Puderzucker und mit Marmelade gereicht. Dänisches Adventsgebäck.",
+      "history": "Æbleskiver — wörtlich „Apfelscheiben“ — sind kugelförmige Pfannküchlein, die in einer charakteristischen gusseisernen Pfanne mit halbkugelförmigen Mulden gebacken werden. Der Name verweist darauf, dass die Teigkugeln früher mit einem Stück Apfel gefüllt wurden; heute werden sie meist pur gebacken und mit Marmelade und Puderzucker serviert. Æbleskiver sind eng mit der dänischen Advents- und Weihnachtszeit verbunden und werden traditionell zusammen mit Glögg, dem skandinavischen Glühwein, gereicht. Die spezielle Pfanne und die Technik, die Kugeln während des Backens mit einer Stricknadel oder einem Spieß zu drehen, machen das Gebäck zu einem kleinen Handwerk. Über Jahrhunderte gehörten Æbleskiver zu winterlichen Festen und Zusammenkünften und sind bis heute ein beliebtes gemeinschaftliches Backerlebnis in dänischen Familien. Als süßes Teiggebäck sind sie selbstverständlich ohne Schweinefleisch.",
+      "ingredients": [
+        { "quantity": "250", "unit": "g", "item": "Mehl" },
+        { "quantity": "300", "unit": "ml", "item": "Buttermilch" },
+        { "quantity": "3", "unit": "", "item": "Eier (getrennt)" },
+        { "quantity": "2", "unit": "EL", "item": "Zucker" },
+        { "quantity": "1", "unit": "TL", "item": "Backpulver" },
+        { "quantity": "1", "unit": "Prise", "item": "Kardamom" },
+        { "quantity": "", "unit": "", "item": "Butter zum Backen" },
+        { "quantity": "", "unit": "", "item": "Puderzucker und Marmelade zum Servieren" }
+      ],
+      "instructions": [
+        "Mehl, Zucker, Backpulver und Kardamom mischen.",
+        "Eigelb mit Buttermilch verquirlen und unter die Mehlmischung rühren.",
+        "Eiweiß steif schlagen und vorsichtig unterheben.",
+        "Mulden der Æbleskiver-Pfanne mit Butter ausstreichen und erhitzen.",
+        "Teig einfüllen und die Kugeln mit einem Spieß nach und nach drehen, bis sie ringsum goldbraun sind.",
+        "Mit Puderzucker bestäubt und Marmelade servieren."
+      ],
+      "tips": [
+        "Steif geschlagenes Eiweiß macht die Æbleskiver besonders luftig.",
+        "Geduldig drehen — nur so werden sie rundum gleichmäßig gebacken.",
+        "Ohne Spezialpfanne lässt sich der Teig auch als kleine Pancakes backen."
+      ],
+      "tags": ["Dänemark", "Æbleskiver", "Advent", "Weihnachten", "Pfannkuchen", "süß", "Gebäck", "Skandinavien", "Kardamom", "vegetarisch", "Glögg", "Dessert"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Deutschland",
+      "continent": "Europa",
+      "recipe_name": "Sauerbraten",
+      "categories": ["Fleisch", "Hauptgericht"],
+      "short_description": "Rinderbraten, tagelang in einer Essig-Gewürz-Beize mariniert und dann zart geschmort, mit einer dunklen, süßsauren Soße. Ein deutscher Sonntagsklassiker.",
+      "history": "Der Sauerbraten gehört zu den bekanntesten deutschen Schmorgerichten und ist vor allem im Rheinland, in Franken, Schwaben und Westfalen verwurzelt, jeweils mit regionalen Eigenheiten. Sein Prinzip — Fleisch vor dem Garen mehrere Tage in einer sauren Beize aus Essig, Wein, Wasser und Gewürzen einzulegen — diente ursprünglich der Haltbarmachung und dazu, zähere Fleischstücke mürbe zu machen. Die lange Marinade verleiht dem Braten seinen charakteristisch säuerlichen Geschmack, der durch eine süßliche Soße ausbalanciert wird. Im Rheinland wird diese traditionell mit Rosinen und zerstoßenen Lebkuchen oder dem dortigen Aachener Printen gebunden, was die typische süßsaure Note ergibt. Während Sauerbraten historisch teils auch aus Pferdefleisch zubereitet wurde, ist heute Rind die übliche und klassische Wahl. Das Gericht ist von Natur aus ohne Schweinefleisch und gilt als festliches Sonntagsessen, das Geduld und Vorausplanung verlangt.",
+      "ingredients": [
+        { "quantity": "1.2", "unit": "kg", "item": "Rinderschmorbraten (z. B. aus der Schulter)" },
+        { "quantity": "375", "unit": "ml", "item": "Rotweinessig" },
+        { "quantity": "375", "unit": "ml", "item": "Wasser" },
+        { "quantity": "2", "unit": "", "item": "Zwiebeln" },
+        { "quantity": "2", "unit": "", "item": "Möhren" },
+        { "quantity": "5", "unit": "", "item": "Wacholderbeeren, 3 Nelken, 2 Lorbeerblätter" },
+        { "quantity": "50", "unit": "g", "item": "Rosinen" },
+        { "quantity": "4", "unit": "", "item": "Lebkuchen oder Printen" },
+        { "quantity": "", "unit": "", "item": "Öl, Salz, Pfeffer, Zucker" }
+      ],
+      "instructions": [
+        "Essig, Wasser, in Scheiben geschnittene Zwiebeln, Möhren und Gewürze aufkochen und abkühlen lassen.",
+        "Das Fleisch in die Beize legen und zugedeckt 3–4 Tage im Kühlschrank marinieren, täglich wenden.",
+        "Fleisch abtupfen, die Beize aufbewahren; Braten in Öl rundum kräftig anbraten.",
+        "Mit der durchgesiebten Beize ablöschen und zugedeckt 2,5–3 Stunden sanft schmoren.",
+        "Braten herausnehmen; Soße mit Rosinen und zerbröselten Lebkuchen binden und einkochen.",
+        "Mit Zucker, Salz und Pfeffer abschmecken; Braten in Scheiben mit Klößen und Rotkohl servieren."
+      ],
+      "tips": [
+        "Je länger die Beizzeit, desto intensiver Geschmack und Zartheit.",
+        "Die Lebkuchen geben Bindung und die typische süßsaure Tiefe.",
+        "Dazu passen Kartoffel- oder Semmelknödel und Apfelrotkohl."
+      ],
+      "tags": ["Deutschland", "Rheinland", "Sauerbraten", "Rind", "Schmorbraten", "süßsauer", "Marinade", "Sonntagsessen", "Lebkuchen", "Rosinen", "Festtag", "Hauptgericht"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Deutschland",
+      "continent": "Europa",
+      "recipe_name": "Käsespätzle",
+      "categories": ["Vegetarisch", "Hauptgericht", "Beilage"],
+      "short_description": "Frische Eierspätzle, geschichtet mit kräftigem Bergkäse und gekrönt von goldbraunen Röstzwiebeln. Herzhafter Klassiker aus dem Süden Deutschlands.",
+      "history": "Käsespätzle (im Allgäu „Kässpatzen“, in Schwaben „Kässpätzle“) sind ein traditionelles Gericht des süddeutschen und alpenländischen Raums und teilen ihre Wurzeln mit der österreichischen und Schweizer Küche. Spätzle, die handgeschabten Eierteignudeln, gelten als schwäbisches Grundnahrungsmittel und sind dort seit Jahrhunderten dokumentiert; das Wort verweist vermutlich auf die kleine, sperlingsartige Form. In Kombination mit reichlich geriebenem Käse — meist einem würzigen Berg- oder Emmentaler — und Röstzwiebeln entsteht ein sättigendes, vegetarisches Hauptgericht, das die deftige Bauern- und Almküche der Region widerspiegelt. Es war ein Essen, das aus einfachen, haltbaren Vorräten wie Mehl, Eiern und Käse zubereitet werden konnte und besonders in den Bergregionen verbreitet war. Heute sind Käsespätzle ein Aushängeschild der Allgäuer und schwäbischen Küche und stehen in Gasthäusern wie Privathaushalten. Sie kommen von Natur aus ohne Schweinefleisch aus.",
+      "ingredients": [
+        { "quantity": "400", "unit": "g", "item": "Mehl" },
+        { "quantity": "4", "unit": "", "item": "Eier" },
+        { "quantity": "150", "unit": "ml", "item": "Wasser" },
+        { "quantity": "250", "unit": "g", "item": "würziger Bergkäse, gerieben" },
+        { "quantity": "100", "unit": "g", "item": "Emmentaler, gerieben" },
+        { "quantity": "3", "unit": "", "item": "Zwiebeln, in Ringen" },
+        { "quantity": "40", "unit": "g", "item": "Butter" },
+        { "quantity": "", "unit": "", "item": "Salz, Muskat" }
+      ],
+      "instructions": [
+        "Mehl, Eier, Wasser, Salz und Muskat zu einem zähen, glatten Teig schlagen, bis er Blasen wirft.",
+        "Teig portionsweise durch eine Spätzlepresse oder vom Brett in siedendes Salzwasser schaben.",
+        "Wenn die Spätzle aufschwimmen, mit dem Schaumlöffel herausheben und abtropfen.",
+        "Zwiebelringe in Butter langsam goldbraun rösten.",
+        "Spätzle und geriebenen Käse abwechselnd in eine Form schichten und kurz im Ofen ziehen lassen, bis der Käse schmilzt.",
+        "Mit den Röstzwiebeln bestreut servieren, dazu ein grüner Salat."
+      ],
+      "tips": [
+        "Der Teig muss zäh sein und Blasen werfen — dann werden die Spätzle locker.",
+        "Eine Mischung kräftiger Käsesorten gibt mehr Tiefe als nur ein Käse.",
+        "Die Röstzwiebeln geduldig und langsam bräunen, damit sie nicht bitter werden."
+      ],
+      "tags": ["Deutschland", "Allgäu", "Schwaben", "Spätzle", "Käse", "vegetarisch", "Alpenküche", "Bergkäse", "Röstzwiebeln", "deftig", "Hausmannskost", "Hauptgericht"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Deutschland",
+      "continent": "Europa",
+      "recipe_name": "Schwarzwälder Kirschtorte",
+      "categories": ["Dessert", "Vegetarisch"],
+      "short_description": "Schokoladenbiskuit mit Kirschen, Sahne und Kirschwasser, geschichtet und mit Schokoraspeln verziert. Deutschlands berühmteste Torte.",
+      "history": "Die Schwarzwälder Kirschtorte ist die wohl bekannteste deutsche Torte und international ein Sinnbild deutscher Backkunst. Ihre charakteristische Kombination aus Schokoladenbiskuit, Sauerkirschen, Schlagsahne und vor allem dem Kirschwasser (einem Obstbrand aus dem Schwarzwald) gab ihr den Namen. Die genaue Entstehung ist nicht eindeutig belegt; verbreitet ist die Zuschreibung an Konditoren des frühen 20. Jahrhunderts, und ihre große Popularität entfaltete sie ab den 1930er- und besonders den Nachkriegsjahren. Manche Deutungen sehen in der Optik — dunkler Teig, weiße Sahne, rote Kirschen — eine Anspielung auf die Tracht der Schwarzwälder Region. Das Kirschwasser ist für den authentischen Geschmack zentral und unterscheidet die Torte von einfachen Sahnetorten. Heute ist sie ein Klassiker der Kaffeetafel und auf der ganzen Welt als „Black Forest Cake“ bekannt. Als Süßgebäck ist sie selbstverständlich ohne Schweinefleisch.",
+      "ingredients": [
+        { "quantity": "6", "unit": "", "item": "Eier" },
+        { "quantity": "150", "unit": "g", "item": "Zucker" },
+        { "quantity": "100", "unit": "g", "item": "Mehl" },
+        { "quantity": "50", "unit": "g", "item": "Kakaopulver" },
+        { "quantity": "1", "unit": "Glas", "item": "Sauerkirschen (Schattenmorellen)" },
+        { "quantity": "600", "unit": "ml", "item": "Schlagsahne" },
+        { "quantity": "4", "unit": "EL", "item": "Kirschwasser" },
+        { "quantity": "100", "unit": "g", "item": "Zartbitterschokolade (Raspel)" },
+        { "quantity": "", "unit": "", "item": "Sahnesteif, Puderzucker" }
+      ],
+      "instructions": [
+        "Eier mit Zucker schaumig schlagen, Mehl und Kakao unterheben und einen Biskuit backen; auskühlen lassen.",
+        "Biskuit zweimal waagerecht durchschneiden und die Böden mit Kirschwasser tränken.",
+        "Kirschen abtropfen lassen, den Saft etwas einkochen oder andicken.",
+        "Sahne mit Sahnesteif steif schlagen.",
+        "Böden abwechselnd mit Sahne und Kirschen füllen, die Torte rundum mit Sahne einstreichen.",
+        "Mit Schokoraspeln, Sahnetupfen und einigen Kirschen verzieren; gut durchkühlen lassen."
+      ],
+      "tips": [
+        "Den Biskuit am Vortag backen — er lässt sich dann besser schneiden.",
+        "Echtes Kirschwasser ist für den typischen Geschmack entscheidend.",
+        "Die Torte vor dem Servieren mehrere Stunden durchziehen lassen."
+      ],
+      "tags": ["Deutschland", "Schwarzwald", "Torte", "Kirschen", "Sahne", "Schokolade", "Kirschwasser", "Kaffeetafel", "süß", "vegetarisch", "Backkunst", "Dessert"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Estland",
+      "continent": "Europa",
+      "recipe_name": "Mulgipuder",
+      "categories": ["Vegetarisch", "Hauptgericht", "Beilage"],
+      "short_description": "Ein herzhafter Stampf aus Kartoffeln und Graupen, traditionell mit Röstzwiebeln. Bauernküche aus der südestnischen Region Mulgimaa.",
+      "history": "Mulgipuder ist eines der bekanntesten traditionellen Gerichte Estlands und stammt aus der südlichen Region Mulgimaa, nach der es benannt ist. Es verbindet zwei Grundpfeiler der estnischen Bauernküche: die Kartoffel und die Gerstengraupe. Beide wurden zusammen gekocht und zu einem dichten Stampf zerdrückt — ein nahrhaftes, günstiges Essen, das die ländliche Bevölkerung über lange Winter trug. Graupen und Gerste haben in der estnischen Esskultur eine besonders lange Geschichte und galten als Grundnahrungsmittel, lange bevor die Kartoffel im 18. und 19. Jahrhundert verbreitet wurde. Traditionell wird Mulgipuder mit ausgelassenem Speck und Röstzwiebeln serviert; in dieser Fassung treten reichlich in Butter geröstete Zwiebeln an die Stelle des Schweinefleischs. Das Gericht wurde 2021 sogar als Teil des nationalen kulinarischen Erbes Estlands hervorgehoben und steht für die bodenständige, getreidegeprägte Küche des Landes.",
+      "ingredients": [
+        { "quantity": "600", "unit": "g", "item": "mehligkochende Kartoffeln" },
+        { "quantity": "150", "unit": "g", "item": "Gerstengraupen" },
+        { "quantity": "3", "unit": "", "item": "Zwiebeln, in Ringen" },
+        { "quantity": "50", "unit": "g", "item": "Butter" },
+        { "quantity": "100", "unit": "ml", "item": "Milch" },
+        { "quantity": "", "unit": "", "item": "Salz und Pfeffer" }
+      ],
+      "instructions": [
+        "Graupen in reichlich Salzwasser etwa 40 Minuten weich kochen.",
+        "Kartoffeln schälen, würfeln und in den letzten 20 Minuten zu den Graupen geben.",
+        "Abgießen, mit etwas Milch und einem Stück Butter zu einem dichten Stampf zerdrücken.",
+        "Mit Salz und Pfeffer kräftig abschmecken.",
+        "Zwiebelringe in reichlich Butter langsam goldbraun rösten.",
+        "Den Stampf mit den Röstzwiebeln und der Bratbutter beträufelt servieren."
+      ],
+      "tips": [
+        "Die Graupen rechtzeitig ansetzen — sie brauchen länger als die Kartoffeln.",
+        "Reichlich Röstzwiebeln und Butter sind hier der ganze Geschmack.",
+        "Dazu passt eingelegtes Gemüse oder ein klarer Salat."
+      ],
+      "tags": ["Estland", "Mulgimaa", "Kartoffeln", "Graupen", "Gerste", "vegetarisch", "Bauernküche", "Stampf", "Röstzwiebeln", "Winterküche", "kulinarisches Erbe", "Hauptgericht"],
+      "substitution": "Mulgipuder wird klassisch mit ausgelassenem Schweinespeck und dessen Grieben zubereitet. Wir ersetzen das durch reichlich in Butter langsam geröstete Zwiebeln und die nussige Bratbutter — das gibt die nötige herzhafte Tiefe, ganz ohne Schwein. Wer mag, ergänzt knusprig geröstete Buchweizen- oder Brotkrümel.",
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Estland",
+      "continent": "Europa",
+      "recipe_name": "Rosolje",
+      "categories": ["Vegetarisch", "Vorspeise", "Beilage"],
+      "short_description": "Estnischer Rote-Bete-Kartoffelsalat mit Apfel, Ei und eingelegter Gurke in einer cremigen Dressing. Leuchtend rosa, süßsäuerlich, ein Festtagssalat.",
+      "history": "Rosolje ist ein traditioneller estnischer Salat, der eng mit der Familie der osteuropäischen Rote-Bete-Salate (russisch „vinegret“) verwandt ist und über die historischen Verflechtungen des Baltikums mit dem russischen und deutschbaltischen Raum nach Estland kam. Charakteristisch ist die Kombination aus gekochter Roter Bete, Kartoffeln, Apfel, eingelegter Gurke und Ei, die durch die Bete ihre kräftig rosa Farbe erhält. Während viele Versionen auch gepökeltes Rindfleisch oder Hering enthalten, ist eine vegetarische Variante ebenso üblich und traditionell. Das süßsäuerliche Geschmacksprofil entsteht durch das Zusammenspiel von Apfel, eingelegter Gurke und einem Dressing aus saurer Sahne, oft mit etwas Senf. Rosolje gehört in Estland zu festlichen Anlässen, Feiertagen und der kalten Tafel und ist besonders rund um Weihnachten und Mittsommer beliebt. Es spiegelt die baltische Vorliebe für eingelegte und säuerliche Aromen und kommt in dieser Fassung ohne Schweinefleisch aus.",
+      "ingredients": [
+        { "quantity": "3", "unit": "", "item": "Rote Bete, gekocht" },
+        { "quantity": "4", "unit": "", "item": "festkochende Kartoffeln, gekocht" },
+        { "quantity": "1", "unit": "", "item": "Apfel" },
+        { "quantity": "2", "unit": "", "item": "eingelegte Gurken" },
+        { "quantity": "3", "unit": "", "item": "hartgekochte Eier" },
+        { "quantity": "200", "unit": "g", "item": "saure Sahne" },
+        { "quantity": "1", "unit": "TL", "item": "Senf" },
+        { "quantity": "", "unit": "", "item": "Salz, Pfeffer, etwas Essig" }
+      ],
+      "instructions": [
+        "Rote Bete, Kartoffeln, Apfel und Gurken in gleichmäßig kleine Würfel schneiden.",
+        "Zwei Eier ebenfalls würfeln, eines für die Garnitur zurückbehalten.",
+        "Saure Sahne mit Senf, Salz, Pfeffer und einem Spritzer Essig zu einem Dressing verrühren.",
+        "Alle Zutaten vorsichtig mit dem Dressing vermengen.",
+        "Mindestens 2 Stunden kühl durchziehen lassen, damit sich die Farbe und Aromen verbinden.",
+        "Mit dem restlichen Ei garniert servieren."
+      ],
+      "tips": [
+        "Die Rote Bete färbt alles rosa — das ist gewollt und typisch.",
+        "Etwas Ruhezeit im Kühlschrank verbessert den Geschmack deutlich.",
+        "Wer es kräftiger mag, gibt mehr eingelegte Gurke und Senf dazu."
+      ],
+      "tags": ["Estland", "Baltikum", "Rote Bete", "Kartoffelsalat", "Apfel", "Ei", "vegetarisch", "süßsäuerlich", "Festtag", "kalte Küche", "eingelegt", "Vorspeise"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Estland",
+      "continent": "Europa",
+      "recipe_name": "Kama",
+      "categories": ["Dessert", "Frühstück", "Vegetarisch"],
+      "short_description": "Ein traditionelles Mehl aus geröstetem Getreide und Erbsen, mit Buttermilch oder Kefir zu einer süßen, sämigen Speise verrührt. Estnisches Urgetreidegericht.",
+      "history": "Kama ist eine der ältesten und eigenständigsten Spezialitäten der estnischen Küche und gilt als Nationalspeise. Es handelt sich um ein feines Mehl aus einer Mischung gerösteter Getreide — meist Gerste, Roggen, Hafer — und gerösteter Erbsen oder Bohnen, das traditionell als haltbarer Vorrat hergestellt wurde. Geröstetes Getreidemehl dieser Art ist uralt und war praktisch, weil es ohne weiteres Kochen verzehrfähig war: Man musste es nur mit einer Flüssigkeit anrühren. Bauern und Reisende konnten so mit wenig Aufwand eine nahrhafte Mahlzeit zubereiten. Heute wird Kama meist mit Buttermilch, Kefir oder Joghurt und etwas Zucker oder Honig zu einem dickflüssigen, leicht süßen Gericht verrührt und als Frühstück oder Dessert gegessen, oft mit frischen Beeren. Das fertige Kama-Mehl ist in estnischen Geschäften ein Standardprodukt. Es ist rein pflanzlich-getreidebasiert und damit selbstverständlich ohne Schweinefleisch.",
+      "ingredients": [
+        { "quantity": "100", "unit": "g", "item": "Kama-Mehl (geröstete Getreidemischung)" },
+        { "quantity": "300", "unit": "ml", "item": "Buttermilch oder Kefir" },
+        { "quantity": "2", "unit": "EL", "item": "Honig oder Zucker" },
+        { "quantity": "150", "unit": "g", "item": "frische Beeren" },
+        { "quantity": "1", "unit": "Prise", "item": "Salz" }
+      ],
+      "instructions": [
+        "Kama-Mehl mit einer Prise Salz in eine Schüssel geben.",
+        "Buttermilch oder Kefir nach und nach einrühren, bis eine sämige, klumpenfreie Masse entsteht.",
+        "Mit Honig oder Zucker süßen und abschmecken.",
+        "Kurz quellen lassen, damit das Mehl die Flüssigkeit aufnimmt.",
+        "In Schalen anrichten und mit frischen Beeren servieren."
+      ],
+      "tips": [
+        "Die Konsistenz nach Geschmack regeln — von trinkbar bis löffelfest.",
+        "Saisonale Beeren wie Walderdbeeren oder Heidelbeeren passen besonders gut.",
+        "Kama-Mehl gibt es fertig; selbst rösten und mahlen ist aufwendig."
+      ],
+      "tags": ["Estland", "Kama", "Urgetreide", "geröstet", "Buttermilch", "Kefir", "vegetarisch", "Frühstück", "Beeren", "Nationalspeise", "traditionell", "Dessert"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Finnland",
+      "continent": "Europa",
+      "recipe_name": "Karjalanpiirakka",
+      "categories": ["Vegetarisch", "Frühstück", "Snack"],
+      "short_description": "Karelische Piroggen: ein dünner Roggenrand umschließt eine Füllung aus Milchreis, serviert mit Eierbutter. Finnisches Gebäck mit geschützter Herkunft.",
+      "history": "Karjalanpiirakka, die karelische Pirogge, stammt aus der Region Karelien und ist heute in ganz Finnland verbreitet und beliebt. Sie besteht aus einem dünn ausgerollten Rand aus Roggenteig, der eine Füllung umschließt — traditionell Milchreisbrei, früher auch Kartoffelpüree oder Gerstenbrei. Die offenen, schiffchenförmigen Piroggen spiegeln die Bedeutung des Roggens in der ostfinnischen Ernährung wider. Serviert werden sie klassisch mit „munavoi“, einer Mischung aus zerdrücktem hartgekochtem Ei und Butter. Die karelische Pirogge ist so eng mit der finnischen Identität verbunden, dass sie als „Karjalanpiirakka“ einen geschützten Status als traditionelle Spezialität in der EU genießt. Sie wird zum Frühstück, als Snack und zu festlichen Anlässen gegessen und ist in finnischen Bäckereien und Supermärkten allgegenwärtig. Als reines Teig-Getreide-Gebäck mit Milchreisfüllung ist sie von Natur aus ohne Schweinefleisch.",
+      "ingredients": [
+        { "quantity": "150", "unit": "g", "item": "Roggenmehl" },
+        { "quantity": "50", "unit": "g", "item": "Weizenmehl" },
+        { "quantity": "150", "unit": "ml", "item": "Wasser" },
+        { "quantity": "150", "unit": "g", "item": "Rundkornreis" },
+        { "quantity": "700", "unit": "ml", "item": "Milch" },
+        { "quantity": "3", "unit": "", "item": "hartgekochte Eier" },
+        { "quantity": "80", "unit": "g", "item": "Butter" },
+        { "quantity": "", "unit": "", "item": "Salz" }
+      ],
+      "instructions": [
+        "Reis kurz in Wasser ankochen, dann in der Milch zu einem weichen, salzigen Brei garen; auskühlen lassen.",
+        "Roggen- und Weizenmehl mit Wasser und Salz zu einem festen Teig kneten.",
+        "Teig zu einer Rolle formen, in Stücke teilen und sehr dünn oval ausrollen.",
+        "Milchreis mittig auf die Ovale geben, die Ränder hochklappen und kräuseln.",
+        "Bei 250 °C etwa 15 Minuten backen, danach mit zerlassener Butter bestreichen.",
+        "Hartgekochte Eier mit weicher Butter zerdrücken (munavoi) und auf die warmen Piroggen geben."
+      ],
+      "tips": [
+        "Den Teigrand möglichst dünn ausrollen — das ist typisch.",
+        "Nach dem Backen sofort mit Butter bestreichen, damit die Piroggen weich werden.",
+        "Munavoi nicht vergessen — es gehört untrennbar dazu."
+      ],
+      "tags": ["Finnland", "Karelien", "Roggen", "Pirogge", "Milchreis", "Eierbutter", "vegetarisch", "Frühstück", "geschützte Spezialität", "Skandinavien", "Gebäck", "Snack"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Finnland",
+      "continent": "Europa",
+      "recipe_name": "Lohikeitto",
+      "categories": ["Fisch", "Suppe", "Hauptgericht"],
+      "short_description": "Eine cremige Lachssuppe mit Kartoffeln, Lauch und reichlich Dill. Wärmendes Wohlfühlessen des finnischen und nordischen Raums.",
+      "history": "Lohikeitto, die finnische Lachssuppe, ist ein Klassiker der nordischen Küche und in Finnland ein verbreitetes, wärmendes Alltagsgericht. Lachs hat in den fisch- und seenreichen Ländern Skandinaviens und im Ostseeraum seit jeher eine zentrale Bedeutung, sowohl als Frischfisch als auch geräuchert oder gebeizt. Die Suppe verbindet ihn mit Grundzutaten der nordischen Ernährung — Kartoffeln, Lauch oder Zwiebeln — in einer durch Sahne gebundenen Brühe, abgeschmeckt mit großzügig frischem Dill, dem Leitkraut der skandinavischen Küche. Solche sämigen Fischsuppen waren eine praktische Art, Fisch sättigend und nahrhaft zu verwerten, und gehören in ähnlichen Formen auch zur schwedischen und norwegischen Tradition. Lohikeitto wird gern an kalten Tagen und zu geselligen Anlässen gegessen und gilt als unkompliziertes, nahrhaftes Wohlfühlessen. Als Fischgericht ist es selbstverständlich ohne Schweinefleisch.",
+      "ingredients": [
+        { "quantity": "500", "unit": "g", "item": "Lachsfilet, gewürfelt" },
+        { "quantity": "5", "unit": "", "item": "festkochende Kartoffeln, gewürfelt" },
+        { "quantity": "1", "unit": "", "item": "Lauchstange, in Ringen" },
+        { "quantity": "1", "unit": "", "item": "Zwiebel" },
+        { "quantity": "1", "unit": "l", "item": "Fisch- oder Gemüsebrühe" },
+        { "quantity": "200", "unit": "ml", "item": "Sahne" },
+        { "quantity": "1", "unit": "Bund", "item": "Dill" },
+        { "quantity": "30", "unit": "g", "item": "Butter" },
+        { "quantity": "", "unit": "", "item": "Salz, Pfeffer, Pimentkörner" }
+      ],
+      "instructions": [
+        "Zwiebel und Lauch in Butter andünsten.",
+        "Kartoffelwürfel zugeben, mit Brühe auffüllen und etwa 15 Minuten köcheln, bis sie weich sind.",
+        "Sahne angießen und erwärmen, nicht mehr stark kochen.",
+        "Lachswürfel einlegen und bei kleiner Hitze 4–5 Minuten gar ziehen lassen.",
+        "Mit Salz, Pfeffer und Piment abschmecken.",
+        "Reichlich frischen Dill unterrühren und mit dunklem Brot servieren."
+      ],
+      "tips": [
+        "Den Lachs nur ziehen lassen, nicht kochen — sonst wird er trocken.",
+        "Frischer Dill ist unverzichtbar und kommt erst zum Schluss dazu.",
+        "Etwas vom Fischfond intensiviert den Geschmack der Brühe."
+      ],
+      "tags": ["Finnland", "Lachs", "Fischsuppe", "Sahne", "Dill", "Kartoffeln", "Lauch", "Skandinavien", "Wohlfühlessen", "Winterküche", "nordisch", "Suppe"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Finnland",
+      "continent": "Europa",
+      "recipe_name": "Korvapuusti",
+      "categories": ["Dessert", "Snack", "Vegetarisch"],
+      "short_description": "Finnische Zimtschnecken mit Kardamomteig, charakteristisch flach gedrückt und mit Hagelzucker bestreut. Gehören zur finnischen Kaffeepause „kahvitauko“.",
+      "history": "Korvapuusti sind die finnische Variante der nordischen Zimtschnecke und ein fester Bestandteil der finnischen Kaffeekultur. Ihr Name bedeutet wörtlich „geohrfeigt“ und spielt auf die typische Form an: Die gerollten und schräg geschnittenen Teigstücke werden an den Enden flach gedrückt, sodass sie wie ein Ohr aussehen. Charakteristisch für den nordischen Hefeteig ist die kräftige Würzung mit Kardamom, einem Gewürz, das über den Handel früh in die skandinavische Backtradition gelangte. Süße Hefegebäcke wie diese sind in Finnland untrennbar mit dem „pulla“-Backwerk und der geselligen Kaffeepause verbunden, die einen hohen Stellenwert im Alltag hat. Bestreut werden Korvapuusti mit grobem Hagelzucker, der beim Backen knusprige Akzente setzt. Sie werden zu Hause gebacken und in Cafés angeboten und gelten als eines der beliebtesten Gebäcke des Landes. Als süßes Hefegebäck sind sie selbstverständlich ohne Schweinefleisch.",
+      "ingredients": [
+        { "quantity": "500", "unit": "g", "item": "Mehl" },
+        { "quantity": "250", "unit": "ml", "item": "lauwarme Milch" },
+        { "quantity": "25", "unit": "g", "item": "frische Hefe" },
+        { "quantity": "80", "unit": "g", "item": "Zucker" },
+        { "quantity": "1", "unit": "", "item": "Ei" },
+        { "quantity": "1", "unit": "TL", "item": "gemahlener Kardamom" },
+        { "quantity": "100", "unit": "g", "item": "weiche Butter (Teig)" },
+        { "quantity": "", "unit": "", "item": "Butter, Zucker und Zimt für die Füllung; Hagelzucker" }
+      ],
+      "instructions": [
+        "Hefe in lauwarmer Milch auflösen; mit Mehl, Zucker, Ei und Kardamom zu einem Teig kneten.",
+        "Die weiche Butter einarbeiten und den Teig 1 Stunde gehen lassen.",
+        "Teig rechteckig ausrollen, mit weicher Butter bestreichen, mit Zimt und Zucker bestreuen.",
+        "Aufrollen und schräg in keilförmige Stücke schneiden; jedes Stück mittig flach drücken.",
+        "Stücke auf ein Blech setzen, nochmals gehen lassen, mit Ei bestreichen und mit Hagelzucker bestreuen.",
+        "Bei 220 °C 10–12 Minuten goldbraun backen; zur Kaffeepause servieren."
+      ],
+      "tips": [
+        "Kardamom frisch mahlen für das beste Aroma.",
+        "Das mittige Flachdrücken gibt die typische Korvapuusti-Form.",
+        "Nicht zu lange backen, damit sie saftig bleiben."
+      ],
+      "tags": ["Finnland", "Korvapuusti", "Zimtschnecke", "Kardamom", "Hefegebäck", "Hagelzucker", "Kaffeepause", "süß", "vegetarisch", "Skandinavien", "pulla", "Dessert"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Frankreich",
+      "continent": "Europa",
+      "recipe_name": "Bœuf bourguignon",
+      "categories": ["Fleisch", "Hauptgericht"],
+      "short_description": "Rindfleisch, langsam in Rotwein mit Möhren, Zwiebeln und Champignons geschmort. Der burgundische Schmorklassiker der französischen Landküche.",
+      "history": "Bœuf bourguignon stammt aus dem Burgund, einer für ihre Rotweine und ihr Charolais-Rind berühmten Region Frankreichs. Das Gericht ist ein Paradebeispiel der bäuerlichen „cuisine de terroir“, die regionale Erzeugnisse — hier Rindfleisch und Rotwein — zu einem reichhaltigen Schmorgericht vereint. Ursprünglich war es eine Methode, zähere Fleischstücke durch langes Garen in Wein mürbe und schmackhaft zu machen. Im Lauf des 19. und 20. Jahrhunderts wurde das einst rustikale Gericht durch die klassische französische Küche verfeinert und kodifiziert, unter anderem von Auguste Escoffier, und gilt seither als eines der Aushängeschilder der französischen Küche. Klassisch enthält es einen Speckanteil; in dieser Fassung verzichten wir darauf und setzen auf kräftiges Anbraten und reichlich Aromaten, um die Tiefe zu erreichen. Serviert wird es traditionell mit Kartoffeln, Nudeln oder einfach mit Brot, das die Sauce aufnimmt.",
+      "ingredients": [
+        { "quantity": "1.2", "unit": "kg", "item": "Rindfleisch zum Schmoren, in Würfeln" },
+        { "quantity": "750", "unit": "ml", "item": "kräftiger Rotwein (Burgunder)" },
+        { "quantity": "300", "unit": "g", "item": "braune Champignons" },
+        { "quantity": "12", "unit": "", "item": "kleine Schalotten oder Perlzwiebeln" },
+        { "quantity": "3", "unit": "", "item": "Möhren, in Stücken" },
+        { "quantity": "2", "unit": "EL", "item": "Tomatenmark" },
+        { "quantity": "2", "unit": "EL", "item": "Mehl" },
+        { "quantity": "1", "unit": "", "item": "Bouquet garni (Thymian, Lorbeer, Petersilie)" },
+        { "quantity": "", "unit": "", "item": "Butter, Öl, Salz, Pfeffer" }
+      ],
+      "instructions": [
+        "Rindfleischwürfel trocken tupfen, salzen und in Öl portionsweise sehr kräftig anbraten; herausnehmen.",
+        "Möhren und Schalotten im Bratfett anrösten, Tomatenmark und Mehl zugeben und kurz mitrösten.",
+        "Mit Rotwein ablöschen, das Fleisch zurückgeben und das Bouquet garni einlegen.",
+        "Zugedeckt bei kleiner Hitze 2,5–3 Stunden schmoren, bis das Fleisch zerfällt.",
+        "Champignons in Butter separat anbraten und im letzten Drittel zugeben.",
+        "Bouquet garni entfernen, abschmecken und mit Kartoffeln oder Brot servieren."
+      ],
+      "tips": [
+        "Das kräftige Anbraten ist die Basis für Farbe und Tiefe der Sauce.",
+        "Einen Wein verwenden, den man auch trinken würde.",
+        "Am zweiten Tag schmeckt das Gericht noch besser."
+      ],
+      "tags": ["Frankreich", "Burgund", "Rind", "Schmorgericht", "Rotwein", "Champignons", "Landküche", "terroir", "Winterküche", "Klassiker", "Escoffier", "Hauptgericht"],
+      "substitution": "Klassisch werden in den Bœuf bourguignon Speckwürfel (lardons) vom Schwein gegeben. Wir lassen sie weg und holen die herzhafte Tiefe stattdessen aus sehr kräftigem Anbraten des Rinds, Tomatenmark und reichlich Aromaten. Wer eine rauchige Note möchte, brät einige Würfel geräuchertes Rind separat an und gibt sie zum Schluss dazu.",
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Frankreich",
+      "continent": "Europa",
+      "recipe_name": "Ratatouille",
+      "categories": ["Vegetarisch", "Vegan", "Hauptgericht", "Beilage"],
+      "short_description": "Geschmortes Sommergemüse aus Aubergine, Zucchini, Paprika und Tomaten mit Kräutern der Provence. Das provenzalische Gemüsegericht schlechthin.",
+      "history": "Ratatouille stammt aus der Provence, genauer aus der Gegend um Nizza, und ist ein Inbegriff der mediterranen Gemüseküche Südfrankreichs. Der Name leitet sich vom okzitanischen bzw. französischen „touiller“ (umrühren) ab. Ursprünglich war es ein einfaches Gericht der armen Landbevölkerung, das die Fülle des sommerlichen Gemüsegartens verwertete: Aubergine, Zucchini, Paprika, Tomaten, Zwiebeln und Knoblauch, geschmort in Olivenöl und gewürzt mit den Kräutern der Provence. Über die richtige Zubereitung gibt es bis heute Diskussionen — ob alle Gemüse zusammen oder einzeln angeschmort und dann vereint werden, um ihre jeweilige Textur zu wahren. Ratatouille kann als eigenständiges Hauptgericht, als Beilage zu Fleisch oder Fisch und warm wie kalt gegessen werden. Es steht für die sonnige, gemüsebetonte Seite der französischen Küche, ist von Natur aus vegan und kommt selbstverständlich ohne Schweinefleisch aus.",
+      "ingredients": [
+        { "quantity": "1", "unit": "", "item": "Aubergine" },
+        { "quantity": "2", "unit": "", "item": "Zucchini" },
+        { "quantity": "2", "unit": "", "item": "Paprika (rot und gelb)" },
+        { "quantity": "4", "unit": "", "item": "reife Tomaten" },
+        { "quantity": "2", "unit": "", "item": "Zwiebeln" },
+        { "quantity": "3", "unit": "Zehen", "item": "Knoblauch" },
+        { "quantity": "5", "unit": "EL", "item": "Olivenöl" },
+        { "quantity": "1", "unit": "EL", "item": "Kräuter der Provence" },
+        { "quantity": "", "unit": "", "item": "Salz, Pfeffer, frisches Basilikum" }
+      ],
+      "instructions": [
+        "Alle Gemüse in gleichmäßige Stücke schneiden.",
+        "Aubergine, Zucchini und Paprika nacheinander in Olivenöl anbraten und beiseitestellen.",
+        "Zwiebeln und Knoblauch andünsten, gehäutete Tomaten zugeben und einköcheln.",
+        "Das angebratene Gemüse zur Tomatensauce geben.",
+        "Mit Kräutern der Provence, Salz und Pfeffer würzen und zugedeckt 25–30 Minuten schmoren.",
+        "Mit frischem Basilikum bestreut warm oder kalt servieren."
+      ],
+      "tips": [
+        "Die Gemüse einzeln anbraten bewahrt ihre Textur.",
+        "Ratatouille schmeckt am nächsten Tag noch aromatischer.",
+        "Mit einem Spritzer Olivenöl und Brot ein vollwertiges Essen."
+      ],
+      "tags": ["Frankreich", "Provence", "Nizza", "Gemüse", "vegan", "vegetarisch", "Aubergine", "Zucchini", "mediterran", "Sommerküche", "Kräuter der Provence", "Hauptgericht"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Frankreich",
+      "continent": "Europa",
+      "recipe_name": "Tarte Tatin",
+      "categories": ["Dessert", "Vegetarisch"],
+      "short_description": "Eine gestürzte Apfeltarte, bei der die Äpfel zuerst in Karamell und Butter geschmort und dann unter einem Teigdeckel gebacken werden. Goldbrauner Klassiker der französischen Patisserie.",
+      "history": "Die Tarte Tatin ist eine der berühmtesten Süßspeisen Frankreichs und verdankt ihren Namen den Schwestern Stéphanie und Caroline Tatin, die Ende des 19. Jahrhunderts ein Hotel in Lamotte-Beuvron in der Region Sologne führten. Der verbreiteten Überlieferung nach entstand die gestürzte Tarte durch ein Missgeschick in der Küche: Die Äpfel seien zu lange in Butter und Zucker gegart worden, woraufhin man den Teig kurzerhand obenauf legte und die fertige Tarte stürzte. Ob Legende oder nicht — die Technik, Obst zuerst in Karamell zu schmoren und mit dem Teig nach unten zu stürzen, wurde zum Markenzeichen. Bekannt wurde die Tarte besonders durch das Pariser Restaurant Maxim's. Klassisch werden feste Äpfel verwendet, die im Karamell ihre Form behalten. Die Tarte Tatin steht für die rustikal-elegante Seite der französischen Patisserie und ist als Süßgebäck selbstverständlich ohne Schweinefleisch.",
+      "ingredients": [
+        { "quantity": "6", "unit": "", "item": "feste, säuerliche Äpfel" },
+        { "quantity": "150", "unit": "g", "item": "Zucker" },
+        { "quantity": "80", "unit": "g", "item": "Butter" },
+        { "quantity": "1", "unit": "Rolle", "item": "Blätter- oder Mürbeteig" },
+        { "quantity": "1", "unit": "Prise", "item": "Zimt (optional)" },
+        { "quantity": "1", "unit": "", "item": "Zitrone (Saft)" }
+      ],
+      "instructions": [
+        "Äpfel schälen, vierteln, entkernen und mit Zitronensaft beträufeln.",
+        "In einer ofenfesten Pfanne aus Zucker und Butter ein goldbraunes Karamell herstellen.",
+        "Apfelviertel dicht an dicht in das Karamell legen und einige Minuten darin schmoren.",
+        "Den Teig auf die Äpfel legen, die Ränder einschlagen und einstechen.",
+        "Bei 190 °C 25–30 Minuten goldbraun backen.",
+        "Kurz abkühlen lassen, dann vorsichtig auf einen Teller stürzen, sodass die karamellisierten Äpfel oben liegen; lauwarm servieren."
+      ],
+      "tips": [
+        "Feste Äpfel wählen, damit sie im Karamell nicht zerfallen.",
+        "Das Karamell goldbraun, aber nicht zu dunkel führen, sonst wird es bitter.",
+        "Mit einem Klecks Crème fraîche oder Vanilleeis servieren."
+      ],
+      "tags": ["Frankreich", "Sologne", "Tarte Tatin", "Apfel", "Karamell", "Patisserie", "gestürzte Tarte", "süß", "vegetarisch", "Klassiker", "Blätterteig", "Dessert"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    }
+  ],
+  "batch_summary": {
+    "batch": 2,
+    "region": "Europa",
+    "countries_processed": ["Dänemark", "Deutschland", "Estland", "Finnland", "Frankreich"],
+    "recipes_created": 15,
+    "recipes_with_images": 0,
+    "recipes_with_placeholders": 15,
+    "recipes_with_pork_substitution": 2
+  }
+}

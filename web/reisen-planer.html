@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HeiBen Reisen · Reise-Planer (Köln +100 km)</title>
+<meta name="description" content="Stelle deine Reise rund um Köln selbst zusammen: Wanderungen, Fahrradreisen, Rundreisen und Übernachtungen mit Karte, Zeitstrahl, Kalkulation, Buchung, Unterlagen, To-do und Angebot.">
+<link rel="stylesheet" href="vendor/leaflet/leaflet.css">
+<style>
+:root{--bg:#f3eee5;--bg-soft:#ebe3d4;--ink:#1f1c17;--ink-soft:#524a3e;--rule:#d8cdb7;--terracotta:#b04a31;--accent:#a97a1d;--accent-d:#9c6f1f;--uebern:#3b6b6b;}
+*{box-sizing:border-box;}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Manrope',-apple-system,Segoe UI,sans-serif;line-height:1.5;}
+.wrap{max-width:1180px;margin:0 auto;padding:0 1.2rem;}
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:1.1rem 0;border-bottom:1px solid var(--rule);}
+.wm{font-family:'Fraunces',serif;font-weight:700;font-size:1.4rem;}.wm .a{color:var(--terracotta);}
+.wm span{font-weight:400;font-size:.9rem;color:var(--ink-soft);}
+.back{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);text-decoration:none;}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:.64rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent-d);}
+h1{font-family:'Fraunces',serif;font-weight:340;font-size:clamp(1.6rem,4.2vw,2.4rem);margin:.9rem 0 .2rem;}
+.lede{color:var(--ink-soft);max-width:66ch;}
+.bar{display:flex;gap:.6rem;flex-wrap:wrap;align-items:center;margin:1rem 0;}
+.seg{display:inline-flex;border:1px solid var(--rule);border-radius:10px;overflow:hidden;background:#fff;}
+.seg button{border:0;background:none;padding:.5rem .9rem;font:inherit;font-size:.82rem;cursor:pointer;color:var(--ink-soft);}
+.seg button.on{background:var(--ink);color:#f3eee5;}
+.btn{display:inline-flex;align-items:center;gap:.3rem;border:0;cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;padding:.55rem .8rem;border-radius:8px;text-decoration:none;}
+.btn.ink{background:var(--ink);color:#f3eee5;}.btn.primary{background:var(--accent);color:#1f1c17;}
+.btn.ghost{background:none;border:1px solid var(--ink);color:var(--ink);}.btn.sm{padding:.35rem .6rem;font-size:.54rem;}
+.fld{display:flex;flex-direction:column;gap:3px;}
+.fld label{font-size:.62rem;color:var(--ink-soft);font-family:'JetBrains Mono',monospace;letter-spacing:.06em;text-transform:uppercase;}
+.fld input,.fld select{border:1px solid var(--rule);border-radius:8px;padding:.45rem .6rem;font:inherit;}
+.bnr-input{width:130px;}
+#map{height:340px;border:1px solid var(--rule);border-radius:16px;margin:.4rem 0 .2rem;z-index:0;}
+.maphint{font-family:'JetBrains Mono',monospace;font-size:.58rem;color:var(--ink-soft);margin-bottom:1rem;}
+.layout{display:grid;grid-template-columns:320px 1fr;gap:18px;align-items:start;}
+@media(max-width:860px){.layout{grid-template-columns:1fr;}#map{height:260px;}}
+.panel{background:#fff;border:1px solid var(--rule);border-radius:16px;padding:1rem;}
+.panel h2{font-family:'Fraunces',serif;font-weight:480;font-size:1.1rem;margin:0 0 .5rem;}
+.chips{display:flex;gap:.35rem;flex-wrap:wrap;margin-bottom:.6rem;}
+.chip{border:1px solid var(--rule);background:#fff;border-radius:999px;padding:.32rem .7rem;font-size:.72rem;cursor:pointer;}
+.chip.on{background:var(--accent);border-color:var(--accent);color:#1f1c17;font-weight:600;}
+.search{width:100%;border:1px solid var(--rule);border-radius:9px;padding:.55rem .7rem;font:inherit;margin-bottom:.6rem;}
+.pal{display:flex;flex-direction:column;gap:.5rem;max-height:560px;overflow:auto;}
+.pcard{border:1px solid var(--rule);border-radius:11px;padding:.6rem .7rem;cursor:grab;background:#fff;}
+.pcard:hover{border-color:var(--ink);}
+.pcard .tp{display:flex;justify-content:space-between;align-items:center;gap:.4rem;}
+.dot{width:9px;height:9px;border-radius:50%;display:inline-block;flex:none;}
+.pcard h3{font-family:'Fraunces',serif;font-weight:460;font-size:.98rem;margin:.15rem 0;}
+.pcard .meta{font-size:.74rem;color:var(--ink-soft);}
+.kat{font-family:'JetBrains Mono',monospace;font-size:.5rem;letter-spacing:.05em;text-transform:uppercase;padding:.1rem .4rem;border-radius:999px;color:#fff;}
+.days{display:flex;flex-direction:column;gap:14px;}
+.day{border:1px solid var(--rule);border-radius:16px;background:#fff;overflow:hidden;}
+.day.activeDay{border-color:var(--accent);box-shadow:0 0 0 2px rgba(169,122,29,.25);}
+.day .dh{display:flex;align-items:center;justify-content:space-between;gap:.5rem;padding:.7rem .9rem;background:var(--bg-soft);}
+.day .dh .lab{display:flex;align-items:center;gap:.5rem;}
+.daycol{width:10px;height:18px;border-radius:3px;}
+.day .dh input.time{border:1px solid var(--rule);border-radius:7px;padding:.25rem .4rem;font:inherit;width:84px;}
+.strahl{padding:.6rem .9rem 1rem;min-height:64px;}
+.strahl.drop{background:rgba(169,122,29,.08);outline:2px dashed var(--accent);outline-offset:-6px;}
+.empty{color:var(--ink-soft);font-size:.84rem;padding:.6rem 0;}
+.anfahrt{font-family:'JetBrains Mono',monospace;font-size:.58rem;color:var(--ink-soft);margin:.1rem 0 .35rem 1rem;border-left:2px dotted var(--rule);padding-left:.6rem;}
+.item{position:relative;border-left:3px solid var(--rule);padding:.2rem 0 .6rem 1rem;margin-left:.4rem;}
+.item:before{content:"";position:absolute;left:-7px;top:.5rem;width:12px;height:12px;border-radius:50%;background:var(--accent);border:2px solid #fff;}
+.item .row1{display:flex;justify-content:space-between;align-items:flex-start;gap:.5rem;}
+.item .tline{font-family:'JetBrains Mono',monospace;font-size:.62rem;color:var(--accent-d);}
+.item h4{font-family:'Fraunces',serif;font-weight:480;font-size:1rem;margin:.1rem 0;}
+.item .meta{font-size:.76rem;color:var(--ink-soft);}
+.stt{font-family:'JetBrains Mono',monospace;font-size:.5rem;letter-spacing:.05em;text-transform:uppercase;padding:.12rem .45rem;border-radius:999px;margin-left:.3rem;}
+.stt.offen{background:#eee4d0;color:#8a7a55;}.stt.angefragt{background:#f3e3c2;color:#9c6f1f;}.stt.gebucht{background:#e7eede;color:#3f5130;}
+.ctrls{display:flex;gap:.25rem;}
+.iconbtn{border:1px solid var(--rule);background:#fff;border-radius:7px;width:26px;height:26px;cursor:pointer;font-size:.8rem;line-height:1;}
+.exp{margin-top:.5rem;border-top:1px dashed var(--rule);padding-top:.5rem;display:none;}
+.exp.open{display:block;}
+.kv{font-size:.82rem;margin:.2rem 0;}
+.kv b{font-family:'Fraunces',serif;}
+.todo label{display:flex;gap:.4rem;align-items:flex-start;font-size:.82rem;margin:.2rem 0;}
+.docs{margin-top:.4rem;}
+.docrow{display:flex;align-items:center;gap:.4rem;font-size:.8rem;margin:.2rem 0;}
+.summary{margin-top:1rem;border:1px solid var(--rule);border-radius:14px;background:#fff;padding:.9rem 1rem;}
+.metrics{display:flex;gap:1.4rem;flex-wrap:wrap;margin-bottom:.6rem;}
+.metrics .b{font-family:'Fraunces',serif;font-size:1.3rem;font-weight:560;}
+.metrics .l{font-family:'JetBrains Mono',monospace;font-size:.54rem;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-soft);}
+.pos{display:flex;justify-content:space-between;gap:.6rem;font-size:.85rem;border-bottom:1px dashed var(--rule);padding:.28rem 0;}
+.pos .r{white-space:nowrap;}
+.pos.tot{border-bottom:0;border-top:2px solid var(--ink);font-family:'Fraunces',serif;font-weight:560;font-size:1rem;padding-top:.4rem;}
+.disc{background:var(--bg-soft);border:1px solid var(--rule);border-radius:12px;padding:.7rem 1rem;font-size:.82rem;color:var(--ink-soft);margin:1.4rem 0;}
+footer{margin-top:2.5rem;border-top:1px solid var(--rule);padding:1.3rem 0;color:var(--ink-soft);font-size:.8rem;}
+.note{font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--ink-soft);}
+.modal{position:fixed;inset:0;background:rgba(31,28,23,.6);display:none;align-items:center;justify-content:center;z-index:1000;padding:1rem;}
+.modal.open{display:flex;}
+.modal .box{background:#fff;border-radius:14px;width:min(900px,96vw);max-height:88vh;display:flex;flex-direction:column;overflow:hidden;}
+.modal .box.sm{width:min(440px,94vw);}
+.modal .mh{display:flex;justify-content:space-between;align-items:center;padding:.7rem 1rem;border-bottom:1px solid var(--rule);}
+.modal iframe{flex:1;border:0;width:100%;height:70vh;}
+.modal .mb{padding:1.1rem;}
+.spin{display:inline-block;width:16px;height:16px;border:3px solid var(--rule);border-top-color:var(--accent);border-radius:50%;animation:sp 1s linear infinite;vertical-align:-3px;}
+@keyframes sp{to{transform:rotate(360deg);}}
+.numpin span{display:flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;color:#fff;font:600 11px/1 'JetBrains Mono',monospace;border:2px solid #fff;box-shadow:0 1px 3px rgba(0,0,0,.3);}
+.cust-head{display:none;}
+@media print{
+  .topbar,.bar,.maphint,#map,.palWrap,.iconbtn,.ctrls,.btn,.chips,.search,.disc,footer,.day .dh input.time{display:none!important;}
+  .layout{display:block;} .company-only{display:none!important;}
+  .cust-head{display:block;margin-bottom:1rem;} .day,.panel,.summary{border-color:#ccc;box-shadow:none;}
+}
+.kunde .company-only{display:none!important;}
+.kunde .cust-head{display:block;}
+</style>
+<link rel="stylesheet" href="heiben-design.css">
+<script src="heiben-nav.js" defer></script>
+</head>
+<body data-hb-welt="reisen">
+<div class="wrap" id="app">
+  <div class="topbar"><div class="wm"><span class="a">H</span>ei<span class="a">B</span>en <span>· Reisen</span></div><a class="back" href="reisen.html">← HeiBen Reisen</a></div>
+  <div class="eyebrow">Reise-Planer · Köln + 100 km</div>
+  <h1>Deine Reise <em style="color:var(--accent-d);font-style:italic;">selbst zusammenstellen</em></h1>
+  <p class="lede">Wanderungen, Fahrradreisen, Rundreisen (Auto/Zug) und Übernachtungen rund um Köln. Plane Tage und Stationen, kalkuliere Preise und Marge, buche oder frag per E-Mail an, lege Unterlagen ab — und übergib alles als Kundenangebot.</p>
+
+  <div class="bar">
+    <div class="fld" style="min-width:220px;flex:1;"><label>Reisetitel</label><input id="title" placeholder="z. B. Rheinland-Wochenende"></div>
+    <div class="fld"><label>Personen</label><input id="persons" type="number" min="1" max="60" value="2" style="width:80px;"></div>
+    <div class="fld"><label>Gespeicherte Reisen</label>
+      <span style="display:flex;gap:.3rem;"><select id="planSel"></select><button class="btn ghost sm" id="newPlan" title="Neue Reise">＋</button><button class="iconbtn" id="delPlan" title="Reise löschen">×</button></span></div>
+  </div>
+  <div class="bar" id="tplBar"><span class="note">Vorlagen:</span>
+    <button class="btn ghost sm" data-tpl="ahr-wein">Ahrtal-Wein · 2 T</button>
+    <button class="btn ghost sm" data-tpl="eifel-aktiv">Eifel Aktiv · 3 T</button>
+    <button class="btn ghost sm" data-tpl="staedte-trio">Städte-Trio · 3 T</button>
+    <button class="btn ghost sm" data-tpl="rhein-klassiker">Rhein-Klassiker · 2 T</button>
+    <button class="btn ghost sm" data-tpl="koeln-klassiker" style="border-color:var(--accent-d);color:var(--accent-d);">★ Köln Klassiker</button>
+    <button class="btn ghost sm" data-tpl="koeln-kultur" style="border-color:var(--accent-d);color:var(--accent-d);">★ Köln Kultur · 2 T</button>
+    <button class="btn ghost sm" data-tpl="koeln-aktiv" style="border-color:var(--accent-d);color:var(--accent-d);">★ Köln Aktiv</button>
+    <button class="btn ghost sm" data-tpl="koeln-veedel" style="border-color:var(--accent-d);color:var(--accent-d);">★ Köln Veedel</button>
+  </div>
+  <div class="bar">
+    <span class="note">Ansicht:</span>
+    <div class="seg" id="viewSeg"><button data-view="firma" class="on">Firma (netto)</button><button data-view="kunde">Kunde</button></div>
+    <span class="fld cust-head" id="bnrWrap" style="display:none;"><label>Freizeit-Buchungsnr.</label><input id="bnr" class="bnr-input" value=""></span>
+    <button class="btn ink sm" id="reqAll">✉ Gesamte Reise anfragen</button>
+    <button class="btn ghost sm" id="print">🖨 Kundendokument</button>
+    <button class="btn ghost sm" id="expJson">JSON ↓</button>
+    <button class="btn ghost sm" id="impBtn">JSON ↑</button>
+    <button class="btn ghost sm" id="expGpx">GPX ↓</button>
+    <input id="impFile" type="file" accept="application/json" style="display:none;">
+  </div>
+
+  <div class="cust-head" id="custHead" style="display:none;">
+    <div style="font-family:'Fraunces',serif;font-size:1.4rem;" id="custTitle">Ihr Reisevorschlag — HeiBen Reisen</div>
+    <div class="note">Freizeit-Buchungsnummer: <b id="bnrShow"></b> · Preise pro Person inkl. Leistungen lt. Beschreibung.</div>
+  </div>
+
+  <div id="map"></div>
+  <div class="maphint">Karte © OpenStreetMap-Mitwirkende · Marker je Typ (grün Wandern, ocker Rad, bordeaux Rundreise, petrol Übernachtung); geplante Stationen tagesfarbig samt Route und verbundener Tageslinie. Kartenkacheln benötigen Internet.</div>
+
+  <div class="layout">
+    <aside class="panel palWrap">
+      <h2>Aktivitäten</h2>
+      <div class="chips" id="typeChips">
+        <span class="chip on" data-typ="">Alle</span>
+        <span class="chip" data-typ="wandern">Wandern</span>
+        <span class="chip" data-typ="rad">Rad</span>
+        <span class="chip" data-typ="rundreise">Rundreise</span>
+        <span class="chip" data-typ="uebernachtung">Übernachtung</span>
+        <span class="chip" data-typ="erlebnis">Erlebnis</span>
+        <span class="chip" data-typ="genuss">Genuss</span>
+        <span class="chip" data-stadt="1" style="border-color:var(--accent-d);color:var(--accent-d);font-weight:600;">Köln Stadt</span>
+      </div>
+      <input class="search" id="pSearch" placeholder="Suchen … Ort oder Titel">
+      <div class="note" style="margin-bottom:.4rem;">Tippe <b>+ Tag</b> oder zieh eine Karte auf einen Tag.</div>
+      <div class="pal" id="pal"></div>
+    </aside>
+
+    <main>
+      <div class="days" id="days"></div>
+      <div style="margin-top:.8rem;"><button class="btn primary sm" id="addDay">+ Tag hinzufügen</button>
+        <button class="btn ghost sm" id="clearPlan">Plan leeren</button></div>
+      <div class="summary" id="summary"></div>
+      <div class="vorbuchung" id="vorbuchung" style="margin-top:1rem;"></div>
+      <div class="disc">HeiBen Reisen vermittelt und kuratiert. Online-Buchung erfolgt über Partner-Schnittstellen (Demo), sonst per E-Mail-Anfrage. Netto-Raten und Marge sind nur in der Firmenansicht sichtbar; Kund:innen sehen Endpreis und Freizeit-Buchungsnummer. Alle Daten liegen lokal in deinem Browser.</div>
+    </main>
+  </div>
+
+  <footer>HeiBen Reisen · Köln · <span class="note">„Heimat leben" — Tag für Tag geplant.</span></footer>
+</div>
+
+<div class="modal" id="pdfModal"><div class="box"><div class="mh"><b id="pdfName">Vorschau</b><button class="btn ghost sm" id="pdfClose">schließen</button></div><iframe id="pdfFrame" title="PDF-Vorschau"></iframe></div></div>
+<div class="modal" id="bookModal"><div class="box sm"><div class="mh"><b>Online-Buchung</b><button class="btn ghost sm" id="bookClose">schließen</button></div><div class="mb" id="bookBody"></div></div></div>
+
+<script src="vendor/leaflet/leaflet.js"></script>
+<script src="heiben-firmierungen.js"></script>
+<script src="heiben-angebot.js"></script>
+<script src="vendor/jspdf/jspdf.umd.min.js"></script>
+<script src="heiben-pdf.js"></script>
+<script src="heiben-analytics.js"></script>
+<script>
+(function(){
+  var T=window.HeiBenTrack;
+  var DAYCOL=['#b04a31','#4a5c39','#a97a1d','#6b3951','#792d29','#1f1c17'];
+  var TYPLABEL={wandern:'Wandern',rad:'Rad',rundreise:'Rundreise',uebernachtung:'Übernachtung',erlebnis:'Erlebnis',genuss:'Genuss'};
+  var TYPCOL={wandern:'#4a5c39',rad:'#a97a1d',rundreise:'#792d29',uebernachtung:'#3b6b6b',erlebnis:'#7d5260',genuss:'#1f7a64'};
+
+  var A=[
+   {id:'drachenfels',t:'Drachenfels-Runde',ort:'Königswinter',typ:'wandern',lat:50.665,lng:7.208,h:4,netto:18,preis:29,partner:'Siebengebirge Touristik',book:{mode:'api'},route:[[50.679,7.190],[50.665,7.208],[50.658,7.213]],todo:['Drachenfelsbahn-Tickets','Einkehr reservieren'],desc:'Aufstieg zum Drachenfels mit Rheinblick, Schloss Drachenburg, Abstieg durchs Nachtigallental.'},
+   {id:'ahrsteig',t:'Ahrsteig: Altenahr–Mayschoß',ort:'Altenahr',typ:'wandern',lat:50.521,lng:6.998,h:5,netto:0,preis:0,partner:'Eigenorganisation',book:{mode:'email',email:'reisen@heiben.de'},route:[[50.520,6.999],[50.535,7.030],[50.546,7.060]],todo:['Wanderführer optional','Winzer-Einkehr Mayschoß'],desc:'Aussichtsreicher Steig durch die Weinberge des Ahrtals mit Rotwein-Pause.'},
+   {id:'eifelsteig-monschau',t:'Eifelsteig-Etappe Monschau',ort:'Monschau',typ:'wandern',lat:50.553,lng:6.245,h:6,netto:22,preis:35,partner:'Eifel Tourismus',book:{mode:'email',email:'info@example-eifel.de'},route:[[50.560,6.230],[50.553,6.245],[50.545,6.260]],todo:['Gepäcktransfer prüfen','Gästeführer buchen'],desc:'Hochmoor, Buchenwälder und das Fachwerkstädtchen Monschau.'},
+   {id:'altenberg',t:'Bergischer Weg: Altenberger Dom',ort:'Odenthal',typ:'wandern',lat:51.050,lng:7.130,h:3,netto:0,preis:0,partner:'Eigenorganisation',book:{mode:'email',email:'reisen@heiben.de'},route:[[51.058,7.118],[51.050,7.130],[51.044,7.142]],todo:['Domführung anfragen'],desc:'Waldreiche Runde im Bergischen Land rund um den „Bergischen Dom".'},
+   {id:'wahnerheide',t:'Wahner Heide Runde',ort:'Troisdorf',typ:'wandern',lat:50.862,lng:7.130,h:3,netto:0,preis:0,partner:'Eigenorganisation',book:{mode:'email',email:'reisen@heiben.de'},route:[[50.870,7.120],[50.862,7.130],[50.856,7.145]],todo:['Naturführung optional'],desc:'Heidelandschaft, Dünen und seltene Tierwelt direkt vor Kölns Toren.'},
+   {id:'rursee',t:'Rursee-Uferweg',ort:'Einruhr',typ:'wandern',lat:50.572,lng:6.402,h:4,netto:0,preis:0,partner:'Eigenorganisation',book:{mode:'email',email:'reisen@heiben.de'},route:[[50.580,6.395],[50.572,6.402],[50.563,6.415]],todo:['Schiffsfahrt Rursee buchen'],desc:'Seeufer im Nationalpark Eifel, kombinierbar mit der Rurseeschifffahrt.'},
+   {id:'rhein-radweg',t:'Rhein-Radweg Köln–Bonn',ort:'Köln → Bonn',typ:'rad',lat:50.850,lng:7.000,h:4,netto:15,preis:25,partner:'Radstation Köln',book:{mode:'api'},route:[[50.938,6.962],[50.870,7.000],[50.735,7.100]],todo:['Leihräder reservieren','Rückfahrt Bahn (Fahrradticket)'],desc:'Flache Genussroute am Rhein entlang, ~35 km, mit Fährmöglichkeiten.'},
+   {id:'erft-radweg',t:'Erft-Radweg Brühl–Bergheim',ort:'Brühl',typ:'rad',lat:50.950,lng:6.700,h:4,netto:12,preis:22,partner:'Radstation',book:{mode:'email',email:'info@example-rad.de'},route:[[50.829,6.905],[50.920,6.760],[50.967,6.640]],todo:['Leihräder reservieren'],desc:'Ruhige Auen entlang der Erft, vorbei an Schlössern und Seen.'},
+   {id:'ahr-radweg',t:'Ahr-Radweg Sinzig–Altenahr',ort:'Sinzig',typ:'rad',lat:50.545,lng:7.250,h:5,netto:14,preis:24,partner:'Ahrtal Tourismus',book:{mode:'email',email:'info@example-ahr.de'},route:[[50.545,7.250],[50.530,7.120],[50.521,6.998]],todo:['Leihräder reservieren','Weingut-Stopp'],desc:'Vom Rhein hinauf ins Ahrtal — Wein, Wasser und Fachwerk.'},
+   {id:'nordbahntrasse',t:'Nordbahntrasse Wuppertal',ort:'Wuppertal',typ:'rad',lat:51.270,lng:7.180,h:3,netto:10,preis:18,partner:'Trassen-Radverleih',book:{mode:'api'},route:[[51.278,7.130],[51.270,7.180],[51.262,7.230]],todo:['Leihräder reservieren'],desc:'Autofreie Bahntrasse über Brücken und durch Tunnel mitten durch die Stadt.'},
+   {id:'rurufer-radweg',t:'Rurufer-Radweg Düren–Heimbach',ort:'Düren',typ:'rad',lat:50.800,lng:6.480,h:5,netto:13,preis:23,partner:'Radstation',book:{mode:'email',email:'info@example-rad.de'},route:[[50.804,6.493],[50.750,6.470],[50.633,6.475]],todo:['Leihräder reservieren','Talsperre-Besuch'],desc:'Entlang der Rur bis ins Jugendstil-Städtchen Heimbach am Nationalpark.'},
+   {id:'bruehl-schloesser',t:'Schlösser-Tour Brühl',ort:'Brühl',typ:'rundreise',lat:50.829,lng:6.905,h:5,netto:24,preis:39,partner:'Schlösserverwaltung',book:{mode:'api'},todo:['Tickets Augustusburg','Führung Falkenlust'],desc:'UNESCO-Welterbe Augustusburg & Falkenlust mit barockem Schlosspark.'},
+   {id:'aachen',t:'Aachen: Dom & Altstadt',ort:'Aachen',typ:'rundreise',lat:50.775,lng:6.084,h:6,netto:20,preis:34,partner:'Aachen Tourist',book:{mode:'email',email:'info@example-aachen.de'},todo:['Domführung buchen','Zugtickets'],desc:'Karlsdom, Printen und Thermaltradition — gut mit der Bahn erreichbar.'},
+   {id:'bonn',t:'Bonn: Museumsmeile & Beethoven',ort:'Bonn',typ:'rundreise',lat:50.733,lng:7.100,h:6,netto:18,preis:32,partner:'Bonn Information',book:{mode:'email',email:'info@example-bonn.de'},todo:['Museumstickets','Beethoven-Haus'],desc:'Ehemalige Hauptstadt mit Museumsmeile, Rheinpromenade und Beethoven-Haus.'},
+   {id:'wuppertal-schwebe',t:'Wuppertal: Schwebebahn & Zoo',ort:'Wuppertal',typ:'rundreise',lat:51.256,lng:7.150,h:5,netto:16,preis:28,partner:'WSW',book:{mode:'api'},todo:['Schwebebahn-Tickets','Zoo-Eintritt'],desc:'Fahrt mit der legendären Schwebebahn und Besuch des grünen Zoos.'},
+   {id:'duesseldorf',t:'Düsseldorf: Altstadt & Rhein',ort:'Düsseldorf',typ:'rundreise',lat:51.225,lng:6.776,h:6,netto:18,preis:30,partner:'Düsseldorf Tourismus',book:{mode:'email',email:'info@example-dus.de'},todo:['Zugtickets','Tischreservierung Altstadt'],desc:'„Längste Theke der Welt", Rheinuferpromenade und MedienHafen-Architektur.'},
+   {id:'monschau-stadt',t:'Monschau: Altstadtbummel',ort:'Monschau',typ:'rundreise',lat:50.557,lng:6.240,h:4,netto:12,preis:22,partner:'Eifel Tourismus',book:{mode:'email',email:'info@example-eifel.de'},todo:['Senfmühle-Führung'],desc:'Romantisches Fachwerkstädtchen an der Rur mit rotem Haus und Senfmühle.'},
+   {id:'badmuenstereifel',t:'Bad Münstereifel: Kurstadt & Outlet',ort:'Bad Münstereifel',typ:'rundreise',lat:50.553,lng:6.762,h:5,netto:10,preis:19,partner:'Eigenorganisation',book:{mode:'email',email:'reisen@heiben.de'},todo:['Stadtführung optional'],desc:'Mittelalterliche Stadtmauer, Kurpark und das City-Outlet in historischen Häusern.'},
+   {id:'zuelpich',t:'Zülpich: Römerthermen',ort:'Zülpich',typ:'rundreise',lat:50.693,lng:6.654,h:4,netto:11,preis:20,partner:'Museumsverwaltung',book:{mode:'api'},todo:['Museumstickets'],desc:'Museum der Badekultur in den am besten erhaltenen Römerthermen nördlich der Alpen.'},
+   {id:'koeln-dom',t:'Köln: Dom & Altstadt',ort:'Köln',typ:'rundreise',stadt:true,lat:50.941,lng:6.958,h:4,netto:14,preis:25,partner:'KölnTourismus',book:{mode:'api'},todo:['Domführung','Brauhaus-Tisch reservieren'],desc:'Domturm-Besteigung, Altstadtgassen und Brauhaus-Kultur am Rhein.'},
+   {id:'uebern-koenigswinter',t:'Übernachtung Königswinter',ort:'Königswinter',typ:'uebernachtung',lat:50.680,lng:7.190,h:12,netto:68,preis:99,partner:'Partnerhotel',book:{mode:'email',email:'info@example-hotel.de'},todo:['Zimmer reservieren','Frühstück bestätigen'],desc:'Hotel mit Rheinblick am Fuß des Siebengebirges, inkl. Frühstück.'},
+   {id:'uebern-monschau',t:'Übernachtung Monschau',ort:'Monschau',typ:'uebernachtung',lat:50.555,lng:6.243,h:12,netto:62,preis:92,partner:'Partnerpension',book:{mode:'email',email:'info@example-eifel.de'},todo:['Zimmer reservieren'],desc:'Gemütliche Pension im Fachwerk-Altstadtkern von Monschau.'},
+   {id:'uebern-heimbach',t:'Übernachtung Heimbach (Eifel)',ort:'Heimbach',typ:'uebernachtung',lat:50.633,lng:6.475,h:12,netto:58,preis:86,partner:'Partnerhotel',book:{mode:'email',email:'info@example-eifel.de'},todo:['Zimmer reservieren'],desc:'Naturnahes Hotel am Nationalpark Eifel, ideal nach Wander- oder Radtag.'},
+   {id:'uebern-ahrtal',t:'Übernachtung Ahrtal',ort:'Altenahr',typ:'uebernachtung',lat:50.522,lng:6.999,h:12,netto:64,preis:95,partner:'Partnerweingut',book:{mode:'email',email:'reisen@heiben.de'},todo:['Zimmer reservieren','Weinprobe optional'],desc:'Winzerhof mit Gästezimmern mitten in den Ahr-Weinbergen.'},
+   {id:'koeln-schoko',t:'Köln: Schokoladenmuseum & Rheinauhafen',ort:'Köln',typ:'rundreise',stadt:true,lat:50.9315,lng:6.9645,h:3,netto:12,preis:22,partner:'Schokoladenmuseum',book:{mode:'api'},todo:['Tickets Schokoladenmuseum'],desc:'Schokoladenmuseum, Hafenkräne und moderne Architektur im Rheinauhafen.'},
+   {id:'koeln-museum-ludwig',t:'Köln: Museum Ludwig & Römisch-Germanisches',ort:'Köln',typ:'rundreise',stadt:true,lat:50.9402,lng:6.9586,h:4,netto:14,preis:24,partner:'Kölner Museen',book:{mode:'api'},todo:['Museumstickets'],desc:'Pop-Art und Moderne im Museum Ludwig, Antike im Römisch-Germanischen Museum.'},
+   {id:'koeln-brauhaus',t:'Köln: Brauhaus-Tour Altstadt',ort:'Köln',typ:'rundreise',stadt:true,lat:50.9384,lng:6.9603,h:3,netto:20,preis:34,partner:'Gästeführung Köln',book:{mode:'email',email:'reisen@heiben.de'},todo:['Tische reservieren'],desc:'Geführte Runde durch die Altstadt mit Kölsch-Verkostung und Brauhaus-Kultur.'},
+   {id:'koeln-rheinrad',t:'Köln: Rheinufer-Radtour',ort:'Köln',typ:'rad',stadt:true,lat:50.9100,lng:6.9900,h:3,netto:12,preis:20,partner:'Radstation Köln',book:{mode:'api'},route:[[50.888,6.998],[50.921,6.972],[50.957,6.974]],todo:['Leihräder reservieren'],desc:'Vom Rodenkirchener Ufer bis zur Zoobrücke am Rhein entlang.'},
+   {id:'koeln-gruenguertel',t:'Köln: Stadtwald & Grüngürtel',ort:'Köln',typ:'wandern',stadt:true,lat:50.9300,lng:6.9000,h:2,netto:0,preis:0,partner:'Eigenorganisation',book:{mode:'email',email:'reisen@heiben.de'},route:[[50.935,6.888],[50.930,6.900],[50.925,6.912]],todo:['Picknick optional'],desc:'Grüne Lunge Kölns: Stadtwald, Decksteiner Weiher und Grüngürtel.'},
+   {id:'koeln-belgisches',t:'Köln: Belgisches Viertel & Design',ort:'Köln',typ:'rundreise',stadt:true,lat:50.9402,lng:6.9370,h:3,netto:8,preis:16,partner:'Eigenorganisation',book:{mode:'email',email:'reisen@heiben.de'},todo:['Café-Empfehlungen'],desc:'Concept Stores, Cafés und Gründerzeit rund um den Brüsseler Platz.'},
+   {id:'koeln-seilbahn',t:'Köln: Rheinseilbahn & Rheinpark',ort:'Köln',typ:'rundreise',stadt:true,lat:50.9570,lng:6.9740,h:2,netto:9,preis:17,partner:'Kölner Seilbahn',book:{mode:'api'},todo:['Seilbahn-Tickets'],desc:'Schwebende Rheinquerung und Spaziergang durch den Rheinpark.'},
+   {id:'koeln-ehrenfeld',t:'Köln: Veedel-Tour Ehrenfeld',ort:'Köln',typ:'wandern',stadt:true,lat:50.9520,lng:6.9170,h:2,netto:10,preis:18,partner:'Streetart-Guide',book:{mode:'email',email:'reisen@heiben.de'},route:[[50.948,6.922],[50.952,6.917],[50.956,6.912]],todo:['Guide anfragen'],desc:'Street-Art, Industriecharme und Szeneküche im Veedel Ehrenfeld.'},
+   {id:'koeln-flora',t:'Köln: Flora & Botanischer Garten',ort:'Köln',typ:'rundreise',stadt:true,lat:50.9590,lng:6.9730,h:2,netto:6,preis:12,partner:'Flora Köln',book:{mode:'email',email:'reisen@heiben.de'},todo:['Öffnungszeiten Gewächshaus'],desc:'Historischer Schaugarten mit Palmenhaus neben dem Kölner Zoo.'},
+   {id:'uebern-koeln',t:'Übernachtung Köln Altstadt',ort:'Köln',typ:'uebernachtung',stadt:true,lat:50.9370,lng:6.9610,h:12,netto:72,preis:105,partner:'Partnerhotel',book:{mode:'email',email:'info@example-hotel.de'},todo:['Zimmer reservieren','Frühstück bestätigen'],desc:'Zentrales Hotel in der Kölner Altstadt, wenige Schritte zum Dom.'},
+   {id:'loewenburg',t:'Löwenburg-Steig',ort:'Bad Honnef',typ:'wandern',lat:50.654,lng:7.243,h:4,netto:16,preis:27,partner:'Siebengebirge Touristik',book:{mode:'api'},route:[[50.660,7.230],[50.654,7.243],[50.648,7.250]],todo:['Burgruine-Infos','Einkehr Löwenburger Hof'],desc:'Aufstieg zur Löwenburg-Ruine mit weitem Blick über das Siebengebirge.'},
+   {id:'oelberg',t:'Ölberg-Runde',ort:'Königswinter',typ:'wandern',lat:50.648,lng:7.255,h:5,netto:0,preis:0,partner:'Eigenorganisation',book:{mode:'email',email:'reisen@heiben.de'},route:[[50.655,7.245],[50.648,7.255],[50.642,7.262]],todo:['Festes Schuhwerk'],desc:'Tour zum höchsten Gipfel des Siebengebirges durch ruhige Buchenwälder.'},
+   {id:'koenigsforst',t:'Königsforst-Runde',ort:'Rösrath',typ:'wandern',lat:50.918,lng:7.110,h:3,netto:0,preis:0,partner:'Eigenorganisation',book:{mode:'email',email:'reisen@heiben.de'},route:[[50.924,7.100],[50.918,7.110],[50.912,7.120]],todo:['ÖPNV: KVB-Linie 9'],desc:'Familienfreundliche Waldrunde am Stadtrand von Köln.'},
+   {id:'neandertal',t:'Neandertal-Steig',ort:'Erkrath',typ:'wandern',lat:51.226,lng:6.947,h:4,netto:14,preis:24,partner:'Neanderland',book:{mode:'email',email:'info@example-neanderland.de'},route:[[51.232,6.940],[51.226,6.947],[51.220,6.955]],todo:['Neanderthal-Museum optional'],desc:'Rundweg durch das namensgebende Tal mit Wildgehege und Museum.'},
+   {id:'vennbahn',t:'Vennbahn: Aachen–Monschau',ort:'Aachen',typ:'rad',lat:50.650,lng:6.200,h:6,netto:0,preis:0,partner:'Eigenorganisation',book:{mode:'email',email:'reisen@heiben.de'},route:[[50.700,6.150],[50.650,6.200],[50.560,6.250]],todo:['E-Bike-Verleih prüfen','Rückfahrt mit Bus'],desc:'Bahntrassen-Radweg über das Hohe Venn ins Fachwerkstädtchen Monschau.'},
+   {id:'balkantrasse',t:'Balkantrasse',ort:'Leverkusen',typ:'rad',lat:51.070,lng:7.130,h:4,netto:0,preis:0,partner:'Eigenorganisation',book:{mode:'email',email:'reisen@heiben.de'},route:[[51.045,7.020],[51.070,7.130],[51.090,7.200]],todo:['Café-Stopp Burscheid'],desc:'Ebener Bahntrassen-Radweg von Leverkusen ins Bergische Land.'},
+   {id:'rheinrad-bonn',t:'Rheinradweg Bonn–Köln',ort:'Bonn',typ:'rad',lat:50.800,lng:7.040,h:5,netto:0,preis:0,partner:'Eigenorganisation',book:{mode:'email',email:'reisen@heiben.de'},route:[[50.737,7.097],[50.800,7.040],[50.937,6.960]],todo:['Fähre Bonn-Beuel'],desc:'Flacher Rheinradweg vorbei an Auen, Fähren und Rheinpromenaden.'},
+   {id:'sieg-radweg',t:'Sieg-Radweg: Siegburg–Hennef',ort:'Siegburg',typ:'rad',lat:50.794,lng:7.205,h:4,netto:0,preis:0,partner:'Eigenorganisation',book:{mode:'email',email:'reisen@heiben.de'},route:[[50.794,7.205],[50.780,7.250],[50.773,7.290]],todo:['Abtei Michaelsberg ansehen'],desc:'Naturnaher Flussradweg entlang der Sieg mit Auenblicken.'},
+   {id:'beethoven-bonn',t:'Beethoven-Rundgang Bonn',ort:'Bonn',typ:'rundreise',stadt:true,lat:50.737,lng:7.097,h:3,netto:19,preis:32,partner:'Bonn Tourismus',book:{mode:'email',email:'info@example-bonn.de'},todo:['Beethoven-Haus Ticket','Rheinpromenade'],desc:'Auf den Spuren Beethovens durch die Bonner Altstadt zum Münster.'},
+   {id:'aachen-dom',t:'Aachener Dom & Printen',ort:'Aachen',typ:'rundreise',stadt:true,lat:50.774,lng:6.084,h:3,netto:17,preis:28,partner:'Aachen Tourist',book:{mode:'email',email:'info@example-aachen.de'},todo:['Domführung buchen','Printen-Verkostung'],desc:'UNESCO-Welterbe Dom, Rathaus und süße Aachener Printen.'},
+   {id:'kommern-freilicht',t:'Freilichtmuseum Kommern',ort:'Mechernich',typ:'rundreise',lat:50.610,lng:6.660,h:4,netto:12,preis:20,partner:'LVR-Museen',book:{mode:'api'},todo:['Marktplatz Rheinland'],desc:'Historische Höfe und Handwerk im großen Eifel-Freilichtmuseum.'},
+   {id:'odysseum-koeln',t:'Odysseum Köln',ort:'Köln',typ:'rundreise',stadt:true,lat:50.948,lng:7.020,h:3,netto:16,preis:26,partner:'Odysseum',book:{mode:'api'},todo:['Online-Ticket'],desc:'Mitmach-Museum mit Wissenschaft zum Anfassen, gut bei Regen.'},
+   {id:'koeln-rheinauhafen',t:'Rheinauhafen-Spaziergang',ort:'Köln',typ:'rundreise',stadt:true,lat:50.928,lng:6.962,h:2,netto:0,preis:0,partner:'Eigenorganisation',book:{mode:'email',email:'reisen@heiben.de'},todo:['Kranhäuser fotografieren'],desc:'Moderne Architektur und Rheinblick zwischen Kranhäusern und Yachthafen.'},
+   {id:'uebern-eifel',t:'Ferienhaus Eifel',ort:'Heimbach',typ:'uebernachtung',lat:50.630,lng:6.470,h:12,netto:95,preis:139,partner:'Partnervermietung',book:{mode:'email',email:'info@example-eifel.de'},todo:['Schlüsselübergabe','Endreinigung'],desc:'Gemütliches Ferienhaus am Nationalpark Eifel, ideal für Familien.'},
+   {id:'uebern-bergisch',t:'Landhotel Bergisches Land',ort:'Kürten',typ:'uebernachtung',lat:51.050,lng:7.270,h:12,netto:68,preis:98,partner:'Partnerhotel',book:{mode:'email',email:'info@example-bergisch.de'},todo:['Zimmer reservieren'],desc:'Ruhiges Landhotel mit regionaler Küche im Bergischen Land.'},
+   {id:'uebern-bonn',t:'Hotel Bonn Zentrum',ort:'Bonn',typ:'uebernachtung',stadt:true,lat:50.735,lng:7.100,h:12,netto:70,preis:102,partner:'Partnerhotel',book:{mode:'email',email:'info@example-bonn-hotel.de'},todo:['Frühstück bestätigen'],desc:'Zentrales Stadthotel nahe Marktplatz und Rheinpromenade.'},
+   {id:'rheinschiff-kd',t:'Rheinschifffahrt Köln–Königswinter',ort:'Köln',typ:'erlebnis',lat:50.940,lng:6.962,h:3,netto:22,preis:34,partner:'Rhein-Personenschifffahrt',book:{mode:'api'},todo:['Abfahrtszeiten prüfen'],desc:'Panorama-Schifffahrt rheinaufwärts vorbei am Siebengebirge.'},
+   {id:'claudius-therme',t:'Claudius Therme',ort:'Köln',typ:'erlebnis',stadt:true,lat:50.953,lng:6.980,h:4,netto:28,preis:39,partner:'Claudius Therme',book:{mode:'api'},todo:['Handtuch mitbringen'],desc:'Thermalbad und Saunagarten im Rheinpark, Erholung mit Domblick.'},
+   {id:'kletterwald-bergisch',t:'Kletterwald Bergisch Gladbach',ort:'Bergisch Gladbach',typ:'erlebnis',lat:50.990,lng:7.130,h:3,netto:24,preis:34,partner:'Kletterwald',book:{mode:'api'},todo:['Festes Schuhwerk','Voranmeldung'],desc:'Hochseilgarten mit Parcours für Familien und Mutige.'},
+   {id:'lavadome-mendig',t:'Lava-Dome Mendig',ort:'Mendig',typ:'erlebnis',lat:50.366,lng:7.290,h:3,netto:14,preis:22,partner:'Vulkanpark',book:{mode:'api'},todo:['Pullover für Lavakeller'],desc:'Vulkanmuseum und begehbarer Lavakeller im Vulkanpark Osteifel.'},
+   {id:'phantasialand-bruehl',t:'Phantasialand Brühl',ort:'Brühl',typ:'erlebnis',lat:50.799,lng:6.879,h:8,netto:42,preis:58,partner:'Freizeitpark-Partner',book:{mode:'api'},todo:['Tagesticket online','Früh anreisen'],desc:'Großer Freizeitpark mit Themenwelten und Achterbahnen, ein Ganztages-Ausflug.'},
+   {id:'ahr-winzer',t:'Ahrtal Winzer-Verkostung',ort:'Mayschoß',typ:'genuss',lat:50.515,lng:7.015,h:2,netto:24,preis:36,partner:'Winzergenossenschaft (Demo)',book:{mode:'email',email:'info@example-ahrwein.de'},todo:['Fahrdienst organisieren'],desc:'Geführte Verkostung von Spätburgunder und Frühburgunder im Rotweintal.'},
+   {id:'koelsch-tour',t:'Kölsch-Brauhaus-Tour',ort:'Köln',typ:'genuss',stadt:true,lat:50.938,lng:6.960,h:3,netto:26,preis:38,partner:'Brauhaus-Partner',book:{mode:'email',email:'reisen@heiben.de'},todo:['Tischreservierung'],desc:'Drei Altstadt-Brauhäuser, frisch gezapftes Kölsch und Köbes-Geschichten.'},
+   {id:'eifel-kaeserei',t:'Eifeler Käserei & Hofladen',ort:'Blankenheim',typ:'genuss',lat:50.440,lng:6.650,h:2,netto:15,preis:24,partner:'Hofladen-Partner',book:{mode:'email',email:'info@example-kaeserei.de'},todo:['Kühltasche mitbringen'],desc:'Hofführung und Verkostung regionaler Käsesorten und Bergkräuter.'},
+   {id:'kaffee-roesterei-bonn',t:'Kaffeerösterei Bonn',ort:'Bonn',typ:'genuss',stadt:true,lat:50.735,lng:7.103,h:2,netto:16,preis:25,partner:'Rösterei-Partner',book:{mode:'email',email:'info@example-roesterei.de'},todo:['Tasting-Platz reservieren'],desc:'Schaurösten, Cupping und Espresso-Schule mitten in der Bonner Innenstadt.'}
+  ];
+  var byId={}; A.forEach(function(a){byId[a.id]=a;});
+  var MON=['','Jan','Feb','Mär','Apr','Mai','Jun','Jul','Aug','Sep','Okt','Nov','Dez'];
+  var SEASON={rursee:[4,10],'ahr-radweg':[3,11],'rhein-radweg':[3,11],'erft-radweg':[3,11],'rurufer-radweg':[3,11],nordbahntrasse:[3,11],ahrsteig:[3,11],'eifelsteig-monschau':[4,11]};
+  var TEMPLATES={
+   'ahr-wein':{title:'Ahrtal Wein-Wochenende',persons:2,days:[{acts:['ahrsteig','uebern-ahrtal']},{acts:['ahr-radweg']}]},
+   'eifel-aktiv':{title:'Eifel Aktiv (3 Tage)',persons:2,days:[{acts:['eifelsteig-monschau','uebern-monschau']},{acts:['rursee','uebern-heimbach']},{acts:['rurufer-radweg','monschau-stadt']}]},
+   'staedte-trio':{title:'Städte-Trio mit der Bahn',persons:2,days:[{acts:['koeln-dom']},{acts:['bonn']},{acts:['aachen']}]},
+   'rhein-klassiker':{title:'Rhein-Klassiker',persons:2,days:[{acts:['drachenfels','uebern-koenigswinter']},{acts:['rhein-radweg','koeln-dom']}]},
+   'koeln-klassiker':{title:'Köln Klassiker (1 Tag)',persons:2,days:[{acts:['koeln-dom','koeln-schoko','koeln-brauhaus']}]},
+   'koeln-kultur':{title:'Köln Kultur & Kölsch (2 Tage)',persons:2,days:[{acts:['koeln-dom','koeln-museum-ludwig','uebern-koeln']},{acts:['koeln-belgisches','koeln-brauhaus']}]},
+   'koeln-aktiv':{title:'Köln Aktiv & Grün (1 Tag)',persons:2,days:[{acts:['koeln-rheinrad','koeln-gruenguertel','koeln-flora']}]},
+   'koeln-veedel':{title:'Köln Veedel-Tour (1 Tag)',persons:2,days:[{acts:['koeln-ehrenfeld','koeln-belgisches','koeln-seilbahn']}]}
+  };
+
+  var SKEY='heiben-reisen';
+  function uid(){ return Math.random().toString(36).slice(2,9); }
+  function newPlanObj(title){ return {id:uid(),title:title||'Neue Reise',persons:2,view:'firma',bnr:'FB-'+Math.random().toString(36).slice(2,6).toUpperCase(),activeDay:0,days:[{id:uid(),start:'09:00',items:[]}]}; }
+  function loadStore(){
+    try{var s=JSON.parse(localStorage.getItem(SKEY)); if(s&&s.plans&&s.current&&s.plans[s.current])return s;}catch(e){}
+    try{var old=JSON.parse(localStorage.getItem('heiben-reiseplan')); if(old&&old.days){ old.id=uid(); old.title=old.title||'Meine Reise'; old.persons=old.persons||2; var st={current:old.id,plans:{}}; st.plans[old.id]=old; return st; }}catch(e){}
+    var p=newPlanObj('Meine Reise'); var st={current:p.id,plans:{}}; st.plans[p.id]=p; return st;
+  }
+  var store=loadStore();
+  function saveStore(){ try{localStorage.setItem(SKEY,JSON.stringify(store));}catch(e){} }
+  function P(){ return store.plans[store.current]; }
+
+  function db(){ return new Promise(function(res,rej){ var r=indexedDB.open('heiben-reise',1);
+    r.onupgradeneeded=function(){ r.result.createObjectStore('docs'); };
+    r.onsuccess=function(){res(r.result);}; r.onerror=function(){rej(r.error);}; }); }
+  function dbPut(k,v){ return db().then(function(d){return new Promise(function(res,rej){ var tx=d.transaction('docs','readwrite'); tx.objectStore('docs').put(v,k); tx.oncomplete=function(){res();}; tx.onerror=function(){rej(tx.error);}; });}); }
+  function dbGet(k){ return db().then(function(d){return new Promise(function(res,rej){ var tx=d.transaction('docs','readonly'); var rq=tx.objectStore('docs').get(k); rq.onsuccess=function(){res(rq.result);}; rq.onerror=function(){rej(rq.error);}; });}); }
+
+  var map=L.map('map',{scrollWheelZoom:false}).setView([50.85,6.95],9);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:18,attribution:'© OpenStreetMap'}).addTo(map);
+  var baseMarkers=L.layerGroup().addTo(map), planLayer=L.layerGroup().addTo(map);
+  A.forEach(function(a){
+    L.circleMarker([a.lat,a.lng],{radius:6,color:TYPCOL[a.typ],fillColor:TYPCOL[a.typ],fillOpacity:.85,weight:2})
+     .bindPopup('<b>'+a.t+'</b><br>'+a.ort+' · '+TYPLABEL[a.typ]+' · '+a.h+' h').addTo(baseMarkers);
+  });
+  function numIcon(col,nr){ return L.divIcon({className:'numpin',html:'<span style="background:'+col+'">'+nr+'</span>',iconSize:[22,22],iconAnchor:[11,11]}); }
+  function redrawPlan(){
+    planLayer.clearLayers(); var all=[]; var nr=0;
+    P().days.forEach(function(d,di){ var col=DAYCOL[di%DAYCOL.length]; var seq=[];
+      d.items.forEach(function(it){ var a=byId[it.actId]; if(!a)return; nr++; seq.push([a.lat,a.lng]); all.push([a.lat,a.lng]);
+        L.marker([a.lat,a.lng],{icon:numIcon(col,nr)}).bindPopup('<b>Tag '+(di+1)+' · '+nr+'.</b> '+a.t).addTo(planLayer);
+        if(a.route&&a.route.length>1) L.polyline(a.route,{color:col,weight:4,opacity:.7}).addTo(planLayer);
+      });
+      if(seq.length>1) L.polyline(seq,{color:col,weight:2,opacity:.6,dashArray:'4 6'}).addTo(planLayer);
+    });
+    if(all.length){ try{ map.fitBounds(L.latLngBounds(all).pad(0.25)); }catch(e){} }
+  }
+
+  function haversine(a,b){ var R=6371,toR=function(x){return x*Math.PI/180;};
+    var dLat=toR(b.lat-a.lat),dLng=toR(b.lng-a.lng);
+    var s=Math.sin(dLat/2)*Math.sin(dLat/2)+Math.cos(toR(a.lat))*Math.cos(toR(b.lat))*Math.sin(dLng/2)*Math.sin(dLng/2);
+    return Math.round(R*2*Math.atan2(Math.sqrt(s),Math.sqrt(1-s)));
+  }
+  function legText(a,b){ var km=haversine(a,b); if(km<1) return null; var min=Math.max(5,Math.round(km/50*60)); return '↳ Anfahrt ~'+km+' km · ~'+min+' min'; }
+
+  var fTyp='', q='', fCity=false;
+  function renderPal(){
+    var list=A.filter(function(a){ if(fTyp&&a.typ!==fTyp)return false;
+      if(fCity&&!a.stadt)return false;
+      if(q){var hay=(a.t+' '+a.ort).toLowerCase(); if(hay.indexOf(q)<0)return false;} return true; });
+    document.getElementById('pal').innerHTML=list.map(function(a){
+      return '<div class="pcard" draggable="true" data-id="'+a.id+'">'+
+        '<div class="tp"><span><span class="dot" style="background:'+TYPCOL[a.typ]+'"></span> <span class="kat" style="background:'+TYPCOL[a.typ]+'">'+TYPLABEL[a.typ]+'</span></span>'+
+        '<button class="btn primary sm" data-add="'+a.id+'">+ Tag '+(P().activeDay+1)+'</button></div>'+
+        '<h3>'+a.t+'</h3><div class="meta">'+a.ort+' · '+a.h+' h · ab '+a.preis+' €</div></div>';
+    }).join('')||'<p class="note">Keine Aktivität für diese Auswahl.</p>';
+  }
+
+  function addMinutes(t,m){ var p=t.split(':'); var d=new Date(2000,0,1,+p[0],+p[1]); d.setMinutes(d.getMinutes()+m); return ('0'+d.getHours()).slice(-2)+':'+('0'+d.getMinutes()).slice(-2); }
+
+  function renderDays(){
+    var host=document.getElementById('days'); host.innerHTML='';
+    P().days.forEach(function(d,di){ var col=DAYCOL[di%DAYCOL.length];
+      var el=document.createElement('div'); el.className='day'+(di===P().activeDay?' activeDay':''); el.dataset.day=di;
+      var cur=d.start||'09:00'; var prev=null;
+      var itemsHtml=d.items.map(function(it){ var a=byId[it.actId]; if(!a)return'';
+        var leg=prev?legText(prev,a):null; prev=a;
+        var st=cur, en=addMinutes(cur,a.h*60); cur=addMinutes(en,30);
+        var status=it.status||'offen';
+        var sw=''; if(d.date && SEASON[a.id]){ var _mo=+d.date.slice(5,7); var _s=SEASON[a.id]; if(_mo<_s[0]||_mo>_s[1]) sw=' <span class="stt" style="background:#f3d6cf;color:#a23b27;">Saison '+MON[_s[0]]+'–'+MON[_s[1]]+'</span>'; }
+        var bookBtn=a.book.mode==='api'
+          ? '<button class="btn ink sm" data-book="'+it.instId+'">Online buchen</button>'
+          : '<button class="btn ink sm" data-mail="'+it.instId+'">Per E-Mail anfragen</button>';
+        var todo=(a.todo||[]).map(function(td,k){ var ck=it.checks&&it.checks[k]?'checked':'';
+          return '<label><input type="checkbox" data-todo="'+it.instId+':'+k+'" '+ck+'> '+td+'</label>'; }).join('');
+        var docs=(it.docs||[]).map(function(dc){ return '<div class="docrow">📄 <a href="#" data-doc="'+dc.key+'">'+dc.name+'</a> <button class="iconbtn" data-docdel="'+it.instId+':'+dc.key+'" title="entfernen">×</button></div>'; }).join('');
+        return (leg?'<div class="anfahrt">'+leg+'</div>':'')+
+          '<div class="item" data-inst="'+it.instId+'">'+
+          '<div class="row1"><div><div class="tline">'+st+'–'+en+'</div><h4>'+a.t+' <span class="stt '+status+' company-only">'+status+(it.ref?' · '+it.ref:'')+'</span>'+sw+'</h4><div class="meta">'+a.ort+' · '+TYPLABEL[a.typ]+' · '+a.h+' h</div></div>'+
+          '<div class="ctrls"><button class="iconbtn" data-show="'+it.instId+'" title="auf Karte">⊙</button><button class="iconbtn" data-up="'+it.instId+'" title="hoch">↑</button><button class="iconbtn" data-down="'+it.instId+'" title="runter">↓</button><button class="iconbtn" data-exp="'+it.instId+'" title="Details">▾</button><button class="iconbtn" data-del="'+it.instId+'" title="entfernen">×</button></div></div>'+
+          '<div class="exp" id="exp-'+it.instId+'">'+
+            '<div class="kv company-only"><b>Netto (Firma):</b> '+(a.netto?a.netto+' €':'—')+' · Partner: '+a.partner+'</div>'+
+            '<div class="kv"><b>Preis (Kunde):</b> '+(a.preis?a.preis+' € p. P.':'inklusive')+'</div>'+
+            '<div class="kv">'+a.desc+'</div>'+
+            '<div style="margin:.4rem 0;">'+bookBtn+'</div>'+
+            '<div class="company-only"><div class="note">Extern zu buchen (To-do):</div><div class="todo">'+(todo||'<span class="note">—</span>')+'</div></div>'+
+            '<div class="docs"><div class="note">Reiseunterlagen (PDF):</div>'+(docs||'')+
+              '<div class="docrow"><input type="file" accept="application/pdf" data-file="'+it.instId+'" style="font-size:.75rem;"></div></div>'+
+          '</div></div>';
+      }).join('') || '<div class="empty">Noch keine Aktivität — tippe in der Palette auf „+ Tag" oder zieh eine Karte hierher.</div>';
+      el.innerHTML='<div class="dh"><div class="lab"><span class="daycol" style="background:'+col+'"></span><b style="font-family:Fraunces,serif;">Tag '+(di+1)+'</b>'+
+        '<input class="time" type="time" value="'+(d.start||'09:00')+'" data-start="'+di+'"> <input class="time" type="date" value="'+(d.date||'')+'" data-date="'+di+'" style="width:140px;"></div>'+
+        '<div class="ctrls"><button class="btn ghost sm" data-setactive="'+di+'">'+(di===P().activeDay?'aktiv':'wählen')+'</button><button class="iconbtn" data-delday="'+di+'" title="Tag löschen">×</button></div></div>'+
+        '<div class="strahl" data-drop="'+di+'">'+itemsHtml+'</div>';
+      host.appendChild(el);
+    });
+    renderSummary();
+  }
+
+  var progWired=false;
+  function wireProg(){ if(progWired)return; var host=document.getElementById('summary'); if(!host)return; host.addEventListener('click',function(e){ var b=e.target.closest('[data-prog]'); if(b) makeProgramm(); }); progWired=true; }
+  function makeProgramm(){ if(!window.HeiBenPDF){alert('PDF-Modul nicht verfügbar.');return;} var persons=P().persons||1; var sek=P().days.map(function(d,i){ return {name:'Tag '+(i+1)+(d.date?' · '+d.date:'')+(d.start?' · ab '+d.start:''), items:d.items.map(function(it){ var a=byId[it.actId]; if(!a)return null; return {t:a.t, meta:((a.ort||'')+(a.h?' · '+a.h+' h':'')), preis:a.preis}; }).filter(Boolean)}; }).filter(function(s){return s.items.length;}); if(!sek.length){alert('Bitte zuerst Stationen planen.');return;} var total=0; P().days.forEach(function(d){ d.items.forEach(function(it){ var a=byId[it.actId]; if(a)total+=a.preis*persons; }); }); window.HeiBenPDF.programm({welt:'reisen',art:'Reiseprogramm',titel:(P().title||'Reiseprogramm'),kunde:(P().title||''),meta:persons+' Personen',sektionen:sek,gesamt:total,hinweis:'Programmvorschlag, Änderungen vorbehalten. Preise pro Person; ggf. Margenbesteuerung nach § 25 UStG.'}); if(T)T.ev('plan_programm',{}); }
+  function renderSummary(){
+    var persons=P().persons||1, n=0,netto=0,preis=0,h=0, pos=[];
+    P().days.forEach(function(d){ d.items.forEach(function(it){ var a=byId[it.actId]; if(!a)return; n++; netto+=a.netto; preis+=a.preis; h+=a.h; pos.push({t:a.t,preis:a.preis}); }); });
+    var custTotal=preis*persons, nettoTotal=netto*persons, marge=custTotal-nettoTotal, margePct=custTotal?Math.round(marge/custTotal*100):0;
+    var metrics='<div class="metrics">'+
+      '<div><div class="b">'+P().days.length+'</div><div class="l">Tage</div></div>'+
+      '<div><div class="b">'+n+'</div><div class="l">Stationen</div></div>'+
+      '<div><div class="b">'+h+' h</div><div class="l">Programm</div></div>'+
+      '<div><div class="b">'+persons+'</div><div class="l">Personen</div></div>'+
+      '<div class="company-only"><div class="b">'+nettoTotal+' €</div><div class="l">Netto gesamt</div></div>'+
+      '<div class="company-only"><div class="b">'+marge+' € · '+margePct+'%</div><div class="l">Marge</div></div>'+
+      '<div><div class="b">'+custTotal+' €</div><div class="l">Gesamt (Kunde)</div></div>'+
+      '</div>';
+    var positions=pos.length?('<div class="note" style="margin:.2rem 0;">Angebotsposten (Preise p. P.):</div>'+
+      pos.map(function(p){return '<div class="pos"><span>'+p.t+'</span><span class="r">'+(p.preis?p.preis+' €':'inkl.')+'</span></div>';}).join('')+
+      '<div class="pos"><span>Summe p. P.</span><span class="r">'+preis+' €</span></div>'+
+      '<div class="pos"><span>× '+persons+' Personen</span><span class="r"></span></div>'+
+      '<div class="pos tot"><span>Gesamtpreis</span><span class="r">'+custTotal+' €</span></div>'):'';
+    var typesPresent={}; P().days.forEach(function(d){ d.items.forEach(function(it){ var a=byId[it.actId]; if(a)typesPresent[a.typ]=1; }); });
+    var PACKMAP={wandern:['Wanderschuhe','Regenjacke','Wasserflasche'],rad:['Fahrradhelm','Pannenset','Trinkflasche'],rundreise:['Bequeme Schuhe','Tickets & Ausweis'],uebernachtung:['Übernachtungsgepäck','Kulturbeutel']};
+    var packSet={}; Object.keys(typesPresent).forEach(function(tp){ (PACKMAP[tp]||[]).forEach(function(x){ packSet[x]=1; }); });
+    if(n){ ['Sonnenschutz','Wetterangepasste Kleidung'].forEach(function(x){ packSet[x]=1; }); }
+    var pack=Object.keys(packSet);
+    var packHtml=pack.length?('<div class="note" style="margin:.6rem 0 .2rem;">Packliste (Vorschlag):</div><div class="chips">'+pack.map(function(x){return '<span class="chip" style="cursor:default;">'+x+'</span>';}).join('')+'</div>'):'';
+    document.getElementById('summary').innerHTML=metrics+positions+packHtml+(pos.length?'<div style="margin-top:.5rem;border-top:1px dotted var(--line,#d8cdb7);padding-top:.45rem;"><button class="btn ghost sm" data-prog="1">Reiseprogramm (PDF)</button></div>':''); wireProg();
+    renderVorbuchung();
+  }
+
+  // ----- Vor-Buchung: Verfügbarkeit (GET /availability) & Angebot (POST /quotes) -----
+  function datedApiItems(){ var out=[]; P().days.forEach(function(d){ d.items.forEach(function(it){ var a=byId[it.actId]; if(a&&a.book&&a.book.mode==='api') out.push({a:a,date:d.date||'',instId:it.instId}); }); }); return out; }
+  function apiBase(){ var api=window.HEIBEN_BOOKING_API; return api?api.replace(/\/+$/,''):null; }
+  var vbWired=false;
+  function renderVorbuchung(){
+    var host=document.getElementById('vorbuchung'); if(!host)return;
+    var items=datedApiItems();
+    if(!items.length){ host.innerHTML='<div class="note" style="border:1px solid var(--rule);border-radius:12px;padding:.7rem .9rem;">Vor-Buchung: Sobald online-buchbare Aktivitäten mit Datum im Plan sind, prüfst du hier Verfügbarkeit und holst ein verbindliches Angebot ein.</div>'; return; }
+    var dated=items.filter(function(x){return x.date;}).length;
+    var q=P().quote, qbox='';
+    if(q){ qbox='<div style="margin-top:.6rem;border-top:1px dashed var(--rule);padding-top:.5rem;">'+
+      '<div class="kv"><b>Angebot '+q.quoteId+'</b> · '+q.n+' Position(en)'+(q.validUntil?' · gültig bis '+q.validUntil.slice(0,10):'')+'</div>'+
+      '<div class="kv company-only">Angebotssumme: <b>'+q.total+' €</b></div>'+
+      '<button class="btn primary sm" data-vb="bookquote" style="margin-top:.3rem;">Mit Angebot buchen</button> <button class="btn ghost sm" data-vb="beleg" style="margin-top:.3rem;">Angebot drucken</button></div>'; }
+    host.innerHTML='<div style="border:1px solid var(--rule);border-radius:12px;padding:.8rem .9rem;background:#fff;">'+
+      '<div class="note" style="margin-bottom:.4rem;">Vor-Buchung · Verfügbarkeit & Angebot (HeiBen-Buchungs-API)</div>'+
+      '<button class="btn ghost sm" data-vb="avail">Verfügbarkeit prüfen</button> '+
+      '<button class="btn ink sm" data-vb="quote">Angebot einholen ('+dated+')</button>'+
+      '<div id="vbResult" style="margin-top:.5rem;"></div>'+qbox+'</div>';
+    if(!vbWired){ host.addEventListener('click',function(e){ var b=e.target.closest('[data-vb]'); if(!b)return;
+      if(b.dataset.vb==='avail') checkAvailability(); else if(b.dataset.vb==='quote') requestQuote(); else if(b.dataset.vb==='bookquote') bookQuote(); else if(b.dataset.vb==='beleg') printAngebot(); }); vbWired=true; }
+  }
+  function printAngebot(){ var q=P().quote; if(!q||!window.HeiBenAngebot)return; var persons=P().persons||2; var items=datedApiItems().filter(function(x){return x.date;});
+    var positionen=items.map(function(x){ var up=x.a.preis; return {t:x.a.t,datum:x.date,menge:persons,einzel:up,summe:up*persons}; });
+    window.HeiBenAngebot.dokument({welt:'reisen',typ:'angebot',referenz:q.quoteId,kunde:(P().title||'Kund:in'),persons:persons,positionen:positionen,gueltigBis:q.validUntil,datum:new Date().toISOString()});
+    if(T)T.ev('plan_beleg',{quoteId:q.quoteId}); }
+  function setVb(html){ var r=document.getElementById('vbResult'); if(r)r.innerHTML=html; }
+  function checkAvailability(){
+    var items=datedApiItems(), base=apiBase(), persons=P().persons||2;
+    setVb('<p><span class="spin"></span> Prüfe Verfügbarkeit …</p>');
+    function badge(av){ if(av.nodate) return '<span class="stt offen">kein Datum</span>';
+      return av.available?'<span class="stt gebucht">✓ frei · Rest '+av.remaining+'</span>':'<span class="stt" style="background:#f3d2cb;color:#7a2a1e;">✗ ausgebucht</span>'; }
+    var jobs=items.map(function(x){
+      if(!x.date) return Promise.resolve({a:x.a,av:{nodate:true}});
+      if(!base) return Promise.resolve({a:x.a,av:{date:x.date,available:true,remaining:5}});
+      var url=base+'/availability?productId='+encodeURIComponent(x.a.id)+'&date='+encodeURIComponent(x.date)+'&persons='+persons;
+      return fetch(url).then(function(r){return r.json();}).then(function(j){return {a:x.a,av:{date:x.date,available:!!j.available,remaining:(j.remaining!=null?j.remaining:'–')}};})
+        .catch(function(){return {a:x.a,av:{date:x.date,available:true,remaining:'–'}};}); });
+    Promise.all(jobs).then(function(res){ setVb(res.map(function(r){return '<div class="pos"><span>'+r.a.t+(r.av.date?' · '+r.av.date:'')+'</span><span class="r">'+badge(r.av)+'</span></div>';}).join('')+'<div class="note" style="margin-top:.3rem;">'+(base?'Live über GET /availability.':'Demo (keine API gesetzt).')+'</div>'); });
+    if(T)T.ev('plan_availability',{n:items.length});
+  }
+  function requestQuote(){
+    var items=datedApiItems().filter(function(x){return x.date;}), base=apiBase(), persons=P().persons||2;
+    if(!items.length){ setVb('<div class="note">Für ein Angebot braucht mindestens eine online-buchbare Aktivität ein Datum.</div>'); return; }
+    setVb('<p><span class="spin"></span> Hole Angebot …</p>');
+    var payload={persons:persons,reference:P().bnr,items:items.map(function(x){return {productId:x.a.id,date:x.date};})};
+    function show(q,via){ P().quote={quoteId:q.quoteId,total:(q.total&&q.total.amount!=null?q.total.amount:0),validUntil:q.validUntil||'',n:(q.items||[]).length}; saveStore();
+      try{ if(window.HeiBenLedger) window.HeiBenLedger.log({welt:'reisen',typ:'angebot',referenz:q.quoteId,status:'angebot',total:(q.total&&q.total.amount!=null?q.total.amount:0),persons:persons,n:(q.items||[]).length,titel:(P().title||'Reise'),kunde:(P().title||''),gueltigBis:q.validUntil||'',positionen:(q.items||[]).map(function(i){return {t:(i.title||i.productId),datum:i.date,menge:persons,einzel:(i.unitPrice?i.unitPrice.amount:0),summe:(i.lineTotal?i.lineTotal.amount:0)};})}); }catch(e){}
+      renderVorbuchung();
+      var lines=(q.items||[]).map(function(i){return '<div class="pos"><span>'+(i.title||i.productId)+' · '+i.date+'</span><span class="r">'+(i.lineTotal?i.lineTotal.amount:'')+' €</span></div>';}).join('');
+      setVb(lines+'<div class="pos tot"><span>Angebotssumme</span><span class="r">'+(q.total?q.total.amount:'')+' €</span></div><div class="note" style="margin-top:.3rem;">'+via+' · POST /quotes → Quote{quoteId,total} · '+q.quoteId+'</div>');
+      if(T)T.ev('plan_quote',{quoteId:q.quoteId,n:payload.items.length}); }
+    function localQuote(p,via){ var qi=p.items.map(function(it){ var a=byId[it.productId]; var up=a?a.preis:30; return {productId:it.productId,title:a?a.t:it.productId,date:it.date,unitPrice:{amount:up,currency:'EUR'},lineTotal:{amount:up*persons,currency:'EUR'}}; });
+      var tot=qi.reduce(function(s,i){return s+i.lineTotal.amount;},0);
+      show({quoteId:'q_demo'+Math.random().toString(36).slice(2,6),persons:persons,currency:'EUR',validUntil:'',items:qi,total:{amount:tot,currency:'EUR'}},via); }
+    if(base){ fetch(base+'/quotes',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)})
+        .then(function(r){return r.json();}).then(function(q){ if(q&&q.quoteId) show(q,'Live'); else throw 0; })
+        .catch(function(){ localQuote(payload,'Demo-Fallback'); }); }
+    else { localQuote(payload,'Demo'); }
+  }
+  function bookQuote(){
+    var q=P().quote; if(!q)return; var base=apiBase(), items=datedApiItems().filter(function(x){return x.date;});
+    var bm=document.getElementById('bookModal'), body=document.getElementById('bookBody');
+    body.innerHTML='<p><span class="spin"></span> Buche Angebot '+q.quoteId+' …</p>'; bm.classList.add('open');
+    function rnd(){ return 'HB-'+Math.random().toString(36).slice(2,8).toUpperCase(); }
+    function finalize(ref,via){ items.forEach(function(x){ var f=findInst(x.instId); if(f){ f.it.status='gebucht'; f.it.ref=ref; } }); P().quote=null; saveStore(); renderDays(); renderSummary();
+      try{ if(window.HeiBenLedger){ window.HeiBenLedger.log({welt:'reisen',typ:'buchung',referenz:ref,status:'gebucht',total:(q.total||0),persons:(P().persons||2),n:items.length,titel:(P().title||'Reise'),kunde:(P().title||'')}); window.HeiBenLedger.update('reisen',q.quoteId,{status:'gebucht'}); } }catch(e){}
+      body.innerHTML='<p style="font-family:Fraunces,serif;font-size:1.2rem;">✓ Gebucht (Angebot)</p>'+
+        '<div class="kv">Angebot: <b>'+q.quoteId+'</b></div><div class="kv">Positionen: '+items.length+'</div>'+
+        '<div class="kv">Buchungsreferenz: <b>'+ref+'</b></div><div class="kv">Personen: '+(P().persons||2)+'</div>'+
+        '<p class="note" style="margin-top:.6rem;">'+via+' · POST /bookings mit quoteId → Booking{reference,status}.</p>'+
+        '<div style="margin-top:.6rem;"><button class="btn ink sm" id="bookOk">Schließen</button></div>';
+      document.getElementById('bookOk').addEventListener('click',function(){ bm.classList.remove('open'); });
+      if(T)T.ev('plan_book_quote',{quoteId:q.quoteId,ref:ref}); }
+    if(base){ fetch(base+'/bookings',{method:'POST',headers:{'Content-Type':'application/json','Prefer':'code=201, example=gebucht'},body:JSON.stringify({persons:P().persons||2,reference:P().bnr,quoteId:q.quoteId})})
+        .then(function(r){return r.json();}).then(function(res){ finalize(res.reference||rnd(),'Partner-API'); })
+        .catch(function(){ finalize(rnd(),'Demo-Fallback (API nicht erreichbar)'); }); }
+    else { setTimeout(function(){ finalize(rnd(),'Demo'); },900); }
+  }
+
+  function addAct(actId,dayIdx){ var d=P().days[dayIdx]; if(!d)return;
+    d.items.push({instId:uid(),actId:actId,checks:{},docs:[],status:'offen'}); saveStore(); renderDays(); redrawPlan(); renderPal();
+    if(T)T.ev('plan_add',{act:actId,day:dayIdx+1}); }
+  function findInst(instId){ var dys=P().days; for(var i=0;i<dys.length;i++){var it=dys[i].items.filter(function(x){return x.instId===instId;})[0]; if(it)return{d:i,it:it};} return null; }
+
+  document.getElementById('pal').addEventListener('click',function(e){ var a=e.target.closest('[data-add]'); if(a){ addAct(a.dataset.add,P().activeDay); } });
+  document.getElementById('pal').addEventListener('dragstart',function(e){ var c=e.target.closest('[data-id]'); if(c) e.dataTransfer.setData('text/id',c.dataset.id); });
+  document.getElementById('days').addEventListener('dragover',function(e){ var z=e.target.closest('[data-drop]'); if(z){ e.preventDefault(); z.classList.add('drop'); } });
+  document.getElementById('days').addEventListener('dragleave',function(e){ var z=e.target.closest('[data-drop]'); if(z) z.classList.remove('drop'); });
+  document.getElementById('days').addEventListener('drop',function(e){ var z=e.target.closest('[data-drop]'); if(z){ e.preventDefault(); z.classList.remove('drop'); var id=e.dataTransfer.getData('text/id'); if(id) addAct(id,+z.dataset.drop); } });
+
+  document.getElementById('days').addEventListener('change',function(e){
+    var s=e.target.closest('[data-start]'); if(s){ P().days[+s.dataset.start].start=s.value; saveStore(); renderDays(); return; }
+    var dt=e.target.closest('[data-date]'); if(dt){ P().days[+dt.dataset.date].date=dt.value; saveStore(); renderDays(); return; }
+    var td=e.target.closest('[data-todo]'); if(td){ var p=td.dataset.todo.split(':'); var f=findInst(p[0]); if(f){ f.it.checks=f.it.checks||{}; f.it.checks[p[1]]=td.checked; saveStore(); } return; }
+    var fl=e.target.closest('[data-file]'); if(fl && fl.files&&fl.files[0]){ var file=fl.files[0]; var f=findInst(fl.dataset.file); if(f){ var key=uid(); dbPut(key,{name:file.name,type:file.type,blob:file}).then(function(){ f.it.docs=f.it.docs||[]; f.it.docs.push({key:key,name:file.name}); saveStore(); renderDays(); if(T)T.ev('plan_doc',{}); }); } return; }
+  });
+
+  document.getElementById('days').addEventListener('click',function(e){
+    var t=e.target;
+    var sa=t.closest('[data-setactive]'); if(sa){ P().activeDay=+sa.dataset.setactive; saveStore(); renderDays(); renderPal(); return; }
+    var dd=t.closest('[data-delday]'); if(dd){ var i=+dd.dataset.delday; P().days.splice(i,1); if(!P().days.length)P().days.push({id:uid(),start:'09:00',items:[]}); P().activeDay=Math.min(P().activeDay,P().days.length-1); saveStore(); renderDays(); redrawPlan(); renderPal(); return; }
+    var ex=t.closest('[data-exp]'); if(ex){ var el=document.getElementById('exp-'+ex.dataset.exp); if(el)el.classList.toggle('open'); return; }
+    var del=t.closest('[data-del]'); if(del){ var f=findInst(del.dataset.del); if(f){ P().days[f.d].items=P().days[f.d].items.filter(function(x){return x.instId!==del.dataset.del;}); saveStore(); renderDays(); redrawPlan(); } return; }
+    var sh=t.closest('[data-show]'); if(sh){ showOnMap(sh.dataset.show); return; }
+    var up=t.closest('[data-up]'); if(up){ move(up.dataset.up,-1); return; }
+    var dn=t.closest('[data-down]'); if(dn){ move(dn.dataset.down,1); return; }
+    var mail=t.closest('[data-mail]'); if(mail){ sendMail(mail.dataset.mail); return; }
+    var bk=t.closest('[data-book]'); if(bk){ bookOnline(bk.dataset.book); return; }
+    var doc=t.closest('[data-doc]'); if(doc){ e.preventDefault(); openDoc(doc.dataset.doc); return; }
+    var dcd=t.closest('[data-docdel]'); if(dcd){ var p=dcd.dataset.docdel.split(':'); var f=findInst(p[0]); if(f){ f.it.docs=(f.it.docs||[]).filter(function(x){return x.key!==p[1];}); saveStore(); renderDays(); } return; }
+  });
+  function move(instId,dir){ var f=findInst(instId); if(!f)return; var arr=P().days[f.d].items; var i=arr.indexOf(f.it); var j=i+dir; if(j<0||j>=arr.length)return; arr.splice(j,0,arr.splice(i,1)[0]); saveStore(); renderDays(); redrawPlan(); }
+  function showOnMap(instId){ var f=findInst(instId); if(!f)return; var a=byId[f.it.actId]; map.setView([a.lat,a.lng],12); document.getElementById('map').scrollIntoView({behavior:'smooth',block:'center'}); }
+
+  function sendMail(instId){ var f=findInst(instId); if(!f)return; var a=byId[f.it.actId]; var to=a.book.email||'reisen@heiben.de';
+    var subj='Reiseanfrage: '+a.t+' ('+a.ort+')';
+    var body='Guten Tag,\n\nfür eine HeiBen-Reise möchten wir folgende Leistung anfragen:\n\n'+
+      '• '+a.t+' — '+a.ort+'\n• Dauer: ca. '+a.h+' Stunden\n• Personen: '+(P().persons||2)+'\n• Wunschtermin: (bitte ergänzen)\n\nBitte teilen Sie Verfügbarkeit und Konditionen mit.\n\nFreundliche Grüße\nHeiBen Reisen';
+    window.location.href='mailto:'+encodeURIComponent(to)+'?subject='+encodeURIComponent(subj)+'&body='+encodeURIComponent(body);
+    f.it.status='angefragt'; saveStore(); renderDays(); if(T)T.ev('plan_mail',{act:a.id});
+  }
+
+  function bookOnline(instId){ var f=findInst(instId); if(!f)return; var a=byId[f.it.actId];
+    var bm=document.getElementById('bookModal'), body=document.getElementById('bookBody'); var api=window.HEIBEN_BOOKING_API;
+    body.innerHTML='<p><span class="spin"></span> Verbindung zu <b>'+a.partner+'</b> …</p><p class="note">'+(api?'Buchung über Partner-API.':'Demo-Buchung (keine Live-API gesetzt).')+'</p>';
+    bm.classList.add('open');
+    function rnd(){ return 'HB-'+Math.random().toString(36).slice(2,8).toUpperCase(); }
+    function finalize(ref,via){ f.it.status='gebucht'; f.it.ref=ref; saveStore(); renderDays();
+      try{ if(window.HeiBenLedger) window.HeiBenLedger.log({welt:'reisen',typ:'buchung',referenz:ref,status:'gebucht',total:((a.preis||0)*(P().persons||2)),persons:(P().persons||2),n:1,titel:(a.t||(P().title||'Reise')),kunde:(P().title||'')}); }catch(e){}
+      body.innerHTML='<p style="font-family:Fraunces,serif;font-size:1.2rem;">✓ Gebucht</p>'+
+        '<div class="kv"><b>'+a.t+'</b> — '+a.ort+'</div><div class="kv">Partner: '+a.partner+'</div>'+
+        '<div class="kv">Buchungsreferenz: <b>'+ref+'</b></div><div class="kv">Personen: '+(P().persons||2)+'</div>'+
+        '<p class="note" style="margin-top:.6rem;">'+via+' · konform zur HeiBen-Buchungs-API (POST /bookings → Booking{reference,status}). Ohne erreichbare API greift die E-Mail-Anfrage.</p>'+
+        '<div style="margin-top:.6rem;"><button class="btn ink sm" id="bookOk">Schließen</button></div>';
+      document.getElementById('bookOk').addEventListener('click',function(){ bm.classList.remove('open'); });
+      if(T)T.ev('plan_book',{act:a.id,ref:ref});
+    }
+    if(api){ var day=P().days[f.d]||{}; var payload={persons:P().persons||2,reference:P().bnr,items:[{productId:a.id,date:day.date||''}]};
+      fetch(api.replace(/\/+$/,'')+'/bookings',{method:'POST',headers:{'Content-Type':'application/json','Prefer':'code=201, example=gebucht'},body:JSON.stringify(payload)})
+        .then(function(r){ return r.json(); }).then(function(res){ finalize(res.reference||rnd(),'Partner-API'); })
+        .catch(function(){ finalize(rnd(),'Demo-Fallback (API nicht erreichbar)'); });
+    } else { setTimeout(function(){ finalize(rnd(),'Demo'); },900); }
+  }
+  document.getElementById('bookClose').addEventListener('click',function(){ document.getElementById('bookModal').classList.remove('open'); });
+
+  function openDoc(key){ dbGet(key).then(function(rec){ if(!rec){alert('Dokument nicht gefunden.');return;} var url=URL.createObjectURL(rec.blob);
+    document.getElementById('pdfName').textContent=rec.name; document.getElementById('pdfFrame').src=url; document.getElementById('pdfModal').classList.add('open'); }); }
+  document.getElementById('pdfClose').addEventListener('click',function(){ document.getElementById('pdfModal').classList.remove('open'); document.getElementById('pdfFrame').src='about:blank'; });
+
+  function requestAll(){ var p=P(); var lines=[]; var total=0, persons=p.persons||2;
+    p.days.forEach(function(d,di){ if(!d.items.length)return; lines.push('Tag '+(di+1)+' (ab '+(d.start||'09:00')+'):');
+      var cur=d.start||'09:00';
+      d.items.forEach(function(it){ var a=byId[it.actId]; if(!a)return; var en=addMinutes(cur,a.h*60);
+        lines.push('  • '+cur+'–'+en+'  '+a.t+' ('+a.ort+', '+TYPLABEL[a.typ]+')'); cur=addMinutes(en,30); total+=a.preis; });
+      lines.push('');
+    });
+    var subj='Reiseanfrage: '+(p.title||'HeiBen-Reise')+' ('+persons+' Pers.)';
+    var body='Guten Tag,\n\nwir möchten folgende Reise anfragen:\n\nReise: '+(p.title||'HeiBen-Reise')+'\nPersonen: '+persons+'\nBuchungsnr.: '+p.bnr+'\n\n'+lines.join('\n')+
+      'Gesamtpreis (Richtwert): '+(total*persons)+' € für '+persons+' Personen ('+total+' € p. P.)\n\nBitte um Bestätigung der Verfügbarkeit und ein verbindliches Angebot.\n\nFreundliche Grüße\nHeiBen Reisen';
+    window.location.href='mailto:'+encodeURIComponent('reisen@heiben.de')+'?subject='+encodeURIComponent(subj)+'&body='+encodeURIComponent(body);
+    if(T)T.ev('plan_request_all',{});
+  }
+  document.getElementById('reqAll').addEventListener('click',requestAll);
+
+  function download(name,content,type){ var b=new Blob([content],{type:type||'application/octet-stream'}); var u=URL.createObjectURL(b); var a=document.createElement('a'); a.href=u; a.download=name; document.body.appendChild(a); a.click(); a.remove(); setTimeout(function(){URL.revokeObjectURL(u);},1000); }
+  document.getElementById('expJson').addEventListener('click',function(){ download((P().title||'reise').replace(/\s+/g,'_')+'.json', JSON.stringify(P(),null,2),'application/json'); });
+  document.getElementById('impBtn').addEventListener('click',function(){ document.getElementById('impFile').click(); });
+  document.getElementById('impFile').addEventListener('change',function(e){ var file=e.target.files[0]; if(!file)return; var r=new FileReader();
+    r.onload=function(){ try{ var p=JSON.parse(r.result); if(!p.days)throw 0; p.id=uid(); p.title=(p.title||'Importierte Reise'); store.plans[p.id]=p; store.current=p.id; saveStore(); fullRender(); }catch(err){ alert('Ungültige JSON-Datei.'); } };
+    r.readAsText(file); e.target.value=''; });
+  function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+  document.getElementById('expGpx').addEventListener('click',function(){ var p=P(); var wpt='',trk='';
+    p.days.forEach(function(d,di){ var seg='';
+      d.items.forEach(function(it){ var a=byId[it.actId]; if(!a)return;
+        wpt+='<wpt lat="'+a.lat+'" lon="'+a.lng+'"><name>'+esc(a.t)+'</name><desc>'+esc(a.ort+' · '+TYPLABEL[a.typ])+'</desc></wpt>\n';
+        (a.route&&a.route.length>1?a.route:[[a.lat,a.lng]]).forEach(function(pt){ seg+='<trkpt lat="'+pt[0]+'" lon="'+pt[1]+'"></trkpt>\n'; });
+      });
+      if(seg) trk+='<trk><name>Tag '+(di+1)+'</name><trkseg>\n'+seg+'</trkseg></trk>\n';
+    });
+    var gpx='<?xml version="1.0" encoding="UTF-8"?>\n<gpx version="1.1" creator="HeiBen Reisen" xmlns="http://www.topografix.com/GPX/1/1">\n<metadata><name>'+esc(p.title||'HeiBen-Reise')+'</name></metadata>\n'+wpt+trk+'</gpx>\n';
+    download((p.title||'reise').replace(/\s+/g,'_')+'.gpx', gpx,'application/gpx+xml'); if(T)T.ev('plan_gpx',{});
+  });
+
+  function renderPlanSel(){ var sel=document.getElementById('planSel'); sel.innerHTML='';
+    Object.keys(store.plans).forEach(function(id){ var o=document.createElement('option'); o.value=id; o.textContent=store.plans[id].title||'(ohne Titel)'; if(id===store.current)o.selected=true; sel.appendChild(o); }); }
+  document.getElementById('planSel').addEventListener('change',function(e){ store.current=e.target.value; saveStore(); fullRender(); });
+  document.getElementById('newPlan').addEventListener('click',function(){ var p=newPlanObj('Reise '+(Object.keys(store.plans).length+1)); store.plans[p.id]=p; store.current=p.id; saveStore(); fullRender(); document.getElementById('title').focus(); });
+  document.getElementById('delPlan').addEventListener('click',function(){ if(Object.keys(store.plans).length<=1){ alert('Mindestens eine Reise muss bestehen bleiben.'); return; } if(!confirm('Diese Reise löschen?'))return; delete store.plans[store.current]; store.current=Object.keys(store.plans)[0]; saveStore(); fullRender(); });
+
+  document.getElementById('title').addEventListener('input',function(e){ P().title=e.target.value; document.getElementById('custTitle').textContent='Ihr Reisevorschlag — '+(e.target.value||'HeiBen Reisen'); saveStore(); renderPlanSel(); });
+  document.getElementById('persons').addEventListener('input',function(e){ var v=Math.max(1,Math.min(60,+e.target.value||1)); P().persons=v; saveStore(); renderSummary(); });
+  function applyView(){ var p=P(); document.getElementById('app').classList.toggle('kunde',p.view==='kunde');
+    document.querySelectorAll('#viewSeg button').forEach(function(b){ b.classList.toggle('on',b.dataset.view===p.view); });
+    var show=p.view==='kunde';
+    document.getElementById('bnrWrap').style.display=show?'flex':'none';
+    document.getElementById('custHead').style.display=show?'block':'none';
+    document.getElementById('bnrShow').textContent=p.bnr; renderSummary(); }
+  document.getElementById('viewSeg').addEventListener('click',function(e){ var b=e.target.closest('[data-view]'); if(!b)return; P().view=b.dataset.view; saveStore(); applyView(); if(T)T.ev('plan_view',{view:P().view}); });
+  document.getElementById('bnr').addEventListener('input',function(e){ P().bnr=e.target.value; document.getElementById('bnrShow').textContent=P().bnr; saveStore(); });
+
+  document.getElementById('addDay').addEventListener('click',function(){ P().days.push({id:uid(),start:'09:00',items:[]}); P().activeDay=P().days.length-1; saveStore(); renderDays(); renderPal(); });
+  document.getElementById('clearPlan').addEventListener('click',function(){ if(!confirm('Plan dieser Reise leeren?'))return; P().days=[{id:uid(),start:'09:00',items:[]}]; P().activeDay=0; saveStore(); renderDays(); redrawPlan(); renderPal(); });
+  document.getElementById('print').addEventListener('click',function(){ window.print(); });
+  document.getElementById('typeChips').addEventListener('click',function(e){ var c=e.target.closest('.chip'); if(!c)return;
+    document.querySelectorAll('#typeChips .chip').forEach(function(x){x.classList.remove('on');}); c.classList.add('on'); if(c.dataset.stadt){ fCity=true; fTyp=''; } else { fCity=false; fTyp=c.dataset.typ||''; } renderPal(); });
+  document.getElementById('pSearch').addEventListener('input',function(e){ q=e.target.value.trim().toLowerCase(); renderPal(); });
+  document.getElementById('tplBar').addEventListener('click',function(e){ var b=e.target.closest('[data-tpl]'); if(!b)return; loadTemplate(b.dataset.tpl); });
+  function loadTemplate(id){ var t=TEMPLATES[id]; if(!t)return; var p=newPlanObj(t.title); p.persons=t.persons||2;
+    p.days=t.days.map(function(day){ return {id:uid(),start:day.start||'09:00',date:'',items:(day.acts||[]).map(function(aid){ return {instId:uid(),actId:aid,checks:{},docs:[],status:'offen'}; })}; });
+    p.activeDay=0; store.plans[p.id]=p; store.current=p.id; saveStore(); fullRender(); if(T)T.ev('plan_template',{tpl:id});
+  }
+
+  function fullRender(){ var p=P(); document.getElementById('title').value=p.title||''; document.getElementById('persons').value=p.persons||2; document.getElementById('bnr').value=p.bnr; document.getElementById('custTitle').textContent='Ihr Reisevorschlag — '+(p.title||'HeiBen Reisen'); renderPlanSel(); applyView(); renderPal(); renderDays(); redrawPlan(); }
+
+  fullRender();
+  setTimeout(function(){ map.invalidateSize(); },200);
+})();
+</script>
+<script src="heiben-legal.js"></script>
+</body>
+</html>

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HeiBen Immobilien · Angebote</title>
+<meta name="description" content="Immobilien-Angebote von HeiBen Immobilien im Rheinland — mit Filter und Finanzierungsrechner.">
+<style>
+:root{--bg:#f3eee5;--bg-soft:#ebe3d4;--ink:#1f1c17;--ink-soft:#524a3e;--rule:#d8cdb7;--terracotta:#b04a31;--accent:#792d29;--accent-d:#5c211d;}
+*{box-sizing:border-box;}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Manrope',-apple-system,Segoe UI,sans-serif;line-height:1.5;}
+.wrap{max-width:1040px;margin:0 auto;padding:0 1.5rem;}
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:1.1rem 0;border-bottom:1px solid var(--rule);}
+.wm{font-family:'Fraunces',serif;font-weight:700;font-size:1.4rem;}.wm .a{color:var(--terracotta);}
+.wm span{font-weight:400;font-size:.9rem;color:var(--ink-soft);}
+.back{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);text-decoration:none;}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:.64rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);}
+h1{font-family:'Fraunces',serif;font-weight:340;font-size:clamp(2rem,5vw,3rem);margin:1rem 0 .2rem;}
+.lede{color:var(--ink-soft);max-width:60ch;}
+h2{font-family:'Fraunces',serif;font-weight:440;font-size:1.3rem;margin:2.2rem 0 .6rem;}
+.filters{display:flex;gap:1rem;flex-wrap:wrap;align-items:flex-end;background:#fff;border:1px solid var(--rule);border-radius:16px;padding:1rem 1.1rem;margin-top:1rem;}
+.field{display:flex;flex-direction:column;gap:4px;}
+.field label{font-size:.74rem;color:var(--ink-soft);}
+.field select,.field input{border:1px solid var(--rule);background:var(--bg);border-radius:8px;padding:.55rem .7rem;font:inherit;min-width:140px;}
+.btn{display:inline-block;border:0;cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;padding:.7rem 1.1rem;border-radius:9px;text-decoration:none;margin:.3rem .3rem 0 0;}
+.btn.primary{background:var(--accent);color:#f3eee5;}.btn.ink{background:var(--ink);color:#f3eee5;}
+.btn.ghost{background:none;border:1px solid var(--ink);color:var(--ink);}
+.btn.sm{padding:.45rem .7rem;font-size:.58rem;}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:16px;margin-top:1rem;}
+.card{background:#fff;border:1px solid var(--rule);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;}
+.card .ph{height:120px;background:linear-gradient(150deg,var(--accent),#1f1c17);display:flex;align-items:flex-start;justify-content:space-between;padding:.7rem .9rem;}
+.card .ph .typ{font-family:'JetBrains Mono',monospace;font-size:.56rem;letter-spacing:.1em;text-transform:uppercase;color:#f3eee5;background:rgba(31,28,23,.4);padding:.15rem .5rem;border-radius:999px;}
+.card .ph .st{font-family:'JetBrains Mono',monospace;font-size:.54rem;letter-spacing:.08em;text-transform:uppercase;padding:.15rem .5rem;border-radius:999px;}
+.st.frei{background:#e7eede;color:#3f5130;}.st.res{background:#f0dcd9;color:#792d29;}
+.card .body{padding:14px;display:flex;flex-direction:column;gap:.4rem;flex:1;}
+.card h3{font-family:'Fraunces',serif;font-weight:480;font-size:1.1rem;margin:0;}
+.card .meta{font-size:.8rem;color:var(--ink-soft);}
+.price{font-family:'Fraunces',serif;font-weight:560;color:var(--accent-d);font-size:1.15rem;}
+.acts{display:flex;gap:.4rem;margin-top:auto;padding-top:.5rem;}
+.detail{border-top:1px dashed var(--rule);margin-top:.5rem;padding-top:.5rem;font-size:.85rem;color:var(--ink-soft);}
+.calc{background:#fff;border:1px solid var(--rule);border-radius:18px;padding:1.2rem 1.3rem;margin-top:1rem;}
+.calc .row{display:flex;gap:1rem;flex-wrap:wrap;}
+.calc .out{display:flex;gap:1.6rem;flex-wrap:wrap;margin-top:1rem;border-top:1px solid var(--rule);padding-top:1rem;}
+.calc .out .b{font-family:'Fraunces',serif;font-size:1.6rem;font-weight:560;color:var(--accent-d);}
+.calc .out .l{font-family:'JetBrains Mono',monospace;font-size:.56rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);}
+.disc{background:var(--bg-soft);border:1px solid var(--rule);border-radius:12px;padding:.7rem 1rem;font-size:.82rem;color:var(--ink-soft);margin:1.2rem 0;}
+footer{margin-top:3rem;border-top:1px solid var(--rule);padding:1.4rem 0;color:var(--ink-soft);font-size:.8rem;}
+.note{font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--ink-soft);}
+.hide{display:none!important;}
+</style>
+<link rel="stylesheet" href="heiben-design.css">
+<script src="heiben-nav.js" defer></script>
+</head>
+<body data-hb-welt="immobilien">
+<div class="wrap">
+  <div class="topbar"><div class="wm"><span class="a">H</span>ei<span class="a">B</span>en <span>· Immobilien</span></div><a class="back" href="immobilien.html">← HeiBen Immobilien</a></div>
+  <div class="eyebrow">Angebote · Rheinland</div>
+  <h1>Zuhause finden <em style="color:var(--accent);font-style:italic;">im Rheinland</em></h1>
+  <p class="lede">Ausgewählte Objekte in Köln und Umland. Filtere nach deinen Kriterien und rechne mit dem Finanzierungsrechner, was monatlich auf dich zukäme.</p>
+
+  <div class="filters">
+    <div class="field"><label>Typ</label><select id="fTyp"><option value="">alle</option><option>Wohnung</option><option>Haus</option><option>Gewerbe</option></select></div>
+    <div class="field"><label>Zimmer ab</label><select id="fZi"><option value="0">egal</option><option value="2">2+</option><option value="3">3+</option><option value="4">4+</option></select></div>
+    <div class="field"><label>Preis bis</label><select id="fPreis"><option value="0">egal</option><option value="350000">350.000&nbsp;€</option><option value="500000">500.000&nbsp;€</option><option value="750000">750.000&nbsp;€</option><option value="1000000">1.000.000&nbsp;€</option></select></div>
+    <div class="field"><label>Lage</label><select id="fLage"><option value="">alle</option><option>Köln</option><option>Umland</option></select></div>
+    <button class="btn ghost sm" id="fReset">zurücksetzen</button>
+  </div>
+  <div id="count" class="note" style="margin-top:.6rem;"></div>
+  <div class="grid" id="grid"></div>
+
+  <h2>Finanzierungsrechner</h2>
+  <div class="calc">
+    <div class="row">
+      <div class="field"><label>Kaufpreis (€)</label><input id="cPreis" type="number" min="0" step="10000" value="420000"></div>
+      <div class="field"><label>Eigenkapital (€)</label><input id="cEk" type="number" min="0" step="10000" value="90000"></div>
+      <div class="field"><label>Sollzins (% p.a.)</label><input id="cZins" type="number" min="0" step="0.1" value="3.6"></div>
+      <div class="field"><label>Tilgung (% p.a.)</label><input id="cTilg" type="number" min="0" step="0.5" value="2.0"></div>
+    </div>
+    <div class="out" id="cOut"></div>
+    <p class="note" style="margin-top:.6rem;">Vereinfachte Annuität (Zins+Tilgung auf das Darlehen). Nebenkosten als Richtwert ≈ 10,5 % (Grunderwerbsteuer NRW 6,5 %, Notar/Grundbuch ~2 %, ggf. Makler).</p>
+  </div>
+
+  <div class="disc">HeiBen Immobilien vermittelt Objekte. Angaben sind <b>Beispiel-/Richtwerte</b> ohne Gewähr; verbindliche Details und Exposés nach Anfrage. Der Rechner liefert eine grobe Orientierung und ist <b>keine Finanzierungsberatung</b>.</div>
+
+  <footer>HeiBen Immobilien · Köln · <span class="note">„Heimat leben" — vom ersten Schlüssel an.</span></footer>
+</div>
+
+<script src="heiben-firmierungen.js"></script>
+<script src="vendor/jspdf/jspdf.umd.min.js"></script>
+<script src="heiben-pdf.js"></script>
+<script src="heiben-analytics.js"></script>
+<script>
+(function(){
+  var T=window.HeiBenTrack;
+  var OBJ=[
+    {id:'ehrenfeld-altbau',typ:'Wohnung',t:'3-Zimmer-Altbau mit Stuck',lage:'Köln',ort:'Köln-Ehrenfeld',zi:3,m2:82,preis:420000,stat:'frei',
+      feat:['Altbau 1908, saniert','Echtholzdielen','Balkon nach Süden','EG-Keller'],energie:'Energieklasse D'},
+    {id:'suelz-reihenhaus',typ:'Haus',t:'Reihenhaus mit Garten',lage:'Köln',ort:'Köln-Sülz',zi:5,m2:140,preis:720000,stat:'frei',
+      feat:['5 Zimmer auf 3 Ebenen','Garten 120 m²','Garage','2022 modernisiert'],energie:'Energieklasse C'},
+    {id:'innenstadt-penthouse',typ:'Wohnung',t:'Penthouse mit Dachterrasse',lage:'Köln',ort:'Köln-Innenstadt',zi:3,m2:110,preis:890000,stat:'res',
+      feat:['Dachterrasse 40 m²','Aufzug','Tiefgarage','Domblick'],energie:'Energieklasse B'},
+    {id:'bergisch-dhh',typ:'Haus',t:'Doppelhaushälfte im Grünen',lage:'Umland',ort:'Bergisch Gladbach',zi:5,m2:155,preis:650000,stat:'frei',
+      feat:['Grundstück 320 m²','Wärmepumpe','Carport','ruhige Lage'],energie:'Energieklasse A'},
+    {id:'nippes-zwei',typ:'Wohnung',t:'Helle 2-Zimmer-Wohnung',lage:'Köln',ort:'Köln-Nippes',zi:2,m2:58,preis:295000,stat:'frei',
+      feat:['ideal für Singles/Paare','Einbauküche','Balkon','top angebunden'],energie:'Energieklasse C'},
+    {id:'deutz-gewerbe',typ:'Gewerbe',t:'Ladenlokal in Lauflage',lage:'Köln',ort:'Köln-Deutz',zi:2,m2:95,preis:380000,stat:'frei',
+      feat:['Schaufensterfront','Teeküche + WC','flexible Nutzung','hohe Frequenz'],energie:'Energieausweis liegt vor'}
+  ];
+  var fTyp='',fZi=0,fPreis=0,fLage='';
+  function eur(n){return n.toLocaleString('de-DE');}
+  function match(o){
+    if(fTyp && o.typ!==fTyp) return false;
+    if(fZi && o.zi<fZi) return false;
+    if(fPreis && o.preis>fPreis) return false;
+    if(fLage && o.lage!==fLage) return false;
+    return true;
+  }
+  function card(o){
+    return '<div class="card"><div class="ph"><span class="typ">'+o.typ+'</span><span class="st '+(o.stat==='frei'?'frei':'res')+'">'+(o.stat==='frei'?'verfügbar':'reserviert')+'</span></div>'+
+      '<div class="body"><h3>'+o.t+'</h3>'+
+      '<div class="meta">'+o.ort+' · '+(o.typ==='Gewerbe'?'':o.zi+' Zi · ')+o.m2+' m²</div>'+
+      '<div class="price">'+eur(o.preis)+'&nbsp;€</div>'+
+      '<div class="acts"><button class="btn ghost sm" data-detail="'+o.id+'">Details</button>'+
+      '<button class="btn ghost sm" data-calc="'+o.preis+'">In Rechner</button>'+
+      '<a class="btn ink sm" href="immobilien-anfrage.html?objekt='+o.id+'" data-anfrage="'+o.id+'">Anfragen</a> <button class="btn ghost sm" data-expose="'+o.id+'">Exposé</button></div>'+
+      '<div class="detail hide" id="d-'+o.id+'"><b>Merkmale:</b><ul style="margin:.3rem 0 0;padding-left:1.1rem;">'+o.feat.map(function(x){return '<li>'+x+'</li>';}).join('')+'</ul><div style="margin-top:.3rem;">'+o.energie+'</div></div></div></div>';
+  }
+  function render(){
+    var list=OBJ.filter(match);
+    document.getElementById('count').textContent=list.length+' von '+OBJ.length+' Objekten';
+    document.getElementById('grid').innerHTML=list.map(card).join('')||'<p class="note">Keine Objekte für diese Filter.</p>';
+  }
+  ['fTyp','fZi','fPreis','fLage'].forEach(function(id){ document.getElementById(id).addEventListener('change',function(){
+    fTyp=document.getElementById('fTyp').value; fZi=+document.getElementById('fZi').value; fPreis=+document.getElementById('fPreis').value; fLage=document.getElementById('fLage').value; render();
+  });});
+  function fTypEl(){ document.getElementById('fTyp').value='';document.getElementById('fZi').value='0';document.getElementById('fPreis').value='0';document.getElementById('fLage').value=''; }
+  document.getElementById('fReset').addEventListener('click',function(){ fTyp='';fZi=0;fPreis=0;fLage=''; fTypEl(); render(); });
+  document.getElementById('grid').addEventListener('click',function(e){
+    var d=e.target.closest('[data-detail]'); if(d){ document.getElementById('d-'+d.dataset.detail).classList.toggle('hide'); return; }
+    var c=e.target.closest('[data-calc]'); if(c){ document.getElementById('cPreis').value=c.dataset.calc; calc(); document.getElementById('cOut').scrollIntoView({behavior:'smooth',block:'center'}); return; }
+    var xp=e.target.closest('[data-expose]'); if(xp){ var oo=OBJ.filter(function(z){return z.id===xp.dataset.expose;})[0]; if(oo&&window.HeiBenPDF){ window.HeiBenPDF.expose(oo,(window.HEIBEN_FIRMA?window.HEIBEN_FIRMA('immobilien'):null)); } return; }
+    var a=e.target.closest('[data-anfrage]'); if(a && T){ T.ev('immo_anfrage',{objekt:a.dataset.anfrage}); }
+  });
+  function calc(){
+    var preis=+document.getElementById('cPreis').value||0, ek=+document.getElementById('cEk').value||0,
+        zins=+document.getElementById('cZins').value||0, tilg=+document.getElementById('cTilg').value||0;
+    var darlehen=Math.max(0,preis-ek);
+    var rate=darlehen*(zins+tilg)/100/12;
+    var neben=Math.round(preis*0.105);
+    document.getElementById('cOut').innerHTML=
+      '<div><div class="b">'+eur(Math.round(rate))+'&nbsp;€</div><div class="l">monatliche Rate</div></div>'+
+      '<div><div class="b">'+eur(darlehen)+'&nbsp;€</div><div class="l">Darlehensbetrag</div></div>'+
+      '<div><div class="b">'+eur(neben)+'&nbsp;€</div><div class="l">Nebenkosten (≈10,5 %)</div></div>';
+  }
+  ['cPreis','cEk','cZins','cTilg'].forEach(function(id){ document.getElementById(id).addEventListener('input',calc); });
+  render(); calc();
+})();
+</script>
+<script src="heiben-legal.js"></script>
+</body>
+</html>

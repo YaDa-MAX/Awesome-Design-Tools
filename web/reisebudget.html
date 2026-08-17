@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reisebudget-Planer · HeiBen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;1,400&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f3eee5;--bg2:#ebe3d4;--paper:#fffdf8;--ink:#1f1c17;--ink2:#524a3e;--rule:#d8cdb7;--terra:#b04a31;--ochre:#a97a1d;--moss:#4a5c39;--burg:#792d29;--aub:#6b3951}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:'Manrope',system-ui,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:800px;margin:0 auto;padding:1.6rem 1.1rem 5rem}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.32em;text-transform:uppercase;color:var(--ochre)}
+h1{font-family:'Fraunces',serif;font-weight:400;font-size:clamp(2rem,6.5vw,3.2rem);line-height:1.02;letter-spacing:-.02em;margin:.45rem 0 .5rem}
+h1 em{font-style:italic;color:var(--ochre)}
+.lead{color:var(--ink2);max-width:60ch;font-size:1.02rem}
+.card{background:var(--paper);border:1px solid var(--rule);border-radius:16px;padding:1.1rem 1.15rem;margin-top:1.1rem}
+.card h3{font-family:'Fraunces',serif;font-weight:500;font-size:1.2rem;margin-bottom:.4rem}
+.grid{display:grid;gap:.7rem;margin-top:.4rem}@media(min-width:560px){.grid.c2{grid-template-columns:1fr 1fr}.grid.c3{grid-template-columns:1fr 1fr 1fr}}
+.field label{display:block;font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink2);margin-bottom:.2rem}
+.field input{width:100%;padding:.5rem .6rem;border:1px solid var(--rule);border-radius:9px;background:var(--bg);font:inherit;font-weight:600}
+.field input:focus{outline:none;border-color:var(--ochre);background:#fff}
+.arow{display:grid;grid-template-columns:1fr 110px 32px;gap:.5rem;align-items:center;margin-top:.4rem}
+.arow input{width:100%;padding:.45rem .5rem;border:1px solid var(--rule);border-radius:8px;background:var(--bg);font:inherit;font-weight:600}
+.arow input:focus{outline:none;border-color:var(--ochre);background:#fff}
+.del{border:1px solid var(--rule);background:var(--bg);border-radius:8px;height:34px;cursor:pointer;color:var(--burg);font-weight:700}
+.addbtn{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;border:1px dashed var(--rule);background:transparent;color:var(--ink2);padding:.45rem .8rem;border-radius:9px;cursor:pointer;margin-top:.6rem}
+.hero{background:var(--ink);color:var(--bg);border-radius:18px;padding:1.4rem 1.3rem;margin-top:1.3rem;text-align:center}
+.hero .cap{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:#cdbfa8}
+.hero .num{font-family:'Fraunces',serif;font-weight:500;font-size:clamp(2.6rem,12vw,4.2rem);color:var(--ochre);line-height:1;margin:.15rem 0}
+.hero .split{display:flex;gap:1.4rem;justify-content:center;flex-wrap:wrap;margin-top:.6rem}
+.hero .split div .l{font-family:'JetBrains Mono',monospace;font-size:.54rem;letter-spacing:.1em;text-transform:uppercase;color:#cdbfa8}
+.hero .split div .v{font-family:'Fraunces',serif;font-size:1.4rem}
+.hero .save{margin-top:1rem;font-size:.95rem;color:#e8e0d0}.hero .save b{color:#9ec27f}
+.chart-card{background:var(--paper);border:1px solid var(--rule);border-radius:16px;padding:1.05rem 1.1rem 1rem;margin-top:1.1rem}
+.chart-card h4{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ochre);margin-bottom:.3rem}
+canvas{width:100%;height:auto;display:block;margin-top:.3rem}
+table{width:100%;border-collapse:collapse;font-size:.9rem;margin-top:.6rem}
+th,td{padding:.42rem .5rem;border-bottom:1px solid var(--rule);text-align:left}td.n{text-align:right;font-variant-numeric:tabular-nums}
+tr.tot td{font-weight:800;background:var(--bg2)}
+.foot{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink2);text-align:center;margin-top:2rem}
+</style>
+<link rel="stylesheet" href="heiben-design.css">
+<script src="heiben-nav.js" defer></script>
+</head>
+<body data-hb-welt="reisen">
+<div class="wrap">
+  <p class="eyebrow">HeiBen · Reisen</p>
+  <h1>Dein <em>Reisebudget</em>, ehrlich geplant</h1>
+  <p class="lead">Die Reise kostet selten nur den Flug. Plane alle Posten realistisch, sieh die Kosten pro Person und pro Tag — und wie lange du dafür sparen musst. Alles bleibt lokal in diesem Gerät.</p>
+
+  <div class="card">
+    <h3>Eckdaten</h3>
+    <div class="grid c3">
+      <div class="field"><label>Reiseziel</label><input id="ziel" value="Lissabon"></div>
+      <div class="field"><label>Reisetage (Nächte)</label><input id="tage" type="number" value="7"></div>
+      <div class="field"><label>Personen</label><input id="pers" type="number" value="2"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Kostenposten</h3>
+    <div class="grid c2">
+      <div class="field"><label>Anreise gesamt (Flug/Bahn) €</label><input id="anreise" type="number" value="380"></div>
+      <div class="field"><label>Unterkunft € / Nacht</label><input id="unterk" type="number" value="90"></div>
+      <div class="field"><label>Essen € / Tag &amp; Person</label><input id="essen" type="number" value="40"></div>
+      <div class="field"><label>Transport vor Ort gesamt €</label><input id="transport" type="number" value="80"></div>
+      <div class="field"><label>Puffer (%)</label><input id="puffer" type="number" value="10"></div>
+      <div class="field"><label>Sparrate € / Monat</label><input id="spar" type="number" value="200"></div>
+    </div>
+    <h3 style="margin-top:1rem">Aktivitäten &amp; Extras</h3>
+    <div id="actRows"></div>
+    <button class="addbtn" id="addAct">+ Aktivität hinzufügen</button>
+  </div>
+
+  <div class="hero" id="hero"></div>
+
+  <div class="chart-card">
+    <h4>Wohin dein Geld fließt</h4>
+    <canvas id="chart" width="800" height="220"></canvas>
+    <table id="tbl"></table>
+  </div>
+
+  <p class="foot">HeiBen GmbH i. G. · „Heimat leben" · <a href="mein-heiben.html" style="color:var(--aub)">Mein HeiBen</a> · grobe Planung</p>
+</div>
+
+<script>
+var KEY="heiben_reise_v1";
+var fields=["ziel","tage","pers","anreise","unterk","essen","transport","puffer","spar"];
+var acts=[{n:"Stadtführung",p:25},{n:"Museen / Eintritte",p:40},{n:"Tagesausflug",p:60}];
+try{var sv=JSON.parse(localStorage.getItem(KEY));if(sv){fields.forEach(function(f){if(sv[f]!=null)document.getElementById(f).value=sv[f];});if(sv.acts)acts=sv.acts;}}catch(e){}
+function el(id){return document.getElementById(id);}
+function num(id){return parseFloat(String(el(id).value).replace(",","."))||0;}
+function eur(n){return (Math.round(n)).toLocaleString("de-DE")+" €";}
+function save(){try{var o={acts:acts};fields.forEach(function(f){o[f]=el(f).value;});localStorage.setItem(KEY,JSON.stringify(o));}catch(e){}}
+function renderActs(){
+  var c=el("actRows");c.innerHTML="";
+  acts.forEach(function(a,i){var row=document.createElement("div");row.className="arow";
+    row.innerHTML='<input data-i="'+i+'" data-k="n" value="'+(a.n||"")+'"><input data-i="'+i+'" data-k="p" type="number" value="'+a.p+'"><button class="del" data-del="'+i+'">×</button>';c.appendChild(row);});
+  c.querySelectorAll("input").forEach(function(inp){inp.addEventListener("input",function(){var i=+inp.dataset.i,k=inp.dataset.k;acts[i][k]=k==="n"?inp.value:(parseFloat(String(inp.value).replace(",","."))||0);compute();});});
+  c.querySelectorAll(".del").forEach(function(b){b.onclick=function(){acts.splice(+b.dataset.del,1);renderActs();compute();};});
+}
+function compute(){
+  save();
+  var tage=num("tage"),pers=Math.max(1,num("pers"));
+  var anreise=num("anreise"),unterkTot=num("unterk")*tage,essenTot=num("essen")*tage*pers,transport=num("transport");
+  var aktTot=acts.reduce(function(s,a){return s+(+a.p||0);},0);
+  var sub=anreise+unterkTot+essenTot+transport+aktTot;
+  var puffer=sub*num("puffer")/100;
+  var total=sub+puffer;
+  var proPerson=total/pers, proTag=tage>0?total/tage:0;
+  var spar=num("spar"),monate=spar>0?Math.ceil(total/spar):0;
+  el("hero").innerHTML='<div class="cap">Gesamtbudget für '+(el("ziel").value||"die Reise")+'</div><div class="num">'+eur(total)+'</div>'+
+    '<div class="split"><div><div class="l">Pro Person</div><div class="v">'+eur(proPerson)+'</div></div><div><div class="l">Pro Tag</div><div class="v">'+eur(proTag)+'</div></div></div>'+
+    '<div class="save">'+(spar>0?'Bei <b>'+eur(spar)+'/Monat</b> bist du in rund <b>'+monate+' Monaten</b> reisefertig.':'Trag eine Sparrate ein, um zu sehen, wann es losgehen kann.')+'</div>';
+  var cats=[["Anreise",anreise],["Unterkunft",unterkTot],["Essen",essenTot],["Aktivitäten",aktTot],["Transport",transport],["Puffer",puffer]];
+  drawBars(cats);
+  el("tbl").innerHTML='<thead><tr><th>Posten</th><th class="n">€</th><th class="n">Anteil</th></tr></thead><tbody>'+
+    cats.map(function(c){return '<tr><td>'+c[0]+'</td><td class="n">'+eur(c[1])+'</td><td class="n">'+(total>0?Math.round(c[1]/total*100):0)+' %</td></tr>';}).join("")+
+    '<tr class="tot"><td>Gesamt</td><td class="n">'+eur(total)+'</td><td class="n">100 %</td></tr></tbody>';
+}
+function drawBars(items){
+  var cv=el("chart"),ctx=cv.getContext("2d"),W=cv.width,H=cv.height;ctx.clearRect(0,0,W,H);
+  var max=Math.max.apply(null,items.map(function(i){return i[1];}))||1;
+  var padL=10,padR=10,padT=16,padB=28,gap=12,n=items.length,bw=(W-padL-padR-gap*(n-1))/n,maxH=H-padT-padB-18;
+  var cols=["#a97a1d","#4a5c39","#b04a31","#6b3951","#792d29","#b8ad95"];
+  items.forEach(function(it,i){var x=padL+i*(bw+gap),h=it[1]/max*maxH,y=padT+(maxH-h);
+    ctx.fillStyle=cols[i%cols.length];var r=Math.min(7,bw/2);
+    ctx.beginPath();ctx.moveTo(x,y+h);ctx.lineTo(x,y+r);ctx.quadraticCurveTo(x,y,x+r,y);ctx.lineTo(x+bw-r,y);ctx.quadraticCurveTo(x+bw,y,x+bw,y+r);ctx.lineTo(x+bw,y+h);ctx.closePath();ctx.fill();
+    ctx.fillStyle="#1f1c17";ctx.font="600 11px 'JetBrains Mono',monospace";ctx.textAlign="center";ctx.fillText(Math.round(it[1]),x+bw/2,y-5);
+    ctx.fillStyle="#524a3e";ctx.font="10px Manrope";ctx.fillText(it[0],x+bw/2,H-padB+14);});
+  ctx.textAlign="left";
+}
+fields.forEach(function(f){el(f).addEventListener("input",compute);});
+el("addAct").onclick=function(){acts.push({n:"Neue Aktivität",p:20});renderActs();compute();};
+renderActs();compute();
+</script>
+</body>
+</html>

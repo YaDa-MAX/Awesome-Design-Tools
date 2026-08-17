@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>White-Label-Demo · HeiBen</title>
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;1,400&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f3eee5;--bg2:#ebe3d4;--paper:#fffdf8;--ink:#1f1c17;--ink2:#524a3e;--rule:#d8cdb7;--terra:#b04a31;--ochre:#a97a1d;--moss:#4a5c39;--burg:#792d29;--aub:#6b3951;--good:#6f8f4e;--goodl:#9ec27f;--bad:#e7a48f}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:'Manrope',system-ui,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:860px;margin:0 auto;padding:1.8rem 1.1rem 5rem}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.32em;text-transform:uppercase;color:var(--terra)}
+h1{font-family:'Fraunces',serif;font-weight:400;font-size:clamp(2.1rem,6.5vw,3.1rem);line-height:1.02;letter-spacing:-.02em;margin:.3rem 0 .5rem}
+h1 em{font-style:italic;color:var(--terra)}
+.lead{color:var(--ink2);max-width:62ch;font-size:1.02rem}
+section{margin-top:2.4rem}
+.h2{font-family:'Fraunces',serif;font-weight:500;font-size:1.5rem;margin-bottom:.9rem}
+.h2 small{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ochre);display:block;margin-bottom:.25rem}
+.card{background:var(--paper);border:1px solid var(--rule);border-radius:16px;padding:1.2rem 1.3rem}
+.switch{display:flex;gap:.5rem;flex-wrap:wrap;align-items:center}
+.switch button{border:1px solid var(--rule);background:var(--paper);border-radius:999px;padding:.5rem 1rem;font:inherit;font-weight:700;cursor:pointer;color:var(--ink)}
+.switch button.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.switch button:focus-visible,.switch input:focus-visible{outline:2px solid var(--ochre);outline-offset:2px}
+.switch label{display:flex;align-items:center;gap:.5rem;border:1px solid var(--rule);background:var(--paper);border-radius:999px;padding:.34rem .6rem .34rem 1rem;font-weight:700;cursor:pointer}
+.switch input[type=color]{width:34px;height:26px;border:0;background:none;padding:0;cursor:pointer}
+.lockup{display:flex;align-items:center;gap:1.1rem;flex-wrap:wrap;background:var(--paper);border:1px solid var(--rule);border-radius:16px;padding:1.1rem 1.3rem;margin-top:.9rem}
+.lockup .sep{width:1px;align-self:stretch;background:var(--rule)}
+.lockup .ph{border:1.5px dashed var(--rule);border-radius:10px;padding:.55rem 1rem;font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink2)}
+.pl{display:flex;align-items:center;gap:.55rem}
+.pl .pname{font-weight:800;font-size:1.05rem;letter-spacing:-.01em}
+.pl .peg{font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--ink2)}
+.comp{display:flex;flex-wrap:wrap;gap:1rem;align-items:center;margin-top:.9rem}
+.btn{border:0;font:inherit;font-weight:700;border-radius:11px;padding:.68rem 1.25rem;cursor:pointer}
+.btn.pri{background:var(--ink);color:var(--bg)}
+.btn.akz{background:var(--terra);color:#fffdf8}
+.pill{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;border-radius:999px;padding:.28rem .7rem;background:var(--ochre);color:#fffdf8}
+.link{color:var(--terra);font-weight:700;text-decoration:underline;text-underline-offset:3px}
+.eyeb2{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.24em;text-transform:uppercase;color:var(--ochre)}
+.band{background:var(--ink);color:var(--bg);border-radius:16px;padding:1.1rem 1.2rem;display:flex;gap:1.1rem;align-items:center;flex-wrap:wrap;margin-top:1rem}
+.band .t{font-family:'Fraunces',serif;font-size:1.15rem;color:#fff}
+.band .s{font-size:.85rem;color:#cdbfa8}
+.grid2{display:grid;grid-template-columns:1.1fr .9fr;gap:.9rem;margin-top:.9rem}
+@media(max-width:680px){.grid2{grid-template-columns:1fr}}
+pre{background:var(--ink);color:#e9e2d3;border-radius:14px;padding:1rem 1.1rem;font-family:'JetBrains Mono',monospace;font-size:.78rem;line-height:1.55;overflow:auto}
+pre .c{color:#8f8676}
+pre .v{color:#9ec27f}
+.badge{display:inline-flex;align-items:center;gap:.45rem;font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;border-radius:999px;padding:.3rem .7rem;border:1px solid var(--rule);background:var(--paper)}
+.badge b{font-size:.72rem}
+.badge.ok{color:var(--good);border-color:var(--good)}
+.badge.warn{color:var(--burg);border-color:var(--burg)}
+.price{margin-top:1rem;font-size:.92rem;color:var(--ink2)}
+a{color:var(--terra)}
+.foot{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink2);text-align:center;margin-top:2.4rem}
+.foot a{color:var(--aub)}
+</style>
+<link rel="stylesheet" href="heiben-design.css">
+<script src="heiben-kennzahlen.js"></script>
+<script src="heiben-nav.js" defer></script>
+</head>
+<body data-hb-welt="holding">
+<div class="wrap">
+  <p class="eyebrow">HeiBen · White-Label-Demo · Weg A</p>
+  <h1>Ihre Marke. <em>Unser</em> Wissen.</h1>
+  <p class="lead">Die komplette HeiBen-Suite unter Partner-Marke — und der Beweis, dass das keine Folienbehauptung ist: Ein Partner-Theme ist genau ein <code>:root</code>-Block. Wählen Sie unten eine Marke und sehen Sie zu.</p>
+
+  <section>
+    <div class="h2"><small>Live umschalten</small>Drei Marken, eine Suite</div>
+    <div class="switch" role="group" aria-label="Marke wählen">
+      <button id="tHeiben" class="on" data-t="heiben">HeiBen (Standard)</button>
+      <button id="tRhein" data-t="rheinwohnen">Rheinwohnen eG</button>
+      <label for="pick">Ihre Farbe <input type="color" id="pick" value="#14508c" aria-label="Eigene Markenfarbe wählen"></label>
+      <span class="badge" id="aa"><b id="aaV">5,3:1</b><span id="aaT">Primär auf Papier · AA ✓</span></span>
+    </div>
+
+    <div class="lockup" aria-label="Co-Branding-Lockup">
+      <svg viewBox="0 0 236 64" style="height:40px;flex:none" xmlns="http://www.w3.org/2000/svg" aria-label="HeiBen">
+        <path d="M10 40 L30 16 L50 40" fill="none" stroke="#1f1c17" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M10 50 C16.5 45.8 23.5 54.2 30 50 C36.5 45.8 43.5 54.2 50 50" fill="none" stroke="#b04a31" stroke-width="5.5" stroke-linecap="round"/>
+        <text x="64" y="48" font-family="Fraunces,serif" font-weight="560" font-size="40" letter-spacing="-1"><tspan fill="#b04a31">H</tspan><tspan fill="#1f1c17">ei</tspan><tspan fill="#b04a31">B</tspan><tspan fill="#1f1c17">en</tspan></text>
+      </svg>
+      <div class="sep"></div>
+      <div id="partnerSlot">
+        <span class="ph">Ihr Logo</span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="h2"><small>Das Produkt im Partner-Kleid</small>Komponenten, live eingefärbt</div>
+    <div class="card">
+      <div class="eyeb2" id="eyebSample">Tagesdosis · Begriff des Tages</div>
+      <div style="font-family:'Fraunces',serif;font-size:1.5rem;margin:.3rem 0 .2rem">Was ist der <em style="color:var(--terra)">Zinseszins</em>?</div>
+      <p style="color:var(--ink2);font-size:.95rem">Zinsen, die selbst wieder Zinsen tragen — der stille Motor jedes Sparplans.</p>
+      <div class="comp">
+        <button class="btn akz">Gewusst</button>
+        <button class="btn pri">Weiter</button>
+        <span class="pill">Tagesdosis heute offen →</span>
+        <a class="link" href="#" onclick="return false">Mehr zum Thema</a>
+        <svg width="72" height="72" viewBox="0 0 72 72" aria-hidden="true"><circle cx="36" cy="36" r="30" fill="none" stroke="var(--bg2)" stroke-width="8"/><circle cx="36" cy="36" r="30" fill="none" stroke="var(--terra)" stroke-width="8" stroke-linecap="round" stroke-dasharray="188.5" stroke-dashoffset="71.6" transform="rotate(-90 36 36)"/><text x="36" y="42" text-anchor="middle" font-family="Fraunces,serif" font-size="17" fill="var(--ink)">62</text></svg>
+      </div>
+    </div>
+    <div class="band">
+      <svg width="42" height="42" viewBox="0 0 64 64" aria-hidden="true"><path d="M12 40 L32 16 L52 40" fill="none" stroke="#fffdf8" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 50 C18.5 45.8 25.5 54.2 32 50 C38.5 45.8 45.5 54.2 52 50" fill="none" stroke="#b04a31" stroke-width="5.5" stroke-linecap="round"/></svg>
+      <div style="flex:1"><div class="t" id="bandTitle">Dein HeiBen-Stand</div><div class="s" id="hbKzBand">60 von 544 Begriffen · 3 von 16 Pfaden · 4-Tage-Serie</div></div>
+      <svg width="56" height="56" viewBox="0 0 72 72" aria-hidden="true"><circle cx="36" cy="36" r="30" fill="none" stroke="rgba(255,255,255,.14)" stroke-width="8"/><circle cx="36" cy="36" r="30" fill="none" stroke="var(--ochre)" stroke-width="8" stroke-linecap="round" stroke-dasharray="188.5" stroke-dashoffset="100" transform="rotate(-90 36 36)"/><text x="36" y="42" text-anchor="middle" font-family="Fraunces,serif" font-size="16" fill="#fffdf8">47</text></svg>
+    </div>
+  </section>
+
+  <section>
+    <div class="h2"><small>Der Beweis</small>Ein Theme ist ein Block</div>
+    <div class="grid2">
+      <pre id="code" aria-live="polite"></pre>
+      <div class="card">
+        <p><b>So funktioniert es.</b> Flächen, Tinte und Typografie bleiben HeiBen — das hält jede Ableitung ruhig und lesbar. Die Partner-Marke belegt ausschließlich die beiden Akzent-Rollen. Deshalb ist ein neuer Mandant in Stunden live, nicht in Wochen — und der Kontrast-Check läuft gleich mit.</p>
+        <p class="price">Preislogik Weg A: <b>7.500&nbsp;€ Setup + 690&nbsp;€/Monat je Marke</b> (Jahresvertrag, Staffel ab drei Mandanten) — Details im <a href="strategie.html">Geschäftsmodell</a>, Regeln im <a href="marke.html">Markenhandbuch</a>.</p>
+      </div>
+    </div>
+  </section>
+
+  <p class="foot">HeiBen GmbH i. G. · „Heimat leben" · <a href="strategie.html">Geschäftsmodell</a> · <a href="marke.html">Markenhandbuch</a> · <a href="index.html">Zur Startseite</a></p>
+</div>
+
+<script>
+var THEMES={
+  heiben:{name:"HeiBen",terra:"#b04a31",ochre:"#a97a1d",partner:false},
+  rheinwohnen:{name:"Rheinwohnen eG",terra:"#1f6f6b",ochre:"#5d7a2f",partner:true}
+};
+function hx(n){n=Math.max(0,Math.min(255,Math.round(n)));var s=n.toString(16);return s.length<2?"0"+s:s;}
+function hexRGB(h){h=h.replace('#','');return [parseInt(h.substr(0,2),16),parseInt(h.substr(2,2),16),parseInt(h.substr(4,2),16)];}
+function lum(h){var c=hexRGB(h).map(function(v){v/=255;return v<=0.03928?v/12.92:Math.pow((v+0.055)/1.055,2.4);});return 0.2126*c[0]+0.7152*c[1]+0.0722*c[2];}
+function cr(a,b){var x=lum(a),y=lum(b),hi=Math.max(x,y),lo=Math.min(x,y);return (hi+0.05)/(lo+0.05);}
+function rgb2hsl(r,g,b){r/=255;g/=255;b/=255;var mx=Math.max(r,g,b),mn=Math.min(r,g,b),h=0,s=0,l=(mx+mn)/2;if(mx!==mn){var d=mx-mn;s=l>0.5?d/(2-mx-mn):d/(mx+mn);if(mx===r)h=((g-b)/d+(g<b?6:0));else if(mx===g)h=(b-r)/d+2;else h=(r-g)/d+4;h/=6;}return [h,s,l];}
+function hsl2hex(h,s,l){function f(p,q,t){if(t<0)t+=1;if(t>1)t-=1;if(t<1/6)return p+(q-p)*6*t;if(t<1/2)return q;if(t<2/3)return p+(q-p)*(2/3-t)*6;return p;}var r,g,b;if(s===0){r=g=b=l;}else{var q=l<0.5?l*(1+s):l+s-l*s,p=2*l-q;r=f(p,q,h+1/3);g=f(p,q,h);b=f(p,q,h-1/3);}return "#"+hx(r*255)+hx(g*255)+hx(b*255);}
+function deriveLabel(hex){var c=hexRGB(hex),hsl=rgb2hsl(c[0],c[1],c[2]);return hsl2hex(hsl[0],Math.min(1,hsl[1]*0.9),Math.max(0.16,hsl[2]*0.72));}
+
+var cur="heiben";
+function partnerLogo(name,color){
+  return '<div class="pl"><svg width="34" height="34" viewBox="0 0 34 34" aria-hidden="true"><rect x="1.5" y="1.5" width="31" height="31" rx="8" fill="'+color+'"/><path d="M9 18 L17 10 L25 18" fill="none" stroke="#fffdf8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><rect x="12.6" y="18" width="8.8" height="7.5" rx="1.4" fill="#fffdf8"/></svg><span><span class="pname" style="color:'+color+'">'+name.replace(' eG','')+'</span> <span class="peg">eG</span></span></div>';
+}
+function codeBlock(t){
+  return '<span class="c">/* Partner-Theme „'+t.name+'“ — mehr braucht es nicht */</span>\n'+
+  ':root{\n'+
+  '  --terra: <span class="v">'+t.terra+'</span>;  <span class="c">/* Primär-Akzent */</span>\n'+
+  '  --ochre: <span class="v">'+t.ochre+'</span>;  <span class="c">/* Label-Akzent */</span>\n'+
+  '}\n'+
+  '<span class="c">/* Flächen, Tinte, Typografie bleiben HeiBen. */</span>';
+}
+function apply(key,custom){
+  var t=custom||THEMES[key]; cur=key;
+  var r=document.documentElement.style;
+  r.setProperty('--terra',t.terra); r.setProperty('--ochre',t.ochre);
+  document.getElementById('code').innerHTML=codeBlock(t);
+  var slot=document.getElementById('partnerSlot');
+  slot.innerHTML=t.partner?partnerLogo(t.name,t.terra):'<span class="ph">Ihr Logo</span>';
+  document.getElementById('bandTitle').textContent=t.partner?('Mein '+t.name.replace(' eG','')+'-Stand'):'Dein HeiBen-Stand';
+  var ratio=cr(t.terra,'#fffdf8'), ok=ratio>=4.5;
+  var aa=document.getElementById('aa');
+  aa.className='badge '+(ok?'ok':'warn');
+  document.getElementById('aaV').textContent=(Math.round(ratio*10)/10).toLocaleString('de-DE')+':1';
+  document.getElementById('aaT').textContent='Primär auf Papier · '+(ok?'AA ✓':'zu hell für Text');
+  document.getElementById('tHeiben').className=key==='heiben'?'on':'';
+  document.getElementById('tRhein').className=key==='rheinwohnen'?'on':'';
+}
+document.getElementById('tHeiben').addEventListener('click',function(){apply('heiben');});
+document.getElementById('tRhein').addEventListener('click',function(){apply('rheinwohnen');});
+document.getElementById('pick').addEventListener('input',function(e){
+  var c=e.target.value;
+  apply('custom',{name:'Ihre Marke',terra:c,ochre:deriveLabel(c),partner:true});
+});
+apply('heiben');
+</script>
+<script>
+/* Nenner des Demo-Stands aus den echten Kennzahlen (heiben-kennzahlen.js) */
+(function(){var k=window.HEIBEN_KZ,el=document.getElementById('hbKzBand');
+if(k&&el)el.textContent='60 von '+k.karten+' Begriffen · 3 von '+k.lernpfade+' Pfaden · 4-Tage-Serie';})();
+</script>
+</body>
+</html>

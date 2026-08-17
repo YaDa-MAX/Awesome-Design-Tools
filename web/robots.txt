@@ -1,0 +1,13 @@
+User-agent: *
+Allow: /
+# Interne Verwaltungsseiten nicht indexieren:
+Disallow: /kulinarik-redaktion.html
+Disallow: /kulinarik-export.html
+Disallow: /studio-redaktion.html
+Disallow: /schaufenster-redaktion.html
+Disallow: /anfragenverwaltung.html
+Disallow: /bestellverwaltung.html
+Disallow: /konto-verwaltung.html
+
+# Beim Live-Gang die echte Domain eintragen:
+Sitemap: https://www.heiben.de/sitemap.xml

@@ -1,0 +1,1021 @@
+openapi: 3.1.0
+info:
+  title: HeiBen Platform API
+  version: 0.1.0-draft
+  summary: API für die HeiBen-Plattform (Konten, Abo/Zahlung, Shop, Kulinarik, Content, Analytics).
+  description: >
+    Entwurf passend zum Backend-Konzept. Ein Konto (SSO) über alle Häuser; Zugriff über
+    Entitlements; Zahlung über Stripe (Webhook treibt den Zustand). Kein bindendes Dokument.
+  contact:
+    name: HeiBen Holding GmbH (i. G.)
+    email: api@heiben.de
+servers:
+- url: https://api.heiben.de/v1
+  description: Produktion (Beispiel)
+- url: https://staging-api.heiben.de/v1
+  description: Staging (Beispiel)
+- url: http://127.0.0.1:4010
+  description: Mock (Prism, lokal — ohne Backend)
+tags:
+- name: Auth
+- name: Account
+- name: Subscriptions
+- name: Billing
+- name: Catalog
+- name: Orders
+- name: Designs
+- name: Gallery
+- name: Content
+- name: Kulinarik
+- name: Analytics
+- name: Referrals
+- name: Webhooks
+security:
+- bearerAuth: []
+paths:
+  /auth/register:
+    post:
+      tags: [Auth]
+      summary: Konto anlegen
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: {$ref: '#/components/schemas/RegisterRequest'}
+      responses:
+        '201':
+          description: Konto erstellt
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/AuthResponse'}
+              example:
+                access_token: eyJhbGciOiJIUzI1Ni␣…gekürzt
+                token_type: Bearer
+                account: &id001
+                  id: 3f1a…
+                  email: maria.beispiel@example.de
+                  name: Maria Beispiel
+                  roles:
+                  - customer
+                  marketing_consent: true
+                  created_at: '2026-03-04T09:12:00Z'
+        '409': {$ref: '#/components/responses/Conflict'}
+        '422': {$ref: '#/components/responses/ValidationError'}
+  /auth/login:
+    post:
+      tags: [Auth]
+      summary: Anmelden
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: {$ref: '#/components/schemas/LoginRequest'}
+      responses:
+        '200':
+          description: Angemeldet
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/AuthResponse'}
+              example:
+                access_token: eyJhbGciOiJIUzI1Ni␣…gekürzt
+                token_type: Bearer
+                account: *id001
+        '401': {$ref: '#/components/responses/Unauthorized'}
+  /auth/logout:
+    post:
+      tags: [Auth]
+      summary: Abmelden
+      responses:
+        '204': {description: Abgemeldet}
+  /account:
+    get:
+      tags: [Account]
+      summary: Eigenes Profil
+      responses:
+        '200':
+          description: Profil
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/Account'}
+              example: *id001
+        '401': {$ref: '#/components/responses/Unauthorized'}
+    patch:
+      tags: [Account]
+      summary: Profil ändern
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: {$ref: '#/components/schemas/AccountUpdate'}
+      responses:
+        '200':
+          description: Aktualisiert
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/Account'}
+    delete:
+      tags: [Account]
+      summary: Konto löschen (DSGVO)
+      responses:
+        '202': {description: Löschung angestoßen}
+  /account/export:
+    get:
+      tags: [Account]
+      summary: Datenkopie (DSGVO-Auskunft)
+      responses:
+        '200':
+          description: Export
+          content:
+            application/json:
+              schema: {type: object, additionalProperties: true}
+  /subscriptions:
+    get:
+      tags: [Subscriptions]
+      summary: Abos & Entitlements
+      responses:
+        '200':
+          description: Liste
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  subscriptions:
+                    type: array
+                    items: {$ref: '#/components/schemas/Subscription'}
+                  entitlements:
+                    type: array
+                    items: {$ref: '#/components/schemas/Entitlement'}
+              example:
+                subscriptions:
+                - id: a1…
+                  scope: lebenswissen
+                  plan: Lebenswissen Jahr
+                  cycle: jahr
+                  status: active
+                  current_period_end: '2027-03-04T00:00:00Z'
+                  auto_renew: true
+                - id: b2…
+                  scope: app
+                  plan: Kulinarik-App Monat
+                  cycle: monat
+                  status: trial
+                  trial_until: '2026-04-03'
+                entitlements:
+                - scope: lebenswissen
+                  active: true
+                  valid_until: '2027-03-04T00:00:00Z'
+                - scope: app
+                  active: true
+                  valid_until: '2026-04-03T00:00:00Z'
+  /subscriptions/trial:
+    post:
+      tags: [Subscriptions]
+      summary: Probemonat starten
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [scope]
+              properties:
+                scope: {$ref: '#/components/schemas/Scope'}
+      responses:
+        '201':
+          description: Probemonat aktiv
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/Subscription'}
+        '409': {$ref: '#/components/responses/Conflict'}
+  /subscriptions/checkout:
+    post:
+      tags: [Billing]
+      summary: Stripe-Checkout-Session erzeugen (Abo oder Bundle)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [scope, cycle]
+              properties:
+                scope: {$ref: '#/components/schemas/Scope'}
+                cycle: {$ref: '#/components/schemas/Cycle'}
+                success_url: {type: string, format: uri}
+                cancel_url: {type: string, format: uri}
+      responses:
+        '200':
+          description: Checkout-URL
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  checkout_url: {type: string, format: uri}
+              example:
+                checkout_url: https://checkout.stripe.com/c/pay/cs_test_a1B2c3…
+  /subscriptions/portal:
+    post:
+      tags: [Billing]
+      summary: Stripe-Kundenportal-Link
+      responses:
+        '200':
+          description: Portal-URL
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  portal_url: {type: string, format: uri}
+  /subscriptions/{id}/cancel:
+    post:
+      tags: [Subscriptions]
+      summary: Abo kündigen (zum Periodenende)
+      parameters: [$ref: '#/components/parameters/IdPath']
+      responses:
+        '200':
+          description: Gekündigt
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/Subscription'}
+        '404': {$ref: '#/components/responses/NotFound'}
+  /subscriptions/{id}/resume:
+    post:
+      tags: [Subscriptions]
+      summary: Kündigung zurücknehmen
+      parameters: [$ref: '#/components/parameters/IdPath']
+      responses:
+        '200':
+          description: Fortgesetzt
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/Subscription'}
+  /invoices:
+    get:
+      tags: [Billing]
+      summary: Rechnungen
+      responses:
+        '200':
+          description: Liste
+          content:
+            application/json:
+              schema:
+                type: array
+                items: {$ref: '#/components/schemas/Invoice'}
+              example:
+              - id: inv_1
+                amount_cents: 1490
+                currency: EUR
+                status: paid
+                pdf_url: https://files.heiben.de/inv/2026-0001.pdf
+                issued_at: '2026-03-04T09:12:30Z'
+              - id: inv_2
+                amount_cents: 690
+                currency: EUR
+                status: paid
+                pdf_url: https://files.heiben.de/inv/2026-0002.pdf
+                issued_at: '2026-03-04T09:13:10Z'
+  /catalog:
+    get:
+      tags: [Catalog]
+      summary: Produkte
+      security: []
+      parameters:
+      - name: kind
+        in: query
+        schema: {type: string, enum: [physical, digital, bundle]}
+      responses:
+        '200':
+          description: Liste
+          content:
+            application/json:
+              schema:
+                type: array
+                items: {$ref: '#/components/schemas/Product'}
+              example:
+              - id: p_lw_jahr
+                kind: digital
+                name: Lebenswissen-Mitgliedschaft (Jahr)
+                price_cents: 1490
+              - id: p_app_jahr
+                kind: digital
+                name: Kulinarik-App (Jahr)
+                price_cents: 6900
+              - id: p_kochbuch
+                kind: digital
+                name: Kochbuch E-Book
+                price_cents: 1200
+              - id: p_bundle
+                kind: bundle
+                name: Kochbuch-Bundle
+                price_cents: 1990
+              - id: p_schild
+                kind: physical
+                name: Türschild (Maßanfertigung)
+                price_cents: 2490
+  /catalog/{id}:
+    get:
+      tags: [Catalog]
+      summary: Produkt
+      security: []
+      parameters: [$ref: '#/components/parameters/IdPath']
+      responses:
+        '200':
+          description: Produkt
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/Product'}
+        '404': {$ref: '#/components/responses/NotFound'}
+  /cart:
+    get:
+      tags: [Orders]
+      summary: Warenkorb lesen
+      responses:
+        '200':
+          description: Warenkorb
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/Cart'}
+    put:
+      tags: [Orders]
+      summary: Warenkorb setzen
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: {$ref: '#/components/schemas/Cart'}
+      responses:
+        '200':
+          description: Gespeichert
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/Cart'}
+  /orders:
+    get:
+      tags: [Orders]
+      summary: Bestellungen
+      responses:
+        '200':
+          description: Liste
+          content:
+            application/json:
+              schema:
+                type: array
+                items: {$ref: '#/components/schemas/Order'}
+    post:
+      tags: [Orders]
+      summary: Bestellung aus Warenkorb anlegen
+      responses:
+        '201':
+          description: Bestellung angelegt (Zahlung via Checkout)
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/Order'}
+  /designs:
+    post:
+      tags: [Designs]
+      summary: Konfigurator-Design speichern
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: {$ref: '#/components/schemas/DesignInput'}
+      responses:
+        '201':
+          description: Gespeichert
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/Design'}
+  /designs/{id}:
+    get:
+      tags: [Designs]
+      summary: Design laden
+      parameters: [$ref: '#/components/parameters/IdPath']
+      responses:
+        '200':
+          description: Design
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/Design'}
+        '404': {$ref: '#/components/responses/NotFound'}
+  /designs/{id}/publish:
+    post:
+      tags: [Gallery]
+      summary: Design in die Galerie veröffentlichen
+      parameters: [$ref: '#/components/parameters/IdPath']
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title: {type: string}
+      responses:
+        '201':
+          description: Veröffentlicht (Moderation ausstehend)
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/GalleryItem'}
+  /gallery:
+    get:
+      tags: [Gallery]
+      summary: Galerie lesen
+      security: []
+      parameters:
+      - {$ref: '#/components/parameters/Limit'}
+      - {$ref: '#/components/parameters/Cursor'}
+      responses:
+        '200':
+          description: Liste
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items: {$ref: '#/components/schemas/GalleryItem'}
+                  next_cursor: {type: string}
+              example:
+                items:
+                - id: g1
+                  design_id: d1
+                  title: Türschild „Familie Hein"
+                  visibility: public
+                  moderation_status: approved
+                - id: g2
+                  design_id: d2
+                  title: Twist-Vase 18 cm
+                  visibility: public
+                  moderation_status: approved
+                next_cursor:
+  /articles/{slug}:
+    get:
+      tags: [Content]
+      summary: Artikel (Paywall serverseitig)
+      parameters:
+      - name: slug
+        in: path
+        required: true
+        schema: {type: string}
+      responses:
+        '200':
+          description: Artikel (bei Premium nur mit Entitlement vollständig)
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/Article'}
+        '402': {$ref: '#/components/responses/PaymentRequired'}
+        '404': {$ref: '#/components/responses/NotFound'}
+  /kulinarik/recipes:
+    get:
+      tags: [Kulinarik]
+      summary: Eigene Rezepte
+      responses:
+        '200':
+          description: Liste
+          content:
+            application/json:
+              schema:
+                type: array
+                items: {$ref: '#/components/schemas/Recipe'}
+    post:
+      tags: [Kulinarik]
+      summary: Rezept anlegen
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: {$ref: '#/components/schemas/RecipeInput'}
+      responses:
+        '201':
+          description: Angelegt
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/Recipe'}
+  /kulinarik/food:
+    get:
+      tags: [Kulinarik]
+      summary: Lebensmittel-Suche
+      security: []
+      parameters:
+      - name: q
+        in: query
+        schema: {type: string}
+      responses:
+        '200':
+          description: Treffer
+          content:
+            application/json:
+              schema:
+                type: array
+                items: {$ref: '#/components/schemas/FoodItem'}
+              example:
+              - id: apfel
+                n: Apfel
+                kat: Obst
+                per100:
+                  energie: 52
+                  eiweiss: 0.3
+                  kh: 14
+                  fett: 0.2
+                  ballast: 2.4
+                  vitc: 12
+                  vitd: 0
+                  eisen: 0.1
+                  calcium: 6
+                  magnesium: 5
+              - id: haferflocken
+                n: Haferflocken
+                kat: Getreide
+                per100:
+                  energie: 370
+                  eiweiss: 13
+                  kh: 59
+                  fett: 7
+                  ballast: 10
+                  vitc: 0
+                  vitd: 0
+                  eisen: 4.3
+                  calcium: 54
+                  magnesium: 130
+  /kulinarik/profile:
+    get:
+      tags: [Kulinarik]
+      summary: Nährwert-Profil & Tagesbedarf
+      responses:
+        '200':
+          description: Profil
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/NutritionProfile'}
+              example:
+                sex: w
+                age: 34
+                height_cm: 172
+                weight_kg: 70
+                activity: 1.375
+                goal: halten
+                bmi: 23.7
+                targets:
+                  energie: 2041
+                  eiweiss: 98
+                  kh: 257
+                  fett: 68
+                  ballast: 30
+                  vitc: 100
+                  vitd: 20
+                  eisen: 15
+                  calcium: 1000
+                  magnesium: 300
+    put:
+      tags: [Kulinarik]
+      summary: Profil setzen (berechnet Bedarf)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: {$ref: '#/components/schemas/NutritionProfileInput'}
+      responses:
+        '200':
+          description: Gespeichert inkl. berechneter targets
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/NutritionProfile'}
+  /kulinarik/meal-log:
+    get:
+      tags: [Kulinarik]
+      summary: Mahlzeiten eines Tages
+      parameters:
+      - name: date
+        in: query
+        required: true
+        schema: {type: string, format: date}
+      responses:
+        '200':
+          description: Tageslog
+          content:
+            application/json:
+              schema:
+                type: array
+                items: {$ref: '#/components/schemas/MealLog'}
+              example:
+              - id: ml_1
+                date: '2026-06-18'
+                slot: fruh
+                items:
+                - name: Shakshuka mit Feta
+                  servings: 1
+                  nutrition:
+                    energie: 380
+                    eiweiss: 22
+                    kh: 18
+                    fett: 24
+    post:
+      tags: [Kulinarik]
+      summary: Mahlzeit eintragen
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: {$ref: '#/components/schemas/MealLogInput'}
+      responses:
+        '201':
+          description: Eingetragen
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/MealLog'}
+  /kulinarik/shopping-list/generate:
+    post:
+      tags: [Kulinarik]
+      summary: Einkaufsliste aus Plan erzeugen
+      responses:
+        '200':
+          description: Liste
+          content:
+            application/json:
+              schema:
+                type: array
+                items: {$ref: '#/components/schemas/ShoppingListItem'}
+              example:
+              - id: s1
+                text: Berglinsen 250 g
+                done: false
+              - id: s2
+                text: Karotten 3
+                done: false
+              - id: s3
+                text: Spinat 200 g
+                done: false
+  /events:
+    post:
+      tags: [Analytics]
+      summary: Ereignis-Batch aufnehmen
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [events]
+              properties:
+                events:
+                  type: array
+                  items: {$ref: '#/components/schemas/EventInput'}
+      responses:
+        '202': {description: Aufgenommen}
+  /experiments/{key}:
+    get:
+      tags: [Analytics]
+      summary: Zugeteilte A/B-Variante (sticky)
+      parameters:
+      - name: key
+        in: path
+        required: true
+        schema: {type: string}
+      responses:
+        '200':
+          description: Variante
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  key: {type: string}
+                  variant: {type: string}
+              example:
+                key: paywall_cta
+                variant: B
+  /referrals:
+    get:
+      tags: [Referrals]
+      summary: Eigener Empfehlungscode & Guthaben
+      responses:
+        '200':
+          description: Referral
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/Referral'}
+              example:
+                code: HB-7K2Q
+                invited_count: 3
+                credit_cents: 1500
+  /referrals/apply:
+    post:
+      tags: [Referrals]
+      summary: Empfehlungscode anwenden
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [code]
+              properties:
+                code: {type: string}
+      responses:
+        '200':
+          description: Angewendet (Rabatt aktiv)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  discount_percent: {type: integer}
+        '404': {$ref: '#/components/responses/NotFound'}
+  /webhooks/stripe:
+    post:
+      tags: [Webhooks]
+      summary: Stripe-Webhook (signiert; treibt Abo-/Rechnungszustand)
+      security: []
+      parameters:
+      - name: Stripe-Signature
+        in: header
+        required: true
+        schema: {type: string}
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: {type: object, additionalProperties: true}
+      responses:
+        '200': {description: Verarbeitet}
+        '400': {$ref: '#/components/responses/ValidationError'}
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  parameters:
+    IdPath:
+      name: id
+      in: path
+      required: true
+      schema: {type: string, format: uuid}
+    Limit:
+      name: limit
+      in: query
+      schema: {type: integer, default: 20, maximum: 100}
+    Cursor:
+      name: cursor
+      in: query
+      schema: {type: string}
+  responses:
+    Unauthorized:
+      description: Nicht authentifiziert
+      content:
+        application/json:
+          schema: {$ref: '#/components/schemas/Error'}
+    NotFound:
+      description: Nicht gefunden
+      content:
+        application/json:
+          schema: {$ref: '#/components/schemas/Error'}
+    Conflict:
+      description: Konflikt
+      content:
+        application/json:
+          schema: {$ref: '#/components/schemas/Error'}
+    PaymentRequired:
+      description: Zugriff erfordert aktives Abo/Entitlement
+      content:
+        application/json:
+          schema: {$ref: '#/components/schemas/Error'}
+    ValidationError:
+      description: Validierungsfehler
+      content:
+        application/json:
+          schema: {$ref: '#/components/schemas/Error'}
+  schemas:
+    Scope:
+      type: string
+      enum: [lebenswissen, app]
+    Cycle:
+      type: string
+      enum: [monat, jahr]
+    Error:
+      type: object
+      required: [code, message]
+      properties:
+        code: {type: string}
+        message: {type: string}
+        details: {type: object, additionalProperties: true}
+    RegisterRequest:
+      type: object
+      required: [email, password]
+      properties:
+        email: {type: string, format: email}
+        password: {type: string, minLength: 8}
+        name: {type: string}
+        marketing_consent: {type: boolean, default: false}
+    LoginRequest:
+      type: object
+      required: [email, password]
+      properties:
+        email: {type: string, format: email}
+        password: {type: string}
+    AuthResponse:
+      type: object
+      properties:
+        access_token: {type: string}
+        token_type: {type: string, examples: [Bearer]}
+        account: {$ref: '#/components/schemas/Account'}
+    Account:
+      type: object
+      properties:
+        id: {type: string, format: uuid}
+        email: {type: string, format: email}
+        name: {type: string}
+        roles:
+          type: array
+          items: {type: string, enum: [customer, editor, ops, admin]}
+        marketing_consent: {type: boolean}
+        created_at: {type: string, format: date-time}
+    AccountUpdate:
+      type: object
+      properties:
+        name: {type: string}
+        marketing_consent: {type: boolean}
+    Subscription:
+      type: object
+      properties:
+        id: {type: string, format: uuid}
+        scope: {$ref: '#/components/schemas/Scope'}
+        plan: {type: string}
+        cycle: {$ref: '#/components/schemas/Cycle'}
+        status: {type: string, enum: [trial, active, canceled]}
+        trial_until: {type: string, format: date}
+        current_period_end: {type: string, format: date-time}
+        auto_renew: {type: boolean}
+    Entitlement:
+      type: object
+      properties:
+        scope: {$ref: '#/components/schemas/Scope'}
+        active: {type: boolean}
+        valid_until: {type: string, format: date-time}
+    Invoice:
+      type: object
+      properties:
+        id: {type: string, format: uuid}
+        amount_cents: {type: integer}
+        currency: {type: string, examples: [EUR]}
+        status: {type: string}
+        pdf_url: {type: string, format: uri}
+        issued_at: {type: string, format: date-time}
+    Product:
+      type: object
+      properties:
+        id: {type: string, format: uuid}
+        kind: {type: string, enum: [physical, digital, bundle]}
+        name: {type: string}
+        price_cents: {type: integer}
+    CartItem:
+      type: object
+      properties:
+        product_id: {type: string, format: uuid}
+        design_id: {type: string, format: uuid}
+        qty: {type: integer, minimum: 1}
+    Cart:
+      type: object
+      properties:
+        items:
+          type: array
+          items: {$ref: '#/components/schemas/CartItem'}
+    Order:
+      type: object
+      properties:
+        id: {type: string, format: uuid}
+        status: {type: string}
+        total_cents: {type: integer}
+        items:
+          type: array
+          items: {$ref: '#/components/schemas/CartItem'}
+        created_at: {type: string, format: date-time}
+    DesignInput:
+      type: object
+      required: [type, material, params]
+      properties:
+        type: {type: string, enum: [schild, box, vase]}
+        material: {type: string}
+        params: {type: object, additionalProperties: true}
+    Design:
+      allOf:
+      - {$ref: '#/components/schemas/DesignInput'}
+      - type: object
+        properties:
+          id: {type: string, format: uuid}
+          preview_url: {type: string, format: uri}
+    GalleryItem:
+      type: object
+      properties:
+        id: {type: string, format: uuid}
+        design_id: {type: string, format: uuid}
+        title: {type: string}
+        visibility: {type: string, enum: [public, unlisted]}
+        moderation_status: {type: string, enum: [pending, approved, rejected]}
+    Article:
+      type: object
+      properties:
+        slug: {type: string}
+        title: {type: string}
+        body: {type: string}
+        premium: {type: boolean}
+        house: {type: string}
+        locked: {type: boolean, description: 'true = Premium und nicht freigeschaltet', examples: [false]}
+    Nutrition:
+      type: object
+      properties:
+        energie: {type: number}
+        eiweiss: {type: number}
+        kh: {type: number}
+        fett: {type: number}
+        ballast: {type: number}
+        vitc: {type: number}
+        vitd: {type: number}
+        eisen: {type: number}
+        calcium: {type: number}
+        magnesium: {type: number}
+    RecipeInput:
+      type: object
+      required: [name]
+      properties:
+        name: {type: string}
+        portions: {type: integer, minimum: 1}
+        nutrition: {$ref: '#/components/schemas/Nutrition'}
+        ingredients:
+          type: array
+          items: {type: string}
+    Recipe:
+      allOf:
+      - {$ref: '#/components/schemas/RecipeInput'}
+      - type: object
+        properties:
+          id: {type: string, format: uuid}
+    FoodItem:
+      type: object
+      properties:
+        id: {type: string}
+        n: {type: string}
+        kat: {type: string}
+        per100: {$ref: '#/components/schemas/Nutrition'}
+    NutritionProfileInput:
+      type: object
+      required: [sex, age, height_cm, weight_kg, activity, goal]
+      properties:
+        sex: {type: string, enum: [w, m]}
+        age: {type: integer}
+        height_cm: {type: integer}
+        weight_kg: {type: number}
+        activity: {type: number, description: 'Aktivitätsfaktor 1.2–1.9'}
+        goal: {type: string, enum: [halten, reduzieren, aufbauen]}
+    NutritionProfile:
+      allOf:
+      - {$ref: '#/components/schemas/NutritionProfileInput'}
+      - type: object
+        properties:
+          targets: {$ref: '#/components/schemas/Nutrition'}
+          bmi: {type: number}
+    MealLogInput:
+      type: object
+      required: [date, slot]
+      properties:
+        date: {type: string, format: date}
+        slot: {type: string, enum: [fruh, mittag, abend, snack]}
+        name: {type: string}
+        servings: {type: number, default: 1}
+        nutrition: {$ref: '#/components/schemas/Nutrition'}
+        ingredients:
+          type: array
+          items: {type: string}
+    MealLog:
+      type: object
+      properties:
+        id: {type: string, format: uuid}
+        date: {type: string, format: date}
+        slot: {type: string, enum: [fruh, mittag, abend, snack]}
+        items:
+          type: array
+          items: {type: object, additionalProperties: true}
+    ShoppingListItem:
+      type: object
+      properties:
+        id: {type: string, format: uuid}
+        text: {type: string}
+        done: {type: boolean}
+    Referral:
+      type: object
+      properties:
+        code: {type: string}
+        invited_count: {type: integer}
+        credit_cents: {type: integer}
+    EventInput:
+      type: object
+      required: [name]
+      properties:
+        name: {type: string}
+        props: {type: object, additionalProperties: true}
+        ts: {type: string, format: date-time}

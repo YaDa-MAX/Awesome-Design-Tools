@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HeiBen Immobilien · Objekt- & Besichtigungsplaner</title>
+<meta name="description" content="Stelle eine Objektauswahl zusammen: Immobilien auf der Karte, Volumen und Provision kalkulieren, Besichtigungen reservieren oder anfragen, Exposés ablegen — als Makler- und Interessentenansicht.">
+<link rel="stylesheet" href="vendor/leaflet/leaflet.css">
+<style>
+:root{--bg:#f3eee5;--bg-soft:#ebe3d4;--ink:#1f1c17;--ink-soft:#524a3e;--rule:#d8cdb7;--terracotta:#b04a31;--accent:#792d29;--accent-d:#5a211e;}
+*{box-sizing:border-box;}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Manrope',-apple-system,Segoe UI,sans-serif;line-height:1.5;}
+.wrap{max-width:1180px;margin:0 auto;padding:0 1.2rem;}
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:1.1rem 0;border-bottom:1px solid var(--rule);}
+.wm{font-family:'Fraunces',serif;font-weight:700;font-size:1.4rem;}.wm .a{color:var(--terracotta);}
+.wm span{font-weight:400;font-size:.9rem;color:var(--ink-soft);}
+.back{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);text-decoration:none;}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:.64rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent-d);}
+h1{font-family:'Fraunces',serif;font-weight:340;font-size:clamp(1.6rem,4.2vw,2.4rem);margin:.9rem 0 .2rem;}
+.lede{color:var(--ink-soft);max-width:66ch;}
+.bar{display:flex;gap:.6rem;flex-wrap:wrap;align-items:center;margin:1rem 0;}
+.seg{display:inline-flex;border:1px solid var(--rule);border-radius:10px;overflow:hidden;background:#fff;}
+.seg button{border:0;background:none;padding:.5rem .9rem;font:inherit;font-size:.82rem;cursor:pointer;color:var(--ink-soft);}
+.seg button.on{background:var(--ink);color:#f3eee5;}
+.btn{display:inline-flex;align-items:center;gap:.3rem;border:0;cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;padding:.55rem .8rem;border-radius:8px;text-decoration:none;}
+.btn.ink{background:var(--ink);color:#f3eee5;}.btn.primary{background:var(--accent);color:#f3eee5;}
+.btn.ghost{background:none;border:1px solid var(--ink);color:var(--ink);}.btn.sm{padding:.35rem .6rem;font-size:.54rem;}
+.fld{display:flex;flex-direction:column;gap:3px;}
+.fld label{font-size:.62rem;color:var(--ink-soft);font-family:'JetBrains Mono',monospace;letter-spacing:.06em;text-transform:uppercase;}
+.fld input,.fld select{border:1px solid var(--rule);border-radius:8px;padding:.45rem .6rem;font:inherit;}
+#map{height:380px;border:1px solid var(--rule);border-radius:16px;margin:.4rem 0 .3rem;z-index:0;}
+.maphint{font-size:.74rem;color:var(--ink-soft);margin-bottom:1rem;}
+.layout{display:grid;grid-template-columns:330px 1fr;gap:18px;align-items:start;}
+@media(max-width:860px){.layout{grid-template-columns:1fr;}}
+.panel{background:#fff;border:1px solid var(--rule);border-radius:16px;padding:1rem;}
+.panel h2{font-family:'Fraunces',serif;font-weight:480;font-size:1.1rem;margin:0 0 .5rem;}
+.chips{display:flex;gap:.35rem;flex-wrap:wrap;margin-bottom:.6rem;}
+.chip{border:1px solid var(--rule);background:#fff;border-radius:999px;padding:.32rem .7rem;font-size:.72rem;cursor:pointer;}
+.chip.on{background:var(--accent);border-color:var(--accent);color:#f3eee5;font-weight:600;}
+.search{width:100%;border:1px solid var(--rule);border-radius:9px;padding:.55rem .7rem;font:inherit;margin-bottom:.6rem;}
+.pal{display:flex;flex-direction:column;gap:.5rem;max-height:520px;overflow:auto;}
+.pcard{border:1px solid var(--rule);border-radius:11px;padding:.6rem .7rem;cursor:grab;background:#fff;}
+.pcard:hover{border-color:var(--ink);}
+.pcard .tp{display:flex;justify-content:space-between;align-items:center;gap:.4rem;}
+.kat{font-family:'JetBrains Mono',monospace;font-size:.5rem;letter-spacing:.05em;text-transform:uppercase;padding:.1rem .4rem;border-radius:999px;color:#fff;}
+.pcard h3{font-family:'Fraunces',serif;font-weight:460;font-size:.98rem;margin:.15rem 0;}
+.pcard .meta{font-size:.74rem;color:var(--ink-soft);}
+.rooms{display:flex;flex-direction:column;gap:14px;}
+.room{border:1px solid var(--rule);border-radius:16px;background:#fff;overflow:hidden;}
+.room.activeRoom{border-color:var(--accent);box-shadow:0 0 0 2px rgba(121,45,41,.25);}
+.room .rh{display:flex;align-items:center;justify-content:space-between;gap:.5rem;padding:.7rem .9rem;background:var(--bg-soft);}
+.room .rh input.nm{border:1px solid var(--rule);border-radius:7px;padding:.3rem .5rem;font:inherit;font-family:'Fraunces',serif;width:200px;}
+.drophint{padding:.6rem .9rem 1rem;min-height:48px;}
+.drophint.drop{background:rgba(121,45,41,.08);outline:2px dashed var(--accent);outline-offset:-6px;}
+.empty{color:var(--ink-soft);font-size:.84rem;padding:.4rem 0;}
+.item{position:relative;border-left:3px solid var(--rule);padding:.2rem 0 .6rem 1rem;margin-left:.4rem;}
+.item:before{content:"";position:absolute;left:-7px;top:.5rem;width:12px;height:12px;border-radius:50%;background:var(--accent);border:2px solid #fff;}
+.item .row1{display:flex;justify-content:space-between;align-items:flex-start;gap:.5rem;}
+.item h4{font-family:'Fraunces',serif;font-weight:480;font-size:1rem;margin:.1rem 0;}
+.item .meta{font-size:.76rem;color:var(--ink-soft);}
+.stt{font-family:'JetBrains Mono',monospace;font-size:.5rem;letter-spacing:.05em;text-transform:uppercase;padding:.12rem .45rem;border-radius:999px;margin-left:.3rem;}
+.stt.offen{background:#eee4d0;color:#8a7a55;}.stt.angefragt{background:#f3e3c2;color:#9c6f1f;}.stt.reserviert{background:#e7eede;color:#3f5130;}
+.ctrls{display:flex;gap:.25rem;}
+.iconbtn{border:1px solid var(--rule);background:#fff;border-radius:7px;width:26px;height:26px;cursor:pointer;font-size:.8rem;line-height:1;}
+.exp{margin-top:.5rem;border-top:1px dashed var(--rule);padding-top:.5rem;display:none;}
+.exp.open{display:block;}
+.kv{font-size:.82rem;margin:.2rem 0;}.kv b{font-family:'Fraunces',serif;}
+.todo label{display:flex;gap:.4rem;align-items:flex-start;font-size:.82rem;margin:.2rem 0;}
+.docs{margin-top:.4rem;}.docrow{display:flex;align-items:center;gap:.4rem;font-size:.8rem;margin:.2rem 0;}
+.summary{margin-top:1rem;border:1px solid var(--rule);border-radius:14px;background:#fff;padding:.9rem 1rem;}
+.metrics{display:flex;gap:1.4rem;flex-wrap:wrap;margin-bottom:.6rem;}
+.metrics .b{font-family:'Fraunces',serif;font-size:1.3rem;font-weight:560;}
+.metrics .l{font-family:'JetBrains Mono',monospace;font-size:.54rem;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-soft);}
+.pos{display:flex;justify-content:space-between;gap:.6rem;font-size:.85rem;border-bottom:1px dashed var(--rule);padding:.28rem 0;}
+.pos .r{white-space:nowrap;}
+.pos.tot{border-bottom:0;border-top:2px solid var(--ink);font-family:'Fraunces',serif;font-weight:560;font-size:1rem;padding-top:.4rem;}
+.disc{background:var(--bg-soft);border:1px solid var(--rule);border-radius:12px;padding:.7rem 1rem;font-size:.82rem;color:var(--ink-soft);margin:1.4rem 0;}
+footer{margin-top:2.5rem;border-top:1px solid var(--rule);padding:1.3rem 0;color:var(--ink-soft);font-size:.8rem;}
+.note{font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--ink-soft);}
+.modal{position:fixed;inset:0;background:rgba(31,28,23,.6);display:none;align-items:center;justify-content:center;z-index:1000;padding:1rem;}
+.modal.open{display:flex;}
+.modal .box{background:#fff;border-radius:14px;width:min(900px,96vw);max-height:88vh;display:flex;flex-direction:column;overflow:hidden;}
+.modal .box.sm{width:min(440px,94vw);}
+.modal .mh{display:flex;justify-content:space-between;align-items:center;padding:.7rem 1rem;border-bottom:1px solid var(--rule);}
+.modal iframe{flex:1;border:0;width:100%;height:70vh;}
+.modal .mb{padding:1.1rem;}
+.spin{display:inline-block;width:16px;height:16px;border:3px solid var(--rule);border-top-color:var(--accent);border-radius:50%;animation:sp 1s linear infinite;vertical-align:-3px;}
+@keyframes sp{to{transform:rotate(360deg);}}
+.numpin span{display:flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;color:#fff;font:600 11px/1 'JetBrains Mono',monospace;border:2px solid #fff;box-shadow:0 1px 3px rgba(0,0,0,.3);}
+.cust-head{display:none;}
+@media print{
+  .topbar,.bar,.palWrap,.iconbtn,.ctrls,.btn,.chips,.search,.disc,footer,.room .rh input.nm,.maphint{display:none!important;}
+  .layout{display:block;} .company-only{display:none!important;}
+  .cust-head{display:block;margin-bottom:1rem;} .room,.panel,.summary{border-color:#ccc;box-shadow:none;}
+}
+.kunde .company-only{display:none!important;}
+.kunde .cust-head{display:block;}
+</style>
+<link rel="stylesheet" href="heiben-design.css">
+<script src="heiben-nav.js" defer></script>
+</head>
+<body data-hb-welt="immobilien">
+<div class="wrap" id="app">
+  <div class="topbar"><div class="wm"><span class="a">H</span>ei<span class="a">B</span>en <span>· Immobilien</span></div><a class="back" href="immobilien.html">← HeiBen Immobilien</a></div>
+  <div class="eyebrow">Objekt- & Besichtigungsplaner</div>
+  <h1>Deine Objektauswahl <em style="color:var(--accent-d);font-style:italic;">selbst zusammenstellen</em></h1>
+  <p class="lede">Stelle Immobilien zu Listen zusammen, sieh sie auf der Karte, kalkuliere Volumen und Provision, reserviere Besichtigungen oder frag an und lege Exposés ab — und übergib alles als Mappe für Interessent:innen.</p>
+
+  <div id="map"></div>
+  <div class="maphint">Karte © OpenStreetMap-Mitwirkende · Marker je Objektart (bordeaux Wohnung, grün Haus, ocker Gewerbe, petrol Grundstück); ausgewählte Objekte erscheinen nummeriert in Listenfarbe.</div>
+
+  <div class="bar">
+    <div class="fld" style="min-width:220px;flex:1;"><label>Vorgang / Titel</label><input id="title" placeholder="z. B. Suche Familie Muster"></div>
+    <div class="fld"><label>Gespeicherte Vorgänge</label>
+      <span style="display:flex;gap:.3rem;"><select id="planSel"></select><button class="btn ghost sm" id="newPlan" title="Neuer Vorgang">＋</button><button class="iconbtn" id="delPlan" title="Vorgang löschen">×</button></span></div>
+  </div>
+  <div class="bar" id="tplBar"><span class="note">Vorlagen:</span>
+    <button class="btn ghost sm" data-tpl="familie-koeln">Familien-Auswahl Köln</button>
+    <button class="btn ghost sm" data-tpl="kapitalanlage">Kapitalanlage</button>
+    <button class="btn ghost sm" data-tpl="gewerbe">Gewerbe & Investment</button>
+  </div>
+  <div class="bar">
+    <span class="note">Ansicht:</span>
+    <div class="seg" id="viewSeg"><button data-view="firma" class="on">Makler (Provision)</button><button data-view="kunde">Interessent</button></div>
+    <span class="fld cust-head" id="abWrap" style="display:none;"><label>Vorgangsnummer</label><input id="ab" style="width:130px;" value=""></span>
+    <button class="btn ink sm" id="reqAll">✉ Sammelanfrage</button>
+    <button class="btn ghost sm" id="print">🖨 Exposé-Mappe</button>
+    <button class="btn ghost sm" id="expJson">JSON ↓</button>
+    <button class="btn ghost sm" id="impBtn">JSON ↑</button>
+    <button class="btn ghost sm" id="expCsv">Objektliste CSV ↓</button>
+    <input id="impFile" type="file" accept="application/json" style="display:none;">
+  </div>
+
+  <div class="cust-head" id="custHead" style="display:none;">
+    <div style="font-family:'Fraunces',serif;font-size:1.4rem;" id="custTitle">Ihre Objektauswahl — HeiBen Immobilien</div>
+    <div class="note">Vorgangsnummer: <b id="abShow"></b> · Angaben ohne Gewähr, Änderungen vorbehalten.</div>
+  </div>
+
+  <div class="layout">
+    <aside class="panel palWrap">
+      <h2>Objekte</h2>
+      <div class="chips" id="katChips">
+        <span class="chip on" data-kat="">Alle</span>
+        <span class="chip" data-kat="wohnung">Wohnung</span>
+        <span class="chip" data-kat="haus">Haus</span>
+        <span class="chip" data-kat="gewerbe">Gewerbe</span>
+        <span class="chip" data-kat="grundstueck">Grundstück</span>
+      </div>
+      <input class="search" id="pSearch" placeholder="Suchen … Ort oder Objekt">
+      <div class="note" style="margin-bottom:.4rem;">Tippe <b>+ Liste</b> oder zieh eine Karte auf eine Liste.</div>
+      <div class="pal" id="pal"></div>
+    </aside>
+
+    <main>
+      <div class="rooms" id="rooms"></div>
+      <div style="margin-top:.8rem;"><button class="btn primary sm" id="addRoom">+ Liste hinzufügen</button>
+        <button class="btn ghost sm" id="clearPlan">Vorgang leeren</button></div>
+      <div class="summary" id="summary"></div>
+      <div class="disc">HeiBen Immobilien vermittelt. Besichtigungen werden über die Objekt-Schnittstelle reserviert (Demo), sonst per E-Mail angefragt. Provision und Marge sind nur in der Makleransicht sichtbar; Interessent:innen sehen Kaufpreise, Eckdaten und die Vorgangsnummer. Alle Daten liegen lokal im Browser.</div>
+    </main>
+  </div>
+
+  <footer>HeiBen Immobilien · Köln · <span class="note">„Heimat leben" — das passende Zuhause.</span></footer>
+</div>
+
+<div class="modal" id="pdfModal"><div class="box"><div class="mh"><b id="pdfName">Vorschau</b><button class="btn ghost sm" id="pdfClose">schließen</button></div><iframe id="pdfFrame" title="Exposé-Vorschau"></iframe></div></div>
+<div class="modal" id="orderModal"><div class="box sm"><div class="mh"><b>Besichtigung</b><button class="btn ghost sm" id="orderClose">schließen</button></div><div class="mb" id="orderBody"></div></div></div>
+
+<script src="vendor/leaflet/leaflet.js"></script>
+<script src="heiben-firmierungen.js"></script>
+<script src="heiben-angebot.js"></script>
+<script src="vendor/jspdf/jspdf.umd.min.js"></script>
+<script src="heiben-pdf.js"></script>
+<script src="heiben-analytics.js"></script>
+<script>
+(function(){
+  var T=window.HeiBenTrack;
+  var KATLABEL={wohnung:'Wohnung',haus:'Haus',gewerbe:'Gewerbe',grundstueck:'Grundstück'};
+  var KATCOL={wohnung:'#792d29',haus:'#3a4a2c',gewerbe:'#9c6f1f',grundstueck:'#3b6b6b'};
+  var LISTCOL=['#792d29','#3b6b6b','#9c6f1f','#3a4a2c','#6b3951'];
+
+  var O=[
+   {id:'w-altstadt',t:'Altbauwohnung Köln-Altstadt',ort:'Köln-Altstadt',kat:'wohnung',lat:50.9385,lng:6.9595,flaeche:92,zimmer:3,preis:549000,provPct:3.57,partner:'Eigentümer privat',book:{mode:'api'},todo:['Exposé versenden','Energieausweis','Grundriss','Besichtigung terminieren'],desc:'Sanierter Altbau mit Stuck, 3 Zimmer, Balkon zum Innenhof.'},
+   {id:'w-ehrenfeld',t:'Loft Köln-Ehrenfeld',ort:'Köln-Ehrenfeld',kat:'wohnung',lat:50.9530,lng:6.9170,flaeche:78,zimmer:2,preis:415000,provPct:3.57,partner:'Bauträger',book:{mode:'api'},todo:['Exposé versenden','Energieausweis','Besichtigung terminieren'],desc:'Offenes Loft in ehemaligem Fabrikgebäude, hohe Decken.'},
+   {id:'w-suelz',t:'Familienwohnung Köln-Sülz',ort:'Köln-Sülz',kat:'wohnung',lat:50.9180,lng:6.9250,flaeche:115,zimmer:4,preis:625000,provPct:3.57,partner:'Eigentümer privat',book:{mode:'email',email:'immobilien@heiben.de'},todo:['Exposé versenden','Grundriss','Besichtigung terminieren'],desc:'Helle 4-Zimmer-Wohnung, ruhige Lage, nahe Grüngürtel.'},
+   {id:'w-deutz',t:'Neubau Köln-Deutz',ort:'Köln-Deutz',kat:'wohnung',lat:50.9370,lng:6.9740,flaeche:64,zimmer:2,preis:389000,provPct:3.57,partner:'Bauträger',book:{mode:'api'},todo:['Exposé versenden','Energieausweis','Besichtigung terminieren'],desc:'Erstbezug mit Rheinblick, Tiefgaragenstellplatz möglich.'},
+   {id:'w-nippes',t:'Etagenwohnung Köln-Nippes',ort:'Köln-Nippes',kat:'wohnung',lat:50.9610,lng:6.9510,flaeche:84,zimmer:3,preis:398000,provPct:3.57,partner:'Eigentümer privat',book:{mode:'email',email:'immobilien@heiben.de'},todo:['Exposé versenden','Besichtigung terminieren'],desc:'Charmante Altbau-Etagenwohnung mit Wohnküche.'},
+   {id:'h-rodenkirchen',t:'Reihenhaus Köln-Rodenkirchen',ort:'Köln-Rodenkirchen',kat:'haus',lat:50.8890,lng:6.9990,flaeche:145,zimmer:5,preis:798000,provPct:3.57,partner:'Eigentümer privat',book:{mode:'api'},todo:['Exposé versenden','Energieausweis','Grundriss','Besichtigung terminieren'],desc:'Modernes Reihenmittelhaus mit Garten, nahe Rheinufer.'},
+   {id:'h-lindenthal',t:'Stadtvilla Köln-Lindenthal',ort:'Köln-Lindenthal',kat:'haus',lat:50.9280,lng:6.9050,flaeche:210,zimmer:6,preis:1450000,provPct:3.57,partner:'Eigentümer privat',book:{mode:'email',email:'immobilien@heiben.de'},todo:['Exposé versenden','Energieausweis','Grundriss','Besichtigung terminieren'],desc:'Repräsentative Villa mit parkähnlichem Grundstück.'},
+   {id:'h-bergisch',t:'Einfamilienhaus Bergisch Gladbach',ort:'Bergisch Gladbach',kat:'haus',lat:50.9920,lng:7.1280,flaeche:160,zimmer:5,preis:720000,provPct:3.57,partner:'Eigentümer privat',book:{mode:'api'},todo:['Exposé versenden','Energieausweis','Besichtigung terminieren'],desc:'Freistehendes Haus mit Garten in ruhiger Wohnlage.'},
+   {id:'h-bonn',t:'Doppelhaushälfte Bonn',ort:'Bonn',kat:'haus',lat:50.7370,lng:7.0980,flaeche:130,zimmer:4,preis:595000,provPct:3.57,partner:'Bauträger',book:{mode:'email',email:'immobilien@heiben.de'},todo:['Exposé versenden','Grundriss','Besichtigung terminieren'],desc:'Neuwertige Doppelhaushälfte mit Stellplatz und Terrasse.'},
+   {id:'g-buero',t:'Bürofläche Köln-Innenstadt',ort:'Köln-Innenstadt',kat:'gewerbe',lat:50.9400,lng:6.9560,flaeche:240,zimmer:0,preis:1200000,provPct:3.57,partner:'Eigentümer gewerblich',book:{mode:'api'},todo:['Exposé versenden','Flächennachweis','Besichtigung terminieren'],desc:'Repräsentative Büroetage, teilbar, gute ÖPNV-Anbindung.'},
+   {id:'g-laden',t:'Ladenlokal Belgisches Viertel',ort:'Köln-Belgisches Viertel',kat:'gewerbe',lat:50.9402,lng:6.9370,flaeche:95,zimmer:0,preis:480000,provPct:3.57,partner:'Eigentümer privat',book:{mode:'email',email:'immobilien@heiben.de'},todo:['Exposé versenden','Besichtigung terminieren'],desc:'Ladenlokal mit Schaufensterfront in Szenelage.'},
+   {id:'g-halle',t:'Gewerbehalle Köln-Ossendorf',ort:'Köln-Ossendorf',kat:'gewerbe',lat:50.9720,lng:6.8900,flaeche:600,zimmer:0,preis:1350000,provPct:3.57,partner:'Eigentümer gewerblich',book:{mode:'api'},todo:['Exposé versenden','Flächennachweis','Besichtigung terminieren'],desc:'Logistik-/Produktionshalle mit Rampe und Büroteil.'},
+   {id:'gr-frechen',t:'Baugrundstück Frechen',ort:'Frechen',kat:'grundstueck',lat:50.9100,lng:6.8120,flaeche:520,zimmer:0,preis:295000,provPct:3.57,partner:'Eigentümer privat',book:{mode:'email',email:'immobilien@heiben.de'},todo:['Exposé versenden','Bebauungsplan','Termin vor Ort'],desc:'Voll erschlossenes Baugrundstück für ein Einfamilienhaus.'},
+   {id:'gr-pulheim',t:'Baugrundstück Pulheim',ort:'Pulheim',kat:'grundstueck',lat:51.0000,lng:6.8020,flaeche:640,zimmer:0,preis:340000,provPct:3.57,partner:'Eigentümer privat',book:{mode:'api'},todo:['Exposé versenden','Bebauungsplan','Termin vor Ort'],desc:'Großzügiges Grundstück in Ortsrandlage, ruhig gelegen.'}
+  ];
+  var byId={}; O.forEach(function(o){byId[o.id]=o;});
+
+  var TEMPLATES={
+   'familie-koeln':{title:'Familien-Auswahl Köln',rooms:[{name:'Engere Auswahl',acts:['w-suelz','h-rodenkirchen','h-lindenthal']}]},
+   'kapitalanlage':{title:'Kapitalanlage',rooms:[{name:'Anlageobjekte',acts:['w-ehrenfeld','w-deutz','w-nippes']}]},
+   'gewerbe':{title:'Gewerbe & Investment',rooms:[{name:'Gewerbe',acts:['g-buero','g-laden','g-halle']}]}
+  };
+
+  var SKEY='heiben-immobilien';
+  function uid(){ return Math.random().toString(36).slice(2,9); }
+  function newPlanObj(title){ return {id:uid(),title:title||'Neuer Vorgang',view:'firma',ab:'VG-'+Math.random().toString(36).slice(2,6).toUpperCase(),activeRoom:0,rooms:[{id:uid(),name:'Engere Auswahl',items:[]}]}; }
+  function loadStore(){ try{var s=JSON.parse(localStorage.getItem(SKEY)); if(s&&s.plans&&s.current&&s.plans[s.current])return s;}catch(e){}
+    var p=newPlanObj('Mein Vorgang'); var st={current:p.id,plans:{}}; st.plans[p.id]=p; return st; }
+  var store=loadStore();
+  function saveStore(){ try{localStorage.setItem(SKEY,JSON.stringify(store));}catch(e){} }
+  function P(){ return store.plans[store.current]; }
+
+  function db(){ return new Promise(function(res,rej){ var r=indexedDB.open('heiben-immo',1);
+    r.onupgradeneeded=function(){ r.result.createObjectStore('docs'); };
+    r.onsuccess=function(){res(r.result);}; r.onerror=function(){rej(r.error);}; }); }
+  function dbPut(k,v){ return db().then(function(d){return new Promise(function(res,rej){ var tx=d.transaction('docs','readwrite'); tx.objectStore('docs').put(v,k); tx.oncomplete=function(){res();}; tx.onerror=function(){rej(tx.error);}; });}); }
+  function dbGet(k){ return db().then(function(d){return new Promise(function(res,rej){ var tx=d.transaction('docs','readonly'); var rq=tx.objectStore('docs').get(k); rq.onsuccess=function(){res(rq.result);}; rq.onerror=function(){rej(rq.error);}; });}); }
+
+  var map=L.map('map',{scrollWheelZoom:false}).setView([50.92,6.95],10);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:18,attribution:'© OpenStreetMap'}).addTo(map);
+  var baseLayer=L.layerGroup().addTo(map), planLayer=L.layerGroup().addTo(map);
+  function drawBase(){ baseLayer.clearLayers(); O.forEach(function(o){
+    L.circleMarker([o.lat,o.lng],{radius:7,color:KATCOL[o.kat],fillColor:KATCOL[o.kat],fillOpacity:.85,weight:2}).bindPopup('<b>'+o.t+'</b><br>'+o.ort+' · '+o.preis.toLocaleString('de-DE')+' €').addTo(baseLayer); }); }
+  function numIcon(col,nr){ return L.divIcon({className:'numpin',html:'<span style="background:'+col+'">'+nr+'</span>',iconSize:[22,22],iconAnchor:[11,11]}); }
+  function redrawPlan(){ planLayer.clearLayers(); var all=[]; var nr=0;
+    P().rooms.forEach(function(r,ri){ var col=LISTCOL[ri%LISTCOL.length];
+      r.items.forEach(function(it){ var o=byId[it.prodId]; if(!o)return; nr++; all.push([o.lat,o.lng]);
+        L.marker([o.lat,o.lng],{icon:numIcon(col,nr)}).bindPopup('<b>'+nr+'. '+o.t+'</b><br>'+o.ort+' · '+o.preis.toLocaleString('de-DE')+' €').addTo(planLayer); }); });
+    if(all.length){ try{ map.fitBounds(L.latLngBounds(all).pad(0.25)); }catch(e){} } }
+  function showOnMap(instId){ var f=findInst(instId); if(!f)return; var o=byId[f.it.prodId]; map.setView([o.lat,o.lng],13); document.getElementById('map').scrollIntoView({behavior:'smooth',block:'center'}); }
+
+  var fKat='', q='';
+  function renderPal(){
+    var list=O.filter(function(o){ if(fKat&&o.kat!==fKat)return false; if(q){var hay=(o.t+' '+o.ort).toLowerCase(); if(hay.indexOf(q)<0)return false;} return true; });
+    document.getElementById('pal').innerHTML=list.map(function(o){
+      return '<div class="pcard" draggable="true" data-id="'+o.id+'">'+
+        '<div class="tp"><span class="kat" style="background:'+KATCOL[o.kat]+'">'+KATLABEL[o.kat]+'</span>'+
+        '<button class="btn primary sm" data-add="'+o.id+'">+ '+(P().rooms[P().activeRoom]?P().rooms[P().activeRoom].name:'Liste')+'</button></div>'+
+        '<h3>'+o.t+'</h3><div class="meta">'+o.ort+' · '+o.flaeche+' m²'+(o.zimmer?' · '+o.zimmer+' Zi.':'')+' · '+o.preis.toLocaleString('de-DE')+' €</div><div style="margin-top:.45rem;"><button class="btn ghost sm" data-expose="'+o.id+'">Exposé (PDF)</button></div></div>';
+    }).join('')||'<p class="note">Kein Objekt für diese Auswahl.</p>';
+  }
+
+  function renderRooms(){
+    var host=document.getElementById('rooms'); host.innerHTML='';
+    P().rooms.forEach(function(r,ri){ var col=LISTCOL[ri%LISTCOL.length];
+      var el=document.createElement('div'); el.className='room'+(ri===P().activeRoom?' activeRoom':''); el.dataset.room=ri;
+      var itemsHtml=r.items.map(function(it){ var o=byId[it.prodId]; if(!o)return''; var status=it.status||'offen';
+        var prov=Math.round(o.preis*o.provPct/100);
+        var orderBtn=o.book.mode==='api'
+          ? '<button class="btn ink sm" data-order="'+it.instId+'">Besichtigung reservieren</button>'
+          : '<button class="btn ink sm" data-mail="'+it.instId+'">Besichtigung anfragen</button>';
+        var todo=(o.todo||[]).map(function(td,k){ var ck=it.checks&&it.checks[k]?'checked':''; return '<label><input type="checkbox" data-todo="'+it.instId+':'+k+'" '+ck+'> '+td+'</label>'; }).join('');
+        var docs=(it.docs||[]).map(function(dc){ return '<div class="docrow">📄 <a href="#" data-doc="'+dc.key+'">'+dc.name+'</a> <button class="iconbtn" data-docdel="'+it.instId+':'+dc.key+'" title="entfernen">×</button></div>'; }).join('');
+        return '<div class="item" data-inst="'+it.instId+'">'+
+          '<div class="row1"><div><h4>'+o.t+' <span class="stt '+status+' company-only">'+status+(it.ref?' · '+it.ref:'')+'</span></h4>'+
+          '<div class="meta">'+KATLABEL[o.kat]+' · '+o.ort+' · '+o.flaeche+' m²'+(o.zimmer?' · '+o.zimmer+' Zi.':'')+' · '+o.preis.toLocaleString('de-DE')+' €</div></div>'+
+          '<div class="ctrls"><button class="iconbtn" data-show="'+it.instId+'" title="auf Karte">⊙</button><button class="iconbtn" data-exp="'+it.instId+'" title="Details">▾</button><button class="iconbtn" data-del="'+it.instId+'" title="entfernen">×</button></div></div>'+
+          '<div class="exp" id="exp-'+it.instId+'">'+
+            '<div class="kv company-only"><b>Provision (HeiBen):</b> '+o.provPct+' % = '+prov.toLocaleString('de-DE')+' € · Anbieter: '+o.partner+'</div>'+
+            '<div class="kv"><b>Kaufpreis:</b> '+o.preis.toLocaleString('de-DE')+' € · '+Math.round(o.preis/o.flaeche).toLocaleString('de-DE')+' €/m²</div>'+
+            '<div class="kv">'+o.desc+'</div>'+
+            '<div style="margin:.4rem 0;">'+orderBtn+'</div>'+
+            '<div class="company-only"><div class="note">Vor der Besichtigung zu erledigen (To-do):</div><div class="todo">'+(todo||'<span class="note">—</span>')+'</div></div>'+
+            '<div class="docs"><div class="note">Exposé / Unterlagen (PDF):</div>'+(docs||'')+
+              '<div class="docrow"><input type="file" accept="application/pdf" data-file="'+it.instId+'" style="font-size:.75rem;"></div></div>'+
+          '</div></div>';
+      }).join('') || '<div class="empty">Noch keine Objekte — tippe in der Palette auf „+ Liste" oder zieh eine Karte hierher.</div>';
+      el.innerHTML='<div class="rh"><div style="display:flex;align-items:center;gap:.5rem;"><span style="width:10px;height:18px;border-radius:3px;background:'+col+';display:inline-block;"></span>'+
+        '<input class="nm" value="'+(r.name||('Liste '+(ri+1)))+'" data-roomname="'+ri+'"></div>'+
+        '<div class="ctrls"><button class="btn ghost sm" data-setactive="'+ri+'">'+(ri===P().activeRoom?'aktiv':'wählen')+'</button><button class="iconbtn" data-delroom="'+ri+'" title="Liste löschen">×</button></div></div>'+
+        '<div class="drophint" data-drop="'+ri+'">'+itemsHtml+'</div>';
+      host.appendChild(el);
+    });
+    renderSummary(); redrawPlan();
+  }
+
+  function renderSummary(){
+    var lists=P().rooms.length, pos=0, volumen=0, prov=0, flaecheSum=0, lines=[];
+    P().rooms.forEach(function(r){ r.items.forEach(function(it){ var o=byId[it.prodId]; if(!o)return; pos++; volumen+=o.preis; prov+=Math.round(o.preis*o.provPct/100); flaecheSum+=o.flaeche; lines.push({t:o.t,ort:o.ort,preis:o.preis}); }); });
+    var avgM2=flaecheSum?Math.round(volumen/flaecheSum):0;
+    var metrics='<div class="metrics">'+
+      '<div><div class="b">'+lists+'</div><div class="l">Listen</div></div>'+
+      '<div><div class="b">'+pos+'</div><div class="l">Objekte</div></div>'+
+      '<div><div class="b">'+avgM2.toLocaleString('de-DE')+' €</div><div class="l">Ø Preis / m²</div></div>'+
+      '<div class="company-only"><div class="b">'+prov.toLocaleString('de-DE')+' €</div><div class="l">Provision gesamt</div></div>'+
+      '<div><div class="b">'+volumen.toLocaleString('de-DE')+' €</div><div class="l">Volumen (Kaufpreise)</div></div>'+
+      '</div>';
+    var positions=lines.length?('<div class="note" style="margin:.2rem 0;">Objekte:</div>'+
+      lines.map(function(l){return '<div class="pos"><span>'+l.t+' · '+l.ort+'</span><span class="r">'+l.preis.toLocaleString('de-DE')+' €</span></div>';}).join('')+
+      '<div class="pos tot"><span>Gesamtvolumen</span><span class="r">'+volumen.toLocaleString('de-DE')+' €</span></div>'):'';
+    document.getElementById('summary').innerHTML=metrics+positions;
+  }
+
+  function addObj(objId,roomIdx){ var r=P().rooms[roomIdx]; if(!r)return;
+    if(r.items.some(function(x){return x.prodId===objId;})) return;
+    r.items.push({instId:uid(),prodId:objId,checks:{},docs:[],status:'offen'}); saveStore(); renderRooms(); renderPal(); if(T)T.ev('immo_add',{obj:objId}); }
+  function findInst(instId){ var rs=P().rooms; for(var i=0;i<rs.length;i++){ var it=rs[i].items.filter(function(x){return x.instId===instId;})[0]; if(it)return{r:i,it:it}; } return null; }
+
+  document.getElementById('pal').addEventListener('click',function(e){ var a=e.target.closest('[data-add]'); if(a){ addObj(a.dataset.add,P().activeRoom); return; } var x=e.target.closest('[data-expose]'); if(x){ e.preventDefault(); var o=byId[x.dataset.expose]; if(o&&window.HeiBenPDF){ window.HeiBenPDF.expose(o,(window.HEIBEN_FIRMA?window.HEIBEN_FIRMA('immobilien'):null)); if(T)T.ev('immo_expose',{obj:x.dataset.expose}); } } });
+  document.getElementById('pal').addEventListener('dragstart',function(e){ var c=e.target.closest('[data-id]'); if(c) e.dataTransfer.setData('text/id',c.dataset.id); });
+  document.getElementById('rooms').addEventListener('dragover',function(e){ var z=e.target.closest('[data-drop]'); if(z){ e.preventDefault(); z.classList.add('drop'); } });
+  document.getElementById('rooms').addEventListener('dragleave',function(e){ var z=e.target.closest('[data-drop]'); if(z) z.classList.remove('drop'); });
+  document.getElementById('rooms').addEventListener('drop',function(e){ var z=e.target.closest('[data-drop]'); if(z){ e.preventDefault(); z.classList.remove('drop'); var id=e.dataTransfer.getData('text/id'); if(id) addObj(id,+z.dataset.drop); } });
+
+  document.getElementById('rooms').addEventListener('change',function(e){
+    var rn=e.target.closest('[data-roomname]'); if(rn){ P().rooms[+rn.dataset.roomname].name=rn.value; saveStore(); renderPal(); return; }
+    var td=e.target.closest('[data-todo]'); if(td){ var pp=td.dataset.todo.split(':'); var f=findInst(pp[0]); if(f){ f.it.checks=f.it.checks||{}; f.it.checks[pp[1]]=td.checked; saveStore(); } return; }
+    var fl=e.target.closest('[data-file]'); if(fl && fl.files&&fl.files[0]){ var file=fl.files[0]; var f=findInst(fl.dataset.file); if(f){ var key=uid(); dbPut(key,{name:file.name,type:file.type,blob:file}).then(function(){ f.it.docs=f.it.docs||[]; f.it.docs.push({key:key,name:file.name}); saveStore(); renderRooms(); if(T)T.ev('immo_doc',{}); }); } return; }
+  });
+
+  document.getElementById('rooms').addEventListener('click',function(e){
+    var t=e.target;
+    var sh=t.closest('[data-show]'); if(sh){ showOnMap(sh.dataset.show); return; }
+    var sa=t.closest('[data-setactive]'); if(sa){ P().activeRoom=+sa.dataset.setactive; saveStore(); renderRooms(); renderPal(); return; }
+    var dr=t.closest('[data-delroom]'); if(dr){ var i=+dr.dataset.delroom; P().rooms.splice(i,1); if(!P().rooms.length)P().rooms.push({id:uid(),name:'Engere Auswahl',items:[]}); P().activeRoom=Math.min(P().activeRoom,P().rooms.length-1); saveStore(); renderRooms(); renderPal(); return; }
+    var ex=t.closest('[data-exp]'); if(ex){ var el=document.getElementById('exp-'+ex.dataset.exp); if(el)el.classList.toggle('open'); return; }
+    var del=t.closest('[data-del]'); if(del){ var f=findInst(del.dataset.del); if(f){ P().rooms[f.r].items=P().rooms[f.r].items.filter(function(x){return x.instId!==del.dataset.del;}); saveStore(); renderRooms(); } return; }
+    var mail=t.closest('[data-mail]'); if(mail){ sendMail(mail.dataset.mail); return; }
+    var od=t.closest('[data-order]'); if(od){ orderOnline(od.dataset.order); return; }
+    var doc=t.closest('[data-doc]'); if(doc){ e.preventDefault(); openDoc(doc.dataset.doc); return; }
+    var dcd=t.closest('[data-docdel]'); if(dcd){ var pp=dcd.dataset.docdel.split(':'); var f=findInst(pp[0]); if(f){ f.it.docs=(f.it.docs||[]).filter(function(x){return x.key!==pp[1];}); saveStore(); renderRooms(); } return; }
+  });
+
+  function sendMail(instId){ var f=findInst(instId); if(!f)return; var o=byId[f.it.prodId]; var to=o.book.email||'immobilien@heiben.de';
+    var subj='Besichtigungsanfrage: '+o.t;
+    var body='Guten Tag,\n\nwir möchten eine Besichtigung anfragen:\n\n• '+o.t+'\n• '+o.ort+' · '+o.flaeche+' m²'+(o.zimmer?' · '+o.zimmer+' Zimmer':'')+'\n• Kaufpreis: '+o.preis.toLocaleString('de-DE')+' €\n\nBitte um Terminvorschläge und das vollständige Exposé.\n\nFreundliche Grüße\nHeiBen Immobilien';
+    window.location.href='mailto:'+encodeURIComponent(to)+'?subject='+encodeURIComponent(subj)+'&body='+encodeURIComponent(body);
+    f.it.status='angefragt'; saveStore(); renderRooms(); if(T)T.ev('immo_mail',{obj:o.id});
+  }
+
+  function orderOnline(instId){ var f=findInst(instId); if(!f)return; var o=byId[f.it.prodId];
+    var om=document.getElementById('orderModal'), body=document.getElementById('orderBody'); var api=window.HEIBEN_BOOKING_API;
+    body.innerHTML='<p><span class="spin"></span> Verbindung zu <b>'+o.partner+'</b> …</p><p class="note">'+(api?'Besichtigung über Objekt-API.':'Demo-Reservierung (keine Live-API gesetzt).')+'</p>';
+    om.classList.add('open');
+    function rnd(){ return 'IM-'+Math.random().toString(36).slice(2,8).toUpperCase(); }
+    function finalize(ref,via){ f.it.status='reserviert'; f.it.ref=ref; saveStore(); renderRooms();
+      try{ if(window.HeiBenLedger) window.HeiBenLedger.log({welt:'immobilien',typ:'buchung',referenz:ref,status:'offen',total:(o.preis?Math.round(o.preis*0.0357):0),persons:1,n:1,titel:(o.t||o.name||'Objekt'),kunde:(P().title||'')}); }catch(e){}
+      body.innerHTML='<p style="font-family:Fraunces,serif;font-size:1.2rem;">✓ Besichtigung reserviert</p>'+
+        '<div class="kv"><b>'+o.t+'</b></div><div class="kv">'+o.ort+' · '+o.preis.toLocaleString('de-DE')+' €</div>'+
+        '<div class="kv">Anbieter: '+o.partner+'</div><div class="kv">Referenz: <b>'+ref+'</b></div>'+
+        '<p class="note" style="margin-top:.6rem;">'+via+' · konform zur HeiBen-Buchungs-API (POST /bookings → {reference,status}). Ohne erreichbare API greift die E-Mail-Anfrage.</p>'+
+        '<div style="margin-top:.6rem;"><button class="btn ink sm" id="orderOk">Schließen</button></div>';
+      document.getElementById('orderOk').addEventListener('click',function(){ om.classList.remove('open'); });
+      if(T)T.ev('immo_order',{obj:o.id,ref:ref});
+    }
+    if(api){ var payload={reference:P().ab,items:[{productId:o.id,date:''}]};
+      fetch(api.replace(/\/+$/,'')+'/bookings',{method:'POST',headers:{'Content-Type':'application/json','Prefer':'code=201, example=gebucht'},body:JSON.stringify(payload)})
+        .then(function(r){ return r.json(); }).then(function(res){ finalize(res.reference||rnd(),'Objekt-API'); })
+        .catch(function(){ finalize(rnd(),'Demo-Fallback (API nicht erreichbar)'); });
+    } else { setTimeout(function(){ finalize(rnd(),'Demo'); },900); }
+  }
+  document.getElementById('orderClose').addEventListener('click',function(){ document.getElementById('orderModal').classList.remove('open'); });
+
+  function openDoc(key){ dbGet(key).then(function(rec){ if(!rec){alert('Dokument nicht gefunden.');return;} var url=URL.createObjectURL(rec.blob);
+    document.getElementById('pdfName').textContent=rec.name; document.getElementById('pdfFrame').src=url; document.getElementById('pdfModal').classList.add('open'); }); }
+  document.getElementById('pdfClose').addEventListener('click',function(){ document.getElementById('pdfModal').classList.remove('open'); document.getElementById('pdfFrame').src='about:blank'; });
+
+  function requestAll(){ var p=P(); var lines=[]; var total=0;
+    p.rooms.forEach(function(r){ if(!r.items.length)return; lines.push(r.name+':');
+      r.items.forEach(function(it){ var o=byId[it.prodId]; if(!o)return; lines.push('  • '+o.t+' ('+o.ort+', '+o.flaeche+' m²) — '+o.preis.toLocaleString('de-DE')+' €'); total+=o.preis; });
+      lines.push('');
+    });
+    var subj='Objektauswahl: '+(p.title||'HeiBen-Vorgang');
+    var body='Guten Tag,\n\nzu folgender Objektauswahl bitten wir um Besichtigungstermine und Exposés:\n\nVorgang: '+(p.title||'HeiBen-Vorgang')+'\nVorgangsnr.: '+p.ab+'\n\n'+lines.join('\n')+'Gesamtvolumen: '+total.toLocaleString('de-DE')+' €\n\nFreundliche Grüße\nHeiBen Immobilien';
+    window.location.href='mailto:'+encodeURIComponent('immobilien@heiben.de')+'?subject='+encodeURIComponent(subj)+'&body='+encodeURIComponent(body);
+    if(T)T.ev('immo_request_all',{});
+  }
+  document.getElementById('reqAll').addEventListener('click',requestAll);
+
+  function download(name,content,type){ var b=new Blob([content],{type:type||'application/octet-stream'}); var u=URL.createObjectURL(b); var a=document.createElement('a'); a.href=u; a.download=name; document.body.appendChild(a); a.click(); a.remove(); setTimeout(function(){URL.revokeObjectURL(u);},1000); }
+  document.getElementById('expJson').addEventListener('click',function(){ download((P().title||'vorgang').replace(/\s+/g,'_')+'.json', JSON.stringify(P(),null,2),'application/json'); });
+  document.getElementById('impBtn').addEventListener('click',function(){ document.getElementById('impFile').click(); });
+  document.getElementById('impFile').addEventListener('change',function(e){ var file=e.target.files[0]; if(!file)return; var r=new FileReader();
+    r.onload=function(){ try{ var p=JSON.parse(r.result); if(!p.rooms)throw 0; p.id=uid(); p.title=(p.title||'Importierter Vorgang'); store.plans[p.id]=p; store.current=p.id; saveStore(); fullRender(); }catch(err){ alert('Ungültige JSON-Datei.'); } };
+    r.readAsText(file); e.target.value=''; });
+  document.getElementById('expCsv').addEventListener('click',function(){ var p=P(); var rows=[['Liste','Objekt','Ort','Art','Fläche m²','Zimmer','Kaufpreis','Preis/m²','Provision %','Provision €']];
+    p.rooms.forEach(function(r){ r.items.forEach(function(it){ var o=byId[it.prodId]; if(!o)return;
+      rows.push([r.name,o.t,o.ort,KATLABEL[o.kat],o.flaeche,(o.zimmer||''),o.preis,Math.round(o.preis/o.flaeche),o.provPct,Math.round(o.preis*o.provPct/100)]); }); });
+    var csv='\ufeff'+rows.map(function(r){return r.join(';');}).join('\n');
+    download((p.title||'objektliste').replace(/\s+/g,'_')+'_objektliste.csv', csv,'text/csv'); if(T)T.ev('immo_csv',{});
+  });
+
+  function renderPlanSel(){ var sel=document.getElementById('planSel'); sel.innerHTML='';
+    Object.keys(store.plans).forEach(function(id){ var oo=document.createElement('option'); oo.value=id; oo.textContent=store.plans[id].title||'(ohne Titel)'; if(id===store.current)oo.selected=true; sel.appendChild(oo); }); }
+  document.getElementById('planSel').addEventListener('change',function(e){ store.current=e.target.value; saveStore(); fullRender(); });
+  document.getElementById('newPlan').addEventListener('click',function(){ var p=newPlanObj('Vorgang '+(Object.keys(store.plans).length+1)); store.plans[p.id]=p; store.current=p.id; saveStore(); fullRender(); document.getElementById('title').focus(); });
+  document.getElementById('delPlan').addEventListener('click',function(){ if(Object.keys(store.plans).length<=1){ alert('Mindestens ein Vorgang muss bestehen bleiben.'); return; } if(!confirm('Diesen Vorgang löschen?'))return; delete store.plans[store.current]; store.current=Object.keys(store.plans)[0]; saveStore(); fullRender(); });
+
+  document.getElementById('tplBar').addEventListener('click',function(e){ var b=e.target.closest('[data-tpl]'); if(!b)return; loadTemplate(b.dataset.tpl); });
+  function loadTemplate(id){ var t=TEMPLATES[id]; if(!t)return; var p=newPlanObj(t.title);
+    p.rooms=t.rooms.map(function(room){ return {id:uid(),name:room.name,items:(room.acts||[]).map(function(aid){ return {instId:uid(),prodId:aid,checks:{},docs:[],status:'offen'}; })}; });
+    p.activeRoom=0; store.plans[p.id]=p; store.current=p.id; saveStore(); fullRender(); if(T)T.ev('immo_template',{tpl:id});
+  }
+
+  document.getElementById('title').addEventListener('input',function(e){ P().title=e.target.value; document.getElementById('custTitle').textContent='Ihre Objektauswahl — '+(e.target.value||'HeiBen Immobilien'); saveStore(); renderPlanSel(); });
+  function applyView(){ var p=P(); document.getElementById('app').classList.toggle('kunde',p.view==='kunde');
+    document.querySelectorAll('#viewSeg button').forEach(function(b){ b.classList.toggle('on',b.dataset.view===p.view); });
+    var show=p.view==='kunde';
+    document.getElementById('abWrap').style.display=show?'flex':'none';
+    document.getElementById('custHead').style.display=show?'block':'none';
+    document.getElementById('abShow').textContent=p.ab; renderSummary(); }
+  document.getElementById('viewSeg').addEventListener('click',function(e){ var b=e.target.closest('[data-view]'); if(!b)return; P().view=b.dataset.view; saveStore(); applyView(); if(T)T.ev('immo_view',{view:P().view}); });
+  document.getElementById('ab').addEventListener('input',function(e){ P().ab=e.target.value; document.getElementById('abShow').textContent=P().ab; saveStore(); });
+
+  document.getElementById('addRoom').addEventListener('click',function(){ P().rooms.push({id:uid(),name:'Liste '+(P().rooms.length+1),items:[]}); P().activeRoom=P().rooms.length-1; saveStore(); renderRooms(); renderPal(); });
+  document.getElementById('clearPlan').addEventListener('click',function(){ if(!confirm('Vorgang leeren?'))return; P().rooms=[{id:uid(),name:'Engere Auswahl',items:[]}]; P().activeRoom=0; saveStore(); renderRooms(); renderPal(); });
+  document.getElementById('print').addEventListener('click',function(){ window.print(); });
+  document.getElementById('katChips').addEventListener('click',function(e){ var c=e.target.closest('.chip'); if(!c)return;
+    document.querySelectorAll('#katChips .chip').forEach(function(x){x.classList.remove('on');}); c.classList.add('on'); fKat=c.dataset.kat||''; renderPal(); });
+  document.getElementById('pSearch').addEventListener('input',function(e){ q=e.target.value.trim().toLowerCase(); renderPal(); });
+
+  function fullRender(){ var p=P(); document.getElementById('title').value=p.title||''; document.getElementById('ab').value=p.ab; document.getElementById('custTitle').textContent='Ihre Objektauswahl — '+(p.title||'HeiBen Immobilien'); renderPlanSel(); applyView(); renderPal(); renderRooms(); }
+  drawBase(); fullRender();
+  setTimeout(function(){ map.invalidateSize(); },200);
+})();
+</script>
+<script src="heiben-legal.js"></script>
+</body>
+</html>

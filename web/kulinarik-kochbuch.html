@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Das HeiBen-Kochbuch — Heimat in Rezepten</title>
+<meta name="description" content="Das HeiBen-Kochbuch: saisonale Heimatküche aus Köln. Als E-Book, gedruckt (Print-on-Demand) oder im Bundle mit der Kulinarik-App.">
+<style>
+:root{--bg:#f3eee5;--bg-soft:#ebe3d4;--ink:#1f1c17;--ink-soft:#524a3e;--rule:#d8cdb7;--terracotta:#b04a31;--kuli:#6b3951;--ochre:#a97a1d;--wohnen:#4a5c39;}
+*{box-sizing:border-box;}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Manrope',-apple-system,Segoe UI,sans-serif;line-height:1.55;}
+.wrap{max-width:1040px;margin:0 auto;padding:0 1.5rem;}
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:1.1rem 0;border-bottom:1px solid var(--rule);}
+.wm{font-family:'Fraunces',serif;font-weight:700;font-size:1.4rem;}.wm .a{color:var(--terracotta);}
+.back{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);text-decoration:none;}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;color:var(--kuli);}
+h1{font-family:'Fraunces',serif;font-weight:340;font-size:clamp(2rem,5.4vw,3.4rem);line-height:1.04;letter-spacing:-.02em;margin:.4rem 0 .6rem;}
+h2{font-family:'Fraunces',serif;font-weight:440;font-size:1.5rem;margin:2.4rem 0 .8rem;}
+.lede{font-size:1.14rem;color:var(--ink-soft);max-width:56ch;}
+.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:2rem;align-items:center;padding:2.4rem 0 1rem;}
+@media(max-width:760px){.hero{grid-template-columns:1fr;}}
+.cover{aspect-ratio:3/4;border-radius:14px;background:linear-gradient(150deg,#6b3951,#792d29 60%,#1f1c17);position:relative;overflow:hidden;box-shadow:0 24px 60px rgba(31,28,23,.28);}
+.cover .t{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:space-between;padding:1.6rem;color:#f3eee5;}
+.cover .big{font-family:'Fraunces',serif;font-weight:340;font-size:2rem;line-height:1.05;}
+.cover .by{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;opacity:.85;}
+.muted{color:var(--ink-soft);}
+.formats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:1rem;}@media(max-width:760px){.formats{grid-template-columns:1fr;}}
+.fmt{background:#fff;border:1px solid var(--rule);border-radius:14px;padding:16px;display:flex;flex-direction:column;}
+.fmt.best{border-color:var(--kuli);box-shadow:0 0 0 2px rgba(107,57,81,.12);}
+.fmt .p{font-family:'Fraunces',serif;font-size:1.8rem;font-weight:560;margin:.2rem 0;}
+.fmt .save{color:var(--wohnen);font-size:.82rem;font-weight:600;}
+.btn{display:inline-block;border:0;cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;padding:.8rem 1.1rem;border-radius:10px;text-decoration:none;margin-top:auto;}
+.btn.primary{background:var(--kuli);color:#f3eee5;}.btn.terra{background:var(--terracotta);color:#f3eee5;}.btn.ghost{background:none;border:1px solid var(--ink);color:var(--ink);}
+.sample{background:#fff;border:1px solid var(--rule);border-radius:14px;padding:18px;}
+.sample h3{font-family:'Fraunces',serif;font-weight:480;margin:.2rem 0;}
+.toc{columns:2;gap:2rem;}@media(max-width:600px){.toc{columns:1;}}
+.toc li{margin:.3rem 0;}
+.upsell{background:var(--ink);color:#f3eee5;border-radius:18px;padding:2rem;margin-top:1.4rem;}
+footer{margin-top:3rem;border-top:1px solid var(--rule);padding:1.4rem 0;color:var(--ink-soft);font-size:.82rem;}
+.note{font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--ink-soft);}
+</style>
+<link rel="stylesheet" href="heiben-design.css">
+<script src="heiben-nav.js" defer></script>
+</head>
+<body data-hb-welt="kulinarik">
+<div class="wrap">
+  <div class="topbar"><div class="wm"><span class="a">H</span>ei<span class="a">B</span>en <span style="font-weight:400;font-size:.9rem;color:var(--ink-soft)">· Kochbuch</span></div><a class="back" href="kulinarik.html">← Kulinarik</a></div>
+
+  <section class="hero">
+    <div>
+      <div class="eyebrow">Kulinarik · Buch</div>
+      <h1>Heimat in Rezepten.</h1>
+      <p class="lede">Saisonale Küche einer Kölner Familie — ehrlich, alltagstauglich, ohne Schwein. 60 Rezepte vom Sonntagseintopf bis zur Festtafel, mit Geschichten dazu.</p>
+      <div class="formats">
+        <div class="fmt"><div class="eyebrow">E-Book</div><div class="p" id="pEbook"></div><p class="muted" style="font-size:.86rem;">PDF + EPUB, sofort verfügbar.</p><button class="btn ghost" id="buyEbook">In den Warenkorb</button></div>
+        <div class="fmt best"><div class="eyebrow">Print · on demand</div><div class="p" id="pPrint"></div><p class="muted" style="font-size:.86rem;">Klimaneutral gedruckt &amp; gebunden, Lieferung 5–7 Tage.</p><button class="btn primary" id="buyPrint">In den Warenkorb</button></div>
+        <div class="fmt"><div class="eyebrow">Bundle</div><div class="p" id="pBundle"></div><div class="save" id="bundleSave"></div><p class="muted" style="font-size:.86rem;">E-Book + 30 Tage Kulinarik-App.</p><button class="btn terra" id="buyBundle">Bundle sichern</button></div>
+      </div>
+      <p class="note" style="margin-top:.7rem;">Print-on-Demand: kein Lagerrisiko — jedes Buch wird erst auf Bestellung gefertigt.</p>
+    </div>
+    <div class="cover"><div class="t"><div class="by">HeiBen · Köln</div><div><div class="big">Heimat<br>in Rezepten</div><div class="by" style="margin-top:.6rem;">Das HeiBen-Kochbuch</div></div></div></div>
+  </section>
+
+  <h2>Leseprobe</h2>
+  <div class="sample">
+    <div class="eyebrow" style="color:var(--ochre)">Kostenfrei · ein Rezept zum Mitkochen</div>
+    <h3>Kölscher Sauerbraten — rheinisch, ohne Schwein (Rind)</h3>
+    <p class="muted">Beize aus Rotwein, Apfelkraut, Zwiebeln und Lorbeer; das Fleisch zieht 3 Tage. Geschmort mit Printen-Soße und Rosinen — dazu Klöße und Apfelmus. Das vollständige Rezept mit Mengen, Zeitplan und Resteküche steht im Buch.</p>
+    <h2 style="margin:1.2rem 0 .4rem;">Aus dem Inhalt</h2>
+    <ul class="toc muted">
+      <li>Sonntagseintöpfe für die ganze Woche</li>
+      <li>Schnelle Feierabendküche unter 30 Minuten</li>
+      <li>Brot &amp; Hefe — der HeiBen-Sauerteig</li>
+      <li>Orientalische Heimat: Couscous, Tajine, Linsen</li>
+      <li>Festtafel: vom Vorspeisen-Mezze bis zum Braten</li>
+      <li>Einmachen &amp; Haltbarmachen für den Winter</li>
+      <li>Süßes: Apfelkuchen, Grießflammeri, Dattelgebäck</li>
+      <li>Vorratskammer &amp; Resteküche</li>
+    </ul>
+  </div>
+
+  <div class="upsell">
+    <div class="eyebrow" style="color:var(--ochre)">Passt dazu</div>
+    <div style="font-family:'Fraunces',serif;font-weight:340;font-size:clamp(1.5rem,3.2vw,2rem);margin:.3rem 0;">Die Rezepte digital — mit Wochenplan &amp; Einkaufsliste.</div>
+    <p style="color:#d8cdb7;max-width:60ch;">Die Kulinarik-App synchronisiert die Kochbuch-Rezepte, plant deine Woche und schreibt die Einkaufsliste. Probemonat gratis.</p>
+    <a class="btn terra" href="kulinarik-app.html" style="margin-top:1rem;">Zur App →</a>
+    <button class="btn ghost" id="shareBtn" style="margin-top:1rem;color:#f3eee5;border-color:#f3eee5;">Buch teilen</button>
+  </div>
+
+  <footer>HeiBen Holding GmbH (i.&nbsp;G.) · Köln · Heimat leben.<br><span class="note">E-Book &amp; Print-on-Demand · ohne Schwein · saisonal.</span></footer>
+</div>
+
+<script src="heiben-konto.js"></script>
+<script src="heiben-analytics.js"></script>
+<script src="heiben-produkt.js"></script>
+<script>
+(function(){
+  var HP=window.HeiBenProdukt, fmt=HP.fmt;
+  var PRICES={ebook:12.90, print:24.90};
+  document.getElementById('pEbook').textContent=fmt(PRICES.ebook);
+  document.getElementById('pPrint').textContent=fmt(PRICES.print);
+  document.getElementById('pBundle').textContent=fmt(HP.BUNDLE.kochbuch);
+  document.getElementById('bundleSave').textContent='inkl. App-Probemonat';
+
+  function cartAdd(item){
+    var c; try{ c=JSON.parse(localStorage.getItem('heiben-shop-warenkorb'))||[]; }catch(e){ c=[]; }
+    c.push(item); try{ localStorage.setItem('heiben-shop-warenkorb', JSON.stringify(c)); }catch(e){}
+    if(window.HeiBenTrack) HeiBenTrack.ev('kochbuch_purchase',{variant:item.key});
+    HP.toast('Im Warenkorb ('+fmt(item.preis)+') ✓');
+  }
+  document.getElementById('buyEbook').onclick=function(){ cartAdd({key:'kochbuch-ebook',name:'HeiBen-Kochbuch (E-Book)',detail:'PDF + EPUB · Sofort-Download',preis:PRICES.ebook,menge:1}); };
+  document.getElementById('buyPrint').onclick=function(){ cartAdd({key:'kochbuch-print',name:'HeiBen-Kochbuch (Print)',detail:'Print-on-Demand · Lieferung 5–7 Tage',preis:PRICES.print,menge:1}); };
+  document.getElementById('buyBundle').onclick=function(){ HP.buyBundle(); cartAdd({key:'kochbuch-bundle',name:'HeiBen-Kochbuch Bundle',detail:'E-Book + 30 Tage Kulinarik-App',preis:HP.BUNDLE.kochbuch,menge:1}); };
+  document.getElementById('shareBtn').onclick=function(){ var u=HP.shareDesign({p:'kochbuch'}); if(navigator.share){ navigator.share({title:'Das HeiBen-Kochbuch',url:location.href}); } else { HP.copy(location.href); HP.toast('Link kopiert ✓'); } };
+})();
+</script>
+<script src="heiben-legal.js"></script>
+</body>
+</html>

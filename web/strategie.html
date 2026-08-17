@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Geschäftsmodell-Review · HeiBen</title>
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;1,400&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f3eee5;--bg2:#ebe3d4;--paper:#fffdf8;--ink:#1f1c17;--ink2:#524a3e;--rule:#d8cdb7;--terra:#b04a31;--ochre:#a97a1d;--moss:#4a5c39;--burg:#792d29;--aub:#6b3951;--good:#6f8f4e;--goodl:#9ec27f;--bad:#e7a48f}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:'Manrope',system-ui,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:860px;margin:0 auto;padding:1.8rem 1.1rem 5rem}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.32em;text-transform:uppercase;color:var(--terra)}
+h1{font-family:'Fraunces',serif;font-weight:400;font-size:clamp(2.1rem,6.5vw,3.1rem);line-height:1.02;letter-spacing:-.02em;margin:.3rem 0 .5rem}
+h1 em{font-style:italic;color:var(--terra)}
+.lead{color:var(--ink2);max-width:62ch;font-size:1.02rem}
+section{margin-top:2.6rem}
+.h2{font-family:'Fraunces',serif;font-weight:500;font-size:1.5rem;margin-bottom:.9rem}
+.h2 small{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ochre);display:block;margin-bottom:.25rem}
+.card{background:var(--paper);border:1px solid var(--rule);border-radius:16px;padding:1.2rem 1.3rem}
+.card+.card{margin-top:.8rem}
+.card p+p{margin-top:.6rem}
+.tag{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:.56rem;letter-spacing:.12em;text-transform:uppercase;border-radius:999px;padding:.22rem .6rem;margin-bottom:.5rem}
+.tag.cut{background:var(--burg);color:#fffdf8}
+.tag.hold{background:var(--ochre);color:#fffdf8}
+.tag.move{background:var(--aub);color:#fffdf8}
+.tag.go{background:var(--moss);color:#fffdf8}
+.num{font-family:'Fraunces',serif;color:var(--terra);font-size:1.2rem;margin-right:.4rem}
+.way{background:var(--paper);border:1px solid var(--rule);border-radius:16px;padding:1.1rem 1.2rem}
+.way+.way{margin-top:.8rem}
+.way .t{font-family:'Fraunces',serif;font-size:1.2rem;margin-bottom:.35rem}
+.way .t b{color:var(--terra);font-style:italic;font-weight:500}
+.meta{display:grid;grid-template-columns:110px 1fr;gap:.15rem .8rem;font-size:.92rem;margin-top:.5rem}
+.meta dt{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ochre);padding-top:.25rem}
+.meta dd{color:var(--ink)}
+.meta dd em{font-style:normal;color:var(--ink2)}
+.matrix{position:relative;background:var(--paper);border:1px solid var(--rule);border-radius:16px;height:280px;margin-top:.8rem}
+.matrix .ax{position:absolute;font-family:'JetBrains Mono',monospace;font-size:.55rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink2)}
+.matrix .ax.x{bottom:8px;left:50%;transform:translateX(-50%)}
+.matrix .ax.y{top:50%;left:8px;transform:rotate(-90deg) translateX(50%);transform-origin:left top}
+.matrix .mid-v{position:absolute;left:50%;top:10%;bottom:14%;border-left:1px dashed var(--rule)}
+.matrix .mid-h{position:absolute;top:50%;left:8%;right:6%;border-top:1px dashed var(--rule)}
+.dot{position:absolute;width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;color:#fffdf8;font-size:1rem;transform:translate(-50%,50%)}
+.dot small{position:absolute;top:-1.15rem;left:50%;transform:translateX(-50%);white-space:nowrap;font-family:'JetBrains Mono',monospace;font-size:.52rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink2)}
+.verdict{background:var(--ink);color:var(--bg);border-radius:18px;padding:1.4rem 1.4rem;margin-top:.8rem}
+.verdict .eyebrow{color:var(--ochre)}
+.verdict .big{font-family:'Fraunces',serif;font-size:1.5rem;line-height:1.2;color:#fff;margin:.3rem 0 .5rem}
+.verdict p{color:#cdbfa8;font-size:.95rem}
+.phase{background:var(--paper);border:1px solid var(--rule);border-radius:14px;padding:1rem 1.1rem}
+.phase+.phase{margin-top:.7rem}
+.phase .d{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:var(--terra)}
+.phase .n{font-family:'Fraunces',serif;font-size:1.15rem;margin:.15rem 0 .3rem}
+.phase p{font-size:.94rem;color:var(--ink)}
+.kpi{margin-top:.8rem;font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--moss);text-align:center}
+.foot{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink2);text-align:center;margin-top:2.4rem}
+.foot a{color:var(--aub)}
+a{color:var(--terra)}
+</style>
+<link rel="stylesheet" href="heiben-design.css">
+<script src="heiben-nav.js" defer></script>
+</head>
+<body data-hb-welt="holding">
+<div class="wrap">
+  <p class="eyebrow">HeiBen · Intern · Geschäftsmodell-Review</p>
+  <h1>Das Geschäftsmodell, <em>ehrlich</em> geprüft</h1>
+  <p class="lead">Teil C des Rebranding-Auftrags: Wer zahlt wofür — heute und morgen? Mit ausdrücklicher Erlaubnis zu kürzen und zu erweitern. Ergebnis: zwei Säulen statt fünf Welten, vier Wege zu Geschäftskunden, eine klare Empfehlung.</p>
+
+  <section>
+    <div class="h2"><small>C1 · Ist-Bewertung</small>Starkes Produkt, kein Erlösmotor</div>
+    <div class="card">
+      <p><b>Heute zahlt verlässlich: niemand.</b> Das Kit ist produktseitig weit — tägliche Rituale, 544 Begriffskarten mit Wiederholung, 165 Artikel, über zwanzig Werkzeuge mit Verdikt. Die Erlösseite hängt an einem B2C-„Plus"-Abo für eine Zielgruppe, die für Prävention notorisch nicht zahlt.</p>
+      <p><b>Die drei schwächsten Annahmen, beim Namen genannt:</b> <span class="num">1</span>„Gute Inhalte finden ihr Publikum von selbst" — ohne Vertriebskanal falsch; der Engpass ist Reichweite, nicht Qualität. <span class="num">2</span>„Privatkunden zahlen fürs Lernen" — sie zahlen im Akutfall (Kauf, Umzug, Steuer), nicht davor. <span class="num">3</span>„Fünf Welten sind fünf Chancen" — real sind es fünf Baustellen; Fokus schlägt Breite.</p>
+      <p><b>Die stärksten Assets</b> — und sie sind B2B-Assets: Alles läuft lokal auf dem Gerät (Datenschutz ohne AVV-Schmerz — für Banken und Genossenschaften ein Kaufargument, kein Feigenblatt). Das Design-System ist seit dem Rebranding belegbar white-label-fähig: ein Partner-Theme ist ein einziger <code>:root</code>-Block. Dazu messbares Engagement (Serien, Tagesdosis-Quote) und die Kölner „Heimat"-Glaubwürdigkeit, die kein Fintech kopieren kann.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="h2"><small>C2 · Fokussierung</small>Drei Kürzungen</div>
+    <div class="card"><span class="tag cut">Gebündelt</span>
+      <p><b>Fünf Welten werden zwei Säulen.</b> „Wissen &amp; Werkzeuge" ist das Kernprodukt; „Immobilien" bleibt als einzige Welt mit zahlungskräftigem Anwendungsfall eigenständig. Reisen und Kulinarik werden redaktioneller Stoff für Tagesdosis und Lernpfade — Farbe, kein Geschäftsfeld. Studio-Ambitionen ruhen.</p>
+    </div>
+    <div class="card"><span class="tag hold">Eingefroren</span>
+      <p><b>Das B2C-„Plus"-Abo bleibt sichtbar, bekommt aber keinen Vertriebs-Euro mehr.</b> Es dient als Preisanker und Beleg für Zahlungsbereitschafts-Tests — getragen wird das Unternehmen von Geschäftskunden.</p>
+    </div>
+    <div class="card"><span class="tag move">Verschoben</span>
+      <p><b>Keine nativen Apps vor der ersten zahlenden B2B-Referenz.</b> Die PWA reicht für jede Demo und jeden Piloten; App-Stores kosten Zeit, die der Vertrieb jetzt braucht.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="h2"><small>C3 · Erweiterung</small>Vier Wege zu Geschäftskunden</div>
+
+    <div class="way">
+      <div class="t"><b>A</b> · White-Label „Finanzwissen" für die Wohnungs- und Genossenschaftswelt</div>
+      <dl class="meta">
+        <dt>Zielkunde</dt><dd>Wohnungsgenossenschaften, Genossenschaftsbanken, regionale Sparkassen-Stiftungen, Versicherer</dd>
+        <dt>Nutzen</dt><dd>Mitglieder- und Kundenbindung, Nachwuchsgewinnung, gelebter Bildungsauftrag — unter eigener Marke, ohne dass Nutzerdaten das Gerät verlassen</dd>
+        <dt>Preislogik</dt><dd>7.500&nbsp;€ Setup einmalig + 690&nbsp;€/Monat je Marke (Jahresvertrag, Staffel ab drei Mandanten)</dd>
+        <dt>Aufwand</dt><dd>Gering — Theming existiert (ein <code>:root</code>-Block + Logo-Zone) <em>· Risiko: lange Entscheidungswege</em></dd>
+      </dl>
+    </div>
+
+    <div class="way">
+      <div class="t"><b>B</b> · Mitarbeiter-Benefit „Finanzkompetenz" für den Mittelstand</div>
+      <dl class="meta">
+        <dt>Zielkunde</dt><dd>Unternehmen mit 50–500 Beschäftigten, HR-Leitungen; Einstieg über Onboarding („Erstes Gehalt, erste Verträge")</dd>
+        <dt>Nutzen</dt><dd>Benefit ohne Datenschutz-Kopfschmerz, sichtbare Fürsorge, messbare Nutzung statt Obstkorb</dd>
+        <dt>Preislogik</dt><dd>2&nbsp;€ je Mitarbeiter/Monat, mindestens 99&nbsp;€/Monat; Zugang per Firmencode</dd>
+        <dt>Aufwand</dt><dd>Gering bis mittel <em>· Risiko: Benefit-Müdigkeit, Abgrenzung zu Wellbeing-Plattformen</em></dd>
+      </dl>
+    </div>
+
+    <div class="way">
+      <div class="t"><b>C</b> · Makler- und Bauträger-Suite</div>
+      <dl class="meta">
+        <dt>Zielkunde</dt><dd>Maklerbüros, Bauträger, Baufinanzierungsvermittler</dd>
+        <dt>Nutzen</dt><dd>Mieten-oder-kaufen, Budget-Rechner und Checklisten als gebrandete Lead-Werkzeuge auf der eigenen Website</dd>
+        <dt>Preislogik</dt><dd>149&nbsp;€/Monat je Büro, 490&nbsp;€ Einrichtung</dd>
+        <dt>Aufwand</dt><dd>Mittel (Einbettung, Lead-Übergabe) <em>· Risiko: Portale verschenken Rechner als Beifang</em></dd>
+      </dl>
+    </div>
+
+    <div class="way">
+      <div class="t"><b>D</b> · „Ankommen in Köln" für Kommune und Bildungsträger</div>
+      <dl class="meta">
+        <dt>Zielkunde</dt><dd>VHS, Integrations- und Berufskollegs, Stadt Köln, Stiftungen</dd>
+        <dt>Nutzen</dt><dd>Köln-Quiz plus Alltags-Lernpfade als fertiges, lokal gefärbtes Kursmaterial — offline-fähig im Klassenraum</dd>
+        <dt>Preislogik</dt><dd>Projektpreise 3.000–15.000&nbsp;€</dd>
+        <dt>Aufwand</dt><dd>Gering <em>· Risiko: Haushaltslagen und Vergabeverfahren</em></dd>
+      </dl>
+    </div>
+
+    <div class="matrix" aria-label="Priorisierung: Wirkung gegen Aufwand">
+      <span class="ax y">Wirkung →</span>
+      <span class="ax x">Aufwand →</span>
+      <i class="mid-v"></i><i class="mid-h"></i>
+      <span class="dot" style="left:24%;bottom:74%;background:var(--moss)"><small>White-Label</small>A</span>
+      <span class="dot" style="left:44%;bottom:52%;background:var(--aub)"><small>Benefit</small>B</span>
+      <span class="dot" style="left:62%;bottom:58%;background:var(--terra)"><small>Makler</small>C</span>
+      <span class="dot" style="left:20%;bottom:40%;background:var(--ochre)"><small>Kommune</small>D</span>
+    </div>
+  </section>
+
+  <section>
+    <div class="h2"><small>C4 · Empfehlung</small>Erst eine Branche gewinnen, dann skalieren</div>
+    <div class="verdict">
+      <p class="eyebrow">Das Verdikt</p>
+      <div class="big">Weg A zuerst: White-Label für Wohnungsgenossenschaften und Genossenschaftsbanken im Rheinland.</div>
+      <p>Vier Gründe: Der Claim passt wörtlich — „Heimat leben" ist das Geschäft der Wohnungswirtschaft. Der Datenschutz-Vorteil („läuft lokal") ist genau dort ein Entscheidungskriterium. Das Theming kostet Stunden, nicht Wochen — Piloten sind sofort lieferbar. Und die Familien-DNA von HeiBen spricht die Genossenschafts-DNA in ihrer eigenen Sprache an. Weg B läuft als Beifang mit derselben Demo; C und D folgen nach der ersten Referenz.</p>
+    </div>
+
+    <div style="margin-top:1.2rem">
+      <div class="phase"><div class="d">Tag 1–30 · Beweis bauen</div><div class="n">Demo-Mandant „Rheinwohnen eG"</div>
+        <p>Partner-Theme als lebende Demo (ein <code>:root</code>-Block, Logo-Zone nach Markenhandbuch), Preisblatt und Pitch-Onepager. Liste von 25 Zielkunden im Rheinland, zehn Erstgespräche über Verband, IHK und Kölner Netzwerk. <a href="partner-demo.html">Zur lebenden Demo →</a></p>
+      </div>
+      <div class="phase"><div class="d">Tag 31–60 · Zwei Piloten</div><div class="n">Setup erlassen, Beweise sammeln</div>
+        <p>Zwei Pilotverträge über drei Monate — Setup-Gebühr erlassen gegen Fallstudien- und Logofreigabe. Erfolgsmetriken fest vereinbart: Aktivierungsquote, Wochenserien, Tagesdosis-Nutzung.</p>
+      </div>
+      <div class="phase"><div class="d">Tag 61–90 · Erste Referenz</div><div class="n">Aus Pilot wird Jahreslizenz</div>
+        <p>Pilot-Review, Umwandlung in die erste zahlende Jahreslizenz, Fallstudie und Referenzseite. Danach Go/No-Go-Entscheidung für den Benefit-Rollout (Weg B).</p>
+      </div>
+      <div class="kpi">Ziel nach 90 Tagen: 10 Gespräche · 2 Piloten · 1 zahlende Referenz · Pipeline ≥ 25</div>
+    </div>
+  </section>
+
+  <section>
+    <div class="h2"><small>C5 · Konsistenz-Check</small>Passt die Marke zum Fokus?</div>
+    <div class="card"><span class="tag go">Bestätigt</span>
+      <p>Name und Claim tragen den B2B-Fokus wörtlich; das Rebranding (Teil A/B) muss nicht korrigiert werden. Das Design ist white-label-belegt: Der globale Token-Rollout lief in Minuten über 94 Dateien — genau das verkauft Weg A. Einzige Ergänzung statt Änderung: In Pitch-Unterlagen führt HeiBen den Descriptor <b>„HeiBen · Wissen für Zuhause"</b>, damit Geschäftskunden das Angebot ohne Kontext sofort einordnen.</p>
+    </div>
+  </section>
+
+  <p class="foot">HeiBen GmbH i. G. · „Heimat leben" · <a href="marke.html">Markenhandbuch</a> · <a href="mein-heiben.html">Mein HeiBen</a> · <a href="index.html">Zur Startseite</a></p>
+</div>
+</body>
+</html>

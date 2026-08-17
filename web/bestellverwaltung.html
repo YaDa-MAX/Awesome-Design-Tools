@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>HeiBen Wohnen — Bestellverwaltung</title>
+<meta name="description" content="Einfaches Backoffice: eingegangene Bestellungen des Konfigurators sammeln, sichten und im Status verwalten — bis zur echten Zahlungsanbindung." />
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..500&family=Manrope:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg:#f3eee5; --bg-soft:#ebe3d4; --bg-deep:#1f1c17; --panel:#fbf8f2;
+    --ink:#1f1c17; --ink-soft:#524a3e; --rule:#d8cdb7;
+    --accent:#4a5c39; --terracotta:#b04a31; --ochre:#a97a1d;
+    --neu:#b04a31; --bearbeitung:#a97a1d; --erledigt:#4a5c39;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Manrope',sans-serif;color:var(--ink);background:var(--bg);line-height:1.55;
+    background-image:radial-gradient(at 12% 4%, rgba(75,93,58,0.05) 0, transparent 50%);min-height:100vh;}
+  .mono{font-family:'JetBrains Mono',monospace;}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 1.5rem;}
+
+  header.bar{background:rgba(243,238,229,0.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--rule);position:sticky;top:0;z-index:20;}
+  header.bar .wrap{display:flex;align-items:center;justify-content:space-between;height:62px;gap:1rem;}
+  .brand{display:flex;align-items:center;gap:0.55rem;text-decoration:none;color:inherit;}
+  .brand img.m{height:26px;} .brand img.w{height:20px;}
+  .brand .div{font-family:'JetBrains Mono',monospace;font-size:0.58rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--accent);border-left:1px solid var(--rule);padding-left:0.5rem;}
+  .bar a.back{font-family:'JetBrains Mono',monospace;font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-soft);text-decoration:none;border:1px solid var(--ink);padding:0.5rem 0.8rem;}
+  .bar a.back:hover{background:var(--ink);color:var(--bg);}
+
+  .intro{padding:2.4rem 0 1.4rem;}
+  .intro h1{font-family:'Fraunces',serif;font-weight:300;font-size:clamp(1.8rem,4vw,2.6rem);letter-spacing:-0.02em;}
+  .intro h1 em{font-style:italic;color:var(--accent);}
+  .intro p{color:var(--ink-soft);max-width:64ch;margin-top:0.5rem;}
+
+  .toolbar{display:flex;flex-wrap:wrap;gap:0.8rem;align-items:center;margin:1.2rem 0;}
+  .drop{flex:1;min-width:260px;border:2px dashed var(--accent);background:var(--panel);padding:1rem 1.2rem;text-align:center;cursor:pointer;transition:background .2s;}
+  .drop:hover,.drop.over{background:var(--bg-soft);}
+  .drop .t{font-family:'JetBrains Mono',monospace;font-size:0.66rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);}
+  .drop .s{font-size:0.82rem;color:var(--ink-soft);margin-top:0.3rem;}
+  .filters{display:flex;gap:0.4rem;}
+  .filters button{font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.08em;text-transform:uppercase;padding:0.5rem 0.7rem;border:1px solid var(--rule);background:transparent;color:var(--ink-soft);}
+  .filters button.active{background:var(--accent);color:var(--bg);border-color:var(--accent);}
+
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:0.8rem;margin-bottom:1.5rem;}
+  @media (max-width:640px){ .stats{grid-template-columns:1fr 1fr;} }
+  .stat{background:var(--panel);border:1px solid var(--rule);padding:0.9rem 1.1rem;}
+  .stat .k{font-family:'Fraunces',serif;font-style:italic;font-size:1.7rem;color:var(--accent);line-height:1;}
+  .stat .v{font-size:0.78rem;color:var(--ink-soft);margin-top:0.3rem;}
+
+  .empty{background:var(--panel);border:1px solid var(--rule);padding:3rem 1.5rem;text-align:center;color:var(--ink-soft);}
+  .empty .big{font-family:'Fraunces',serif;font-style:italic;font-size:1.3rem;color:var(--ink);margin-bottom:0.5rem;}
+
+  .order{background:var(--panel);border:1px solid var(--rule);border-left:4px solid var(--rule);margin-bottom:0.9rem;}
+  .order.neu{border-left-color:var(--neu);}
+  .order.bearbeitung{border-left-color:var(--bearbeitung);}
+  .order.erledigt{border-left-color:var(--erledigt);opacity:0.78;}
+  .order-head{display:flex;align-items:center;gap:1rem;padding:1rem 1.2rem;cursor:pointer;flex-wrap:wrap;}
+  .order-head .id{font-family:'JetBrains Mono',monospace;font-size:0.8rem;color:var(--ink);font-weight:500;}
+  .order-head .who{font-size:0.9rem;color:var(--ink-soft);}
+  .order-head .sum{margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:0.86rem;}
+  .badge{font-family:'JetBrains Mono',monospace;font-size:0.56rem;letter-spacing:0.12em;text-transform:uppercase;padding:0.28rem 0.55rem;color:#fff;}
+  .badge.neu{background:var(--neu);} .badge.bearbeitung{background:var(--bearbeitung);} .badge.erledigt{background:var(--erledigt);}
+  .order-body{display:none;padding:0 1.2rem 1.2rem;border-top:1px solid var(--rule);}
+  .order.open .order-body{display:block;}
+  .ob-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;margin-top:1rem;}
+  @media (max-width:640px){ .ob-grid{grid-template-columns:1fr;} }
+  .ob h4{font-family:'JetBrains Mono',monospace;font-size:0.58rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:0.4rem;}
+  .ob p{font-size:0.88rem;margin-bottom:0.2rem;}
+  .line{display:flex;justify-content:space-between;font-size:0.85rem;padding:0.3rem 0;border-bottom:1px dashed var(--rule);}
+  .line .r{font-family:'JetBrains Mono',monospace;}
+  .roomlabel{font-family:'Fraunces',serif;font-style:italic;color:var(--accent);font-size:0.9rem;margin:0.6rem 0 0.2rem;}
+  .ob-actions{display:flex;gap:0.5rem;flex-wrap:wrap;margin-top:1rem;}
+  .ob-actions button{font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.08em;text-transform:uppercase;padding:0.55rem 0.8rem;border:1px solid var(--rule);background:transparent;color:var(--ink);}
+  .ob-actions button.active{background:var(--accent);color:var(--bg);border-color:var(--accent);}
+  .ob-actions .print{margin-left:auto;}
+  .ob-actions .del{color:var(--terracotta);border-color:var(--terracotta);}
+  .ob-actions .del:hover{background:var(--terracotta);color:var(--bg);}
+
+  .note{font-size:0.78rem;color:var(--ink-soft);background:var(--bg-soft);padding:0.8rem 1rem;border-left:3px solid var(--accent);margin:1.5rem 0 3rem;line-height:1.5;}
+
+  @media print{
+    header.bar,.toolbar,.filters,.stats,.intro p,.ob-actions,.note{display:none!important;}
+    .order-body{display:block!important;} .order{break-inside:avoid;border-left-width:1px;opacity:1;}
+    body{background:#fff;}
+  }
+</style>
+<!-- HeiBen social/meta -->
+<meta name="robots" content="noindex,nofollow" />
+<meta name="theme-color" content="#f3eee5" />
+<link rel="manifest" href="manifest.webmanifest" />
+<style id="hb-motion">
+/* HeiBen Motion — dezente Scroll-Reveals im Stil großer Produkt-Websites */
+html{scroll-behavior:smooth;}
+::selection{background:rgba(109,58,82,.18);}
+@keyframes hbUp{from{opacity:0;transform:translateY(26px);}to{opacity:1;transform:none;}}
+.hb-rv{opacity:0;}
+.hb-rv.hb-go{animation:hbUp .9s cubic-bezier(.16,1,.3,1) var(--hbd,0s) both;}
+.hb-rv.hb-done{opacity:1;animation:none;}
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto;}
+  .hb-rv{opacity:1!important;animation:none!important;transform:none!important;}
+}
+</style>
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="default" />
+<meta name="apple-mobile-web-app-title" content="HeiBen" />
+<meta name="application-name" content="HeiBen" />
+<style id="hb-logo-css">
+.brand{display:flex;align-items:center;text-decoration:none;}
+.brand svg{height:30px;width:auto;display:block;}
+@media(max-width:600px){.brand svg{height:25px;}}
+.brand-block svg{height:34px;width:auto;display:block;margin-bottom:1.2rem;}
+.wms-lockup{display:flex;justify-content:center;padding:6px 0 2px;}
+.wms-lockup svg{width:min(540px,84vw);height:auto;display:block;}
+</style>
+<link rel="stylesheet" href="heiben-design.css">
+<script src="heiben-nav.js" defer></script>
+</head>
+<body data-hb-welt="holding">
+
+<header class="bar">
+  <div class="wrap">
+    <a class="brand" href="wohnen.html"><svg viewBox="168.5 10 465.6 178" role="img" aria-label="HeiBen" xmlns="http://www.w3.org/2000/svg"><text x="400" y="150" text-anchor="middle" font-family="Fraunces,serif" font-weight="560" font-size="150" letter-spacing="-4"><tspan fill="#b04a31">H</tspan><tspan fill="#1f1c17">ei</tspan><tspan fill="#b04a31">B</tspan><tspan fill="#1f1c17">en</tspan></text></svg></a>
+    <a class="back" href="wohnen-konfigurator.html">Zum Konfigurator</a>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="intro">
+    <h1>Bestell<em>verwaltung</em></h1>
+    <p>Hier sammeln und sichten Sie die Bestellungen, die im Konfigurator über „Für Bestellverwaltung speichern" erzeugt wurden. Ziehen Sie die Bestelldateien einfach in das Feld unten. So behalten Sie alles übersichtlich, bis die echte Zahlungs- und Auftragsabwicklung angebunden ist.</p>
+  </section>
+
+  <div class="toolbar">
+    <label class="drop" id="drop">
+      <div class="t">Bestelldateien hierher ziehen oder klicken</div>
+      <div class="s">Akzeptiert die .json-Dateien aus dem Konfigurator (auch mehrere auf einmal)</div>
+      <input type="file" id="file" accept="application/json" multiple style="display:none">
+    </label>
+    <div class="filters" id="filters">
+      <button data-f="alle" class="active">Alle</button>
+      <button data-f="neu">Neu</button>
+      <button data-f="bearbeitung">In Arbeit</button>
+      <button data-f="erledigt">Erledigt</button>
+    </div>
+  </div>
+
+  <div class="stats" id="stats"></div>
+  <div id="list"></div>
+
+  <div class="note" id="note"></div>
+</main>
+
+<script>
+/* ============================================================================
+   HeiBen — Bestellverwaltung (eigenständiges Backoffice, ohne Server)
+   - liest die .json-Bestelldateien des Konfigurators ein
+   - speichert sie im Browser (mit Rückfall in den Arbeitsspeicher)
+   - erlaubt Statuswechsel (neu / in Arbeit / erledigt), Druck und Löschen
+   Bewusst rein lokal: keine Kundendaten verlassen den Rechner.
+   ============================================================================ */
+const memStore={};
+const store={
+  get(k){ try{ const v=localStorage.getItem(k); return v?JSON.parse(v):(memStore[k]??null); }catch(e){ return memStore[k]??null; } },
+  set(k,v){ try{ localStorage.setItem(k,JSON.stringify(v)); }catch(e){ memStore[k]=v; } },
+};
+const KEY='heiben_orders';
+let orders = store.get(KEY) || [];   // [{...Bestellung, status}]
+let filter='alle';
+
+const euro=n=>(n||0).toLocaleString('de-DE',{style:'currency',currency:'EUR',maximumFractionDigits:0});
+const STATUS=['neu','bearbeitung','erledigt'];
+const STATUS_LABEL={neu:'Neu',bearbeitung:'In Arbeit',erledigt:'Erledigt'};
+
+function save(){ store.set(KEY, orders); }
+
+// Eine eingelesene Datei prüfen und übernehmen. Wir erkennen gültige Bestellungen
+// am Kennzeichen "heibenOrder" und vermeiden Doubletten über die Bestellnummer.
+function ingest(obj){
+  if(!obj || obj.kind!=='heibenOrder' || !obj.id) return false;
+  if(orders.some(o=>o.id===obj.id)) return 'dup';
+  orders.push(Object.assign({status:'neu'}, obj));
+  return true;
+}
+function handleFiles(fileList){
+  const files=[...fileList]; let ok=0,dup=0,bad=0,pending=files.length;
+  if(!pending) return;
+  files.forEach(f=>{
+    const rd=new FileReader();
+    rd.onload=()=>{ try{ const r=ingest(JSON.parse(rd.result)); if(r===true)ok++; else if(r==='dup')dup++; else bad++; }
+      catch(e){ bad++; } if(--pending===0) finish(); };
+    rd.onerror=()=>{ bad++; if(--pending===0) finish(); };
+    rd.readAsText(f);
+  });
+  function finish(){ save(); render();
+    let msg=[]; if(ok)msg.push(`${ok} übernommen`); if(dup)msg.push(`${dup} bereits vorhanden`); if(bad)msg.push(`${bad} nicht lesbar`);
+    flashNote(msg.join(' · ')||'Keine gültigen Bestellungen gefunden.'); }
+}
+let noteTimer=null;
+function flashNote(text){ const n=document.getElementById('note'); n.dataset.flash=text; render(); 
+  clearTimeout(noteTimer); noteTimer=setTimeout(()=>{ delete n.dataset.flash; render(); },4000); }
+
+function setStatus(id,st){ const o=orders.find(x=>x.id===id); if(o){ o.status=st; save(); render(); } }
+function delOrder(id){ const o=orders.find(x=>x.id===id); if(o && confirm(`Bestellung ${o.id} aus der Verwaltung entfernen?`)){ orders=orders.filter(x=>x.id!==id); save(); render(); } }
+
+function render(){
+  // Statistik
+  const total=orders.length, neu=orders.filter(o=>o.status==='neu').length, bear=orders.filter(o=>o.status==='bearbeitung').length;
+  const sumOpen=orders.filter(o=>o.status!=='erledigt').reduce((s,o)=>s+(o.totals?o.totals.gross:0),0);
+  document.getElementById('stats').innerHTML=
+    `<div class="stat"><div class="k">${total}</div><div class="v">Bestellungen gesamt</div></div>
+     <div class="stat"><div class="k">${neu}</div><div class="v">neu / unbearbeitet</div></div>
+     <div class="stat"><div class="k">${bear}</div><div class="v">in Arbeit</div></div>
+     <div class="stat"><div class="k">${euro(sumOpen)}</div><div class="v">offenes Volumen (brutto)</div></div>`;
+
+  // Liste
+  const list=document.getElementById('list');
+  const shown=orders.filter(o=>filter==='alle'||o.status===filter)
+    .sort((a,b)=>(b.createdAt||'').localeCompare(a.createdAt||''));
+  if(!orders.length){
+    list.innerHTML=`<div class="empty"><div class="big">Noch keine Bestellungen.</div>Sobald im Konfigurator eine Bestellung abgeschlossen und über „Für Bestellverwaltung speichern" gesichert wurde, ziehen Sie die Datei oben in das Feld — sie erscheint dann hier.</div>`;
+  } else if(!shown.length){
+    list.innerHTML=`<div class="empty">Keine Bestellungen im Status „${STATUS_LABEL[filter]}".</div>`;
+  } else {
+    list.innerHTML=shown.map(orderCard).join('');
+    shown.forEach(o=>wireCard(o.id));
+  }
+
+  // Notiz/Flash
+  const n=document.getElementById('note');
+  n.textContent = n.dataset.flash ? n.dataset.flash
+    : 'Hinweis: Alle Daten bleiben in diesem Browser. Für eine dauerhafte, mehrplatzfähige Lösung mit echter Zahlungsabwicklung wird später ein Shop-Backend angebunden; bis dahin ersetzt diese Verwaltung das Backoffice.';
+}
+
+function orderCard(o){
+  const d=o.createdAt? new Date(o.createdAt).toLocaleDateString('de-DE',{day:'2-digit',month:'2-digit',year:'numeric'}) : '';
+  const byRoom={}; (o.lines||[]).forEach(l=>{ (byRoom[l.room]=byRoom[l.room]||[]).push(l); });
+  let items=''; for(const room in byRoom){ items+=`<div class="roomlabel">${room}</div>`;
+    byRoom[room].forEach(l=>{ items+=`<div class="line"><span>${l.qty}× ${l.name} · ${l.color}</span><span class="r">${euro(l.price*l.qty)}</span></div>`; }); }
+  const t=o.totals||{};
+  const stBtns=STATUS.map(s=>`<button data-st="${s}" class="${o.status===s?'active':''}">${STATUS_LABEL[s]}</button>`).join('');
+  return `<div class="order ${o.status}" id="o_${o.id}">
+    <div class="order-head" data-toggle="${o.id}">
+      <span class="badge ${o.status}">${STATUS_LABEL[o.status]}</span>
+      <span class="id">${o.id}</span>
+      <span class="who">${o.customer?(o.customer.vn+' '+o.customer.nn):''}${d?' · '+d:''}</span>
+      <span class="sum">${euro(t.gross)}</span>
+    </div>
+    <div class="order-body">
+      <div class="ob-grid">
+        <div class="ob">
+          <h4>Lieferung an</h4>
+          <p>${o.customer?o.customer.vn+' '+o.customer.nn:''}</p>
+          <p>${o.customer?o.customer.str:''}</p>
+          <p>${o.customer?o.customer.plz+' '+o.customer.ort:''}</p>
+          <p>${o.customer?o.customer.mail:''}</p>
+          <h4 style="margin-top:0.9rem">Versand &amp; Zahlung</h4>
+          <p>${o.shipping?o.shipping.label:''}</p>
+          <p>${o.payment?o.payment.label:''}</p>
+        </div>
+        <div class="ob">
+          <h4>Artikel</h4>
+          ${items}
+          <div class="line" style="margin-top:0.5rem"><span>Netto</span><span class="r">${euro(t.net)}</span></div>
+          <div class="line"><span>Versand</span><span class="r">${t.sh?euro(t.sh):'kostenlos'}</span></div>
+          <div class="line"><span>MwSt 19 %</span><span class="r">${euro(t.vat)}</span></div>
+          <div class="line" style="font-weight:600"><span>Gesamt</span><span class="r">${euro(t.gross)}</span></div>
+        </div>
+      </div>
+      <div class="ob-actions">
+        ${stBtns}
+        <button class="print" onclick="window.print()">Drucken</button>
+        <button class="del" data-del="${o.id}">Entfernen</button>
+      </div>
+    </div>
+  </div>`;
+}
+function wireCard(id){
+  const card=document.getElementById('o_'+id); if(!card) return;
+  card.querySelector('[data-toggle]').onclick=()=>card.classList.toggle('open');
+  card.querySelectorAll('[data-st]').forEach(b=>b.onclick=(e)=>{ e.stopPropagation(); setStatus(id,b.dataset.st); });
+  card.querySelector('[data-del]').onclick=(e)=>{ e.stopPropagation(); delOrder(id); };
+}
+
+// Datei-Eingang verdrahten (Klick + Drag&Drop)
+const drop=document.getElementById('drop'), fileInput=document.getElementById('file');
+fileInput.onchange=e=>{ handleFiles(e.target.files); fileInput.value=''; };
+['dragenter','dragover'].forEach(ev=>drop.addEventListener(ev,e=>{e.preventDefault();drop.classList.add('over');}));
+['dragleave','drop'].forEach(ev=>drop.addEventListener(ev,e=>{e.preventDefault();drop.classList.remove('over');}));
+drop.addEventListener('drop',e=>{ if(e.dataTransfer&&e.dataTransfer.files) handleFiles(e.dataTransfer.files); });
+// Filter
+document.querySelectorAll('#filters button').forEach(b=>b.onclick=()=>{ filter=b.dataset.f;
+  document.querySelectorAll('#filters button').forEach(x=>x.classList.toggle('active',x===b)); render(); });
+
+render();
+</script>
+<script id="hb-motion-js">
+(function(){
+  if(!('IntersectionObserver' in window)) return;
+  if(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var els=[];
+  document.querySelectorAll('section, header.subhero, footer').forEach(function(el){ el.classList.add('hb-rv'); els.push(el); });
+  document.querySelectorAll('[class*="grid"]').forEach(function(g){
+    if(g.closest('nav')) return;
+    Array.prototype.slice.call(g.children,0,12).forEach(function(el,i){
+      el.classList.add('hb-rv'); el.style.setProperty('--hbd',(Math.min(i,8)*0.075)+'s'); els.push(el);
+    });
+  });
+  els.forEach(function(el){
+    el.addEventListener('animationend',function h(){ el.classList.add('hb-done'); el.removeEventListener('animationend',h); });
+  });
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add('hb-go'); io.unobserve(en.target); } });
+  },{threshold:.05,rootMargin:'0px 0px -4% 0px'});
+  els.forEach(function(el){ io.observe(el); });
+  /* Sicherheitsnetz: nach 3s ist garantiert alles sichtbar */
+  setTimeout(function(){ els.forEach(function(el){ el.classList.add('hb-go'); }); io.disconnect(); },3000);
+})();
+</script>
+<script src="heiben-konto.js"></script>
+<script id="konto-guard">window.HeiBenKonto&&HeiBenKonto.requireRole(['admin']);</script>
+<script id="hb-pwa">
+(function(){
+  /* Service-Worker registrieren */
+  if('serviceWorker' in navigator){
+    window.addEventListener('load',function(){ navigator.serviceWorker.register('service-worker.js').catch(function(){}); });
+  }
+  /* Bereits als App installiert? Dann keine Aufforderung. */
+  function standalone(){ return window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone===true; }
+  if(standalone()) return;
+  try{ if(localStorage.getItem('heiben-pwa-dismiss')==='1') return; }catch(e){}
+  var deferred=null;
+  function bar(html){
+    if(document.getElementById('hbInstall')) return document.getElementById('hbInstall');
+    var d=document.createElement('div'); d.id='hbInstall';
+    d.style.cssText='position:fixed;left:12px;right:12px;bottom:12px;z-index:9000;max-width:520px;margin:0 auto;background:var(--ink,#1f1c17);color:#f3eee5;border-radius:14px;padding:13px 14px;box-shadow:0 14px 40px rgba(31,28,23,.35);display:flex;align-items:center;gap:12px;font-family:Manrope,system-ui,sans-serif;';
+    d.innerHTML=html;
+    document.body.appendChild(d); return d;
+  }
+  function dismiss(){ try{localStorage.setItem('heiben-pwa-dismiss','1');}catch(e){} var b=document.getElementById('hbInstall'); if(b) b.remove(); }
+  /* Android / Desktop-Chromium: echtes Installieren */
+  window.addEventListener('beforeinstallprompt',function(e){
+    e.preventDefault(); deferred=e;
+    var d=bar('<img src="assets/favicon-192.png" alt="" style="width:38px;height:38px;border-radius:9px;flex:0 0 auto" />'+
+      '<div style="flex:1;line-height:1.35"><b style="font-size:.92rem">HeiBen als App installieren</b><br><span style="font-size:.78rem;opacity:.8">Schnellzugriff, Offline-Nutzung, eigenes Symbol.</span></div>'+
+      '<button id="hbInstBtn" style="flex:0 0 auto;border:0;border-radius:8px;background:#b04a31;color:#fff;padding:9px 13px;font-family:\'JetBrains Mono\',monospace;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;cursor:pointer">Installieren</button>'+
+      '<button id="hbInstX" aria-label="Schließen" style="flex:0 0 auto;border:0;background:none;color:#f3eee5;font-size:1.1rem;cursor:pointer;opacity:.7">✕</button>');
+    d.querySelector('#hbInstBtn').addEventListener('click',function(){ if(!deferred) return; deferred.prompt(); deferred.userChoice.then(function(){ deferred=null; var b=document.getElementById('hbInstall'); if(b) b.remove(); }); });
+    d.querySelector('#hbInstX').addEventListener('click',dismiss);
+  });
+  window.addEventListener('appinstalled',function(){ var b=document.getElementById('hbInstall'); if(b) b.remove(); });
+  /* iOS Safari: kein beforeinstallprompt -> Hinweis „Teilen -> Zum Home-Bildschirm" */
+  var ua=navigator.userAgent||'';
+  var isIOS=/iphone|ipad|ipod/i.test(ua);
+  var isSafari=/safari/i.test(ua)&&!/crios|fxios|edgios/i.test(ua);
+  if(isIOS&&isSafari){
+    setTimeout(function(){
+      if(standalone()||document.getElementById('hbInstall')) return;
+      var d=bar('<img src="assets/favicon-192.png" alt="" style="width:38px;height:38px;border-radius:9px;flex:0 0 auto" />'+
+        '<div style="flex:1;line-height:1.35"><b style="font-size:.92rem">Zum Home-Bildschirm hinzufügen</b><br><span style="font-size:.78rem;opacity:.8">Tippen Sie auf <b>Teilen</b> ▵ und dann „Zum Home-Bildschirm".</span></div>'+
+        '<button id="hbInstX" aria-label="Schließen" style="flex:0 0 auto;border:0;background:none;color:#f3eee5;font-size:1.1rem;cursor:pointer;opacity:.7">✕</button>');
+      d.querySelector('#hbInstX').addEventListener('click',dismiss);
+    },1600);
+  }
+})();
+</script>
+</body>
+</html>

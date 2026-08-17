@@ -1,0 +1,115 @@
+/* ============================================================
+   HeiBen Fundament — zentrales Design-System (Remake v2, W1)
+   Regel: ausschließlich .hb-Klassen und :root-Tokens.
+   KEINE Element-Selektoren → keine Interferenz mit Bestand.
+   Marken-DNA: warme Palette, Fraunces/Manrope/JetBrains Mono.
+   ============================================================ */
+
+:root{
+  /* Grundpalette (Marken-DNA) */
+  --hb-bg:#f3eee5; --hb-bg2:#ebe3d4; --hb-paper:#fffdf8;
+  --hb-ink:#1f1c17; --hb-ink2:#524a3e; --hb-rule:#d8cdb7;
+  --hb-terra:#b04a31; --hb-ochre:#a97a1d; --hb-moss:#4a5c39;
+  --hb-burg:#792d29; --hb-aub:#6b3951; --hb-good:#6f8f4e;
+  /* Weltfarben (kanonisch: heiben-firmierungen.js) */
+  --hb-w-reisen:#a97a1d; --hb-w-wohnen:#4a5c39; --hb-w-immobilien:#792d29;
+  --hb-w-studio:#1f1c17; --hb-w-kulinarik:#6b3951;
+  /* Typo-Stacks */
+  --hb-serif:'Fraunces',Georgia,serif;
+  --hb-sans:'Manrope',system-ui,sans-serif;
+  --hb-mono:'JetBrains Mono',ui-monospace,monospace;
+  /* Form */
+  --hb-r-s:11px; --hb-r-m:14px; --hb-r-l:18px;
+}
+
+/* ---------- Navigation (heiben-nav.js) ---------- */
+.hb-nav{background:var(--hb-paper);border-bottom:1px solid var(--hb-rule);
+  font-family:var(--hb-sans);line-height:1.4;-webkit-font-smoothing:antialiased}
+.hb-nav *{box-sizing:border-box;margin:0;padding:0}
+.hb-nav-in{max-width:1100px;margin:0 auto;padding:.65rem 1.1rem;
+  display:flex;align-items:center;gap:1.1rem;flex-wrap:wrap}
+.hb-brand{font-family:var(--hb-serif);font-size:1.35rem;color:var(--hb-ink);
+  text-decoration:none;letter-spacing:-.01em;display:flex;align-items:baseline;gap:.55rem}
+.hb-brand small{font-family:var(--hb-mono);font-size:.56rem;letter-spacing:.24em;
+  text-transform:uppercase;color:var(--hb-terra)}
+.hb-links{display:flex;align-items:center;gap:.15rem .9rem;flex-wrap:wrap;margin-left:auto}
+.hb-links a{font-size:.85rem;font-weight:600;color:var(--hb-ink2);text-decoration:none;
+  padding:.3rem 0;border-bottom:2px solid transparent;display:inline-flex;align-items:center;gap:.35rem}
+.hb-links a:hover{color:var(--hb-ink)}
+.hb-links a:focus-visible{outline:2px solid var(--hb-ochre);outline-offset:2px}
+.hb-links a.on{color:var(--hb-ink);border-bottom-color:var(--wf,var(--hb-terra))}
+.hb-dot{width:7px;height:7px;border-radius:50%;background:var(--wf,var(--hb-rule));flex:0 0 auto}
+.hb-nav-sep{width:1px;height:1.05rem;background:var(--hb-rule);margin:0 .1rem}
+.hb-burger{display:none;margin-left:auto;border:1px solid var(--hb-rule);background:var(--hb-paper);
+  border-radius:var(--hb-r-s);padding:.35rem .65rem;font:inherit;font-size:1rem;cursor:pointer;color:var(--hb-ink)}
+.hb-burger:focus-visible{outline:2px solid var(--hb-ochre);outline-offset:2px}
+@media (max-width:860px){
+  .hb-burger{display:block}
+  .hb-links{display:none;width:100%;flex-direction:column;align-items:flex-start;gap:.15rem;padding:.4rem 0 .2rem}
+  .hb-nav.open .hb-links{display:flex}
+  .hb-nav-sep{display:none}
+}
+
+/* ---------- Seitenkopf-Muster ---------- */
+.hb-eyebrow{font-family:var(--hb-mono);font-size:.66rem;letter-spacing:.32em;
+  text-transform:uppercase;color:var(--hb-terra)}
+.hb-h1{font-family:var(--hb-serif);font-weight:400;font-size:clamp(2rem,6.5vw,3.1rem);
+  line-height:1.02;letter-spacing:-.02em;margin:.3rem 0 .5rem;color:var(--hb-ink)}
+.hb-h1 em{font-style:italic;color:var(--hb-terra)}
+.hb-lead{color:var(--hb-ink2);max-width:64ch;font-size:1.02rem;font-family:var(--hb-sans)}
+.hb-disclaimer{border:1px dashed var(--hb-burg);background:rgba(121,45,41,.05);
+  border-radius:12px;padding:.65rem .9rem;margin-top:.9rem;max-width:64ch;
+  font-size:.9rem;color:var(--hb-burg);font-weight:600;font-family:var(--hb-sans)}
+.hb-divi{font-family:var(--hb-mono);font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--hb-ochre);margin:1.9rem 0 0;padding-top:1.2rem;border-top:1px solid var(--hb-rule)}
+
+/* ---------- Interaktion ---------- */
+.hb-chip{border:1px solid var(--hb-rule);background:var(--hb-paper);border-radius:999px;
+  padding:.34rem .8rem;font-family:var(--hb-sans);font-size:.82rem;font-weight:600;
+  cursor:pointer;color:var(--hb-ink)}
+.hb-chip.on{background:var(--hb-ink);color:var(--hb-bg);border-color:var(--hb-ink)}
+.hb-chip:focus-visible{outline:2px solid var(--hb-ochre);outline-offset:2px}
+.hb-btn{display:inline-block;border:1px solid var(--hb-ink);background:var(--hb-ink);color:var(--hb-bg);
+  border-radius:var(--hb-r-s);padding:.55rem 1.05rem;font-family:var(--hb-sans);font-size:.88rem;
+  font-weight:700;text-decoration:none;cursor:pointer}
+.hb-btn.ghost{background:transparent;color:var(--hb-ink)}
+.hb-btn:focus-visible{outline:2px solid var(--hb-ochre);outline-offset:2px}
+
+/* ---------- Karten & Raster ---------- */
+.hb-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:.7rem}
+.hb-card{display:block;background:var(--hb-paper);border:1px solid var(--hb-rule);
+  border-radius:var(--hb-r-m);padding:.85rem .95rem;color:var(--hb-ink);text-decoration:none;
+  font-family:var(--hb-sans);transition:.12s}
+.hb-card:hover{border-color:var(--hb-terra);transform:translateY(-1px)}
+.hb-card:focus-visible{outline:2px solid var(--hb-ochre);outline-offset:2px}
+.hb-card .hb-card-t{font-family:var(--hb-serif);font-size:1.08rem;line-height:1.18}
+.hb-card .hb-card-m{display:flex;flex-wrap:wrap;gap:.15rem .35rem;margin-top:.5rem;
+  font-family:var(--hb-mono);font-size:.6rem;letter-spacing:.06em;text-transform:uppercase;color:var(--hb-ink2)}
+.hb-welt-card{border-left:4px solid var(--wf,var(--hb-rule))}
+
+/* ---------- Info-Boxen (Steckbrief-Familie) ---------- */
+.hb-box{border:1px solid var(--hb-rule);border-radius:12px;padding:.7rem .9rem;margin-top:.8rem;
+  font-size:.93rem;background:var(--hb-paper);font-family:var(--hb-sans);color:var(--hb-ink)}
+.hb-box .hb-bt{font-family:var(--hb-mono);font-size:.56rem;letter-spacing:.12em;
+  text-transform:uppercase;display:block;margin-bottom:.2rem;color:var(--hb-ink2)}
+.hb-box.fehler{background:rgba(169,122,29,.07);border-color:var(--hb-ochre)}
+.hb-box.fehler .hb-bt{color:var(--hb-ochre)}
+.hb-box.warn{background:rgba(121,45,41,.06);border-color:var(--hb-burg)}
+.hb-box.warn .hb-bt{color:var(--hb-burg)}
+.hb-box.merk,.hb-box.werk{background:rgba(74,92,57,.07);border-color:var(--hb-moss)}
+.hb-box.merk .hb-bt,.hb-box.werk .hb-bt{color:var(--hb-moss)}
+.hb-box.kid{background:rgba(107,57,81,.05);border-color:var(--hb-aub)}
+.hb-box.kid .hb-bt{color:var(--hb-aub)}
+.hb-box.welt{border-left:4px solid var(--wf,var(--hb-rule))}
+.hb-tip{border:1px dashed var(--hb-ochre);border-radius:12px;padding:.7rem .9rem;margin-top:.7rem;
+  font-size:.95rem;font-weight:600;font-family:var(--hb-sans);color:var(--hb-ink)}
+.hb-tip .hb-bt{font-family:var(--hb-mono);font-size:.56rem;letter-spacing:.12em;text-transform:uppercase;
+  display:block;margin-bottom:.2rem;color:var(--hb-terra)}
+.hb-badge{font-family:var(--hb-mono);font-size:.56rem;letter-spacing:.08em;text-transform:uppercase;
+  border-radius:999px;padding:.24rem .6rem;background:var(--hb-bg2);color:var(--hb-ink2);display:inline-block}
+.hb-badge.fill{background:var(--wf,var(--hb-terra));color:var(--hb-paper)}
+
+/* ---------- Fuß ---------- */
+.hb-foot{font-family:var(--hb-mono);font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--hb-ink2);text-align:center;margin-top:2.4rem}
+.hb-foot a{color:var(--hb-aub)}

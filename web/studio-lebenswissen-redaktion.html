@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HeiBen Studio · Lebenswissen-Redaktion</title>
+<meta name="description" content="Redaktions-Arbeitsplatz für das Lebenswissen-Magazin: Beiträge nach Kategorie, Lebensphase und Status filtern, durchsuchen, Entwürfe anlegen und den Veröffentlichungs-Workflow steuern.">
+<style>
+:root{--bg:#f3eee5;--bg-soft:#ebe3d4;--ink:#1f1c17;--ink-soft:#524a3e;--rule:#d8cdb7;--terracotta:#b04a31;--accent:#1f1c17;
+--bildung:#b04a31;--beruf:#6b3951;--finanzen:#9c6f1f;--wohnen:#4a5c39;--familie:#792d29;--gesundheit:#3b6b6b;--recht:#524a3e;--freizeit:#a97a1d;--alter:#5a5148;--digital:#17A2B8;--buero:#8E44AD;}
+*{box-sizing:border-box;}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Manrope',-apple-system,Segoe UI,sans-serif;line-height:1.5;}
+.wrap{max-width:1180px;margin:0 auto;padding:0 1.2rem;}
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:1.1rem 0;border-bottom:1px solid var(--rule);}
+.wm{font-family:'Fraunces',serif;font-weight:700;font-size:1.4rem;}.wm .a{color:var(--terracotta);}
+.wm span{font-weight:400;font-size:.9rem;color:var(--ink-soft);}
+.back{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);text-decoration:none;}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:.64rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-soft);}
+h1{font-family:'Fraunces',serif;font-weight:340;font-size:clamp(1.6rem,4.2vw,2.4rem);margin:.9rem 0 .2rem;}
+.lede{color:var(--ink-soft);max-width:70ch;}
+.note{font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--ink-soft);}
+.btn{display:inline-flex;align-items:center;gap:.3rem;border:0;cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;padding:.55rem .8rem;border-radius:8px;text-decoration:none;}
+.btn.ink{background:var(--ink);color:#f3eee5;}.btn.primary{background:var(--terracotta);color:#f3eee5;}
+.btn.ghost{background:none;border:1px solid var(--ink);color:var(--ink);}.btn.sm{padding:.35rem .6rem;font-size:.54rem;}
+.toolbar{display:flex;gap:.6rem;flex-wrap:wrap;align-items:flex-end;margin:1rem 0 .4rem;}
+.fld{display:flex;flex-direction:column;gap:3px;}
+.fld label{font-size:.6rem;color:var(--ink-soft);font-family:'JetBrains Mono',monospace;letter-spacing:.06em;text-transform:uppercase;}
+.fld input,.fld select,.fld textarea{border:1px solid var(--rule);border-radius:8px;padding:.45rem .6rem;font:inherit;background:#fff;}
+.search{flex:1;min-width:200px;}
+.chips{display:flex;gap:.35rem;flex-wrap:wrap;margin:.4rem 0;}
+.chip{border:1px solid var(--rule);background:#fff;border-radius:999px;padding:.32rem .7rem;font-size:.72rem;cursor:pointer;}
+.chip.on{background:var(--ink);border-color:var(--ink);color:#f3eee5;font-weight:600;}
+.stats{display:flex;gap:1.2rem;flex-wrap:wrap;margin:.6rem 0;border:1px solid var(--rule);border-radius:12px;background:#fff;padding:.7rem 1rem;}
+.stats .b{font-family:'Fraunces',serif;font-size:1.25rem;font-weight:560;}
+.stats .l{font-family:'JetBrains Mono',monospace;font-size:.52rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);}
+.row{display:grid;grid-template-columns:118px 1fr 150px 130px;gap:.6rem;align-items:center;border:1px solid var(--rule);border-radius:12px;background:#fff;padding:.55rem .8rem;margin-bottom:.5rem;}
+@media(max-width:760px){.row{grid-template-columns:1fr;gap:.3rem;}}
+.row h3{font-family:'Fraunces',serif;font-weight:480;font-size:1rem;margin:.1rem 0;}
+.row .meta{font-size:.72rem;color:var(--ink-soft);}
+.kbadge{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:.5rem;letter-spacing:.04em;text-transform:uppercase;color:#fff;padding:.12rem .45rem;border-radius:999px;}
+.tags{display:flex;gap:.25rem;flex-wrap:wrap;margin-top:.2rem;}
+.tag{font-size:.6rem;background:var(--bg-soft);border:1px solid var(--rule);border-radius:999px;padding:.05rem .4rem;color:var(--ink-soft);}
+.status{cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:.54rem;letter-spacing:.04em;text-transform:uppercase;padding:.28rem .55rem;border-radius:999px;text-align:center;}
+.status.entwurf{background:#eee4d0;color:#8a7a55;}
+.status.pruefung{background:#f3e3c2;color:#9c6f1f;}
+.status.veroeffentlicht{background:#e7eede;color:#3f5130;}
+.status.draftmark{outline:2px dotted var(--terracotta);outline-offset:1px;}
+.acts{display:flex;gap:.25rem;flex-wrap:wrap;justify-content:flex-end;}
+@media(max-width:760px){.acts{justify-content:flex-start;}}
+.iconbtn{border:1px solid var(--rule);background:#fff;border-radius:7px;padding:.25rem .45rem;font-size:.6rem;cursor:pointer;font-family:'JetBrains Mono',monospace;text-decoration:none;color:var(--ink);}
+.disc{background:var(--bg-soft);border:1px solid var(--rule);border-radius:12px;padding:.7rem 1rem;font-size:.82rem;color:var(--ink-soft);margin:1.2rem 0;}
+footer{margin-top:2.5rem;border-top:1px solid var(--rule);padding:1.3rem 0;color:var(--ink-soft);font-size:.8rem;}
+.modal{position:fixed;inset:0;background:rgba(31,28,23,.6);display:none;align-items:center;justify-content:center;z-index:1000;padding:1rem;}
+.modal.open{display:flex;}
+.modal .box{background:#fff;border-radius:14px;width:min(680px,96vw);max-height:88vh;display:flex;flex-direction:column;overflow:hidden;}
+.modal .mh{display:flex;justify-content:space-between;align-items:center;padding:.7rem 1rem;border-bottom:1px solid var(--rule);}
+.modal .mb{padding:1.1rem;overflow:auto;}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;}
+.full{grid-column:1/-1;}
+.prev h2{font-family:'Fraunces',serif;font-weight:480;}
+.prev ul{padding-left:1.1rem;} .prev li{margin:.2rem 0;}
+</style>
+<link rel="stylesheet" href="heiben-design.css">
+<script src="heiben-nav.js" defer></script>
+</head>
+<body data-hb-welt="studio">
+<div class="wrap">
+  <div class="topbar"><div class="wm"><span class="a">H</span>ei<span class="a">B</span>en <span>· Studio</span></div><a class="back" href="studio-lebenswissen-bibliothek.html">← Lebenswissen</a></div>
+  <div class="eyebrow">Studio · Lebenswissen-Redaktion</div>
+  <h1>Redaktions-<em style="color:var(--terracotta);font-style:italic;">Arbeitsplatz</em></h1>
+  <p class="lede">Steuere das Lebenswissen-Magazin: filtere Beiträge nach Kategorie, Lebensphase und Status, durchsuche den Bestand, lege Entwürfe an und führe sie durch den Workflow bis zur Veröffentlichung. Status, Notizen und Entwürfe liegen lokal in deinem Browser.</p>
+
+  <div class="stats" id="stats"></div>
+
+  <div class="toolbar">
+    <div class="fld search"><label>Suche</label><input id="q" type="search" placeholder="Titel, Teaser, Stichwort …"></div>
+    <div class="fld"><label>Lebensphase</label><select id="phase"></select></div>
+    <div class="fld"><label>Sortierung</label><select id="sort">
+      <option value="t">Titel A–Z</option><option value="k">Kategorie</option><option value="a">Alter (aufsteigend)</option><option value="status">Status</option></select></div>
+    <button class="btn primary sm" id="newDraft">+ Entwurf</button>
+    <button class="btn ghost sm" id="expJson">Redaktion JSON ↓</button>
+    <button class="btn ghost sm" id="expSnippet">Entwürfe-Snippet ↓</button>
+  </div>
+  <div class="chips" id="katChips"></div>
+  <div class="chips" id="statusChips">
+    <span class="chip on" data-s="">Alle Status</span>
+    <span class="chip" data-s="entwurf">Entwurf</span>
+    <span class="chip" data-s="pruefung">In Prüfung</span>
+    <span class="chip" data-s="veroeffentlicht">Veröffentlicht</span>
+    <span class="chip" data-s="__drafts">Nur eigene Entwürfe</span>
+  </div>
+  <div id="count" class="note" style="margin:.3rem 0;"></div>
+  <div id="list"></div>
+
+  <div class="disc">Beiträge durchlaufen <b>Entwurf → In Prüfung → Veröffentlicht</b> (Status-Badge antippen zum Weiterschalten). Die bestehenden Beiträge starten als „Veröffentlicht". Eigene Entwürfe sind mit gepunktetem Rand markiert, lassen sich bearbeiten, in der Vorschau ansehen und als Daten-Snippet exportieren.</div>
+  <footer>HeiBen Studio · Köln · <span class="note">Lebenswissen-Redaktion</span></footer>
+</div>
+
+<div class="modal" id="editModal"><div class="box"><div class="mh"><b id="editTitle">Entwurf</b><button class="btn ghost sm" id="editClose">schließen</button></div>
+  <div class="mb"><div class="grid2">
+    <div class="fld"><label>Titel</label><input id="e_t"></div>
+    <div class="fld"><label>Kategorie</label><select id="e_k"></select></div>
+    <div class="fld"><label>Alter von</label><input id="e_a0" type="number" min="0" max="120" value="18"></div>
+    <div class="fld"><label>Alter bis</label><input id="e_a1" type="number" min="0" max="120" value="30"></div>
+    <div class="fld full"><label>Stichworte (Komma-getrennt)</label><input id="e_s" placeholder="z. B. Miete, Kaution"></div>
+    <div class="fld full"><label>Teaser (kurz)</label><textarea id="e_kurz" rows="2"></textarea></div>
+    <div class="fld full"><label>Kernpunkte (eine pro Zeile)</label><textarea id="e_p" rows="4"></textarea></div>
+    <div class="fld full"><label>Checkliste (eine pro Zeile)</label><textarea id="e_c" rows="3"></textarea></div>
+    <div class="fld full"><label style="display:flex;gap:.4rem;align-items:center;"><input id="e_prem" type="checkbox"> Premium-Beitrag</label></div>
+    <div class="fld full"><label>Redaktionsnotiz</label><textarea id="e_note" rows="2" placeholder="interne Notiz …"></textarea></div>
+  </div>
+  <div style="margin-top:.8rem;display:flex;gap:.5rem;"><button class="btn ink sm" id="editSave">Speichern</button><button class="btn ghost sm" id="editCancel">Abbrechen</button></div>
+  </div></div></div>
+
+<div class="modal" id="prevModal"><div class="box"><div class="mh"><b>Vorschau</b><button class="btn ghost sm" id="prevClose">schließen</button></div>
+  <div class="mb prev" id="prevBody"></div></div></div>
+
+<script src="lebenswissen-daten.js"></script>
+<script src="heiben-analytics.js"></script>
+<script>
+(function(){
+  var T=window.HeiBenTrack;
+  var LW=window.LW_DATA||{}; var ART=(LW.ARTIKEL||[]).slice(); var KATS=LW.KATS||(window.KATS||{}); var PHASEN=LW.PHASEN||(window.PHASEN||[]);
+  var KCOL={bildung:'#b04a31',beruf:'#6b3951',finanzen:'#9c6f1f',wohnen:'#4a5c39',familie:'#792d29',gesundheit:'#3b6b6b',recht:'#524a3e',freizeit:'#a97a1d',alter:'#5a5148',digital:'#17A2B8',buero:'#8E44AD'};
+  function katName(k){ return (KATS[k]&&KATS[k].n)||k; }
+  function katCol(k){ return KCOL[k]||'#524a3e'; }
+  var STORE_KEY='heiben-redaktion';
+  function load(){ try{var s=JSON.parse(localStorage.getItem(STORE_KEY)); if(s&&s.status)return s;}catch(e){} return {status:{},notes:{},drafts:[]}; }
+  var R=load();
+  function save(){ try{localStorage.setItem(STORE_KEY,JSON.stringify(R));}catch(e){} }
+  function uid(){ return Math.random().toString(36).slice(2,8); }
+  function statusOf(a){ if(a._draft) return R.status[a.id]||'entwurf'; return R.status[a.id]||'veroeffentlicht'; }
+  function noteOf(a){ return R.notes[a.id]||''; }
+  var SLABEL={entwurf:'Entwurf',pruefung:'In Prüfung',veroeffentlicht:'Veröffentlicht'};
+  var SNEXT={entwurf:'pruefung',pruefung:'veroeffentlicht',veroeffentlicht:'entwurf'};
+  function allArticles(){ return ART.concat(R.drafts); }
+
+  var fKat='', fStatus='', fPhase='', q='', sortBy='t';
+  function phaseMatch(a){ if(!fPhase) return true; var ph=PHASEN[+fPhase]; if(!ph||!ph.a||!a.a) return true; return a.a[0]<=ph.a[1] && a.a[1]>=ph.a[0]; }
+  function matches(a){
+    if(fKat && a.k!==fKat) return false;
+    var st=statusOf(a);
+    if(fStatus==='__drafts'){ if(!a._draft) return false; }
+    else if(fStatus && st!==fStatus) return false;
+    if(!phaseMatch(a)) return false;
+    if(q){ var hay=((a.t||'')+' '+(a.kurz||'')+' '+((a.s||[]).join(' '))+' '+((a.p||[]).join(' '))+' '+katName(a.k)).toLowerCase(); if(hay.indexOf(q)<0) return false; }
+    return true;
+  }
+  function sortList(list){ var cp=list.slice();
+    cp.sort(function(x,y){
+      if(sortBy==='t') return (x.t||'').localeCompare(y.t||'');
+      if(sortBy==='k') return (katName(x.k)).localeCompare(katName(y.k));
+      if(sortBy==='a') return ((x.a&&x.a[0])||0)-((y.a&&y.a[0])||0);
+      if(sortBy==='status'){ var o={entwurf:0,pruefung:1,veroeffentlicht:2}; return o[statusOf(x)]-o[statusOf(y)]; }
+      return 0; }); return cp; }
+
+  function renderKatChips(){
+    var h='<span class="chip'+(fKat===''?' on':'')+'" data-k="">Alle Kategorien</span>';
+    Object.keys(KATS).forEach(function(k){ h+='<span class="chip'+(fKat===k?' on':'')+'" data-k="'+k+'" style="'+(fKat===k?'background:'+katCol(k)+';border-color:'+katCol(k)+';color:#fff;':'')+'">'+katName(k)+'</span>'; });
+    document.getElementById('katChips').innerHTML=h;
+  }
+  function renderPhase(){ var sel=document.getElementById('phase'); var h='<option value="">alle Lebensphasen</option>';
+    PHASEN.forEach(function(p,i){ h+='<option value="'+i+'">'+p.t+' ('+p.a[0]+'–'+p.a[1]+')</option>'; }); sel.innerHTML=h; sel.value=fPhase; }
+  function renderStats(){ var all=allArticles(); var c={entwurf:0,pruefung:0,veroeffentlicht:0}; all.forEach(function(a){ c[statusOf(a)]++; });
+    document.getElementById('stats').innerHTML=
+      '<div><div class="b">'+all.length+'</div><div class="l">Beiträge</div></div>'+
+      '<div><div class="b">'+R.drafts.length+'</div><div class="l">eigene Entwürfe</div></div>'+
+      '<div><div class="b">'+c.entwurf+'</div><div class="l">Entwurf</div></div>'+
+      '<div><div class="b">'+c.pruefung+'</div><div class="l">In Prüfung</div></div>'+
+      '<div><div class="b">'+c.veroeffentlicht+'</div><div class="l">Veröffentlicht</div></div>'+
+      '<div><div class="b">'+Object.keys(KATS).length+'</div><div class="l">Kategorien</div></div>';
+  }
+  function render(){
+    renderStats();
+    var list=sortList(allArticles().filter(matches));
+    document.getElementById('count').textContent=list.length+' von '+allArticles().length+' Beiträgen';
+    document.getElementById('list').innerHTML=list.map(function(a){
+      var st=statusOf(a), note=noteOf(a);
+      var tags=(a.s||[]).slice(0,4).map(function(t){return '<span class="tag">'+t+'</span>';}).join('');
+      var actions='<button class="iconbtn" data-prev="'+a.id+'">Vorschau</button>'+
+        (a._draft
+          ? '<button class="iconbtn" data-edit="'+a.id+'">Bearbeiten</button><button class="iconbtn" data-del="'+a.id+'">Löschen</button>'
+          : '<button class="iconbtn" data-dupe="'+a.id+'">Als Entwurf</button><button class="iconbtn" data-note="'+a.id+'">Notiz</button>')+
+        (st==='veroeffentlicht'&&!a._draft?'<a class="iconbtn" href="studio-lebenswissen-artikel.html?id='+encodeURIComponent(a.id)+'" target="_blank">Reader ↗</a>':'');
+      return '<div class="row">'+
+        '<div class="status '+st+(a._draft?' draftmark':'')+'" data-status="'+a.id+'" title="Status weiterschalten">'+SLABEL[st]+'</div>'+
+        '<div><h3>'+(a.t||'(ohne Titel)')+(a.prem?' <span class="note">★ Premium</span>':'')+'</h3>'+
+          '<div class="meta">'+(a.kurz||'').slice(0,120)+(note?' · <em>Notiz: '+note.slice(0,40)+'</em>':'')+'</div>'+
+          (tags?'<div class="tags">'+tags+'</div>':'')+'</div>'+
+        '<div><span class="kbadge" style="background:'+katCol(a.k)+'">'+katName(a.k)+'</span>'+
+          '<div class="meta" style="margin-top:.25rem;">Alter '+((a.a&&a.a[0])||'?')+'–'+((a.a&&a.a[1])||'?')+'</div></div>'+
+        '<div class="acts">'+actions+'</div></div>';
+    }).join('')||'<div class="note">Keine Beiträge für diese Filter.</div>';
+  }
+
+  document.getElementById('katChips').addEventListener('click',function(e){ var c=e.target.closest('.chip'); if(!c)return; fKat=c.dataset.k||''; renderKatChips(); render(); });
+  document.getElementById('statusChips').addEventListener('click',function(e){ var c=e.target.closest('.chip'); if(!c)return;
+    document.querySelectorAll('#statusChips .chip').forEach(function(x){x.classList.remove('on');}); c.classList.add('on'); fStatus=c.dataset.s||''; render(); });
+  document.getElementById('phase').addEventListener('change',function(e){ fPhase=e.target.value; render(); });
+  document.getElementById('sort').addEventListener('change',function(e){ sortBy=e.target.value; render(); });
+  document.getElementById('q').addEventListener('input',function(e){ q=e.target.value.trim().toLowerCase(); render(); });
+
+  document.getElementById('list').addEventListener('click',function(e){ var t=e.target;
+    var s=t.closest('[data-status]'); if(s){ var id=s.dataset.status; var a=byIdAll(id); R.status[id]=SNEXT[statusOf(a)]; save(); render(); if(T)T.ev('red_status',{id:id,to:R.status[id]}); return; }
+    var pv=t.closest('[data-prev]'); if(pv){ preview(byIdAll(pv.dataset.prev)); return; }
+    var du=t.closest('[data-dupe]'); if(du){ dupe(byIdAll(du.dataset.dupe)); return; }
+    var nt=t.closest('[data-note]'); if(nt){ openEdit(byIdAll(nt.dataset.note),true); return; }
+    var ed=t.closest('[data-edit]'); if(ed){ openEdit(byIdAll(ed.dataset.edit),false); return; }
+    var dl=t.closest('[data-del]'); if(dl){ if(confirm('Entwurf löschen?')){ R.drafts=R.drafts.filter(function(x){return x.id!==dl.dataset.del;}); delete R.status[dl.dataset.del]; delete R.notes[dl.dataset.del]; save(); render(); } return; }
+  });
+  function byIdAll(id){ return allArticles().filter(function(x){return x.id===id;})[0]; }
+
+  function preview(a){ if(!a)return;
+    var p=(a.p||[]).map(function(x){return '<li>'+x+'</li>';}).join('');
+    var c=(a.c||[]).map(function(x){return '<li>'+x+'</li>';}).join('');
+    document.getElementById('prevBody').innerHTML='<div class="eyebrow">'+katName(a.k)+' · Alter '+((a.a&&a.a[0])||'?')+'–'+((a.a&&a.a[1])||'?')+'</div>'+
+      '<h2>'+(a.t||'')+'</h2><p>'+(a.kurz||'')+'</p>'+
+      (p?'<h3>Kernpunkte</h3><ul>'+p+'</ul>':'')+(c?'<h3>Checkliste</h3><ul>'+c+'</ul>':'')+
+      '<p class="note" style="margin-top:.6rem;">Status: '+SLABEL[statusOf(a)]+(a._draft?' · eigener Entwurf':'')+'</p>';
+    document.getElementById('prevModal').classList.add('open'); if(T)T.ev('red_preview',{id:a.id});
+  }
+  document.getElementById('prevClose').addEventListener('click',function(){ document.getElementById('prevModal').classList.remove('open'); });
+
+  function dupe(a){ if(!a)return; var d={_draft:true,id:'draft-'+uid(),k:a.k,a:(a.a||[18,30]).slice(),s:(a.s||[]).slice(),t:'(Kopie) '+(a.t||''),kurz:a.kurz||'',p:(a.p||[]).slice(),c:(a.c||[]).slice(),prem:!!a.prem};
+    R.drafts.push(d); R.status[d.id]='entwurf'; save(); fStatus='__drafts'; document.querySelectorAll('#statusChips .chip').forEach(function(x){x.classList.toggle('on',x.dataset.s==='__drafts');}); render(); openEdit(d,false); if(T)T.ev('red_dupe',{from:a.id}); }
+
+  var editId=null, editNoteOnly=false;
+  function fillKatSelect(){ document.getElementById('e_k').innerHTML=Object.keys(KATS).map(function(k){return '<option value="'+k+'">'+katName(k)+'</option>';}).join(''); }
+  function openEdit(a,noteOnly){ editNoteOnly=!!noteOnly;
+    if(!a){ a={_draft:true,id:'draft-'+uid(),k:Object.keys(KATS)[0],a:[18,30],s:[],t:'',kurz:'',p:[],c:[],prem:false}; }
+    editId=a.id; fillKatSelect();
+    document.getElementById('editTitle').textContent=noteOnly?'Redaktionsnotiz':(a.t?'Entwurf bearbeiten':'Neuer Entwurf');
+    document.getElementById('e_t').value=a.t||''; document.getElementById('e_k').value=a.k||Object.keys(KATS)[0];
+    document.getElementById('e_a0').value=(a.a&&a.a[0])||18; document.getElementById('e_a1').value=(a.a&&a.a[1])||30;
+    document.getElementById('e_s').value=(a.s||[]).join(', ');
+    document.getElementById('e_kurz').value=a.kurz||''; document.getElementById('e_p').value=(a.p||[]).join('\n'); document.getElementById('e_c').value=(a.c||[]).join('\n');
+    document.getElementById('e_prem').checked=!!a.prem; document.getElementById('e_note').value=noteOf(a);
+    var disabled=noteOnly || (!a._draft);
+    ['e_t','e_k','e_a0','e_a1','e_s','e_kurz','e_p','e_c','e_prem'].forEach(function(id){ document.getElementById(id).disabled=disabled; });
+    document.getElementById('editModal').classList.add('open');
+  }
+  function closeEdit(){ document.getElementById('editModal').classList.remove('open'); editId=null; }
+  document.getElementById('editClose').addEventListener('click',closeEdit);
+  document.getElementById('editCancel').addEventListener('click',closeEdit);
+  document.getElementById('newDraft').addEventListener('click',function(){ openEdit(null,false); });
+  document.getElementById('editSave').addEventListener('click',function(){
+    if(!editId)return; var a=byIdAll(editId);
+    var note=document.getElementById('e_note').value.trim();
+    if(note) R.notes[editId]=note; else delete R.notes[editId];
+    if(a && a._draft && !editNoteOnly){
+      a.t=document.getElementById('e_t').value.trim(); a.k=document.getElementById('e_k').value;
+      a.a=[+document.getElementById('e_a0').value||0,+document.getElementById('e_a1').value||0];
+      a.s=document.getElementById('e_s').value.split(',').map(function(x){return x.trim();}).filter(Boolean);
+      a.kurz=document.getElementById('e_kurz').value.trim();
+      a.p=document.getElementById('e_p').value.split('\n').map(function(x){return x.trim();}).filter(Boolean);
+      a.c=document.getElementById('e_c').value.split('\n').map(function(x){return x.trim();}).filter(Boolean);
+      a.prem=document.getElementById('e_prem').checked;
+    } else if(!a){
+      var d={_draft:true,id:editId,k:document.getElementById('e_k').value,
+        a:[+document.getElementById('e_a0').value||0,+document.getElementById('e_a1').value||0],
+        s:document.getElementById('e_s').value.split(',').map(function(x){return x.trim();}).filter(Boolean),
+        t:document.getElementById('e_t').value.trim(),kurz:document.getElementById('e_kurz').value.trim(),
+        p:document.getElementById('e_p').value.split('\n').map(function(x){return x.trim();}).filter(Boolean),
+        c:document.getElementById('e_c').value.split('\n').map(function(x){return x.trim();}).filter(Boolean),
+        prem:document.getElementById('e_prem').checked};
+      R.drafts.push(d); R.status[d.id]='entwurf';
+    }
+    save(); closeEdit(); render(); if(T)T.ev('red_save',{id:editId});
+  });
+
+  function download(name,content,type){ var b=new Blob([content],{type:type||'application/json'}); var u=URL.createObjectURL(b); var a=document.createElement('a'); a.href=u; a.download=name; document.body.appendChild(a); a.click(); a.remove(); setTimeout(function(){URL.revokeObjectURL(u);},800); }
+  document.getElementById('expJson').addEventListener('click',function(){ download('heiben-redaktion.json',JSON.stringify(R,null,2)); if(T)T.ev('red_export',{}); });
+  document.getElementById('expSnippet').addEventListener('click',function(){
+    var clean=R.drafts.map(function(d){ var o={id:d.id,k:d.k,a:d.a,s:d.s,t:d.t,kurz:d.kurz,p:d.p,c:d.c}; if(d.prem)o.prem=true; return o; });
+    download('lebenswissen-entwuerfe.js','/* HeiBen Lebenswissen — Redaktions-Entwürfe */\nwindow.LW_DRAFTS = '+JSON.stringify(clean,null,2)+';\n','application/javascript');
+  });
+
+  if(!ART.length){ document.getElementById('list').innerHTML='<div class="note">Lebenswissen-Daten nicht geladen.</div>'; }
+  renderKatChips(); renderPhase(); render();
+})();
+</script>
+<script src="heiben-legal.js"></script>
+</body>
+</html>

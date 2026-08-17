@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>HeiBen · Welt-Cockpit</title>
+<style>
+:root{--bg:#f3eee5;--bg-soft:#ebe3d4;--ink:#1f1c17;--ink-soft:#524a3e;--rule:#d8cdb7;--terracotta:#b04a31;--welt:#1f1c17;}
+*{box-sizing:border-box;}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Manrope',-apple-system,Segoe UI,sans-serif;line-height:1.5;}
+.wrap{max-width:1180px;margin:0 auto;padding:0 1.2rem;}
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:1.1rem 0;border-bottom:1px solid var(--rule);}
+.wm{font-family:'Fraunces',serif;font-weight:700;font-size:1.4rem;}.wm .a{color:var(--terracotta);}.wm span{font-weight:400;font-size:.9rem;color:var(--ink-soft);}
+.back{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);text-decoration:none;}
+.bar{height:6px;border-radius:3px;background:var(--welt);margin:1rem 0 .2rem;}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-soft);}
+h1{font-family:'Fraunces',serif;font-weight:340;font-size:clamp(1.5rem,4vw,2.2rem);margin:.4rem 0 .1rem;}
+.firma{background:#fff;border:1px solid var(--rule);border-radius:12px;padding:.8rem 1rem;margin:.6rem 0;display:flex;flex-wrap:wrap;gap:.3rem 2rem;}
+.firma .l{font-family:'JetBrains Mono',monospace;font-size:.52rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);}
+.kpis{display:flex;gap:1rem;flex-wrap:wrap;margin:.7rem 0;}
+.kpi{background:#fff;border:1px solid var(--rule);border-radius:12px;padding:.7rem 1rem;min-width:120px;}
+.kpi .b{font-family:'Fraunces',serif;font-size:1.5rem;font-weight:560;}
+.kpi .l{font-family:'JetBrains Mono',monospace;font-size:.52rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);}
+.weltnav{display:flex;gap:.4rem;flex-wrap:wrap;margin:.4rem 0;}
+.wchip{border:1px solid var(--rule);background:#fff;border-radius:999px;padding:.3rem .7rem;font-size:.72rem;cursor:pointer;text-decoration:none;color:var(--ink);}
+.wchip.on{background:var(--welt);border-color:var(--welt);color:#fff;font-weight:600;}
+.toolbar{display:flex;gap:.6rem;flex-wrap:wrap;align-items:flex-end;margin:.8rem 0 .3rem;}
+.fld{display:flex;flex-direction:column;gap:3px;}.fld label{font-size:.58rem;color:var(--ink-soft);font-family:'JetBrains Mono',monospace;letter-spacing:.06em;text-transform:uppercase;}
+.fld input,.fld select{border:1px solid var(--rule);border-radius:8px;padding:.45rem .6rem;font:inherit;background:#fff;}
+.search{flex:1;min-width:170px;}
+.btn{display:inline-flex;align-items:center;gap:.3rem;border:0;cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:.56rem;letter-spacing:.08em;text-transform:uppercase;padding:.5rem .75rem;border-radius:8px;text-decoration:none;}
+.btn.ink{background:var(--ink);color:#f3eee5;}.btn.ghost{background:none;border:1px solid var(--ink);color:var(--ink);}.btn.welt{background:var(--welt);color:#fff;}
+table{width:100%;border-collapse:collapse;margin-top:.5rem;background:#fff;border:1px solid var(--rule);border-radius:12px;overflow:hidden;}
+th,td{text-align:left;padding:.55rem .7rem;border-bottom:1px solid var(--rule);font-size:.84rem;}
+th{font-family:'JetBrains Mono',monospace;font-size:.54rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);}
+td.r,th.r{text-align:right;}
+.pill{font-family:'JetBrains Mono',monospace;font-size:.54rem;letter-spacing:.04em;text-transform:uppercase;padding:.2rem .5rem;border-radius:999px;cursor:pointer;}
+.pill.gebucht{background:#e7eede;color:#3f5130;}.pill.offen{background:#f3e3c2;color:#9c6f1f;}.pill.angebot{background:#eee4d0;color:#8a7a55;}.pill.storniert{background:#efe0dd;color:#9c3a2f;text-decoration:line-through;}.pill.pay-offen{background:#f3e3c2;color:#9c6f1f;}.pill.pay-faellig{background:#efd6d0;color:#a3402e;}.pill.pay-bezahlt{background:#e7eede;color:#3f5130;}
+.typ{font-family:'JetBrains Mono',monospace;font-size:.56rem;color:var(--ink-soft);}
+.iconbtn{border:1px solid var(--rule);background:#fff;border-radius:7px;padding:.2rem .4rem;font-size:.56rem;cursor:pointer;font-family:'JetBrains Mono',monospace;}
+.note{font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--ink-soft);}
+.empty{background:#fff;border:1px dashed var(--rule);border-radius:12px;padding:1.4rem;text-align:center;color:var(--ink-soft);margin-top:.6rem;}
+footer{margin-top:2.5rem;border-top:1px solid var(--rule);padding:1.2rem 0;color:var(--ink-soft);font-size:.8rem;}
+.archrow td{background:var(--bg-soft);}
+.archdoc{font-size:.78rem;padding:.2rem 0;}
+.adoc-art{font-family:'JetBrains Mono',monospace;font-size:.54rem;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-soft);}
+</style>
+<link rel="stylesheet" href="heiben-design.css">
+<script src="heiben-nav.js" defer></script>
+</head>
+<body data-hb-welt="holding">
+<div class="wrap">
+  <div class="topbar"><div class="wm"><span class="a">H</span>ei<span class="a">B</span>en <span>· Cockpit</span></div>
+    <a class="back" href="holding-dashboard.html">Holding-Dashboard ↗</a></div>
+  <div class="bar" id="bar"></div>
+  <div class="eyebrow" id="eyebrow">Welt-Cockpit · intern</div>
+  <h1 id="title">Cockpit</h1>
+  <div class="firma" id="firma"></div>
+
+  <div class="weltnav" id="weltnav"></div>
+  <div class="kpis" id="kpis"></div>
+
+  <div class="toolbar">
+    <div class="fld search"><label>Suche</label><input id="q" type="search" placeholder="Referenz, Kunde, Titel …"></div>
+    <div class="fld"><label>Typ</label><select id="fTyp"><option value="">alle</option><option value="angebot">Angebote</option><option value="buchung">Buchungen</option></select></div>
+    <div class="fld"><label>Status</label><select id="fStatus"><option value="">alle</option><option value="angebot">Angebot</option><option value="offen">offen</option><option value="gebucht">gebucht</option></select></div>
+    <div class="fld"><label>Sortierung</label><select id="sort"><option value="datum">neueste zuerst</option><option value="total">Volumen</option><option value="ref">Referenz</option></select></div>
+    <button class="btn ghost" id="planerBtn">Planer ↗</button>
+    <button class="btn ghost" id="csv">CSV ↓</button>
+    <button class="btn ghost" id="bw">Buchhaltung ↓</button>
+    <button class="btn ghost" id="demo">Beispiel laden</button>
+  </div>
+  <div id="count" class="note"></div>
+  <div id="tableWrap"></div>
+
+  <footer>HeiBen <span id="footName"></span> · Köln · <span class="note">Jede Welt fakturiert in eigener Firmierung. Vorgänge liegen lokal im Browser.</span></footer>
+</div>
+
+<script src="heiben-firmierungen.js"></script>
+<script src="heiben-angebot.js"></script>
+<script src="vendor/jspdf/jspdf.umd.min.js"></script>
+<script src="heiben-pdf.js"></script>
+<script src="heiben-analytics.js"></script>
+<script>
+(function(){
+  var T=window.HeiBenTrack;
+  function qp(k){ return new URLSearchParams(location.search).get(k); }
+  var WELTEN=window.HEIBEN_WELTEN||['reisen','wohnen','kulinarik','immobilien','studio'];
+  var welt=qp('welt'); if(WELTEN.indexOf(welt)<0) welt='reisen';
+  var F=window.HEIBEN_FIRMA(welt);
+  document.documentElement.style.setProperty('--welt',F.farbe||'#1f1c17');
+  document.getElementById('eyebrow').textContent=F.kurz+' · Cockpit · intern';
+  document.getElementById('title').textContent=F.kurz+' — Cockpit';
+  document.getElementById('footName').textContent=(F.name+' '+(F.rechtsform||''));
+  document.title='HeiBen · '+F.kurz+' Cockpit';
+  document.getElementById('firma').innerHTML=
+    '<div><div class="l">Firmierung</div>'+F.name+' '+(F.rechtsform||'')+'</div>'+
+    '<div><div class="l">Leistung</div>'+(F.leistung||'')+'</div>'+
+    '<div><div class="l">Register</div>'+(F.register||'')+'</div>'+
+    '<div><div class="l">USt-IdNr.</div>'+(F.ustid||'')+'</div>'+
+    '<div><div class="l">Geschäftsführung</div>'+((F.gf||[]).join(' · '))+'</div>';
+  var planerMap={reisen:'reisen-planer.html',wohnen:'wohnen-planer.html',kulinarik:'kulinarik-planner.html',immobilien:'immobilien-planner.html',studio:'studio-lebenswissen-redaktion.html'};
+  document.getElementById('planerBtn').addEventListener('click',function(){ location.href=planerMap[welt]||'index.html'; });
+
+  // Welt-Navigation
+  document.getElementById('weltnav').innerHTML=WELTEN.map(function(w){ var f=window.HEIBEN_FIRMA(w);
+    return '<a class="wchip'+(w===welt?' on':'')+'" '+(w===welt?'style="--welt:'+(f.farbe)+';"':'')+' href="welt-cockpit.html?welt='+w+'">'+f.kurz.replace('HeiBen ','')+'</a>'; }).join('');
+
+  var L=window.HeiBenLedger;
+  var q='',fTyp='',fStatus='',sortBy='datum';
+  function eur(n){ return (Math.round((+n||0)*100)/100).toLocaleString('de-DE',{minimumFractionDigits:2,maximumFractionDigits:2}); }
+  function list(){
+    var a=L.byWelt(welt);
+    if(q){ a=a.filter(function(x){ return ((x.referenz||'')+' '+(x.kunde||'')+' '+(x.titel||'')).toLowerCase().indexOf(q)>=0; }); }
+    if(fTyp) a=a.filter(function(x){ return x.typ===fTyp; });
+    if(fStatus) a=a.filter(function(x){ return (x.status||'')===fStatus; });
+    a.sort(function(x,y){ if(sortBy==='total') return (+y.total||0)-(+x.total||0); if(sortBy==='ref') return (''+x.referenz).localeCompare(''+y.referenz); return (y.datum||'').localeCompare(x.datum||''); });
+    return a;
+  }
+  function renderKpis(){
+    var k=L.kpis(L.byWelt(welt));
+    document.getElementById('kpis').innerHTML=
+      '<div class="kpi"><div class="b">'+k.count+'</div><div class="l">Vorgänge</div></div>'+
+      '<div class="kpi"><div class="b">'+k.angebote+'</div><div class="l">Angebote</div></div>'+
+      '<div class="kpi"><div class="b">'+k.buchungen+'</div><div class="l">Buchungen</div></div>'+
+      '<div class="kpi"><div class="b">'+k.gebucht+'</div><div class="l">gebucht</div></div>'+
+      '<div class="kpi"><div class="b">'+eur(k.volumen)+' €</div><div class="l">Volumen</div></div>';
+  }
+  function today(){ return new Date().toISOString().slice(0,10); }
+  function render(){
+    renderKpis();
+    var a=list();
+    document.getElementById('count').textContent=a.length+' Vorgang/Vorgänge';
+    if(!a.length){ document.getElementById('tableWrap').innerHTML='<div class="empty">Noch keine Vorgänge in dieser Welt. Angebote und Buchungen aus dem Planer erscheinen hier automatisch.<br><br><button class="btn welt" id="demo2">Beispiel-Vorgänge laden</button></div>';
+      var d2=document.getElementById('demo2'); if(d2)d2.addEventListener('click',seed); return; }
+    var rows=a.map(function(x){
+      var st=x.status||(x.typ==='angebot'?'angebot':'gebucht');
+      var canRech=(x.typ==='buchung'||(x.positionen&&x.positionen.length)); var nDocs=(x.belege&&x.belege.length)||0; var canStorno=(x.typ==='buchung'&&(x.status||'')!=='storniert'); var pay=(x.rechnungNr?(x.bezahlt?'bezahlt':((x.faelligAm&&x.faelligAm<today())?'überfällig':'offen')):null); var payKey=(pay==='überfällig'?'faellig':pay); var canMahn=(pay&&pay!=='bezahlt');
+      return '<tr><td>'+(x.datum||'').slice(0,10)+'</td>'+
+        '<td class="typ">'+(x.typ==='angebot'?'Angebot':'Buchung')+'</td>'+
+        '<td><b>'+(x.referenz||'—')+'</b></td>'+
+        '<td>'+(x.titel||x.kunde||'—')+(x.kunde&&x.titel?' · '+x.kunde:'')+'</td>'+
+        '<td class="r">'+(x.persons||'')+'</td>'+
+        '<td class="r">'+(x.total!=null?eur(x.total)+' €':'')+'</td>'+
+        '<td><span class="pill '+st+'" data-tog="'+x.id+'" title="Status umschalten">'+st+'</span>'+(pay?' <span class="pill pay-'+payKey+'" data-pay="'+x.id+'" title="Zahlung umschalten">'+pay+'</span>':'')+'</td>'+
+        '<td class="r">'+(canRech?'<button class="iconbtn" data-rech="'+x.id+'">Rechnung</button> ':'')+(canStorno?'<button class="iconbtn" data-storno="'+x.id+'">Storno</button> ':'')+(canMahn?'<button class="iconbtn" data-mahn="'+x.id+'">Mahnung</button> ':'')+'<button class="iconbtn" data-beleg="'+x.id+'">Beleg</button> <button class="iconbtn" data-arch="'+x.id+'">Archiv'+(nDocs?' ('+nDocs+')':'')+'</button> <button class="iconbtn" data-del="'+x.id+'">×</button></td></tr>'+
+        '<tr class="archrow" id="arch-'+x.id+'" style="display:none;"><td colspan="8">'+(nDocs? x.belege.map(function(d,i){ return '<div class="archdoc"><span class="adoc-art">'+d.art+'</span> <b>'+d.nr+'</b> · '+(d.datum||'').slice(0,10)+' <button class="iconbtn" data-open="'+x.id+':'+i+'">öffnen</button></div>'; }).join('') : '<span class="note">Noch keine Dokumente erzeugt — „Beleg" oder „Rechnung" legt eine archivierte Fassung an.</span>')+'</td></tr>';
+    }).join('');
+    document.getElementById('tableWrap').innerHTML='<table><thead><tr><th>Datum</th><th>Typ</th><th>Referenz</th><th>Titel / Kunde</th><th class="r">Pers.</th><th class="r">Volumen</th><th>Status</th><th class="r">Aktion</th></tr></thead><tbody>'+rows+'</tbody></table>';
+  }
+  document.getElementById('tableWrap').addEventListener('click',function(e){
+    var tg=e.target.closest('[data-tog]'); if(tg){ var it=byId(tg.dataset.tog); if(it&&it.status!=='storniert'){ it.status=(it.status==='gebucht')?'offen':'gebucht'; L.update(welt,it.referenz,{status:it.status}); render(); } return; }
+    var ar=e.target.closest('[data-arch]'); if(ar){ var row=document.getElementById('arch-'+ar.dataset.arch); if(row) row.style.display=(row.style.display==='none'?'table-row':'none'); return; }
+    var op=e.target.closest('[data-open]'); if(op){ var pp=op.dataset.open.split(':'); var xx=byId(pp[0]); if(xx){ var d=(xx.belege||[])[+pp[1]]; if(d&&d.art==='Rechnung') rechnung(xx); else if(d&&d.art==='Stornobeleg') storno(xx); else if(d&&/^Mahnung/.test(d.art)) mahnung(xx,{nr:d.nr,stufe:(parseInt((d.art.match(/\d+/)||[1])[0],10)+1)}); else beleg(xx); } return; }
+    var rc=e.target.closest('[data-rech]'); if(rc){ rechnung(byId(rc.dataset.rech)); return; }
+    var sto=e.target.closest('[data-storno]'); if(sto){ storno(byId(sto.dataset.storno)); return; }
+    var pa=e.target.closest('[data-pay]'); if(pa){ var px=byId(pa.dataset.pay); if(px){ px.bezahlt=px.bezahlt?null:today(); L.update(welt,px.referenz,{bezahlt:px.bezahlt}); render(); } return; }
+    var ma=e.target.closest('[data-mahn]'); if(ma){ mahnung(byId(ma.dataset.mahn)); return; }
+    var bl=e.target.closest('[data-beleg]'); if(bl){ beleg(byId(bl.dataset.beleg)); return; }
+    var dl=e.target.closest('[data-del]'); if(dl){ if(confirm('Vorgang entfernen?')){ L.remove(dl.dataset.del); render(); } return; }
+  });
+  function byId(id){ return L.byWelt(welt).filter(function(x){return x.id===id;})[0]; }
+  function archive(x,art,nr){ if(!x||!nr)return; x.belege=x.belege||[]; var ex=x.belege.filter(function(d){return d.art===art&&d.nr===nr;})[0]; if(!ex){ x.belege.push({art:art,nr:nr,datum:new Date().toISOString()}); L.update(welt,x.referenz,{belege:x.belege}); render(); } }
+  function beleg(x){ if(!x)return;
+    var positionen=(x.positionen&&x.positionen.length)?x.positionen:[{t:(x.titel||F.leistungswort||'Leistung'),menge:x.persons||1,summe:x.total||0,einzel:(x.persons?(x.total||0)/x.persons:x.total||0)}];
+    window.HeiBenAngebot.dokument({welt:welt,typ:(x.typ==='angebot'?'angebot':'auftrag'),referenz:x.referenz,kunde:x.kunde||x.titel,persons:x.persons,positionen:positionen,gesamt:x.total,gueltigBis:x.gueltigBis,datum:x.datum});
+    archive(x,(x.typ==='angebot'?'Angebot':'Auftragsbestätigung'),x.referenz);
+    if(T)T.ev('cockpit_beleg',{welt:welt,ref:x.referenz});
+  }
+  function rechnung(x){ if(!x)return; if(!(window.HeiBenPDF&&window.HeiBenPDF.rechnung)){ alert('PDF-Modul nicht verfügbar.'); return; }
+    if(!x.rechnungNr){ x.rechnungNr=L.nextNr(welt,'RE'); x.rechnungDatum=today(); x.faelligAm=new Date(Date.now()+14*86400000).toISOString().slice(0,10); x.bezahlt=null; L.update(welt,x.referenz,{rechnungNr:x.rechnungNr,rechnungDatum:x.rechnungDatum,faelligAm:x.faelligAm,bezahlt:null}); render(); }
+    var positionen=(x.positionen&&x.positionen.length)?x.positionen:[{t:(x.titel||F.leistungswort||'Leistung'),menge:x.persons||1,summe:x.total||0,einzel:(x.persons?(x.total||0)/x.persons:x.total||0)}];
+    window.HeiBenPDF.rechnung({welt:welt,referenz:x.rechnungNr,auftragRef:x.referenz,kunde:x.kunde||x.titel,persons:x.persons,positionen:positionen,gesamt:x.total,datum:new Date().toISOString(),leistungsdatum:x.datum});
+    archive(x,'Rechnung',x.rechnungNr);
+    if(T)T.ev('cockpit_rechnung',{welt:welt,ref:x.rechnungNr});
+  }
+  function storno(x){ if(!x)return; if(!(window.HeiBenPDF&&window.HeiBenPDF.storno)){ alert('PDF-Modul nicht verfügbar.'); return; }
+    var already=((x.status||'')==='storniert');
+    if(!already){ if(!confirm('Diesen Vorgang stornieren? Das Volumen wird aus der Auswertung genommen.')) return; }
+    if(!x.stornoNr){ x.stornoNr=L.nextNr(welt,'ST'); }
+    if(!already){ x.status='storniert'; L.update(welt,x.referenz,{status:'storniert',stornoNr:x.stornoNr}); } else { L.update(welt,x.referenz,{stornoNr:x.stornoNr}); }
+    var positionen=(x.positionen&&x.positionen.length)?x.positionen:[{t:(x.titel||F.leistungswort||'Leistung'),menge:x.persons||1,summe:x.total||0,einzel:(x.persons?(x.total||0)/x.persons:x.total||0)}];
+    window.HeiBenPDF.storno({welt:welt,referenz:x.stornoNr,originalRef:(x.rechnungNr||x.referenz),originalTyp:(x.rechnungNr?'Rechnung':'Auftrag'),kunde:x.kunde||x.titel,persons:x.persons,positionen:positionen,gesamt:x.total,datum:new Date().toISOString()});
+    archive(x,'Stornobeleg',x.stornoNr); if(!already) render();
+    if(T)T.ev('cockpit_storno',{welt:welt,ref:x.stornoNr});
+  }
+  function mahnung(x, fixed){ if(!x||!x.rechnungNr)return; if(!(window.HeiBenPDF&&window.HeiBenPDF.mahnung)){ alert('PDF-Modul nicht verfügbar.'); return; }
+    var stufe, nr, isNew=!fixed;
+    if(fixed){ stufe=fixed.stufe||x.mahnstufe||1; nr=fixed.nr; } else { x.mahnstufe=(x.mahnstufe||0)+1; stufe=x.mahnstufe; nr=L.nextNr(welt,'MA'); }
+    var alt=x.faelligAm||x.rechnungDatum; var neueFrist=new Date(Date.now()+7*86400000).toISOString().slice(0,10); var gebuehr=(stufe>=2?5:0);
+    window.HeiBenPDF.mahnung({welt:welt,referenz:nr,rechnungNr:x.rechnungNr,kunde:x.kunde||x.titel,datum:new Date().toISOString(),faelligAlt:alt,betrag:x.total,mahnstufe:stufe,neueFrist:neueFrist,gebuehr:gebuehr});
+    if(isNew){ L.update(welt,x.referenz,{mahnstufe:x.mahnstufe,letzteMahnung:nr}); archive(x,'Mahnung (Stufe '+stufe+')',nr); render(); }
+    if(T)T.ev('cockpit_mahnung',{welt:welt,ref:nr,stufe:stufe});
+  }
+  document.getElementById('q').addEventListener('input',function(e){ q=e.target.value.trim().toLowerCase(); render(); });
+  document.getElementById('fTyp').addEventListener('change',function(e){ fTyp=e.target.value; render(); });
+  document.getElementById('fStatus').addEventListener('change',function(e){ fStatus=e.target.value; render(); });
+  document.getElementById('sort').addEventListener('change',function(e){ sortBy=e.target.value; render(); });
+  document.getElementById('csv').addEventListener('click',function(){
+    var a=list(); var head=['datum','typ','referenz','titel','kunde','personen','volumen','status'];
+    var rows=a.map(function(x){ return [ (x.datum||'').slice(0,10),x.typ,x.referenz,(x.titel||'').replace(/;/g,','),(x.kunde||'').replace(/;/g,','),x.persons||'',x.total!=null?(''+x.total).replace('.',','):'',x.status||'' ].join(';'); });
+    var csv=head.join(';')+'\n'+rows.join('\n');
+    var b=new Blob(["\ufeff"+csv],{type:'text/csv'}); var u=URL.createObjectURL(b); var el=document.createElement('a'); el.href=u; el.download='cockpit-'+welt+'.csv'; document.body.appendChild(el); el.click(); el.remove(); setTimeout(function(){URL.revokeObjectURL(u);},800);
+  });
+  document.getElementById('bw').addEventListener('click',function(){
+    var rows=L.buchhaltungRows(L.byWelt(welt)); function c(n){ return (''+n).replace('.',','); }
+    var head=['Datum','Belegart','Belegnr','Kunde','Welt','Firmierung','Brutto','Netto_19','USt_19','Netto_7','USt_7','Marge_§25','Zahlstatus','Status'];
+    var lines=rows.map(function(r){ return [r.datum,r.belegart,r.belegnr,(r.kunde||'').replace(/;/g,','),r.welt,(r.firma||'').replace(/;/g,','),c(r.brutto),c(r.netto19),c(r.ust19),c(r.netto7),c(r.ust7),c(r.margeBrutto),r.zahlstatus,r.status].join(';'); });
+    var csv=head.join(';')+'\n'+lines.join('\n'); var bb=new Blob(["\ufeff"+csv],{type:'text/csv'}); var u=URL.createObjectURL(bb); var el=document.createElement('a'); el.href=u; el.download='buchhaltung-'+welt+'.csv'; document.body.appendChild(el); el.click(); el.remove(); setTimeout(function(){URL.revokeObjectURL(u);},800); if(T)T.ev('cockpit_buchhaltung',{welt:welt});
+  });
+  function seed(){ var p=(F.refPrefix||'XX-');
+    L.log({welt:welt,typ:'angebot',referenz:'q_'+welt.slice(0,3)+'_1',status:'angebot',total:880,persons:4,n:3,titel:'Beispiel-Anfrage',kunde:'Familie Beispiel'});
+    L.log({welt:welt,typ:'buchung',referenz:p+'DEMO1',status:'gebucht',total:1490,persons:6,n:4,titel:'Beispiel-Auftrag',kunde:'Familie Muster'});
+    render(); if(T)T.ev('cockpit_seed',{welt:welt});
+  }
+  document.getElementById('demo').addEventListener('click',seed);
+
+  render();
+})();
+</script>
+<script src="heiben-legal.js"></script>
+</body>
+</html>

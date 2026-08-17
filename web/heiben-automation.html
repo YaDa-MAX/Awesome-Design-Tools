@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>HeiBen · E-Mail-Automation (Backoffice)</title>
+<style>
+:root{--bg:#f3eee5;--bg-soft:#ebe3d4;--ink:#1f1c17;--ink-soft:#524a3e;--rule:#d8cdb7;--terracotta:#b04a31;--kuli:#6b3951;--ochre:#a97a1d;--wohnen:#4a5c39;--immo:#792d29;}
+*{box-sizing:border-box;}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Manrope',-apple-system,Segoe UI,sans-serif;line-height:1.5;}
+.wrap{max-width:920px;margin:0 auto;padding:0 1.5rem;}
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:1.1rem 0;border-bottom:1px solid var(--rule);}
+.wm{font-family:'Fraunces',serif;font-weight:700;font-size:1.4rem;}.wm .a{color:var(--terracotta);}
+.back{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);text-decoration:none;}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:.64rem;letter-spacing:.18em;text-transform:uppercase;color:var(--kuli);}
+h1{font-family:'Fraunces',serif;font-weight:340;font-size:clamp(1.8rem,4.5vw,2.6rem);margin:1rem 0 .2rem;}
+h2{font-family:'Fraunces',serif;font-weight:440;font-size:1.3rem;margin:2rem 0 .6rem;}
+.card{background:#fff;border:1px solid var(--rule);border-radius:16px;padding:18px;margin:.8rem 0;}
+.muted{color:var(--ink-soft);font-size:.9rem;}
+.trigger{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.06em;text-transform:uppercase;color:var(--terracotta);}
+.step{border-left:2px solid var(--rule);padding:.4rem 0 .4rem .9rem;margin:.5rem 0;}
+.step .when{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);}
+.step .subj{font-weight:600;}
+.step .prev{font-size:.86rem;color:var(--ink-soft);}
+.state{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:.56rem;letter-spacing:.06em;text-transform:uppercase;padding:.15rem .5rem;border-radius:999px;}
+.state.on{background:#e7eede;color:var(--wohnen);}.state.off{background:var(--bg-soft);color:var(--ink-soft);}
+.btn{display:inline-block;border:0;cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;padding:.7rem 1.05rem;border-radius:9px;margin:.3rem .3rem 0 0;}
+.btn.dark{background:var(--ink);color:#f3eee5;}.btn.ghost{background:none;border:1px solid var(--ink);color:var(--ink);}
+.mail{border:1px solid var(--rule);border-radius:10px;padding:.7rem .9rem;margin:.4rem 0;background:var(--bg-soft);}
+.mail .to{font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--ink-soft);}
+footer{margin-top:3rem;border-top:1px solid var(--rule);padding:1.4rem 0;color:var(--ink-soft);font-size:.8rem;}
+.note{font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--ink-soft);}
+</style>
+<link rel="stylesheet" href="heiben-design.css">
+<script src="heiben-nav.js" defer></script>
+</head>
+<body data-hb-welt="holding">
+<div class="wrap">
+  <div class="topbar"><div class="wm"><span class="a">H</span>ei<span class="a">B</span>en <span style="font-weight:400;font-size:.9rem;color:var(--ink-soft)">· Backoffice</span></div><a class="back" href="heiben-wachstum.html">← Wachstum</a></div>
+  <div class="eyebrow">Lifecycle · E-Mail-Automation</div>
+  <h1>Automatisierte Strecken</h1>
+  <p class="note">Die Strecken reagieren auf erfasste Ereignisse &amp; Zustände. Der „Trockenlauf" prüft den aktuellen Stand auf diesem Gerät und zeigt, welche Mails jetzt ausgelöst würden. Live wird der Versand an einen E-Mail-Dienst (z. B. via Webhook) angebunden.</p>
+
+  <h2>Journeys</h2>
+  <div id="journeys"></div>
+
+  <h2>Trockenlauf · Outbox</h2>
+  <div class="card">
+    <p class="muted">Aktueller Zustand wird ausgewertet und die fälligen Mails hier eingereiht (kein echter Versand).</p>
+    <button class="btn dark" id="runBtn">Trockenlauf starten</button>
+    <button class="btn ghost" id="clrBtn">Outbox leeren</button>
+    <div id="outbox" style="margin-top:1rem;"></div>
+  </div>
+
+  <footer>HeiBen Holding GmbH (i.&nbsp;G.) · Köln · <span class="note">Prototyp: Auswertung &amp; Outbox lokal, kein echter E-Mail-Versand.</span></footer>
+</div>
+
+<script src="heiben-konto.js"></script>
+<script src="heiben-analytics.js"></script>
+<script src="heiben-produkt.js"></script>
+<script>
+(function(){
+  var HP=window.HeiBenProdukt, K=window.HeiBenKonto||null;
+  function recipient(){
+    try{ var u=K&&K.current&&K.current(); if(u&&u.email) return u.email; }catch(e){}
+    try{ var l=JSON.parse(localStorage.getItem('heiben-lead')); if(l&&l.email) return l.email; }catch(e){}
+    return 'gast@beispiel.de';
+  }
+  function cartCount(){ try{ return (JSON.parse(localStorage.getItem('heiben-shop-warenkorb'))||[]).length; }catch(e){ return 0; } }
+  function trialOn(){ return HP.aboState('app').trial || HP.aboState('lebenswissen').trial || !!localStorage.getItem('heiben-app-onboarding'); }
+  function streakAtRisk(){ var re=HP.reEngage(); return !!re; }
+
+  var JOURNEYS=[
+    {id:'onboarding', name:'Onboarding', trig:'Probemonat gestartet / Konto angelegt', active:trialOn,
+      steps:[
+        {when:'Tag 0', subj:'Willkommen bei HeiBen — in 2 Minuten startklar', prev:'Beantworte drei Fragen, dein Wochenplan steht.'},
+        {when:'Tag 2', subj:'Schon synchronisiert? Deine Einkaufsliste schreibt sich selbst', prev:'So holst du das meiste aus der App.'},
+        {when:'Tag 6', subj:'Sichere dir den Jahrespreis (Vorkasse spart 2 Monate)', prev:'Dein Probemonat läuft — jetzt günstig weiter.'}
+      ]},
+    {id:'cart', name:'Warenkorbabbruch', trig:'Artikel im Warenkorb, kein Kauf', active:function(){return cartCount()>0;},
+      steps:[
+        {when:'+1 Stunde', subj:'Dein Eigendesign wartet noch', prev:'Wir haben deinen Entwurf gespeichert.'},
+        {when:'+24 Stunden', subj:'Noch da? 10 % auf deine erste Bestellung', prev:'Mit deinem Empfehlungscode sparst du sofort.'}
+      ]},
+    {id:'streak', name:'Streak-Erinnerung', trig:'Koch-Serie droht zu reißen', active:streakAtRisk,
+      steps:[
+        {when:'abends', subj:'Heute kochen hält deine Serie 🔥', prev:'Ein Gericht genügt, um dranzubleiben.'},
+        {when:'+2 Tage inaktiv', subj:'Wir vermissen dich — neue Saison-Rezepte sind da', prev:'Starte heute eine frische Koch-Serie.'}
+      ]}
+  ];
+
+  function renderJourneys(){
+    document.getElementById('journeys').innerHTML=JOURNEYS.map(function(j){
+      var on=j.active();
+      return '<div class="card"><div style="display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;">'+
+        '<b style="font-family:\'Fraunces\',serif;font-size:1.15rem;">'+j.name+'</b>'+
+        '<span class="state '+(on?'on':'off')+'">'+(on?'Trigger aktiv':'inaktiv')+'</span></div>'+
+        '<div class="trigger" style="margin:.3rem 0 .5rem;">Trigger: '+j.trig+'</div>'+
+        j.steps.map(function(st){ return '<div class="step"><div class="when">'+st.when+'</div><div class="subj">'+st.subj+'</div><div class="prev">'+st.prev+'</div></div>'; }).join('')+
+      '</div>';
+    }).join('');
+  }
+  function renderOutbox(){
+    var box; try{ box=JSON.parse(localStorage.getItem('heiben-outbox'))||[]; }catch(e){ box=[]; }
+    document.getElementById('outbox').innerHTML = box.length
+      ? box.map(function(m){ return '<div class="mail"><div class="to">an '+m.to+' · '+m.journey+' · '+new Date(m.at).toLocaleString('de-DE')+'</div><b>'+m.subj+'</b></div>'; }).join('')
+      : '<p class="note">Outbox leer — Trockenlauf starten.</p>';
+  }
+  document.getElementById('runBtn').addEventListener('click',function(){
+    var to=recipient(), box=[];
+    JOURNEYS.forEach(function(j){ if(j.active()){ box.push({to:to, journey:j.name, subj:j.steps[0].subj, at:Date.now()}); } });
+    try{ localStorage.setItem('heiben-outbox',JSON.stringify(box)); }catch(e){}
+    if(window.HeiBenTrack)HeiBenTrack.ev('automation_dryrun',{queued:box.length});
+    HP.toast(box.length?(box.length+' Mail(s) eingereiht ✓'):'Aktuell keine Trigger aktiv.');
+    renderJourneys(); renderOutbox();
+  });
+  document.getElementById('clrBtn').addEventListener('click',function(){ try{localStorage.removeItem('heiben-outbox');}catch(e){} renderOutbox(); });
+  renderJourneys(); renderOutbox();
+})();
+</script>
+</body>
+</html>

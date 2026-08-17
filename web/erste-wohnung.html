@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Die erste eigene Wohnung · HeiBen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;1,400&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f3eee5;--bg2:#ebe3d4;--paper:#fffdf8;--ink:#1f1c17;--ink2:#524a3e;--rule:#d8cdb7;--terra:#b04a31;--ochre:#a97a1d;--moss:#4a5c39;--burg:#792d29;--aub:#6b3951}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:'Manrope',system-ui,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:840px;margin:0 auto;padding:1.6rem 1.1rem 5rem}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.32em;text-transform:uppercase;color:var(--terra)}
+h1{font-family:'Fraunces',serif;font-weight:400;font-size:clamp(2rem,6.5vw,3.2rem);line-height:1.02;letter-spacing:-.02em;margin:.45rem 0 .5rem}
+h1 em{font-style:italic;color:var(--terra)}
+.lead{color:var(--ink2);max-width:62ch;font-size:1.02rem}
+.card{background:var(--paper);border:1px solid var(--rule);border-radius:16px;padding:1.1rem 1.15rem;margin-top:1.1rem}
+.card h3{font-family:'Fraunces',serif;font-weight:500;font-size:1.2rem;margin-bottom:.4rem}
+.grid{display:grid;gap:.7rem;margin-top:.5rem}@media(min-width:560px){.grid.c2{grid-template-columns:1fr 1fr}}
+.field label{display:block;font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink2);margin-bottom:.2rem}
+.field input{width:100%;padding:.5rem .6rem;border:1px solid var(--rule);border-radius:9px;background:var(--bg);color:var(--ink);font:inherit;font-weight:600}
+.field input:focus{outline:none;border-color:var(--terra);background:#fff}
+.heroes{display:grid;gap:1rem;margin-top:1.3rem}@media(min-width:560px){.heroes{grid-template-columns:1fr 1fr}}
+.hero{background:var(--ink);color:var(--bg);border-radius:16px;padding:1.2rem 1.2rem}
+.hero .cap{font-family:'JetBrains Mono',monospace;font-size:.56rem;letter-spacing:.12em;text-transform:uppercase;color:#cdbfa8}
+.hero .v{font-family:'Fraunces',serif;font-weight:500;font-size:clamp(1.8rem,7vw,2.6rem);color:var(--ochre);margin:.1rem 0}
+.hero .s{font-size:.84rem;color:#cdbfa8}
+.gauge{background:var(--paper);border:1px solid var(--rule);border-radius:16px;padding:1.1rem 1.15rem;margin-top:1rem}
+.gauge h3{font-family:'Fraunces',serif;font-weight:500;font-size:1.15rem;margin-bottom:.5rem}
+.gbar{height:30px;border-radius:8px;background:linear-gradient(90deg,#4a5c39 0%,#4a5c39 30%,#a97a1d 30%,#a97a1d 40%,#792d29 40%,#792d29 100%);position:relative;overflow:visible}
+.gmark{position:absolute;top:-6px;width:3px;height:42px;background:var(--ink);border-radius:2px;transition:left .4s}
+.gmark::after{content:attr(data-v);position:absolute;top:-18px;left:50%;transform:translateX(-50%);font-family:'JetBrains Mono',monospace;font-size:.62rem;font-weight:600;white-space:nowrap;background:var(--ink);color:var(--bg);padding:.05rem .35rem;border-radius:4px}
+.glabels{display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:.54rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink2);margin-top:.5rem}
+.gverdict{margin-top:.8rem;font-size:.98rem}.gverdict b{font-family:'Fraunces',serif}
+.gv-ok{color:var(--moss)}.gv-mid{color:#b07d1e}.gv-bad{color:var(--burg)}
+table{width:100%;border-collapse:collapse;font-size:.9rem;margin-top:.5rem}
+th,td{padding:.42rem .5rem;border-bottom:1px solid var(--rule);text-align:left}
+td.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+tr.tot td{font-weight:800;background:var(--bg2)}
+.foot{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink2);text-align:center;margin-top:2rem}
+.free{display:flex;justify-content:space-between;align-items:baseline;margin-top:.9rem;padding-top:.7rem;border-top:1px solid var(--rule)}
+.free .v{font-family:'Fraunces',serif;font-size:1.5rem}
+</style>
+<link rel="stylesheet" href="heiben-design.css">
+<script src="heiben-nav.js" defer></script>
+</head>
+<body data-hb-welt="wissen">
+<div class="wrap">
+  <p class="eyebrow">HeiBen · Ausziehen mit Plan</p>
+  <h1>Die erste eigene <em>Wohnung</em></h1>
+  <p class="lead">Ausziehen kostet zweimal: einmal viel zum Einzug, dann jeden Monat. Beides unterschätzt man leicht. Trag deine Wunschwohnung ein und sieh, was du brauchst — und ob es zu deinem Einkommen passt.</p>
+
+  <div class="card">
+    <h3>Die Wohnung</h3>
+    <div class="grid c2">
+      <div class="field"><label>Kaltmiete (€/Mon)</label><input type="number" id="kalt" value="650"></div>
+      <div class="field"><label>Nebenkosten (€/Mon)</label><input type="number" id="neben" value="180"></div>
+      <div class="field"><label>Strom (€/Mon)</label><input type="number" id="strom" value="55"></div>
+      <div class="field"><label>Internet (€/Mon)</label><input type="number" id="net" value="35"></div>
+      <div class="field"><label>Versicherungen (€/Mon)</label><input type="number" id="vers" value="15"></div>
+      <div class="field"><label>Netto-Einkommen (€/Mon)</label><input type="number" id="netto" value="2100"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Einmal zum Einzug</h3>
+    <div class="grid c2">
+      <div class="field"><label>Möbel & Erstausstattung (€)</label><input type="number" id="moebel" value="2500"></div>
+      <div class="field"><label>Umzug (€)</label><input type="number" id="umzug" value="500"></div>
+      <div class="field"><label>Maklerprovision (€)</label><input type="number" id="makler" value="0"></div>
+      <div class="field"><label>Monatlich zurücklegbar (€)</label><input type="number" id="sparrate" value="300"></div>
+    </div>
+  </div>
+
+  <div class="heroes">
+    <div class="hero"><div class="cap">Das brauchst du angespart</div><div class="v" id="h_einmal">–</div><div class="s" id="h_einmalS"></div></div>
+    <div class="hero"><div class="cap">Das kostet jeden Monat</div><div class="v" id="h_lauf">–</div><div class="s" id="h_laufS"></div></div>
+  </div>
+
+  <div class="gauge">
+    <h3>Wohnkostenquote</h3>
+    <div class="gbar"><div class="gmark" id="gmark" data-v="0 %" style="left:0%"></div></div>
+    <div class="glabels"><span>0 %</span><span>30 % locker</span><span>40 %</span><span>kritisch</span></div>
+    <div class="gverdict" id="gverdict"></div>
+    <div class="free"><span>Frei verfügbar nach allen Wohnkosten</span><span class="v" id="free">–</span></div>
+  </div>
+
+  <div class="card">
+    <h3>Aufschlüsselung</h3>
+    <div class="grid c2">
+      <div><table id="tEinmal"></table></div>
+      <div><table id="tLauf"></table></div>
+    </div>
+  </div>
+
+  <p class="foot">HeiBen GmbH i. G. · „Heimat leben" · <a href="mein-heiben.html" style="color:var(--aub)">Mein HeiBen</a> · Rundfunkbeitrag 18,36 €/Mon eingerechnet · grobe Schätzung</p>
+</div>
+
+<script>
+var KEY="heiben_wohnung_v1";
+var RUNDFUNK=18.36;
+var ids=["kalt","neben","strom","net","vers","netto","moebel","umzug","makler","sparrate"];
+try{var sv=JSON.parse(localStorage.getItem(KEY))||{};ids.forEach(function(id){if(sv[id]!=null)document.getElementById(id).value=sv[id];});}catch(e){}
+function el(id){return document.getElementById(id);}
+function num(id){return parseFloat(String(el(id).value).replace(",","."))||0;}
+function eur(n){return (Math.round(n)).toLocaleString("de-DE")+" €";}
+function render(){
+  try{var o={};ids.forEach(function(id){o[id]=el(id).value;});localStorage.setItem(KEY,JSON.stringify(o));}catch(e){}
+  var kalt=num("kalt"),neben=num("neben"),strom=num("strom"),net=num("net"),vers=num("vers"),netto=num("netto");
+  var kaution=3*kalt;
+  var einmal=[["Kaution (3 Kaltmieten)",kaution],["Möbel & Erstausstattung",num("moebel")],["Umzug",num("umzug")],["Maklerprovision",num("makler")]];
+  var einmalSum=einmal.reduce(function(s,r){return s+r[1];},0);
+  var lauf=[["Kaltmiete",kalt],["Nebenkosten",neben],["Strom",strom],["Internet",net],["Rundfunkbeitrag",RUNDFUNK],["Versicherungen",vers]];
+  var laufSum=lauf.reduce(function(s,r){return s+r[1];},0);
+  var warm=kalt+neben;
+  var quote=netto>0?warm/netto*100:0;
+  var frei=netto-laufSum;
+  var sparrate=num("sparrate");
+  var monate=sparrate>0?Math.ceil(einmalSum/sparrate):0;
+
+  el("h_einmal").textContent=eur(einmalSum);
+  el("h_einmalS").textContent=sparrate>0?("Bei "+eur(sparrate)+"/Monat in rund "+monate+" Monaten angespart"):"Trag deine Sparrate ein für die Dauer";
+  el("h_lauf").textContent=eur(laufSum);
+  el("h_laufS").textContent="Warmmiete davon: "+eur(warm);
+
+  var pos=Math.min(100,quote/50*100);
+  var gm=el("gmark");gm.style.left=pos+"%";gm.setAttribute("data-v",Math.round(quote)+" %");
+  var gv=el("gverdict");
+  if(netto<=0){gv.innerHTML="Trag dein Netto-Einkommen ein.";}
+  else if(quote<=30){gv.innerHTML='<b class="gv-ok">Locker leistbar.</b> Deine Warmmiete liegt bei '+Math.round(quote)+' % vom Netto — unter der 30-%-Faustregel. Da bleibt Luft zum Sparen und Leben.';}
+  else if(quote<=40){gv.innerHTML='<b class="gv-mid">Machbar, aber eng.</b> '+Math.round(quote)+' % vom Netto gehen für die Warmmiete drauf. Achte darauf, dass für Notgroschen und Spaß genug bleibt.';}
+  else{gv.innerHTML='<b class="gv-bad">Sportlich.</b> '+Math.round(quote)+' % vom Netto nur für die Warmmiete ist viel — ein unerwarteter Posten bringt dich schnell ins Minus. Such günstiger oder teile dir die Wohnung.';}
+  var f=el("free");f.textContent=eur(frei);f.style.color=frei<0?"var(--burg)":"var(--moss)";
+
+  el("tEinmal").innerHTML='<thead><tr><th>Einmal</th><th class="n">€</th></tr></thead><tbody>'+einmal.map(function(r){return '<tr><td>'+r[0]+'</td><td class="n">'+eur(r[1])+'</td></tr>';}).join("")+'<tr class="tot"><td>Summe</td><td class="n">'+eur(einmalSum)+'</td></tr></tbody>';
+  el("tLauf").innerHTML='<thead><tr><th>Pro Monat</th><th class="n">€</th></tr></thead><tbody>'+lauf.map(function(r){return '<tr><td>'+r[0]+'</td><td class="n">'+eur(r[1])+'</td></tr>';}).join("")+'<tr class="tot"><td>Summe</td><td class="n">'+eur(laufSum)+'</td></tr></tbody>';
+}
+ids.forEach(function(id){el(id).addEventListener("input",render);});
+render();
+</script>
+</body>
+</html>

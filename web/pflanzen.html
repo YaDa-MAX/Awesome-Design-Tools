@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pflanzenwissen · HeiBen</title>
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;1,400&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f3eee5;--bg2:#ebe3d4;--paper:#fffdf8;--ink:#1f1c17;--ink2:#524a3e;--rule:#d8cdb7;--terra:#b04a31;--ochre:#a97a1d;--moss:#4a5c39;--burg:#792d29;--aub:#6b3951;--good:#6f8f4e;--goodl:#9ec27f;--bad:#e7a48f}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:'Manrope',system-ui,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:900px;margin:0 auto;padding:1.8rem 1.1rem 5rem}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.32em;text-transform:uppercase;color:var(--terra)}
+.leaf{display:inline-block;vertical-align:-6px;margin-right:.2rem}
+h1{font-family:'Fraunces',serif;font-weight:400;font-size:clamp(2rem,6.5vw,3.1rem);line-height:1.02;letter-spacing:-.02em;margin:.3rem 0 .5rem}
+h1 em{font-style:italic;color:var(--terra)}
+.lead{color:var(--ink2);max-width:64ch;font-size:1.02rem}
+.controls{position:sticky;top:0;background:rgba(243,238,229,.94);backdrop-filter:blur(6px);z-index:5;padding:.9rem 0 .7rem;margin-top:1.3rem;border-bottom:1px solid var(--rule)}
+.row{display:flex;flex-wrap:wrap;gap:.4rem;align-items:center;margin-bottom:.5rem}
+.row .lbl{font-family:'JetBrains Mono',monospace;font-size:.55rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ochre);width:100%;margin-bottom:.1rem}
+.chip{border:1px solid var(--rule);background:var(--paper);border-radius:999px;padding:.34rem .8rem;font:inherit;font-size:.82rem;font-weight:600;cursor:pointer;color:var(--ink)}
+.chip.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.chip:focus-visible,#q:focus-visible{outline:2px solid var(--ochre);outline-offset:2px}
+#q{flex:1;min-width:160px;border:1px solid var(--rule);background:var(--paper);border-radius:11px;padding:.5rem .8rem;font:inherit}
+.count{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink2);margin:.9rem 0 .5rem}
+#detail{margin:.4rem 0 1.2rem}
+.dcard{background:var(--paper);border:1px solid var(--rule);border-radius:18px;padding:1.3rem 1.35rem}
+.dhead{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;flex-wrap:wrap}
+.dhead h2{font-family:'Fraunces',serif;font-weight:500;font-size:1.7rem;line-height:1.1}
+.dhead .lat{font-style:italic;color:var(--ink2);font-size:.95rem}
+.close{border:0;background:var(--bg2);border-radius:9px;padding:.35rem .7rem;font:inherit;font-weight:700;cursor:pointer;color:var(--ink2)}
+.badges{display:flex;flex-wrap:wrap;gap:.4rem;margin:.6rem 0 .2rem}
+.b{font-family:'JetBrains Mono',monospace;font-size:.56rem;letter-spacing:.08em;text-transform:uppercase;border-radius:999px;padding:.24rem .6rem}
+.b.env{background:var(--moss);color:#fffdf8}
+.b.zw{background:var(--aub);color:#fffdf8}
+.b.kat{background:var(--bg2);color:var(--ink2)}
+.b.warn{background:var(--burg);color:#fffdf8}
+.b.diff{border:1px solid var(--rule);color:var(--ink2)}
+.facts{margin-top:1rem;display:grid;grid-template-columns:130px 1fr;gap:.05rem .9rem}
+.facts dt{font-family:'JetBrains Mono',monospace;font-size:.56rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ochre);padding-top:.42rem;border-top:1px solid var(--rule)}
+.facts dd{padding:.35rem 0;border-top:1px solid var(--rule);font-size:.94rem}
+.facts .tip dt{color:var(--terra)}
+.facts .tip dd{color:var(--ink);font-weight:600}
+@media(max-width:560px){.facts{grid-template-columns:1fr}.facts dt{border-top:1px solid var(--rule);padding-top:.5rem}.facts dd{border-top:0;padding-top:.15rem}}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:.7rem}
+.pc{position:relative;text-align:left;background:var(--paper);border:1px solid var(--rule);border-radius:14px;padding:.85rem .95rem;cursor:pointer;font:inherit;color:var(--ink);transition:.12s}
+.pc:hover{border-color:var(--terra);transform:translateY(-1px)}
+.pc:focus-visible{outline:2px solid var(--ochre);outline-offset:2px}
+.pc .n{font-family:'Fraunces',serif;font-size:1.2rem;line-height:1.1;padding-right:1.5rem}
+.star{position:absolute;top:.4rem;right:.45rem;border:0;background:none;cursor:pointer;font-size:1.1rem;line-height:1;color:var(--rule);padding:.15rem .25rem}
+.star.on{color:var(--ochre)}
+.star:hover{color:var(--terra)}
+.star:focus-visible{outline:2px solid var(--ochre);outline-offset:2px;border-radius:6px}
+.ghint{background:var(--paper);border:1px dashed var(--ochre);border-radius:11px;padding:.55rem .8rem;font-size:.9rem;color:var(--ink);margin:.2rem 0 .8rem}
+.pc .l{font-style:italic;color:var(--ink2);font-size:.78rem;margin-top:.05rem}
+.pc .meta{display:flex;flex-wrap:wrap;gap:.3rem;margin-top:.55rem}
+.pc .dot{font-family:'JetBrains Mono',monospace;font-size:.54rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink2)}
+.pc .warn{color:var(--burg)}
+.empty{color:var(--ink2);text-align:center;padding:2rem 1rem}
+.foot{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink2);text-align:center;margin-top:2.4rem}
+.foot a{color:var(--aub)}
+a{color:var(--terra)}
+</style>
+<link rel="stylesheet" href="heiben-design.css">
+<script src="heiben-nav.js" defer></script>
+</head>
+<body data-hb-welt="wissen">
+<div class="wrap">
+  <p class="eyebrow">HeiBen · Heimat leben</p>
+  <h1><svg class="leaf" width="34" height="34" viewBox="0 0 32 32" aria-hidden="true"><path d="M27 5C13 5 6 12 6 24c0 1 0 2 .3 3 1-6 5-11 12-14-5 4-8 8-9 15 12 1 21-6 21-19 0-2 0-3-3.3-4z" fill="none" stroke="#4a5c39" stroke-width="2" stroke-linejoin="round"/></svg>Pflanzen<em>wissen</em></h1>
+  <p class="lead">Anbau und Gestaltung für Garten, Gewächshaus und Indoor — von der Tomate bis zur Monstera. Jede Pflanze mit ehrlichem Steckbrief: Licht, Wasser, Boden, Pflege, den häufigsten Fehlern und einem Tipp, der den Unterschied macht.</p>
+
+  <div class="controls">
+    <div class="row"><span class="lbl">Wo</span>
+      <button class="chip on" data-f="env" data-v="alle">Alle</button>
+      <button class="chip" data-f="env" data-v="garten">Garten</button>
+      <button class="chip" data-f="env" data-v="gewaechshaus">Gewächshaus</button>
+      <button class="chip" data-f="env" data-v="indoor">Indoor</button>
+    </div>
+    <div class="row"><span class="lbl">Wozu</span>
+      <button class="chip on" data-f="zw" data-v="alle">Alle</button>
+      <button class="chip" data-f="zw" data-v="anbau">Anbau</button>
+      <button class="chip" data-f="zw" data-v="deko">Deko</button>
+    </div>
+    <div class="row"><span class="lbl" id="saisonLbl">Saison</span>
+      <button class="chip on" data-f="saison" data-v="alle">Alle</button>
+      <button class="chip" data-f="saison" data-v="saeen" id="sSaeen">Jetzt säen &amp; pflanzen</button>
+      <button class="chip" data-f="saison" data-v="ernten" id="sErnten">Jetzt ernten</button>
+    </div>
+    <div class="row"><span class="lbl">Art &amp; Suche</span>
+      <button class="chip" id="meinChip">★ Mein Garten (0)</button>
+      <select id="kat" class="chip" style="padding-right:.5rem"></select>
+      <input id="q" type="search" placeholder="Suchen: Tomate, Monstera, Lavendel …" aria-label="Pflanze suchen">
+    </div>
+  </div>
+
+  <div class="count" id="count"></div>
+  <div class="ghint" id="gartenHint" style="display:none"></div>
+  <div id="detail"></div>
+  <div class="grid" id="grid"></div>
+  <div class="empty" id="empty" style="display:none">Keine Pflanze passt zu dieser Auswahl. Filter zurücksetzen und neu stöbern.</div>
+
+  <div class="hb-box welt" style="--wf:#4a5c39;max-width:1100px;margin:1.6rem auto 0"><span class="hb-bt">Aus der HeiBen-Welt</span>Der richtige Platz für jede Pflanze — Licht, Raum, Wirkung: <a style="color:inherit" href="wohnen.html">HeiBen Wohnen</a> denkt Grün von Anfang an mit.</div>
+
+<p class="foot">HeiBen GmbH i. G. · „Heimat leben" · <a href="mein-heiben.html">Mein HeiBen</a> · <a href="wissen.html">Alle Kompendien</a> · <a href="index.html">Zur Startseite</a></p>
+</div>
+
+<script src="pflanzen-daten.js"></script>
+<script>
+var P=window.PFLANZEN, KAT=window.PFL_KAT, ENV=window.PFL_ENV, ZW=window.PFL_ZW;
+var state={env:"alle",zw:"alle",kat:"alle",q:"",saison:"alle",mein:false};
+function esc(s){return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
+var DIFF={1:"leicht",2:"mittel",3:"anspruchsvoll"};
+function isGiftig(g){return g && !/^Ungiftig|^Unbedenklich|^—/.test(g);}
+
+/* — Saison: Monate aus den Steckbrief-Texten ableiten — */
+var MONNAME=["Januar","Februar","März","April","Mai","Juni","Juli","August","September","Oktober","November","Dezember"];
+var CUR=(new Date()).getMonth()+1;
+function monthsFrom(text){
+  if(!text)return [];
+  var set={};
+  function add(m){if(m>=1&&m<=12)set[m]=1;}
+  function fill(a,b){var m=a,n=0;while(n++<13){add(m);if(m===b)break;m=m%12+1;}}
+  if(/ganzjährig/i.test(text)){for(var i=1;i<=12;i++)add(i);}
+  if(/\bFrühjahr\b|\bFrühling\b/.test(text)){add(3);add(4);add(5);}
+  if(/\bFrühsommer\b/.test(text)){add(6);}
+  if(/\bSommer\b/.test(text)){add(6);add(7);add(8);}
+  if(/\bSpätsommer\b/.test(text)){add(8);add(9);}
+  if(/\bHerbst\b/.test(text)){add(9);add(10);add(11);}
+  if(/\bWinter\b/.test(text)){add(12);add(1);add(2);}
+  var FULL={januar:1,februar:2,"märz":3,april:4,mai:5,juni:6,juli:7,august:8,september:9,oktober:10,november:11,dezember:12};
+  var ABBR={jan:1,feb:2,mrz:3,apr:4,jun:6,jul:7,aug:8,sep:9,sept:9,okt:10,nov:11,dez:12};
+  var re=/\b(Januar|Februar|März|April|Mai|Juni|Juli|August|September|Oktober|November|Dezember)\b|\b(Jan|Feb|Mrz|Apr|Jun|Jul|Aug|Sept|Sep|Okt|Nov|Dez)\./g;
+  var toks=[],m;
+  while((m=re.exec(text))){
+    var mon=m[1]?FULL[m[1].toLowerCase()]:ABBR[m[2].toLowerCase()];
+    if(mon){toks.push({m:mon,s:m.index,e:m.index+m[0].length});add(mon);}
+  }
+  for(var t=0;t<toks.length-1;t++){
+    var between=text.slice(toks[t].e,toks[t+1].s).trim();
+    if(between==="–"||between==="-"||between==="—"||/(^|\s)bis$/.test(between)) fill(toks[t].m,toks[t+1].m);
+  }
+  return Object.keys(set).map(Number).sort(function(a,b){return a-b;});
+}
+P.forEach(function(p){ p._sa=monthsFrom(p.aussaat||""); p._er=monthsFrom(p.ernte||""); });
+window.PFL_DEBUG={monthsFrom:monthsFrom,CUR:CUR};
+(function(){
+  var cSa=P.filter(function(p){return p._sa.indexOf(CUR)>=0;}).length;
+  var cEr=P.filter(function(p){return p._er.indexOf(CUR)>=0;}).length;
+  document.getElementById("saisonLbl").textContent="Saison · "+MONNAME[CUR-1];
+  document.getElementById("sSaeen").textContent="Jetzt säen & pflanzen ("+cSa+")";
+  document.getElementById("sErnten").textContent="Jetzt ernten ("+cEr+")";
+})();
+
+/* — Mein Garten (Merkliste) — */
+var MERK=(function(){try{var v=JSON.parse(localStorage.getItem("heiben_pflanzen_v1"));return (v&&v.merk)||{};}catch(e){return {};}})();
+var curDetailId=null;
+function saveMerk(){try{localStorage.setItem("heiben_pflanzen_v1",JSON.stringify({merk:MERK}));}catch(e){}}
+function syncResults(){
+  try{
+    var R=JSON.parse(localStorage.getItem("heiben_results"))||{};
+    var n=merkCount();
+    var v=n+(n===1?" Pflanze gemerkt":" Pflanzen gemerkt");
+    var ex=R.pflanzen;
+    if(n>0){
+      if(!ex||ex.v!==v){R.pflanzen={t:"Mein Garten",v:v,u:"pflanzen.html",ts:Date.now()};localStorage.setItem("heiben_results",JSON.stringify(R));}
+    }else if(ex){delete R.pflanzen;localStorage.setItem("heiben_results",JSON.stringify(R));}
+  }catch(e){}
+}
+function merkCount(){var n=0;for(var k in MERK){if(MERK[k])n++;}return n;}
+function updMeinChip(){var b=document.getElementById("meinChip");b.textContent="★ Mein Garten ("+merkCount()+")";b.className="chip"+(state.mein?" on":"");}
+function toggleMerk(id){
+  if(MERK[id]){delete MERK[id];}else{MERK[id]=1;}
+  saveMerk(); syncResults(); updMeinChip(); render();
+  var b=document.getElementById("dMerk");
+  if(b&&curDetailId===id){b.textContent=MERK[id]?"★ Gemerkt":"☆ Merken";b.style.color=MERK[id]?"var(--ochre)":"var(--ink2)";}
+}
+document.getElementById("meinChip").addEventListener("click",function(){state.mein=!state.mein;updMeinChip();render();});
+updMeinChip();
+syncResults();
+
+// Kategorie-Filter füllen
+(function(){
+  var sel=document.getElementById("kat");
+  var opts='<option value="alle">Alle Arten</option>';
+  Object.keys(KAT).forEach(function(k){ if(P.some(function(p){return p.k===k||p.kat===k;})) opts+='<option value="'+k+'">'+KAT[k]+'</option>'; });
+  sel.innerHTML=opts;
+  sel.addEventListener("change",function(){state.kat=sel.value;render();});
+})();
+
+document.querySelectorAll('.chip[data-f]').forEach(function(b){
+  b.addEventListener("click",function(){
+    var f=b.getAttribute("data-f");
+    state[f]=b.getAttribute("data-v");
+    document.querySelectorAll('.chip[data-f="'+f+'"]').forEach(function(x){x.className="chip"+(x===b?" on":"");});
+    render();
+  });
+});
+document.getElementById("q").addEventListener("input",function(e){state.q=e.target.value.toLowerCase().trim();render();});
+
+function match(p){
+  if(state.env!=="alle" && p.env.indexOf(state.env)<0) return false;
+  if(state.zw!=="alle" && p.zw.indexOf(state.zw)<0) return false;
+  if(state.kat!=="alle" && p.kat!==state.kat) return false;
+  if(state.mein && !MERK[p.id]) return false;
+  if(state.saison==="saeen" && p._sa.indexOf(CUR)<0) return false;
+  if(state.saison==="ernten" && p._er.indexOf(CUR)<0) return false;
+  if(state.q){
+    var hay=(p.n+" "+p.lat+" "+(KAT[p.kat]||"")).toLowerCase();
+    if(hay.indexOf(state.q)<0) return false;
+  }
+  return true;
+}
+
+var FIELDS=[["licht","Licht"],["wasser","Wasser"],["boden","Boden"],["temp","Temperatur"],["feuchte","Luftfeuchte"],["duenger","Dünger"],
+  ["aussaat","Aussaat & Pflanzung"],["ernte","Ernte"],["pflege","Pflege"],["begleiter","Gute Nachbarn"],["deko","Deko & Gestaltung"],["fehler","Häufige Fehler"]];
+
+function detail(p){
+  var envB=p.env.map(function(e){return '<span class="b env">'+ENV[e]+'</span>';}).join('');
+  var zwB=p.zw.map(function(z){return '<span class="b zw">'+ZW[z]+'</span>';}).join('');
+  var warn=isGiftig(p.giftig)?'<span class="b warn">⚠ '+esc(p.giftig)+'</span>':'';
+  var seas='';
+  if(p._sa.indexOf(CUR)>=0) seas+='<span class="b" style="background:var(--good);color:#fffdf8">Jetzt säen/pflanzen</span>';
+  if(p._er.indexOf(CUR)>=0) seas+='<span class="b" style="background:var(--ochre);color:#fffdf8">Jetzt ernten</span>';
+  var rows='';
+  FIELDS.forEach(function(f){ var v=p[f[0]]; if(v){ rows+='<dt>'+f[1]+'</dt><dd>'+esc(v)+'</dd>'; } });
+  if(p.giftig){ rows+='<dt>Giftigkeit</dt><dd>'+esc(p.giftig)+'</dd>'; }
+  if(p.tipp){ rows+='<div class="tip" style="display:contents"><dt>HeiBen-Tipp</dt><dd>'+esc(p.tipp)+'</dd></div>'; }
+  return '<div class="dcard">'+
+    '<div class="dhead"><div><h2>'+esc(p.n)+'</h2><div class="lat">'+esc(p.lat)+'</div></div>'+
+      '<div style="display:flex;gap:.4rem;flex:none"><button class="close" id="dMerk" style="color:'+(MERK[p.id]?'var(--ochre)':'var(--ink2)')+'">'+(MERK[p.id]?'★ Gemerkt':'☆ Merken')+'</button><button class="close" id="dClose">Schließen ✕</button></div></div>'+
+    '<div class="badges">'+envB+zwB+seas+'<span class="b kat">'+(KAT[p.kat]||"")+'</span><span class="b diff">'+DIFF[p.schwer||2]+'</span>'+warn+'</div>'+
+    '<dl class="facts">'+rows+'</dl></div>';
+}
+
+function showDetail(id){
+  var p=P.filter(function(x){return x.id===id;})[0]; if(!p)return;
+  curDetailId=id;
+  var d=document.getElementById("detail");
+  d.innerHTML=detail(p);
+  document.getElementById("dClose").addEventListener("click",function(){d.innerHTML="";curDetailId=null;});
+  document.getElementById("dMerk").addEventListener("click",function(){toggleMerk(p.id);});
+  d.scrollIntoView({behavior:"smooth",block:"start"});
+}
+
+function card(p){
+  var giftM=isGiftig(p.giftig)?'<span class="dot warn">⚠ giftig</span>':'';
+  var on=!!MERK[p.id];
+  return '<div class="pc" tabindex="0" role="button" aria-label="'+esc(p.n)+' öffnen" data-id="'+p.id+'">'+
+    '<button class="star'+(on?' on':'')+'" data-star="'+p.id+'" aria-label="'+(on?'Aus Mein Garten entfernen':'Zu Mein Garten merken')+'" title="Mein Garten">'+(on?'★':'☆')+'</button>'+
+    '<div class="n">'+esc(p.n)+'</div><div class="l">'+esc(p.lat)+'</div>'+
+    '<div class="meta"><span class="dot">'+(KAT[p.kat]||"")+'</span><span class="dot">·</span><span class="dot">'+p.env.map(function(e){return ENV[e];}).join(", ")+'</span>'+
+    '<span class="dot">·</span><span class="dot">'+DIFF[p.schwer||2]+'</span>'+giftM+'</div></div>';
+}
+
+function render(){
+  var list=P.filter(match);
+  document.getElementById("count").textContent=list.length+" von "+P.length+" Pflanzen";
+  var g=document.getElementById("grid");
+  var emptyEl=document.getElementById("empty");
+  emptyEl.style.display=list.length?"none":"block";
+  emptyEl.textContent=(state.mein&&merkCount()===0)
+    ? "Noch nichts gemerkt — tippe das ☆ auf einer Pflanze, um deinen Garten zu füllen."
+    : "Keine Pflanze passt zu dieser Auswahl. Filter zurücksetzen und neu stöbern.";
+  g.innerHTML=list.map(card).join('');
+  Array.prototype.forEach.call(g.querySelectorAll('.pc'),function(el){
+    el.addEventListener("click",function(){showDetail(el.getAttribute("data-id"));});
+    el.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();showDetail(el.getAttribute("data-id"));}});
+  });
+  Array.prototype.forEach.call(g.querySelectorAll('.star'),function(st){
+    st.addEventListener("click",function(e){e.stopPropagation();toggleMerk(st.getAttribute("data-star"));});
+  });
+  var gh=document.getElementById("gartenHint");
+  if(state.mein&&merkCount()>0){
+    var mk=P.filter(function(p){return MERK[p.id];});
+    var sa=mk.filter(function(p){return p._sa.indexOf(CUR)>=0;}).length;
+    var er=mk.filter(function(p){return p._er.indexOf(CUR)>=0;}).length;
+    gh.style.display="";
+    gh.innerHTML="Im <b>"+MONNAME[CUR-1]+"</b> in deinem Garten: <b style=\"color:var(--good)\">"+sa+"</b> zum Säen/Pflanzen · <b style=\"color:var(--ochre)\">"+er+"</b> zum Ernten.";
+  } else { gh.style.display="none"; }
+}
+render();
+
+/* Deep-Link aus wissen.html: seite.html#eintrags-id öffnet den Steckbrief direkt */
+(function(){var h=decodeURIComponent((location.hash||"").slice(1));if(h){try{showDetail(h);}catch(e){}}})();
+</script>
+</body>
+</html>

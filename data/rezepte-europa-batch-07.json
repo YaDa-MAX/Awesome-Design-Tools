@@ -1,0 +1,509 @@
+{
+  "batch": 7,
+  "region": "Europa",
+  "schema_version": 1,
+  "note": "Traditionelle, historisch etablierte Gerichte. Auswahl ohne Schweinefleisch; Feld 'substitution' nur dort, wo das Original mit Schwein zubereitet wird. Bilder als Platzhalter. Generisches Schema, direkt importierbar in PostgreSQL/Supabase/Directus/Strapi/Sanity.",
+  "recipes": [
+    {
+      "country": "Rumänien",
+      "continent": "Europa",
+      "recipe_name": "Mici",
+      "categories": ["Fleisch", "Hauptgericht", "Snack"],
+      "short_description": "Kleine, fingerförmige Grillröllchen aus gewürztem Rind- und Lammhack, über Holzkohle gebraten und mit Senf serviert. Rumäniens beliebtestes Grillgericht.",
+      "history": "Mici (auch Mititei, „die Kleinen“) gehören zu den beliebtesten Gerichten Rumäniens und sind ein fester Bestandteil von Grillfesten, Volksfesten und Sommerabenden. Es handelt sich um kleine, längliche Röllchen aus gewürztem Hackfleisch, die ohne Hülle über Holzkohle gegrillt werden. Charakteristisch ist die kräftige Würzung mit Knoblauch, Pfeffer, Kreuzkümmel und etwas Natron, das die Röllchen locker macht; oft wird auch etwas Brühe oder Mineralwasser untergearbeitet. Einer verbreiteten Anekdote nach sollen Mici im 19. Jahrhundert in einem Bukarester Wirtshaus entstanden sein, als die Wursthüllen ausgingen und man die gewürzte Masse kurzerhand ohne Darm grillte. Serviert werden Mici klassisch mit Senf, Brot und einem kühlen Getränk. Während manche Rezepte eine Fleischmischung mit Schweineanteil verwenden, lassen sie sich ebenso traditionell aus Rind und Lamm zubereiten — diese Fassung kommt ohne Schwein aus. Mici verkörpern die gesellige, volksnahe Seite der rumänischen Esskultur.",
+      "ingredients": [
+        { "quantity": "500", "unit": "g", "item": "Rinderhack" },
+        { "quantity": "300", "unit": "g", "item": "Lammhack" },
+        { "quantity": "4", "unit": "Zehen", "item": "Knoblauch, fein gerieben" },
+        { "quantity": "1", "unit": "TL", "item": "gemahlener Kreuzkümmel" },
+        { "quantity": "0.5", "unit": "TL", "item": "Natron" },
+        { "quantity": "100", "unit": "ml", "item": "Rinderbrühe (kalt)" },
+        { "quantity": "1", "unit": "TL", "item": "Pfeffer, 1 TL Salz, Prise Piment" },
+        { "quantity": "", "unit": "", "item": "Senf und Brot zum Servieren" }
+      ],
+      "instructions": [
+        "Beide Hackfleischsorten mit Knoblauch, Kreuzkümmel, Natron, Pfeffer, Salz und Piment gründlich verkneten.",
+        "Nach und nach die kalte Brühe einarbeiten, bis die Masse geschmeidig ist.",
+        "Abgedeckt mehrere Stunden, am besten über Nacht, kühl ruhen lassen.",
+        "Mit feuchten Händen kleine, fingerdicke Röllchen formen.",
+        "Über Holzkohle oder in einer heißen Grillpfanne rundum kräftig grillen.",
+        "Heiß mit Senf und Brot servieren."
+      ],
+      "tips": [
+        "Die Ruhezeit über Nacht ist entscheidend für Geschmack und Bindung.",
+        "Etwas kalte Brühe macht die Mici saftig.",
+        "Nicht zu lange grillen, sonst werden sie trocken."
+      ],
+      "tags": ["Rumänien", "Mici", "Mititei", "Rind", "Lamm", "Hackfleisch", "Grillgericht", "Knoblauch", "Senf", "Sommerküche", "Straßenessen", "Hauptgericht"],
+      "substitution": "Manche Mici-Rezepte verwenden eine Fleischmischung mit Schweineanteil. Wir nehmen ausschließlich Rind und Lamm, kräftig gewürzt mit Knoblauch und Kreuzkümmel — die Röllchen bleiben saftig und aromatisch, ganz ohne Schwein.",
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Rumänien",
+      "continent": "Europa",
+      "recipe_name": "Ciorbă rădăuțeană",
+      "categories": ["Geflügel", "Suppe", "Vorspeise"],
+      "short_description": "Eine säuerliche Hähnchensuppe mit Wurzelgemüse, gebunden mit Ei und saurer Sahne und verfeinert mit Knoblauch und Essig. Wärmende rumänische Suppe.",
+      "history": "Ciorbă bezeichnet in Rumänien die große Familie der säuerlichen Suppen, deren typische Säure traditionell aus Borș (fermentiertem Weizenkleie-Sud) oder aus Essig und Zitrone stammt. Die Ciorbă rădăuțeană stammt aus der Stadt Rădăuți in der nördlichen Region Bukowina und wurde dort in der zweiten Hälfte des 20. Jahrhunderts bekannt. Sie ist eine vergleichsweise junge, aber fest etablierte Variante, die mit Hähnchenfleisch statt der sonst verbreiteten Innereien zubereitet wird und dadurch milder ist. Die Suppe verbindet Hähnchen und Wurzelgemüse in einer säuerlichen Brühe, die am Ende mit einer Mischung aus Ei und saurer Sahne gebunden („temperiert“) und mit reichlich Knoblauch und Essig abgeschmeckt wird. Die säuerlich-cremige, knoblauchbetonte Note ist charakteristisch. Ciorbă gehört in Rumänien zu fast jeder Mahlzeit als erster Gang und gilt als wärmendes Wohlfühlessen. Als Geflügelsuppe ist die Ciorbă rădăuțeană selbstverständlich ohne Schweinefleisch.",
+      "ingredients": [
+        { "quantity": "600", "unit": "g", "item": "Hähnchenbrust oder -schenkel" },
+        { "quantity": "2", "unit": "", "item": "Möhren" },
+        { "quantity": "1", "unit": "", "item": "Petersilienwurzel, 0,5 Sellerie" },
+        { "quantity": "1", "unit": "", "item": "Zwiebel, 1 rote Paprika" },
+        { "quantity": "2", "unit": "", "item": "Eigelb" },
+        { "quantity": "200", "unit": "g", "item": "saure Sahne" },
+        { "quantity": "4", "unit": "Zehen", "item": "Knoblauch" },
+        { "quantity": "3", "unit": "EL", "item": "Essig" },
+        { "quantity": "", "unit": "", "item": "Salz, Pfeffer, Liebstöckel" }
+      ],
+      "instructions": [
+        "Hähnchen mit Wasser aufsetzen, aufkochen und abschäumen.",
+        "Gewürfeltes Wurzelgemüse, Zwiebel und Paprika zugeben und garen, bis alles weich ist.",
+        "Fleisch herausnehmen, zerkleinern und zurück in die Suppe geben.",
+        "Eigelb mit saurer Sahne verquirlen, mit etwas heißer Brühe temperieren und einrühren (nicht mehr kochen).",
+        "Mit Essig, zerdrücktem Knoblauch, Salz, Pfeffer und Liebstöckel abschmecken.",
+        "Heiß als erster Gang servieren."
+      ],
+      "tips": [
+        "Die Ei-Sahne-Mischung temperieren, damit sie nicht gerinnt.",
+        "Erst nach dem Binden mit Essig und Knoblauch abschmecken.",
+        "Reichlich Knoblauch ist hier typisch."
+      ],
+      "tags": ["Rumänien", "Bukowina", "Ciorbă", "Hähnchensuppe", "säuerlich", "saure Sahne", "Knoblauch", "Wurzelgemüse", "Geflügel", "Wohlfühlessen", "Vorspeise", "Suppe"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Rumänien",
+      "continent": "Europa",
+      "recipe_name": "Cozonac",
+      "categories": ["Dessert", "Vegetarisch"],
+      "short_description": "Ein geflochtenes Hefe-Süßbrot mit einer Spirale aus Walnuss- und Kakaofüllung. Festtagsgebäck Rumäniens zu Ostern und Weihnachten.",
+      "history": "Cozonac ist das klassische süße Hefebrot Rumäniens und gehört untrennbar zu den großen Festen, vor allem Ostern und Weihnachten. Es zählt zur weit verbreiteten Familie der gefüllten Hefezöpfe und -brote Südost- und Mitteleuropas und hat in Rumänien einen besonders hohen symbolischen Stellenwert: Das Backen des Cozonac in den Tagen vor dem Fest ist ein Ritual, das ganze Familien einbindet, und ein gelungener, luftiger Cozonac gilt als Stolz der Bäckerin. Der reichhaltige, mit Eiern, Butter und Milch angesetzte Hefeteig wird dünn ausgerollt, mit einer Füllung aus gemahlenen Walnüssen, Kakao, Zucker und oft Rosinen oder Lokum bestrichen, aufgerollt und zu einem Zopf geflochten, bevor er gebacken wird. Beim Anschneiden zeigt sich die charakteristische dunkle Spirale. Cozonac wird in Scheiben zum Fest gereicht und oft verschenkt. Als süßes Hefegebäck ist er selbstverständlich vegetarisch und ohne Schweinefleisch und steht sinnbildlich für die festliche Backtradition Rumäniens.",
+      "ingredients": [
+        { "quantity": "600", "unit": "g", "item": "Mehl" },
+        { "quantity": "250", "unit": "ml", "item": "Milch" },
+        { "quantity": "30", "unit": "g", "item": "frische Hefe" },
+        { "quantity": "150", "unit": "g", "item": "Zucker" },
+        { "quantity": "3", "unit": "", "item": "Eier" },
+        { "quantity": "100", "unit": "g", "item": "Butter" },
+        { "quantity": "250", "unit": "g", "item": "gemahlene Walnüsse (Füllung)" },
+        { "quantity": "3", "unit": "EL", "item": "Kakao und 100 g Zucker (Füllung)" },
+        { "quantity": "1", "unit": "", "item": "Bio-Zitrone (Schale), Prise Salz" }
+      ],
+      "instructions": [
+        "Hefe in warmer Milch mit etwas Zucker auflösen.",
+        "Mehl, Zucker, Eier, Zitronenschale, Salz und die Hefemilch zu einem Teig kneten, weiche Butter einarbeiten.",
+        "Zugedeckt 1–1,5 Stunden gehen lassen, bis sich der Teig verdoppelt.",
+        "Walnüsse mit Kakao, Zucker und etwas warmer Milch zu einer streichfähigen Füllung mischen.",
+        "Teig ausrollen, mit Füllung bestreichen, aufrollen und zu zwei Strängen flechten; in Kastenformen geben.",
+        "Nochmals gehen lassen, mit Ei bestreichen und bei 175 °C 40–50 Minuten backen; auskühlen lassen."
+      ],
+      "tips": [
+        "Der Teig muss gut gehen — Geduld macht den Cozonac luftig.",
+        "Die Füllung nicht zu trocken anrühren, damit die Spirale saftig bleibt.",
+        "Vor dem Anschneiden vollständig auskühlen lassen."
+      ],
+      "tags": ["Rumänien", "Cozonac", "Hefezopf", "Süßbrot", "Walnuss", "Kakao", "Ostern", "Weihnachten", "süß", "vegetarisch", "Festtag", "Dessert"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "San Marino",
+      "continent": "Europa",
+      "recipe_name": "Piadina",
+      "categories": ["Vegetarisch", "Snack", "Beilage"],
+      "short_description": "Ein dünnes, auf der Platte gebackenes Fladenbrot, warm gefüllt mit Frischkäse und Rucola. Allgegenwärtiges Brot der Romagna und San Marinos.",
+      "history": "Die Piadina (lokal auch „piada“) ist ein dünnes, ungesäuertes Fladenbrot, das San Marino mit der italienischen Region Romagna teilt, in deren Mitte die Republik liegt. Sie hat eine lange, bäuerliche Tradition und galt über Jahrhunderte als das „Brot der Armen“ — eine schnelle, günstige Alternative zum gesäuerten Brot, gebacken aus Mehl, Wasser oder Milch, etwas Fett und Salz auf einer heißen Tonplatte (teglia) oder Eisenplatte. Die Piadina wird warm gegessen und nach Belieben gefüllt: klassisch mit dem cremigen Frischkäse Squacquerone und Rucola, mit anderem Käse, Gemüse oder Kräutern. In San Marino und der Romagna ist sie allgegenwärtig und wird an spezialisierten Ständen (piadinerie) frisch zubereitet. Sie verkörpert die unkomplizierte, alltägliche Esskultur der Region. In der vegetarischen Füllung mit Käse und Rucola ist sie selbstverständlich ohne Schweinefleisch und gehört zu den identitätsstiftenden Speisen des Gebiets.",
+      "ingredients": [
+        { "quantity": "400", "unit": "g", "item": "Mehl" },
+        { "quantity": "150", "unit": "ml", "item": "lauwarmes Wasser oder Milch" },
+        { "quantity": "50", "unit": "g", "item": "Olivenöl oder weiche Butter" },
+        { "quantity": "0.5", "unit": "TL", "item": "Backpulver" },
+        { "quantity": "1", "unit": "Prise", "item": "Salz" },
+        { "quantity": "200", "unit": "g", "item": "Squacquerone oder Frischkäse" },
+        { "quantity": "1", "unit": "Hand", "item": "Rucola" }
+      ],
+      "instructions": [
+        "Mehl, Backpulver, Salz, Fett und Flüssigkeit zu einem geschmeidigen Teig kneten und ruhen lassen.",
+        "Den Teig in Portionen teilen und dünn rund ausrollen.",
+        "Auf einer heißen, trockenen Platte oder Pfanne beidseitig backen, bis sich braune Flecken bilden.",
+        "Die Piadina warm vom Feuer nehmen.",
+        "Mit Frischkäse bestreichen und Rucola belegen.",
+        "Zusammenklappen und sofort servieren."
+      ],
+      "tips": [
+        "Auf trockener, heißer Platte backen — kein zusätzliches Fett in der Pfanne.",
+        "Warm füllen, damit der Käse leicht schmilzt.",
+        "Den Teig nicht zu dick ausrollen."
+      ],
+      "tags": ["San Marino", "Romagna", "Piadina", "Fladenbrot", "Squacquerone", "Rucola", "vegetarisch", "Straßenessen", "Snack", "mediterran", "bäuerlich", "Beilage"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "San Marino",
+      "continent": "Europa",
+      "recipe_name": "Nidi di rondine",
+      "categories": ["Vegetarisch", "Hauptgericht"],
+      "short_description": "„Schwalbennester“: gerollte Pastateigblätter mit Käse- und Gemüsefüllung, in Béchamel und Tomatensauce überbacken. Festliches Ofengericht San Marinos.",
+      "history": "Nidi di rondine — „Schwalbennester“ — sind ein traditionelles Ofengericht San Marinos und gelten als eine der charakteristischen Speisen der kleinen Republik. Der Name beschreibt die Form: Frisch ausgerollte Pastateigblätter werden mit einer Füllung bestrichen, fest aufgerollt und dann in Scheiben geschnitten, sodass beim Aufstellen runde, nestartige Röllchen entstehen. Diese werden dicht in eine Form gesetzt, mit Béchamel und Tomatensauce übergossen, mit Käse bestreut und im Ofen überbacken. Das Gericht gehört zur festlichen Tafel und zu Sonntagen und spiegelt die enge Verwandtschaft der sanmarinesischen mit der emilianischen und romagnolischen Küche wider, in der gefüllte und überbackene Pasta eine große Rolle spielt. Traditionell enthält die Füllung oft Schinken; in dieser Fassung verwenden wir eine Füllung aus Käse, Spinat und Kräutern, sodass das Gericht ohne Schwein auskommt, ohne an Reichhaltigkeit zu verlieren. Nidi di rondine stehen für die festliche, hausgemachte Pastakultur San Marinos.",
+      "ingredients": [
+        { "quantity": "300", "unit": "g", "item": "frische Lasagneblätter" },
+        { "quantity": "300", "unit": "g", "item": "Spinat" },
+        { "quantity": "250", "unit": "g", "item": "Ricotta" },
+        { "quantity": "150", "unit": "g", "item": "geriebener Käse (z. B. Fontina)" },
+        { "quantity": "500", "unit": "ml", "item": "Béchamelsauce" },
+        { "quantity": "300", "unit": "g", "item": "Tomatensauce" },
+        { "quantity": "50", "unit": "g", "item": "Parmesan" },
+        { "quantity": "", "unit": "", "item": "Salz, Pfeffer, Muskat" }
+      ],
+      "instructions": [
+        "Spinat blanchieren, ausdrücken, hacken und mit Ricotta, der Hälfte des Käses, Salz, Pfeffer und Muskat verrühren.",
+        "Die Lasagneblätter kurz vorgaren und abtropfen.",
+        "Die Füllung dünn auf die Blätter streichen und diese fest aufrollen.",
+        "Die Rollen in etwa fingerbreite Scheiben schneiden und aufrecht („Nester“) in eine Form setzen.",
+        "Mit Béchamel und Tomatensauce übergießen, mit restlichem Käse und Parmesan bestreuen.",
+        "Bei 190 °C 25–30 Minuten goldbraun überbacken; kurz ruhen lassen und servieren."
+      ],
+      "tips": [
+        "Die Rollen fest wickeln, damit die Nester beim Schneiden halten.",
+        "Aufrecht in die Form setzen, damit die typische Nestform sichtbar bleibt.",
+        "Die Füllung kräftig würzen, sie trägt das Gericht."
+      ],
+      "tags": ["San Marino", "Nidi di rondine", "Schwalbennester", "Pasta", "Spinat", "Ricotta", "überbacken", "vegetarisch", "Festtag", "Béchamel", "emilianisch geprägt", "Hauptgericht"],
+      "substitution": "Traditionell werden Nidi di rondine oft mit Schinken gefüllt. Wir verwenden stattdessen eine Füllung aus Spinat, Ricotta und Käse — sie macht das Gericht ebenso reichhaltig und cremig, ganz ohne Schwein. Wer eine herzhaft-rauchige Note möchte, kann etwas geräucherten Rinderschinken einarbeiten.",
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "San Marino",
+      "continent": "Europa",
+      "recipe_name": "Torta Tre Monti",
+      "categories": ["Dessert", "Vegetarisch"],
+      "short_description": "Eine Schichttorte aus knusprigen Waffelblättern und Haselnuss-Schokoladencreme, überzogen mit Schokolade. Das süße Wahrzeichen San Marinos.",
+      "history": "Die Torta Tre Monti — „Torte der drei Berge“ — ist die bekannteste Süßspeise San Marinos und ein kulinarisches Wahrzeichen der Republik. Ihr Name und ihre Gestaltung verweisen auf die drei Gipfel des Monte Titano mit ihren drei Festungstürmen, die das Wappen und die Flagge San Marinos zieren. Die Torte besteht aus mehreren Lagen dünner, knuspriger Waffelblätter (cialde), die mit einer Creme aus Haselnüssen, Kakao und Schokolade verbunden und anschließend mit Schokolade überzogen werden. Sie entstand im 20. Jahrhundert und entwickelte sich zu einem beliebten Mitbringsel und Symbol für Besucher der Republik. Die Kombination aus knusprigen Schichten und cremiger Nuss-Schokoladenfüllung ist charakteristisch und macht sie zu einem festen Bestandteil des sanmarinesischen Süßwarensortiments. Die Torta Tre Monti gehört zu festlichen Anlässen und wird in Scheiben serviert. Als reine Waffel-Schokoladen-Süßspeise ist sie selbstverständlich vegetarisch und ohne Schweinefleisch und steht sinnbildlich für die Identität der kleinen Republik.",
+      "ingredients": [
+        { "quantity": "1", "unit": "Packung", "item": "runde Waffelblätter (cialde/Oblaten)" },
+        { "quantity": "300", "unit": "g", "item": "Haselnusscreme (gianduia)" },
+        { "quantity": "100", "unit": "g", "item": "geröstete Haselnüsse, gehackt" },
+        { "quantity": "200", "unit": "g", "item": "Zartbitterschokolade" },
+        { "quantity": "100", "unit": "g", "item": "Milchschokolade" },
+        { "quantity": "50", "unit": "g", "item": "Butter" }
+      ],
+      "instructions": [
+        "Haselnusscreme leicht erwärmen, damit sie streichfähig wird, und mit gehackten Haselnüssen mischen.",
+        "Ein Waffelblatt dünn mit der Creme bestreichen, ein weiteres Blatt darauflegen.",
+        "So Blatt für Blatt schichten, bis ein Stapel entsteht; leicht beschweren und kühl fest werden lassen.",
+        "Zartbitter- und Milchschokolade mit der Butter schmelzen.",
+        "Den Waffelstapel rundum mit der geschmolzenen Schokolade überziehen.",
+        "Vollständig fest werden lassen und in Stücke schneiden."
+      ],
+      "tips": [
+        "Den Stapel beim Festwerden leicht beschweren, damit er kompakt bleibt.",
+        "Die Schokolade nicht zu heiß auftragen, sonst weichen die Waffeln auf.",
+        "Mit einem heißen, scharfen Messer schneiden."
+      ],
+      "tags": ["San Marino", "Torta Tre Monti", "Waffeltorte", "Haselnuss", "Schokolade", "Schichttorte", "süß", "vegetarisch", "Wahrzeichen", "Monte Titano", "gianduia", "Dessert"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Schweden",
+      "continent": "Europa",
+      "recipe_name": "Köttbullar",
+      "categories": ["Fleisch", "Hauptgericht"],
+      "short_description": "Kleine Hackfleischbällchen in cremiger Bratensauce, serviert mit Kartoffelpüree und Preiselbeeren. Schwedens berühmtestes Gericht.",
+      "history": "Köttbullar — schwedische Fleischbällchen — gelten als das bekannteste Gericht der schwedischen Küche und sind weltweit zu einem Symbol für Schweden geworden. Kleine, gewürzte Hackfleischbällchen werden in Butter gebraten und mit einer cremigen Bratensauce (gräddsås) serviert, dazu Kartoffelpüree, eingelegte Gurken und vor allem Preiselbeerkompott (lingonsylt), dessen Süße und Säure einen Kontrast zum herzhaften Fleisch bildet. Köttbullar gehören zur schwedischen Hausmannskost (husmanskost) und zum festlichen Julbord, dem weihnachtlichen Büfett. Interessanterweise wird das Rezept teils auf Einflüsse aus dem Osmanischen Reich zurückgeführt, die König Karl XII. im frühen 18. Jahrhundert nach Schweden gebracht haben soll. Traditionell wird eine Mischung aus Rind- und Schweinehack verwendet; in dieser Fassung nehmen wir Rind und Kalb, sodass die Bällchen ohne Schwein zubereitet werden. Köttbullar verkörpern die gemütliche, familiäre Seite der schwedischen Esskultur und werden in vielen Haushalten nach überliefertem Rezept zubereitet.",
+      "ingredients": [
+        { "quantity": "400", "unit": "g", "item": "Rinderhack" },
+        { "quantity": "200", "unit": "g", "item": "Kalbshack" },
+        { "quantity": "1", "unit": "", "item": "Zwiebel, fein gerieben" },
+        { "quantity": "50", "unit": "g", "item": "Semmelbrösel" },
+        { "quantity": "100", "unit": "ml", "item": "Milch" },
+        { "quantity": "1", "unit": "", "item": "Ei" },
+        { "quantity": "300", "unit": "ml", "item": "Sahne und 200 ml Brühe (Sauce)" },
+        { "quantity": "", "unit": "", "item": "Butter, Mehl, Salz, Pfeffer, Piment; Preiselbeeren zum Servieren" }
+      ],
+      "instructions": [
+        "Semmelbrösel in Milch einweichen.",
+        "Hackfleisch mit Zwiebel, eingeweichten Bröseln, Ei, Salz, Pfeffer und Piment zu einer Masse verkneten.",
+        "Kleine Bällchen formen und in Butter rundum goldbraun braten; herausnehmen.",
+        "Im Bratfett etwas Mehl anschwitzen, mit Brühe und Sahne zu einer Sauce aufgießen.",
+        "Die Bällchen in der Sauce kurz fertig garen.",
+        "Mit Kartoffelpüree und Preiselbeeren servieren."
+      ],
+      "tips": [
+        "Eingeweichte Brösel machen die Bällchen besonders saftig.",
+        "Die Bällchen gleich groß formen, damit sie gleichmäßig garen.",
+        "Preiselbeeren gehören für den süß-säuerlichen Kontrast dazu."
+      ],
+      "tags": ["Schweden", "Köttbullar", "Fleischbällchen", "Rind", "Kalb", "Rahmsauce", "Preiselbeeren", "husmanskost", "Julbord", "Skandinavien", "Wohlfühlessen", "Hauptgericht"],
+      "substitution": "Köttbullar werden traditionell aus einer Mischung von Rind- und Schweinehack zubereitet. Wir verwenden Rind und Kalb; eingeweichte Semmelbrösel und Milch sorgen für Saftigkeit, sodass die Bällchen ohne Schwein zart und aromatisch bleiben.",
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Schweden",
+      "continent": "Europa",
+      "recipe_name": "Janssons frestelse",
+      "categories": ["Fisch", "Hauptgericht", "Beilage"],
+      "short_description": "Ein cremiges Kartoffelgratin mit Zwiebeln und eingelegten Sprotten, überbacken mit Sahne. Schwedischer Weihnachtsklassiker.",
+      "history": "Janssons frestelse — „Janssons Versuchung“ — ist ein klassisches schwedisches Kartoffelgratin und ein fester Bestandteil des weihnachtlichen Julbord-Büfetts. Das Gericht besteht aus fein geschnittenen Kartoffeln und Zwiebeln, die schichtweise mit eingelegten schwedischen Sprotten oder Sardellen (ansjovis) belegt, mit Sahne übergossen und im Ofen überbacken werden, bis sie weich und goldbraun sind. Die salzig-würzigen Fischchen geben dem cremigen Gratin seine charakteristische Tiefe. Der Ursprung des Namens ist nicht eindeutig geklärt; verbreitet sind Erzählungen, die ihn mit einem Opernsänger oder einem Film der frühen 20. Jahrhunderts in Verbindung bringen. Das Gericht etablierte sich im Lauf des 20. Jahrhunderts als Weihnachtsspezialität und wird auch zu anderen festlichen Anlässen und Buffets serviert. Es lässt sich gut vorbereiten und im Ofen fertig garen. Da es auf Kartoffeln, Zwiebeln, Sahne und eingelegtem Fisch beruht, ist es selbstverständlich ohne Schweinefleisch und gehört zu den beliebtesten Beilagen der schwedischen Festtafel.",
+      "ingredients": [
+        { "quantity": "1", "unit": "kg", "item": "festkochende Kartoffeln" },
+        { "quantity": "2", "unit": "", "item": "Zwiebeln" },
+        { "quantity": "1", "unit": "Dose", "item": "eingelegte Sprotten oder Sardellen (ansjovis)" },
+        { "quantity": "300", "unit": "ml", "item": "Sahne" },
+        { "quantity": "100", "unit": "ml", "item": "Milch" },
+        { "quantity": "40", "unit": "g", "item": "Butter" },
+        { "quantity": "3", "unit": "EL", "item": "Semmelbrösel" },
+        { "quantity": "", "unit": "", "item": "Salz, Pfeffer" }
+      ],
+      "instructions": [
+        "Kartoffeln und Zwiebeln in feine Streifen bzw. Scheiben schneiden.",
+        "Zwiebeln in Butter glasig dünsten.",
+        "In einer gebutterten Form Kartoffeln, Zwiebeln und Sprotten abwechselnd schichten.",
+        "Etwas vom Einlegesud sowie Sahne und Milch angießen.",
+        "Mit Butterflöckchen und Semmelbröseln bestreuen.",
+        "Bei 200 °C 45–55 Minuten backen, bis die Kartoffeln weich und die Oberfläche goldbraun sind."
+      ],
+      "tips": [
+        "Etwas Einlegesud der Fischchen gibt zusätzliche Würze.",
+        "Die Kartoffeln dünn schneiden, damit sie gleichmäßig garen.",
+        "Vor dem Servieren kurz ruhen lassen."
+      ],
+      "tags": ["Schweden", "Janssons frestelse", "Kartoffelgratin", "Sprotten", "Sardellen", "Sahne", "Weihnachten", "Julbord", "Skandinavien", "überbacken", "Fisch", "Beilage"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Schweden",
+      "continent": "Europa",
+      "recipe_name": "Kanelbullar",
+      "categories": ["Dessert", "Snack", "Vegetarisch"],
+      "short_description": "Weiche Zimtschnecken aus Kardamomteig mit Zimt-Butter-Füllung, bestreut mit Hagelzucker. Herzstück der schwedischen Kaffeepause „fika“.",
+      "history": "Kanelbullar — schwedische Zimtschnecken — sind eines der bekanntesten Gebäcke Schwedens und untrennbar mit der schwedischen Kaffeekultur und dem Ritual der „fika“ verbunden, der bewussten Pause bei Kaffee und etwas Süßem. Sie verbreiteten sich in Schweden im 20. Jahrhundert, als die Zutaten erschwinglich wurden, und entwickelten sich zu einem nationalen Symbol; seit 1999 gibt es sogar einen „Kanelbullens dag“ (Tag der Zimtschnecke) am 4. Oktober. Charakteristisch für den nordischen Hefeteig ist die Würzung mit Kardamom. Der Teig wird ausgerollt, mit einer Füllung aus weicher Butter, Zucker und Zimt bestrichen, aufgerollt und in Stücke geschnitten oder zu Knoten geschlungen, mit Ei bestrichen und mit grobem Hagelzucker bestreut gebacken. Kanelbullar werden frisch und leicht warm gegessen und in schwedischen Haushalten ebenso wie in Cafés (konditori) angeboten. Als süßes Hefegebäck sind sie selbstverständlich vegetarisch und ohne Schweinefleisch und verkörpern die gemütliche, gesellige Seite der schwedischen Esskultur.",
+      "ingredients": [
+        { "quantity": "500", "unit": "g", "item": "Mehl" },
+        { "quantity": "250", "unit": "ml", "item": "lauwarme Milch" },
+        { "quantity": "25", "unit": "g", "item": "frische Hefe" },
+        { "quantity": "80", "unit": "g", "item": "Zucker" },
+        { "quantity": "80", "unit": "g", "item": "Butter (Teig)" },
+        { "quantity": "1", "unit": "TL", "item": "gemahlener Kardamom" },
+        { "quantity": "", "unit": "", "item": "100 g weiche Butter, Zucker und Zimt (Füllung)" },
+        { "quantity": "", "unit": "", "item": "Ei und Hagelzucker zum Bestreichen" }
+      ],
+      "instructions": [
+        "Hefe in lauwarmer Milch auflösen; mit Mehl, Zucker, Kardamom und weicher Butter zu einem Teig kneten.",
+        "Zugedeckt etwa 45 Minuten gehen lassen.",
+        "Teig rechteckig ausrollen, mit weicher Butter bestreichen und mit Zimt und Zucker bestreuen.",
+        "Aufrollen, in Stücke schneiden und auf ein Blech setzen (oder zu Knoten schlingen).",
+        "Nochmals gehen lassen, mit Ei bestreichen und mit Hagelzucker bestreuen.",
+        "Bei 220 °C 8–10 Minuten goldbraun backen; lauwarm zur fika servieren."
+      ],
+      "tips": [
+        "Kardamom frisch mahlen für das beste Aroma.",
+        "Nicht zu lange backen, damit sie saftig bleiben.",
+        "Mit Hagelzucker bestreut sind sie original schwedisch."
+      ],
+      "tags": ["Schweden", "Kanelbullar", "Zimtschnecke", "Kardamom", "Hefegebäck", "fika", "Hagelzucker", "süß", "vegetarisch", "Skandinavien", "Kaffeepause", "Dessert"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Schweiz",
+      "continent": "Europa",
+      "recipe_name": "Käsefondue",
+      "categories": ["Vegetarisch", "Hauptgericht"],
+      "short_description": "Geschmolzener Käse mit Weißwein und Knoblauch in einem Topf, in den Brotstücke getunkt werden. Das gesellige Nationalgericht der Schweiz.",
+      "history": "Das Käsefondue gilt als eines der Nationalgerichte der Schweiz und verkörpert wie kein anderes die gesellige Esskultur des Landes. Sein Ursprung liegt in der alpinen Notwendigkeit, im Winter haltbar gemachten Käse und hart gewordenes Brot zu verwerten: Indem man den Käse mit etwas Wein schmolz, ließ er sich auch in fortgeschrittenem Reifezustand genießen. Im 20. Jahrhundert wurde das Fondue gezielt als nationales Gericht popularisiert und entwickelte sich zu einem Symbol für Schweizer Gemütlichkeit. Klassisch werden Käsesorten wie Gruyère und Vacherin (in der Freiburger Variante „moitié-moitié“) mit Weißwein, etwas Knoblauch und einem Spritzer Kirsch im Caquelon, einem dickwandigen Topf, geschmolzen und mit Maisstärke gebunden. Am Tisch wird der Topf auf einem Rechaud warm gehalten, und die Gäste tunken Brotstücke an langen Gabeln in den geschmolzenen Käse. Ungeschriebene Regeln und gesellige Bräuche begleiten das Essen. Als reines Käsegericht ist Fondue selbstverständlich ohne Schweinefleisch.",
+      "ingredients": [
+        { "quantity": "400", "unit": "g", "item": "Gruyère, gerieben" },
+        { "quantity": "400", "unit": "g", "item": "Vacherin Fribourgeois oder Emmentaler, gerieben" },
+        { "quantity": "300", "unit": "ml", "item": "trockener Weißwein" },
+        { "quantity": "1", "unit": "Zehe", "item": "Knoblauch" },
+        { "quantity": "2", "unit": "TL", "item": "Maisstärke" },
+        { "quantity": "2", "unit": "EL", "item": "Kirsch (optional)" },
+        { "quantity": "1", "unit": "Laib", "item": "Weißbrot, gewürfelt" },
+        { "quantity": "", "unit": "", "item": "Pfeffer, Muskat" }
+      ],
+      "instructions": [
+        "Das Caquelon mit der halbierten Knoblauchzehe ausreiben.",
+        "Weißwein im Topf erwärmen.",
+        "Den geriebenen Käse nach und nach unter Rühren einschmelzen.",
+        "Maisstärke im Kirsch (oder etwas Wein) anrühren und einrühren, bis das Fondue cremig bindet.",
+        "Mit Pfeffer und Muskat würzen.",
+        "Auf dem Rechaud warm halten und Brotstücke an Gabeln hineintunken."
+      ],
+      "tips": [
+        "Stetig in Achterbewegung rühren, damit der Käse cremig bleibt.",
+        "Das Fondue nicht zu heiß werden lassen, sonst gerinnt es.",
+        "Trockenen, säurebetonten Weißwein wählen."
+      ],
+      "tags": ["Schweiz", "Käsefondue", "Gruyère", "Vacherin", "Käse", "vegetarisch", "Weißwein", "Alpenküche", "gesellig", "Nationalgericht", "Winterküche", "Hauptgericht"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Schweiz",
+      "continent": "Europa",
+      "recipe_name": "Rösti",
+      "categories": ["Vegetarisch", "Beilage", "Hauptgericht"],
+      "short_description": "Ein knuspriger, goldbrauner Fladen aus geriebenen Kartoffeln, in der Pfanne gebraten. Schweizer Klassiker, einst Bauernfrühstück.",
+      "history": "Rösti ist eines der bekanntesten Gerichte der Schweiz und hat seinen Ursprung als einfaches, sättigendes Bauernfrühstück, vor allem im Kanton Bern. Geriebene Kartoffeln werden in der Pfanne in Fett zu einem flachen, goldbraunen Fladen mit knuspriger Kruste gebraten. Ursprünglich verwendete man am Vortag gekochte Kartoffeln, doch auch rohe geriebene Kartoffeln sind verbreitet. Rösti steht so sehr für die Deutschschweiz, dass die sprachlich-kulturelle Grenze zur französischsprachigen Schweiz scherzhaft „Röstigraben“ („Röstigraben“) genannt wird. Vom Berner Frühstück entwickelte sich Rösti zur beliebten Beilage im ganzen Land, etwa zum Zürcher Geschnetzelten, und wird auch mit Käse, Ei oder Gemüse zu einem Hauptgericht aufgewertet. Die Kunst liegt darin, einen zusammenhängenden, außen knusprigen und innen weichen Fladen zu braten und ihn als Ganzes zu wenden. In der schlichten Grundform aus Kartoffeln und Fett ist Rösti selbstverständlich vegetarisch und ohne Schweinefleisch.",
+      "ingredients": [
+        { "quantity": "1", "unit": "kg", "item": "festkochende Kartoffeln" },
+        { "quantity": "50", "unit": "g", "item": "Butter" },
+        { "quantity": "2", "unit": "EL", "item": "neutrales Öl" },
+        { "quantity": "", "unit": "", "item": "Salz, Pfeffer" }
+      ],
+      "instructions": [
+        "Kartoffeln (roh oder am Vortag gekocht) schälen und grob raspeln.",
+        "Mit Salz und Pfeffer würzen; bei rohen Kartoffeln überschüssige Flüssigkeit ausdrücken.",
+        "Butter und Öl in einer Pfanne erhitzen.",
+        "Die Kartoffeln einfüllen, flach drücken und bei mittlerer Hitze braten, bis sich unten eine goldbraune Kruste bildet.",
+        "Den Fladen als Ganzes wenden (z. B. mithilfe eines Tellers) und die andere Seite knusprig braten.",
+        "Heiß als Beilage oder mit Käse, Ei und Gemüse als Hauptgericht servieren."
+      ],
+      "tips": [
+        "Genug Fett verwenden, damit die Kruste knusprig wird.",
+        "Nicht zu früh wenden — erst wenn die Unterseite fest und goldbraun ist.",
+        "Rohe Kartoffeln gut ausdrücken, sonst wird die Rösti matschig."
+      ],
+      "tags": ["Schweiz", "Rösti", "Kartoffeln", "vegetarisch", "Beilage", "Bauernfrühstück", "Bern", "knusprig", "Alpenküche", "Röstigraben", "gebraten", "Hauptgericht"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Schweiz",
+      "continent": "Europa",
+      "recipe_name": "Zürcher Geschnetzeltes",
+      "categories": ["Fleisch", "Hauptgericht"],
+      "short_description": "Feine Kalbfleischstreifen in einer cremigen Sauce aus Weißwein, Sahne und Champignons, klassisch mit Rösti. Spezialität aus Zürich.",
+      "history": "Zürcher Geschnetzeltes (im Dialekt „Züri-Gschnätzlets“) ist die bekannteste Fleischspezialität der Stadt Zürich und ein Klassiker der Deutschschweizer Küche. Das Gericht besteht aus feinen Streifen vom Kalbfleisch, die kurz angebraten und in einer cremigen Sauce aus Zwiebeln, Weißwein, Kalbsfond und Sahne geschmort werden; Champignons gehören in der verbreiteten Variante dazu. Charakteristisch ist die zarte, helle Sauce, die das schnell gegarte Kalbfleisch saftig hält. Das Gericht etablierte sich im 20. Jahrhundert als Aushängeschild der Zürcher Gastronomie und wird klassisch mit Rösti serviert, die die Sauce aufnimmt. In manchen Versionen werden auch Kalbsnieren mitverarbeitet. Zürcher Geschnetzeltes steht für die feinere, bürgerliche Seite der Schweizer Küche und ist in Restaurants im ganzen Land verbreitet. Da es auf Kalbfleisch beruht, ist es von Natur aus ohne Schweinefleisch und gilt als eines der repräsentativsten Gerichte der Region Zürich.",
+      "ingredients": [
+        { "quantity": "700", "unit": "g", "item": "Kalbfleisch (z. B. aus der Nuss), in Streifen" },
+        { "quantity": "250", "unit": "g", "item": "Champignons" },
+        { "quantity": "1", "unit": "", "item": "Zwiebel" },
+        { "quantity": "150", "unit": "ml", "item": "Weißwein" },
+        { "quantity": "200", "unit": "ml", "item": "Sahne" },
+        { "quantity": "100", "unit": "ml", "item": "Kalbsfond" },
+        { "quantity": "40", "unit": "g", "item": "Butter" },
+        { "quantity": "", "unit": "", "item": "Mehl, Salz, Pfeffer, Petersilie" }
+      ],
+      "instructions": [
+        "Kalbfleischstreifen salzen, leicht mehlieren und in heißer Butter portionsweise kurz anbraten; herausnehmen.",
+        "Zwiebel und in Scheiben geschnittene Champignons im Bratfett andünsten.",
+        "Mit Weißwein ablöschen und etwas einkochen.",
+        "Kalbsfond und Sahne zugeben und zu einer cremigen Sauce einköcheln.",
+        "Das Fleisch mit dem ausgetretenen Saft zurückgeben und nur kurz erwärmen, nicht mehr kochen.",
+        "Mit Salz, Pfeffer und Petersilie abschmecken und mit Rösti servieren."
+      ],
+      "tips": [
+        "Das Kalbfleisch nur kurz garen, sonst wird es zäh.",
+        "Das Fleisch am Ende nur in der Sauce erwärmen.",
+        "Rösti ist die klassische Beilage."
+      ],
+      "tags": ["Schweiz", "Zürich", "Zürcher Geschnetzeltes", "Kalb", "Rahmsauce", "Champignons", "Weißwein", "Rösti", "bürgerliche Küche", "Klassiker", "Deutschschweiz", "Hauptgericht"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Serbien",
+      "continent": "Europa",
+      "recipe_name": "Pljeskavica",
+      "categories": ["Fleisch", "Hauptgericht"],
+      "short_description": "Eine große, flache Frikadelle aus gewürztem Rind- und Lammhack, über Holzkohle gegrillt und in Fladenbrot mit Zwiebeln und Ajvar serviert. Serbisches Grill-Wahrzeichen.",
+      "history": "Pljeskavica ist eines der bekanntesten Gerichte Serbiens und des Balkans und gehört zur gemeinsamen Grilltradition (roštilj) der Region, die ihre Wurzeln in der osmanischen Küche hat. Es handelt sich um eine große, flache, runde Frikadelle aus gewürztem Hackfleisch — in der mehrheitlich nicht schweinefleischverzehrenden Grilltradition häufig aus Rind und Lamm —, die über Holzkohle gegrillt wird. Charakteristisch sind die kräftige Würzung mit Zwiebel und Paprika sowie das gründliche Durchkneten, das der Frikadelle ihre dichte, saftige Textur gibt. Pljeskavica wird klassisch im Fladenbrot (lepinja) mit rohen Zwiebeln, Ajvar, Kajmak und Salat serviert und gilt als herzhaftes Fast Food ebenso wie als Grillfestessen. Eine besonders bekannte, üppige Variante ist die „leskovačka pljeskavica“ aus der Stadt Leskovac. In dieser Fassung kommt sie ganz ohne Schwein aus. Pljeskavica verkörpert die gesellige Grillkultur Serbiens und gehört zu Sommerabenden und Feiern.",
+      "ingredients": [
+        { "quantity": "500", "unit": "g", "item": "Rinderhack" },
+        { "quantity": "300", "unit": "g", "item": "Lammhack" },
+        { "quantity": "1", "unit": "", "item": "Zwiebel, sehr fein gewürfelt" },
+        { "quantity": "3", "unit": "Zehen", "item": "Knoblauch" },
+        { "quantity": "1", "unit": "TL", "item": "Paprikapulver, 0,5 TL Natron" },
+        { "quantity": "", "unit": "", "item": "Salz, Pfeffer" },
+        { "quantity": "4", "unit": "", "item": "Fladenbrote (lepinja)" },
+        { "quantity": "", "unit": "", "item": "Zwiebeln, Ajvar und Kajmak zum Servieren" }
+      ],
+      "instructions": [
+        "Beide Hackfleischsorten mit Zwiebel, Knoblauch, Paprikapulver, Natron, Salz und Pfeffer gründlich verkneten.",
+        "Die Masse abgedeckt mehrere Stunden, am besten über Nacht, kühl ruhen lassen.",
+        "Aus der Masse große, flache, runde Frikadellen formen.",
+        "Über Holzkohle oder in einer heißen Grillpfanne je Seite kräftig grillen.",
+        "Das Fladenbrot kurz mit aufwärmen.",
+        "Pljeskavica im Brot mit rohen Zwiebeln, Ajvar und Kajmak servieren."
+      ],
+      "tips": [
+        "Gründliches Kneten und Ruhen macht die Pljeskavica saftig und kompakt.",
+        "Die Frikadelle flach formen, damit sie gleichmäßig durchgrillt.",
+        "Ajvar und Kajmak gehören klassisch dazu."
+      ],
+      "tags": ["Serbien", "Pljeskavica", "Balkan", "Rind", "Lamm", "Grillgericht", "roštilj", "Ajvar", "Kajmak", "osmanisch geprägt", "Straßenessen", "Hauptgericht"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Serbien",
+      "continent": "Europa",
+      "recipe_name": "Gibanica",
+      "categories": ["Vegetarisch", "Frühstück", "Hauptgericht"],
+      "short_description": "Eine geschichtete Filoteigpastete mit einer Füllung aus Weißkäse, Quark und Eiern, knusprig und saftig zugleich. Festtagsgebäck Serbiens.",
+      "history": "Gibanica gehört zu den bekanntesten und beliebtesten Gerichten Serbiens und ist auch in den Nachbarländern des Balkans verbreitet. Es handelt sich um eine Pastete aus dünnen Filoteigblättern (kore), die mit einer Mischung aus Weißkäse (oft sirene oder ein junger Schafskäse), Quark, Eiern und manchmal Joghurt oder Mineralwasser geschichtet und gebacken wird. Die Blätter werden zerknüllt, getränkt und locker eingeschichtet, sodass eine Pastete entsteht, die außen knusprig und innen saftig-cremig ist. Gibanica gehört traditionell zum festlichen Frühstück, zu Feiertagen wie dem orthodoxen Weihnachtsfest und zur Gästebewirtung und wird oft mit Joghurt gereicht. Die Zubereitung mit handgezogenem oder fertigem Filoteig hat eine lange Tradition in der Region und teilt ihre Wurzeln mit den verwandten Pasteten des gesamten Balkans und der osmanischen Küche. In der klassischen Käsefüllung ist Gibanica von Natur aus vegetarisch und ohne Schweinefleisch und gilt als Inbegriff serbischer Gastlichkeit.",
+      "ingredients": [
+        { "quantity": "400", "unit": "g", "item": "Filoteigblätter (kore)" },
+        { "quantity": "300", "unit": "g", "item": "Weißkäse (sirene/Feta), zerbröselt" },
+        { "quantity": "300", "unit": "g", "item": "Quark" },
+        { "quantity": "4", "unit": "", "item": "Eier" },
+        { "quantity": "200", "unit": "ml", "item": "Joghurt" },
+        { "quantity": "100", "unit": "ml", "item": "Mineralwasser" },
+        { "quantity": "80", "unit": "ml", "item": "Öl" },
+        { "quantity": "", "unit": "", "item": "Salz" }
+      ],
+      "instructions": [
+        "Käse, Quark, Eier und Joghurt zu einer Füllmasse verrühren, salzen.",
+        "Eine Form mit Öl auspinseln.",
+        "Filoblätter einzeln kurz in der Masse wenden, locker zerknüllen und einschichten.",
+        "Zwischendurch mit Öl und Mineralwasser beträufeln, mit einem glatten Blatt abschließen.",
+        "Mit Öl bestreichen und bei 190 °C 40–45 Minuten goldbraun und knusprig backen.",
+        "Etwas ruhen lassen, in Stücke schneiden und mit Joghurt servieren."
+      ],
+      "tips": [
+        "Die Blätter locker einschichten — das macht die Gibanica saftig.",
+        "Mineralwasser sorgt für eine besonders luftige Füllung.",
+        "Lauwarm schmeckt sie am besten."
+      ],
+      "tags": ["Serbien", "Gibanica", "Filoteig", "Weißkäse", "Quark", "vegetarisch", "Frühstück", "Festtag", "Balkan", "Pastete", "osmanisch geprägt", "Hauptgericht"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Serbien",
+      "continent": "Europa",
+      "recipe_name": "Prebranac",
+      "categories": ["Vegetarisch", "Vegan", "Hauptgericht", "Beilage"],
+      "short_description": "Geschmorte weiße Bohnen mit reichlich karamellisierten Zwiebeln und Paprikapulver, langsam im Ofen gebacken. Serbisches Bohnengericht, oft zur Fastenzeit.",
+      "history": "Prebranac ist ein traditionelles serbisches Bohnengericht und in ähnlicher Form auf dem gesamten Balkan verbreitet. Es beruht auf weißen Bohnen, die mit einer großen Menge langsam gedünsteter, fast karamellisierter Zwiebeln und Paprikapulver geschichtet und im Ofen gebacken werden, bis die Aromen verschmelzen und sich oben eine leicht krustige Schicht bildet. Das Verhältnis von viel Zwiebel zu Bohnen ist charakteristisch und gibt dem Gericht seine süßlich-würzige Tiefe. Prebranac hat eine besondere Bedeutung in der orthodoxen Fastenzeit (posno), in der tierische Produkte gemieden werden — als rein pflanzliches, sättigendes Gericht ist es dann ideal. Es gehört zugleich zur Alltags- und Festtagsküche und wird als Hauptgericht oder Beilage gegessen, oft mit Brot. Bohnengerichte gehören seit Langem zur bodenständigen Küche der Region und boten eine günstige, nahrhafte Mahlzeit. Prebranac ist von Natur aus vegan und ohne Schweinefleisch und steht für die einfache, gemüsebetonte Seite der serbischen Küche.",
+      "ingredients": [
+        { "quantity": "500", "unit": "g", "item": "weiße Bohnen, über Nacht eingeweicht" },
+        { "quantity": "6", "unit": "", "item": "Zwiebeln" },
+        { "quantity": "2", "unit": "EL", "item": "edelsüßes Paprikapulver" },
+        { "quantity": "2", "unit": "", "item": "Lorbeerblätter" },
+        { "quantity": "100", "unit": "ml", "item": "Öl" },
+        { "quantity": "1", "unit": "", "item": "frische Chili (optional)" },
+        { "quantity": "", "unit": "", "item": "Salz, Pfeffer" }
+      ],
+      "instructions": [
+        "Die eingeweichten Bohnen in frischem Wasser mit Lorbeer weich, aber nicht zerfallen kochen; abgießen.",
+        "Zwiebeln in Ringe schneiden und in reichlich Öl langsam goldbraun und fast karamellisiert dünsten.",
+        "Vom Herd ziehen und das Paprikapulver einrühren.",
+        "Bohnen und Zwiebeln in einer Form abwechselnd schichten, dazwischen salzen und pfeffern.",
+        "Etwas Bohnenwasser angießen.",
+        "Im Ofen bei 190 °C 40–50 Minuten backen, bis sich oben eine Kruste bildet; mit Brot servieren."
+      ],
+      "tips": [
+        "Viel Zwiebel ist entscheidend — sie gibt die süßliche Tiefe.",
+        "Paprikapulver erst nach dem Herd einrühren, sonst wird es bitter.",
+        "Schmeckt warm wie kalt und am nächsten Tag noch besser."
+      ],
+      "tags": ["Serbien", "Prebranac", "weiße Bohnen", "vegan", "vegetarisch", "Zwiebeln", "Paprika", "Fastenspeise", "Balkan", "Ofengericht", "bäuerlich", "Hauptgericht"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    }
+  ],
+  "batch_summary": {
+    "batch": 7,
+    "region": "Europa",
+    "countries_processed": ["Rumänien", "San Marino", "Schweden", "Schweiz", "Serbien"],
+    "recipes_created": 15,
+    "recipes_with_images": 0,
+    "recipes_with_placeholders": 15,
+    "recipes_with_pork_substitution": 3
+  }
+}

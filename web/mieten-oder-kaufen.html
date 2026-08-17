@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mieten oder kaufen? · HeiBen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;1,400&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f3eee5;--bg2:#ebe3d4;--paper:#fffdf8;--ink:#1f1c17;--ink2:#524a3e;--rule:#d8cdb7;--terra:#b04a31;--ochre:#a97a1d;--moss:#4a5c39;--burg:#792d29;--aub:#6b3951}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:'Manrope',system-ui,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:820px;margin:0 auto;padding:1.6rem 1.1rem 5rem}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.32em;text-transform:uppercase;color:var(--aub)}
+h1{font-family:'Fraunces',serif;font-weight:400;font-size:clamp(1.9rem,6vw,3rem);line-height:1.04;letter-spacing:-.02em;margin:.45rem 0 .5rem}
+h1 em{font-style:italic;color:var(--aub)}
+.lead{color:var(--ink2);max-width:64ch;font-size:1.02rem}
+.controls{background:var(--paper);border:1px solid var(--rule);border-radius:16px;padding:1.2rem;margin-top:1.3rem}
+.legend{font-family:'JetBrains Mono',monospace;font-size:.56rem;letter-spacing:.16em;text-transform:uppercase;color:var(--aub);margin:.2rem 0 .7rem}
+.legend:not(:first-child){margin-top:1.2rem;padding-top:1rem;border-top:1px dashed var(--rule)}
+.grid{display:grid;gap:.8rem}@media(min-width:560px){.grid.c2{grid-template-columns:1fr 1fr}.grid.c3{grid-template-columns:1fr 1fr 1fr}}
+.field label{display:block;font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink2);margin-bottom:.22rem}
+.field input{width:100%;padding:.55rem .6rem;border:1px solid var(--rule);border-radius:9px;background:var(--bg);color:var(--ink);font:inherit;font-weight:600}
+.field input:focus{outline:none;border-color:var(--aub);background:#fff}
+.field .hint{font-size:.72rem;color:var(--ink2);margin-top:.18rem}
+.result{margin-top:1.5rem;background:var(--ink);color:var(--bg);border-radius:18px;padding:1.4rem 1.3rem 1.5rem}
+.result .eyebrow{color:var(--ochre)}
+.big{font-family:'Fraunces',serif;font-weight:500;font-size:clamp(2rem,9vw,3.4rem);color:var(--ochre);line-height:1.04;margin:.2rem 0}
+.big.rent{color:#9ec27f}.big.buy{color:var(--ochre)}
+.sub{font-size:.98rem;color:#e8e0d0}
+.chartbox{margin-top:1.2rem;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:13px;padding:.8rem .7rem .5rem}
+svg{display:block;width:100%;height:auto}
+.lgnd{display:flex;gap:1.1rem;flex-wrap:wrap;font-size:.78rem;color:#cdbfa8;margin:.5rem .3rem 0}
+.lgnd span{display:inline-flex;align-items:center;gap:.4rem}.sw{width:12px;height:12px;border-radius:3px;display:inline-block}
+.mini{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.6rem;margin-top:1.1rem}
+@media(max-width:460px){.mini{grid-template-columns:1fr 1fr}}
+.mini .m{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);border-radius:11px;padding:.6rem .7rem}
+.mini .l{font-family:'JetBrains Mono',monospace;font-size:.52rem;letter-spacing:.06em;text-transform:uppercase;color:#cdbfa8}
+.mini .v{font-family:'Fraunces',serif;font-size:1.22rem;margin-top:.12rem}
+.kipp{margin-top:1.1rem;background:rgba(169,122,29,.13);border:1px solid rgba(169,122,29,.35);border-radius:12px;padding:.8rem .9rem;font-size:.93rem;color:#f0e7d6}
+.kipp b{color:var(--ochre)}
+.verdict{font-size:.95rem;color:#e8e0d0;margin-top:1rem}.verdict b{color:var(--ochre)}.verdict .bad{color:#e7a48f}.verdict .ok{color:#9ec27f}
+.note{background:var(--paper);border:1px solid var(--rule);border-left:3px solid var(--aub);border-radius:0 12px 12px 0;padding:.9rem 1rem;margin-top:1.1rem;font-size:.9rem;color:var(--ink2)}
+.note b{color:var(--ink)}
+.foot{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink2);text-align:center;margin-top:2rem}
+</style>
+<link rel="stylesheet" href="heiben-design.css">
+<script src="heiben-nav.js" defer></script>
+</head>
+<body data-hb-welt="wissen">
+<div class="wrap">
+  <p class="eyebrow">HeiBen · Immobilien</p>
+  <h1>Mieten oder <em>kaufen</em>?</h1>
+  <p class="lead">Die ehrliche Frage ist nicht „Miete ist weg, Kaufen baut Vermögen" — sondern: Wo stehst du nach einigen Jahren wirklich? Wir rechnen beide Wege als Vermögen durch. Entscheidend ist die faire Annahme, dass der Mieter die Differenz nicht verlebt, sondern anlegt. Am Ende zählt, wer mehr besitzt — und ab welchem Jahr sich der Kauf dreht.</p>
+
+  <div class="controls">
+    <div class="legend">Die Immobilie</div>
+    <div class="grid c3">
+      <div class="field"><label>Kaufpreis (€)</label><input type="number" id="kp" value="400000" step="10000"></div>
+      <div class="field"><label>Eigenkapital (€)</label><input type="number" id="ek" value="80000" step="5000"></div>
+      <div class="field"><label>Kaufnebenkosten (%)</label><input type="number" id="nk" value="10" step="0.5"><div class="hint">Steuer, Notar, Makler</div></div>
+      <div class="field"><label>Sollzins (% p. a.)</label><input type="number" id="zins" value="3.6" step="0.1"></div>
+      <div class="field"><label>Anfangstilgung (%)</label><input type="number" id="tilg" value="2" step="0.5"></div>
+      <div class="field"><label>Instandhaltung (% p. a.)</label><input type="number" id="inst" value="1.2" step="0.1"><div class="hint">Rücklage + nicht umlegbar</div></div>
+      <div class="field"><label>Wertsteigerung (% p. a.)</label><input type="number" id="wert" value="2" step="0.5"></div>
+    </div>
+    <div class="legend">Die Alternative: mieten &amp; anlegen</div>
+    <div class="grid c3">
+      <div class="field"><label>Kaltmiete (€/Monat)</label><input type="number" id="miete" value="1300" step="50"><div class="hint">für eine vergleichbare Wohnung</div></div>
+      <div class="field"><label>Mietsteigerung (% p. a.)</label><input type="number" id="msteig" value="2" step="0.5"></div>
+      <div class="field"><label>Rendite Geldanlage (% p. a.)</label><input type="number" id="anl" value="5" step="0.5"><div class="hint">z. B. breit gestreuter ETF</div></div>
+    </div>
+    <div class="legend">Zeitraum</div>
+    <div class="grid c2">
+      <div class="field"><label>Betrachtungszeitraum (Jahre)</label><input type="number" id="jahre" value="15" step="1" min="1" max="40"></div>
+    </div>
+  </div>
+
+  <div class="result" id="result"></div>
+  <div class="note" id="note"></div>
+
+  <p class="foot">HeiBen GmbH i. G. · „Heimat leben" · <a href="mein-heiben.html" style="color:var(--aub)">Mein HeiBen</a> · vereinfachtes Modell · keine Finanzierungs- oder Anlageberatung</p>
+</div>
+
+<script>
+var KEY="heiben_mietkauf_v1";
+var ids=["kp","ek","nk","zins","tilg","inst","wert","miete","msteig","anl","jahre"];
+try{var sv=JSON.parse(localStorage.getItem(KEY))||{};ids.forEach(function(id){if(sv[id]!=null)document.getElementById(id).value=sv[id];});}catch(e){}
+function el(id){return document.getElementById(id);}
+function num(id){return parseFloat(String(el(id).value).replace(",","."))||0;}
+function eur(n){return (Math.round(n)).toLocaleString("de-DE")+" €";}
+function eurK(n){var a=Math.round(n);if(Math.abs(a)>=1000)return (Math.round(a/100)/10).toLocaleString("de-DE")+"k €";return a.toLocaleString("de-DE")+" €";}
+function de(n,d){return n.toFixed(d==null?1:d).replace(".",",");}
+
+function simulate(p){
+  var neben=p.kp*p.nk/100;
+  var downpay=p.ek-neben;                 // Eigenkapital, das in die Immobilie fließt
+  var darlehen=p.kp-Math.max(0,downpay);  // bei zu wenig EK: gesamter Kaufpreis finanziert
+  var shortfall=downpay<0?-downpay:0;     // EK reicht nicht mal für Nebenkosten
+  var pay=darlehen*(p.zins+p.tilg)/100/12;// Annuität (fixe Monatsrate)
+  var rm=p.zins/100/12;
+  var rAnl=Math.pow(1+p.anl/100,1/12)-1;
+  var hg=Math.pow(1+p.wert/100,1/12)-1;
+
+  var debt=darlehen, buyInv=0, rentInv=p.ek, hv=p.kp, rent=p.miete;
+  var years=[{y:0,buy:p.ek-neben+0+ (p.kp-darlehen) - (p.kp-darlehen),rentNW:p.ek}]; // platzhalter, gleich überschrieben
+  years=[{y:0,buyNW:(hv-debt+buyInv),rentNW:rentInv}];
+  var months=Math.round(p.jahre*12), totalRent=0, totalBuyCash=0;
+  for(var m=1;m<=months;m++){
+    var interest=debt*rm;
+    var actualPay=Math.min(pay, debt+interest);
+    if(actualPay<0)actualPay=0;
+    var principal=actualPay-interest;
+    debt=debt+interest-actualPay; if(debt<0)debt=0;
+    var maint=hv*p.inst/100/12;
+    var buyerCash=actualPay+maint;
+    var renterCash=rent;
+    totalRent+=renterCash; totalBuyCash+=buyerCash;
+    // Differenz wird vom Günstigeren angelegt
+    var diff=buyerCash-renterCash;
+    buyInv=buyInv*(1+rAnl); rentInv=rentInv*(1+rAnl);
+    if(diff>0) rentInv+=diff; else buyInv+=(-diff);
+    hv=hv*(1+hg);
+    if(m%12===0){ rent=rent*(1+p.msteig/100);
+      years.push({y:m/12, buyNW:hv-debt+buyInv, rentNW:rentInv}); }
+  }
+  return {neben:neben,darlehen:darlehen,shortfall:shortfall,pay:pay,debt:debt,hv:hv,
+          buyInv:buyInv,rentInv:rentInv,years:years,totalRent:totalRent,totalBuyCash:totalBuyCash,
+          buyNW:hv-debt+buyInv, rentNW:rentInv};
+}
+
+function chart(years){
+  var W=600,H=240,padL=46,padR=14,padT=14,padB=26;
+  var maxV=0,minV=0;
+  years.forEach(function(p){maxV=Math.max(maxV,p.buyNW,p.rentNW);minV=Math.min(minV,p.buyNW,p.rentNW);});
+  if(minV>0)minV=0;
+  var yMax=years.length-1||1;
+  function X(i){return padL+(W-padL-padR)*(i/yMax);}
+  function Y(v){return padT+(H-padT-padB)*(1-(v-minV)/((maxV-minV)||1));}
+  function path(key){return years.map(function(p,i){return (i?'L':'M')+X(i).toFixed(1)+' '+Y(p[key]).toFixed(1);}).join(' ');}
+  // y-Gitter (4 Linien)
+  var grid='',i;
+  for(i=0;i<=4;i++){var gv=minV+(maxV-minV)*i/4;var gy=Y(gv);
+    grid+='<line x1="'+padL+'" y1="'+gy.toFixed(1)+'" x2="'+(W-padR)+'" y2="'+gy.toFixed(1)+'" stroke="rgba(255,255,255,.10)"/>'+
+          '<text x="'+(padL-6)+'" y="'+(gy+3).toFixed(1)+'" fill="#9c917e" font-size="10" text-anchor="end" font-family="JetBrains Mono,monospace">'+eurK(gv)+'</text>';}
+  // x-Achse Jahre (max 8 Marken)
+  var step=Math.ceil(yMax/8)||1,xl='';
+  for(i=0;i<years.length;i+=step){xl+='<text x="'+X(i).toFixed(1)+'" y="'+(H-8)+'" fill="#9c917e" font-size="10" text-anchor="middle" font-family="JetBrains Mono,monospace">'+years[i].y+'</text>';}
+  // Schnittpunkt (Kipp) markieren
+  var kx='';var kp=kippIndex(years);
+  if(kp>0&&kp<years.length){var cx=X(kp);kx='<line x1="'+cx.toFixed(1)+'" y1="'+padT+'" x2="'+cx.toFixed(1)+'" y2="'+(H-padB)+'" stroke="#a97a1d" stroke-dasharray="3 3" stroke-width="1"/>';}
+  return '<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Vermögensverlauf Kaufen vs. Mieten">'+
+    grid+kx+
+    '<path d="'+path('rentNW')+'" fill="none" stroke="#9ec27f" stroke-width="2.4"/>'+
+    '<path d="'+path('buyNW')+'" fill="none" stroke="#a97a1d" stroke-width="2.4"/>'+
+    xl+'</svg>';
+}
+function kippIndex(years){ // erstes Jahr, ab dem Kaufen >= Mieten und es davor < war
+  for(var i=1;i<years.length;i++){ if(years[i].buyNW>=years[i].rentNW && years[i-1].buyNW<years[i-1].rentNW) return i; }
+  // falls von Anfang an Kaufen vorn:
+  if(years.length&&years[0].buyNW>=years[0].rentNW)return 0;
+  return -1;
+}
+
+function render(){
+  try{var o={};ids.forEach(function(id){o[id]=el(id).value;});localStorage.setItem(KEY,JSON.stringify(o));}catch(e){}
+  var p={kp:num("kp"),ek:num("ek"),nk:num("nk"),zins:num("zins"),tilg:num("tilg"),inst:num("inst"),
+         wert:num("wert"),miete:num("miete"),msteig:num("msteig"),anl:num("anl"),
+         jahre:Math.max(1,Math.min(40,Math.round(num("jahre"))))};
+  var r=simulate(p);
+  var diff=r.buyNW-r.rentNW;
+  var kauftVorn=diff>=0;
+  var ki=kippIndex(r.years);
+
+  var bigCls=kauftVorn?"buy":"rent";
+  var eyebrow=kauftVorn?'Vorteil Kaufen':'Vorteil Mieten';
+  var headline=kauftVorn
+    ? 'Kaufen liegt vorn — um '+eur(Math.abs(diff))
+    : 'Mieten liegt vorn — um '+eur(Math.abs(diff));
+  if(r.shortfall>0){ bigCls="rent"; eyebrow="Eigenkapital zu knapp";
+    headline='Es fehlen '+eur(r.shortfall)+' Eigenkapital'; }
+  var sub='Vermögen nach '+p.jahre+' Jahren: Kaufen rund <b style="color:#a97a1d">'+eur(r.buyNW)+'</b>, mieten &amp; anlegen rund <b style="color:#9ec27f">'+eur(r.rentNW)+'</b>.';
+
+  var kipp;
+  if(r.shortfall>0){
+    kipp='<b>Halt:</b> Dein Eigenkapital deckt nicht einmal die Kaufnebenkosten — es fehlen '+eur(r.shortfall)+'. In dieser Lage ist Kaufen meist gar nicht erst finanzierbar.';
+  } else if(ki<0){
+    kipp='Im betrachteten Zeitraum von '+p.jahre+' Jahren dreht es sich nicht — <b>Mieten &amp; Anlegen bleibt durchgehend vorn</b>. Erst bei längerem Horizont, höherer Wertsteigerung oder niedrigerem Zins kippt das Bild.';
+  } else if(ki===0){
+    kipp='Kaufen liegt hier <b>von Beginn an</b> vorn. Das passiert vor allem, wenn deine Miete im Verhältnis zum Kaufpreis hoch ist.';
+  } else {
+    kipp='Der <b>Kipp-Punkt liegt bei Jahr '+r.years[ki].y+'</b>: Ab dann besitzt der Käufer mehr als der anlegende Mieter. Wer früher wieder verkaufen oder umziehen müsste, fährt mit Mieten besser.';
+  }
+
+  el("result").innerHTML=
+    '<p class="eyebrow">'+eyebrow+'</p>'+
+    '<div class="big '+bigCls+'">'+headline+'</div>'+
+    '<div class="sub">'+sub+'</div>'+
+    '<div class="chartbox">'+chart(r.years)+
+      '<div class="lgnd"><span><i class="sw" style="background:#a97a1d"></i>Kaufen (Immobilienwert − Schuld)</span><span><i class="sw" style="background:#9ec27f"></i>Mieten + Geldanlage</span></div>'+
+    '</div>'+
+    '<div class="mini">'+
+      '<div class="m"><div class="l">Immobilienwert</div><div class="v">'+eur(r.hv)+'</div></div>'+
+      '<div class="m"><div class="l">Restschuld</div><div class="v">'+eur(r.debt)+'</div></div>'+
+      '<div class="m"><div class="l">Geldanlage Mieter</div><div class="v">'+eur(r.rentInv)+'</div></div>'+
+      '<div class="m"><div class="l">Monatsrate Kauf</div><div class="v">'+eur(r.pay)+'</div></div>'+
+      '<div class="m"><div class="l">Darlehen</div><div class="v">'+eur(r.darlehen)+'</div></div>'+
+      '<div class="m"><div class="l">Nebenkosten</div><div class="v">'+eur(r.neben)+'</div></div>'+
+    '</div>'+
+    '<div class="kipp">'+kipp+'</div>';
+
+  el("note").innerHTML='<b>Die eine Annahme, an der alles hängt:</b> Dieses Modell unterstellt, dass der Mieter den Betrag, den der Käufer mehr zahlt, konsequent zu '+de(p.anl)+' % anlegt. Wer die Differenz verlebt, für den gewinnt Kaufen fast immer. '+
+    'Nicht eingerechnet sind spätere <b>Verkaufskosten</b> der Immobilie (Makler, ggf. Steuer; grob 5–8 %), die den Kauf-Vorteil schmälern, sowie steuerliche Effekte und das ruhigere Gefühl der eigenen vier Wände. Alle Werte sind grobe Schätzungen — spiel mit Zins, Wertsteigerung und Anlagerendite, dort entscheidet sich das Rennen.';
+
+  // Ergebnis fürs spätere Dashboard ablegen
+  try{var R=JSON.parse(localStorage.getItem("heiben_results")||"{}");
+    R.mietkauf={t:"Mieten oder kaufen",v:(kauftVorn?"Kaufen":"Mieten")+" +"+eur(Math.abs(diff)).replace(" €","")+" € nach "+p.jahre+" J.",u:"mieten-oder-kaufen.html",ts:Date.now()};
+    localStorage.setItem("heiben_results",JSON.stringify(R));}catch(e){}
+}
+ids.forEach(function(id){el(id).addEventListener("input",render);});
+render();
+</script>
+</body>
+</html>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Stromfresser-Detektiv · HeiBen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;1,400&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f3eee5;--bg2:#ebe3d4;--paper:#fffdf8;--ink:#1f1c17;--ink2:#524a3e;--rule:#d8cdb7;--terra:#b04a31;--ochre:#a97a1d;--moss:#4a5c39;--burg:#792d29;--aub:#6b3951}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:'Manrope',system-ui,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:780px;margin:0 auto;padding:1.6rem 1.1rem 5rem}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.32em;text-transform:uppercase;color:var(--moss)}
+h1{font-family:'Fraunces',serif;font-weight:400;font-size:clamp(2rem,6.5vw,3.2rem);line-height:1.02;letter-spacing:-.02em;margin:.45rem 0 .5rem}
+h1 em{font-style:italic;color:var(--moss)}
+.lead{color:var(--ink2);max-width:60ch;font-size:1.02rem}
+.card{background:var(--paper);border:1px solid var(--rule);border-radius:16px;padding:1.1rem 1.15rem;margin-top:1.1rem}
+.card h3{font-family:'Fraunces',serif;font-weight:500;font-size:1.2rem;margin-bottom:.4rem}
+.pricerow{display:flex;align-items:center;gap:.7rem;flex-wrap:wrap}
+.pricerow label{font-weight:600}
+.pricerow input{width:110px;padding:.5rem .6rem;border:1px solid var(--rule);border-radius:9px;background:var(--bg);font:inherit;font-weight:700}
+.dhead,.drow{display:grid;grid-template-columns:1.6fr 1fr 1fr 32px;gap:.5rem;align-items:center}
+.dhead{font-family:'JetBrains Mono',monospace;font-size:.52rem;letter-spacing:.05em;text-transform:uppercase;color:var(--ink2);margin:.6rem 0 .2rem;padding:0 .1rem}
+.drow{margin-top:.4rem}
+.drow input{width:100%;padding:.45rem .5rem;border:1px solid var(--rule);border-radius:8px;background:var(--bg);font:inherit;font-weight:600;font-size:.9rem}
+.drow input:focus{outline:none;border-color:var(--moss);background:#fff}
+.del{border:1px solid var(--rule);background:var(--bg);border-radius:8px;height:34px;cursor:pointer;color:var(--burg);font-weight:700}
+.addbtn{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;border:1px dashed var(--rule);background:transparent;color:var(--ink2);padding:.45rem .8rem;border-radius:9px;cursor:pointer;margin-top:.6rem}
+.hero{background:var(--ink);color:var(--bg);border-radius:18px;padding:1.4rem 1.3rem;margin-top:1.3rem;text-align:center}
+.hero .cap{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:#cdbfa8}
+.hero .num{font-family:'Fraunces',serif;font-weight:500;font-size:clamp(2.4rem,11vw,3.6rem);color:var(--ochre);line-height:1;margin:.15rem 0}
+.hero .sub{font-size:.95rem;color:#e8e0d0}.hero .sub b{color:#9ec27f}
+.chart-card{background:var(--paper);border:1px solid var(--rule);border-radius:16px;padding:1.05rem 1.1rem 1.1rem;margin-top:1.1rem}
+.chart-card h4{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--moss);margin-bottom:.3rem}
+canvas{width:100%;height:auto;display:block;margin-top:.3rem}
+.verdict{background:var(--paper);border:1px solid var(--rule);border-left:3px solid var(--moss);border-radius:0 12px 12px 0;padding:.9rem 1rem;margin-top:1.1rem;font-size:.95rem}
+.verdict b{color:var(--burg)}
+.foot{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink2);text-align:center;margin-top:2rem}
+</style>
+<link rel="stylesheet" href="heiben-design.css">
+<script src="heiben-nav.js" defer></script>
+</head>
+<body data-hb-welt="wissen">
+<div class="wrap">
+  <p class="eyebrow">HeiBen · Wohnen</p>
+  <h1>Wo dein <em>Strom</em> wirklich hingeht</h1>
+  <p class="lead">Die Stromrechnung ist eine Blackbox — bis man sie aufschlüsselt. Trag deine Geräte mit Wattzahl und täglicher Nutzung ein und finde die heimlichen Kostentreiber. Oft sind es nicht die offensichtlichen.</p>
+
+  <div class="card">
+    <h3>Strompreis</h3>
+    <div class="pricerow"><label>Cent pro Kilowattstunde:</label><input type="number" id="preis" value="35" step="1"><span style="color:var(--ink2);font-size:.85rem">ct/kWh</span></div>
+  </div>
+
+  <div class="card">
+    <h3>Deine Geräte</h3>
+    <div class="dhead"><span>Gerät</span><span>Watt</span><span>Std./Tag</span><span></span></div>
+    <div id="rows"></div>
+    <button class="addbtn" id="add">+ Gerät hinzufügen</button>
+  </div>
+
+  <div class="hero" id="hero"></div>
+
+  <div class="chart-card">
+    <h4>Stromkosten pro Jahr — vom größten Fresser abwärts</h4>
+    <canvas id="chart" width="800" height="320"></canvas>
+  </div>
+
+  <div class="verdict" id="verdict"></div>
+
+  <p class="foot">HeiBen GmbH i. G. · „Heimat leben" · <a href="mein-heiben.html" style="color:var(--aub)">Mein HeiBen</a> · Schätzung über Watt × Nutzungsdauer · reale Werte schwanken</p>
+</div>
+
+<script>
+var KEY="heiben_strom_v1";
+var preis=35;
+var geraete=[
+ {n:"Kühlschrank",w:150,h:8},{n:"Gefriertruhe",w:120,h:6},{n:"Waschmaschine",w:2000,h:0.3},
+ {n:"Wäschetrockner",w:2500,h:0.25},{n:"Fernseher",w:100,h:4},{n:"Gaming-PC",w:300,h:2},
+ {n:"Standby (diverse)",w:30,h:24},{n:"Beleuchtung",w:60,h:5}
+];
+try{var sv=JSON.parse(localStorage.getItem(KEY));if(sv){if(sv.geraete)geraete=sv.geraete;if(sv.preis!=null)preis=sv.preis;}}catch(e){}
+function el(id){return document.getElementById(id);}
+function eur(n){return (Math.round(n)).toLocaleString("de-DE")+" €";}
+function save(){try{localStorage.setItem(KEY,JSON.stringify({geraete:geraete,preis:preis}));}catch(e){}}
+function kwhYear(g){return (+g.w||0)/1000*(+g.h||0)*365;}
+function costYear(g){return kwhYear(g)*preis/100;}
+function renderRows(){
+  var c=el("rows");c.innerHTML="";
+  geraete.forEach(function(g,i){var row=document.createElement("div");row.className="drow";
+    row.innerHTML='<input data-i="'+i+'" data-k="n" value="'+(g.n||"")+'"><input data-i="'+i+'" data-k="w" type="number" value="'+g.w+'"><input data-i="'+i+'" data-k="h" type="number" step="0.25" value="'+g.h+'"><button class="del" data-del="'+i+'">×</button>';c.appendChild(row);});
+  c.querySelectorAll("input").forEach(function(inp){inp.addEventListener("input",function(){var i=+inp.dataset.i,k=inp.dataset.k;geraete[i][k]=k==="n"?inp.value:(parseFloat(String(inp.value).replace(",","."))||0);compute();});});
+  c.querySelectorAll(".del").forEach(function(b){b.onclick=function(){geraete.splice(+b.dataset.del,1);renderRows();compute();};});
+}
+function compute(){
+  save();
+  var ranked=geraete.map(function(g){return {n:g.n,kwh:kwhYear(g),cost:costYear(g)};}).sort(function(a,b){return b.cost-a.cost;});
+  var totalCost=ranked.reduce(function(s,r){return s+r.cost;},0);
+  var totalKwh=ranked.reduce(function(s,r){return s+r.kwh;},0);
+  el("hero").innerHTML='<div class="cap">Stromkosten deiner Geräte</div><div class="num">'+eur(totalCost)+' <span style="font-size:1.1rem;color:#cdbfa8">/ Jahr</span></div>'+
+    '<div class="sub">macht rund <b>'+Math.round(totalKwh).toLocaleString("de-DE")+' kWh</b> im Jahr — etwa '+eur(totalCost/12)+' im Monat.</div>';
+  drawBars(ranked,totalCost);
+  if(ranked.length){
+    var top=ranked[0],share=totalCost>0?Math.round(top.cost/totalCost*100):0;
+    var standby=ranked.filter(function(r){return /standby/i.test(r.n);})[0];
+    var tip = standby&&standby.cost>15 ? 'Allein dein <b>Standby-Verbrauch</b> kostet rund '+eur(standby.cost)+' im Jahr — abschaltbare Steckdosenleisten holen das fast komplett zurück.' :
+      'Bei Dauerläufern wie Kühl- und Gefriergeräten lohnt der Blick aufs Alter: Ein Modell von vor 2010 kann das Doppelte eines neuen verbrauchen.';
+    el("verdict").innerHTML='<b>Größter Fresser:</b> '+top.n+' mit '+eur(top.cost)+' im Jahr ('+share+' % deiner Stromkosten). '+tip;
+  } else el("verdict").innerHTML="Füg Geräte hinzu, um deine Stromfresser zu finden.";
+}
+function drawBars(items,total){
+  var cv=el("chart"),ctx=cv.getContext("2d"),W=cv.width,H=cv.height;ctx.clearRect(0,0,W,H);
+  if(!items.length)return;
+  var max=items[0].cost||1,padL=130,padR=58,padT=8,padB=8,n=items.length;
+  var gap=8,bh=Math.min(34,(H-padT-padB-gap*(n-1))/n),step=bh+gap;
+  items.forEach(function(it,i){var y=padT+i*step,bw=(it.cost/max)*(W-padL-padR);
+    ctx.fillStyle=i===0?"#b04a31":i<3?"#a97a1d":"#4a5c39";var r=6;bw=Math.max(bw,2);
+    ctx.beginPath();ctx.moveTo(padL,y);ctx.lineTo(padL+bw-r,y);ctx.quadraticCurveTo(padL+bw,y,padL+bw,y+r);ctx.lineTo(padL+bw,y+bh-r);ctx.quadraticCurveTo(padL+bw,y+bh,padL+bw-r,y+bh);ctx.lineTo(padL,y+bh);ctx.closePath();ctx.fill();
+    ctx.fillStyle="#1f1c17";ctx.font="12px Manrope";ctx.textAlign="right";var lab=String(it.n);if(lab.length>16)lab=lab.slice(0,15)+"…";ctx.fillText(lab,padL-8,y+bh/2+4);
+    ctx.fillStyle="#524a3e";ctx.font="600 11px 'JetBrains Mono',monospace";ctx.textAlign="left";ctx.fillText(eur(it.cost),padL+bw+6,y+bh/2+4);
+  });
+  ctx.textAlign="left";
+}
+el("preis").addEventListener("input",function(){preis=parseFloat(String(this.value).replace(",","."))||0;compute();});
+el("preis").value=preis;
+el("add").onclick=function(){geraete.push({n:"Neues Gerät",w:100,h:1});renderRows();compute();};
+renderRows();compute();
+</script>
+</body>
+</html>

@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HeiBen Kulinarik-App — Saisonküche, die mitdenkt</title>
+<meta name="description" content="Die HeiBen Kulinarik-App: saisonale Wochenpläne, Einkaufslisten und Rezept-Sync mit dem Kochbuch. Probemonat gratis.">
+<style>
+:root{--bg:#f3eee5;--bg-soft:#ebe3d4;--ink:#1f1c17;--ink-soft:#524a3e;--rule:#d8cdb7;--terracotta:#b04a31;--kuli:#6b3951;--ochre:#a97a1d;--wohnen:#4a5c39;}
+*{box-sizing:border-box;}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Manrope',-apple-system,Segoe UI,sans-serif;line-height:1.55;}
+a{color:inherit;}
+.wrap{max-width:1040px;margin:0 auto;padding:0 1.5rem;}
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:1.1rem 0;border-bottom:1px solid var(--rule);}
+.wm{font-family:'Fraunces',serif;font-weight:700;font-size:1.4rem;}
+.wm .a{color:var(--terracotta);}
+.back{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);text-decoration:none;}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;color:var(--kuli);}
+h1{font-family:'Fraunces',serif;font-weight:340;font-size:clamp(2rem,5vw,3rem);line-height:1.06;letter-spacing:-.02em;margin:.4rem 0 .6rem;}
+h2{font-family:'Fraunces',serif;font-weight:420;font-size:1.5rem;margin:2.4rem 0 .8rem;}
+.lede{font-size:1.12rem;color:var(--ink-soft);max-width:60ch;}
+.hero{padding:2.6rem 0 1.4rem;}
+.btn{display:inline-block;border:0;cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;padding:.85rem 1.3rem;border-radius:10px;text-decoration:none;}
+.btn.primary{background:var(--kuli);color:#f3eee5;}
+.btn.terra{background:var(--terracotta);color:#f3eee5;}
+.btn.ghost{background:none;border:1px solid var(--ink);color:var(--ink);}
+.row{display:flex;gap:.7rem;flex-wrap:wrap;align-items:center;}
+.grid{display:grid;gap:16px;}
+.cards{grid-template-columns:repeat(auto-fill,minmax(240px,1fr));}
+.card{background:#fff;border:1px solid var(--rule);border-radius:16px;padding:18px;}
+.card h3{font-family:'Fraunces',serif;font-weight:480;font-size:1.1rem;margin:0 0 4px;}
+.muted{color:var(--ink-soft);font-size:.9rem;}
+.kpi{display:flex;gap:1.4rem;flex-wrap:wrap;margin:.4rem 0 0;}
+.kpi .b{font-family:'Fraunces',serif;font-size:1.8rem;font-weight:560;color:var(--kuli);}
+.kpi .l{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);}
+.lock{position:relative;}
+.lock .veil{position:absolute;inset:0;background:linear-gradient(180deg,rgba(243,238,229,.2),rgba(243,238,229,.97));display:flex;flex-direction:column;align-items:center;justify-content:flex-end;text-align:center;padding:1.4rem;border-radius:16px;}
+.pill{font-family:'JetBrains Mono',monospace;font-size:.56rem;letter-spacing:.1em;text-transform:uppercase;background:var(--bg-soft);border:1px solid var(--rule);border-radius:999px;padding:.2rem .6rem;color:var(--ink-soft);}
+.price{display:flex;gap:14px;flex-wrap:wrap;margin-top:8px;}
+.plan{flex:1;min-width:200px;border:1px solid var(--rule);border-radius:14px;padding:16px;background:#fff;}
+.plan.best{border-color:var(--kuli);box-shadow:0 0 0 2px rgba(107,57,81,.12);}
+.plan .p{font-family:'Fraunces',serif;font-size:1.7rem;font-weight:560;}
+.plan .save{color:var(--wohnen);font-size:.82rem;font-weight:600;}
+.field{display:flex;flex-direction:column;gap:4px;margin:.5rem 0;}
+.field label{font-size:.78rem;color:var(--ink-soft);}
+.field select,.field input{border:1px solid var(--rule);background:var(--bg);border-radius:8px;padding:.6rem .7rem;font:inherit;}
+.chk{display:flex;gap:10px;align-items:center;padding:.5rem 0;border-bottom:1px dotted var(--rule);}
+.chk input{width:18px;height:18px;accent-color:var(--kuli);}
+.list li{padding:.35rem 0;border-bottom:1px dotted var(--rule);display:flex;justify-content:space-between;}
+footer{margin-top:3rem;border-top:1px solid var(--rule);padding:1.6rem 0;color:var(--ink-soft);font-size:.82rem;}
+.note{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.06em;color:var(--ink-soft);}
+.hide{display:none!important;}
+</style>
+<link rel="stylesheet" href="heiben-design.css">
+<script src="heiben-nav.js" defer></script>
+</head>
+<body data-hb-welt="kulinarik">
+<div class="wrap">
+  <div class="topbar">
+    <div class="wm"><span class="a">H</span>ei<span class="a">B</span>en <span style="font-weight:400;font-size:.9rem;color:var(--ink-soft)">· Kulinarik-App</span></div>
+    <a class="back" href="kulinarik.html">← Kulinarik</a>
+  </div>
+
+  <section class="hero">
+    <div class="eyebrow">Online-Tool · Abo</div>
+    <h1>Saisonküche, die mitdenkt.</h1>
+    <p class="lede">Dein Wochenplan aus saisonalen Zutaten, die Einkaufsliste entsteht automatisch — und alle Rezepte sind mit dem HeiBen-Kochbuch synchronisiert. <b id="statusLine"></b></p>
+    <div class="row" style="margin-top:1.2rem;">
+      <button class="btn primary" id="ctaTrial">Probemonat gratis starten</button>
+      <a class="btn ghost" href="#abo">Pläne ansehen</a>
+      <a class="btn ghost" href="kulinarik-mealplanner.html">Mealplanner →</a>
+      <span class="pill" id="streakPill"></span>
+    </div>
+  </section>
+
+  <!-- Onboarding -->
+  <section id="onboarding" class="card" style="border-color:var(--kuli);">
+    <div class="eyebrow">Schnellstart · unter 2 Minuten</div>
+    <h2 style="margin-top:.3rem;">Drei Fragen — dann steht dein Wochenplan.</h2>
+    <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(180px,1fr));">
+      <div class="field"><label>Haushaltsgröße</label><select id="obSize"><option value="1">1 Person</option><option value="2" selected>2 Personen</option><option value="4">3–4 Personen</option></select></div>
+      <div class="field"><label>Ernährung</label><select id="obDiet"><option value="alles">gemischt (ohne Schwein)</option><option value="vegetarisch">vegetarisch</option><option value="vegan">vegan</option></select></div>
+      <div class="field"><label>Lieblingsrichtung</label><select id="obCuisine"><option value="heimat">Heimatküche</option><option value="mediterran">mediterran</option><option value="orient">orientalisch</option></select></div>
+    </div>
+    <button class="btn terra" id="obGo" style="margin-top:.6rem;">Wochenplan erstellen →</button>
+  </section>
+
+  <!-- Aha: Wochenplan + Streak -->
+  <section id="ahaWrap" class="hide">
+    <h2>Dein Wochenplan</h2>
+    <div class="kpi" id="planKpi"></div>
+    <div class="grid cards" id="recipeCards" style="margin-top:1rem;"></div>
+
+    <div class="grid" style="grid-template-columns:1fr 1fr;margin-top:1.4rem;" id="syncGrid">
+      <div class="card">
+        <div class="eyebrow">Tagesstreak</div>
+        <h3>Dranbleiben lohnt sich.</h3>
+        <div class="kpi"><div><div class="b" id="stCount">0</div><div class="l">Tage in Folge</div></div><div><div class="b" id="stBest">0</div><div class="l">Bestwert</div></div></div>
+        <button class="btn ghost" id="cookedBtn" style="margin-top:.6rem;">Heute gekocht ✓</button>
+      </div>
+      <div class="card">
+        <div class="eyebrow">Einkaufsliste · Rezept-Sync</div>
+        <h3>Automatisch aus deinen Rezepten.</h3>
+        <ul class="list" id="shopList"><li class="muted">Tippe bei einem Rezept auf „+ Einkaufsliste".</li></ul>
+        <p class="note" id="syncNote"></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Abo -->
+  <section id="abo">
+    <h2>Pläne</h2>
+    <p class="muted">Probemonat 30 Tage gratis, danach jederzeit kündbar. Jahres-Abo = Vorkasse, du sparst zwei Monate.</p>
+    <div class="price">
+      <div class="plan"><div class="eyebrow">Monatlich</div><div class="p" id="pMonat"></div><div class="muted">flexibel, monatlich kündbar</div><button class="btn ghost" id="subMonat" style="margin-top:.8rem;">Monatlich abonnieren</button></div>
+      <div class="plan best"><div class="eyebrow">Jährlich · Vorkasse</div><div class="p" id="pJahr"></div><div class="save" id="pSave"></div><button class="btn primary" id="subJahr" style="margin-top:.8rem;">Jahres-Abo (Vorkasse)</button></div>
+      <div class="plan"><div class="eyebrow">Bundle</div><div class="p" id="pBundle"></div><div class="muted" id="bundleNote"></div><button class="btn terra" id="buyBundle" style="margin-top:.8rem;">Kochbuch + App-Probemonat</button></div>
+    </div>
+    <p class="note" style="margin-top:.8rem;">Prototyp ohne echten Zahlungsanbieter — Abos werden lokal simuliert.</p>
+    <p style="margin-top:.4rem;"><a href="mein-abo.html" style="font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--kuli);">Mein Abo, Rechnungen &amp; Empfehlungen verwalten →</a></p>
+  </section>
+
+  <!-- Referral -->
+  <section id="referral" class="card" style="margin-top:1.4rem;">
+    <div class="eyebrow">Freunde werben</div>
+    <h3>Teile HeiBen — beide gewinnen.</h3>
+    <p class="muted">Dein Freund erhält <b>10 % auf die erste Bestellung</b>, du bekommst <b>5 € Guthaben</b> pro Einladung.</p>
+    <div class="row" style="margin-top:.6rem;">
+      <input id="refLink" class="field" style="flex:1;min-width:240px;" readonly>
+      <button class="btn ghost" id="copyRef">Link kopieren</button>
+      <button class="btn ghost" id="shareRef">Teilen</button>
+    </div>
+    <p class="note" id="refState" style="margin-top:.6rem;"></p>
+  </section>
+
+  <footer>
+    HeiBen Holding GmbH (i.&nbsp;G.) · Sitz Köln · Heimat leben.<br>
+    <span class="note">Saisonküche · Rezept-Sync mit dem HeiBen-Kochbuch · Probemonat gratis.</span>
+  </footer>
+</div>
+
+<script src="heiben-konto.js"></script>
+<script src="heiben-analytics.js"></script>
+<script src="heiben-produkt.js"></script>
+<script>
+(function(){
+  var HP=window.HeiBenProdukt, fmt=HP.fmt;
+  var SCOPE='app';
+  // Rezepte (saisonal, ohne Schwein) — frei: 3, Premium: alle
+  var RECIPES=[
+    {id:'r1',n:'Linsen-Eintopf mit Röstgemüse',k:'Heimat · Herbst',free:true,zut:['Berglinsen 250 g','Karotten 3','Sellerie 1/4','Zwiebel 1','Gemüsebrühe 1 l']},
+    {id:'r2',n:'Ofen-Hähnchen mit Zitrone & Thymian',k:'Heimat · ganzjährig',free:true,zut:['Hähnchenschenkel 4','Zitrone 1','Thymian','Kartoffeln 600 g','Olivenöl']},
+    {id:'r3',n:'Shakshuka mit Feta',k:'Orient · Frühling',free:true,zut:['Eier 4','Tomaten 400 g','Paprika 2','Feta 150 g','Kreuzkümmel']},
+    {id:'r4',n:'Kürbis-Risotto',k:'Mediterran · Herbst',free:false,zut:['Risottoreis 250 g','Hokkaido 1/2','Parmesan 60 g','Weißwein 100 ml','Zwiebel 1']},
+    {id:'r5',n:'Gefüllte Auberginen',k:'Orient · Sommer',free:false,zut:['Auberginen 2','Bulgur 150 g','Tomaten 2','Minze','Joghurt 200 g']},
+    {id:'r6',n:'Lauch-Quiche (vegetarisch)',k:'Heimat · Winter',free:false,zut:['Lauch 2','Eier 3','Sahne 200 ml','Mürbeteig 1','Bergkäse 100 g']},
+    {id:'r7',n:'Couscous-Salat mit Granatapfel',k:'Orient · Sommer',free:false,zut:['Couscous 200 g','Granatapfel 1','Gurke 1','Petersilie','Zitrone 1']},
+    {id:'r8',n:'Kichererbsen-Spinat-Curry (vegan)',k:'Orient · ganzjährig',free:false,zut:['Kichererbsen 400 g','Spinat 200 g','Kokosmilch 400 ml','Curry','Reis 200 g']}
+  ];
+  var shop={}; // synced shopping list
+  try{ (JSON.parse(localStorage.getItem('heiben-einkauf'))||[]).forEach(function(it){ var nm=(it&&it.item)||it; if(nm&&!(it&&it.done)) shop[nm]=(shop[nm]||0)+1; }); }catch(e){}
+
+  function access(){ return HP.hasAccess(SCOPE); }
+  function st(){ return HP.aboState(SCOPE); }
+
+  function refreshStatus(){
+    var s=st(), line=document.getElementById('statusLine');
+    if(s.trial){ line.textContent='Probemonat aktiv bis '+new Date(s.trialUntil).toLocaleDateString('de-DE')+'.'; }
+    else if(s.active){ line.textContent='Abo aktiv'+(s.cycle==='jahr'?' (jährlich)':'')+'.'; }
+    else if(s.viaKonto){ line.textContent='Über HeiBen-Konto freigeschaltet.'; }
+    else { line.textContent=''; }
+    var sp=document.getElementById('streakPill'); var stk=HP.streakState(); sp.textContent= stk.count>0?('🔥 '+stk.count+' Tage Streak'):'';
+    document.getElementById('ctaTrial').classList.toggle('hide', s.access);
+  }
+
+  // Onboarding
+  function buildPlan(){
+    var size=document.getElementById('obSize').value, diet=document.getElementById('obDiet').value, cu=document.getElementById('obCuisine').value;
+    try{ localStorage.setItem('heiben-app-onboarding', JSON.stringify({size:size,diet:diet,cu:cu})); }catch(e){}
+    document.getElementById('onboarding').classList.add('hide');
+    document.getElementById('ahaWrap').classList.remove('hide');
+    var meals = size==='4'?7:5;
+    document.getElementById('planKpi').innerHTML=
+      '<div><div class="b">'+meals+'</div><div class="l">Gerichte / Woche</div></div>'+
+      '<div><div class="b">'+(diet==='vegan'?'100':(diet==='vegetarisch'?'60':'40'))+' %</div><div class="l">pflanzlich</div></div>'+
+      '<div><div class="b">'+(size)+'</div><div class="l">Portionen</div></div>';
+    renderRecipes();
+    HP.streakPing(); renderStreak();
+    document.getElementById('ahaWrap').scrollIntoView({behavior:'smooth',block:'start'});
+  }
+  function renderRecipes(){
+    var unlocked=access();
+    document.getElementById('recipeCards').innerHTML=RECIPES.map(function(r){
+      var locked=!r.free&&!unlocked;
+      return '<div class="card '+(locked?'lock':'')+'">'+
+        '<div class="eyebrow" style="color:var(--ochre)">'+r.k+'</div>'+
+        '<h3>'+r.n+'</h3>'+
+        '<p class="muted">'+r.zut.length+' Zutaten · aus dem HeiBen-Kochbuch</p>'+
+        (locked?'<div class="veil"><span class="pill">Premium</span><button class="btn primary" data-trial="1" style="margin-top:.5rem;">Mit Probemonat freischalten</button></div>'
+               :'<button class="btn ghost addShop" data-r="'+r.id+'">+ Einkaufsliste</button>')+
+      '</div>';
+    }).join('');
+  }
+  function addToShop(rid){
+    var r=RECIPES.filter(function(x){return x.id===rid;})[0]; if(!r) return;
+    r.zut.forEach(function(z){ shop[z]=(shop[z]||0)+1; });
+    try{ localStorage.setItem('heiben-einkauf', JSON.stringify(Object.keys(shop).map(function(k){return {item:k,done:false};}))); }catch(e){}
+    renderShop(); HP.toast('Zutaten zur Einkaufsliste ✓');
+  }
+  function renderShop(){
+    var keys=Object.keys(shop);
+    var el=document.getElementById('shopList');
+    if(!keys.length){ el.innerHTML='<li class="muted">Tippe bei einem Rezept auf „+ Einkaufsliste".</li>'; return; }
+    el.innerHTML=keys.map(function(k){ return '<li><span>'+k+'</span>'+(shop[k]>1?'<span class="muted">×'+shop[k]+'</span>':'')+'</li>'; }).join('');
+    document.getElementById('syncNote').textContent=keys.length+' Positionen · synchron mit deinen Kochbuch-Rezepten.';
+  }
+  function renderStreak(){ var s=HP.streakState(); document.getElementById('stCount').textContent=s.count; document.getElementById('stBest').textContent=s.best; }
+
+  // Abo-Preise
+  function renderPrices(){
+    var p=HP.PLANS[SCOPE];
+    document.getElementById('pMonat').textContent=fmt(p.monat)+' /Mon';
+    document.getElementById('pJahr').textContent=fmt(p.jahr)+' /Jahr';
+    document.getElementById('pSave').textContent='spare '+fmt(HP.jahrErsparnis(SCOPE))+' (2 Monate gratis)';
+    document.getElementById('pBundle').textContent=fmt(HP.BUNDLE.kochbuch);
+    document.getElementById('bundleNote').textContent=HP.BUNDLE.vorteil;
+  }
+  function renderRef(){
+    var r=HP.refState();
+    document.getElementById('refLink').value=HP.refLink();
+    document.getElementById('refState').textContent='Dein Code: '+r.code+' · '+r.invited+' Einladungen · '+fmt((r.creditsCt||0)/100)+' Guthaben';
+  }
+
+  // Events
+  document.getElementById('obGo').addEventListener('click',buildPlan);
+  document.getElementById('ctaTrial').addEventListener('click',function(){ var r=HP.startTrial(SCOPE); HP.toast(r.ok?'Probemonat gestartet — viel Freude! ✓':r.error); refreshStatus(); renderRecipes(); });
+  document.getElementById('cookedBtn').addEventListener('click',function(){ HP.streakPing(); renderStreak(); refreshStatus(); HP.toast('Stark — Streak aktualisiert 🔥'); });
+  document.getElementById('subMonat').addEventListener('click',function(){ HP.subscribe(SCOPE,'monat'); HP.toast('Monats-Abo aktiv ✓'); refreshStatus(); renderRecipes(); });
+  document.getElementById('subJahr').addEventListener('click',function(){ HP.subscribe(SCOPE,'jahr'); HP.toast('Jahres-Abo (Vorkasse) aktiv ✓'); refreshStatus(); renderRecipes(); });
+  document.getElementById('buyBundle').addEventListener('click',function(){ HP.buyBundle(); HP.toast('Bundle gesichert — App-Probemonat läuft ✓'); refreshStatus(); renderRecipes(); });
+  document.getElementById('copyRef').addEventListener('click',function(){ HP.copy(HP.refLink()); HP.creditWerber(); renderRef(); HP.toast('Link kopiert — +5 € Guthaben bei Einlösung ✓'); });
+  document.getElementById('shareRef').addEventListener('click',function(){ if(navigator.share){ navigator.share({title:'HeiBen Kulinarik-App',url:HP.refLink()}); } else { HP.copy(HP.refLink()); HP.toast('Link kopiert ✓'); } });
+  document.addEventListener('click',function(e){
+    var a=e.target.closest('.addShop'); if(a){ addToShop(a.dataset.r); }
+    var t=e.target.closest('[data-trial]'); if(t){ var r=HP.startTrial(SCOPE); HP.toast(r.ok?'Probemonat gestartet ✓':r.error); refreshStatus(); renderRecipes(); }
+  });
+
+  // Init: vorhandenes Onboarding überspringen
+  renderPrices(); renderRef(); refreshStatus(); renderShop();
+  var ob=null; try{ ob=JSON.parse(localStorage.getItem('heiben-app-onboarding')); }catch(e){}
+  if(ob){ document.getElementById('obSize').value=ob.size; document.getElementById('obDiet').value=ob.diet; document.getElementById('obCuisine').value=ob.cu; buildPlan(); }
+})();
+</script>
+<script src="heiben-legal.js"></script>
+</body>
+</html>

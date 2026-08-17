@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wahr oder Falsch · HeiBen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;1,400&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f3eee5;--bg2:#ebe3d4;--paper:#fffdf8;--ink:#1f1c17;--ink2:#524a3e;--rule:#d8cdb7;--terra:#b04a31;--ochre:#a97a1d;--moss:#4a5c39;--burg:#792d29;--aub:#6b3951}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:'Manrope',system-ui,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:680px;margin:0 auto;padding:1.6rem 1.1rem 5rem}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.32em;text-transform:uppercase;color:var(--terra)}
+h1{font-family:'Fraunces',serif;font-weight:400;font-size:clamp(2rem,6.5vw,3.2rem);line-height:1.02;letter-spacing:-.02em;margin:.45rem 0 .5rem}
+h1 em{font-style:italic;color:var(--terra)}
+.lead{color:var(--ink2);max-width:60ch;font-size:1.02rem}
+.prog{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink2);margin-top:1.3rem;display:flex;justify-content:space-between}
+.card{background:var(--paper);border:1px solid var(--rule);border-radius:16px;padding:1.6rem 1.3rem;margin-top:.5rem;min-height:150px;display:flex;align-items:center;justify-content:center}
+.stmt{font-family:'Fraunces',serif;font-weight:400;font-size:clamp(1.4rem,5.2vw,1.95rem);line-height:1.25;text-align:center}
+.choices{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin-top:.8rem}
+.choices button{border:1px solid var(--rule);background:var(--paper);border-radius:13px;padding:1rem;cursor:pointer;font:inherit;font-weight:700;font-size:1.1rem;color:var(--ink);transition:.12s}
+.choices button:hover:not(:disabled){border-color:var(--terra)}
+.choices button .ic{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;display:block;color:var(--ink2);font-weight:600;margin-bottom:.1rem}
+.choices button.t:hover:not(:disabled){border-color:var(--moss)}
+.choices button.f:hover:not(:disabled){border-color:var(--burg)}
+.choices button:disabled{cursor:default;opacity:.85}
+.choices button.right{background:#e9f0e0;border-color:var(--moss)}
+.choices button.miss{background:#f4e3df;border-color:var(--burg)}
+.verdict{margin-top:.9rem;border-radius:13px;padding:.9rem 1rem;display:none}
+.verdict.show{display:block}
+.verdict.ok{background:#e9f0e0;border:1px solid var(--moss)}
+.verdict.no{background:#f4e3df;border:1px solid var(--burg)}
+.verdict .head{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;margin-bottom:.2rem}
+.verdict.ok .head{color:var(--moss)}.verdict.no .head{color:var(--burg)}
+.verdict .why{font-size:.94rem;color:var(--ink2)}
+.next{margin-top:.9rem;border:0;background:var(--ink);color:var(--bg);font:inherit;font-weight:700;border-radius:12px;padding:.7rem 1.4rem;cursor:pointer;display:none}
+.next.show{display:inline-block}
+.streak{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ochre);margin-top:.7rem;text-align:center;min-height:16px}
+.result{background:var(--ink);color:var(--bg);border-radius:18px;padding:1.6rem 1.3rem;margin-top:.5rem;text-align:center;display:none}
+.result.show{display:block}
+.result .eyebrow{color:var(--ochre)}
+.ring{margin:.5rem auto .2rem;display:block}
+.band{font-family:'Fraunces',serif;font-style:italic;font-size:1.5rem}
+.rsub{color:#cdbfa8;font-size:.9rem;margin-top:.3rem}
+.best{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ochre);margin-top:.7rem}
+.row{display:flex;gap:.5rem;justify-content:center;margin-top:1.1rem;flex-wrap:wrap}
+.row button{border:1px solid rgba(255,255,255,.4);background:transparent;color:var(--bg);font:inherit;font-weight:700;border-radius:12px;padding:.65rem 1.2rem;cursor:pointer}
+.row button.pri{background:var(--ochre);color:var(--ink);border-color:var(--ochre)}
+.xlink{text-align:center;margin-top:1.3rem}
+.xlink a{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink2);text-decoration:none;border-bottom:1px solid var(--rule)}
+.foot{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink2);text-align:center;margin-top:1.6rem}
+.choices button:focus-visible,.next:focus-visible,.row button:focus-visible{outline:2px solid var(--ochre);outline-offset:2px}
+.keyhint{display:none;text-align:center;font-family:'JetBrains Mono',monospace;font-size:.55rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink2);margin-top:.7rem}
+.keyhint b{color:var(--terra);font-weight:600}
+@media (hover:hover) and (pointer:fine){.keyhint{display:block}}
+</style>
+<link rel="stylesheet" href="heiben-design.css">
+<script src="heiben-nav.js" defer></script>
+</head>
+<body data-hb-welt="wissen">
+<div class="wrap">
+  <p class="eyebrow">HeiBen · Lebenswissen</p>
+  <h1>Wahr oder <em>Falsch?</em></h1>
+  <p class="lead">Zwölf Aussagen rund um Geld, Recht, Job, Wohnen und Digitales — manche stimmen, manche sind hartnäckige Mythen. Entscheide schnell und sieh, wie leicht du zu täuschen bist.</p>
+
+  <div id="game">
+    <div class="prog"><span id="pnum"></span><span id="pstreak"></span></div>
+    <div class="card"><div class="stmt" id="stmt"></div></div>
+    <div class="choices" id="choices">
+      <button class="t" data-v="1"><span class="ic">Tippe</span>Stimmt</button>
+      <button class="f" data-v="0"><span class="ic">Tippe</span>Mythos</button>
+    </div>
+    <div class="verdict" id="verdict"></div>
+    <button class="next" id="next">Weiter</button>
+    <div class="streak" id="streakline">&nbsp;</div>
+    <div class="keyhint"><b>←</b> Stimmt · <b>→</b> Mythos · <b>Enter</b> weiter</div>
+  </div>
+
+  <div class="result" id="result"></div>
+
+  <div class="xlink"><a href="wissensquiz.html">Lieber Multiple-Choice? → Lebenswissen-Quiz</a></div>
+  <p class="foot">HeiBen GmbH i. G. · „Heimat leben" · <a href="mein-heiben.html" style="color:var(--aub)">Mein HeiBen</a> · Orientierungswissen, keine Rechts- oder Finanzberatung</p>
+</div>
+
+<script>
+var KEY="heiben_wof_v1";
+var ROUND=12;
+
+// w:true = Aussage stimmt; w:false = Mythos
+var BANK=[
+ {s:"Eine Garantie ist gesetzlich vorgeschrieben.",w:false,why:"Vorgeschrieben ist die Gewährleistung (zwei Jahre bei Neuware). Die Garantie ist eine freiwillige Zusage von Hersteller oder Händler."},
+ {s:"Beim Privatkauf darf der Verkäufer die Gewährleistung ausschließen.",w:true,why:"Privatverkäufer dürfen sie ausschließen — nur arglistig verschwiegene Mängel bleiben angreifbar."},
+ {s:"Im Laden gekaufte Ware kann man immer innerhalb von 14 Tagen zurückgeben.",w:false,why:"Das 14-tägige Widerrufsrecht gilt nur online. Im Laden ist Umtausch reine Kulanz."},
+ {s:"Ein Notgroschen sollte etwa drei bis sechs Monatsausgaben umfassen.",w:true,why:"Diese Faustregel deckt die meisten Notfälle ab — getrennt vom übrigen Geld geparkt."},
+ {s:"Kapitalerträge sind pro Person bis 1.000 € im Jahr steuerfrei (mit Freistellungsauftrag).",w:true,why:"Bis zum Sparerpauschbetrag bleiben sie steuerfrei; darüber greift die Abgeltungssteuer."},
+ {s:"Die Steuerklasse legt fest, wie viel Steuer man am Jahresende endgültig zahlt.",w:false,why:"Sie bestimmt nur die monatliche Vorauszahlung. Zu viel oder zu wenig gleicht die Steuererklärung aus."},
+ {s:"Der Arbeitgeber zahlt bei Krankheit unbegrenzt das volle Gehalt weiter.",w:false,why:"Die Entgeltfortzahlung gilt sechs Wochen. Danach zahlt die Kasse das geringere Krankengeld."},
+ {s:"Den Arbeitgeber muss man bei Krankheit sofort informieren, auch ohne ärztliches Attest.",w:true,why:"Die Meldung ist unabhängig von der Bescheinigung — und zwar unverzüglich."},
+ {s:"Eine Mieterhöhung darf der Vermieter formlos und ohne Begründung verlangen.",w:false,why:"Sie braucht Textform, Begründung (Mietspiegel o. Ä.) und Frist — sonst ist sie unwirksam."},
+ {s:"Die Miete darf in drei Jahren um höchstens 20 % steigen (Kappungsgrenze).",w:true,why:"In angespannten Märkten sind es nur 15 % — zusätzlich begrenzt die ortsübliche Vergleichsmiete."},
+ {s:"Der Rundfunkbeitrag fällt pro Person an, nicht pro Wohnung.",w:false,why:"Er wird pro Wohnung erhoben (18,36 € im Monat) — eine WG teilt ihn also."},
+ {s:"Dasselbe Passwort überall zu nutzen ist sicher, solange es lang genug ist.",w:false,why:"Taucht es in einem Leck auf, probieren Angreifer es automatisiert überall. Eigene Passwörter je Dienst schützen."},
+ {s:"Die Zwei-Faktor-Authentifizierung schützt auch, wenn das Passwort gestohlen wurde.",w:true,why:"Ohne den zweiten Faktor — etwa einen App-Code — kommt niemand ins Konto."},
+ {s:"Ein KI-Chatbot gibt grundsätzlich faktisch korrekte Antworten.",w:false,why:"Sprachmodelle erzeugen wahrscheinliche Wortfolgen — Fakten und Zahlen gehören geprüft."},
+ {s:"Cloud-Synchronisierung ersetzt ein Backup vollständig.",w:false,why:"Ein gelöschtes oder verschlüsseltes Original ist überall weg. Es gilt: drei Kopien, zwei Medien, eine extern."},
+ {s:"In Excel beginnt jede Formel mit einem Gleichheitszeichen.",w:true,why:"Das Gleichheitszeichen sagt Excel: rechne, statt nur anzuzeigen."},
+ {s:"Ein absoluter Bezug wie $A$1 verändert sich beim Kopieren nicht.",w:true,why:"Das Dollarzeichen fixiert den Bezug — relative Bezüge wandern dagegen mit."},
+ {s:"Ein Kreisdiagramm zeigt einen Verlauf über die Zeit am besten.",w:false,why:"Für Verläufe nimmt man Linien. Kreise zeigen Anteile, Balken vergleichen Größen."},
+ {s:"Mit Formatvorlagen lässt sich in Word ein automatisches Inhaltsverzeichnis erzeugen.",w:true,why:"Erst durch ausgezeichnete Überschriften kennt Word die Struktur."},
+ {s:"Strg + Z macht den letzten Arbeitsschritt rückgängig.",w:true,why:"Auf dem Mac ist es ⌘ + Z. Strg + S speichert, Strg + P druckt."},
+ {s:"Ein überschuldetes Erbe muss man aktiv ausschlagen, sonst gilt es als angenommen.",w:true,why:"Wer nichts tut, nimmt an — samt Schulden."},
+ {s:"Für das Ausschlagen eines Erbes hat man sechs Monate Zeit.",w:false,why:"Es sind nur sechs Wochen ab Kenntnis — eine kurze, scharfe Frist."},
+ {s:"Werbungskosten erkennt das Finanzamt nur mit eingereichten Belegen an.",w:false,why:"Bis zum Pauschbetrag von 1.230 € geht es ohne Nachweis; erst darüber lohnt das Einzeln-Angeben."},
+ {s:"Mehrere Schulden tilgt man mathematisch am günstigsten, indem man zuerst die teuerste (höchster Zins) abzahlt.",w:true,why:"Das ist die Lawine. Der Schneeball beginnt für den Kopf bei der kleinsten Summe."},
+ {s:"Finanzielle Unabhängigkeit liegt grob beim 25-Fachen der Jahresausgaben.",w:true,why:"Das ist die Kehrseite der 4-%-Regel — ab da kann das Vermögen die Ausgaben tragen."},
+ {s:"Wer dich online aus der Ferne um Geld bittet, ist meist seriös, wenn das Profil echt wirkt.",w:false,why:"Genau das ist das Muster des Romance-Scams. An reine Online-Bekanntschaften gehört nie Geld."},
+ {s:"Garantie und Gewährleistung sind dasselbe.",w:false,why:"Gewährleistung ist gesetzlich (Verkäufer), Garantie freiwillig (oft Hersteller)."},
+ {s:"Das Krankengeld der Kasse ist genauso hoch wie das vorherige Nettogehalt.",w:false,why:"Es liegt deutlich darunter und ist gedeckelt — bei langer Krankheit ein knapper Puffer."},
+ {s:"Bei Online-Käufen besteht in der Regel ein 14-tägiges Widerrufsrecht.",w:true,why:"Anders als im Laden kann man ohne Angabe von Gründen widerrufen."},
+ {s:"Eine Pivot-Tabelle verändert die zugrunde liegenden Rohdaten.",w:false,why:"Sie ist nur eine Sicht darauf — man kann gefahrlos damit experimentieren."}
+];
+
+var st={best:0,bestStreak:0};
+try{var sv=JSON.parse(localStorage.getItem(KEY));if(sv){st.best=sv.best||0;st.bestStreak=sv.bestStreak||0;}}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(st));}catch(e){}}
+
+var queue=[], idx=0, score=0, streak=0, runBest=0, answered=false;
+function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+
+function start(){
+  queue=shuffle(BANK).slice(0,Math.min(ROUND,BANK.length));
+  idx=0;score=0;streak=0;runBest=0;answered=false;
+  document.getElementById("result").className="result";
+  document.getElementById("game").style.display="";
+  render();
+}
+
+function render(){
+  answered=false;
+  var q=queue[idx];
+  document.getElementById("pnum").textContent="Aussage "+(idx+1)+" / "+queue.length;
+  document.getElementById("pstreak").textContent="Serie "+streak;
+  document.getElementById("stmt").textContent=q.s;
+  var v=document.getElementById("verdict");v.className="verdict";v.innerHTML="";
+  var nx=document.getElementById("next");nx.className="next";
+  document.getElementById("streakline").innerHTML="&nbsp;";
+  var btns=document.querySelectorAll("#choices button");
+  Array.prototype.forEach.call(btns,function(b){b.disabled=false;b.classList.remove("right","miss");});
+}
+
+function choose(val){
+  if(answered)return;answered=true;
+  var q=queue[idx];
+  var correct=(val===1)===q.w;
+  if(correct){score++;streak++;if(streak>runBest)runBest=streak;}else{streak=0;}
+  var btns=document.querySelectorAll("#choices button");
+  Array.prototype.forEach.call(btns,function(b){
+    b.disabled=true;
+    var bv=parseInt(b.getAttribute("data-v"),10);
+    var isTrueBtn=(bv===1);
+    if(isTrueBtn===q.w)b.classList.add("right");
+    else if(bv===val)b.classList.add("miss");
+  });
+  var v=document.getElementById("verdict");
+  v.className="verdict show "+(correct?"ok":"no");
+  v.innerHTML='<div class="head">'+(correct?"Richtig":"Daneben")+' — '+(q.w?"Stimmt":"Mythos")+'</div><div class="why">'+q.why+'</div>';
+  var nx=document.getElementById("next");nx.className="next show";
+  nx.textContent=(idx===queue.length-1)?"Auswerten":"Weiter";
+  document.getElementById("pstreak").textContent="Serie "+streak;
+  document.getElementById("streakline").innerHTML = streak>=3 ? ("🔥 "+streak+" in Serie") : "&nbsp;";
+}
+
+function advance(){if(idx<queue.length-1){idx++;render();window.scrollTo({top:0,behavior:"smooth"});}else finish();}
+
+function band(p){
+  if(p>=90)return["Schwer zu täuschen","Du fällst auf kaum einen Mythos herein.","#9ec27f"];
+  if(p>=70)return["Wachsam","Guter Riecher für Halbwahrheiten.","#a97a1d"];
+  if(p>=50)return["Geht so","Die Hälfte sitzt — die andere lohnt einen Blick.","#a97a1d"];
+  return["Leicht zu ködern","Viele Mythen haben dich erwischt. Die Erklärungen helfen.","#e7a48f"];
+}
+
+function ring(p){
+  var c=document.createElement("canvas");c.width=160;c.height=160;c.className="ring";
+  var x=c.getContext("2d"),cx=80,cy=80,r=64;
+  x.lineWidth=14;x.lineCap="round";
+  x.strokeStyle="rgba(255,255,255,.14)";x.beginPath();x.arc(cx,cy,r,0,Math.PI*2);x.stroke();
+  var col=p>=70?"#9ec27f":(p>=50?"#a97a1d":"#e7a48f");
+  x.strokeStyle=col;x.beginPath();x.arc(cx,cy,r,-Math.PI/2,-Math.PI/2+Math.PI*2*(p/100));x.stroke();
+  x.fillStyle="#fffdf8";x.textAlign="center";
+  x.font="500 38px Fraunces, serif";x.fillText(p+"%",cx,cy+6);
+  x.font="600 11px 'JetBrains Mono', monospace";x.fillStyle="#cdbfa8";x.fillText(score+" / "+queue.length,cx,cy+30);
+  return c;
+}
+
+function finish(){
+  document.getElementById("game").style.display="none";
+  var p=Math.round(score/queue.length*100);
+  var isBest=score>st.best;
+  if(isBest)st.best=score;
+  if(runBest>st.bestStreak)st.bestStreak=runBest;
+  save();
+  var bd=band(p);
+  var r=document.getElementById("result");
+  r.innerHTML='<p class="eyebrow">Täuschungs-Test</p>';
+  r.appendChild(ring(p));
+  var e=document.createElement("div");
+  e.innerHTML='<div class="band" style="color:'+bd[2]+'">'+bd[0]+'</div>'+
+    '<div class="rsub">'+bd[1]+'</div>'+
+    '<div class="best">'+(isBest?"Neuer Bestwert!":"Bestwert: "+st.best+" / "+queue.length)+' · Beste Serie: '+st.bestStreak+'</div>'+
+    '<div class="row"><button class="pri" id="rep">Nochmal</button><button id="quiz" onclick="location.href=\'wissensquiz.html\'">Zum Quiz</button></div>';
+  r.appendChild(e);
+  r.classList.add("show");
+  document.getElementById("rep").addEventListener("click",function(){start();window.scrollTo({top:0,behavior:"smooth"});});
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+Array.prototype.forEach.call(document.querySelectorAll("#choices button"),function(b){
+  b.addEventListener("click",function(){choose(parseInt(b.getAttribute("data-v"),10));});
+});
+document.getElementById("next").addEventListener("click",advance);
+
+// Tastatursteuerung
+document.addEventListener("keydown",function(e){
+  var game=document.getElementById("game");
+  if(!game||game.style.display==="none")return;
+  var k=e.key, isBtn=e.target&&e.target.tagName==="BUTTON";
+  if(!answered){
+    if(k==="ArrowLeft"||k==="1"||k==="w"||k==="W"){ e.preventDefault(); choose(1); return; }
+    if(k==="ArrowRight"||k==="2"||k==="f"||k==="F"){ e.preventDefault(); choose(0); return; }
+    return;
+  }
+  if(k==="Enter"||k===" "||k==="Spacebar"){ if(isBtn)return; e.preventDefault(); advance(); }
+});
+start();
+</script>
+</body>
+</html>

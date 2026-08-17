@@ -1,0 +1,311 @@
+{
+  "batch": 10,
+  "region": "Nordafrika",
+  "schema_version": 1,
+  "note": "Nordafrika: Algerien, Libyen, Marokko. Diese Küchen sind überwiegend muslimisch geprägt und von Natur aus ohne Schweinefleisch; ein Feld 'substitution' ist daher nicht erforderlich. Bilder als Platzhalter. Generisches Schema, direkt importierbar in PostgreSQL/Supabase/Directus/Strapi/Sanity.",
+  "recipes": [
+    {
+      "country": "Algerien",
+      "continent": "Afrika",
+      "recipe_name": "Chakhchoukha",
+      "categories": ["Fleisch", "Hauptgericht"],
+      "short_description": "In Stücke gezupftes, dünnes Fladenbrot, getränkt in einer würzigen Tomaten-Kichererbsen-Sauce mit Lamm. Herzhaftes Festtagsgericht aus dem algerischen Hochland.",
+      "history": "Chakhchoukha gehört zu den traditionsreichsten Gerichten Algeriens und stammt aus den Hochland- und Aurès-Regionen sowie dem Süden des Landes, etwa um Biskra. Es ist ein Gericht der Festtage und großen Familienfeiern. Im Zentrum steht ein sehr dünnes, von Hand gebackenes Fladenbrot (rougag oder m'semmen), das nach dem Backen in kleine Stücke gezupft wird — eine geduldige Handarbeit, die traditionell von den Frauen der Familie geleistet wird. Diese Brotstücke werden in einer kräftigen, mit Tomaten, Kichererbsen und der nordafrikanischen Gewürzmischung sowie Lamm zubereiteten Sauce (marqa) getränkt, bis sie weich sind und die Aromen aufgenommen haben. Die Würzung mit Ras el-Hanout, Kreuzkümmel und Paprika ist charakteristisch. Chakhchoukha spiegelt die berberischen Wurzeln der algerischen Küche und die Tradition wider, Brot als zentrales Element einer Mahlzeit zu nutzen. Als Lamm-Gemüse-Gericht ist es von Natur aus ohne Schweinefleisch und gilt als sättigendes, geselliges Festessen.",
+      "ingredients": [
+        { "quantity": "500", "unit": "g", "item": "dünnes Fladenbrot (rougag), in Stücke gezupft" },
+        { "quantity": "600", "unit": "g", "item": "Lammfleisch, gewürfelt" },
+        { "quantity": "2", "unit": "", "item": "Zwiebeln" },
+        { "quantity": "400", "unit": "g", "item": "passierte Tomaten, 2 EL Tomatenmark" },
+        { "quantity": "200", "unit": "g", "item": "gekochte Kichererbsen" },
+        { "quantity": "1", "unit": "TL", "item": "Ras el-Hanout, 1 TL Paprika, 0,5 TL Kreuzkümmel" },
+        { "quantity": "5", "unit": "EL", "item": "Olivenöl" },
+        { "quantity": "", "unit": "", "item": "Salz, Pfeffer" }
+      ],
+      "instructions": [
+        "Zwiebeln in Olivenöl andünsten, Lammwürfel zugeben und rundum anbraten.",
+        "Tomatenmark und Gewürze einrühren und kurz mitrösten.",
+        "Passierte Tomaten und Wasser angießen, salzen und das Fleisch sanft weich schmoren.",
+        "Kichererbsen zugeben und die Sauce einige Minuten mitkochen.",
+        "Die gezupften Brotstücke in einer Schüssel mit der heißen Sauce übergießen und kurz ziehen lassen, bis sie weich sind.",
+        "Mit Fleisch und Kichererbsen anrichten und heiß servieren."
+      ],
+      "tips": [
+        "Das Brot wirklich klein zupfen, damit es die Sauce gut aufnimmt.",
+        "Die Sauce darf reichlich sein — das Brot saugt viel auf.",
+        "Mit Ras el-Hanout und Kreuzkümmel kräftig würzen."
+      ],
+      "tags": ["Algerien", "Chakhchoukha", "Fladenbrot", "Lamm", "Kichererbsen", "Tomatensauce", "Ras el-Hanout", "berberisch", "Festtag", "Aurès", "Maghreb", "Hauptgericht"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Algerien",
+      "continent": "Afrika",
+      "recipe_name": "Chorba frik",
+      "categories": ["Suppe", "Hauptgericht"],
+      "short_description": "Eine herzhafte Suppe aus Grünkern (Freekeh), Lamm, Tomaten und Kräutern. Die klassische algerische Ramadan-Suppe.",
+      "history": "Chorba frik ist eine der bekanntesten Suppen Algeriens und ein fester Bestandteil des Fastenmonats Ramadan, in dem sie traditionell zum abendlichen Fastenbrechen (Iftar) auf den Tisch kommt. Ihr Name verweist auf die zentrale Zutat: Frik (Freekeh) ist geröstetes, noch grün geerntetes und gedroschenes Weizenkorn, das der Suppe ihren charakteristischen, leicht rauchigen Geschmack und Biss verleiht. Freekeh hat im Maghreb und im östlichen Mittelmeerraum eine lange Tradition. Die Suppe verbindet das Korn mit Lammfleisch, Tomaten, Zwiebeln, Kichererbsen und reichlich frischen Kräutern wie Koriander und Minze, gewürzt mit nordafrikanischen Gewürzen. Sie ist nahrhaft und wärmend und gilt als ideale Speise, um nach einem Fastentag wieder zu Kräften zu kommen. Jede Region und Familie pflegt ihre eigene Variante. Chorba frik spiegelt die getreidereiche, kräutergewürzte Seite der algerischen Küche wider und ist als Lamm-Getreide-Suppe von Natur aus ohne Schweinefleisch.",
+      "ingredients": [
+        { "quantity": "400", "unit": "g", "item": "Lammfleisch, gewürfelt" },
+        { "quantity": "120", "unit": "g", "item": "Frik (Freekeh/Grünkern)" },
+        { "quantity": "2", "unit": "", "item": "Zwiebeln" },
+        { "quantity": "400", "unit": "g", "item": "passierte Tomaten, 1 EL Tomatenmark" },
+        { "quantity": "150", "unit": "g", "item": "Kichererbsen" },
+        { "quantity": "1", "unit": "Bund", "item": "Koriander und Minze" },
+        { "quantity": "1", "unit": "TL", "item": "Zimt, 1 TL Ras el-Hanout" },
+        { "quantity": "", "unit": "", "item": "Olivenöl, Salz, Pfeffer" }
+      ],
+      "instructions": [
+        "Zwiebeln in Olivenöl andünsten, Lammwürfel zugeben und anbraten.",
+        "Tomatenmark und Gewürze einrühren, dann passierte Tomaten und Wasser angießen.",
+        "Kichererbsen zugeben und das Fleisch sanft weich kochen.",
+        "Den gewaschenen Frik einstreuen und unter gelegentlichem Rühren gar kochen, bis die Suppe sämig wird.",
+        "Reichlich gehackten Koriander und Minze einrühren.",
+        "Mit Salz, Pfeffer und einem Spritzer Zitrone abschmecken und heiß servieren."
+      ],
+      "tips": [
+        "Frik gibt der Suppe Biss und ein rauchiges Aroma — nicht durch Reis ersetzen.",
+        "Frische Kräuter erst zum Schluss zugeben.",
+        "Die Suppe darf schön sämig sein; bei Bedarf Wasser nachgießen."
+      ],
+      "tags": ["Algerien", "Chorba frik", "Freekeh", "Grünkern", "Lamm", "Suppe", "Ramadan", "Iftar", "Koriander", "Maghreb", "Tomaten", "Hauptgericht"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Algerien",
+      "continent": "Afrika",
+      "recipe_name": "Kalb el louz",
+      "categories": ["Dessert", "Vegetarisch"],
+      "short_description": "Ein saftiger Grießkuchen mit Mandeln, nach dem Backen mit Orangenblüten-Sirup getränkt. Beliebtes algerisches Süßgebäck, besonders im Ramadan.",
+      "history": "Kalb el louz — wörtlich „Herz der Mandel“ — ist eine der beliebtesten Süßspeisen Algeriens und gehört besonders im Fastenmonat Ramadan zu den traditionellen Nachspeisen. Es handelt sich um einen saftigen Kuchen auf Grießbasis, der mit Mandeln verfeinert und nach dem Backen großzügig mit einem duftenden Sirup aus Zucker und Orangenblütenwasser getränkt wird, sodass er besonders feucht und süß wird. Häufig wird in die Mitte eine ganze Mandel gedrückt, was dem Gebäck seinen Namen gibt. Sirupgetränkte Grießsüßspeisen haben im gesamten Maghreb und im früheren osmanischen Raum eine lange Tradition; das Orangenblütenwasser ist ein charakteristisches Aroma der nordafrikanischen Konditorei. Kalb el louz wird in Rauten geschnitten und kühl oder bei Zimmertemperatur serviert, oft zum Tee. Es spiegelt die ausgeprägte Vorliebe der algerischen Küche für mandel- und sirupbasierte Süßigkeiten wider. Als reines Grieß-Mandel-Gebäck ist es von Natur aus vegetarisch und ohne Schweinefleisch.",
+      "ingredients": [
+        { "quantity": "400", "unit": "g", "item": "feiner Grieß" },
+        { "quantity": "150", "unit": "g", "item": "gemahlene Mandeln" },
+        { "quantity": "150", "unit": "g", "item": "Zucker (Teig)" },
+        { "quantity": "120", "unit": "g", "item": "geschmolzene Butter" },
+        { "quantity": "1", "unit": "TL", "item": "Backpulver" },
+        { "quantity": "20", "unit": "", "item": "ganze Mandeln zum Verzieren" },
+        { "quantity": "400", "unit": "g", "item": "Zucker und 400 ml Wasser (Sirup)" },
+        { "quantity": "3", "unit": "EL", "item": "Orangenblütenwasser" }
+      ],
+      "instructions": [
+        "Grieß, gemahlene Mandeln, Zucker und Backpulver mischen.",
+        "Die geschmolzene Butter einarbeiten, bis eine krümelig-feuchte Masse entsteht; kurz ruhen lassen.",
+        "Die Masse in eine Form drücken, in Rauten vorschneiden und je eine Mandel eindrücken.",
+        "Bei 180 °C 25–30 Minuten goldbraun backen.",
+        "Aus Zucker, Wasser und Orangenblütenwasser einen Sirup kochen.",
+        "Den Sirup über den noch warmen Kuchen gießen und mehrere Stunden einziehen lassen."
+      ],
+      "tips": [
+        "Heißer Sirup auf warmes Gebäck zieht am besten ein.",
+        "Die Masse vor dem Backen ruhen lassen, damit der Grieß quillt.",
+        "Vor dem Servieren gut durchtränken lassen."
+      ],
+      "tags": ["Algerien", "Kalb el louz", "Grießkuchen", "Mandeln", "Orangenblütenwasser", "Sirup", "süß", "Ramadan", "vegetarisch", "Maghreb", "Konditorei", "Dessert"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Libyen",
+      "continent": "Afrika",
+      "recipe_name": "Bazin",
+      "categories": ["Fleisch", "Hauptgericht"],
+      "short_description": "Ein fester Teigkloß aus Gerstenmehl, serviert in einer würzigen Tomaten-Lamm-Sauce mit Ei. Das Nationalgericht Libyens.",
+      "history": "Bazin gilt als das Nationalgericht Libyens und ist ein traditionsreiches Essen, das besonders zu Feiertagen, Familienfeiern und religiösen Festen zubereitet wird. Im Zentrum steht ein fester, ungesäuerter Teigkloß, der aus Gerstenmehl (und teils Weizenmehl) mit Wasser zu einer dichten Masse gekocht und mit einem speziellen Stock zu einer glatten, halbkugelförmigen Kuppel geformt wird — eine kraftvolle Handarbeit. Gerste hat in der libyschen und nordafrikanischen Ernährung eine lange Geschichte als Grundnahrungsmittel. Der Teigkloß wird in die Mitte einer Schüssel gesetzt und von einer kräftigen, würzigen Sauce (marqa) aus Tomaten, Lamm, Kartoffeln und der scharfen Gewürzpaste umgeben, dazu kommen hartgekochte Eier. Gegessen wird traditionell gemeinschaftlich aus einer Schüssel, indem man Stücke des Teigs abbricht und in die Sauce taucht. Bazin verkörpert die gemeinschaftliche, gastfreundliche Esskultur Libyens und ist als Gersten-Lamm-Gericht von Natur aus ohne Schweinefleisch.",
+      "ingredients": [
+        { "quantity": "400", "unit": "g", "item": "Gerstenmehl (plus etwas Weizenmehl)" },
+        { "quantity": "600", "unit": "ml", "item": "Wasser (Teig)" },
+        { "quantity": "600", "unit": "g", "item": "Lammfleisch, gewürfelt" },
+        { "quantity": "2", "unit": "", "item": "Zwiebeln, 3 EL Tomatenmark" },
+        { "quantity": "2", "unit": "", "item": "Kartoffeln" },
+        { "quantity": "1", "unit": "TL", "item": "scharfes Paprikapulver, 1 TL Kurkuma, Bharat-Gewürz" },
+        { "quantity": "4", "unit": "", "item": "Eier (hartgekocht)" },
+        { "quantity": "", "unit": "", "item": "Olivenöl, Salz" }
+      ],
+      "instructions": [
+        "Für die Sauce Zwiebeln in Öl andünsten, Lamm anbraten, Tomatenmark und Gewürze einrühren.",
+        "Mit Wasser auffüllen, Kartoffeln zugeben und das Fleisch weich schmoren.",
+        "Für den Teig Gerstenmehl nach und nach in kochendes Salzwasser einrühren und zu einer sehr festen Masse verkochen.",
+        "Den Teig kräftig durcharbeiten und zu einer glatten Kuppel formen.",
+        "Den Teigkloß in die Mitte einer Schüssel setzen und mit der Sauce umgeben.",
+        "Mit Lamm, Kartoffeln und hartgekochten Eiern anrichten und gemeinschaftlich servieren."
+      ],
+      "tips": [
+        "Den Teig zügig und kräftig durcharbeiten, damit er glatt und fest wird.",
+        "Die Sauce kräftig würzen — sie trägt das Gericht.",
+        "Traditionell isst man gemeinsam aus einer Schüssel."
+      ],
+      "tags": ["Libyen", "Bazin", "Gerste", "Teigkloß", "Lamm", "Tomatensauce", "Ei", "Nationalgericht", "Festtag", "Maghreb", "gemeinschaftlich", "Hauptgericht"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Libyen",
+      "continent": "Afrika",
+      "recipe_name": "Sharba libiya",
+      "categories": ["Suppe", "Hauptgericht"],
+      "short_description": "Eine würzige Lammsuppe mit Tomaten, feinen Nudeln, Minze und reichlich Gewürzen. Libyens klassische Ramadan-Suppe.",
+      "history": "Sharba libiya — die libysche Suppe — ist eine der bekanntesten Speisen Libyens und gehört, ähnlich wie verwandte Suppen im Maghreb, fest zum Fastenmonat Ramadan, in dem sie das abendliche Fastenbrechen einleitet. Die Suppe verbindet Lammfleisch mit einer tomatenreichen Basis, feinen Nudeln (orzo oder gebrochene Fadennudeln) und einer charakteristischen Würzung aus libyschem Gewürzmix (bharat), Kurkuma, etwas Schärfe und vor allem reichlich getrockneter Minze, die ihr das unverwechselbare Aroma gibt. Manche Varianten enthalten Kichererbsen. Sharba ist nahrhaft und wärmend und gilt als ideale Speise, um nach einem Fastentag schonend wieder zu Kräften zu kommen. Sie spiegelt die Verbindung der libyschen Küche mit der breiteren nordafrikanischen und mediterranen Tradition würziger Lammsuppen wider und wird auch außerhalb des Ramadan geschätzt. Als Lammsuppe ist Sharba libiya von Natur aus ohne Schweinefleisch und gehört zu den Gerichten, die Gastfreundschaft und Familienzusammenhalt verkörpern.",
+      "ingredients": [
+        { "quantity": "400", "unit": "g", "item": "Lammfleisch, klein gewürfelt" },
+        { "quantity": "1", "unit": "", "item": "Zwiebel" },
+        { "quantity": "3", "unit": "EL", "item": "Tomatenmark, 400 g passierte Tomaten" },
+        { "quantity": "100", "unit": "g", "item": "feine Nudeln (orzo)" },
+        { "quantity": "2", "unit": "EL", "item": "getrocknete Minze" },
+        { "quantity": "1", "unit": "TL", "item": "Kurkuma, 1 TL bharat, etwas Chili" },
+        { "quantity": "1", "unit": "Bund", "item": "frische Petersilie" },
+        { "quantity": "", "unit": "", "item": "Olivenöl, Salz, Pfeffer" }
+      ],
+      "instructions": [
+        "Zwiebel in Olivenöl andünsten, Lammwürfel zugeben und anbraten.",
+        "Tomatenmark und Gewürze einrühren und kurz mitrösten.",
+        "Passierte Tomaten und Wasser angießen, salzen und das Fleisch sanft weich kochen.",
+        "Die feinen Nudeln einstreuen und gar kochen, bis die Suppe sämig ist.",
+        "Reichlich getrocknete Minze und frische Petersilie einrühren.",
+        "Mit Salz, Pfeffer und einem Spritzer Zitrone abschmecken und heiß servieren."
+      ],
+      "tips": [
+        "Getrocknete Minze ist das prägende Aroma — nicht weglassen.",
+        "Die Nudeln erst gegen Ende zugeben, damit sie nicht zerkochen.",
+        "Bei Bedarf Wasser nachgießen, die Suppe soll sämig, nicht dick sein."
+      ],
+      "tags": ["Libyen", "Sharba libiya", "Lammsuppe", "Tomaten", "Minze", "bharat", "Ramadan", "Iftar", "Nudeln", "Maghreb", "würzig", "Hauptgericht"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Libyen",
+      "continent": "Afrika",
+      "recipe_name": "Asida",
+      "categories": ["Dessert", "Vegetarisch", "Frühstück"],
+      "short_description": "Ein glatter, fester Brei aus Weizenmehl, serviert mit einer Mulde aus Dattelsirup und Olivenöl oder Honig. Süße libysche Spezialität zu Festen.",
+      "history": "Asida ist eine traditionelle Mehlspeise, die in Libyen und weiten Teilen Nordafrikas und der arabischen Welt verbreitet ist und besonders zu festlichen Anlässen zubereitet wird — in Libyen vor allem zum Geburtsfest des Propheten (Mawlid) sowie zu Familienfeiern und der Geburt eines Kindes. Es handelt sich um einen glatten, festen Brei aus Weizenmehl (manchmal Gerste oder Grieß), der in heißem Wasser unter kräftigem Rühren zu einer geschmeidigen, klebrigen Masse gekocht wird. Die Asida wird kuppelförmig in einer Schüssel angerichtet, und in die Mitte gibt man eine Mulde, die mit Dattelsirup (rub), Honig oder zerlassener Butter und Olivenöl gefüllt wird. Gegessen wird sie gemeinschaftlich, indem man Stücke des Breis abnimmt und in den Sirup tunkt. Süße Brei- und Teigspeisen dieser Art haben in der Region eine lange Geschichte als Festtags- und Trostessen. Asida ist als reine Mehl-Sirup-Speise von Natur aus vegetarisch und ohne Schweinefleisch.",
+      "ingredients": [
+        { "quantity": "300", "unit": "g", "item": "Weizenmehl" },
+        { "quantity": "600", "unit": "ml", "item": "Wasser" },
+        { "quantity": "1", "unit": "Prise", "item": "Salz" },
+        { "quantity": "150", "unit": "g", "item": "Dattelsirup (rub) oder Honig" },
+        { "quantity": "60", "unit": "g", "item": "Butter, zerlassen" },
+        { "quantity": "3", "unit": "EL", "item": "Olivenöl" }
+      ],
+      "instructions": [
+        "Salzwasser zum Kochen bringen.",
+        "Das Mehl nach und nach einrühren und dabei kräftig schlagen, um Klumpen zu vermeiden.",
+        "Unter ständigem Rühren zu einem glatten, festen, klebrigen Brei kochen.",
+        "Die Asida kuppelförmig in einer Schüssel anrichten.",
+        "In die Mitte eine Mulde drücken und mit Dattelsirup, zerlassener Butter und Olivenöl füllen.",
+        "Warm und gemeinschaftlich servieren, indem man Stücke in den Sirup tunkt."
+      ],
+      "tips": [
+        "Kräftig und ohne Pause rühren, damit der Brei glatt wird.",
+        "Dattelsirup (rub) gibt das authentische Aroma.",
+        "Warm servieren, solange die Asida geschmeidig ist."
+      ],
+      "tags": ["Libyen", "Asida", "Mehlspeise", "Dattelsirup", "Honig", "süß", "Mawlid", "Festtag", "vegetarisch", "Maghreb", "gemeinschaftlich", "Dessert"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Marokko",
+      "continent": "Afrika",
+      "recipe_name": "Couscous aux sept légumes",
+      "categories": ["Fleisch", "Hauptgericht"],
+      "short_description": "Gedämpfter Couscous mit sieben Gemüsesorten und Lamm in würziger Brühe. Das Freitagsgericht der marokkanischen Küche.",
+      "history": "Couscous ist das Herzstück der marokkanischen und der gesamten maghrebinischen Küche und hat berberische Wurzeln, die viele Jahrhunderte zurückreichen. In Marokko ist der Couscous mit sieben Gemüsesorten besonders verbreitet und traditionell das Freitagsgericht, das nach dem Mittagsgebet im Kreis der Familie gegessen wird. Die Zahl Sieben gilt als glückbringend. Der eigentliche Couscous — feiner Hartweizengrieß — wird mehrfach von Hand befeuchtet, gerollt und über dem Dampf der köchelnden Brühe in einem speziellen Topf (couscoussier) gegart, was ihn locker und fluffig macht. Darüber kommen Lamm und ein Bett aus Gemüse wie Möhren, Zucchini, Kürbis, Kohl, Steckrübe, Kichererbsen und Zwiebeln, die in einer mit Safran, Ingwer und Ras el-Hanout gewürzten Brühe geschmort werden. Couscous verkörpert Gastfreundschaft und Gemeinschaft und wird oft aus einer großen, geteilten Platte gegessen. Als Lamm-Gemüse-Gericht ist es von Natur aus ohne Schweinefleisch und gilt als kulinarisches Wahrzeichen Marokkos.",
+      "ingredients": [
+        { "quantity": "500", "unit": "g", "item": "Couscous (Hartweizengrieß)" },
+        { "quantity": "600", "unit": "g", "item": "Lammfleisch, in Stücken" },
+        { "quantity": "3", "unit": "", "item": "Möhren, 2 Zucchini, 1 Stück Kürbis" },
+        { "quantity": "0.25", "unit": "", "item": "Weißkohl, 1 Steckrübe" },
+        { "quantity": "200", "unit": "g", "item": "Kichererbsen" },
+        { "quantity": "2", "unit": "", "item": "Zwiebeln" },
+        { "quantity": "1", "unit": "Prise", "item": "Safran, 1 TL Ingwer, 1 TL Ras el-Hanout" },
+        { "quantity": "", "unit": "", "item": "Olivenöl, Butter, Salz, Pfeffer" }
+      ],
+      "instructions": [
+        "Zwiebeln und Lamm im unteren Teil des Couscoussiers in Öl anbraten, mit Gewürzen würzen.",
+        "Mit Wasser auffüllen, Kichererbsen zugeben und das Fleisch ansetzen.",
+        "Den Couscous befeuchten, lockern und im Dampfaufsatz über der Brühe garen; mehrmals wiederholen und mit Butter auflockern.",
+        "Das Gemüse nach Garzeit gestaffelt in die Brühe geben (festes zuerst, zartes später).",
+        "Den fertigen Couscous auf einer großen Platte anhäufen.",
+        "Fleisch und Gemüse darauf anrichten und mit etwas Brühe übergießen; restliche Brühe separat reichen."
+      ],
+      "tips": [
+        "Den Couscous mehrfach dämpfen und auflockern — das macht ihn fluffig.",
+        "Das Gemüse gestaffelt zugeben, damit nichts zerfällt.",
+        "Die würzige Brühe separat zum Nachgießen reichen."
+      ],
+      "tags": ["Marokko", "Couscous", "sieben Gemüse", "Lamm", "Hartweizengrieß", "Freitagsgericht", "Ras el-Hanout", "Safran", "berberisch", "Maghreb", "gedämpft", "Hauptgericht"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Marokko",
+      "continent": "Afrika",
+      "recipe_name": "Tajine de poulet aux citrons confits",
+      "categories": ["Geflügel", "Hauptgericht"],
+      "short_description": "Hähnchen, langsam geschmort mit eingelegten Salzzitronen, grünen Oliven und Safran im Tontopf. Klassiker der marokkanischen Tajine-Küche.",
+      "history": "Die Tajine ist sowohl ein Gericht als auch der namensgebende, kegelförmige Tontopf, in dem es zubereitet wird, und gehört zum Kern der marokkanischen Küche. Die charakteristische Form des Deckels lässt aufsteigenden Dampf kondensieren und zurück in das Gericht tropfen, sodass die Zutaten in wenig Flüssigkeit besonders schonend und aromatisch schmoren. Die Variante mit Hähnchen, eingelegten Salzzitronen (citrons confits) und grünen Oliven gehört zu den berühmtesten und spiegelt die für Marokko typische Kombination von herzhaften, salzigen und säuerlichen Aromen wider. Eingelegte Salzzitronen sind eine charakteristische Zutat der marokkanischen Küche und geben dem Gericht seine unverwechselbare, zugleich fruchtige und salzige Note. Gewürzt wird mit Safran, Ingwer, Kurkuma und frischem Koriander. Die Tajine wird traditionell im Topf serviert und mit Brot gegessen, das die Sauce aufnimmt. Als Geflügelgericht ist sie von Natur aus ohne Schweinefleisch und verkörpert die geduldige, gewürzbetonte Schmorkunst Marokkos.",
+      "ingredients": [
+        { "quantity": "1", "unit": "", "item": "Hähnchen, in Teilen" },
+        { "quantity": "2", "unit": "", "item": "eingelegte Salzzitronen" },
+        { "quantity": "150", "unit": "g", "item": "grüne Oliven" },
+        { "quantity": "2", "unit": "", "item": "Zwiebeln" },
+        { "quantity": "3", "unit": "Zehen", "item": "Knoblauch" },
+        { "quantity": "1", "unit": "Prise", "item": "Safran, 1 TL Ingwer, 1 TL Kurkuma" },
+        { "quantity": "1", "unit": "Bund", "item": "Koriander und Petersilie" },
+        { "quantity": "", "unit": "", "item": "Olivenöl, Salz, Pfeffer" }
+      ],
+      "instructions": [
+        "Hähnchenteile mit Knoblauch, Safran, Ingwer, Kurkuma, Öl und gehackten Kräutern marinieren.",
+        "Zwiebeln in Ringe schneiden und auf den Boden der Tajine oder eines Schmortopfs legen.",
+        "Das marinierte Hähnchen darauf betten und mit etwas Wasser angießen.",
+        "Zugedeckt bei kleiner Hitze 45–60 Minuten schmoren, bis das Hähnchen zart ist.",
+        "Die in Streifen geschnittenen Salzzitronen und die Oliven zugeben und kurz mitschmoren.",
+        "Mit frischen Kräutern bestreuen und mit Brot servieren."
+      ],
+      "tips": [
+        "Eingelegte Salzzitronen sind unverzichtbar für das typische Aroma.",
+        "Bei kleiner Hitze schmoren, damit das Hähnchen saftig bleibt.",
+        "Mit Brot servieren, um die Sauce aufzunehmen."
+      ],
+      "tags": ["Marokko", "Tajine", "Hähnchen", "Salzzitronen", "Oliven", "Safran", "Geflügel", "Schmorgericht", "Maghreb", "Tontopf", "gewürzbetont", "Hauptgericht"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Marokko",
+      "continent": "Afrika",
+      "recipe_name": "Kaab el ghzal",
+      "categories": ["Dessert", "Vegetarisch"],
+      "short_description": "Zarte, hörnchenförmige Gebäckstücke aus dünnem Teig mit einer Füllung aus Mandelpaste und Orangenblütenwasser. Marokkanisches Festtagsgebäck.",
+      "history": "Kaab el ghzal — „Gazellenhörner“ (französisch cornes de gazelle) — gehören zu den edelsten und bekanntesten Süßgebäcken Marokkos und sind ein fester Bestandteil von Festen, Hochzeiten, religiösen Feiertagen und der Gästebewirtung. Ihren Namen verdanken sie der charakteristischen geschwungenen Hörnchenform. Ein sehr dünner, geschmeidiger Teig wird mit einer Füllung aus fein gemahlenen Mandeln, Zucker, Zimt und Orangenblütenwasser umhüllt, zu schlanken Halbmonden geformt und behutsam gebacken, sodass sie hell und zart bleiben. Mandeln, Zimt und Orangenblütenwasser sind charakteristische Aromen der marokkanischen Konditorei, die für ihre Feinheit und ihren Reichtum an Mandelgebäck bekannt ist. Die Herstellung gilt als Kunst und erfordert Geschick beim dünnen Ausrollen des Teigs und beim Formen. Kaab el ghzal werden zum Minztee gereicht, der untrennbar zur marokkanischen Gastfreundschaft gehört. Als reines Teig-Mandel-Gebäck sind sie von Natur aus vegetarisch und ohne Schweinefleisch.",
+      "ingredients": [
+        { "quantity": "300", "unit": "g", "item": "Mehl" },
+        { "quantity": "50", "unit": "g", "item": "Butter (Teig)" },
+        { "quantity": "2", "unit": "EL", "item": "Orangenblütenwasser (Teig)" },
+        { "quantity": "300", "unit": "g", "item": "gemahlene Mandeln (Füllung)" },
+        { "quantity": "150", "unit": "g", "item": "Puderzucker (Füllung)" },
+        { "quantity": "1", "unit": "TL", "item": "Zimt" },
+        { "quantity": "3", "unit": "EL", "item": "Orangenblütenwasser (Füllung)" }
+      ],
+      "instructions": [
+        "Für die Füllung gemahlene Mandeln, Puderzucker, Zimt und Orangenblütenwasser zu einer formbaren Paste verkneten.",
+        "Aus der Mandelpaste schlanke, an den Enden spitz zulaufende Röllchen formen.",
+        "Mehl, Butter, Salz und Orangenblütenwasser mit etwas Wasser zu einem sehr geschmeidigen Teig kneten.",
+        "Den Teig hauchdünn ausrollen, die Mandelröllchen einlegen und den Teig eng darum schließen.",
+        "Zu Halbmonden (Hörnchen) biegen, die Ränder andrücken und überstehenden Teig abschneiden.",
+        "Bei 170 °C hell backen, sodass sie zart bleiben; auskühlen lassen und zum Minztee servieren."
+      ],
+      "tips": [
+        "Den Teig möglichst dünn ausrollen — das ist die Kunst dieses Gebäcks.",
+        "Hell backen, damit die Hörnchen zart und nicht hart werden.",
+        "Mit marokkanischem Minztee servieren."
+      ],
+      "tags": ["Marokko", "Kaab el ghzal", "Gazellenhörner", "Mandeln", "Orangenblütenwasser", "süß", "Festtag", "vegetarisch", "Minztee", "Maghreb", "Konditorei", "Dessert"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    }
+  ],
+  "batch_summary": {
+    "batch": 10,
+    "region": "Nordafrika",
+    "countries_processed": ["Algerien", "Libyen", "Marokko"],
+    "recipes_created": 9,
+    "recipes_with_images": 0,
+    "recipes_with_placeholders": 9,
+    "recipes_with_pork_substitution": 0
+  }
+}

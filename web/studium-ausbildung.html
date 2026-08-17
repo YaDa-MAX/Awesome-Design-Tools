@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Studium oder Ausbildung? · HeiBen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;1,400&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f3eee5;--bg2:#ebe3d4;--paper:#fffdf8;--ink:#1f1c17;--ink2:#524a3e;--rule:#d8cdb7;--terra:#b04a31;--ochre:#a97a1d;--moss:#4a5c39;--burg:#792d29;--aub:#6b3951}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:'Manrope',system-ui,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:900px;margin:0 auto;padding:1.6rem 1.1rem 5rem}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.32em;text-transform:uppercase;color:var(--terra)}
+h1{font-family:'Fraunces',serif;font-weight:400;font-size:clamp(2rem,6.5vw,3.2rem);line-height:1.02;letter-spacing:-.02em;margin:.45rem 0 .5rem}
+h1 em{font-style:italic;color:var(--terra)}
+.lead{color:var(--ink2);max-width:64ch;font-size:1.02rem}
+.grid2{display:grid;gap:1rem;margin-top:1.4rem}@media(min-width:760px){.grid2{grid-template-columns:1fr 1fr}}
+.path{background:var(--paper);border:1px solid var(--rule);border-radius:16px;padding:1.15rem}
+.path.s{border-color:var(--terra);box-shadow:0 0 0 1px var(--terra)}
+.path h3{font-family:'Fraunces',serif;font-weight:500;font-size:1.3rem;display:flex;align-items:center;gap:.5rem}
+.dot{width:.7rem;height:.7rem;border-radius:50%;display:inline-block}
+.field{margin-top:.7rem}.field label{display:block;font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink2);margin-bottom:.22rem}
+.field input{width:100%;padding:.5rem .6rem;border:1px solid var(--rule);border-radius:9px;background:var(--bg);color:var(--ink);font:inherit;font-weight:600}
+.field input:focus{outline:none;border-color:var(--terra);background:#fff}
+.field .hint{font-size:.74rem;color:var(--ink2);margin-top:.18rem}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:.6rem}
+.result{margin-top:1.6rem;background:var(--ink);color:var(--bg);border-radius:18px;padding:1.4rem 1.3rem 1.5rem}
+.result .eyebrow{color:var(--ochre)}
+.verdict{font-family:'Fraunces',serif;font-weight:400;font-size:clamp(1.35rem,4vw,1.95rem);line-height:1.2;margin:.5rem 0 .2rem}
+.verdict b{color:var(--ochre);font-weight:500}.verdict .good{color:#9ec27f}
+.cmp{display:grid;grid-template-columns:repeat(3,1fr);gap:.7rem;margin-top:1.1rem}
+.cmp .box{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);border-radius:12px;padding:.7rem .8rem}
+.cmp .l{font-family:'JetBrains Mono',monospace;font-size:.52rem;letter-spacing:.06em;text-transform:uppercase;color:#cdbfa8}
+.cmp .v{font-family:'Fraunces',serif;font-size:1.3rem;margin-top:.1rem}
+.chart-card{background:var(--paper);border:1px solid var(--rule);border-radius:16px;padding:1.05rem 1.1rem 1.2rem;margin-top:1.1rem}
+.chart-card h4{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--terra);margin-bottom:.3rem}
+canvas{width:100%;height:auto;display:block;margin-top:.3rem}
+.legend{display:flex;gap:1rem;font-size:.78rem;color:var(--ink2);margin-top:.4rem}
+.legend span{display:inline-flex;align-items:center;gap:.35rem}.sw{width:12px;height:12px;border-radius:3px;display:inline-block}
+.note{font-size:.82rem;color:var(--ink2);margin-top:1rem;max-width:66ch}
+.foot{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink2);text-align:center;margin-top:2rem}
+</style>
+<link rel="stylesheet" href="heiben-design.css">
+<script src="heiben-nav.js" defer></script>
+</head>
+<body data-hb-welt="wissen">
+<div class="wrap">
+  <p class="eyebrow">HeiBen · Die große Weichenstellung</p>
+  <h1>Studium oder <em>Ausbildung?</em></h1>
+  <p class="lead">Die Ausbildung bringt früh Geld, das Studium kostet erst Zeit und Geld — zahlt sich aber oft später aus. Wir rechnen beide Wege übers ganze Berufsleben durch und zeigen, ab wann sich das Studium einholt. Geld ist nur ein Faktor, aber ein ehrlicher.</p>
+
+  <div class="grid2">
+    <div class="path a">
+      <h3><span class="dot" style="background:var(--moss)"></span>Ausbildung</h3>
+      <div class="frow">
+        <div class="field"><label>Dauer (Jahre)</label><input type="number" id="a_dauer" value="3"></div>
+        <div class="field"><label>Vergütung netto (€/Mon)</label><input type="number" id="a_verg" value="950"></div>
+      </div>
+      <div class="frow">
+        <div class="field"><label>Einstiegsgehalt brutto/Jahr</label><input type="number" id="a_ein" value="34000" step="1000"></div>
+        <div class="field"><label>Gehaltswachstum (%/Jahr)</label><input type="number" id="a_wachs" value="2.5" step="0.5"></div>
+      </div>
+    </div>
+    <div class="path s">
+      <h3><span class="dot" style="background:var(--terra)"></span>Studium</h3>
+      <div class="frow">
+        <div class="field"><label>Dauer (Jahre)</label><input type="number" id="s_dauer" value="5"></div>
+        <div class="field"><label>Netto im Studium (€/Mon)</label><input type="number" id="s_netto" value="200"><div class="hint">Nebenjob minus Kosten (auch negativ)</div></div>
+      </div>
+      <div class="frow">
+        <div class="field"><label>Einstiegsgehalt brutto/Jahr</label><input type="number" id="s_ein" value="50000" step="1000"></div>
+        <div class="field"><label>Gehaltswachstum (%/Jahr)</label><input type="number" id="s_wachs" value="3" step="0.5"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="result" id="result"></div>
+
+  <div class="chart-card">
+    <h4>Kumuliertes Netto-Einkommen bis 67</h4>
+    <canvas id="chart" width="800" height="320"></canvas>
+    <div class="legend"><span><i class="sw" style="background:#4a5c39"></i>Ausbildung</span><span><i class="sw" style="background:#b04a31"></i>Studium</span></div>
+    <p class="note" id="note"></p>
+  </div>
+
+  <p class="foot">HeiBen GmbH i. G. · „Heimat leben" · <a href="mein-heiben.html" style="color:var(--aub)">Mein HeiBen</a> · stark vereinfachte Modellrechnung · keine Berufs- oder Finanzberatung</p>
+</div>
+
+<script>
+var KEY="heiben_studium_v1";
+var ids=["a_dauer","a_verg","a_ein","a_wachs","s_dauer","s_netto","s_ein","s_wachs"];
+try{var sv=JSON.parse(localStorage.getItem(KEY))||{};ids.forEach(function(id){if(sv[id]!=null)document.getElementById(id).value=sv[id];});}catch(e){}
+function el(id){return document.getElementById(id);}
+function num(id){return parseFloat(String(el(id).value).replace(",","."))||0;}
+function eur(n){return (Math.round(n)).toLocaleString("de-DE")+" €";}
+function nettoJahr(b){b=+b||0;if(b<=0)return 0;var sv=Math.min(b,62100)*0.20;var z=Math.max(0,b-11604-Math.min(sv,b)*0.5);var st=z<=0?0:z<=17000?z*0.16:z<=66000?2720+(z-17000)*0.30:17420+(z-66000)*0.42;return Math.max(0,b-sv-st);}
+var START=18,END=67;
+function path(dauer,duringMonthlyNet,einstieg,wachs){
+  var cum=0,series=[];
+  for(var age=START;age<END;age++){var y=age-START;var add;
+    if(y<dauer)add=duringMonthlyNet*12;
+    else{var emp=y-dauer;var brutto=einstieg*Math.pow(1+wachs/100,emp);add=nettoJahr(brutto);}
+    cum+=add;series.push({age:age+1,cum:cum});
+  }
+  return series;
+}
+function render(){
+  try{var o={};ids.forEach(function(id){o[id]=el(id).value;});localStorage.setItem(KEY,JSON.stringify(o));}catch(e){}
+  var A=path(num("a_dauer"),num("a_verg"),num("a_ein"),num("a_wachs"));
+  var S=path(num("s_dauer"),num("s_netto"),num("s_ein"),num("s_wachs"));
+  var be=null;for(var i=0;i<A.length;i++){if(S[i].cum>=A[i].cum){be=A[i].age;break;}}
+  var finA=A[A.length-1].cum,finS=S[S.length-1].cum,diff=finS-finA;
+  var v;
+  if(be===null){
+    v="Rein finanziell bleibt die <b>Ausbildung</b> hier bis 67 vorn — sie holt ihren Vorsprung durch den frühen Start nie ganz auf. Bis 67 liegt sie <span class=\"good\">"+eur(-diff)+"</span> vorne.";
+  } else if(be<=30){
+    v="Das <b>Studium</b> holt die Ausbildung schon mit <b>"+be+"</b> ein und liegt bis 67 rund <span class=\"good\">"+eur(diff)+"</span> vorn. Finanziell ein klarer Fall — wenn der Weg zu dir passt.";
+  } else {
+    v="Das <b>Studium</b> zieht erst mit <b>"+be+"</b> gleich und liegt bis 67 rund <span class=\"good\">"+eur(diff)+"</span> vorn. Die Ausbildung schenkt dir dafür Jahre an frühem Einkommen und Unabhängigkeit.";
+  }
+  el("result").innerHTML='<p class="eyebrow">Das Urteil</p><p class="verdict">'+v+'</p>'+
+    '<div class="cmp">'+
+      '<div class="box"><div class="l">Break-even-Alter</div><div class="v">'+(be||"—")+'</div></div>'+
+      '<div class="box"><div class="l">Lebensnetto Ausbildung</div><div class="v">'+eur(finA)+'</div></div>'+
+      '<div class="box"><div class="l">Lebensnetto Studium</div><div class="v">'+eur(finS)+'</div></div>'+
+    '</div>';
+  el("note").innerHTML="Kumuliertes <b>Netto</b>-Einkommen ohne Kapitalanlage — wer früh verdient und investiert, vergrößert seinen Vorsprung zusätzlich (Zinseszins). Nicht enthalten: BAföG, Stipendien, individuelle Berufschancen, Erfüllung. Die Zahlen sind Annahmen — ändere sie, bis sie zu deiner Realität passen.";
+  drawChart(A,S);
+}
+function drawChart(A,S){
+  var cv=el("chart"),ctx=cv.getContext("2d"),W=cv.width,H=cv.height;ctx.clearRect(0,0,W,H);
+  var padL=58,padR=14,padT=16,padB=26,pw=W-padL-padR,ph=H-padT-padB;
+  var mx=Math.max(A[A.length-1].cum,S[S.length-1].cum)*1.04||1,n=A.length;
+  function X(i){return padL+i/(n-1)*pw;}function Y(v){return padT+(1-v/mx)*ph;}
+  ctx.strokeStyle="#e6dcc8";ctx.fillStyle="#9a9079";ctx.font="10px 'JetBrains Mono',monospace";
+  for(var g=0;g<=4;g++){var gv=mx*g/4,yy=Y(gv);ctx.beginPath();ctx.moveTo(padL,yy);ctx.lineTo(W-padR,yy);ctx.stroke();ctx.fillText(Math.round(gv/1000)+"k",6,yy+3);}
+  function line(arr,col,w){ctx.beginPath();ctx.moveTo(X(0),Y(arr[0].cum));for(var i=1;i<arr.length;i++)ctx.lineTo(X(i),Y(arr[i].cum));ctx.strokeStyle=col;ctx.lineWidth=w;ctx.stroke();}
+  line(A,"#4a5c39",2.5);line(S,"#b04a31",2.5);
+  // crossover dot
+  for(var i=0;i<n;i++){if(S[i].cum>=A[i].cum){ctx.fillStyle="#1f1c17";ctx.beginPath();ctx.arc(X(i),Y(S[i].cum),5,0,7);ctx.fill();break;}}
+  ctx.fillStyle="#524a3e";ctx.font="10px 'JetBrains Mono',monospace";ctx.textAlign="center";
+  for(var a=20;a<=END;a+=10){var idx=a-19;if(idx>=0&&idx<n)ctx.fillText(a,X(idx),H-9);}
+  ctx.textAlign="left";
+}
+ids.forEach(function(id){el(id).addEventListener("input",render);});
+render();
+</script>
+</body>
+</html>

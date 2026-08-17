@@ -1,0 +1,300 @@
+{
+  "batch": 11,
+  "region": "Nordafrika",
+  "schema_version": 1,
+  "note": "Abschluss Nordafrika: Tunesien, Mauretanien und Westsahara. Westsahara ist ein völkerrechtlich umstrittenes Gebiet; die Küche ist sahrauisch-saharanisch geprägt und entsprechend gekennzeichnet. Alle Küchen sind überwiegend muslimisch geprägt und von Natur aus ohne Schweinefleisch; ein Feld 'substitution' ist nicht erforderlich. Bilder als Platzhalter. Generisches Schema, direkt importierbar in PostgreSQL/Supabase/Directus/Strapi/Sanity.",
+  "recipes": [
+    {
+      "country": "Tunesien",
+      "continent": "Afrika",
+      "recipe_name": "Couscous tunisien au poisson",
+      "categories": ["Fisch", "Hauptgericht"],
+      "short_description": "Gedämpfter Couscous mit Fisch und Gemüse in einer scharfen, tomaten- und harissabetonten Brühe. Spezialität der tunesischen Küstenstädte.",
+      "history": "Couscous ist auch in Tunesien das zentrale Gericht der Küche und hat berberische Wurzeln, die weit zurückreichen. Während im Binnenland Lamm verbreitet ist, prägt an den Küsten — etwa in Sfax und entlang des Mittelmeers — der Fischcouscous die Tradition. Charakteristisch für die tunesische Variante ist die deutlich schärfere und tomatenreichere Würzung im Vergleich zum marokkanischen Couscous: Harissa, die scharfe Chilipaste, und reichlich Tabil (eine tunesische Gewürzmischung) geben der Brühe ihre rote Farbe und Feurigkeit. Der Hartweizengrieß wird über dem Dampf der köchelnden Brühe gegart, bis er locker ist, und mit dem in der würzigen Tomatenbrühe geschmorten Fisch und Gemüse wie Möhren, Kürbis, Kartoffeln und Kichererbsen serviert. Fischcouscous spiegelt die maritime Seite der tunesischen Küche und die Bedeutung des Mittelmeers wider. Als Fisch-Gemüse-Gericht ist er von Natur aus ohne Schweinefleisch und gehört zu den geschätzten Festtags- und Sonntagsessen der Küstenregionen.",
+      "ingredients": [
+        { "quantity": "500", "unit": "g", "item": "Couscous (Hartweizengrieß)" },
+        { "quantity": "800", "unit": "g", "item": "fester Fisch (z. B. Zackenbarsch, Meerbrasse), in Stücken" },
+        { "quantity": "2", "unit": "EL", "item": "Harissa" },
+        { "quantity": "3", "unit": "EL", "item": "Tomatenmark" },
+        { "quantity": "3", "unit": "", "item": "Möhren, 1 Stück Kürbis, 2 Kartoffeln" },
+        { "quantity": "150", "unit": "g", "item": "Kichererbsen" },
+        { "quantity": "1", "unit": "TL", "item": "Tabil (Koriander-Kümmel-Mischung)" },
+        { "quantity": "", "unit": "", "item": "Olivenöl, Knoblauch, Salz" }
+      ],
+      "instructions": [
+        "Im unteren Teil des Couscoussiers Knoblauch und Tomatenmark in Olivenöl anrösten, Harissa und Tabil einrühren.",
+        "Mit Wasser auffüllen, Kichererbsen zugeben und eine würzige, rote Brühe ansetzen.",
+        "Den Couscous befeuchten, lockern und im Dampfaufsatz garen; mehrmals wiederholen.",
+        "Das Gemüse nach Garzeit gestaffelt in die Brühe geben.",
+        "Die Fischstücke vorsichtig in der Brühe gar ziehen lassen, ohne dass sie zerfallen.",
+        "Den Couscous auf einer Platte anhäufen, mit Fisch und Gemüse anrichten und mit der scharfen Brühe übergießen."
+      ],
+      "tips": [
+        "Harissa und Tabil geben die typisch tunesische Schärfe und Würze.",
+        "Den Fisch erst spät zugeben, damit er nicht zerfällt.",
+        "Den Couscous mehrfach dämpfen für eine lockere Konsistenz."
+      ],
+      "tags": ["Tunesien", "Couscous", "Fisch", "Harissa", "Tabil", "Hartweizengrieß", "scharf", "Küstenküche", "Maghreb", "Sfax", "gedämpft", "Hauptgericht"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Tunesien",
+      "continent": "Afrika",
+      "recipe_name": "Brik",
+      "categories": ["Fisch", "Vorspeise", "Snack"],
+      "short_description": "Eine knusprig frittierte Teigtasche aus hauchdünnem Malsouka-Teig mit Ei, Thunfisch und Petersilie. Tunesischer Klassiker mit flüssigem Eigelb.",
+      "history": "Brik (auch Brik à l'œuf) ist eine der bekanntesten Spezialitäten Tunesiens und ein fester Bestandteil der Alltags- und Festküche, besonders beliebt während des Ramadan. Es handelt sich um eine knusprig frittierte Teigtasche aus Malsouka — einem hauchdünnen, an Filo erinnernden Teigblatt, das für die tunesische Küche charakteristisch ist. Die klassische Füllung besteht aus einem ganzen, rohen Ei, Thunfisch, Petersilie, Zwiebel und Kapern; das Besondere ist, dass das Ei beim kurzen Frittieren nur leicht stockt, sodass das Eigelb beim Hineinbeißen flüssig bleibt — was beim Essen Geschick erfordert. Brik spiegelt den Einfluss der mediterranen und osmanischen Teigtraditionen auf die tunesische Küche wider. Es wird heiß und frisch als Vorspeise oder Snack gegessen, oft mit einem Spritzer Zitrone. Als Teigtasche mit Ei und Fisch ist Brik von Natur aus ohne Schweinefleisch und gehört zu den Gerichten, die Tunesiens Vorliebe für knusprige, herzhafte Spezialitäten verkörpern.",
+      "ingredients": [
+        { "quantity": "4", "unit": "", "item": "Malsouka- oder Filoteigblätter" },
+        { "quantity": "4", "unit": "", "item": "Eier" },
+        { "quantity": "1", "unit": "Dose", "item": "Thunfisch" },
+        { "quantity": "1", "unit": "Bund", "item": "Petersilie" },
+        { "quantity": "1", "unit": "", "item": "Zwiebel, 1 EL Kapern" },
+        { "quantity": "50", "unit": "g", "item": "geriebener Käse (optional)" },
+        { "quantity": "", "unit": "", "item": "Öl zum Frittieren, Salz, Pfeffer; Zitrone" }
+      ],
+      "instructions": [
+        "Thunfisch mit gehackter Petersilie, Zwiebel, Kapern, Salz und Pfeffer mischen.",
+        "Ein Teigblatt auf die Arbeitsfläche legen und etwas Füllung in die Mitte geben.",
+        "Eine Mulde formen und ein Ei hineingleiten lassen.",
+        "Das Teigblatt rasch zu einer Tasche schließen, sodass das Ei eingeschlossen ist.",
+        "In heißem Öl kurz und zügig beidseitig knusprig ausbacken, sodass das Eigelb flüssig bleibt.",
+        "Sofort mit einem Spritzer Zitrone servieren."
+      ],
+      "tips": [
+        "Nur kurz frittieren, damit das Eigelb flüssig bleibt.",
+        "Die Tasche zügig schließen, bevor das Ei ausläuft.",
+        "Heiß und frisch essen — am besten direkt aus der Pfanne."
+      ],
+      "tags": ["Tunesien", "Brik", "Malsouka", "Ei", "Thunfisch", "frittiert", "Teigtasche", "Ramadan", "Vorspeise", "Maghreb", "knusprig", "Snack"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Tunesien",
+      "continent": "Afrika",
+      "recipe_name": "Lablabi",
+      "categories": ["Vegetarisch", "Suppe", "Frühstück"],
+      "short_description": "Eine herzhafte Kichererbsensuppe über zerrupftem Brot, gewürzt mit Knoblauch, Kreuzkümmel und Harissa, gekrönt von einem Ei. Tunesisches Winterfrühstück.",
+      "history": "Lablabi ist ein traditionelles tunesisches Gericht und ein beliebtes, günstiges Straßenessen, das besonders in den kühleren Monaten und gern zum Frühstück gegessen wird. Im Kern besteht es aus weich gekochten Kichererbsen in einer würzigen Knoblauch-Kreuzkümmel-Brühe, die über zerrupftes, oft altbackenes Brot gegeben wird, das die Brühe aufsaugt. Darüber kommen typische Beigaben: Harissa für die Schärfe, Olivenöl, ein Spritzer Zitrone oder Essig, Kapern, und häufig ein pochiertes oder weich gekochtes Ei. Jeder würzt sein Lablabi am Tisch nach eigenem Geschmack. Das Gericht ist ein Paradebeispiel für die Kunst, aus sehr einfachen, günstigen Zutaten — Kichererbsen, Brot, Knoblauch, Gewürze — eine sättigende, wärmende Mahlzeit zu schaffen, und spiegelt die volksnahe Seite der tunesischen Küche wider. Als Kichererbsengericht ist es von Natur aus vegetarisch und ohne Schweinefleisch und gehört zu den Speisen, die Tunesiens Liebe zu Harissa und Kreuzkümmel verkörpern.",
+      "ingredients": [
+        { "quantity": "300", "unit": "g", "item": "getrocknete Kichererbsen, über Nacht eingeweicht" },
+        { "quantity": "4", "unit": "Zehen", "item": "Knoblauch" },
+        { "quantity": "1", "unit": "EL", "item": "gemahlener Kreuzkümmel" },
+        { "quantity": "2", "unit": "EL", "item": "Harissa" },
+        { "quantity": "4", "unit": "Scheiben", "item": "altbackenes Brot" },
+        { "quantity": "4", "unit": "", "item": "Eier" },
+        { "quantity": "5", "unit": "EL", "item": "Olivenöl" },
+        { "quantity": "", "unit": "", "item": "Zitrone, Kapern, Salz" }
+      ],
+      "instructions": [
+        "Kichererbsen mit Knoblauch in reichlich Wasser sehr weich kochen.",
+        "Die Brühe mit Kreuzkümmel und Salz kräftig würzen.",
+        "Das zerrupfte Brot in tiefe Schüsseln geben.",
+        "Mit den heißen Kichererbsen und der Brühe übergießen, sodass das Brot durchweicht.",
+        "Je ein weich gekochtes oder pochiertes Ei daraufsetzen.",
+        "Mit Harissa, Olivenöl, Zitrone und Kapern nach Geschmack vollenden und heiß servieren."
+      ],
+      "tips": [
+        "Reichlich Kreuzkümmel und Knoblauch geben den typischen Geschmack.",
+        "Altbackenes Brot saugt die Brühe am besten auf.",
+        "Jeder würzt sein Lablabi mit Harissa selbst am Tisch."
+      ],
+      "tags": ["Tunesien", "Lablabi", "Kichererbsen", "Suppe", "Harissa", "Kreuzkümmel", "Brot", "vegetarisch", "Frühstück", "Straßenessen", "Maghreb", "winterlich"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Mauretanien",
+      "continent": "Afrika",
+      "recipe_name": "Mechoui",
+      "categories": ["Fleisch", "Hauptgericht"],
+      "short_description": "Ganzes oder großes Stück Lamm, über Stunden langsam geröstet, bis es zart vom Knochen fällt. Festmahl der saharanischen Nomadentradition.",
+      "history": "Mechoui — das langsam geröstete Lamm — ist tief in der nomadischen Tradition der Sahara und des Maghreb verwurzelt und in Mauretanien ein zentrales Festessen. Bei den Beduinen- und Nomadengemeinschaften, deren Reichtum und Lebensgrundlage über Jahrhunderte das Vieh war, gilt das Schlachten und gemeinschaftliche Verspeisen eines ganzen Lamms als höchster Ausdruck von Gastfreundschaft und wird zu Hochzeiten, religiösen Festen und der Bewirtung von Gästen zelebriert. Das Tier oder ein großes Stück wird, oft nur mit Salz, Kreuzkümmel und etwas Butter gewürzt, über vielen Stunden über Glut oder in einer Erdgrube langsam gegart, bis das Fleisch außen knusprig und innen butterzart vom Knochen fällt. Die schlichte Würzung stellt den reinen Fleischgeschmack in den Mittelpunkt. Mechoui wird gemeinschaftlich von einer großen Platte gegessen, traditionell mit der Hand. Es verkörpert die Verbindung der mauretanischen Küche mit der Wüsten- und Hirtenkultur und ist als Lammgericht von Natur aus ohne Schweinefleisch.",
+      "ingredients": [
+        { "quantity": "2", "unit": "kg", "item": "Lammschulter oder -keule (mit Knochen)" },
+        { "quantity": "80", "unit": "g", "item": "Butter oder Schmalz vom Lamm" },
+        { "quantity": "1", "unit": "EL", "item": "gemahlener Kreuzkümmel" },
+        { "quantity": "1", "unit": "EL", "item": "Salz" },
+        { "quantity": "1", "unit": "TL", "item": "Paprika (optional)" },
+        { "quantity": "4", "unit": "Zehen", "item": "Knoblauch" }
+      ],
+      "instructions": [
+        "Das Lamm rundum mit einer Paste aus Butter, zerdrücktem Knoblauch, Salz, Kreuzkümmel und Paprika einreiben.",
+        "Einige Stunden, am besten über Nacht, durchziehen lassen.",
+        "Das Fleisch bei niedriger Temperatur (etwa 150 °C) sehr langsam mehrere Stunden garen.",
+        "Während des Garens immer wieder mit dem austretenden Fett und etwas Butter bestreichen.",
+        "Gegen Ende die Hitze kurz erhöhen, damit die Außenseite knusprig wird.",
+        "Zart vom Knochen fallend auf einer großen Platte anrichten und mit Kreuzkümmel-Salz servieren."
+      ],
+      "tips": [
+        "Sehr langsam und lange garen — das macht das Fleisch butterzart.",
+        "Regelmäßiges Bestreichen hält das Lamm saftig.",
+        "Kreuzkümmel-Salz zum Dippen separat reichen."
+      ],
+      "tags": ["Mauretanien", "Mechoui", "Lamm", "geröstet", "Sahara", "Nomadenküche", "Festtag", "Gastfreundschaft", "Kreuzkümmel", "Hirtenkultur", "gemeinschaftlich", "Hauptgericht"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Mauretanien",
+      "continent": "Afrika",
+      "recipe_name": "Couscous mauritanien",
+      "categories": ["Fleisch", "Hauptgericht"],
+      "short_description": "Gedämpfter Couscous mit Lamm und Wüstengemüse in einer würzigen Brühe. Saharanische Fassung des maghrebinischen Grundgerichts.",
+      "history": "Couscous gehört auch in Mauretanien zu den wichtigsten Gerichten und verbindet das Land mit der berberisch-maghrebinischen Tradition, die im gesamten Nordwesten Afrikas verbreitet ist. Als Bindeglied zwischen dem arabisch-berberischen Maghreb und Westafrika vereint die mauretanische Küche Einflüsse beider Welten. Der Hartweizengrieß wird, wie in der gesamten Region, über dem Dampf einer köchelnden Brühe gegart, bis er locker und fluffig ist, und mit Lamm sowie dem verfügbaren Gemüse — Möhren, Kürbis, Zwiebeln, Kohl und Kichererbsen — serviert, die in einer mit Kreuzkümmel und weiteren Gewürzen abgeschmeckten Brühe geschmort werden. In der kargen Sahara-Umgebung war Couscous ein nahrhaftes, sättigendes Gericht, das sich gut für die gemeinschaftliche Mahlzeit eignete. Es wird traditionell von einer großen, geteilten Platte gegessen und verkörpert Gastfreundschaft. Als Lamm-Gemüse-Gericht ist der mauretanische Couscous von Natur aus ohne Schweinefleisch.",
+      "ingredients": [
+        { "quantity": "500", "unit": "g", "item": "Couscous (Hartweizengrieß)" },
+        { "quantity": "700", "unit": "g", "item": "Lammfleisch, in Stücken" },
+        { "quantity": "3", "unit": "", "item": "Möhren, 1 Stück Kürbis" },
+        { "quantity": "0.25", "unit": "", "item": "Weißkohl, 2 Zwiebeln" },
+        { "quantity": "200", "unit": "g", "item": "Kichererbsen" },
+        { "quantity": "1", "unit": "TL", "item": "Kreuzkümmel, 1 TL Paprika" },
+        { "quantity": "", "unit": "", "item": "Öl, Salz, Pfeffer" }
+      ],
+      "instructions": [
+        "Zwiebeln und Lamm im unteren Teil des Couscoussiers anbraten, mit Kreuzkümmel und Paprika würzen.",
+        "Mit Wasser auffüllen, Kichererbsen zugeben und das Fleisch ansetzen.",
+        "Den Couscous befeuchten, lockern und im Dampfaufsatz garen; mehrmals wiederholen und auflockern.",
+        "Das Gemüse gestaffelt in die Brühe geben und weich schmoren.",
+        "Den Couscous auf einer großen Platte anhäufen.",
+        "Lamm und Gemüse darauf anrichten und mit Brühe übergießen; gemeinschaftlich servieren."
+      ],
+      "tips": [
+        "Den Couscous mehrfach dämpfen für eine lockere Konsistenz.",
+        "Das Gemüse je nach Garzeit gestaffelt zugeben.",
+        "Traditionell von einer geteilten Platte essen."
+      ],
+      "tags": ["Mauretanien", "Couscous", "Lamm", "Hartweizengrieß", "Wüstengemüse", "Sahara", "Maghreb", "berberisch", "Kreuzkümmel", "gedämpft", "gemeinschaftlich", "Hauptgericht"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Mauretanien",
+      "continent": "Afrika",
+      "recipe_name": "Lakh",
+      "categories": ["Dessert", "Frühstück", "Vegetarisch"],
+      "short_description": "Feiner Hirse-Couscous, serviert mit gesüßter, leicht säuerlicher Milch oder Joghurt. Süße Sahel-Spezialität Mauretaniens.",
+      "history": "Lakh ist eine traditionelle süße Speise, die in Mauretanien und der angrenzenden Sahel-Region, etwa im Senegal, verbreitet ist und die Verbindung der mauretanischen Küche zu Westafrika widerspiegelt. Grundlage ist feiner Couscous aus Hirse — Hirse ist eines der wichtigsten und ältesten Getreide der Sahelzone und übersteht das trockene Klima besser als Weizen. Der gedämpfte Hirse-Couscous wird mit gesüßter, oft leicht angesäuerter Milch oder Joghurt übergossen, manchmal verfeinert mit etwas Vanille, Orangenblütenwasser oder zerdrückten Datteln. Das Ergebnis ist eine erfrischende, sättigende Speise, die als süßes Frühstück, als Dessert oder zum Fastenbrechen gegessen wird. Lakh verbindet die getreidebasierte Grundernährung der Region mit der Bedeutung von Milch in der von Viehzucht geprägten Kultur. Als Gericht aus Hirse und Milch ist es von Natur aus vegetarisch und ohne Schweinefleisch und steht für die Sahel-Seite der mauretanischen Küche zwischen Wüste und Fluss.",
+      "ingredients": [
+        { "quantity": "300", "unit": "g", "item": "feiner Hirse-Couscous (oder Hirsegrieß)" },
+        { "quantity": "500", "unit": "ml", "item": "Milch oder Joghurt" },
+        { "quantity": "100", "unit": "ml", "item": "leicht gesäuerte Milch (oder etwas Buttermilch)" },
+        { "quantity": "60", "unit": "g", "item": "Zucker" },
+        { "quantity": "4", "unit": "", "item": "Datteln, zerdrückt (optional)" },
+        { "quantity": "1", "unit": "EL", "item": "Orangenblütenwasser (optional)" },
+        { "quantity": "1", "unit": "Prise", "item": "Salz" }
+      ],
+      "instructions": [
+        "Den Hirse-Couscous nach Packungsangabe befeuchten und über Dampf garen, bis er locker ist; auflockern und auskühlen lassen.",
+        "Milch und gesäuerte Milch mit Zucker und nach Wunsch Orangenblütenwasser verrühren.",
+        "Die zerdrückten Datteln unterrühren.",
+        "Den Hirse-Couscous in Schalen geben.",
+        "Mit der gesüßten Milch übergießen, sodass er gut durchtränkt ist.",
+        "Gut gekühlt servieren."
+      ],
+      "tips": [
+        "Den Hirse-Couscous gut auflockern, damit er die Milch aufnimmt.",
+        "Die Süße und Säure der Milch nach Geschmack ausbalancieren.",
+        "Gekühlt ist Lakh besonders erfrischend."
+      ],
+      "tags": ["Mauretanien", "Lakh", "Hirse", "Couscous", "Milch", "süß", "Sahel", "vegetarisch", "Frühstück", "Datteln", "Westafrika", "Dessert"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Westsahara",
+      "continent": "Afrika",
+      "recipe_name": "Khobz dafun",
+      "categories": ["Vegetarisch", "Vegan", "Beilage"],
+      "short_description": "Ein ungesäuertes Fladenbrot, das traditionell in heißem Sand und unter Glut gebacken wird. Brot der saharanischen Nomaden.",
+      "history": "Khobz dafun — „vergrabenes Brot“ — ist ein traditionelles Fladenbrot der saharanischen Nomaden und gehört zur sahrauischen Esskultur der Westsahara, einem völkerrechtlich umstrittenen Gebiet. Die Zubereitung ist eine geniale Anpassung an das Leben in der Wüste, wo es weder Öfen noch viel Brennholz gibt: Ein einfacher Teig aus Mehl, Wasser und Salz wird zu einem dicken Fladen geformt und direkt in den heißen Sand unter einer zuvor entfachten Glut gebettet, wo er langsam gart. Nach dem Backen wird der Sand abgeklopft und die Kruste gereinigt. Das Brot ist außen fest und innen weich und begleitet die Mahlzeiten der Nomaden, etwa Fleisch- und Couscousgerichte oder Tee. Es spiegelt die Genügsamkeit und Erfindungsgabe der Wüstenbewohner wider, die mit minimalen Mitteln eine Grundnahrung herstellen. Khobz dafun ist als reines Mehl-Wasser-Brot von Natur aus vegan und ohne Schweinefleisch. In der heimischen Küche lässt es sich ersatzweise in einer Pfanne oder im Ofen backen.",
+      "ingredients": [
+        { "quantity": "500", "unit": "g", "item": "Mehl" },
+        { "quantity": "300", "unit": "ml", "item": "Wasser" },
+        { "quantity": "1", "unit": "TL", "item": "Salz" },
+        { "quantity": "1", "unit": "Prise", "item": "Trockenhefe (optional, für eine weichere Krume)" }
+      ],
+      "instructions": [
+        "Mehl, Wasser und Salz (sowie optional etwas Hefe) zu einem festen, glatten Teig kneten.",
+        "Kurz ruhen lassen und zu einem dicken, runden Fladen formen.",
+        "Traditionell den Fladen in heißen Sand unter Glut betten und langsam garen.",
+        "In der heimischen Küche stattdessen in einer schweren, trockenen Pfanne bei mittlerer Hitze beidseitig backen.",
+        "Den Fladen wenden, bis er außen fest und durchgebacken ist.",
+        "Etwas abkühlen lassen, aufbrechen und zu Fleisch-, Couscousgerichten oder Tee servieren."
+      ],
+      "tips": [
+        "Ohne Sandgrube gelingt das Brot gut in einer Gusspfanne oder im Ofen.",
+        "Den Teig fest halten, damit der Fladen seine Form behält.",
+        "Als Beilage zu herzhaften Wüstengerichten reichen."
+      ],
+      "tags": ["Westsahara", "Khobz dafun", "Sandbrot", "Fladenbrot", "Nomadenküche", "Sahara", "vegan", "vegetarisch", "sahrauisch", "ungesäuert", "Wüstenküche", "Beilage"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Westsahara",
+      "continent": "Afrika",
+      "recipe_name": "Couscous sahraoui",
+      "categories": ["Fleisch", "Hauptgericht"],
+      "short_description": "Gedämpfter Couscous mit Lamm oder Kamelfleisch und wenig Gemüse, schlicht gewürzt. Festgericht der sahrauischen Wüstenküche.",
+      "history": "Couscous ist auch in der Westsahara, einem völkerrechtlich umstrittenen Gebiet, das zentrale Festgericht und verbindet die sahrauische Küche mit der berberisch-maghrebinischen Tradition des gesamten Nordwestafrikas. In der kargen Wüstenumgebung, in der die sahrauischen Nomaden traditionell von Viehzucht lebten, ist Couscous ein nahrhaftes, sättigendes Gericht für Feste und die gemeinschaftliche Bewirtung von Gästen. Der Hartweizengrieß wird über dem Dampf einer köchelnden Brühe gegart und mit Lamm — bei festlichen Anlässen auch Kamelfleisch, das in der Region eine Rolle spielt — sowie dem verfügbaren Gemüse serviert. Die Würzung ist gegenüber den nördlichen Maghreb-Varianten oft schlichter und stellt das Fleisch in den Mittelpunkt, passend zur Verfügbarkeit von Zutaten in der Wüste. Gegessen wird traditionell von einer großen, geteilten Platte mit der Hand, oft gefolgt von der dreifachen Teezeremonie. Als Fleisch-Getreide-Gericht ist der sahrauische Couscous von Natur aus ohne Schweinefleisch.",
+      "ingredients": [
+        { "quantity": "500", "unit": "g", "item": "Couscous (Hartweizengrieß)" },
+        { "quantity": "700", "unit": "g", "item": "Lammfleisch (ersatzweise; traditionell auch Kamel)" },
+        { "quantity": "2", "unit": "", "item": "Zwiebeln" },
+        { "quantity": "3", "unit": "", "item": "Möhren, 1 Stück Kürbis" },
+        { "quantity": "150", "unit": "g", "item": "Kichererbsen" },
+        { "quantity": "1", "unit": "TL", "item": "Kreuzkümmel, Salz, Pfeffer" },
+        { "quantity": "", "unit": "", "item": "Öl, Butter" }
+      ],
+      "instructions": [
+        "Zwiebeln und Fleisch im unteren Teil des Couscoussiers anbraten und würzen.",
+        "Mit Wasser auffüllen, Kichererbsen zugeben und das Fleisch weich schmoren.",
+        "Den Couscous befeuchten, lockern und über dem Dampf garen; mehrmals wiederholen und mit Butter auflockern.",
+        "Das Gemüse gestaffelt in die Brühe geben.",
+        "Den Couscous auf einer großen Platte anhäufen und Fleisch sowie Gemüse darauf anrichten.",
+        "Mit etwas Brühe übergießen und gemeinschaftlich servieren."
+      ],
+      "tips": [
+        "Den Couscous mehrfach dämpfen und mit Butter auflockern.",
+        "Die Würzung schlicht halten — das Fleisch steht im Mittelpunkt.",
+        "Im Anschluss die dreifache sahrauische Teezeremonie reichen."
+      ],
+      "tags": ["Westsahara", "Couscous", "Lamm", "Kamel", "Hartweizengrieß", "Sahara", "sahrauisch", "Nomadenküche", "Festtag", "berberisch", "gemeinschaftlich", "Hauptgericht"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Westsahara",
+      "continent": "Afrika",
+      "recipe_name": "Atay",
+      "categories": ["Getränk", "Vegetarisch", "Vegan"],
+      "short_description": "Stark gebrühter grüner Minztee, in drei Aufgüssen und aus großer Höhe in kleine Gläser gegossen. Herzstück der sahrauischen Gastfreundschaft.",
+      "history": "Atay — die dreifache Teezeremonie — ist weit mehr als ein Getränk und gehört zum kulturellen Kern der sahrauischen Gesellschaft in der Westsahara, einem völkerrechtlich umstrittenen Gebiet, sowie der gesamten saharanischen Nomadenwelt. Grüner Tee (oft Gunpowder), frische Minze und reichlich Zucker werden stark aufgebrüht und in drei aufeinanderfolgenden Aufgüssen aus demselben Tee zubereitet und serviert. Der Tee wird aus großer Höhe in kleine Gläser gegossen, sodass sich eine Schaumkrone bildet — eine Kunst, die Geschick verlangt. Die drei Gläser werden in der sahrauischen und maghrebinischen Tradition oft sinnbildlich gedeutet: das erste bitter „wie das Leben“, das zweite süß „wie die Liebe“, das dritte sanft „wie der Tod“. Die Zeremonie ist Ausdruck von Gastfreundschaft, Geselligkeit und sozialer Bindung und begleitet Begegnungen, Verhandlungen und Mahlzeiten. Sie nimmt Zeit in Anspruch und ist ein bewusstes, gemeinschaftliches Ritual. Der Tee ist als reines Pflanzengetränk selbstverständlich vegan und ohne Schweinefleisch.",
+      "ingredients": [
+        { "quantity": "2", "unit": "EL", "item": "grüner Tee (Gunpowder)" },
+        { "quantity": "1", "unit": "Bund", "item": "frische Minze" },
+        { "quantity": "60", "unit": "g", "item": "Zucker (oder mehr nach Geschmack)" },
+        { "quantity": "500", "unit": "ml", "item": "Wasser" }
+      ],
+      "instructions": [
+        "Den grünen Tee mit etwas heißem Wasser kurz überbrühen und das erste Wasser abgießen (Reinigung der Blätter).",
+        "Frisches Wasser zugeben und den Tee stark aufkochen.",
+        "Reichlich Minze und Zucker zugeben und kurz ziehen lassen.",
+        "Den Tee aus großer Höhe in kleine Gläser gießen, um Schaum zu erzeugen, und mehrmals zurückgießen.",
+        "Den ersten Aufguss servieren; anschließend Wasser, Minze und Zucker erneut aufgießen für den zweiten und dritten Aufguss.",
+        "Die drei Gläser nacheinander und in Ruhe gemeinschaftlich genießen."
+      ],
+      "tips": [
+        "Das Gießen aus der Höhe erzeugt die typische Schaumkrone.",
+        "Jeder der drei Aufgüsse schmeckt etwas anders — das ist Teil der Zeremonie.",
+        "Sich Zeit nehmen: Atay ist ein Ritual der Gastfreundschaft."
+      ],
+      "tags": ["Westsahara", "Atay", "Minztee", "grüner Tee", "Teezeremonie", "Getränk", "vegan", "vegetarisch", "sahrauisch", "Sahara", "Gastfreundschaft", "Ritual"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    }
+  ],
+  "batch_summary": {
+    "batch": 11,
+    "region": "Nordafrika",
+    "countries_processed": ["Tunesien", "Mauretanien", "Westsahara"],
+    "recipes_created": 9,
+    "recipes_with_images": 0,
+    "recipes_with_placeholders": 9,
+    "recipes_with_pork_substitution": 0
+  }
+}

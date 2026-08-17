@@ -1,0 +1,27 @@
+{
+  "name": "heiben-app",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Native iOS/Android-Hülle für HeiBen (Capacitor) — verpackt die Web-Assets aus ../web.",
+  "scripts": {
+    "sync:web": "node copy-web.mjs",
+    "assets": "npx @capacitor/assets generate --iconBackgroundColor #f3eee5 --iconBackgroundColorDark #f3eee5 --splashBackgroundColor #f3eee5 --splashBackgroundColorDark #f3eee5",
+    "add:ios": "npm run sync:web && npx cap add ios && npm run assets",
+    "add:android": "npm run sync:web && npx cap add android && npm run assets",
+    "sync": "npm run sync:web && npx cap sync",
+    "open:ios": "npx cap open ios",
+    "open:android": "npx cap open android"
+  },
+  "dependencies": {
+    "@capacitor/android": "^6.1.2",
+    "@capacitor/app": "^6.0.1",
+    "@capacitor/core": "^6.1.2",
+    "@capacitor/ios": "^6.1.2",
+    "@capacitor/splash-screen": "^6.0.2",
+    "@capacitor/status-bar": "^6.0.1"
+  },
+  "devDependencies": {
+    "@capacitor/assets": "^3.0.5",
+    "@capacitor/cli": "^6.1.2"
+  }
+}

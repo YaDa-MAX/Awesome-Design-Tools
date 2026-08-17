@@ -1,7 +1,7 @@
 # CLAUDE.md — HeiBen Kit (Remake-Weiterarbeit)
 
 ## Projekt
-Fiktive Kölner Familienholding **HeiBen** („Heimat leben“, GmbH i. G., GF immer Yakin Benkhaouda
+Fiktive Kölner Familienholding **HeiBen** („Heimat leben", GmbH i. G., GF immer Yakin Benkhaouda
 & Katharina Hein) mit **fünf Welten**: Reisen `#a97a1d` · Wohnen `#4a5c39` · Immobilien `#792d29`
 · Studio `#1f1c17` · Kulinarik `#6b3951` (kanonisch: `web/heiben-firmierungen.js`).
 Statisches HTML/JS/CSS-**PWA ohne Build-Schritt**, offline-fähig, localStorage. Web-Root: `web/`
@@ -11,7 +11,7 @@ Statisches HTML/JS/CSS-**PWA ohne Build-Schritt**, offline-fähig, localStorage.
 ## Arbeitsweise (bindend)
 - Deutsch mit echten Umlauten/ß. Terse: liefern statt erklären. **Ein Deliverable pro Auftrag.**
 - Keine Screenshots ungefragt. Bugs als Soll/Ist melden. Perfektionsanspruch: 0 PageErrors.
-- Nichts „nebenbei“ umbauen; stabile Verträge (unten) nie brechen.
+- Nichts „nebenbei" umbauen; stabile Verträge (unten) nie brechen.
 
 ## Pflicht-Workflow nach JEDER Änderung unter web/
 1. Service-Worker-Version bumpen: `web/service-worker.js`, Muster `heiben-v20260622-NNNN`
@@ -26,7 +26,7 @@ Statisches HTML/JS/CSS-**PWA ohne Build-Schritt**, offline-fähig, localStorage.
   `<script heiben-nav.js defer>` vor `</head>` + `<body data-hb-welt="reisen|wohnen|immobilien|studio|kulinarik|wissen|konto|holding">`.
 - `index.html` bewusst OHNE hb-nav (eigener Hero-Header, dokumentierte Ausnahme).
 - Alt-Nav-Ablösung: `assert count('<nav>')==1` → Block ersetzen + `script#hb-mobile-js` mit entfernen.
-- Brücken-Boxen „Aus der HeiBen-Welt“ (`.hb-box.welt`, `--wf`=Zielfarbe): vor Einbau Guard
+- Brücken-Boxen „Aus der HeiBen-Welt" (`.hb-box.welt`, `--wf`=Zielfarbe): vor Einbau Guard
   `'Aus der HeiBen-Welt' not in s`; Kompendien haben **kein** `<footer>` → Anker `<p class="foot"`.
 
 ## Stabile Verträge (nie brechen)
@@ -34,7 +34,7 @@ Statisches HTML/JS/CSS-**PWA ohne Build-Schritt**, offline-fähig, localStorage.
   `heiben_ordner_v1` (+ Welt-Speicher der Planer/Konfiguratoren).
 - Deep-Links: `#id` (Kompendien-Steckbriefe), `?id=`, `?q=` (wissen.html), `?welt=` (welt-cockpit).
 - Daten-Arrays (`*-daten.js`) nur ans Ende erweitern, `id`-Felder stabil. `PFADE` ist `var` (script-scope).
-- Fiktions-Fakten: GmbH i. G., Benkhaouda/Hein, „Heimat leben“, Köln.
+- Fiktions-Fakten: GmbH i. G., Benkhaouda/Hein, „Heimat leben", Köln.
 
 ## Testen (Playwright headless, Chromium)
 - Server: `cd web && python3 -m http.server 8180 &`. Browser-Args:

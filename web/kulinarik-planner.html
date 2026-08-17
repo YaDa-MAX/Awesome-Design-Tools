@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HeiBen Kulinarik · Menü- & Catering-Planer</title>
+<meta name="description" content="Stelle Menüs und Catering zusammen: Gerichte wählen, Gäste festlegen, Allergene und Budget im Blick, beauftragen oder anfragen — als Firmen- und Kundenansicht.">
+<style>
+:root{--bg:#f3eee5;--bg-soft:#ebe3d4;--ink:#1f1c17;--ink-soft:#524a3e;--rule:#d8cdb7;--terracotta:#b04a31;--accent:#6b3951;--accent-d:#4f2a3c;}
+*{box-sizing:border-box;}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Manrope',-apple-system,Segoe UI,sans-serif;line-height:1.5;}
+.wrap{max-width:1180px;margin:0 auto;padding:0 1.2rem;}
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:1.1rem 0;border-bottom:1px solid var(--rule);}
+.wm{font-family:'Fraunces',serif;font-weight:700;font-size:1.4rem;}.wm .a{color:var(--terracotta);}
+.wm span{font-weight:400;font-size:.9rem;color:var(--ink-soft);}
+.back{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);text-decoration:none;}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:.64rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent-d);}
+h1{font-family:'Fraunces',serif;font-weight:340;font-size:clamp(1.6rem,4.2vw,2.4rem);margin:.9rem 0 .2rem;}
+.lede{color:var(--ink-soft);max-width:66ch;}
+.bar{display:flex;gap:.6rem;flex-wrap:wrap;align-items:center;margin:1rem 0;}
+.seg{display:inline-flex;border:1px solid var(--rule);border-radius:10px;overflow:hidden;background:#fff;}
+.seg button{border:0;background:none;padding:.5rem .9rem;font:inherit;font-size:.82rem;cursor:pointer;color:var(--ink-soft);}
+.seg button.on{background:var(--ink);color:#f3eee5;}
+.btn{display:inline-flex;align-items:center;gap:.3rem;border:0;cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;padding:.55rem .8rem;border-radius:8px;text-decoration:none;}
+.btn.ink{background:var(--ink);color:#f3eee5;}.btn.primary{background:var(--accent);color:#f3eee5;}
+.btn.ghost{background:none;border:1px solid var(--ink);color:var(--ink);}.btn.sm{padding:.35rem .6rem;font-size:.54rem;}
+.fld{display:flex;flex-direction:column;gap:3px;}
+.fld label{font-size:.62rem;color:var(--ink-soft);font-family:'JetBrains Mono',monospace;letter-spacing:.06em;text-transform:uppercase;}
+.fld input,.fld select{border:1px solid var(--rule);border-radius:8px;padding:.45rem .6rem;font:inherit;}
+.layout{display:grid;grid-template-columns:320px 1fr;gap:18px;align-items:start;}
+@media(max-width:860px){.layout{grid-template-columns:1fr;}}
+.panel{background:#fff;border:1px solid var(--rule);border-radius:16px;padding:1rem;}
+.panel h2{font-family:'Fraunces',serif;font-weight:480;font-size:1.1rem;margin:0 0 .5rem;}
+.chips{display:flex;gap:.35rem;flex-wrap:wrap;margin-bottom:.6rem;}
+.chip{border:1px solid var(--rule);background:#fff;border-radius:999px;padding:.32rem .7rem;font-size:.72rem;cursor:pointer;}
+.chip.on{background:var(--accent);border-color:var(--accent);color:#f3eee5;font-weight:600;}
+.search{width:100%;border:1px solid var(--rule);border-radius:9px;padding:.55rem .7rem;font:inherit;margin-bottom:.6rem;}
+.pal{display:flex;flex-direction:column;gap:.5rem;max-height:560px;overflow:auto;}
+.pcard{border:1px solid var(--rule);border-radius:11px;padding:.6rem .7rem;cursor:grab;background:#fff;}
+.pcard:hover{border-color:var(--ink);}
+.pcard .tp{display:flex;justify-content:space-between;align-items:center;gap:.4rem;}
+.kat{font-family:'JetBrains Mono',monospace;font-size:.5rem;letter-spacing:.05em;text-transform:uppercase;padding:.1rem .4rem;border-radius:999px;color:#fff;}
+.pcard h3{font-family:'Fraunces',serif;font-weight:460;font-size:.98rem;margin:.15rem 0;}
+.pcard .meta{font-size:.74rem;color:var(--ink-soft);}
+.alg{font-size:.62rem;color:var(--ink-soft);}
+.menucard{border:1px solid var(--rule);border-radius:16px;background:#fff;padding:1.1rem 1.3rem;margin:.4rem 0 1rem;}
+.menucard h3{font-family:'Fraunces',serif;font-weight:480;font-size:1.15rem;margin:.1rem 0 .6rem;text-align:center;}
+.mc-sec{margin:.5rem 0;}
+.mc-sec .secname{font-family:'JetBrains Mono',monospace;font-size:.56rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent-d);border-bottom:1px solid var(--rule);padding-bottom:.2rem;margin-bottom:.3rem;}
+.mc-dish{display:flex;justify-content:space-between;gap:.6rem;font-size:.9rem;padding:.12rem 0;}
+.mc-dish .kl{font-family:'JetBrains Mono',monospace;font-size:.5rem;color:var(--ink-soft);}
+.allergens{margin-top:.6rem;font-size:.74rem;color:var(--ink-soft);}
+.allergens b{font-family:'JetBrains Mono',monospace;font-size:.56rem;letter-spacing:.08em;text-transform:uppercase;}
+.menuempty{color:var(--ink-soft);font-size:.86rem;text-align:center;padding:1rem;}
+.rooms{display:flex;flex-direction:column;gap:14px;}
+.room{border:1px solid var(--rule);border-radius:16px;background:#fff;overflow:hidden;}
+.room.activeRoom{border-color:var(--accent);box-shadow:0 0 0 2px rgba(107,57,81,.25);}
+.room .rh{display:flex;align-items:center;justify-content:space-between;gap:.5rem;padding:.7rem .9rem;background:var(--bg-soft);}
+.room .rh input.nm{border:1px solid var(--rule);border-radius:7px;padding:.3rem .5rem;font:inherit;font-family:'Fraunces',serif;width:200px;}
+.drophint{padding:.6rem .9rem 1rem;min-height:48px;}
+.drophint.drop{background:rgba(107,57,81,.08);outline:2px dashed var(--accent);outline-offset:-6px;}
+.empty{color:var(--ink-soft);font-size:.84rem;padding:.4rem 0;}
+.item{position:relative;border-left:3px solid var(--rule);padding:.2rem 0 .6rem 1rem;margin-left:.4rem;}
+.item:before{content:"";position:absolute;left:-7px;top:.5rem;width:12px;height:12px;border-radius:50%;background:var(--accent);border:2px solid #fff;}
+.item .row1{display:flex;justify-content:space-between;align-items:flex-start;gap:.5rem;}
+.item h4{font-family:'Fraunces',serif;font-weight:480;font-size:1rem;margin:.1rem 0;}
+.item .meta{font-size:.76rem;color:var(--ink-soft);}
+.stt{font-family:'JetBrains Mono',monospace;font-size:.5rem;letter-spacing:.05em;text-transform:uppercase;padding:.12rem .45rem;border-radius:999px;margin-left:.3rem;}
+.stt.offen{background:#eee4d0;color:#8a7a55;}.stt.angefragt{background:#f3e3c2;color:#9c6f1f;}.stt.bestellt{background:#e7eede;color:#3f5130;}
+.ctrls{display:flex;gap:.25rem;}
+.iconbtn{border:1px solid var(--rule);background:#fff;border-radius:7px;width:26px;height:26px;cursor:pointer;font-size:.8rem;line-height:1;}
+.exp{margin-top:.5rem;border-top:1px dashed var(--rule);padding-top:.5rem;display:none;}
+.exp.open{display:block;}
+.kv{font-size:.82rem;margin:.2rem 0;}.kv b{font-family:'Fraunces',serif;}
+.todo label{display:flex;gap:.4rem;align-items:flex-start;font-size:.82rem;margin:.2rem 0;}
+.docs{margin-top:.4rem;}.docrow{display:flex;align-items:center;gap:.4rem;font-size:.8rem;margin:.2rem 0;}
+.summary{margin-top:1rem;border:1px solid var(--rule);border-radius:14px;background:#fff;padding:.9rem 1rem;}
+.metrics{display:flex;gap:1.4rem;flex-wrap:wrap;margin-bottom:.6rem;}
+.metrics .b{font-family:'Fraunces',serif;font-size:1.3rem;font-weight:560;}
+.metrics .l{font-family:'JetBrains Mono',monospace;font-size:.54rem;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-soft);}
+.pos{display:flex;justify-content:space-between;gap:.6rem;font-size:.85rem;border-bottom:1px dashed var(--rule);padding:.28rem 0;}
+.pos .r{white-space:nowrap;}
+.pos.tot{border-bottom:0;border-top:2px solid var(--ink);font-family:'Fraunces',serif;font-weight:560;font-size:1rem;padding-top:.4rem;}
+.disc{background:var(--bg-soft);border:1px solid var(--rule);border-radius:12px;padding:.7rem 1rem;font-size:.82rem;color:var(--ink-soft);margin:1.4rem 0;}
+footer{margin-top:2.5rem;border-top:1px solid var(--rule);padding:1.3rem 0;color:var(--ink-soft);font-size:.8rem;}
+.note{font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--ink-soft);}
+.modal{position:fixed;inset:0;background:rgba(31,28,23,.6);display:none;align-items:center;justify-content:center;z-index:1000;padding:1rem;}
+.modal.open{display:flex;}
+.modal .box{background:#fff;border-radius:14px;width:min(900px,96vw);max-height:88vh;display:flex;flex-direction:column;overflow:hidden;}
+.modal .box.sm{width:min(440px,94vw);}
+.modal .mh{display:flex;justify-content:space-between;align-items:center;padding:.7rem 1rem;border-bottom:1px solid var(--rule);}
+.modal iframe{flex:1;border:0;width:100%;height:70vh;}
+.modal .mb{padding:1.1rem;}
+.spin{display:inline-block;width:16px;height:16px;border:3px solid var(--rule);border-top-color:var(--accent);border-radius:50%;animation:sp 1s linear infinite;vertical-align:-3px;}
+@keyframes sp{to{transform:rotate(360deg);}}
+.cust-head{display:none;}
+@media print{
+  .topbar,.bar,.palWrap,.iconbtn,.ctrls,.btn,.chips,.search,.disc,footer,.room .rh input.nm{display:none!important;}
+  .layout{display:block;} .company-only{display:none!important;}
+  .cust-head{display:block;margin-bottom:1rem;} .room,.panel,.summary,.menucard{border-color:#ccc;box-shadow:none;}
+}
+.kunde .company-only{display:none!important;}
+.kunde .cust-head{display:block;}
+</style>
+<link rel="stylesheet" href="heiben-design.css">
+<script src="heiben-nav.js" defer></script>
+</head>
+<body data-hb-welt="kulinarik">
+<div class="wrap" id="app">
+  <div class="topbar"><div class="wm"><span class="a">H</span>ei<span class="a">B</span>en <span>· Kulinarik</span></div><a class="back" href="kulinarik.html">← HeiBen Kulinarik</a></div>
+  <div class="eyebrow">Menü- & Catering-Planer</div>
+  <h1>Dein Menü <em style="color:var(--accent-d);font-style:italic;">selbst zusammenstellen</em></h1>
+  <p class="lede">Wähle Gerichte für Empfang, Dinner und Dessert, lege die Gästezahl fest und behalte Allergene, Budget und Marge im Blick. Beauftrage die Manufaktur oder frag per E-Mail an — und übergib alles als Kundenangebot.</p>
+
+  <div class="bar">
+    <div class="fld" style="min-width:220px;flex:1;"><label>Anlass / Titel</label><input id="title" placeholder="z. B. Hochzeit Hein-Benkhaouda"></div>
+    <div class="fld"><label>Gäste</label><input id="guests" type="number" min="1" max="500" value="30" style="width:90px;"></div>
+    <div class="fld"><label>Gespeicherte Menüs</label>
+      <span style="display:flex;gap:.3rem;"><select id="planSel"></select><button class="btn ghost sm" id="newPlan" title="Neues Menü">＋</button><button class="iconbtn" id="delPlan" title="Menü löschen">×</button></span></div>
+  </div>
+  <div class="bar" id="tplBar"><span class="note">Vorlagen:</span>
+    <button class="btn ghost sm" data-tpl="3-gang">3-Gänge Klassisch</button>
+    <button class="btn ghost sm" data-tpl="festessen">Festmenü 4 Gänge</button>
+    <button class="btn ghost sm" data-tpl="sommer-buffet">Sommer-Buffet</button>
+    <button class="btn ghost sm" data-tpl="empfang">Stehempfang</button>
+  </div>
+  <div class="bar">
+    <span class="note">Ansicht:</span>
+    <div class="seg" id="viewSeg"><button data-view="firma" class="on">Firma (netto)</button><button data-view="kunde">Kunde</button></div>
+    <span class="fld cust-head" id="abWrap" style="display:none;"><label>Angebotsnummer</label><input id="ab" style="width:130px;" value=""></span>
+    <button class="btn ink sm" id="reqAll">✉ Gesamtanfrage</button>
+    <button class="btn ghost sm" id="print">🖨 Kundenmenü</button>
+    <button class="btn ghost sm" id="expJson">JSON ↓</button>
+    <button class="btn ghost sm" id="impBtn">JSON ↑</button>
+    <button class="btn ghost sm" id="expCsv">Kalkulation CSV ↓</button>
+    <input id="impFile" type="file" accept="application/json" style="display:none;">
+  </div>
+
+  <div class="cust-head" id="custHead" style="display:none;">
+    <div style="font-family:'Fraunces',serif;font-size:1.4rem;" id="custTitle">Ihr Menüvorschlag — HeiBen Kulinarik</div>
+    <div class="note">Angebotsnummer: <b id="abShow"></b> · Preise pro Gast, gültig für die angegebene Gästezahl.</div>
+  </div>
+
+  <div class="note" style="margin:.2rem 0 .2rem;">Menükarte · Vorschau</div>
+  <div class="menucard" id="menucard"></div>
+
+  <div class="layout">
+    <aside class="panel palWrap">
+      <h2>Gerichte</h2>
+      <div class="chips" id="katChips">
+        <span class="chip on" data-kat="">Alle</span>
+        <span class="chip" data-kat="fingerfood">Fingerfood</span>
+        <span class="chip" data-kat="vorspeise">Vorspeise</span>
+        <span class="chip" data-kat="hauptgang">Hauptgang</span>
+        <span class="chip" data-kat="beilage">Beilage</span>
+        <span class="chip" data-kat="dessert">Dessert</span>
+        <span class="chip" data-kat="getraenk">Getränke</span>
+        <span class="chip" data-kat="service">Service</span>
+      </div>
+      <input class="search" id="pSearch" placeholder="Suchen … Gericht">
+      <div class="note" style="margin-bottom:.4rem;">Tippe <b>+ Menüteil</b> oder zieh eine Karte auf einen Menüteil.</div>
+      <div class="pal" id="pal"></div>
+    </aside>
+
+    <main>
+      <div class="rooms" id="rooms"></div>
+      <div style="margin-top:.8rem;"><button class="btn primary sm" id="addRoom">+ Menüteil hinzufügen</button>
+        <button class="btn ghost sm" id="clearPlan">Menü leeren</button></div>
+      <div class="summary" id="summary"></div>
+      <div class="disc">HeiBen Kulinarik kocht ohne Schwein. Beauftragungen laufen über die Manufaktur-/Lieferanten-Schnittstelle (Demo), sonst per E-Mail-Anfrage. Netto-Preise und Marge sind nur in der Firmenansicht sichtbar; Gäste sehen Endpreise pro Person und die Angebotsnummer. Alle Daten liegen lokal im Browser.</div>
+    </main>
+  </div>
+
+  <footer>HeiBen Kulinarik · Köln · <span class="note">„Heimat leben" — an einem Tisch.</span></footer>
+</div>
+
+<div class="modal" id="pdfModal"><div class="box"><div class="mh"><b id="pdfName">Vorschau</b><button class="btn ghost sm" id="pdfClose">schließen</button></div><iframe id="pdfFrame" title="Dokument-Vorschau"></iframe></div></div>
+<div class="modal" id="orderModal"><div class="box sm"><div class="mh"><b>Beauftragung</b><button class="btn ghost sm" id="orderClose">schließen</button></div><div class="mb" id="orderBody"></div></div></div>
+
+<script src="heiben-firmierungen.js"></script>
+<script src="heiben-angebot.js"></script>
+<script src="vendor/jspdf/jspdf.umd.min.js"></script>
+<script src="heiben-pdf.js"></script>
+<script src="heiben-analytics.js"></script>
+<script>
+(function(){
+  var T=window.HeiBenTrack;
+  var KATLABEL={fingerfood:'Fingerfood',vorspeise:'Vorspeise',hauptgang:'Hauptgang',beilage:'Beilage',dessert:'Dessert',getraenk:'Getränke',service:'Service'};
+  var KATCOL={fingerfood:'#b04a31',vorspeise:'#6b3951',hauptgang:'#792d29',beilage:'#7d5260',dessert:'#9c6f1f',getraenk:'#3b6b6b',service:'#4a5c39'};
+  var KATORDER=['fingerfood','vorspeise','hauptgang','beilage','dessert','getraenk','service'];
+  var SECCOL=['#6b3951','#3b6b6b','#9c6f1f','#4a5c39','#792d29'];
+
+  var PR=[
+   {id:'v-bete',t:'Rote-Bete-Carpaccio mit Ziegenkäse',kat:'vorspeise',netto:4,preis:9,alg:['Milch'],partner:'HeiBen Manufaktur',book:{mode:'api'},todo:['Vorbereitung am Vortag'],desc:'Hauchdünne Rote Bete, Ziegenkäse, geröstete Kerne, Honig-Senf-Dressing.'},
+   {id:'v-suppe',t:'Kürbiscremesuppe mit Kürbiskernöl',kat:'vorspeise',netto:3,preis:7,alg:[],partner:'HeiBen Manufaktur',book:{mode:'api'},todo:['Warmhaltung organisieren'],desc:'Samtige Kürbissuppe mit einem Spritzer Kürbiskernöl.'},
+   {id:'v-bruschetta',t:'Bruschetta Tomate-Basilikum',kat:'vorspeise',netto:2.5,preis:6,alg:['Gluten'],partner:'HeiBen Manufaktur',book:{mode:'email',email:'kulinarik@heiben.de'},todo:['Brot frisch rösten'],desc:'Geröstetes Bauernbrot mit marinierten Tomaten und Basilikum.'},
+   {id:'v-lachs',t:'Räucherlachs-Tatar',kat:'vorspeise',netto:6,preis:12,alg:['Fisch'],partner:'Fischmanufaktur',book:{mode:'api'},todo:['Kühlkette sichern'],desc:'Räucherlachs-Tatar mit Dill, Limette und Crème fraîche.'},
+   {id:'h-schmor',t:'Rinderschmorbraten, Serviettenknödel, Rotkohl',kat:'hauptgang',netto:9,preis:19,alg:['Gluten','Ei'],partner:'HeiBen Manufaktur',book:{mode:'api'},todo:['Garzeit einplanen','Warmhaltung'],desc:'Geschmorter Rinderbraten in Rotweinjus mit Serviettenknödel.'},
+   {id:'h-haehnchen',t:'Kräuter-Hähnchenbrust, Ofengemüse',kat:'hauptgang',netto:7,preis:16,alg:[],partner:'HeiBen Manufaktur',book:{mode:'api'},todo:['Vorgaren möglich'],desc:'Hähnchenbrust mit Kräuterkruste auf mediterranem Ofengemüse.'},
+   {id:'h-lachs',t:'Lachsfilet auf Blattspinat, Kartoffelstampf',kat:'hauptgang',netto:8,preis:18,alg:['Fisch','Milch'],partner:'Fischmanufaktur',book:{mode:'api'},todo:['Kühlkette sichern'],desc:'Gebratenes Lachsfilet auf Blattspinat mit cremigem Kartoffelstampf.'},
+   {id:'h-risotto',t:'Steinpilz-Risotto (vegetarisch)',kat:'hauptgang',netto:5,preis:14,alg:['Milch'],partner:'HeiBen Manufaktur',book:{mode:'email',email:'kulinarik@heiben.de'},todo:['Frisch fertigstellen'],desc:'Cremiges Risotto mit Steinpilzen und Bergkäse.'},
+   {id:'h-rind',t:'Rinderfilet, Pfeffersauce, Kartoffelgratin',kat:'hauptgang',netto:14,preis:28,alg:['Milch'],partner:'HeiBen Manufaktur',book:{mode:'api'},todo:['Garpunkt abstimmen'],desc:'Rinderfilet mit grüner Pfeffersauce und Kartoffelgratin.'},
+   {id:'d-mousse',t:'Schokoladenmousse',kat:'dessert',netto:2,preis:6,alg:['Milch','Ei'],partner:'HeiBen Manufaktur',book:{mode:'api'},todo:['Kühlung'],desc:'Dunkle Schokoladenmousse mit Sahnehäubchen.'},
+   {id:'d-strudel',t:'Apfelstrudel, Vanillesauce',kat:'dessert',netto:2.5,preis:7,alg:['Gluten','Milch','Ei'],partner:'HeiBen Manufaktur',book:{mode:'email',email:'kulinarik@heiben.de'},todo:['Warm servieren'],desc:'Hausgemachter Apfelstrudel mit warmer Vanillesauce.'},
+   {id:'d-creme',t:'Crème brûlée',kat:'dessert',netto:2.5,preis:7,alg:['Milch','Ei'],partner:'HeiBen Manufaktur',book:{mode:'api'},todo:['Karamellisieren vor Ort'],desc:'Klassische Crème brûlée mit Vanille.'},
+   {id:'d-obst',t:'Marinierter Obstsalat',kat:'dessert',netto:2,preis:5,alg:[],partner:'HeiBen Manufaktur',book:{mode:'email',email:'kulinarik@heiben.de'},todo:['Frisch schneiden'],desc:'Saisonaler Obstsalat mit Minze und Limette.'},
+   {id:'g-aperitif',t:'Aperitif-Empfang (1 Glas)',kat:'getraenk',netto:3,preis:7,alg:[],partner:'Getränkepartner',book:{mode:'api'},todo:['Gläser stellen'],desc:'Begrüßungsaperitif, auch alkoholfrei wählbar.'},
+   {id:'g-wein',t:'Weinbegleitung (3 Gläser)',kat:'getraenk',netto:8,preis:18,alg:['Sulfite'],partner:'Weinhandlung',book:{mode:'email',email:'kulinarik@heiben.de'},todo:['Weinauswahl abstimmen'],desc:'Korrespondierende Weinbegleitung zu drei Gängen.'},
+   {id:'g-alkfrei',t:'Alkoholfreie Getränkepauschale',kat:'getraenk',netto:4,preis:9,alg:[],partner:'Getränkepartner',book:{mode:'api'},todo:['Kühlung'],desc:'Wasser, Säfte und Softdrinks zur freien Auswahl.'},
+   {id:'g-kaffee',t:'Kaffee & Tee',kat:'getraenk',netto:1.5,preis:4,alg:[],partner:'HeiBen Manufaktur',book:{mode:'email',email:'kulinarik@heiben.de'},todo:['Maschine/Service'],desc:'Kaffeespezialitäten und Teeauswahl zum Abschluss.'},
+   {id:'s-service',t:'Service & Aufbau (pro Gast)',kat:'service',netto:5,preis:9,alg:[],partner:'HeiBen Service',book:{mode:'email',email:'kulinarik@heiben.de'},todo:['Personalplanung','Schichtzeiten'],desc:'Servicekräfte, Aufbau und Abbau, anteilig pro Gast.'},
+   {id:'s-deko',t:'Tischdekoration (pro Gast)',kat:'service',netto:2,preis:5,alg:[],partner:'HeiBen Service',book:{mode:'email',email:'kulinarik@heiben.de'},todo:['Farbkonzept'],desc:'Blumen, Kerzen und Tischwäsche pro Gedeck.'},
+   {id:'s-geschirr',t:'Geschirr & Gläser-Verleih (pro Gast)',kat:'service',netto:1.5,preis:4,alg:[],partner:'Verleih-Partner',book:{mode:'api'},todo:['Stückzahl bestätigen'],desc:'Komplettes Gedeck inkl. Gläser und Besteck im Verleih.'},
+   {id:'f-lachs',t:'Lachs-Blini mit Dill-Crème',kat:'fingerfood',netto:3,preis:7,alg:['Fisch','Milch','Gluten'],partner:'HeiBen Manufaktur',book:{mode:'api'},todo:['Kühlkette beachten'],desc:'Kleine Buchweizen-Blini mit Räucherlachs und Dill-Crème.'},
+   {id:'f-caprese',t:'Caprese-Spieße',kat:'fingerfood',netto:2,preis:5,alg:['Milch'],partner:'HeiBen Manufaktur',book:{mode:'api'},todo:['Frisch stecken'],desc:'Tomate, Mozzarella und Basilikum am Spieß, vegetarisch.'},
+   {id:'f-falafel',t:'Mini-Falafel mit Minz-Dip (vegan)',kat:'fingerfood',netto:2,preis:5,alg:['Sesam'],partner:'HeiBen Manufaktur',book:{mode:'email',email:'kulinarik@heiben.de'},todo:['Dip separat'],desc:'Knusprige Kichererbsen-Falafel mit frischem Minz-Joghurt auf Pflanzenbasis.'},
+   {id:'f-crostini',t:'Pilz-Crostini mit Kräutern (vegan)',kat:'fingerfood',netto:2,preis:5,alg:['Gluten'],partner:'HeiBen Manufaktur',book:{mode:'api'},todo:['Brot frisch rösten'],desc:'Geröstetes Brot mit geschmorten Kräuterseitlingen und Thymian.'},
+   {id:'f-garnele',t:'Gambas-Spieße mit Knoblauch',kat:'fingerfood',netto:4,preis:8,alg:['Krebstiere'],partner:'HeiBen Manufaktur',book:{mode:'email',email:'kulinarik@heiben.de'},todo:['Kühlkette beachten'],desc:'In Knoblauchöl gebratene Garnelen am Spieß.'},
+   {id:'v-burrata',t:'Burrata mit Ofentomaten',kat:'vorspeise',netto:5,preis:10,alg:['Milch'],partner:'HeiBen Manufaktur',book:{mode:'api'},todo:['Raumtemperatur servieren'],desc:'Cremige Burrata mit geschmorten Tomaten und Basilikumöl.'},
+   {id:'v-tatar',t:'Rinder-Tatar mit Kapern',kat:'vorspeise',netto:6,preis:12,alg:['Ei','Senf'],partner:'HeiBen Manufaktur',book:{mode:'email',email:'kulinarik@heiben.de'},todo:['Fleisch frisch wolfen'],desc:'Handgeschnittenes Rinderfilet-Tatar mit Kapern, Schalotten und Eigelb.'},
+   {id:'v-dal',t:'Rote-Linsen-Dal-Süppchen (vegan)',kat:'vorspeise',netto:2.5,preis:6,alg:['Sellerie'],partner:'HeiBen Manufaktur',book:{mode:'api'},todo:['Warmhaltung'],desc:'Würziges Linsen-Süppchen mit Kokos und Koriander.'},
+   {id:'h-lamm',t:'Geschmorte Lammhaxe mit Rosmarinjus',kat:'hauptgang',netto:7,preis:18,alg:['Sellerie'],partner:'HeiBen Manufaktur',book:{mode:'email',email:'kulinarik@heiben.de'},todo:['Niedergaren einplanen'],desc:'Zart geschmorte Lammhaxe mit kräftiger Rosmarinjus.'},
+   {id:'h-trueffel',t:'Trüffel-Tagliatelle mit Bergkäse (vegetarisch)',kat:'hauptgang',netto:5,preis:15,alg:['Gluten','Milch','Ei'],partner:'HeiBen Manufaktur',book:{mode:'api'},todo:['Frisch fertigstellen'],desc:'Hausgemachte Tagliatelle mit Sommertrüffel und gereiftem Bergkäse.'},
+   {id:'h-curry',t:'Kichererbsen-Gemüse-Curry (vegan)',kat:'hauptgang',netto:4,preis:13,alg:[],partner:'HeiBen Manufaktur',book:{mode:'api'},todo:['Schärfe abstimmen'],desc:'Aromatisches Curry mit Kichererbsen, Saisongemüse und Basmati.'},
+   {id:'h-forelle',t:'Gebratene Forelle nach Müllerin Art',kat:'hauptgang',netto:6,preis:17,alg:['Fisch','Milch','Gluten'],partner:'HeiBen Manufaktur',book:{mode:'email',email:'kulinarik@heiben.de'},todo:['Frische Lieferung'],desc:'In Butter gebratene Forelle mit Mandeln und Petersilie.'},
+   {id:'h-rinderfilet',t:'Rinderfilet mit Pfefferrahm',kat:'hauptgang',netto:9,preis:24,alg:['Milch','Sellerie'],partner:'HeiBen Manufaktur',book:{mode:'email',email:'kulinarik@heiben.de'},todo:['Garstufen abfragen'],desc:'Gebratenes Rinderfilet mit grüner Pfefferrahmsauce.'},
+   {id:'b-gratin',t:'Kartoffelgratin',kat:'beilage',netto:2,preis:5,alg:['Milch'],partner:'HeiBen Manufaktur',book:{mode:'api'},todo:['Vorgaren'],desc:'Sahniges Kartoffelgratin mit Muskat und Bergkäse.'},
+   {id:'b-ofengemuese',t:'Mediterranes Ofengemüse (vegan)',kat:'beilage',netto:2,preis:5,alg:[],partner:'HeiBen Manufaktur',book:{mode:'api'},todo:['Saisonal anpassen'],desc:'Geröstetes Gemüse mit Olivenöl, Knoblauch und Kräutern.'},
+   {id:'b-salat',t:'Blattsalat mit Senf-Vinaigrette (vegan)',kat:'beilage',netto:1.5,preis:4,alg:['Senf'],partner:'HeiBen Manufaktur',book:{mode:'api'},todo:['Dressing separat'],desc:'Bunte Blattsalate mit hausgemachter Senf-Vinaigrette.'},
+   {id:'b-brot',t:'Hausbrot & Dips',kat:'beilage',netto:1.5,preis:4,alg:['Gluten','Sesam'],partner:'HeiBen Manufaktur',book:{mode:'api'},todo:['Frisch backen'],desc:'Warmes Sauerteigbrot mit Hummus und Kräuterquark.'},
+   {id:'d-tiramisu',t:'Tiramisu',kat:'dessert',netto:3,preis:7,alg:['Milch','Ei','Gluten'],partner:'HeiBen Manufaktur',book:{mode:'api'},todo:['Am Vortag ziehen lassen'],desc:'Klassisches Tiramisu mit Mascarpone und Espresso.'},
+   {id:'d-pannacotta',t:'Panna Cotta mit Beeren',kat:'dessert',netto:2.5,preis:6,alg:['Milch'],partner:'HeiBen Manufaktur',book:{mode:'api'},todo:['Kühlzeit'],desc:'Vanille-Panna-Cotta mit Beerenspiegel.'},
+   {id:'d-sorbet',t:'Fruchtsorbet-Variation (vegan)',kat:'dessert',netto:2,preis:5,alg:[],partner:'HeiBen Manufaktur',book:{mode:'api'},todo:['Tiefkühlung'],desc:'Drei hausgemachte Fruchtsorbets der Saison.'},
+   {id:'g-cocktail',t:'Signature-Cocktail',kat:'getraenk',netto:5,preis:11,alg:['Sulfite'],partner:'Getränkepartner',book:{mode:'email',email:'kulinarik@heiben.de'},todo:['Bar aufbauen'],desc:'Hauscocktail nach Wahl, auch alkoholfrei mixbar.'},
+   {id:'g-kindersekt',t:'Kindersekt & Limonaden',kat:'getraenk',netto:2,preis:5,alg:[],partner:'Getränkepartner',book:{mode:'api'},todo:['Kühlung'],desc:'Alkoholfreie Begrüßung für junge Gäste.'},
+   {id:'g-digestif',t:'Digestif-Auswahl',kat:'getraenk',netto:4,preis:9,alg:['Sulfite'],partner:'Getränkepartner',book:{mode:'email',email:'kulinarik@heiben.de'},todo:['Auswahl abstimmen'],desc:'Edelbrände und Liköre zum Abschluss des Menüs.'},
+   {id:'s-station',t:'Live-Cooking-Station (pro Gast)',kat:'service',netto:6,preis:12,alg:[],partner:'HeiBen Service',book:{mode:'email',email:'kulinarik@heiben.de'},todo:['Stromanschluss','Kochinsel'],desc:'Showküche mit Koch vor Ort, anteilig pro Gast.'},
+   {id:'s-barista',t:'Barista- & Bar-Service (pro Gast)',kat:'service',netto:3,preis:6,alg:[],partner:'HeiBen Service',book:{mode:'email',email:'kulinarik@heiben.de'},todo:['Personalplanung'],desc:'Mobile Kaffeebar bzw. Cocktailbar mit Personal, anteilig pro Gast.'}
+  ];
+  var byId={}; PR.forEach(function(p){byId[p.id]=p;});
+
+  var TEMPLATES={
+   '3-gang':{title:'3-Gänge Klassisch',rooms:[{name:'Menü',acts:['v-suppe','h-haehnchen','d-mousse','g-wein']}]},
+   'festessen':{title:'Festmenü 4 Gänge',rooms:[{name:'Festmenü',acts:['v-lachs','v-bete','h-rind','d-creme','g-aperitif','g-wein','s-service']}]},
+   'sommer-buffet':{title:'Sommer-Buffet',rooms:[{name:'Buffet',acts:['v-bruschetta','h-lachs','h-risotto','d-obst','g-alkfrei','s-geschirr']}]},
+   'empfang':{title:'Stehempfang',rooms:[{name:'Empfang',acts:['v-bruschetta','v-bete','g-aperitif','s-geschirr','s-deko']}]}
+  };
+
+  var SKEY='heiben-kulinarik';
+  function uid(){ return Math.random().toString(36).slice(2,9); }
+  function newPlanObj(title){ return {id:uid(),title:title||'Neues Menü',guests:30,view:'firma',ab:'AN-'+Math.random().toString(36).slice(2,6).toUpperCase(),activeRoom:0,rooms:[{id:uid(),name:'Menü',items:[]}]}; }
+  function loadStore(){ try{var s=JSON.parse(localStorage.getItem(SKEY)); if(s&&s.plans&&s.current&&s.plans[s.current])return s;}catch(e){}
+    var p=newPlanObj('Mein Menü'); var st={current:p.id,plans:{}}; st.plans[p.id]=p; return st; }
+  var store=loadStore();
+  function saveStore(){ try{localStorage.setItem(SKEY,JSON.stringify(store));}catch(e){} }
+  function P(){ return store.plans[store.current]; }
+  function guests(){ return Math.max(1,+P().guests||1); }
+
+  function db(){ return new Promise(function(res,rej){ var r=indexedDB.open('heiben-kuli',1);
+    r.onupgradeneeded=function(){ r.result.createObjectStore('docs'); };
+    r.onsuccess=function(){res(r.result);}; r.onerror=function(){rej(r.error);}; }); }
+  function dbPut(k,v){ return db().then(function(d){return new Promise(function(res,rej){ var tx=d.transaction('docs','readwrite'); tx.objectStore('docs').put(v,k); tx.oncomplete=function(){res();}; tx.onerror=function(){rej(tx.error);}; });}); }
+  function dbGet(k){ return db().then(function(d){return new Promise(function(res,rej){ var tx=d.transaction('docs','readonly'); var rq=tx.objectStore('docs').get(k); rq.onsuccess=function(){res(rq.result);}; rq.onerror=function(){rej(rq.error);}; });}); }
+
+  var fKat='', q='';
+  function renderPal(){
+    var list=PR.filter(function(p){ if(fKat&&p.kat!==fKat)return false; if(q){ if((p.t).toLowerCase().indexOf(q)<0)return false; } return true; });
+    document.getElementById('pal').innerHTML=list.map(function(p){
+      return '<div class="pcard" draggable="true" data-id="'+p.id+'">'+
+        '<div class="tp"><span class="kat" style="background:'+KATCOL[p.kat]+'">'+KATLABEL[p.kat]+'</span>'+
+        '<button class="btn primary sm" data-add="'+p.id+'">+ '+(P().rooms[P().activeRoom]?P().rooms[P().activeRoom].name:'Menüteil')+'</button></div>'+
+        '<h3>'+p.t+'</h3><div class="meta">'+p.preis+' € / Gast'+(p.alg.length?' · <span class="alg">enthält '+p.alg.join(', ')+'</span>':'')+'</div></div>';
+    }).join('')||'<p class="note">Kein Gericht für diese Auswahl.</p>';
+  }
+
+  function renderMenu(){
+    var host=document.getElementById('menucard');
+    var anyItems=P().rooms.some(function(r){return r.items.length;});
+    if(!anyItems){ host.innerHTML='<div class="menuempty">Noch leer — wähle Gerichte für deinen Anlass.</div>'; return; }
+    var algSet={};
+    var secs=P().rooms.map(function(r){ if(!r.items.length)return'';
+      var dishes=r.items.slice().sort(function(a,b){ return KATORDER.indexOf(byId[a.prodId].kat)-KATORDER.indexOf(byId[b.prodId].kat); })
+        .map(function(it){ var p=byId[it.prodId]; if(!p)return''; p.alg.forEach(function(a){algSet[a]=1;});
+          return '<div class="mc-dish"><span><span class="kl">'+KATLABEL[p.kat]+'</span> · '+p.t+'</span><span class="company-only">'+p.preis+' €</span></div>'; }).join('');
+      return '<div class="mc-sec"><div class="secname">'+r.name+'</div>'+dishes+'</div>';
+    }).join('');
+    var algs=Object.keys(algSet);
+    host.innerHTML='<h3>'+(P().title||'Menü')+'</h3>'+secs+
+      (algs.length?'<div class="allergens"><b>Allergene im Menü:</b> '+algs.join(' · ')+'</div>':'<div class="allergens"><b>Allergene:</b> keine deklariert</div>');
+  }
+
+  function renderRooms(){
+    var host=document.getElementById('rooms'); host.innerHTML=''; var g=guests();
+    P().rooms.forEach(function(r,ri){ var col=SECCOL[ri%SECCOL.length];
+      var el=document.createElement('div'); el.className='room'+(ri===P().activeRoom?' activeRoom':''); el.dataset.room=ri;
+      var itemsHtml=r.items.map(function(it){ var p=byId[it.prodId]; if(!p)return''; var status=it.status||'offen';
+        var orderBtn=p.book.mode==='api'
+          ? '<button class="btn ink sm" data-order="'+it.instId+'">Beauftragen</button>'
+          : '<button class="btn ink sm" data-mail="'+it.instId+'">Per E-Mail anfragen</button>';
+        var todo=(p.todo||[]).map(function(td,k){ var ck=it.checks&&it.checks[k]?'checked':''; return '<label><input type="checkbox" data-todo="'+it.instId+':'+k+'" '+ck+'> '+td+'</label>'; }).join('');
+        var docs=(it.docs||[]).map(function(dc){ return '<div class="docrow">📄 <a href="#" data-doc="'+dc.key+'">'+dc.name+'</a> <button class="iconbtn" data-docdel="'+it.instId+':'+dc.key+'" title="entfernen">×</button></div>'; }).join('');
+        return '<div class="item" data-inst="'+it.instId+'">'+
+          '<div class="row1"><div><h4>'+p.t+' <span class="stt '+status+' company-only">'+status+(it.ref?' · '+it.ref:'')+'</span></h4>'+
+          '<div class="meta">'+KATLABEL[p.kat]+' · '+p.preis+' € / Gast · '+(p.preis*g)+' € ('+g+' Gäste)'+(p.alg.length?' · enthält '+p.alg.join(', '):'')+'</div></div>'+
+          '<div class="ctrls"><button class="iconbtn" data-exp="'+it.instId+'" title="Details">▾</button><button class="iconbtn" data-del="'+it.instId+'" title="entfernen">×</button></div></div>'+
+          '<div class="exp" id="exp-'+it.instId+'">'+
+            '<div class="kv company-only"><b>Netto:</b> '+p.netto+' € / Gast · Partner: '+p.partner+'</div>'+
+            '<div class="kv"><b>Preis (Kunde):</b> '+p.preis+' € / Gast · '+g+' Gäste = '+(p.preis*g)+' €</div>'+'<div class="kv">USt-Satz: <button class="iconbtn" data-ust="'+it.instId+'">'+((it.ust===7)?'außer Haus · 7 %':'Bewirtung · 19 %')+'</button></div>'+
+            '<div class="kv">'+p.desc+'</div>'+
+            '<div style="margin:.4rem 0;">'+orderBtn+'</div>'+
+            '<div class="company-only"><div class="note">Vor dem Event zu erledigen (To-do):</div><div class="todo">'+(todo||'<span class="note">—</span>')+'</div></div>'+
+            '<div class="docs"><div class="note">Rezeptur / Unterlagen (PDF):</div>'+(docs||'')+
+              '<div class="docrow"><input type="file" accept="application/pdf" data-file="'+it.instId+'" style="font-size:.75rem;"></div></div>'+
+          '</div></div>';
+      }).join('') || '<div class="empty">Noch keine Gerichte — tippe in der Palette auf „+ Menüteil" oder zieh eine Karte hierher.</div>';
+      el.innerHTML='<div class="rh"><div style="display:flex;align-items:center;gap:.5rem;"><span style="width:10px;height:18px;border-radius:3px;background:'+col+';display:inline-block;"></span>'+
+        '<input class="nm" value="'+(r.name||('Menüteil '+(ri+1)))+'" data-roomname="'+ri+'"></div>'+
+        '<div class="ctrls"><button class="btn ghost sm" data-setactive="'+ri+'">'+(ri===P().activeRoom?'aktiv':'wählen')+'</button><button class="iconbtn" data-delroom="'+ri+'" title="Menüteil löschen">×</button></div></div>'+
+        '<div class="drophint" data-drop="'+ri+'">'+itemsHtml+'</div>';
+      host.appendChild(el);
+    });
+    renderSummary(); renderMenu();
+  }
+
+  function angRefK(){ return (window.HEIBEN_FIRMA?window.HEIBEN_FIRMA('kulinarik').refPrefix:'KB-')+Math.random().toString(36).slice(2,8).toUpperCase(); }
+  function plus14(){ var d=new Date(); d.setDate(d.getDate()+14); return d.toISOString(); }
+  function planPositionen(){ var g=guests(); var out=[]; P().rooms.forEach(function(r){ r.items.forEach(function(it){ var p=byId[it.prodId]; if(!p)return; out.push({t:p.t,menge:g,einzel:p.preis,summe:p.preis*g,ust:(it.ust!=null?it.ust:19)}); }); }); return out; }
+  function logAngebot(pos,total){ if(!window.HeiBenLedger||!P().angebot)return; window.HeiBenLedger.log({welt:'kulinarik',typ:'angebot',referenz:P().angebot.ref,status:'angebot',total:total,persons:guests(),n:pos.length,titel:(P().title||'Menü'),kunde:(P().title||''),gueltigBis:P().angebot.gueltigBis,positionen:pos}); }
+  function makeAngebot(){ var pos=planPositionen(); if(!pos.length){ alert('Bitte zuerst Gerichte planen.'); return; } var total=pos.reduce(function(s,x){return s+x.summe;},0); if(!P().angebot)P().angebot={ref:angRefK(),datum:new Date().toISOString(),gueltigBis:plus14()}; P().angebot.total=total; P().angebot.n=pos.length; saveStore(); logAngebot(pos,total); renderSummary(); if(T)T.ev('kuli_angebot',{ref:P().angebot.ref,total:total}); }
+  function printAngebot(){ if(!window.HeiBenAngebot)return; if(!P().angebot){ makeAngebot(); if(!P().angebot)return; } var pos=planPositionen(); var total=pos.reduce(function(s,x){return s+x.summe;},0); P().angebot.total=total; P().angebot.n=pos.length; saveStore(); logAngebot(pos,total); window.HeiBenAngebot.dokument({welt:'kulinarik',typ:'angebot',referenz:P().angebot.ref,kunde:(P().title||'Kund:in'),persons:guests(),positionen:pos,gueltigBis:P().angebot.gueltigBis,datum:P().angebot.datum}); if(T)T.ev('kuli_beleg',{ref:P().angebot.ref}); }
+  function docPanel(){ return '<div style="margin-top:.5rem;border-top:1px dotted var(--rule);padding-top:.45rem;"><button class="btn ghost sm" data-ang="doc">Menükarte (PDF)</button></div>'; }
+  function makeDoc(){ if(!window.HeiBenPDF){alert('PDF-Modul nicht verfügbar.');return;} var g=guests(); var sek=P().rooms.map(function(r){ return {name:r.name, items:r.items.map(function(it){ var p=byId[it.prodId]; if(!p)return null; return {t:p.t, meta:((p.alg&&p.alg.length)?'enthält '+p.alg.join(', '):''), preis:p.preis}; }).filter(Boolean)}; }).filter(function(s){return s.items.length;}); if(!sek.length){alert('Bitte zuerst Gerichte planen.');return;} window.HeiBenPDF.programm({welt:'kulinarik',art:'Menükarte',titel:(P().title||'Menü'),kunde:(P().title||''),meta:g+' Gäste',sektionen:sek,hinweis:'Preise pro Gast inkl. gesetzlicher USt. Allergene und Unverträglichkeiten bitte vorab mitteilen.'}); if(T)T.ev('kuli_menue',{}); }
+  function angebotPanel(total){ var a=P().angebot; var h='<div style="margin-top:.7rem;border-top:1px dashed var(--rule);padding-top:.6rem;">'; if(!a){ return h+'<button class="btn primary sm" data-ang="make">Angebot erstellen</button><div class="note" style="margin-top:.3rem;">Druckfertiger Beleg in eigener Firmierung; erscheint als Angebot im Cockpit.</div></div>'; } return h+'<div class="pos"><span><b>Angebot '+a.ref+'</b> · '+(a.n||0)+' Position(en)'+(a.gueltigBis?' · gültig bis '+(''+a.gueltigBis).slice(0,10):'')+'</span><span class="r">'+total+' €</span></div>'+'<button class="btn primary sm" data-ang="print" style="margin-top:.3rem;">Angebot drucken</button> <button class="btn ghost sm" data-ang="make" style="margin-top:.3rem;">aktualisieren</button></div>'; }
+  var angWired=false;
+  function wireAng(){ if(angWired)return; var host=document.getElementById('summary'); if(!host)return; host.addEventListener('click',function(e){ var b=e.target.closest('[data-ang]'); if(!b)return; if(b.dataset.ang==='make')makeAngebot(); else if(b.dataset.ang==='print')printAngebot(); else if(b.dataset.ang==='doc')makeDoc(); }); angWired=true; }
+  function renderSummary(){
+    var g=guests(), secs=P().rooms.length, pos=0, nettoG=0, preisG=0, lines=[];
+    P().rooms.forEach(function(r){ r.items.forEach(function(it){ var p=byId[it.prodId]; if(!p)return; pos++; nettoG+=p.netto; preisG+=p.preis; lines.push({t:p.t,perGuest:p.preis,sum:p.preis*g}); }); });
+    var netto=nettoG*g, preis=preisG*g, marge=preis-netto, margePct=preis?Math.round(marge/preis*100):0;
+    var metrics='<div class="metrics">'+
+      '<div><div class="b">'+secs+'</div><div class="l">Menüteile</div></div>'+
+      '<div><div class="b">'+pos+'</div><div class="l">Gerichte</div></div>'+
+      '<div><div class="b">'+g+'</div><div class="l">Gäste</div></div>'+
+      '<div><div class="b">'+preisG+' €</div><div class="l">Preis / Gast</div></div>'+
+      '<div class="company-only"><div class="b">'+netto+' €</div><div class="l">Netto gesamt</div></div>'+
+      '<div class="company-only"><div class="b">'+marge+' € · '+margePct+'%</div><div class="l">Marge</div></div>'+
+      '<div><div class="b">'+preis+' €</div><div class="l">Gesamt (Kunde)</div></div>'+
+      '</div>';
+    var positions=lines.length?('<div class="note" style="margin:.2rem 0;">Positionen (× '+g+' Gäste):</div>'+
+      lines.map(function(l){return '<div class="pos"><span>'+l.t+' ('+l.perGuest+' €/Gast)</span><span class="r">'+l.sum+' €</span></div>';}).join('')+
+      '<div class="pos tot"><span>Gesamtpreis</span><span class="r">'+preis+' €</span></div>'):'';
+    document.getElementById('summary').innerHTML=metrics+positions+(lines.length?angebotPanel(preis):'')+(lines.length?docPanel():''); wireAng();
+  }
+
+  function addProd(prodId,roomIdx){ var r=P().rooms[roomIdx]; if(!r)return;
+    if(r.items.some(function(x){return x.prodId===prodId;})) return;
+    r.items.push({instId:uid(),prodId:prodId,checks:{},docs:[],status:'offen'}); saveStore(); renderRooms(); renderPal(); if(T)T.ev('kuli_add',{prod:prodId}); }
+  function findInst(instId){ var rs=P().rooms; for(var i=0;i<rs.length;i++){ var it=rs[i].items.filter(function(x){return x.instId===instId;})[0]; if(it)return{r:i,it:it}; } return null; }
+
+  document.getElementById('pal').addEventListener('click',function(e){ var a=e.target.closest('[data-add]'); if(a){ addProd(a.dataset.add,P().activeRoom); } });
+  document.getElementById('pal').addEventListener('dragstart',function(e){ var c=e.target.closest('[data-id]'); if(c) e.dataTransfer.setData('text/id',c.dataset.id); });
+  document.getElementById('rooms').addEventListener('dragover',function(e){ var z=e.target.closest('[data-drop]'); if(z){ e.preventDefault(); z.classList.add('drop'); } });
+  document.getElementById('rooms').addEventListener('dragleave',function(e){ var z=e.target.closest('[data-drop]'); if(z) z.classList.remove('drop'); });
+  document.getElementById('rooms').addEventListener('drop',function(e){ var z=e.target.closest('[data-drop]'); if(z){ e.preventDefault(); z.classList.remove('drop'); var id=e.dataTransfer.getData('text/id'); if(id) addProd(id,+z.dataset.drop); } });
+
+  document.getElementById('rooms').addEventListener('change',function(e){
+    var rn=e.target.closest('[data-roomname]'); if(rn){ P().rooms[+rn.dataset.roomname].name=rn.value; saveStore(); renderMenu(); renderPal(); return; }
+    var td=e.target.closest('[data-todo]'); if(td){ var pp=td.dataset.todo.split(':'); var f=findInst(pp[0]); if(f){ f.it.checks=f.it.checks||{}; f.it.checks[pp[1]]=td.checked; saveStore(); } return; }
+    var fl=e.target.closest('[data-file]'); if(fl && fl.files&&fl.files[0]){ var file=fl.files[0]; var f=findInst(fl.dataset.file); if(f){ var key=uid(); dbPut(key,{name:file.name,type:file.type,blob:file}).then(function(){ f.it.docs=f.it.docs||[]; f.it.docs.push({key:key,name:file.name}); saveStore(); renderRooms(); if(T)T.ev('kuli_doc',{}); }); } return; }
+  });
+
+  document.getElementById('rooms').addEventListener('click',function(e){
+    var t=e.target;
+    var sa=t.closest('[data-setactive]'); if(sa){ P().activeRoom=+sa.dataset.setactive; saveStore(); renderRooms(); renderPal(); return; }
+    var dr=t.closest('[data-delroom]'); if(dr){ var i=+dr.dataset.delroom; P().rooms.splice(i,1); if(!P().rooms.length)P().rooms.push({id:uid(),name:'Menü',items:[]}); P().activeRoom=Math.min(P().activeRoom,P().rooms.length-1); saveStore(); renderRooms(); renderPal(); return; }
+    var ex=t.closest('[data-exp]'); if(ex){ var el=document.getElementById('exp-'+ex.dataset.exp); if(el)el.classList.toggle('open'); return; }
+    var us=t.closest('[data-ust]'); if(us){ var fu=findInst(us.dataset.ust); if(fu){ fu.it.ust=(fu.it.ust===7?19:7); saveStore(); renderRooms(); renderSummary(); } return; }
+    var del=t.closest('[data-del]'); if(del){ var f=findInst(del.dataset.del); if(f){ P().rooms[f.r].items=P().rooms[f.r].items.filter(function(x){return x.instId!==del.dataset.del;}); saveStore(); renderRooms(); } return; }
+    var mail=t.closest('[data-mail]'); if(mail){ sendMail(mail.dataset.mail); return; }
+    var od=t.closest('[data-order]'); if(od){ orderOnline(od.dataset.order); return; }
+    var doc=t.closest('[data-doc]'); if(doc){ e.preventDefault(); openDoc(doc.dataset.doc); return; }
+    var dcd=t.closest('[data-docdel]'); if(dcd){ var pp=dcd.dataset.docdel.split(':'); var f=findInst(pp[0]); if(f){ f.it.docs=(f.it.docs||[]).filter(function(x){return x.key!==pp[1];}); saveStore(); renderRooms(); } return; }
+  });
+
+  function sendMail(instId){ var f=findInst(instId); if(!f)return; var p=byId[f.it.prodId]; var to=p.book.email||'kulinarik@heiben.de'; var g=guests();
+    var subj='Catering-Anfrage: '+p.t;
+    var body='Guten Tag,\n\nfür ein HeiBen-Kulinarik-Event fragen wir an:\n\n• '+p.t+'\n• Gäste: '+g+'\n• Allergene: '+(p.alg.join(', ')||'keine')+'\n\nBitte um Verfügbarkeit und Konditionen.\n\nFreundliche Grüße\nHeiBen Kulinarik';
+    window.location.href='mailto:'+encodeURIComponent(to)+'?subject='+encodeURIComponent(subj)+'&body='+encodeURIComponent(body);
+    f.it.status='angefragt'; saveStore(); renderRooms(); if(T)T.ev('kuli_mail',{prod:p.id});
+  }
+
+  function orderOnline(instId){ var f=findInst(instId); if(!f)return; var p=byId[f.it.prodId];
+    var om=document.getElementById('orderModal'), body=document.getElementById('orderBody'); var api=window.HEIBEN_ORDER_API||window.HEIBEN_BOOKING_API;
+    body.innerHTML='<p><span class="spin"></span> Verbindung zu <b>'+p.partner+'</b> …</p><p class="note">'+(api?'Beauftragung über Manufaktur-/Partner-API.':'Demo-Beauftragung (keine Live-API gesetzt).')+'</p>';
+    om.classList.add('open');
+    function rnd(){ return 'KB-'+Math.random().toString(36).slice(2,8).toUpperCase(); }
+    function finalize(ref,via){ f.it.status='bestellt'; f.it.ref=ref; saveStore(); renderRooms();
+      try{ if(window.HeiBenLedger){ var _g=(typeof guests==='function'?guests():1); window.HeiBenLedger.log({welt:'kulinarik',typ:'buchung',referenz:ref,status:'gebucht',total:((p.preis||0)*_g),persons:_g,n:1,titel:(p.t||p.name||'Gericht'),kunde:(P().title||''),positionen:[{t:(p.t||p.name||'Gericht'),menge:_g,einzel:(p.preis||0),summe:((p.preis||0)*_g),ust:(f.it.ust!=null?f.it.ust:19)}]}); } }catch(e){}
+      body.innerHTML='<p style="font-family:Fraunces,serif;font-size:1.2rem;">✓ Beauftragt</p>'+
+        '<div class="kv"><b>'+p.t+'</b></div><div class="kv">Partner: '+p.partner+'</div>'+
+        '<div class="kv">Gäste: '+guests()+'</div><div class="kv">Referenz: <b>'+ref+'</b></div>'+
+        '<p class="note" style="margin-top:.6rem;">'+via+' · konform zur HeiBen-Buchungs-/Bestell-API (POST /bookings → {reference,status}). Ohne erreichbare API greift die E-Mail-Anfrage.</p>'+
+        '<div style="margin-top:.6rem;"><button class="btn ink sm" id="orderOk">Schließen</button></div>';
+      document.getElementById('orderOk').addEventListener('click',function(){ om.classList.remove('open'); });
+      if(T)T.ev('kuli_order',{prod:p.id,ref:ref});
+    }
+    if(api){ var payload={persons:guests(),reference:P().ab,items:[{productId:p.id,date:''}]};
+      fetch(api.replace(/\/+$/,'')+'/bookings',{method:'POST',headers:{'Content-Type':'application/json','Prefer':'code=201, example=gebucht'},body:JSON.stringify(payload)})
+        .then(function(r){ return r.json(); }).then(function(res){ finalize(res.reference||rnd(),'Partner-API'); })
+        .catch(function(){ finalize(rnd(),'Demo-Fallback (API nicht erreichbar)'); });
+    } else { setTimeout(function(){ finalize(rnd(),'Demo'); },900); }
+  }
+  document.getElementById('orderClose').addEventListener('click',function(){ document.getElementById('orderModal').classList.remove('open'); });
+
+  function openDoc(key){ dbGet(key).then(function(rec){ if(!rec){alert('Dokument nicht gefunden.');return;} var url=URL.createObjectURL(rec.blob);
+    document.getElementById('pdfName').textContent=rec.name; document.getElementById('pdfFrame').src=url; document.getElementById('pdfModal').classList.add('open'); }); }
+  document.getElementById('pdfClose').addEventListener('click',function(){ document.getElementById('pdfModal').classList.remove('open'); document.getElementById('pdfFrame').src='about:blank'; });
+
+  function requestAll(){ var p=P(); var g=guests(); var lines=[]; var total=0;
+    p.rooms.forEach(function(r){ if(!r.items.length)return; lines.push(r.name+':');
+      r.items.forEach(function(it){ var pr=byId[it.prodId]; if(!pr)return; lines.push('  • '+pr.t+' — '+pr.preis+' €/Gast'); total+=pr.preis*g; });
+      lines.push('');
+    });
+    var subj='Catering-Anfrage: '+(p.title||'HeiBen-Event');
+    var body='Guten Tag,\n\nwir möchten folgendes Menü anfragen:\n\nAnlass: '+(p.title||'HeiBen-Event')+'\nAngebotsnr.: '+p.ab+'\nGäste: '+g+'\n\n'+lines.join('\n')+'Gesamtpreis (Richtwert): '+total+' €\n\nBitte um Verfügbarkeit und ein verbindliches Angebot.\n\nFreundliche Grüße\nHeiBen Kulinarik';
+    window.location.href='mailto:'+encodeURIComponent('kulinarik@heiben.de')+'?subject='+encodeURIComponent(subj)+'&body='+encodeURIComponent(body);
+    if(T)T.ev('kuli_request_all',{});
+  }
+  document.getElementById('reqAll').addEventListener('click',requestAll);
+
+  function download(name,content,type){ var b=new Blob([content],{type:type||'application/octet-stream'}); var u=URL.createObjectURL(b); var a=document.createElement('a'); a.href=u; a.download=name; document.body.appendChild(a); a.click(); a.remove(); setTimeout(function(){URL.revokeObjectURL(u);},1000); }
+  document.getElementById('expJson').addEventListener('click',function(){ download((P().title||'menue').replace(/\s+/g,'_')+'.json', JSON.stringify(P(),null,2),'application/json'); });
+  document.getElementById('impBtn').addEventListener('click',function(){ document.getElementById('impFile').click(); });
+  document.getElementById('impFile').addEventListener('change',function(e){ var file=e.target.files[0]; if(!file)return; var r=new FileReader();
+    r.onload=function(){ try{ var p=JSON.parse(r.result); if(!p.rooms)throw 0; p.id=uid(); p.title=(p.title||'Importiertes Menü'); store.plans[p.id]=p; store.current=p.id; saveStore(); fullRender(); }catch(err){ alert('Ungültige JSON-Datei.'); } };
+    r.readAsText(file); e.target.value=''; });
+  document.getElementById('expCsv').addEventListener('click',function(){ var p=P(); var g=guests(); var rows=[['Menüteil','Gericht','Kategorie','Allergene','Netto/Gast','Preis/Gast','Gäste','Netto-Summe','Preis-Summe']];
+    p.rooms.forEach(function(r){ r.items.forEach(function(it){ var pr=byId[it.prodId]; if(!pr)return;
+      rows.push([r.name,pr.t,KATLABEL[pr.kat],(pr.alg.join(' ')||'-'),pr.netto,pr.preis,g,pr.netto*g,pr.preis*g]); }); });
+    var csv='\ufeff'+rows.map(function(r){return r.join(';');}).join('\n');
+    download((p.title||'kalkulation').replace(/\s+/g,'_')+'_kalkulation.csv', csv,'text/csv'); if(T)T.ev('kuli_csv',{});
+  });
+
+  function renderPlanSel(){ var sel=document.getElementById('planSel'); sel.innerHTML='';
+    Object.keys(store.plans).forEach(function(id){ var o=document.createElement('option'); o.value=id; o.textContent=store.plans[id].title||'(ohne Titel)'; if(id===store.current)o.selected=true; sel.appendChild(o); }); }
+  document.getElementById('planSel').addEventListener('change',function(e){ store.current=e.target.value; saveStore(); fullRender(); });
+  document.getElementById('newPlan').addEventListener('click',function(){ var p=newPlanObj('Menü '+(Object.keys(store.plans).length+1)); store.plans[p.id]=p; store.current=p.id; saveStore(); fullRender(); document.getElementById('title').focus(); });
+  document.getElementById('delPlan').addEventListener('click',function(){ if(Object.keys(store.plans).length<=1){ alert('Mindestens ein Menü muss bestehen bleiben.'); return; } if(!confirm('Dieses Menü löschen?'))return; delete store.plans[store.current]; store.current=Object.keys(store.plans)[0]; saveStore(); fullRender(); });
+
+  document.getElementById('tplBar').addEventListener('click',function(e){ var b=e.target.closest('[data-tpl]'); if(!b)return; loadTemplate(b.dataset.tpl); });
+  function loadTemplate(id){ var t=TEMPLATES[id]; if(!t)return; var p=newPlanObj(t.title);
+    p.rooms=t.rooms.map(function(room){ return {id:uid(),name:room.name,items:(room.acts||[]).map(function(aid){ return {instId:uid(),prodId:aid,checks:{},docs:[],status:'offen'}; })}; });
+    p.activeRoom=0; store.plans[p.id]=p; store.current=p.id; saveStore(); fullRender(); if(T)T.ev('kuli_template',{tpl:id});
+  }
+
+  document.getElementById('title').addEventListener('input',function(e){ P().title=e.target.value; document.getElementById('custTitle').textContent='Ihr Menüvorschlag — '+(e.target.value||'HeiBen Kulinarik'); saveStore(); renderPlanSel(); renderMenu(); });
+  document.getElementById('guests').addEventListener('input',function(e){ P().guests=Math.max(1,+e.target.value||1); saveStore(); renderRooms(); });
+  function applyView(){ var p=P(); document.getElementById('app').classList.toggle('kunde',p.view==='kunde');
+    document.querySelectorAll('#viewSeg button').forEach(function(b){ b.classList.toggle('on',b.dataset.view===p.view); });
+    var show=p.view==='kunde';
+    document.getElementById('abWrap').style.display=show?'flex':'none';
+    document.getElementById('custHead').style.display=show?'block':'none';
+    document.getElementById('abShow').textContent=p.ab; renderSummary(); renderMenu(); }
+  document.getElementById('viewSeg').addEventListener('click',function(e){ var b=e.target.closest('[data-view]'); if(!b)return; P().view=b.dataset.view; saveStore(); applyView(); if(T)T.ev('kuli_view',{view:P().view}); });
+  document.getElementById('ab').addEventListener('input',function(e){ P().ab=e.target.value; document.getElementById('abShow').textContent=P().ab; saveStore(); });
+
+  document.getElementById('addRoom').addEventListener('click',function(){ P().rooms.push({id:uid(),name:'Menüteil '+(P().rooms.length+1),items:[]}); P().activeRoom=P().rooms.length-1; saveStore(); renderRooms(); renderPal(); });
+  document.getElementById('clearPlan').addEventListener('click',function(){ if(!confirm('Menü leeren?'))return; P().rooms=[{id:uid(),name:'Menü',items:[]}]; P().activeRoom=0; saveStore(); renderRooms(); renderPal(); });
+  document.getElementById('print').addEventListener('click',function(){ window.print(); });
+  document.getElementById('katChips').addEventListener('click',function(e){ var c=e.target.closest('.chip'); if(!c)return;
+    document.querySelectorAll('#katChips .chip').forEach(function(x){x.classList.remove('on');}); c.classList.add('on'); fKat=c.dataset.kat||''; renderPal(); });
+  document.getElementById('pSearch').addEventListener('input',function(e){ q=e.target.value.trim().toLowerCase(); renderPal(); });
+
+  function fullRender(){ var p=P(); document.getElementById('title').value=p.title||''; document.getElementById('guests').value=p.guests||30; document.getElementById('ab').value=p.ab; document.getElementById('custTitle').textContent='Ihr Menüvorschlag — '+(p.title||'HeiBen Kulinarik'); renderPlanSel(); applyView(); renderPal(); renderRooms(); }
+  fullRender();
+})();
+</script>
+<script src="heiben-legal.js"></script>
+</body>
+</html>

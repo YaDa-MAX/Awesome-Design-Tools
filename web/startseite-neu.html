@@ -1,0 +1,570 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>HeiBen — Heimat leben. Eine Familie aus fünf Welten.</title>
+<meta name="description" content="Entwurf der neuen HeiBen-Startseite: fünf Welten, fünf Zeichen — Koffer, Haus, Tür, Glühbirne, Kochtopf. Scrollend erzählt.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=JetBrains+Mono:wght@400;600&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+<script src="heiben-kennzahlen.js"></script>
+<style>
+:root{
+  --bg:#f3eee5; --bg2:#ebe3d4; --paper:#fffdf8; --ink:#1f1c17; --ink2:#524a3e; --rule:#d8cdb7;
+  --stage:#16130f; --stage2:#1d1913;
+  --terra:#b04a31; --ochre:#a97a1d; --moss:#4a5c39; --burg:#792d29; --aub:#6b3951; --sand:#d8cdb7;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Manrope',system-ui,sans-serif;line-height:1.55;overflow-x:hidden}
+a{color:inherit}
+.mono{font-family:'JetBrains Mono',monospace}
+
+/* ---------- feste Leiste ---------- */
+.bar{position:fixed;inset:0 0 auto 0;z-index:50;display:flex;align-items:center;gap:1.2rem;
+  padding:.6rem 1.2rem;background:rgba(243,238,229,.82);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--rule);transform:translateY(-110%);transition:transform .45s cubic-bezier(.22,.9,.24,1)}
+.bar.show{transform:none}
+.bar .brand{font-family:'Fraunces',serif;font-size:1.15rem;text-decoration:none;display:flex;align-items:baseline;gap:.5rem}
+.bar .brand small{font-family:'JetBrains Mono',monospace;font-size:.52rem;letter-spacing:.22em;text-transform:uppercase;color:var(--terra)}
+.bar .links{margin-left:auto;display:flex;gap:.9rem;flex-wrap:wrap}
+.bar .links a{font-size:.8rem;font-weight:700;text-decoration:none;color:var(--ink2);display:inline-flex;align-items:center;gap:.32rem}
+.bar .links a:hover{color:var(--ink)}
+.bar .links i{width:7px;height:7px;border-radius:50%;background:var(--wc,var(--rule))}
+.bar .cta{font-size:.8rem;font-weight:800;text-decoration:none;background:var(--ink);color:var(--bg);border-radius:999px;padding:.42rem .9rem}
+@media(max-width:820px){.bar .links{display:none}}
+
+/* ---------- Blend-ins ---------- */
+.reveal{opacity:0;transform:translateY(30px);filter:blur(12px);
+  transition:opacity .9s cubic-bezier(.22,.9,.24,1),transform .9s cubic-bezier(.22,.9,.24,1),filter .9s;
+  transition-delay:var(--d,0s)}
+.reveal.in{opacity:1;transform:none;filter:none}
+
+/* ---------- Hero ---------- */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;
+  text-align:center;position:relative;padding:5rem 1.2rem 4rem;overflow:hidden}
+.orb{position:absolute;border-radius:50%;filter:blur(70px);opacity:.5;animation:float 16s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(0,-46px) scale(1.08)}}
+.hero .eyebrow{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.34em;text-transform:uppercase;color:var(--terra)}
+.hero h1{font-family:'Fraunces',serif;font-weight:340;font-size:clamp(2.6rem,8.4vw,5.6rem);line-height:1.0;letter-spacing:-.028em;margin:.7rem 0 1rem;max-width:15ch}
+.hero h1 em{font-style:italic;color:var(--terra)}
+.hero h1 .w{display:inline-block;opacity:0;transform:translateY(.55em) rotate(1.2deg);filter:blur(10px);
+  animation:wordin 1s cubic-bezier(.22,.9,.24,1) forwards;animation-delay:var(--d)}
+@keyframes wordin{to{opacity:1;transform:none;filter:none}}
+.hero p{color:var(--ink2);max-width:52ch;font-size:1.06rem}
+.cue{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);font-family:'JetBrains Mono',monospace;
+  font-size:.58rem;letter-spacing:.28em;text-transform:uppercase;color:var(--ink2);animation:cue 2.2s ease-in-out infinite}
+@keyframes cue{0%,100%{transform:translate(-50%,0);opacity:.85}50%{transform:translate(-50%,9px);opacity:.35}}
+
+/* ---------- Manifest ---------- */
+.manifest{padding:9rem 1.2rem;max-width:900px;margin:0 auto;text-align:center}
+.manifest p{font-family:'Fraunces',serif;font-weight:340;font-size:clamp(1.5rem,4.2vw,2.6rem);line-height:1.28;letter-spacing:-.015em;margin:.9rem 0}
+.manifest p em{font-style:italic;color:var(--terra)}
+
+/* ---------- Welt-Kapitel (Sticky-Bühnen) ---------- */
+.chapter{height:300vh;position:relative}
+.stage{position:sticky;top:0;height:100vh;overflow:hidden;background:linear-gradient(180deg,var(--stage) 0%,var(--stage2) 100%)}
+.glowbg{position:absolute;inset:-12%;pointer-events:none;background:radial-gradient(1050px 640px at 50% 40%, var(--wc), transparent 68%);opacity:calc(var(--g,0)*.42);will-change:transform}
+.glowbg2{position:absolute;inset:-12%;pointer-events:none;background:radial-gradient(760px 520px at 68% 66%, var(--wc2,var(--wc)), transparent 70%);opacity:calc(var(--g,0)*.26);will-change:transform}
+.stage::after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(140% 110% at 50% 46%, transparent 58%, rgba(10,8,6,.55) 100%)}
+.spark{position:absolute;border-radius:50%;pointer-events:none;filter:blur(1.5px);opacity:calc(var(--g,0)*var(--so,.8));animation:sparkfloat var(--sd,9s) ease-in-out infinite alternate;will-change:transform}
+@keyframes sparkfloat{from{transform:translate3d(0,14px,0) scale(.9)}to{transform:translate3d(var(--sx,10px),-26px,0) scale(1.12)}}
+.cord{position:absolute;left:50%;width:3px;background:linear-gradient(#3a342b,#57503f);transform:translateX(-50%)}
+.stage .num{position:absolute;top:1.4rem;left:1.6rem;font-family:'JetBrains Mono',monospace;font-size:.62rem;
+  letter-spacing:.3em;text-transform:uppercase;color:var(--sand);opacity:.65}
+.scene{position:absolute;inset:0;perspective:1300px;perspective-origin:50% 42%}
+.obj{position:absolute;left:50%;top:44%;transform-style:preserve-3d;will-change:transform}
+.obj *,.obj{transform-style:preserve-3d}
+.f{position:absolute;left:50%;top:50%;backface-visibility:visible}
+.copy{position:absolute;left:50%;transform:translateX(-50%);bottom:6.5vh;width:min(92vw,760px);text-align:center;color:var(--bg)}
+.ph{opacity:0;transform:translateY(26px);filter:blur(10px);
+  transition:opacity .8s cubic-bezier(.22,.9,.24,1),transform .8s cubic-bezier(.22,.9,.24,1),filter .8s}
+.ph.on{opacity:1;transform:none;filter:none}
+.copy .kick{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.3em;text-transform:uppercase;color:var(--wc)}
+.copy h2{font-family:'Fraunces',serif;font-weight:340;font-size:clamp(2rem,6vw,3.6rem);line-height:1.02;letter-spacing:-.024em;margin:.45rem 0 .6rem}
+.copy h2 em{font-style:italic;color:var(--wc)}
+.copy .desc{color:#cdbfa8;max-width:56ch;margin:0 auto;font-size:1rem}
+.copy .row{display:flex;gap:.5rem;justify-content:center;flex-wrap:wrap;margin-top:1rem}
+.copy .tag{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;
+  border:1px solid rgba(216,205,183,.35);border-radius:999px;padding:.34rem .75rem;color:var(--sand)}
+.copy .go{display:inline-block;margin-top:1.1rem;background:var(--wc);color:#16130f;font-weight:800;font-size:.88rem;
+  text-decoration:none;border-radius:999px;padding:.6rem 1.25rem}
+.copy .go:focus-visible,.bar a:focus-visible{outline:2px solid var(--ochre);outline-offset:2px}
+.steam{position:absolute;width:24px;height:72px;border-radius:50%;background:rgba(255,250,240,.75);filter:blur(11px);
+  opacity:0;animation:steam 3.2s ease-in-out infinite}
+@keyframes steam{0%{transform:translateY(16px) scaleX(1);opacity:0}30%{opacity:.55}100%{transform:translateY(-84px) scaleX(1.7);opacity:0}}
+
+/* ---------- Kennzahlen ---------- */
+.kzband{padding:8.5rem 1.2rem;text-align:center}
+.kzband .kick{font-family:'JetBrains Mono',monospace;font-size:.64rem;letter-spacing:.32em;text-transform:uppercase;color:var(--terra)}
+.kzband h2{font-family:'Fraunces',serif;font-weight:340;font-size:clamp(1.9rem,5vw,3rem);letter-spacing:-.02em;margin:.5rem 0 2.2rem}
+.kzrow{display:flex;justify-content:center;gap:2.2rem 3.4rem;flex-wrap:wrap;max-width:1000px;margin:0 auto}
+.kz b{display:block;font-family:'Fraunces',serif;font-weight:400;font-size:clamp(2.2rem,6vw,3.6rem);line-height:1;letter-spacing:-.02em}
+.kz small{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ink2)}
+
+/* ---------- Abschluss ---------- */
+.finale{max-width:1000px;margin:0 auto;padding:0 1.2rem 7rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem}
+.fcard{background:var(--paper);border:1px solid var(--rule);border-radius:18px;padding:1.4rem 1.3rem;text-decoration:none;display:block;transition:transform .35s cubic-bezier(.22,.9,.24,1),border-color .35s}
+.fcard:hover{transform:translateY(-4px);border-color:var(--terra)}
+.fcard small{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ink2)}
+.fcard b{display:block;font-family:'Fraunces',serif;font-weight:500;font-size:1.35rem;margin:.4rem 0 .3rem}
+.fcard p{margin:0;color:var(--ink2);font-size:.92rem}
+.foot{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink2);text-align:center;padding:0 1rem 2.4rem}
+.foot a{color:var(--aub)}
+.draft{position:fixed;left:1rem;bottom:1rem;z-index:60;font-family:'JetBrains Mono',monospace;font-size:.56rem;
+  letter-spacing:.14em;text-transform:uppercase;background:var(--ink);color:var(--bg);border-radius:999px;
+  padding:.4rem .8rem;text-decoration:none;opacity:.85}
+.draft:hover{opacity:1}
+
+/* ---------- Reduzierte Bewegung ---------- */
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  .reveal,.ph{opacity:1!important;transform:none!important;filter:none!important;transition:none!important}
+  .hero h1 .w{animation:none;opacity:1;transform:none;filter:none}
+  .orb,.cue,.steam,.spark{animation:none!important}
+  .chapter{height:auto;min-height:100vh}
+  .stage{position:relative}
+}
+</style>
+</head>
+<body>
+
+<a class="draft" href="index.html">Entwurf zur Freigabe · zur aktuellen Startseite</a>
+
+<div class="bar" id="bar">
+  <a class="brand" href="#top">HeiBen<small>Heimat leben</small></a>
+  <div class="links">
+    <a href="#reisen"><i style="--wc:#a97a1d"></i>Reisen</a>
+    <a href="#wohnen"><i style="--wc:#4a5c39"></i>Wohnen</a>
+    <a href="#immobilien"><i style="--wc:#792d29"></i>Immobilien</a>
+    <a href="#wissen"><i style="--wc:#d8cdb7"></i>Studio</a>
+    <a href="#kulinarik"><i style="--wc:#6b3951"></i>Kulinarik</a>
+  </div>
+  <a class="cta" href="mein-heiben.html">Mein HeiBen</a>
+</div>
+
+<header class="hero" id="top">
+  <div class="orb" style="width:420px;height:420px;background:#a97a1d;left:-120px;top:-80px"></div>
+  <div class="orb" style="width:360px;height:360px;background:#6b3951;right:-100px;top:22%;animation-delay:-6s"></div>
+  <div class="orb" style="width:300px;height:300px;background:#4a5c39;left:14%;bottom:-90px;animation-delay:-11s"></div>
+  <div class="eyebrow">HeiBen Holding · Köln</div>
+  <h1 id="heroH1">Eine Familie aus <em>fünf Welten</em>, verbunden durch eine Idee.</h1>
+  <p class="reveal" style="--d:.9s">Reisen, Wohnen, Immobilien, ein eigenes Studio und eine Küche mit Herkunft.
+  Fünf Zeichen erzählen, was uns verbindet — scrollen Sie los.</p>
+  <div class="cue">Scrollen</div>
+</header>
+
+<section class="manifest">
+  <p class="reveal">Heimat ist für uns kein Ort auf der Karte.</p>
+  <p class="reveal" style="--d:.12s">Sie entsteht, wo Wege, Räume, Wissen und Geschmack <em>zusammenfinden</em>.</p>
+  <p class="reveal" style="--d:.24s">Deshalb bauen wir nicht ein Unternehmen — sondern fünf, die einander tragen.</p>
+</section>
+
+<!-- ============ KAPITEL ============ -->
+<section class="chapter" id="reisen" data-obj="koffer" style="--wc:#c9962f;--wc2:#e8c46a">
+  <div class="stage">
+    <div class="glowbg"></div>
+    <div class="num">Welt 01 · HeiBen Reisen</div>
+    <div class="scene"><div class="obj" id="obj-koffer"></div></div>
+    <div class="copy">
+      <div class="ph" data-at="0.08"><div class="kick">Der Koffer</div>
+        <h2>Wege, die sich wie <em>Ankommen</em> anfühlen.</h2></div>
+      <div class="ph" data-at="0.34"><p class="desc">Kuratierte Reisen mit Handschrift statt Katalogware — geplant von Menschen,
+        die jedes Ziel selbst gesehen haben. Der Griff ist schon ausgefahren.</p></div>
+      <div class="ph" data-at="0.6"><div class="row"><span class="tag">Kuratierte Reisen</span><span class="tag">Reise-Planer</span><span class="tag">Persönliche Anfrage</span></div>
+        <a class="go" href="reisen.html">HeiBen Reisen entdecken</a></div>
+    </div>
+  </div>
+</section>
+
+<section class="chapter" id="wohnen" data-obj="haus" style="--wc:#7fa05f;--wc2:#a6c184">
+  <div class="stage">
+    <div class="glowbg"></div>
+    <div class="num">Welt 02 · HeiBen Wohnen</div>
+    <div class="scene"><div class="obj" id="obj-haus"></div></div>
+    <div class="copy">
+      <div class="ph" data-at="0.08"><div class="kick">Das Haus</div>
+        <h2>Räume, die <em>bleiben</em> dürfen.</h2></div>
+      <div class="ph" data-at="0.34"><p class="desc">Einrichtung aus der eigenen Manufaktur — entworfen im Konfigurator,
+        geprüft im 2D-Plan und im 3D-Raum, gebaut für Jahrzehnte. Sehen Sie, wie das Dach sich setzt und Licht angeht.</p></div>
+      <div class="ph" data-at="0.6"><div class="row"><span class="tag">Manufaktur</span><span class="tag">Konfigurator</span><span class="tag">2D- &amp; 3D-Planer</span></div>
+        <a class="go" href="wohnen.html">HeiBen Wohnen entdecken</a></div>
+    </div>
+  </div>
+</section>
+
+<section class="chapter" id="immobilien" data-obj="tuer" style="--wc:#b0574f;--wc2:#e8c46a">
+  <div class="stage">
+    <div class="glowbg"></div>
+    <div class="num">Welt 03 · HeiBen Immobilien</div>
+    <div class="scene"><div class="obj" id="obj-tuer"></div></div>
+    <div class="copy">
+      <div class="ph" data-at="0.08"><div class="kick">Die Tür</div>
+        <h2>Es beginnt mit einer Tür, <em>die sich öffnet</em>.</h2></div>
+      <div class="ph" data-at="0.34"><p class="desc">Bestand mit Charakter, ehrlich gerechnet: Angebote, Budget-Planner
+        und Beratung ohne Verkaufsdruck — Schritt für Schritt zur richtigen Entscheidung.</p></div>
+      <div class="ph" data-at="0.6"><div class="row"><span class="tag">Angebote</span><span class="tag">Budget-Planner</span><span class="tag">Beratung</span></div>
+        <a class="go" href="immobilien.html">HeiBen Immobilien entdecken</a></div>
+    </div>
+  </div>
+</section>
+
+<section class="chapter" id="wissen" data-obj="birne" style="--wc:#e8c46a;--wc2:#fff0c4">
+  <div class="stage">
+    <div class="glowbg"></div>
+    <div class="num">Welt 04 · HeiBen Studio</div>
+    <div class="scene"><div class="obj" id="obj-birne"></div></div>
+    <div class="copy">
+      <div class="ph" data-at="0.08"><div class="kick">Die Glühbirne</div>
+        <h2>Wissen, das im Alltag <em>trägt</em>.</h2></div>
+      <div class="ph" data-at="0.34"><p class="desc">Acht Kompendien, <span id="kzSteck">370</span> Steckbriefe, Lernpfade und eine Suche über alles —
+        frei und werbefrei aus unserer Redaktion. Beim Scrollen geht das Licht an.</p></div>
+      <div class="ph" data-at="0.6"><div class="row"><span class="tag">Wissens-Suche</span><span class="tag">Lernpfade</span><span class="tag">Tagesdosis</span></div>
+        <a class="go" href="wissen.html">Zum Wissen für Zuhause</a></div>
+    </div>
+  </div>
+</section>
+
+<section class="chapter" id="kulinarik" data-obj="topf" style="--wc:#b57b9b;--wc2:#d98fb4">
+  <div class="stage">
+    <div class="glowbg"></div>
+    <div class="num">Welt 05 · HeiBen Kulinarik</div>
+    <div class="scene">
+      <div class="obj" id="obj-topf"></div>
+      <div class="steam" style="left:47%;top:26%"></div>
+      <div class="steam" style="left:52%;top:24%;animation-delay:-1.1s"></div>
+      <div class="steam" style="left:49.5%;top:22%;animation-delay:-2.2s"></div>
+    </div>
+    <div class="copy">
+      <div class="ph" data-at="0.08"><div class="kick">Der Kochtopf</div>
+        <h2>Eine Küche zwischen <em>Maghreb und Norddeutschland</em>.</h2></div>
+      <div class="ph" data-at="0.34"><p class="desc">Familienrezepte aus 51 Küchen — bewusst ohne Schweinefleisch, mit Wochenplan,
+        Einkaufsliste und dem Rezept-Würfel für den Blick in den Kühlschrank. Der Deckel hebt sich schon.</p></div>
+      <div class="ph" data-at="0.6"><div class="row"><span class="tag">Rezepte</span><span class="tag">Wochenplan</span><span class="tag">Rezept-Würfel</span></div>
+        <a class="go" href="kulinarik.html">HeiBen Kulinarik entdecken</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ KENNZAHLEN ============ -->
+<section class="kzband">
+  <div class="kick reveal">Aus echten Daten, jede Nacht zählbar</div>
+  <h2 class="reveal" style="--d:.1s">Was die fünf Welten heute schon tragen.</h2>
+  <div class="kzrow">
+    <div class="kz reveal" style="--d:.05s"><b data-count="5">0</b><small>Welten</small></div>
+    <div class="kz reveal" style="--d:.15s"><b data-count="8">0</b><small>Kompendien</small></div>
+    <div class="kz reveal" style="--d:.25s"><b data-count="370">0</b><small>Steckbriefe</small></div>
+    <div class="kz reveal" style="--d:.35s"><b data-count="16">0</b><small>Lernpfade</small></div>
+    <div class="kz reveal" style="--d:.45s"><b data-count="544">0</b><small>Begriffskarten</small></div>
+  </div>
+</section>
+
+<section class="finale">
+  <a class="fcard reveal" href="mein-heiben.html"><small>Ihr Zugang</small><b>Mein HeiBen</b>
+    <p>Ein Konto für alle Welten — Werkzeuge, Fortschritt und Ihr persönlicher Überblick.</p></a>
+  <a class="fcard reveal" style="--d:.12s" href="zuhause-ordner.html"><small>Neu</small><b>Der Zuhause-Ordner</b>
+    <p>Der Notfall- &amp; Familienordner: sieben Register, geführt anlegen, abhaken, ausdrucken.</p></a>
+  <a class="fcard reveal" style="--d:.24s" href="unternehmen.html"><small>Die Holding</small><b>Das Unternehmen</b>
+    <p>Wer wir sind, wie die fünf Welten zusammengehören — und warum Köln unser Zuhause ist.</p></a>
+</section>
+
+<p class="foot">HeiBen GmbH i. G. · „Heimat leben" · <a href="impressum.html">Impressum</a> · <a href="datenschutz.html">Datenschutz</a> · <a href="index.html">Aktuelle Startseite</a></p>
+
+<script>
+(function(){
+"use strict";
+var RM=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ---------- Hero-Headline: Wort fuer Wort ---------- */
+(function(){
+  var h=document.getElementById('heroH1');
+  h.innerHTML=h.innerHTML.split(/(<em>.*?<\/em>|\s+)/).filter(Boolean).map(function(t,i){
+    if(/^\s+$/.test(t)) return ' ';
+    return '<span class="w" style="--d:'+(0.12+i*0.055)+'s">'+t+'</span>';
+  }).join('');
+})();
+
+/* ---------- Blend-ins ---------- */
+var io=new IntersectionObserver(function(es){es.forEach(function(e){
+  if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}
+});},{threshold:.18});
+document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
+
+/* ---------- Count-up ---------- */
+var io2=new IntersectionObserver(function(es){es.forEach(function(e){
+  if(!e.isIntersecting) return; io2.unobserve(e.target);
+  var el=e.target, ziel=+el.getAttribute('data-count'), t0=null;
+  if(RM){el.textContent=ziel;return;}
+  function step(t){ if(!t0)t0=t; var p=Math.min(1,(t-t0)/1400); p=1-Math.pow(1-p,3);
+    el.textContent=Math.round(ziel*p); if(p<1)requestAnimationFrame(step); }
+  requestAnimationFrame(step);
+});},{threshold:.7});
+document.querySelectorAll('[data-count]').forEach(function(el){io2.observe(el);});
+(function(){var k=window.HEIBEN_KZ; if(!k)return;
+  var map={5:'welten',8:'kompendien',370:'steckbriefe',16:'lernpfade',544:'karten'};
+  document.querySelectorAll('[data-count]').forEach(function(el){
+    var key=map[+el.getAttribute('data-count')]; if(key&&k[key])el.setAttribute('data-count',k[key]);});
+  var s=document.getElementById('kzSteck'); if(s&&k.steckbriefe)s.textContent=k.steckbriefe;
+})();
+
+/* ================= 3D-Werkstatt (reines CSS-3D) ================= */
+function shade(hex,f){
+  var n=parseInt(hex.slice(1),16),r=n>>16&255,g=n>>8&255,b=n&255;
+  function m(c){return Math.max(0,Math.min(255,Math.round(f<0?c*(1+f*.72):c+(255-c)*f*.8)))}
+  return 'rgb('+m(r)+','+m(g)+','+m(b)+')';
+}
+function face(parent,w,h,tf,bg,extra){
+  var d=document.createElement('div'); d.className='f';
+  d.style.width=w+'px'; d.style.height=h+'px';
+  d.style.transform='translate(-50%,-50%) '+tf;
+  d.style.background=bg; if(extra)d.setAttribute('style',d.getAttribute('style')+';'+extra);
+  parent.appendChild(d); return d;
+}
+function box(parent,w,h,d,c,extra){
+  var g=document.createElement('div'); g.className='f'; g.style.transform='translate(-50%,-50%)';
+  face(g,w,h,'translateZ('+(d/2)+'px)',shade(c,.18),extra);
+  face(g,w,h,'rotateY(180deg) translateZ('+(d/2)+'px)',shade(c,-.42));
+  face(g,d,h,'rotateY(90deg) translateZ('+(w/2)+'px)',shade(c,-.14));
+  face(g,d,h,'rotateY(-90deg) translateZ('+(w/2)+'px)',shade(c,-.3));
+  face(g,w,d,'rotateX(90deg) translateZ('+(h/2)+'px)',shade(c,.38));
+  face(g,w,d,'rotateX(-90deg) translateZ('+(h/2)+'px)',shade(c,-.5));
+  parent.appendChild(g); return g;
+}
+function cylinder(parent,r,h,n,c,capTop){
+  var g=document.createElement('div'); g.className='f'; g.style.transform='translate(-50%,-50%)';
+  var w=2*r*Math.tan(Math.PI/n)+.8;
+  for(var i=0;i<n;i++){
+    var a=i*360/n, lum=Math.cos((a-30)*Math.PI/180)*.5;
+    face(g,w,h,'rotateY('+a+'deg) translateZ('+r+'px)',shade(c,lum*.7));
+  }
+  if(capTop){ face(g,2*r,2*r,'translateY('+(-h/2)+'px) rotateX(90deg)',shade(c,.42),'border-radius:50%'); }
+  face(g,2*r,2*r,'translateY('+(h/2)+'px) rotateX(90deg)',shade(c,-.5),'border-radius:50%');
+  parent.appendChild(g); return g;
+}
+function wrap(parent,tf){ var g=document.createElement('div'); g.className='f';
+  g.style.transform='translate(-50%,-50%) '+tf; parent.appendChild(g); return g; }
+
+/* --- 01 Koffer: Griff faehrt aus, Anhaenger schwenkt ein --- */
+(function(){
+  var o=document.getElementById('obj-koffer'), c='#b8871f';
+  box(o,168,118,46,c);
+  face(o,14,118,'translateZ(23.5px) translateX(-34px)',shade(c,-.34));
+  face(o,14,118,'translateZ(23.5px) translateX(34px)',shade(c,-.34));
+  face(o,168,9,'translateZ(23.6px)',shade('#1f1c17',.14));
+  var griff=wrap(o,''); griff.setAttribute('data-griff','1');
+  box(griff,86,10,10,shade(c,-.55)).firstChild.parentNode.style.transform+='';
+  griff.children[0].style.transform+=' translateY(-76px)';
+  box(griff,10,26,10,shade(c,-.55)); griff.children[1].style.transform+=' translate(-38px,-58px)';
+  box(griff,10,26,10,shade(c,-.55)); griff.children[2].style.transform+=' translate(38px,-58px)';
+  var tag=face(o,34,48,'translateZ(26px) translate(66px,-30px) rotateZ(14deg)','#fffdf8','border-radius:6px;opacity:0;transition:opacity .5s,transform .8s');
+  tag.setAttribute('data-tag','1');
+  o.setAttribute('data-morph','koffer');
+})();
+
+/* --- 02 Haus: Dach schwebt ein und setzt sich, Fenster leuchten ---
+   Dach-Geometrie bewiesen: Flaechenwinkel = +/-asin(D/(2L)), L=sqrt((D/2)^2+R^2) */
+(function(){
+  var o=document.getElementById('obj-haus'), c='#4f6a3d', W=160,D=112,R=58;
+  var korpus=wrap(o,'translateY(29px)');
+  box(korpus,W,86,D,c);
+  var f1=face(korpus,26,34,'translateZ('+(D/2+.5)+'px) translate(-34px,8px)','#ffd97a','opacity:0;transition:opacity .6s');
+  f1.setAttribute('data-fenster','1');
+  var f2=face(korpus,26,34,'translateZ('+(D/2+.5)+'px) translate(34px,8px)','#ffd97a','opacity:0;transition:opacity .6s');
+  f2.setAttribute('data-fenster','1');
+  face(korpus,30,50,'translateZ('+(D/2+.5)+'px) translateY(18px)',shade(c,-.52));
+  var dach=wrap(o,'translateY(-14px)');
+  dach.setAttribute('data-dach','1');
+  var L=Math.sqrt((D/2)*(D/2)+R*R), phi=Math.asin(D/(2*L))*180/Math.PI, dc='#8a3a30';
+  face(dach,W+18,L,'translateY('+(-R/2)+'px) translateZ('+(D/4)+'px) rotateX('+phi+'deg)',shade(dc,.16));
+  face(dach,W+18,L,'translateY('+(-R/2)+'px) translateZ('+(-D/4)+'px) rotateX('+(-phi)+'deg)',shade(dc,-.28));
+  /* Giebel an den STIRNSEITEN (+/-X), um 90 Grad gedreht — Spitze trifft die Firstenden */
+  face(dach,D,R,'translateY('+(-R/2)+'px) rotateY(90deg) translateZ('+(W/2)+'px)',shade(c,-.1),'clip-path:polygon(0 100%,50% 0,100% 100%)');
+  face(dach,D,R,'translateY('+(-R/2)+'px) rotateY(-90deg) translateZ('+(W/2)+'px)',shade(c,-.3),'clip-path:polygon(0 100%,50% 0,100% 100%)');
+  box(dach,W+24,6,10,shade(dc,-.45)).style.transform+=' translateY('+(-R)+'px)'; /* Firstbalken */
+  o.setAttribute('data-morph','haus');
+})();
+
+/* --- 03 Tuer: bleibt frontal, oeffnet sich in warmes Licht --- */
+(function(){
+  var o=document.getElementById('obj-tuer'), c='#8a3a30';
+  var glow=face(o,160,214,'translateZ(-16px)','radial-gradient(closest-side, rgba(255,214,120,.9), rgba(255,180,90,.35) 60%, transparent 76%)','opacity:0;transition:opacity .5s;filter:blur(7px)');
+  glow.setAttribute('data-glow','1');
+  box(o,16,214,20,shade(c,-.22)).style.transform+=' translateX(-76px)';
+  box(o,16,214,20,shade(c,-.22)).style.transform+=' translateX(76px)';
+  box(o,168,16,20,shade(c,-.22)).style.transform+=' translateY(-107px)';
+  box(o,168,10,26,shade(c,-.5)).style.transform+=' translateY(107px)';
+  var tuer=wrap(o,'translateX(-68px)');
+  tuer.setAttribute('data-tuer','1'); tuer.style.transformOrigin='0 50%';
+  var blatt=wrap(tuer,'translateX(68px)');
+  face(blatt,134,196,'translateZ(3px)',shade(c,.2));
+  face(blatt,134,196,'rotateY(180deg) translateZ(3px)',shade(c,-.4));
+  face(blatt,26,60,'translateZ(3.6px) translateX(-30px) translateY(-40px)',shade(c,-.08));
+  face(blatt,26,60,'translateZ(3.6px) translateX(30px) translateY(-40px)',shade(c,-.08));
+  face(blatt,10,10,'translateZ(4.5px) translateX(48px)','#ffd97a','border-radius:50%;box-shadow:0 0 8px rgba(255,217,122,.8)');
+  o.setAttribute('data-morph','tuer');
+})();
+
+/* --- 04 Gluehbirne: haengt am Kabel, pendelt sanft, geht an --- */
+(function(){
+  var o=document.getElementById('obj-birne');
+  var pend=wrap(o,''); pend.setAttribute('data-pend','1');
+  pend.style.transformOrigin='0px -172px';
+  var kabel=document.createElement('div'); kabel.className='cord';
+  kabel.style.top='-172px'; kabel.style.height='86px'; pend.appendChild(kabel);
+  var kugel=wrap(pend,'translateY(-26px)'); kugel.setAttribute('data-kugel','1');
+  ['0','45','90','135'].forEach(function(a){
+    face(kugel,126,126,'rotateY('+a+'deg)','radial-gradient(circle at 40% 32%, rgba(255,252,240,.92), rgba(255,214,120,.5) 55%, rgba(216,205,183,.06) 76%)','border-radius:50%');
+  });
+  face(kugel,44,30,'translateZ(1px) translateY(12px)','none','border:3px solid #c9663a;border-top:none;border-radius:0 0 40px 40px;opacity:.9');
+  var halo=face(kugel,340,340,'translateZ(0px)','radial-gradient(closest-side, rgba(255,222,130,.6), rgba(255,190,110,.22) 55%, transparent 72%)','opacity:0;transition:opacity .6s;filter:blur(10px)');
+  halo.setAttribute('data-halo','1');
+  cylinder(pend,26,40,12,'#9a9285').style.transform+=' translateY(66px)';
+  face(pend,56,5,'translateY(58px)','#7a7469'); face(pend,56,5,'translateY(70px)','#7a7469');
+  o.setAttribute('data-morph','birne');
+})();
+
+/* --- 05 Kochtopf: Deckel hebt sich, Dampf steigt, leichtes Koecheln --- */
+(function(){
+  var o=document.getElementById('obj-topf'), c='#7d4260';
+  var korpus=wrap(o,'translateY(18px)');
+  cylinder(korpus,62,72,18,c,false);
+  face(korpus,132,132,'translateY(-36px) rotateX(90deg)',shade('#1f1c17',.08),'border-radius:50%');
+  box(korpus,26,10,12,shade(c,-.4)).style.transform+=' translateX(-76px) translateY(-18px)';
+  box(korpus,26,10,12,shade(c,-.4)).style.transform+=' translateX(76px) translateY(-18px)';
+  var deckel=wrap(o,'translateY(-24px)');
+  deckel.setAttribute('data-deckel','1');
+  cylinder(deckel,66,12,18,shade(c,.3),true);
+  box(deckel,18,14,18,shade('#1f1c17',.16)).style.transform+=' translateY(-13px)';
+  o.setAttribute('data-morph','topf');
+})();
+
+/* ---------- Farbpartikel je Buehne ---------- */
+(function(){
+  var POS=[[12,26],[80,18],[24,74],[87,62],[56,10],[68,80]];
+  document.querySelectorAll('.chapter').forEach(function(ch){
+    var scene=ch.querySelector('.scene'); if(!scene) return;
+    POS.forEach(function(pz,i){
+      var sp=document.createElement('div'); sp.className='spark';
+      var gr=6+(i*3)%9;
+      sp.style.width=gr+'px'; sp.style.height=gr+'px';
+      sp.style.left=pz[0]+'%'; sp.style.top=pz[1]+'%';
+      sp.style.background=(i%2?'var(--wc2, var(--wc))':'var(--wc)');
+      sp.style.setProperty('--sd',(7+i*1.3)+'s');
+      sp.style.setProperty('--sx',((i%2?-1:1)*(12+i*5))+'px');
+      sp.style.setProperty('--so',(0.5+(i%3)*0.16).toFixed(2));
+      scene.insertBefore(sp,scene.firstChild);
+    });
+  });
+})();
+
+/* ================= Scroll-Regie v2: passende Bewegung + Lerp-Glaettung ================= */
+var MOTION={
+  koffer:{r0:-30,r1:206,tilt:-11,bob:7,idle:.9, pre:64,post:52},
+  haus:  {r0:-40,r1:32, tilt:-13,bob:0,idle:0,  pre:26,post:22},
+  tuer:  {r0:-24,r1:-6, tilt:-7, bob:0,idle:0,  pre:12,post:10},
+  birne: {r0:-14,r1:12, tilt:-6, bob:0,idle:0,  pre:10,post:8, pend:3.4},
+  topf:  {r0:-34,r1:26, tilt:-14,bob:0,idle:.45,pre:30,post:26,simmer:1.5}
+};
+var chapters=[].slice.call(document.querySelectorAll('.chapter')).map(function(ch){
+  return {el:ch, stage:ch.querySelector('.stage'), obj:ch.querySelector('.obj'),
+          g1:ch.querySelector('.glowbg'), g2:ch.querySelector('.glowbg2'),
+          phs:[].slice.call(ch.querySelectorAll('.ph')), top:0, len:1, sp:0};
+});
+/* zweite Glow-Ebene injizieren */
+chapters.forEach(function(c){
+  if(!c.g2){ var d=document.createElement('div'); d.className='glowbg2';
+    c.stage.insertBefore(d, c.stage.children[1]||null); c.g2=d; }
+});
+function measure(){ var vh=innerHeight;
+  chapters.forEach(function(c){ c.top=c.el.offsetTop; c.len=c.el.offsetHeight-vh; });
+}
+function clamp(x){return Math.max(0,Math.min(1,x));}
+function smooth(a,b,x){ x=clamp((x-a)/(b-a)); return x*x*(3-2*x); }
+var t0=performance.now(), lastF=0, SY=scrollY;
+function frame(now){
+  lastF=now;
+  try{ frameBody(now); }catch(e){}
+  requestAnimationFrame(frame);
+}
+function frameBody(now){
+  var y=scrollY, vh=innerHeight;
+  var dy=y-SY; SY+=(Math.abs(dy)>vh*0.6?dy:dy*0.14);   /* EINE globale Glaettung + Teleport-Snap */
+  chapters.forEach(function(c){
+    /* Lebenslinie: ein (Buehne gleitet herein) -> p (gepinnt) -> aus (gleitet hinaus) */
+    var ein=clamp((SY-(c.top-vh))/vh);
+    var p=clamp((SY-c.top)/c.len);
+    var aus=clamp((SY-(c.top+c.len))/vh);
+    var praw=clamp((y-c.top)/c.len);
+    var par=clamp((SY-(c.top-vh))/(c.len+2*vh));
+    var g=smooth(.35,1,ein)*(1-.6*smooth(0,1,aus));
+    c.stage.style.setProperty('--g',g.toFixed(3));
+    if(c.g1)c.g1.style.transform='translate3d(0,'+((0.5-par)*120).toFixed(1)+'px,0) scale('+(1+par*.14).toFixed(3)+')';
+    if(c.g2)c.g2.style.transform='translate3d('+((par-0.5)*90).toFixed(1)+'px,'+((par-0.5)*60).toFixed(1)+'px,0)';
+    if(c.obj){
+      var morph=c.obj.getAttribute('data-morph'), mo=MOTION[morph]||{r0:-20,r1:20,tilt:-10,pre:24,post:20};
+      var m=smooth(.34,.72,p);
+      c.stage.style.setProperty('--m',m.toFixed(3));
+      var eEin=smooth(0,1,ein), eAus=smooth(0,1,aus), er=smooth(0,1,p);
+      /* Rotation laeuft VOR dem Pin an und dreht beim Verlassen weiter -> kein Standbild */
+      var rot=mo.r0+(mo.r1-mo.r0)*er-(mo.pre||24)*(1-eEin)+(mo.post||20)*eAus
+              +(mo.idle?Math.sin(now*0.00042)*8*mo.idle:0);
+      var s=(.6+.52*smooth(0,.3,p))*(1-.12*smooth(.9,1,p));
+      s*=(.8+.2*eEin)*(1-.18*eAus);
+      var ty=(1-eEin)*72-eAus*96;
+      var bob=mo.bob?Math.sin(now*0.0011)*mo.bob*smooth(.1,.4,p):0;
+      if(morph==='topf'&&mo.simmer)bob+=Math.sin(now*0.02)*mo.simmer*m;
+      ty+=bob;
+      var op=smooth(.12,.7,ein)*(1-.72*smooth(.15,1,aus));
+      c.obj.style.transform='translate(-50%,-50%) translateY('+ty.toFixed(1)+'px) rotateX('+mo.tilt+'deg) rotateY('+rot.toFixed(2)+'deg) scale('+s.toFixed(3)+')';
+      c.obj.style.opacity=Math.max(.001,op).toFixed(3);
+      if(morph==='koffer'){
+        var gf=c.obj.querySelector('[data-griff]'); if(gf)gf.style.transform='translate(-50%,-50%) translateY('+(-18*m)+'px)';
+        var tg=c.obj.querySelector('[data-tag]'); if(tg)tg.style.opacity=m>.6?1:0;
+      }else if(morph==='haus'){
+        var dd=c.obj.querySelector('[data-dach]');
+        if(dd){dd.style.transform='translate(-50%,-50%) translateY('+(-14-(1-m)*120)+'px)';
+               dd.style.opacity=(0.12+0.88*m).toFixed(2);}
+        [].forEach.call(c.obj.querySelectorAll('[data-fenster]'),function(fe){
+          fe.style.opacity=m>.75?1:0;
+          fe.style.boxShadow=m>.75?'0 0 22px rgba(255,217,122,.85)':'none';});
+      }else if(morph==='tuer'){
+        var t=c.obj.querySelector('[data-tuer]'); if(t)t.style.transform='translate(-50%,-50%) translateX(-68px) rotateY('+(-80*smooth(.3,.8,p))+'deg)';
+        var gl=c.obj.querySelector('[data-glow]'); if(gl)gl.style.opacity=(m*.95).toFixed(2);
+      }else if(morph==='birne'){
+        var pe=c.obj.querySelector('[data-pend]');
+        if(pe)pe.style.transform='translate(-50%,-50%) rotateZ('+(Math.sin(now*0.0014)*(MOTION.birne.pend*(0.35+0.65*m))).toFixed(2)+'deg)';
+        var h=c.obj.querySelector('[data-halo]'); if(h)h.style.opacity=(m).toFixed(2);
+        c.obj.style.filter='brightness('+(1+m*.5)+') drop-shadow(0 0 '+(m*52)+'px rgba(255,214,120,'+(m*.75).toFixed(2)+'))';
+      }else if(morph==='topf'){
+        var dl=c.obj.querySelector('[data-deckel]');
+        if(dl)dl.style.transform='translate(-50%,-50%) translateY('+(-24-44*m)+'px) translateX('+(32*m)+'px) rotateZ('+(-11*m)+'deg)';
+        [].forEach.call(c.el.querySelectorAll('.steam'),function(st){st.style.opacity=m>.5?1:0;});
+      }
+    }
+    c.phs.forEach(function(ph){
+      var at=parseFloat(ph.getAttribute('data-at')||'0');
+      ph.classList.toggle('on', praw>=at && praw<1.02);
+    });
+  });
+  document.getElementById('bar').classList.toggle('show', y>innerHeight*.72);
+}
+measure();
+addEventListener('resize',measure);
+addEventListener('load',measure);
+if(document.fonts&&document.fonts.ready){document.fonts.ready.then(measure);}
+setInterval(function(){ if(!RM && !document.hidden && performance.now()-lastF>800){ requestAnimationFrame(frame); } },1000);
+if(!RM){ requestAnimationFrame(frame); }
+else{
+  chapters.forEach(function(c){
+    c.stage.style.setProperty('--g','1'); c.stage.style.setProperty('--m','1'); c.sp=1;
+    if(c.obj){var mo=MOTION[c.obj.getAttribute('data-morph')]||{r1:0,tilt:-10};
+      c.obj.style.transform='translate(-50%,-50%) rotateX('+mo.tilt+'deg) rotateY('+(mo.r1*0.5)+'deg)';}
+    c.phs.forEach(function(ph){ph.classList.add('on');});
+  });
+  document.getElementById('bar').classList.add('show');
+}
+})();
+</script>
+</script>
+</body>
+</html>

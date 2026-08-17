@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Konsum-Check · HeiBen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;1,400&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f3eee5;--bg2:#ebe3d4;--paper:#fffdf8;--ink:#1f1c17;--ink2:#524a3e;--rule:#d8cdb7;--terra:#b04a31;--ochre:#a97a1d;--moss:#4a5c39;--burg:#792d29;--aub:#6b3951}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:'Manrope',system-ui,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:760px;margin:0 auto;padding:1.6rem 1.1rem 5rem}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.32em;text-transform:uppercase;color:var(--terra)}
+h1{font-family:'Fraunces',serif;font-weight:400;font-size:clamp(2rem,6.5vw,3.2rem);line-height:1.02;letter-spacing:-.02em;margin:.45rem 0 .5rem}
+h1 em{font-style:italic;color:var(--terra)}
+.lead{color:var(--ink2);max-width:60ch;font-size:1.02rem}
+.seg{display:inline-flex;background:var(--bg2);border:1px solid var(--rule);border-radius:999px;padding:.25rem;gap:.2rem;margin-top:1.2rem}
+.seg button{font-family:'JetBrains Mono',monospace;font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;border:none;background:transparent;color:var(--ink2);padding:.5rem .9rem;border-radius:999px;cursor:pointer}
+.seg button.on{background:var(--ink);color:var(--bg)}
+.card{background:var(--paper);border:1px solid var(--rule);border-radius:16px;padding:1.1rem 1.15rem;margin-top:1.1rem}
+.card h3{font-family:'Fraunces',serif;font-weight:500;font-size:1.2rem;margin-bottom:.4rem}
+.hidden{display:none}
+.arow{display:grid;grid-template-columns:1fr 110px 32px;gap:.5rem;align-items:center;margin-top:.4rem}
+.arow input{width:100%;padding:.45rem .5rem;border:1px solid var(--rule);border-radius:8px;background:var(--bg);font:inherit;font-weight:600}
+.arow input:focus{outline:none;border-color:var(--terra);background:#fff}
+.del{border:1px solid var(--rule);background:var(--bg);border-radius:8px;height:34px;cursor:pointer;color:var(--burg);font-weight:700}
+.addbtn{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;border:1px dashed var(--rule);background:transparent;color:var(--ink2);padding:.45rem .8rem;border-radius:9px;cursor:pointer;margin-top:.6rem}
+.field{margin-top:.7rem}.field label{display:block;font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink2);margin-bottom:.2rem}
+.field input{width:100%;padding:.55rem .6rem;border:1px solid var(--rule);border-radius:9px;background:var(--bg);font:inherit;font-weight:600}
+.field input:focus{outline:none;border-color:var(--terra);background:#fff}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:.7rem}
+.result{margin-top:1.4rem;background:var(--ink);color:var(--bg);border-radius:18px;padding:1.4rem 1.3rem 1.5rem}
+.result .eyebrow{color:var(--ochre)}
+.big{font-family:'Fraunces',serif;font-weight:500;font-size:clamp(2.2rem,10vw,3.4rem);color:var(--ochre);line-height:1;margin:.2rem 0}
+.verdict{font-size:.98rem;color:#e8e0d0;margin-top:.6rem}.verdict b{color:#9ec27f}
+.mini{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.6rem;margin-top:1rem}
+.mini .m{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);border-radius:11px;padding:.6rem .7rem}
+.mini .l{font-family:'JetBrains Mono',monospace;font-size:.5rem;letter-spacing:.06em;text-transform:uppercase;color:#cdbfa8}
+.mini .v{font-family:'Fraunces',serif;font-size:1.15rem;margin-top:.1rem}
+.chart-card{background:var(--paper);border:1px solid var(--rule);border-radius:16px;padding:1.05rem 1.1rem 1.2rem;margin-top:1.1rem}
+.chart-card h4{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--terra);margin-bottom:.3rem}
+canvas{width:100%;height:auto;display:block;margin-top:.3rem}
+.foot{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink2);text-align:center;margin-top:2rem}
+</style>
+<link rel="stylesheet" href="heiben-design.css">
+<script src="heiben-nav.js" defer></script>
+</head>
+<body data-hb-welt="wissen">
+<div class="wrap">
+  <p class="eyebrow">HeiBen · Bewusst ausgeben</p>
+  <h1>Der <em>wahre Preis</em> deines Konsums</h1>
+  <p class="lead">Kleine Beträge fühlen sich harmlos an — bis man sie aufs Jahr oder aufs Jahrzehnt hochrechnet. Hier siehst du, was deine Abos wirklich kosten und was ein einzelner Kauf an Lebenszeit und entgangener Rendite bedeutet. Ohne erhobenen Zeigefinger.</p>
+
+  <div class="seg" id="seg">
+    <button data-m="abos" class="on">Abos & Verträge</button>
+    <button data-m="kauf">Einmalkauf</button>
+  </div>
+
+  <div id="panel-abos">
+    <div class="card">
+      <h3>Deine laufenden Abos</h3>
+      <div id="aboRows"></div>
+      <button class="addbtn" id="addAbo">+ Abo hinzufügen</button>
+    </div>
+  </div>
+
+  <div id="panel-kauf" class="hidden">
+    <div class="card">
+      <h3>Was willst du kaufen?</h3>
+      <div class="frow">
+        <div class="field"><label>Preis (€)</label><input type="number" id="preis" value="900" step="10"></div>
+        <div class="field"><label>Dein Netto-Stundenlohn (€)</label><input type="number" id="lohn" value="18" step="0.5"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="result" id="result"></div>
+
+  <div class="chart-card" id="chartCard">
+    <h4 id="chartTitle">Kosten über 10 Jahre je Abo</h4>
+    <canvas id="chart" width="800" height="240"></canvas>
+  </div>
+
+  <p class="foot">HeiBen GmbH i. G. · „Heimat leben" · <a href="mein-heiben.html" style="color:var(--aub)">Mein HeiBen</a> · Anlage-Annahme 7 % p. a. · keine Anlageberatung</p>
+</div>
+
+<script>
+var KEY="heiben_konsum_v1";
+var REND=0.07, mode="abos";
+var abos=[{n:"Streaming (Video)",p:13},{n:"Musik",p:11},{n:"Fitnessstudio",p:35},{n:"Cloud-Speicher",p:3}];
+var preis=900,lohn=18;
+try{var sv=JSON.parse(localStorage.getItem(KEY));if(sv){if(sv.abos)abos=sv.abos;if(sv.mode)mode=sv.mode;if(sv.preis!=null)preis=sv.preis;if(sv.lohn!=null)lohn=sv.lohn;}}catch(e){}
+function el(id){return document.getElementById(id);}
+function eur(n){return (Math.round(n)).toLocaleString("de-DE")+" €";}
+function fvMonthly(m,years){var r=REND/12,nn=years*12;return r>0?m*((Math.pow(1+r,nn)-1)/r):m*nn;}
+function fvOnce(p,years){return p*Math.pow(1+REND,years);}
+function save(){try{localStorage.setItem(KEY,JSON.stringify({abos:abos,mode:mode,preis:preis,lohn:lohn}));}catch(e){}}
+
+function renderAboRows(){
+  var c=el("aboRows");c.innerHTML="";
+  abos.forEach(function(a,i){
+    var row=document.createElement("div");row.className="arow";
+    row.innerHTML='<input data-i="'+i+'" data-k="n" value="'+(a.n||"")+'"><input data-i="'+i+'" data-k="p" type="number" step="1" value="'+a.p+'"><button class="del" data-del="'+i+'">×</button>';
+    c.appendChild(row);
+  });
+  c.querySelectorAll("input").forEach(function(inp){inp.addEventListener("input",function(){var i=+inp.dataset.i,k=inp.dataset.k;abos[i][k]=k==="n"?inp.value:(parseFloat(String(inp.value).replace(",","."))||0);compute();});});
+  c.querySelectorAll(".del").forEach(function(b){b.onclick=function(){abos.splice(+b.dataset.del,1);renderAboRows();compute();};});
+}
+
+function compute(){
+  save();
+  if(mode==="abos"){
+    var monat=abos.reduce(function(s,a){return s+(+a.p||0);},0);
+    var jahr=monat*12, zehn=monat*120;
+    var inv30=fvMonthly(monat,30), inv10=fvMonthly(monat,10);
+    el("result").innerHTML='<p class="eyebrow">Deine Abos kosten</p><div class="big">'+eur(monat)+' <span style="font-size:1.1rem;color:#cdbfa8">/ Monat</span></div>'+
+      '<div class="mini"><div class="m"><div class="l">Pro Jahr</div><div class="v">'+eur(jahr)+'</div></div><div class="m"><div class="l">In 10 Jahren</div><div class="v">'+eur(zehn)+'</div></div><div class="m"><div class="l">Angelegt (30 J.)</div><div class="v" style="color:#9ec27f">'+eur(inv30)+'</div></div></div>'+
+      '<div class="verdict">Würdest du denselben Betrag investieren statt abonnieren, wären daraus in 30 Jahren <b>'+eur(inv30)+'</b>. Die ehrliche Frage: Welches dieser Abos hast du im letzten Monat wirklich genutzt? Streich, was du nicht vermisst.</div>';
+    el("chartTitle").textContent="Kosten über 10 Jahre je Abo";
+    drawBars(abos.map(function(a){return [a.n,(+a.p||0)*120];}));
+  } else {
+    var stunden=lohn>0?preis/lohn:0, tage=stunden/8;
+    var i30=fvOnce(preis,30), i10=fvOnce(preis,10);
+    el("result").innerHTML='<p class="eyebrow">Dieser Kauf kostet dich</p><div class="big">'+stunden.toFixed(0)+' <span style="font-size:1.1rem;color:#cdbfa8">Arbeitsstunden</span></div>'+
+      '<div class="mini"><div class="m"><div class="l">Das sind</div><div class="v">'+tage.toFixed(1).replace(".",",")+' Tage</div></div><div class="m"><div class="l">Angelegt (10 J.)</div><div class="v" style="color:#9ec27f">'+eur(i10)+'</div></div><div class="m"><div class="l">Angelegt (30 J.)</div><div class="v" style="color:#9ec27f">'+eur(i30)+'</div></div></div>'+
+      '<div class="verdict">Für '+eur(preis)+' arbeitest du rund <b>'+stunden.toFixed(0)+' Stunden</b>. Dasselbe Geld in 30 Jahren angelegt wären <b>'+eur(i30)+'</b>. Wenn es dir das wert ist — gönn es dir mit gutem Gewissen. Wenn nicht, weißt du jetzt warum.</div>';
+    el("chartTitle").textContent="Wert des Kaufpreises, wenn angelegt";
+    drawBars([["heute",preis],["in 10 J.",i10],["in 20 J.",fvOnce(preis,20)],["in 30 J.",i30]]);
+  }
+}
+
+function drawBars(items){
+  var cv=el("chart"),ctx=cv.getContext("2d"),W=cv.width,H=cv.height;ctx.clearRect(0,0,W,H);
+  if(!items.length){ctx.fillStyle="#524a3e";ctx.font="15px Manrope";ctx.fillText("Keine Daten.",10,30);return;}
+  var max=Math.max.apply(null,items.map(function(i){return i[1];}))||1;
+  var padL=10,padR=10,padT=16,padB=30,gap=14,n=items.length;
+  var bw=(W-padL-padR-gap*(n-1))/n,maxH=H-padT-padB-20;
+  var cols=["#4a5c39","#b04a31","#a97a1d","#6b3951","#792d29","#2c6e6b"];
+  items.forEach(function(it,i){var x=padL+i*(bw+gap),h=it[1]/max*maxH,y=padT+(maxH-h);
+    ctx.fillStyle=cols[i%cols.length];var r=Math.min(7,bw/2);
+    ctx.beginPath();ctx.moveTo(x,y+h);ctx.lineTo(x,y+r);ctx.quadraticCurveTo(x,y,x+r,y);ctx.lineTo(x+bw-r,y);ctx.quadraticCurveTo(x+bw,y,x+bw,y+r);ctx.lineTo(x+bw,y+h);ctx.closePath();ctx.fill();
+    ctx.fillStyle="#1f1c17";ctx.font="600 11px 'JetBrains Mono',monospace";ctx.textAlign="center";ctx.fillText(eur(it[1]).replace(" €",""),x+bw/2,y-5);
+    ctx.fillStyle="#524a3e";ctx.font="10px Manrope";var lab=String(it[0]);if(lab.length>11)lab=lab.slice(0,10)+"…";ctx.fillText(lab,x+bw/2,H-padB+14);
+  });
+  ctx.textAlign="left";
+}
+
+document.querySelectorAll("#seg button").forEach(function(b){b.onclick=function(){mode=b.dataset.m;document.querySelectorAll("#seg button").forEach(function(x){x.classList.toggle("on",x===b);});el("panel-abos").classList.toggle("hidden",mode!=="abos");el("panel-kauf").classList.toggle("hidden",mode!=="kauf");compute();};});
+el("addAbo").onclick=function(){abos.push({n:"Neues Abo",p:10});renderAboRows();compute();};
+el("preis").addEventListener("input",function(){preis=parseFloat(String(this.value).replace(",","."))||0;compute();});
+el("lohn").addEventListener("input",function(){lohn=parseFloat(String(this.value).replace(",","."))||0;compute();});
+el("preis").value=preis;el("lohn").value=lohn;
+document.querySelectorAll("#seg button").forEach(function(x){x.classList.toggle("on",x.dataset.m===mode);});
+el("panel-abos").classList.toggle("hidden",mode!=="abos");el("panel-kauf").classList.toggle("hidden",mode!=="kauf");
+renderAboRows();compute();
+</script>
+</body>
+</html>

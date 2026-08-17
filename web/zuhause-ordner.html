@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Der HeiBen Zuhause-Ordner — Notfall- & Familienordner zum Anlegen, Abhaken, Ausdrucken</title>
+<meta name="description" content="Der geführte Notfall- und Familienordner: sieben Register, klare Checklisten, Fortschritt auf deinem Gerät — und ein Druck-Export fürs Papier. Ein Produkt von Mein HeiBen.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=JetBrains+Mono:wght@400;600&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="heiben-design.css">
+<script src="heiben-nav.js" defer></script>
+<style>
+:root{--bg:#f3eee5;--bg2:#ebe3d4;--paper:#fffdf8;--ink:#1f1c17;--ink2:#524a3e;--rule:#d8cdb7;
+--terra:#b04a31;--ochre:#a97a1d;--moss:#4a5c39;--burg:#792d29;--aub:#6b3951;--good:#6f8f4e}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Manrope',system-ui,sans-serif;line-height:1.55}
+.wrap{max-width:1100px;margin:0 auto;padding:1.6rem 1.1rem 2.2rem}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.32em;text-transform:uppercase;color:var(--terra)}
+h1{font-family:'Fraunces',serif;font-weight:400;font-size:clamp(2rem,6.5vw,3rem);line-height:1.03;letter-spacing:-.02em;margin:.3rem 0 .5rem}
+h1 em{font-style:italic;color:var(--terra)}
+.lead{color:var(--ink2);max-width:64ch;font-size:1.02rem}
+.hinweis{border:1px dashed var(--burg);background:rgba(121,45,41,.05);border-radius:12px;padding:.65rem .9rem;margin-top:.9rem;max-width:64ch;font-size:.9rem;color:var(--burg);font-weight:600}
+.bar-wrap{position:sticky;top:0;background:var(--bg);padding:.8rem 0 .6rem;z-index:5;border-bottom:1px solid var(--rule);margin-top:1.2rem}
+.bar-line{display:flex;align-items:center;gap:.9rem;flex-wrap:wrap}
+#gesamt{font-family:'Fraunces',serif;font-size:1.25rem;white-space:nowrap}
+.bar{flex:1 1 220px;height:10px;background:var(--bg2);border-radius:999px;overflow:hidden;border:1px solid var(--rule)}
+.bar i{display:block;height:100%;width:0;background:var(--good);transition:width .25s}
+.aktionen{display:flex;gap:.5rem;flex-wrap:wrap}
+.btn{border:1px solid var(--ink);background:var(--ink);color:var(--bg);border-radius:11px;padding:.45rem .9rem;font:inherit;font-size:.84rem;font-weight:700;cursor:pointer}
+.btn.ghost{background:transparent;color:var(--ink)}
+.btn:focus-visible{outline:2px solid var(--ochre);outline-offset:2px}
+.reg{background:var(--paper);border:1px solid var(--rule);border-left:5px solid var(--rk,var(--rule));border-radius:16px;padding:1rem 1.1rem;margin-top:1rem;break-inside:avoid}
+.reg h2{font-family:'Fraunces',serif;font-weight:500;font-size:1.35rem;margin:0}
+.reg .rz{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink2)}
+.reg .rd{color:var(--ink2);font-size:.88rem;margin:.25rem 0 .55rem}
+.item{display:flex;align-items:flex-start;gap:.6rem;padding:.42rem 0;border-top:1px dashed var(--rule)}
+.item:first-of-type{border-top:0}
+.item input{width:1.15rem;height:1.15rem;margin-top:.12rem;accent-color:var(--good);flex:0 0 auto;cursor:pointer}
+.item label{cursor:pointer;flex:1 1 auto}
+.item.done label{color:var(--ink2);text-decoration:line-through;text-decoration-color:var(--rule);text-decoration-thickness:2px}
+.item a{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--aub);text-decoration:none;white-space:nowrap;margin-top:.25rem}
+.item a:hover{text-decoration:underline}
+.foot{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink2);text-align:center;margin-top:2.4rem}
+.foot a{color:var(--aub)}
+@media print{
+  .hb-nav,.aktionen,.bar-wrap .bar,.hinweis,.hb-box{display:none!important}
+  body{background:#fff;color:#000}
+  .wrap{max-width:none;padding:0}
+  .reg{border:1px solid #999;border-left:5px solid #999;page-break-inside:avoid;background:#fff}
+  .item a{display:none}
+  #gesamt::after{content:" — HeiBen Zuhause-Ordner, Stand beim Druck"}
+}
+</style>
+</head>
+<body data-hb-welt="konto">
+
+<div class="wrap">
+  <div class="eyebrow">Mein HeiBen · Zuhause-Ordner</div>
+  <h1>Der Ordner, der im Ernstfall <em>alles weiß</em>.</h1>
+  <p class="lead">Wenn dir etwas zustößt, müssen andere in Stunden finden, wofür du Jahre sortiert hast: Vollmachten, Versicherungen, Konten, Verträge. Der Zuhause-Ordner führt dich in sieben Registern durch alles, was hineingehört — abhaken, was erledigt ist, ausdrucken, was ins Papier soll. Dein Fortschritt bleibt auf diesem Gerät.</p>
+  <div class="hinweis">Papier gewinnt im Notfall. Diese Seite ersetzt keine Rechtsberatung — für Vollmachten und Verfügungen lohnt der Blick in die verlinkten Steckbriefe und im Zweifel der Gang zur Beratungsstelle.</div>
+
+  <div class="bar-wrap">
+    <div class="bar-line">
+      <div id="gesamt">0 von 0 erledigt</div>
+      <div class="bar" aria-hidden="true"><i id="barfill"></i></div>
+      <div class="aktionen">
+        <button class="btn" id="drucken" type="button">🖨 Register drucken</button>
+        <button class="btn ghost" id="reset" type="button">Zurücksetzen</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="regs"></div>
+
+  <p class="foot">HeiBen GmbH i. G. · „Heimat leben" · Teil von <a href="mein-heiben.html">Mein HeiBen</a> · <a href="papierkram.html#notfallordner">Zum Steckbrief „Der Notfallordner"</a> · <a href="index.html">Zur Startseite</a></p>
+</div>
+
+<script>
+(function(){
+"use strict";
+var SK="heiben_ordner_v1";
+var REG=[
+ {t:"Vorsorge & Vollmachten", k:"#792d29", d:"Das Wichtigste zuerst — diese Blätter gehören ganz nach vorn in den Ordner.",
+  items:[
+   {id:"vv-vollmacht", t:"Vorsorgevollmacht erteilt und im Original auffindbar", l:"papierkram.html#vorsorge"},
+   {id:"vv-patient",   t:"Patientenverfügung liegt vorn im Ordner", l:"papierkram.html#vorsorge"},
+   {id:"vv-betreuung", t:"Betreuungsverfügung bedacht oder bewusst verworfen"},
+   {id:"vv-vertrauen", t:"Zwei Vertrauenspersonen wissen, DASS es den Ordner gibt und WO er steht"}
+  ]},
+ {t:"Dokumente & Identität", k:"#524a3e", d:"Urkunden und Nachweise — Kopien genügen, wenn der Fundort des Originals notiert ist.",
+  items:[
+   {id:"di-ausweise",  t:"Kopien von Ausweisen und Pässen abgeheftet"},
+   {id:"di-urkunden",  t:"Geburts- und Heiratsurkunden (Kopie + Fundort-Notiz)"},
+   {id:"di-stammbuch", t:"Stammbuch-Fundort notiert"},
+   {id:"di-zeugnisse", t:"Zeugnisse und wichtige Nachweise gesammelt"}
+  ]},
+ {t:"Finanzen & Verträge", k:"#a97a1d", d:"Listen statt Zettelchaos — niemals PINs oder Passwörter aufschreiben.",
+  items:[
+   {id:"fv-konten",    t:"Kontenliste mit allen Banken (ohne PINs!)", l:"finanzen.html#girokonto"},
+   {id:"fv-policen",   t:"Policen-Übersicht ist aktuell", l:"papierkram.html#policen"},
+   {id:"fv-vcheck",    t:"Versicherungs-Check gemacht: Was ist wirklich wichtig?", l:"finanzen.html#versicherungscheck"},
+   {id:"fv-vertraege", t:"Laufende Verträge als Liste (Miete, Strom, Handy, Abos)"},
+   {id:"fv-dauer",     t:"Daueraufträge und Lastschriften notiert", l:"papierkram.html#kontoauszuege"}
+  ]},
+ {t:"Wohnen & Immobilie", k:"#4a5c39", d:"Alles rund um die eigenen vier Wände — gemietet oder gekauft.",
+  items:[
+   {id:"wi-vertrag",   t:"Mietvertrag bzw. Grundbuch-Unterlagen abgeheftet", l:"finanzen.html#grundbuch"},
+   {id:"wi-protokoll", t:"Übergabeprotokoll und Zählernummern notiert"},
+   {id:"wi-inventar",  t:"Inventarliste wertvoller Dinge (Fotos genügen)"},
+   {id:"wi-notdienst", t:"Handwerker- und Notdienst-Nummern griffbereit"}
+  ]},
+ {t:"Gesundheit & Familie", k:"#b04a31", d:"Was Helfer und Angehörige im Ernstfall sofort brauchen.",
+  items:[
+   {id:"gf-medis",     t:"Medikamentenliste und Impfpass-Fundorte notiert", l:"erstehilfe.html#notfalldaten"},
+   {id:"gf-kontakte",  t:"Notfallkontakte und wichtige Gesundheitsdaten je Person", l:"erstehilfe.html#notfalldaten"},
+   {id:"gf-apotheke",  t:"Hausapotheke geprüft und aufgefüllt", l:"erstehilfe.html#hausapotheke"},
+   {id:"gf-kinder",    t:"U-Hefte und Kinderdokumente (falls Kinder im Haus)"}
+  ]},
+ {t:"Digitales Erbe", k:"#6b3951", d:"Papier gewinnt — aber der Hinweis, wo die digitalen Zugänge geregelt sind, gehört hinein.",
+  items:[
+   {id:"dg-manager",   t:"Passwort-Manager-Notfallzugang geregelt (Hinweis im Ordner)", l:"digital.html#passwoerter"},
+   {id:"dg-backup",    t:"Zwei-Faktor-Backup-Codes sicher verwahrt", l:"digital.html#zweifaktor"},
+   {id:"dg-liste",     t:"Liste digitaler Konten (E-Mail, Cloud, Verträge, Soziale Netzwerke)"}
+  ]},
+ {t:"Unterwegs & Reisen", k:"#a97a1d", d:"Damit auch fern von Zuhause alles auffindbar ist.",
+  items:[
+   {id:"ur-paesse",    t:"Reisepass-Kopien im Ordner"},
+   {id:"ur-kranken",   t:"Auslandskrankenversicherung notiert (Police + Notrufnummer)"},
+   {id:"ur-ice",       t:"Notfallkontakt (ICE) im Handy hinterlegt"}
+  ]}
+];
+
+var done={};
+try{ done=JSON.parse(localStorage.getItem(SK)||"{}")||{}; }catch(e){ done={}; }
+function save(){ try{ localStorage.setItem(SK,JSON.stringify(done)); }catch(e){} }
+function esc(x){ return String(x).replace(/&/g,"&amp;").replace(/</g,"&lt;"); }
+
+var host=document.getElementById("regs");
+function render(){
+  host.innerHTML=REG.map(function(r,ri){
+    var rows=r.items.map(function(it){
+      var ok=!!done[it.id];
+      return '<div class="item'+(ok?" done":"")+'" data-id="'+it.id+'">'+
+        '<input type="checkbox" id="cb-'+it.id+'"'+(ok?" checked":"")+'>'+
+        '<label for="cb-'+it.id+'">'+esc(it.t)+'</label>'+
+        (it.l?'<a href="'+it.l+'">Steckbrief →</a>':'')+
+        '</div>';
+    }).join("");
+    return '<section class="reg" style="--rk:'+r.k+'">'+
+      '<div class="rz">Register 0'+(ri+1)+' · <span class="rc" data-reg="'+ri+'"></span></div>'+
+      '<h2>'+esc(r.t)+'</h2><div class="rd">'+esc(r.d)+'</div>'+rows+'</section>';
+  }).join("");
+}
+function paint(){
+  var total=0, ok=0;
+  REG.forEach(function(r,ri){
+    var n=r.items.length, o=r.items.filter(function(it){return done[it.id];}).length;
+    total+=n; ok+=o;
+    var el=host.querySelector('.rc[data-reg="'+ri+'"]');
+    if(el) el.textContent=o+" / "+n+" erledigt";
+  });
+  document.getElementById("gesamt").textContent=ok+" von "+total+" erledigt";
+  document.getElementById("barfill").style.width=(total?Math.round(ok/total*100):0)+"%";
+}
+host.addEventListener("change",function(ev){
+  var cb=ev.target; if(!cb||cb.type!=="checkbox") return;
+  var id=cb.id.replace(/^cb-/,"");
+  if(cb.checked) done[id]=true; else delete done[id];
+  cb.closest(".item").classList.toggle("done",cb.checked);
+  save(); paint();
+});
+document.getElementById("drucken").addEventListener("click",function(){ window.print(); });
+document.getElementById("reset").addEventListener("click",function(){
+  if(!confirm("Alle Haken im Zuhause-Ordner zurücksetzen?")) return;
+  done={}; try{ localStorage.removeItem(SK); }catch(e){}
+  render(); paint();
+});
+render(); paint();
+})();
+</script>
+</body>
+</html>

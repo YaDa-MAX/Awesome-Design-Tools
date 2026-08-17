@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Einrichten nach Plan — interaktiv | HeiBen Studio</title>
+<meta name="description" content="Einrichtungslehre zum Mitmachen: welche Möbel in welchen Raum, wie Wege frei bleiben, wie Licht in drei Ebenen wirkt — mit interaktivem 3D-Modell und verschiebbarem Grundriss samt Maßen und Abständen.">
+<meta name="robots" content="index,follow">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Manrope:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f3eee5;--bg-soft:#ebe3d4;--ink:#1f1c17;--ink-soft:#524a3e;--rule:#d8cdb7;--terracotta:#b04a31;--moss:#4a5c39;--accent:#4a5c39;}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--ink);font-family:'Manrope',-apple-system,Segoe UI,sans-serif;line-height:1.62;overflow-x:hidden;
+  background-image:radial-gradient(at 88% 2%,rgba(75,93,58,0.07) 0,transparent 52%),radial-gradient(at 6% 98%,rgba(176,74,49,0.04) 0,transparent 55%);background-attachment:fixed;}
+.wrap{max-width:1040px;margin:0 auto;padding:0 1.5rem;}
+a{color:inherit;}
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:1.1rem 0;border-bottom:1px solid var(--rule);}
+.wm{font-family:'Fraunces',serif;font-weight:700;font-size:1.4rem;}.wm .a{color:var(--terracotta);}.wm span{font-weight:400;font-size:.9rem;color:var(--ink-soft);}
+.back{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);text-decoration:none;}
+.back:hover{color:var(--moss);}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:.64rem;letter-spacing:.18em;text-transform:uppercase;color:var(--moss);margin-top:1.6rem;}
+h1{font-family:'Fraunces',serif;font-weight:340;font-size:clamp(2rem,5.4vw,3.1rem);margin:.6rem 0 .4rem;line-height:1.08;}
+h1 em{font-style:italic;color:var(--moss);}
+.lede{color:var(--ink-soft);max-width:64ch;font-size:1.05rem;}
+.meta{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.08em;color:var(--ink-soft);margin-top:.8rem;text-transform:uppercase;}
+section.theory{margin:2.6rem 0;}
+.theory .num{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.14em;color:var(--moss);text-transform:uppercase;}
+.theory h2{font-family:'Fraunces',serif;font-weight:420;font-size:clamp(1.4rem,3.4vw,1.9rem);margin:.2rem 0 .6rem;}
+.theory p{max-width:66ch;margin:.5rem 0;color:var(--ink);}
+.theory p.sub{color:var(--ink-soft);}
+.rule-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.7rem;margin:1rem 0;}
+.rule-card{background:#fff;border:1px solid var(--rule);border-left:3px solid var(--moss);border-radius:12px;padding:.75rem .85rem;}
+.rule-card b{font-family:'Fraunces',serif;font-weight:560;display:block;margin-bottom:.15rem;}
+.rule-card span{font-size:.84rem;color:var(--ink-soft);}
+.lightrow{display:flex;flex-wrap:wrap;gap:.6rem;margin:1rem 0;}
+.lpill{flex:1;min-width:160px;background:#fff;border:1px solid var(--rule);border-radius:12px;padding:.7rem .85rem;}
+.lpill .lh{font-family:'JetBrains Mono',monospace;font-size:.56rem;letter-spacing:.08em;text-transform:uppercase;color:#f3eee5;background:var(--moss);border-radius:999px;padding:.12rem .5rem;display:inline-block;margin-bottom:.35rem;}
+.lpill b{font-family:'Fraunces',serif;font-weight:520;}.lpill span{font-size:.84rem;color:var(--ink-soft);display:block;}
+
+.lab{background:#fff;border:1px solid var(--rule);border-radius:20px;padding:1.1rem;margin:1.4rem 0 1rem;box-shadow:0 12px 40px rgba(31,28,23,.05);}
+.lab.passed{border-color:var(--moss);box-shadow:0 12px 40px rgba(75,93,58,.16);}
+.lab .labhead{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;flex-wrap:wrap;}
+.lab h3{font-family:'Fraunces',serif;font-weight:480;font-size:1.3rem;}
+.scn-tabs{display:flex;gap:.35rem;flex-wrap:wrap;}
+.scn-tabs button{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.05em;text-transform:uppercase;border:1px solid var(--rule);background:var(--bg);border-radius:999px;padding:.4rem .65rem;cursor:pointer;}
+.scn-tabs button.on{background:var(--moss);border-color:var(--moss);color:#f3eee5;font-weight:600;}
+.tip{font-size:.9rem;color:var(--ink-soft);margin:.7rem 0 .6rem;padding:.6rem .8rem;background:var(--bg-soft);border-radius:10px;}
+.dims{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.04em;color:var(--ink-soft);text-transform:uppercase;margin:.1rem 0 .9rem;}
+.labgrid{display:grid;grid-template-columns:1fr;gap:1rem;}
+@media(min-width:860px){.labgrid{grid-template-columns:300px 1fr;}}
+.pal{max-height:430px;overflow-y:auto;padding-right:.3rem;}
+.pgroup{margin-bottom:.7rem;}
+.plabel{font-family:'JetBrains Mono',monospace;font-size:.56rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);border-left:3px solid var(--c,var(--rule));padding-left:.4rem;margin-bottom:.3rem;}
+.padd{width:100%;display:flex;align-items:center;gap:.5rem;border:1px solid var(--rule);background:#fff;border-radius:10px;padding:.45rem .55rem;margin-bottom:.3rem;cursor:pointer;text-align:left;transition:border-color .12s,transform .1s;}
+.padd:hover{border-color:var(--ink);transform:translateY(-1px);}
+.padd .pn{flex:1;font-size:.86rem;}
+.padd .ltag{font-family:'JetBrains Mono',monospace;font-size:.5rem;text-transform:uppercase;letter-spacing:.04em;color:var(--moss);border:1px solid var(--rule);border-radius:999px;padding:.05rem .35rem;}
+.padd .pp{font-family:'JetBrains Mono',monospace;font-size:.62rem;color:var(--ink-soft);}
+.padd .plus{font-family:'Fraunces',serif;font-weight:700;color:var(--moss);font-size:1.05rem;width:1.1rem;text-align:center;}
+.stage{display:flex;flex-direction:column;gap:.7rem;}
+.room3dwrap{position:relative;border:1px solid var(--rule);border-radius:16px;overflow:hidden;background:#efe9dd;height:380px;}
+#room3d{display:block;width:100%;height:100%;cursor:grab;}#room3d:active{cursor:grabbing;}
+#plan2d{position:absolute;inset:0;width:100%;height:100%;display:none;touch-action:none;}
+.room3dwrap.planmode #room3d,.room3dwrap.planmode .r3d-labels{display:none;}
+.room3dwrap.planmode #plan2d{display:block;}
+.r3dbar{position:absolute;left:10px;bottom:10px;display:flex;align-items:center;gap:.3rem;background:rgba(243,238,229,.9);border:1px solid var(--rule);border-radius:999px;padding:.22rem .5rem;z-index:3;}
+.r3dbar button{font-family:'JetBrains Mono',monospace;font-size:.54rem;text-transform:uppercase;letter-spacing:.05em;border:0;background:none;cursor:pointer;color:var(--ink);padding:.16rem .4rem;border-radius:7px;}
+.r3dbar button:hover{background:rgba(31,28,23,.08);}.r3dbar button.on{background:var(--moss);color:#f3eee5;}
+.r3dbar .sep{width:1px;height:13px;background:var(--rule);margin:0 .1rem;}
+.r3d-labels{position:absolute;inset:0;pointer-events:none;}
+.r3dprice{position:absolute;transform:translate(-50%,-120%);background:rgba(31,28,23,.86);color:#f3eee5;font-family:'JetBrains Mono',monospace;font-size:.56rem;padding:.12rem .42rem;border-radius:999px;white-space:nowrap;border-left:3px solid var(--c,#4a5c39);box-shadow:0 2px 8px rgba(31,28,23,.2);}
+.inroom{display:flex;flex-wrap:wrap;gap:.35rem;align-items:center;min-height:1.6rem;}
+.rchip{display:inline-flex;align-items:center;gap:.3rem;font-size:.78rem;background:var(--bg);border:1px solid var(--rule);border-left:3px solid var(--c,var(--rule));border-radius:999px;padding:.2rem .25rem .2rem .55rem;}
+.rchip button{border:0;background:rgba(31,28,23,.1);border-radius:50%;width:1.05rem;height:1.05rem;cursor:pointer;font-size:.7rem;line-height:1;color:var(--ink);}
+.rchip button:hover{background:var(--terracotta);color:#fff;}
+.scorebar{height:8px;background:var(--bg-soft);border-radius:999px;overflow:hidden;margin:.2rem 0;}
+.scorebar i{display:block;height:100%;background:var(--moss);width:0;transition:width .3s;}
+.scoretxt{font-family:'JetBrains Mono',monospace;font-size:.62rem;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.06em;}
+ul.checklist{list-style:none;margin:.6rem 0;display:flex;flex-direction:column;gap:.45rem;}
+ul.checklist li{display:flex;gap:.55rem;font-size:.88rem;align-items:flex-start;}
+ul.checklist .ic{width:1.3rem;height:1.3rem;flex:none;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.78rem;font-weight:700;}
+.c-ok .ic{background:var(--moss);color:#f3eee5;}
+.c-open .ic{background:var(--bg-soft);color:var(--ink-soft);}
+.c-warn .ic{background:#e7c14a;color:#3a2f12;}
+li.opt{opacity:.82;}li.opt em{font-style:normal;font-family:'JetBrains Mono',monospace;font-size:.54rem;text-transform:uppercase;color:var(--ink-soft);}
+.hint{color:var(--ink-soft);font-size:.82rem;}
+.badge{display:none;align-items:center;gap:.5rem;background:var(--moss);color:#f3eee5;border-radius:12px;padding:.6rem .9rem;margin-top:.6rem;font-family:'Fraunces',serif;font-size:1rem;}
+.plantools{display:flex;flex-wrap:wrap;gap:.35rem;align-items:center;margin:.1rem 0 .8rem;}
+.tbtn{font-family:'JetBrains Mono',monospace;font-size:.56rem;letter-spacing:.05em;text-transform:uppercase;border:1px solid var(--rule);background:var(--bg);border-radius:8px;padding:.35rem .55rem;cursor:pointer;}
+.tbtn:hover{border-color:var(--ink);}
+.tbtn.on{background:var(--moss);border-color:var(--moss);color:#f3eee5;}
+.ptsep{width:1px;height:16px;background:var(--rule);margin:0 .2rem;}
+.ptlab{font-family:'JetBrains Mono',monospace;font-size:.56rem;text-transform:uppercase;color:var(--ink-soft);display:flex;align-items:center;gap:.25rem;}
+.ptlab input{width:3rem;font-family:'JetBrains Mono',monospace;font-size:.7rem;border:1px solid var(--rule);border-radius:6px;padding:.2rem .3rem;background:#fff;}
+.tinybtn{font-family:'JetBrains Mono',monospace;font-size:.56rem;letter-spacing:.06em;text-transform:uppercase;border:1px solid var(--rule);background:var(--bg);border-radius:8px;padding:.35rem .6rem;cursor:pointer;}
+.recap{background:var(--ink);color:#f3eee5;border-radius:18px;padding:1.3rem 1.4rem;margin:2.4rem 0 1rem;}
+.recap h2{font-family:'Fraunces',serif;font-weight:420;font-size:1.3rem;color:#f3eee5;margin-bottom:.4rem;}
+.recap ul{list-style:none;display:grid;gap:.4rem;}
+.recap li{color:#e7ddc9;font-size:.92rem;padding-left:1.1rem;position:relative;}
+.recap li::before{content:'→';position:absolute;left:0;color:var(--moss);}
+.recap a.btn{display:inline-block;margin-top:.9rem;background:var(--terracotta);color:#f3eee5;text-decoration:none;font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;padding:.7rem 1.1rem;border-radius:9px;}
+footer{margin-top:2.4rem;border-top:1px solid var(--rule);padding:1.4rem 0;color:var(--ink-soft);font-size:.8rem;}
+.note{font-family:'JetBrains Mono',monospace;font-size:.62rem;color:var(--ink-soft);}
+</style>
+<link rel="stylesheet" href="heiben-design.css">
+<script src="heiben-nav.js" defer></script>
+</head>
+<body data-hb-welt="studio">
+<div class="wrap">
+  <div class="topbar">
+    <div class="wm"><span class="a">H</span>ei<span class="a">B</span>en <span>· Studio</span></div>
+    <span style="display:flex;gap:1rem;align-items:center;"><a class="back" href="wohnen-planer.html">Wohnen-Planer ↗</a><a class="back" href="studio-lebenswissen-bibliothek.html">← Bibliothek</a></span>
+  </div>
+
+  <div class="eyebrow">Lebenswissen · Wohnen · Interaktiv</div>
+  <h1>Einrichten nach Plan:<br><em>Räume, Wege, Licht</em></h1>
+  <p class="lede">Gute Einrichtung ist kein Geschmack, sondern Handwerk. Drei Prinzipien tragen jeden Raum — und am Ende baust du sie selbst: im 3D-Modell und im verschiebbaren Grundriss mit echten Maßen und Abständen. Die Checkliste sagt dir sofort, ob deine Lösung funktioniert.</p>
+  <div class="meta">Lesezeit ~7 Min · 5 Räume zum Üben · HeiBen Wohnen</div>
+
+  <section class="theory">
+    <div class="num">01 · Zonierung</div>
+    <h2>Erst die Funktion, dann die Möbel</h2>
+    <p>Jeder Raum hat eine Hauptaufgabe — und die Möbel folgen ihr. Im Wohnzimmer bilden Sofa, Couchtisch und Teppich eine Sitzinsel. Im Schlafzimmer ordnet sich alles um das Bett. Am Arbeitsplatz zählt die Achse Schreibtisch–Stuhl–Licht.</p>
+    <p class="sub">Faustregel: Kläre zuerst, was im Raum passieren soll, und wähle dann die Stücke. Was nicht zur Aufgabe gehört, stört — der schöne Sessel im Homeoffice frisst nur Platz.</p>
+    <div class="rule-row">
+      <div class="rule-card"><b>Wohnzimmer</b><span>Sofa/Sessel · Couchtisch · Teppich · Stauraum an der Wand</span></div>
+      <div class="rule-card"><b>Schlafzimmer</b><span>Bett zentral · zwei Nachttische · Kleiderschrank · ruhiges Licht</span></div>
+      <div class="rule-card"><b>Arbeitsplatz</b><span>Schreibtisch · ergonomischer Stuhl · Funktionslicht · Ablage</span></div>
+    </div>
+  </section>
+
+  <section class="theory">
+    <div class="num">02 · Flow</div>
+    <h2>Wege sind unsichtbare Möbel</h2>
+    <p>Bevor ein Stück steht, steht der Weg. Plane Hauptwege mit rund <b>80–100 cm</b> Breite, halte Türen und Durchgänge frei und stelle Großmöbel an Wände oder in klar definierte Zonen.</p>
+    <p class="sub">Ein Teppich verankert die Sitzgruppe und sagt dem Auge: <em>hier ist das Zentrum</em>. Der häufigste Fehler ist Überfüllung. Im Grundriss unten siehst du jeden Abstand in Zentimetern — fällt er unter ~60 cm, wird es eng.</p>
+  </section>
+
+  <section class="theory">
+    <div class="num">03 · Licht</div>
+    <h2>Licht wirkt in drei Ebenen</h2>
+    <p>Ein einzelnes Deckenlicht macht jeden Raum flach. Schichte stattdessen drei Ebenen — im Wohnraum gern alle drei, sonst mindestens zwei:</p>
+    <div class="lightrow">
+      <div class="lpill"><span class="lh">Grundlicht</span><b>Der Raum wird gefüllt</b><span>Decken- oder Pendelleuchte für gleichmäßige Helligkeit.</span></div>
+      <div class="lpill"><span class="lh">Funktionslicht</span><b>Licht, wo gearbeitet wird</b><span>Schreibtisch- oder Leseleuchte genau am Ort der Tätigkeit.</span></div>
+      <div class="lpill"><span class="lh">Stimmung</span><b>Warme Akzente am Abend</b><span>Steh- und Tischleuchten setzen Inseln aus Licht.</span></div>
+    </div>
+  </section>
+
+  <section class="theory">
+    <div class="num">Übung</div>
+    <h2>Jetzt du: Bau den Raum</h2>
+    <p>Richte die fünf Räume nach der Theorie ein. Füge Möbel und Leuchten hinzu, dreh die 3D-Ansicht — oder wechsle in den <b>Grundriss</b> und <b>schiebe die Möbel mit dem Finger</b>. Raummaße und Abstände werden live bemaßt. Die Checkliste prüft, ob deine Lösung trägt.</p>
+  </section>
+
+  <div class="lab" id="lab">
+    <div class="labhead">
+      <h3>Übungsraum</h3>
+      <div class="scn-tabs" id="scnTabs">
+        <button data-scn="wohnzimmer" class="on">Wohnzimmer</button>
+        <button data-scn="schlafzimmer">Schlafzimmer</button>
+        <button data-scn="arbeit">Arbeitsplatz</button>
+        <button data-scn="essen">Essbereich</button>
+        <button data-scn="kinder">Kinderzimmer</button>
+      </div>
+    </div>
+    <div class="tip" id="tip"></div>
+    <div class="dims" id="dims"></div>
+    <div class="plantools" id="planTools">
+      <button class="tbtn" data-tool="measure">Messen</button>
+      <button class="tbtn" data-tool="adddoor">+ Tür</button>
+      <button class="tbtn" data-tool="addwin">+ Fenster</button>
+      <button class="tbtn" data-tool="addft">+ Fenstertür</button>
+      <button class="tbtn" data-tool="addbt">+ Bodentief</button>
+      <span class="ptsep"></span>
+      <label class="ptlab">B <input id="rw" type="number" step="0.1" min="2" max="8"></label>
+      <label class="ptlab">T <input id="rd" type="number" step="0.1" min="2" max="8"></label>
+      <button class="tbtn" data-tool="applysize">Maße setzen</button>
+      <button class="tbtn" data-tool="resetshape">Form zurücksetzen</button>
+    </div>
+    <div class="labgrid">
+      <div class="pal" id="pal"></div>
+      <div class="stage">
+        <div class="room3dwrap" id="room3dWrap">
+          <canvas id="room3d"></canvas>
+          <canvas id="plan2d"></canvas>
+          <div class="r3dbar"><button data-r3d="mode3d" class="on">3D</button><button data-r3d="modeplan">Grundriss</button><span class="sep"></span><button data-r3d="rotate">Auto-Dreh</button><button data-r3d="reset">Ansicht</button></div>
+        </div>
+        <div class="inroom" id="inRoom"></div>
+        <div>
+          <div class="scorebar"><i id="bar"></i></div>
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:.5rem;">
+            <span class="scoretxt" id="score">0/0</span>
+            <button class="tinybtn" data-reset>Raum leeren</button>
+          </div>
+        </div>
+        <ul class="checklist" id="checklist"></ul>
+        <div class="badge" id="badge"><span>✓</span><span>Theorie bestätigt — der Raum funktioniert.</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="recap">
+    <h2>Merksätze</h2>
+    <ul>
+      <li>Erst die Funktion des Raums klären, dann die Möbel wählen.</li>
+      <li>Wege mit 80–100 cm freihalten; ein Teppich verankert die Zone.</li>
+      <li>Licht in zwei bis drei Ebenen schichten statt einer Deckenlampe.</li>
+      <li>Im Zweifel weniger: Überfüllung ist der häufigste Einrichtungsfehler.</li>
+    </ul>
+    <a class="btn" href="wohnen-planer.html">Jetzt echten Raum planen →</a>
+  </div>
+
+  <footer>HeiBen Studio · Lebenswissen · <span class="note">Wissen, das durchs Leben trägt.</span> · Demo-Inhalt, keine verbindliche Planungsberatung.</footer>
+</div>
+
+<script src="vendor/three/three.min.js"></script>
+<script src="vendor/three/OrbitControls.js"></script>
+<script src="heiben-room3d.js"></script>
+<script src="heiben-plan2d.js"></script>
+<script>
+(function(){
+  var KATCOL={sofa:'#7d5260',tisch:'#9c6f1f',bett:'#3b6b6b',schrank:'#4a5c39',leuchte:'#b04a31',deko:'#8a7a55',buero:'#2f6f6b',textil:'#a8743f'};
+  var CAT={sofa:'Sitzen',tisch:'Tische',bett:'Schlafen',schrank:'Stauraum',buero:'Arbeiten',leuchte:'Licht',deko:'Teppich',textil:'Textil'};
+  var LIGHTLABEL={grund:'Grundlicht',funktion:'Funktionslicht',stimmung:'Stimmung'};
+  var P=[
+    {id:'sofa3',t:'3-Sitzer Sofa',kat:'sofa',zone:['wohnzimmer'],masse:'210×95×85 cm',preis:890},
+    {id:'sessel',t:'Sessel',kat:'sofa',zone:['wohnzimmer','kinder'],masse:'80×85×105 cm',preis:349},
+    {id:'couchtisch',t:'Couchtisch',kat:'tisch',zone:['wohnzimmer'],role:'couchtisch',masse:'110×60×40 cm',preis:220},
+    {id:'esstisch',t:'Esstisch',kat:'tisch',zone:['essen'],role:'esstisch',masse:'160×90×76 cm',preis:590},
+    {id:'essstuhl',t:'Esszimmerstuhl',kat:'tisch',zone:['essen'],role:'stuhl',masse:'45×52×82 cm',preis:110},
+    {id:'bett',t:'Doppelbett',kat:'bett',zone:['schlafzimmer'],masse:'160×200×50 cm',preis:650},
+    {id:'kinderbett',t:'Kinderbett',kat:'bett',zone:['kinder'],masse:'144×74×70 cm',preis:290},
+    {id:'nachttisch',t:'Nachttisch',kat:'schrank',zone:['schlafzimmer'],role:'nachttisch',masse:'45×38×50 cm',preis:160},
+    {id:'schrank',t:'Kleiderschrank',kat:'schrank',zone:['schlafzimmer'],masse:'150×60×220 cm',preis:980},
+    {id:'kinderschrank',t:'Kinderschrank',kat:'schrank',zone:['kinder'],masse:'100×55×180 cm',preis:420},
+    {id:'kinderregal',t:'Kinderregal',kat:'schrank',zone:['kinder'],masse:'80×30×100 cm',preis:150},
+    {id:'sideboard',t:'Sideboard',kat:'schrank',zone:['wohnzimmer','essen'],masse:'180×45×75 cm',preis:640},
+    {id:'regal',t:'Bücherregal',kat:'schrank',zone:['wohnzimmer','arbeit'],masse:'80×30×200 cm',preis:320},
+    {id:'aktenregal',t:'Aktenregal',kat:'schrank',zone:['arbeit'],masse:'80×40×180 cm',preis:260},
+    {id:'schreibtisch',t:'Schreibtisch',kat:'buero',zone:['arbeit'],role:'schreibtisch',masse:'160×80×74 cm',preis:480},
+    {id:'buerostuhl',t:'Bürostuhl',kat:'buero',zone:['arbeit'],role:'stuhl',masse:'65×65×120 cm',preis:320},
+    {id:'pendel',t:'Pendelleuchte',kat:'leuchte',zone:['all'],light:'grund',masse:'Ø35×40 cm',preis:240},
+    {id:'steh',t:'Stehleuchte',kat:'leuchte',zone:['all'],light:'stimmung',masse:'H 180 cm',preis:290},
+    {id:'tischl',t:'Tischleuchte',kat:'leuchte',zone:['all'],light:'stimmung',masse:'Ø22×34 cm',preis:120},
+    {id:'schreibl',t:'Schreibtischleuchte',kat:'leuchte',zone:['all'],light:'funktion',masse:'Arm 60 cm',preis:110},
+    {id:'leseleuchte',t:'Leseleuchte',kat:'leuchte',zone:['all'],light:'funktion',masse:'H 150 cm',preis:160},
+    {id:'teppichG',t:'Teppich groß',kat:'deko',zone:['all'],masse:'200×300 cm',preis:480},
+    {id:'teppichK',t:'Teppich klein',kat:'deko',zone:['all'],masse:'160×230 cm',preis:380},
+    {id:'spielteppich',t:'Spielteppich',kat:'deko',zone:['all'],masse:'150×200 cm',preis:160},
+    {id:'vorhang',t:'Vorhang',kat:'textil',zone:['all'],masse:'140×260 cm',preis:160}
+  ];
+  var byId={}; P.forEach(function(p){byId[p.id]=p;});
+  function baseDims(it){ if(typeof it.cw==='number'){ return {w:it.cw,d:it.cd}; } var p=byId[it.id]; return dims(p.masse,p.kat); }
+  function efDims(it){ var b=baseDims(it), r=(it.rot||0)%180; return r===0?{w:b.w,d:b.d}:{w:b.d,d:b.w}; }
+  function outlineOf(s){ var r=RSTATE[s]; return r.outline||[{x:-r.w/2,z:-r.d/2},{x:r.w/2,z:-r.d/2},{x:r.w/2,z:r.d/2},{x:-r.w/2,z:r.d/2}]; }
+  function pinp(poly,x,z){ var c=false; for(var i=0,j=poly.length-1;i<poly.length;j=i++){ var a=poly[i],b=poly[j]; if(((a.z>z)!=(b.z>z)) && (x<(b.x-a.x)*(z-a.z)/(b.z-a.z)+a.x)) c=!c; } return c; }
+  function rectInRoom(s,x,z,w,d){ var o=outlineOf(s); return [[x-w/2,z-d/2],[x+w/2,z-d/2],[x+w/2,z+d/2],[x-w/2,z+d/2],[x,z]].every(function(p){return pinp(o,p[0],p[1]);}); }
+  function bboxOf(s){ var o=outlineOf(s),xs=o.map(function(p){return p.x;}),zs=o.map(function(p){return p.z;}); return {x0:Math.min.apply(null,xs),x1:Math.max.apply(null,xs),z0:Math.min.apply(null,zs),z1:Math.max.apply(null,zs)}; }
+  function doorRects(s){ var r=RSTATE[s],bb=bboxOf(s),c=0.9; return (r.doors||[]).map(function(dr){ if(dr.wall==='bottom')return {x0:dr.at-dr.width/2,x1:dr.at+dr.width/2,z0:bb.z1-c,z1:bb.z1}; if(dr.wall==='top')return {x0:dr.at-dr.width/2,x1:dr.at+dr.width/2,z0:bb.z0,z1:bb.z0+c}; if(dr.wall==='left')return {x0:bb.x0,x1:bb.x0+c,z0:dr.at-dr.width/2,z1:dr.at+dr.width/2}; return {x0:bb.x1-c,x1:bb.x1,z0:dr.at-dr.width/2,z1:dr.at+dr.width/2}; }); }
+  function ovl(a,b){ return a.x0<b.x1&&a.x1>b.x0&&a.z0<b.z1&&a.z1>b.z0; }
+  function itemRect(it){ var e=efDims(it); return {x0:it.x-e.w/2,x1:it.x+e.w/2,z0:it.z-e.d/2,z1:it.z+e.d/2}; }
+  function roomAreaM(s){ var o=outlineOf(s),a=0; for(var i=0;i<o.length;i++){ var p=o[i],q=o[(i+1)%o.length]; a+=p.x*q.z-q.x*p.z; } return Math.abs(a)/2; }
+  function roomGeom(s){ var r=RSTATE[s]; return {name:r.name,w:r.w,d:r.d,outline:r.outline,doors:r.doors,windows:r.windows,shapeLabel:r.shapeLabel}; }
+  var RSTATE={};
+  function clampOpenings(s){ var bb=bboxOf(s); ['doors','windows'].forEach(function(kk){ (RSTATE[s][kk]||[]).forEach(function(o){ if(o.wall==='top'||o.wall==='bottom') o.at=Math.max(bb.x0+o.width/2+0.05,Math.min(bb.x1-o.width/2-0.05,o.at)); else o.at=Math.max(bb.z0+o.width/2+0.05,Math.min(bb.z1-o.width/2-0.05,o.at)); }); }); }
+  function setRoomSize(w,d){ var R=RSTATE[scn]; R.w=w; R.d=d; R.outline=null; R.shapeLabel='rechteckig'; clampOpenings(scn); refresh(); }
+  function addOpening(kind,type){ var R=RSTATE[scn]; var door=(kind==='door'); var arr=door?(R.doors||(R.doors=[])):(R.windows||(R.windows=[]));
+    var w=(type==='bodentief')?1.4:(type==='fenstertuer')?1.0:(door?0.9:1.0);
+    arr.push({wall:'top',at:0,width:w,type:(type||(door?'tuer':'fenster'))}); clampOpenings(scn); refresh(); }
+  function resetShape(){ RSTATE[scn]=JSON.parse(JSON.stringify(ROOM[scn])); refresh(); }
+  var ROOM={wohnzimmer:{name:'Wohnzimmer',w:4.4,d:3.6,shapeLabel:'L-Form',outline:[{x:-2.2,z:-1.8},{x:0.8,z:-1.8},{x:0.8,z:-0.2},{x:2.2,z:-0.2},{x:2.2,z:1.8},{x:-2.2,z:1.8}],doors:[{wall:'bottom',at:-1.2,width:0.9}],windows:[{wall:'left',at:0,width:1.2}]},schlafzimmer:{name:'Schlafzimmer',w:3.8,d:3.4,shapeLabel:'rechteckig',doors:[{wall:'bottom',at:0,width:0.9}],windows:[{wall:'top',at:0,width:1.4}]},arbeit:{name:'Arbeitsplatz',w:3.2,d:2.8,shapeLabel:'rechteckig',doors:[{wall:'left',at:0,width:0.8}],windows:[{wall:'right',at:0,width:1.2}]},essen:{name:'Essbereich',w:3.6,d:3.2,shapeLabel:'versetzt',outline:[{x:-1.8,z:-1.6},{x:1.8,z:-1.6},{x:1.8,z:1.6},{x:-0.6,z:1.6},{x:-0.6,z:0.6},{x:-1.8,z:0.6}],doors:[{wall:'bottom',at:1.0,width:0.9}],windows:[{wall:'top',at:0,width:1.4}]},kinder:{name:'Kinderzimmer',w:3.4,d:3.0,shapeLabel:'rechteckig',doors:[{wall:'bottom',at:1.0,width:0.8}],windows:[{wall:'top',at:-0.6,width:1.2}]}};
+  Object.keys(ROOM).forEach(function(k){ RSTATE[k]=JSON.parse(JSON.stringify(ROOM[k])); });
+  var TIP={wohnzimmer:'Ziel: eine Sitzinsel aus Sofa, Couchtisch und Teppich, Stauraum an der Wand und zwei bis drei Lichtebenen — ohne den Raum zu überfüllen.',
+           schlafzimmer:'Ziel: Bett als Zentrum, Nachttisch(e), Kleiderschrank und warmes, ruhiges Licht. Kein Schreibtisch, kein Esstisch.',
+           arbeit:'Ziel: Schreibtisch mit ergonomischem Stuhl, Funktionslicht direkt am Tisch und etwas Ablage. Kein Bett im Büro.',
+           essen:'Ziel: Esstisch mit genügend Stühlen, eine Leuchte über dem Tisch und freie Wege rundherum. Optional ein Sideboard.',
+           kinder:'Ziel: Kinderbett, Stauraum zum Aufräumen, eine Spiel-/Teppichfläche und sanftes, warmes Licht.'};
+  var builds={wohnzimmer:[],schlafzimmer:[],arbeit:[],essen:[],kinder:[]}; var scn='wohnzimmer'; var mode='3d'; var room3d=null, plan2d=null; var _uid=0;
+
+  function dims(m,kat){ m=''+(m||''); var dia=/Ø/.test(m); var heightOnly=/^\s*(H|Arm)\b/i.test(m);
+    var n=(m.match(/\d+(?:[.,]\d+)?/g)||[]).map(function(x){return parseFloat(x.replace(',','.'))/100;}); var w,d;
+    var FB=({sofa:[2.0,0.9],tisch:[1.2,0.7],bett:[1.6,2.0],schrank:[1.0,0.45],buero:[1.4,0.7],leuchte:[0.35,0.35],deko:[1.6,2.3],textil:[1.4,0.06]})[kat]||[0.7,0.5];
+    if(dia&&n.length>=1){ w=n[0]; d=n[0]; } else if(!heightOnly&&n.length>=2){ w=n[0]; d=n[1]; } else { w=FB[0]; d=FB[1]; }
+    return {w:Math.max(0.1,Math.min(3.4,w)),d:Math.max(0.1,Math.min(3.4,d))}; }
+  function isFlat(kat){ return kat==='deko'||kat==='textil'; }
+  function autoPlace(s,p){ var d=dims(p.masse,p.kat); if(isFlat(p.kat)) return {x:0,z:0.2};
+    var insts=builds[s].filter(function(it){return !isFlat(byId[it.id].kat);}); var drs=doorRects(s); var bb=bboxOf(s);
+    function free(x,z){ if(!rectInRoom(s,x,z,d.w,d.d)) return false; var ir={x0:x-d.w/2,x1:x+d.w/2,z0:z-d.d/2,z1:z+d.d/2};
+      if(drs.some(function(dr){return ovl(ir,dr);})) return false;
+      return !insts.some(function(it){ var e=efDims(it); return Math.abs(x-it.x)<(d.w+e.w)/2+0.5 && Math.abs(z-it.z)<(d.d+e.d)/2+0.5; }); }
+    for(var z=bb.z0+d.d/2; z<=bb.z1-d.d/2+0.001; z+=0.25){ for(var x=bb.x0+d.w/2; x<=bb.x1-d.w/2+0.001; x+=0.25){ if(free(x,z)) return {x:+x.toFixed(2),z:+z.toFixed(2)}; } }
+    return {x:0,z:0.2}; }
+
+  function items3d(){ return builds[scn].map(function(it){ var p=byId[it.id], b=baseDims(it), pr=dims(p.masse,p.kat); return {t:p.t,kat:p.kat,col:KATCOL[p.kat],masse:p.masse,preis:p.preis,x:it.x,z:it.z,rot:it.rot||0,sx:b.w/pr.w,sz:b.d/pr.d,qty:1}; }); }
+  function itemsPlan(){ return builds[scn].map(function(it){ var p=byId[it.id], d=baseDims(it); return {id:it.iid,t:p.t,kat:p.kat,col:KATCOL[p.kat],w:d.w,d:d.d,x:it.x,z:it.z,rot:it.rot||0,flat:isFlat(p.kat)}; }); }
+
+  function ctxOf(s){ var arr=builds[s].map(function(it){return byId[it.id];}); var c={n:arr.length,kat:{},role:{},lights:{},area:0,mismatch:[]};
+    arr.forEach(function(p){ c.kat[p.kat]=(c.kat[p.kat]||0)+1; if(p.role)c.role[p.role]=(c.role[p.role]||0)+1; if(p.light)c.lights[p.light]=1;
+      var d=dims(p.masse,p.kat); if(!isFlat(p.kat)) c.area+=d.w*d.d;
+      var neutral=(p.kat==='leuchte'||isFlat(p.kat)); if(!neutral && p.zone && p.zone.indexOf(s)<0) c.mismatch.push(p.t); });
+    return c; }
+  function layers(c){ return Object.keys(c.lights).length; }
+  function uniq(a){ var o={},r=[]; a.forEach(function(x){ if(!o[x]){o[x]=1;r.push(x);} }); return r; }
+  function chk(cond,label,hint,opt){ return {label:label,state:cond?'ok':'open',hint:hint,opt:!!opt}; }
+  function passend(c){ return {label:'Nur raumtaugliche Möbel',state:c.mismatch.length?'warn':'ok',hint:c.mismatch.length?('Fehl am Platz: '+uniq(c.mismatch).join(', ')):'Alles passt zur Raumfunktion.'}; }
+  function lichtEbenen(c,need,label){ var L=layers(c); return {label:label,state:L>=need?'ok':'open',hint:'Grund · Funktion · Stimmung — aktuell '+L+'/3 Ebenen.'}; }
+  function hasWardrobe(){ return builds.schlafzimmer.some(function(it){return it.id==='schrank';}); }
+  function tuerCheck(s){ var drs=doorRects(s); if(!drs.length)return null; var block=builds[s].some(function(it){ if(isFlat(byId[it.id].kat))return false; var ir=itemRect(it); return drs.some(function(dr){return ovl(ir,dr);}); }); return {label:'Tür frei halten',state:block?'warn':'ok',hint:block?'Ein Möbel steht im Türbereich — wegschieben.':'Türschwenk bleibt frei.'}; }
+  function abstand(s){ var insts=builds[s].filter(function(it){return !isFlat(byId[it.id].kat);}).map(function(it){ var e=efDims(it); return {x:it.x,z:it.z,w:e.w,d:e.d}; });
+    if(insts.length<2) return {label:'Abstände & Wege frei',state:insts.length?'ok':'open',hint:insts.length?'Genug Platz.':'Noch leer.'};
+    var minG=99, overlap=false;
+    for(var i=0;i<insts.length;i++)for(var j=i+1;j<insts.length;j++){ var a=insts[i],b=insts[j];
+      var dx=Math.abs(a.x-b.x)-(a.w+b.w)/2, dz=Math.abs(a.z-b.z)-(a.d+b.d)/2;
+      if(dx<-0.02&&dz<-0.02) overlap=true;
+      var ovz=Math.abs(a.z-b.z)<(a.d+b.d)/2, ovx=Math.abs(a.x-b.x)<(a.w+b.w)/2;
+      if(ovz&&!ovx){ if(dx<minG)minG=dx; } else if(ovx&&!ovz){ if(dz<minG)minG=dz; } }
+    if(overlap) return {label:'Abstände & Wege frei',state:'warn',hint:'Möbel überlappen — im Grundriss auseinanderziehen.'};
+    if(minG<0.4&&minG<90) return {label:'Abstände & Wege frei',state:'warn',hint:'Engstelle unter 40 cm — im Grundriss auseinanderziehen.'};
+    var knapp=(minG<0.6&&minG<90);
+    return {label:'Abstände & Wege frei',state:'ok',hint:knapp?('Begehbar, aber knapp (~'+Math.round(minG*100)+' cm) — 60 cm sind ideal.'):'Überall genug Abstand für freie Wege.'}; }
+
+  function checksFor(s,c){
+    if(s==='wohnzimmer') return [
+      chk(c.kat.sofa>0,'Sitzgelegenheit (Sofa/Sessel)','Die Basis jeder Sitzzone.'),
+      chk(c.kat.tisch>0,'Couch-/Beistelltisch','Ablage in Reichweite der Sitzgruppe.'),
+      chk(c.kat.deko>0,'Teppich verankert die Zone','Fasst Sofa und Tisch zu einer Insel.'),
+      lichtEbenen(c,2,'Zwei bis drei Lichtebenen'),
+      abstand(s), passend(c),
+      chk(c.kat.schrank>0,'Stauraum/Regal','Sideboard oder Regal hält Ordnung.',true)
+    ];
+    if(s==='schlafzimmer') return [
+      chk(c.kat.bett>0,'Bett als Zentrum','Alles ordnet sich ums Bett.'),
+      chk((c.role.nachttisch||0)>=1,'Nachttisch (ideal zwei)','Ablage links und rechts.'),
+      chk(hasWardrobe(),'Kleiderschrank/Stauraum','Kleidung verschwindet hinter Türen.'),
+      {label:'Warmes Stimmungs-/Leselicht',state:(c.lights.stimmung||c.lights.funktion)?'ok':'open',hint:'Kein grelles Deckenlicht allein — Steh-/Leseleuchte.'},
+      abstand(s), passend(c)
+    ];
+    if(s==='arbeit') return [
+      chk((c.role.schreibtisch||0)>=1,'Schreibtisch','Die Arbeitsfläche.'),
+      chk((c.role.stuhl||0)>=1,'Arbeitsstuhl','Ergonomisch sitzen.'),
+      {label:'Funktionslicht am Tisch',state:c.lights.funktion?'ok':'open',hint:'Schreibtisch-/Leseleuchte gegen Schatten.'},
+      abstand(s), passend(c),
+      chk(c.kat.schrank>0,'Ablage/Regal','Ordnung für Unterlagen.',true)
+    ];
+    if(s==='essen') return [
+      chk((c.role.esstisch||0)>=1,'Esstisch','Das Zentrum des Essbereichs.'),
+      chk((c.role.stuhl||0)>=2,'Genügend Stühle','Pro Sitzplatz ein Stuhl — ideal vier.'),
+      {label:'Leuchte über dem Tisch',state:c.lights.grund?'ok':'open',hint:'Pendelleuchte mittig über der Tischplatte.'},
+      abstand(s), passend(c),
+      chk(c.kat.schrank>0,'Sideboard','Geschirr und Wäsche griffbereit.',true)
+    ];
+    return [
+      chk(c.kat.bett>0,'Kinderbett','Der ruhige Schlafplatz.'),
+      chk(c.kat.schrank>0,'Stauraum zum Aufräumen','Regal oder Schrank für Spielzeug.'),
+      chk(c.kat.deko>0,'Spiel-/Teppichfläche','Weicher Boden zum Spielen am Boden.'),
+      {label:'Sanftes, warmes Licht',state:(c.lights.stimmung||c.lights.funktion)?'ok':'open',hint:'Nachtlicht/Leseleuchte statt grellem Deckenlicht.'},
+      abstand(s), passend(c)
+    ];
+  }
+
+  // ---- DOM ----
+  var palEl=document.getElementById('pal'), inRoomEl=document.getElementById('inRoom'), listEl=document.getElementById('checklist'),
+      barEl=document.getElementById('bar'), scoreEl=document.getElementById('score'), badgeEl=document.getElementById('badge'),
+      tipEl=document.getElementById('tip'), dimsEl=document.getElementById('dims'), labEl=document.getElementById('lab'), wrapEl=document.getElementById('room3dWrap');
+  var ORDER=['sofa','tisch','bett','schrank','buero','leuchte','deko','textil'];
+  function buildPalette(){ palEl.innerHTML=ORDER.map(function(k){ var its=P.filter(function(p){return p.kat===k;}); if(!its.length)return'';
+    return '<div class="pgroup"><div class="plabel" style="--c:'+KATCOL[k]+'">'+(CAT[k]||k)+'</div>'+its.map(function(p){
+      return '<button class="padd" data-add="'+p.id+'" style="--c:'+KATCOL[p.kat]+'"><span class="pn">'+p.t+'</span>'+(p.light?'<span class="ltag">'+LIGHTLABEL[p.light]+'</span>':'')+'<span class="pp">'+p.preis+' €</span><span class="plus">+</span></button>';
+    }).join('')+'</div>'; }).join(''); }
+
+  function fmtM(m){ return (m).toFixed(2).replace('.',',')+' m'; }
+  function updateInRoom(){ var cnt={}; builds[scn].forEach(function(it){ cnt[it.id]=(cnt[it.id]||0)+1; });
+    var keys=Object.keys(cnt);
+    inRoomEl.innerHTML=keys.length? keys.map(function(id){ var p=byId[id];
+      return '<span class="rchip" style="--c:'+KATCOL[p.kat]+'">'+p.t+(cnt[id]>1?' ×'+cnt[id]:'')+'<button data-rem="'+id+'" aria-label="entfernen">×</button></span>'; }).join('')
+      : '<span class="note">Noch leer — füge links Möbel hinzu.</span>'; }
+  function updateViews(){ if(mode==='plan'){ if(plan2d){ plan2d.setRoom(roomGeom(scn)); plan2d.setItems(itemsPlan()); plan2d.resize(); } } else if(room3d){ room3d.setItems(items3d()); room3d.resize(); } }
+  function updateChecks(){ var c=ctxOf(scn), checks=checksFor(scn,c); var tc=tuerCheck(scn); if(tc) checks.push(tc);
+    var core=checks.filter(function(x){return !x.opt;}); var done=core.filter(function(x){return x.state==='ok';}).length; var passed=core.every(function(x){return x.state==='ok';});
+    listEl.innerHTML=checks.map(function(x){ var ic=x.state==='ok'?'✓':(x.state==='warn'?'!':'○');
+      return '<li class="c-'+x.state+(x.opt?' opt':'')+'"><span class="ic">'+ic+'</span><span><b>'+x.label+'</b>'+(x.opt?' <em>optional</em>':'')+'<br><span class="hint">'+x.hint+'</span></span></li>'; }).join('');
+    barEl.style.width=Math.round(done/core.length*100)+'%'; scoreEl.textContent=done+'/'+core.length+' Prinzipien erfüllt';
+    badgeEl.style.display=passed?'flex':'none'; labEl.classList.toggle('passed',passed); }
+  function refresh(){ var r=RSTATE[scn]; var bb=bboxOf(scn); dimsEl.textContent='Raum: '+fmtM(bb.x1-bb.x0)+' × '+fmtM(bb.z1-bb.z0)+' · '+roomAreaM(scn).toFixed(1).replace('.',',')+' m² · '+(r.shapeLabel||'rechteckig'); tipEl.textContent=TIP[scn]; var rw=document.getElementById('rw'),rd=document.getElementById('rd'); if(rw){rw.value=(bb.x1-bb.x0).toFixed(1); rd.value=(bb.z1-bb.z0).toFixed(1);} updateInRoom(); updateViews(); updateChecks(); }
+
+  // events
+  palEl.addEventListener('click',function(e){ var bn=e.target.closest('[data-add]'); if(!bn)return; var id=bn.dataset.add; var pos=autoPlace(scn,byId[id]); builds[scn].push({iid:'i'+(++_uid),id:id,x:pos.x,z:pos.z,rot:0}); track('add',id); refresh(); });
+  inRoomEl.addEventListener('click',function(e){ var bn=e.target.closest('[data-rem]'); if(!bn)return; var id=bn.dataset.rem; for(var i=builds[scn].length-1;i>=0;i--){ if(builds[scn][i].id===id){ builds[scn].splice(i,1); break; } } refresh(); });
+  document.getElementById('scnTabs').addEventListener('click',function(e){ var bn=e.target.closest('[data-scn]'); if(!bn)return; scn=bn.dataset.scn;
+    document.querySelectorAll('[data-scn]').forEach(function(x){x.classList.toggle('on',x.dataset.scn===scn);}); track('scn',scn); resetMeasure(); refresh(); });
+  document.querySelector('[data-reset]').addEventListener('click',function(){ builds[scn]=[]; refresh(); });
+  var measureOn=false;
+  function resetMeasure(){ measureOn=false; var mb=document.querySelector('[data-tool="measure"]'); if(mb)mb.classList.remove('on'); if(plan2d)plan2d.setMeasure(false); }
+  function toPlan(){ if(mode!=='plan'){ mode='plan'; wrapEl.classList.add('planmode'); document.querySelectorAll('[data-r3d="mode3d"],[data-r3d="modeplan"]').forEach(function(x){x.classList.toggle('on',x.dataset.r3d==='modeplan');}); updateViews(); } }
+  document.getElementById('planTools').addEventListener('click',function(e){ var b=e.target.closest('[data-tool]'); if(!b)return; var t=b.dataset.tool;
+    if(t==='measure'){ toPlan(); measureOn=!measureOn; b.classList.toggle('on',measureOn); if(plan2d)plan2d.setMeasure(measureOn); return; }
+    if(t==='adddoor'){ toPlan(); resetMeasure(); addOpening('door','tuer'); return; }
+    if(t==='addwin'){ toPlan(); resetMeasure(); addOpening('window','fenster'); return; }
+    if(t==='addft'){ toPlan(); resetMeasure(); addOpening('door','fenstertuer'); return; }
+    if(t==='addbt'){ toPlan(); resetMeasure(); addOpening('window','bodentief'); return; }
+    if(t==='applysize'){ toPlan(); resetMeasure(); var w=parseFloat(document.getElementById('rw').value),d=parseFloat(document.getElementById('rd').value); if(w>=2&&w<=8&&d>=2&&d<=8) setRoomSize(+w.toFixed(2),+d.toFixed(2)); return; }
+    if(t==='resetshape'){ toPlan(); resetMeasure(); resetShape(); return; } });
+  document.querySelector('.r3dbar').addEventListener('click',function(e){ var r=e.target.closest('[data-r3d]'); if(!r)return; var k=r.dataset.r3d;
+    if(k==='mode3d'||k==='modeplan'){ mode=(k==='modeplan'?'plan':'3d'); if(mode==='3d')resetMeasure(); wrapEl.classList.toggle('planmode',mode==='plan');
+      document.querySelectorAll('[data-r3d="mode3d"],[data-r3d="modeplan"]').forEach(function(b){ b.classList.toggle('on',b.dataset.r3d===k); }); updateViews(); return; }
+    if(!room3d)return;
+    if(k==='rotate'){ r.classList.toggle('on'); room3d.setAutoRotate(r.classList.contains('on')); }
+    else if(k==='reset'){ room3d.resetView(); } });
+  window.addEventListener('resize',function(){ if(room3d)room3d.resize(); if(plan2d)plan2d.resize(); });
+  function track(a,v){ try{ if(window.HeiBenTrack)window.HeiBenTrack.ev('einrichtung_'+a,{v:v}); }catch(e){} }
+
+  buildPalette();
+  if(window.HeiBenRoom3D && window.HeiBenRoom3D.available()){ try{ room3d=window.HeiBenRoom3D.create(document.getElementById('room3d')); }catch(e){} }
+  if(window.HeiBenPlan2D){ plan2d=window.HeiBenPlan2D.create(document.getElementById('plan2d'),{ onChange:function(pos){ builds[scn].forEach(function(it){ var q=pos[it.iid]; if(q){ it.x=q.x; it.z=q.z; it.rot=q.rot; it.cw=q.w; it.cd=q.d; } }); updateChecks(); }, onRoom:function(rm){ var R=RSTATE[scn]; R.doors=rm.doors; R.windows=rm.windows;
+      if(rm.outline){ R.outline=rm.outline.map(function(p){return {x:p.x,z:p.z};}); if(R.outline.length>4 && (R.shapeLabel==='rechteckig'||!R.shapeLabel)) R.shapeLabel='angepasst'; }
+      var bb=bboxOf(scn); R.w=bb.x1-bb.x0; R.d=bb.z1-bb.z0;
+      if(dimsEl) dimsEl.textContent='Raum: '+fmtM(R.w)+' × '+fmtM(R.d)+' · '+roomAreaM(scn).toFixed(1).replace('.',',')+' m² · '+(R.shapeLabel||'rechteckig');
+      var rw=document.getElementById('rw'),rd=document.getElementById('rd'); if(rw){ rw.value=R.w.toFixed(1); rd.value=R.d.toFixed(1); }
+      updateInRoom(); updateChecks(); } }); }
+  if(!room3d && !plan2d){ wrapEl.innerHTML='<div class="note" style="padding:1.4rem;">Ansicht in diesem Browser nicht verfügbar — die Theorie-Prüfung funktioniert trotzdem.</div>'; }
+  refresh();
+})();
+</script>
+<script src="heiben-legal.js"></script>
+</body>
+</html>

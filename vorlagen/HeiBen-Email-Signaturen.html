@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HeiBen — E-Mail-Signaturen (aktuelle CI)</title>
+<style>
+  body{margin:0;background:#f3eee5;color:#1f1c17;font-family:'Manrope',-apple-system,Segoe UI,Arial,sans-serif;line-height:1.55;}
+  .wrap{max-width:760px;margin:0 auto;padding:40px 24px 64px;}
+  .eyebrow{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;color:#c2533a;}
+  h1{font-family:'Fraunces',Georgia,serif;font-weight:480;font-size:2rem;margin:.2em 0 .1em;}
+  h2{font-family:'Fraunces',Georgia,serif;font-weight:480;font-size:1.2rem;margin:2.2em 0 .6em;}
+  p.lede{color:#524a3e;max-width:60ch;}
+  .card{background:#fff;border:1px solid #d8cdb7;border-radius:14px;padding:24px;margin:14px 0;}
+  .hint{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.06em;text-transform:uppercase;color:#524a3e;margin:0 0 12px;}
+  pre{white-space:pre-wrap;background:#ebe3d4;border:1px solid #d8cdb7;border-radius:10px;padding:14px;font-family:'JetBrains Mono',monospace;font-size:.72rem;color:#1f1c17;overflow:auto;}
+  .note{font-size:.82rem;color:#524a3e;}
+  code{font-family:'JetBrains Mono',monospace;background:#ebe3d4;padding:1px 5px;border-radius:5px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">Corporate Identity · E-Mail</div>
+  <h1>E-Mail-Signaturen.</h1>
+  <p class="lede">Aktuelle CI: Wortmarke „HeiBen“ (H+B Terracotta), Marken-Fonts mit Web-Fallback, Hausfarben-Punkte, Claim „Heimat leben“. Markup unten in die E-Mail-Signatur einfügen, Platzhalter in eckigen Klammern ersetzen.</p>
+
+  <h2>1 · Standard-Signatur</h2>
+  <div class="card">
+    <!-- VORSCHAU = exakt das einzufügende Markup -->
+    <table cellpadding="0" cellspacing="0" border="0" style="font-family:'Manrope',Arial,sans-serif;color:#1f1c17;font-size:14px;line-height:1.5;">
+      <tr><td style="padding-bottom:8px;">
+        <span style="font-family:'Fraunces',Georgia,serif;font-weight:700;font-size:22px;color:#c2533a;">H</span><span style="font-family:'Fraunces',Georgia,serif;font-weight:700;font-size:22px;color:#1f1c17;">ei</span><span style="font-family:'Fraunces',Georgia,serif;font-weight:700;font-size:22px;color:#c2533a;">B</span><span style="font-family:'Fraunces',Georgia,serif;font-weight:700;font-size:22px;color:#1f1c17;">en</span>
+        &nbsp;&nbsp;<span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2px;color:#524a3e;">HEIMAT&nbsp;LEBEN</span>
+      </td></tr>
+      <tr><td style="border-top:2px solid #c2533a;padding-top:10px;">
+        <div style="font-weight:700;font-size:15px;color:#1f1c17;">[Vorname Nachname]</div>
+        <div style="color:#524a3e;">[Funktion] · HeiBen [Haus]</div>
+      </td></tr>
+      <tr><td style="padding-top:8px;color:#1f1c17;">
+        Tel. [+49&nbsp;…] · Mobil [+49&nbsp;…]<br>
+        <a href="mailto:[name]@heiben.de" style="color:#c2533a;text-decoration:none;">[name]@heiben.de</a> ·
+        <a href="https://heiben.de" style="color:#c2533a;text-decoration:none;">heiben.de</a>
+      </td></tr>
+      <tr><td style="padding-top:8px;">
+        <span style="font-size:11px;color:#d29939;">●</span><span style="font-size:11px;color:#4a5c39;">●</span><span style="font-size:11px;color:#792d29;">●</span><span style="font-size:11px;color:#1f1c17;">●</span><span style="font-size:11px;color:#6b3951;">●</span>
+      </td></tr>
+      <tr><td style="padding-top:8px;font-family:'JetBrains Mono',monospace;font-size:9px;color:#8a8174;line-height:1.5;">
+        HeiBen Holding GmbH (i.&nbsp;G.) · [Straße Nr.], 50xxx Köln · Geschäftsführer: Yakin Benkhaouda, Katharina Hein<br>
+        Amtsgericht Köln HRB [Nummer] · USt-IdNr. [DE…] · Diese E-Mail kann vertrauliche Informationen enthalten.
+      </td></tr>
+    </table>
+  </div>
+  <p class="hint">HTML-Quelltext zum Kopieren</p>
+  <pre>&lt;table cellpadding="0" cellspacing="0" border="0" style="font-family:'Manrope',Arial,sans-serif;color:#1f1c17;font-size:14px;line-height:1.5;"&gt;
+ &lt;tr&gt;&lt;td style="padding-bottom:8px;"&gt;
+  &lt;span style="font-family:'Fraunces',Georgia,serif;font-weight:700;font-size:22px;color:#c2533a;"&gt;H&lt;/span&gt;&lt;span style="...color:#1f1c17;"&gt;ei&lt;/span&gt;&lt;span style="...color:#c2533a;"&gt;B&lt;/span&gt;&lt;span style="...color:#1f1c17;"&gt;en&lt;/span&gt;
+  &amp;nbsp;&amp;nbsp;&lt;span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2px;color:#524a3e;"&gt;HEIMAT&amp;nbsp;LEBEN&lt;/span&gt;
+ &lt;/td&gt;&lt;/tr&gt;
+ &lt;tr&gt;&lt;td style="border-top:2px solid #c2533a;padding-top:10px;"&gt;
+  &lt;div style="font-weight:700;font-size:15px;"&gt;[Vorname Nachname]&lt;/div&gt;
+  &lt;div style="color:#524a3e;"&gt;[Funktion] · HeiBen [Haus]&lt;/div&gt;
+ &lt;/td&gt;&lt;/tr&gt;
+ &lt;tr&gt;&lt;td style="padding-top:8px;"&gt;Tel. [+49 …] · Mobil [+49 …]&lt;br&gt;
+  &lt;a href="mailto:[name]@heiben.de" style="color:#c2533a;text-decoration:none;"&gt;[name]@heiben.de&lt;/a&gt; ·
+  &lt;a href="https://heiben.de" style="color:#c2533a;text-decoration:none;"&gt;heiben.de&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;
+ &lt;tr&gt;&lt;td style="padding-top:8px;"&gt;&lt;span style="color:#d29939;"&gt;●&lt;/span&gt;&lt;span style="color:#4a5c39;"&gt;●&lt;/span&gt;&lt;span style="color:#792d29;"&gt;●&lt;/span&gt;&lt;span style="color:#1f1c17;"&gt;●&lt;/span&gt;&lt;span style="color:#6b3951;"&gt;●&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;
+ &lt;tr&gt;&lt;td style="padding-top:8px;font-family:'JetBrains Mono',monospace;font-size:9px;color:#8a8174;"&gt;HeiBen Holding GmbH (i. G.) · [Straße Nr.], 50xxx Köln · Geschäftsführer: Yakin Benkhaouda, Katharina Hein&lt;br&gt;Amtsgericht Köln HRB [Nummer] · USt-IdNr. [DE…]&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;</pre>
+
+  <h2>2 · Kompakt-Signatur (Antworten)</h2>
+  <div class="card">
+    <div style="font-family:'Manrope',Arial,sans-serif;color:#1f1c17;font-size:13px;line-height:1.5;">
+      <span style="font-family:'Fraunces',Georgia,serif;font-weight:700;color:#c2533a;">H</span><span style="font-family:'Fraunces',Georgia,serif;font-weight:700;color:#1f1c17;">ei</span><span style="font-family:'Fraunces',Georgia,serif;font-weight:700;color:#c2533a;">B</span><span style="font-family:'Fraunces',Georgia,serif;font-weight:700;color:#1f1c17;">en</span>
+      &nbsp;|&nbsp; <strong>[Vorname Nachname]</strong>, [Funktion] &nbsp;·&nbsp;
+      <a href="mailto:[name]@heiben.de" style="color:#c2533a;text-decoration:none;">[name]@heiben.de</a> &nbsp;·&nbsp; [+49 …]
+    </div>
+  </div>
+
+  <h2>3 · Reintext-Signatur (Plain)</h2>
+  <pre>--
+HeiBen — Heimat leben
+[Vorname Nachname] | [Funktion] · HeiBen [Haus]
+Tel. [+49 …] · [name]@heiben.de · heiben.de
+HeiBen Holding GmbH (i. G.) · Sitz Köln · Amtsgericht Köln HRB [Nummer] · USt-IdNr. [DE…]</pre>
+
+  <p class="note">Marken-Fonts (Fraunces/Manrope/JetBrains Mono) sind als CI installiert; per Web-Fallback (Georgia/Arial/monospace) bleiben Signaturen auch in fremden Clients lesbar. Bitte keine externen Bild-URLs verwenden — die Wortmarke ist reiner, robuster HTML-Text.</p>
+</div>
+</body>
+</html>

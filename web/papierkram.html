@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Papierkram · HeiBen</title>
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;1,400&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f3eee5;--bg2:#ebe3d4;--paper:#fffdf8;--ink:#1f1c17;--ink2:#524a3e;--rule:#d8cdb7;--terra:#b04a31;--ochre:#a97a1d;--moss:#4a5c39;--burg:#792d29;--aub:#6b3951;--good:#6f8f4e}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:'Manrope',system-ui,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:900px;margin:0 auto;padding:1.8rem 1.1rem 5rem}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.32em;text-transform:uppercase;color:var(--terra)}
+.leaf{display:inline-block;vertical-align:-6px;margin-right:.2rem}
+h1{font-family:'Fraunces',serif;font-weight:400;font-size:clamp(2rem,6.5vw,3.1rem);line-height:1.02;letter-spacing:-.02em;margin:.3rem 0 .5rem}
+h1 em{font-style:italic;color:var(--terra)}
+.lead{color:var(--ink2);max-width:64ch;font-size:1.02rem}
+.controls{position:sticky;top:0;background:rgba(243,238,229,.94);backdrop-filter:blur(6px);z-index:5;padding:.9rem 0 .7rem;margin-top:1.3rem;border-bottom:1px solid var(--rule)}
+.row{display:flex;flex-wrap:wrap;gap:.4rem;align-items:center;margin-bottom:.5rem}
+.row .lbl{font-family:'JetBrains Mono',monospace;font-size:.55rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ochre);width:100%;margin-bottom:.1rem}
+.chip{border:1px solid var(--rule);background:var(--paper);border-radius:999px;padding:.34rem .8rem;font:inherit;font-size:.82rem;font-weight:600;cursor:pointer;color:var(--ink)}
+.chip.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.chip:focus-visible,#q:focus-visible{outline:2px solid var(--ochre);outline-offset:2px}
+#q{flex:1;min-width:160px;border:1px solid var(--rule);background:var(--paper);border-radius:11px;padding:.5rem .8rem;font:inherit}
+.count{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink2);margin:.9rem 0 .5rem}
+#detail{margin:.4rem 0 1.2rem}
+.dcard{background:var(--paper);border:1px solid var(--rule);border-radius:18px;padding:1.3rem 1.35rem}
+.dhead{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;flex-wrap:wrap}
+.dhead h2{font-family:'Fraunces',serif;font-weight:500;font-size:1.7rem;line-height:1.1}
+.dhead .sub{color:var(--ink2);font-size:.92rem}
+.close{border:0;background:var(--bg2);border-radius:9px;padding:.35rem .7rem;font:inherit;font-weight:700;cursor:pointer;color:var(--ink2)}
+.close:focus-visible{outline:2px solid var(--ochre);outline-offset:2px}
+.badges{display:flex;flex-wrap:wrap;gap:.4rem;margin:.6rem 0 .2rem}
+.b{font-family:'JetBrains Mono',monospace;font-size:.56rem;letter-spacing:.08em;text-transform:uppercase;border-radius:999px;padding:.24rem .6rem}
+.b.typ{background:var(--aub);color:#fffdf8}
+.b.kat{background:var(--bg2);color:var(--ink2)}
+.b.frist{background:var(--terra);color:#fffdf8}
+.sec{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ochre);margin-top:1.05rem;padding-top:.65rem;border-top:1px solid var(--rule)}
+.stext{font-size:.95rem;margin-top:.3rem}
+.stext b{color:var(--terra)}
+.box{border:1px solid var(--rule);border-radius:12px;padding:.7rem .9rem;margin-top:.7rem;font-size:.93rem;background:var(--paper)}
+.box .bt{font-family:'JetBrains Mono',monospace;font-size:.56rem;letter-spacing:.12em;text-transform:uppercase;display:block;margin-bottom:.2rem}
+.box.frist{background:rgba(169,122,29,.07);border-color:var(--ochre)}
+.box.frist .bt{color:var(--ochre)}
+.box.warn{background:rgba(121,45,41,.06);border-color:var(--burg)}
+.box.warn .bt{color:var(--burg)}
+.box.weg{background:rgba(74,92,57,.06);border-color:var(--moss)}
+.box.weg .bt{color:var(--moss)}
+.tip{border:1px dashed var(--ochre);border-radius:12px;padding:.7rem .9rem;margin-top:.7rem;font-size:.95rem;font-weight:600}
+.tip .bt{font-family:'JetBrains Mono',monospace;font-size:.56rem;letter-spacing:.12em;text-transform:uppercase;display:block;margin-bottom:.2rem;color:var(--terra);font-weight:600}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:.7rem}
+.pc{text-align:left;background:var(--paper);border:1px solid var(--rule);border-radius:14px;padding:.85rem .95rem;cursor:pointer;font:inherit;color:var(--ink);transition:.12s}
+.pc:hover{border-color:var(--terra);transform:translateY(-1px)}
+.pc:focus-visible{outline:2px solid var(--ochre);outline-offset:2px}
+.pc .n{font-family:'Fraunces',serif;font-size:1.08rem;line-height:1.18}
+.pc .meta{display:flex;flex-wrap:wrap;gap:.15rem .35rem;margin-top:.5rem;font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink2)}
+.pc .meta .frist{color:var(--terra);font-weight:700}
+.empty{display:none;background:var(--paper);border:1px dashed var(--rule);border-radius:14px;padding:1.2rem;text-align:center;color:var(--ink2)}
+.foot{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink2);text-align:center;margin-top:2.4rem}
+.foot a{color:var(--aub)}
+</style>
+<link rel="stylesheet" href="heiben-design.css">
+<script src="heiben-nav.js" defer></script>
+</head>
+<body data-hb-welt="wissen">
+<div class="wrap">
+  <div class="eyebrow">HeiBen · Wissen für Zuhause</div>
+  <h1><svg class="leaf" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#b04a31" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M3 10h18"/></svg>Ordnung im <em>Papierkram</em></h1>
+  <p class="lead">Was hebe ich wie lange auf, reicht ein Scan, und welche Kündigungsfrist läuft mir gerade davon? 31 Dokumente und Verträge im Steckbrief — vom Kassenbon bis zum Notfallordner, mit ehrlichen Fristen und dem Schredder-Gebot für alles mit Namen darauf.</p>
+
+  <div class="controls">
+    <div class="row"><span class="lbl">Wie lange aufheben</span>
+      <button class="chip on" data-f="typ" data-v="alle">Alle</button>
+      <button class="chip" data-f="typ" data-v="lebenslang">Lebenslang</button>
+      <button class="chip" data-f="typ" data-v="jahre">Mehrere Jahre</button>
+      <button class="chip" data-f="typ" data-v="laufend">Solange es läuft</button>
+    </div>
+    <div class="row"><span class="lbl">Kategorie &amp; Suche</span>
+      <button class="chip" id="fristChip">⏰ Frist beachten</button>
+      <select id="kat" class="chip" style="padding-right:.5rem"></select>
+      <input id="q" type="search" placeholder="Suchen: Testament, Kassenbon, Kfz …" aria-label="Dokumente durchsuchen">
+    </div>
+  </div>
+
+  <div class="count" id="count"></div>
+  <div id="detail"></div>
+  <div class="empty" id="empty"></div>
+  <div class="grid" id="grid"></div>
+
+  <div class="hb-box welt" style="--wf:#1f1c17;max-width:1100px;margin:1.6rem auto 0"><span class="hb-bt">Aus der HeiBen-Welt</span>Vom Wissen zum Ordner: der <a style="color:inherit" href="zuhause-ordner.html">HeiBen Zuhause-Ordner</a> — den Notfall- &amp; Familienordner digital anlegen, abhaken und als Register ausdrucken.</div>
+
+<p class="foot">HeiBen GmbH i. G. · „Heimat leben" · <a href="mein-heiben.html">Mein HeiBen</a> · <a href="wissen.html">Alle Kompendien</a> · <a href="index.html">Zur Startseite</a></p>
+</div>
+
+<script src="papierkram-daten.js"></script>
+<script>
+var P=window.PAPIERKRAM, KAT=window.PK_KAT, TYP=window.PK_TYP;
+var state={typ:"alle",kat:"alle",q:"",frist:false};
+function esc(s){return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
+
+/* Kategorie-Auswahl füllen */
+(function(){
+  var sel=document.getElementById("kat");
+  var html='<option value="alle">Alle Kategorien</option>';
+  Object.keys(KAT).forEach(function(k){html+='<option value="'+k+'">'+esc(KAT[k])+'</option>';});
+  sel.innerHTML=html;
+  sel.addEventListener("change",function(){state.kat=sel.value;render();});
+})();
+
+/* Dauer-Chips */
+Array.prototype.forEach.call(document.querySelectorAll('.chip[data-f]'),function(btn){
+  btn.addEventListener("click",function(){
+    var f=btn.getAttribute("data-f"), v=btn.getAttribute("data-v");
+    state[f]=v;
+    Array.prototype.forEach.call(document.querySelectorAll('.chip[data-f="'+f+'"]'),function(c){c.classList.toggle("on",c===btn);});
+    render();
+  });
+});
+
+/* Frist-Filter */
+(function(){
+  var b=document.getElementById("fristChip");
+  var n=P.filter(function(p){return p.frist;}).length;
+  b.textContent="⏰ Frist beachten ("+n+")";
+  b.addEventListener("click",function(){state.frist=!state.frist;b.classList.toggle("on",state.frist);render();});
+})();
+
+document.getElementById("q").addEventListener("input",function(e){state.q=e.target.value.trim().toLowerCase();render();});
+
+function match(p){
+  if(state.typ!=="alle" && p.typ!==state.typ) return false;
+  if(state.kat!=="alle" && p.kat!==state.kat) return false;
+  if(state.frist && !p.frist) return false;
+  if(state.q){
+    var hay=(p.n+" "+(KAT[p.kat]||"")).toLowerCase();
+    if(hay.indexOf(state.q)<0) return false;
+  }
+  return true;
+}
+
+function card(p){
+  var fr=p.frist?'<span class="frist">⏰</span>':'';
+  return '<div class="pc" tabindex="0" role="button" aria-label="'+esc(p.n)+' öffnen" data-id="'+p.id+'">'+
+    '<div class="n">'+esc(p.n)+'</div>'+
+    '<div class="meta"><span>'+esc(KAT[p.kat]||"")+'</span><span>·</span><span>'+esc(TYP[p.typ]||"")+'</span>'+fr+'</div></div>';
+}
+
+function detail(p){
+  var fristB=p.frist?'<span class="b frist">⏰ Frist</span>':'';
+  var frist=p.frist?'<div class="box frist"><span class="bt">⏰ Frist</span>'+esc(p.frist)+'</div>':'';
+  var warn=p.warn?'<div class="box warn"><span class="bt">⚠ Achtung</span>'+esc(p.warn)+'</div>':'';
+  var weg=p.entsorgen?'<div class="box weg"><span class="bt">Richtig entsorgen</span>'+esc(p.entsorgen)+'</div>':'';
+  return '<div class="dcard">'+
+    '<div class="dhead"><div><h2>'+esc(p.n)+'</h2><div class="sub">'+esc(KAT[p.kat]||"")+'</div></div>'+
+      '<button class="close" id="dClose">Schließen ✕</button></div>'+
+    '<div class="badges"><span class="b typ">'+esc(TYP[p.typ]||"")+'</span><span class="b kat">'+esc(KAT[p.kat]||"")+'</span>'+fristB+'</div>'+
+    '<div class="sec">Wie lange aufheben</div><div class="stext"><b>'+esc(p.dauer)+'</b></div>'+
+    '<div class="sec">Warum es zählt</div><div class="stext">'+esc(p.warum)+'</div>'+
+    '<div class="sec">Ablage</div><div class="stext">'+esc(p.ablage)+'</div>'+
+    '<div class="sec">Digital oder Original?</div><div class="stext">'+esc(p.digital)+'</div>'+
+    frist+warn+weg+
+    '<div class="tip"><span class="bt">HeiBen-Tipp</span>'+esc(p.tipp)+'</div>'+
+  '</div>';
+}
+
+function showDetail(id){
+  var p=P.filter(function(x){return x.id===id;})[0]; if(!p)return;
+  var d=document.getElementById("detail");
+  d.innerHTML=detail(p);
+  document.getElementById("dClose").addEventListener("click",function(){d.innerHTML="";});
+  d.scrollIntoView({behavior:"smooth",block:"start"});
+}
+
+function render(){
+  var list=P.filter(match);
+  document.getElementById("count").textContent=list.length+" von "+P.length+" Dokumenten";
+  var g=document.getElementById("grid");
+  var emptyEl=document.getElementById("empty");
+  emptyEl.style.display=list.length?"none":"block";
+  emptyEl.textContent="Nichts passt zu dieser Auswahl. Filter zurücksetzen und neu stöbern.";
+  g.innerHTML=list.map(card).join('');
+  Array.prototype.forEach.call(g.querySelectorAll('.pc'),function(el){
+    el.addEventListener("click",function(){showDetail(el.getAttribute("data-id"));});
+    el.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();showDetail(el.getAttribute("data-id"));}});
+  });
+}
+render();
+
+/* Deep-Link aus wissen.html: seite.html#eintrags-id öffnet den Steckbrief direkt */
+(function(){var h=decodeURIComponent((location.hash||"").slice(1));if(h){try{showDetail(h);}catch(e){}}})();
+</script>
+</body>
+</html>

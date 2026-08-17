@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lohnt sich der Jobwechsel? · HeiBen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;1,400&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f3eee5;--bg2:#ebe3d4;--paper:#fffdf8;--ink:#1f1c17;--ink2:#524a3e;--rule:#d8cdb7;--terra:#b04a31;--ochre:#a97a1d;--moss:#4a5c39;--burg:#792d29;--aub:#6b3951}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:'Manrope',system-ui,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:940px;margin:0 auto;padding:1.6rem 1.1rem 5rem}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.32em;text-transform:uppercase;color:var(--terra)}
+h1{font-family:'Fraunces',serif;font-weight:400;font-size:clamp(2rem,6.5vw,3.3rem);line-height:1.02;letter-spacing:-.02em;margin:.45rem 0 .5rem}
+h1 em{font-style:italic;color:var(--terra)}
+.lead{color:var(--ink2);max-width:62ch;font-size:1.02rem}
+.grid2{display:grid;gap:1rem;margin-top:1.4rem}
+@media(min-width:760px){.grid2{grid-template-columns:1fr 1fr}}
+.job{background:var(--paper);border:1px solid var(--rule);border-radius:16px;padding:1.15rem 1.15rem 1.3rem}
+.job.b{border-color:var(--terra);box-shadow:0 0 0 1px var(--terra)}
+.job h3{font-family:'Fraunces',serif;font-weight:500;font-size:1.35rem;display:flex;align-items:center;gap:.5rem}
+.dot{width:.7rem;height:.7rem;border-radius:50%;display:inline-block}
+.field{margin-top:.7rem}
+.field label{display:block;font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink2);margin-bottom:.22rem}
+.field input{width:100%;padding:.5rem .6rem;border:1px solid var(--rule);border-radius:9px;background:var(--bg);color:var(--ink);font:inherit;font-weight:600}
+.field input:focus{outline:none;border-color:var(--terra);background:#fff}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:.6rem}
+.assum{background:var(--bg2);border:1px solid var(--rule);border-radius:14px;padding:1rem 1.1rem;margin-top:1rem}
+.assum .ah{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink2);margin-bottom:.7rem}
+.arow{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
+@media(min-width:560px){.arow{grid-template-columns:1fr 1fr 1fr}}
+.result{margin-top:1.6rem;background:var(--ink);color:var(--bg);border-radius:18px;padding:1.4rem 1.3rem 1.5rem}
+.result .eyebrow{color:var(--ochre)}
+.verdict{font-family:'Fraunces',serif;font-weight:400;font-size:clamp(1.35rem,4vw,1.95rem);line-height:1.2;margin:.5rem 0 .2rem}
+.verdict b{color:var(--ochre);font-weight:500}
+.verdict .good{color:#9ec27f}.verdict .bad{color:#e7a48f}
+.cmp{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;margin:1.2rem 0 .2rem}
+@media(min-width:560px){.cmp{grid-template-columns:repeat(4,1fr)}}
+.cmp .box{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);border-radius:12px;padding:.75rem .8rem}
+.cmp .l{font-family:'JetBrains Mono',monospace;font-size:.54rem;letter-spacing:.08em;text-transform:uppercase;color:#cdbfa8}
+.cmp .v{font-family:'Fraunces',serif;font-size:1.45rem;margin-top:.12rem}
+.cmp .s{font-size:.74rem;color:#cdbfa8;margin-top:.1rem}
+.bars{margin-top:1.2rem}
+.bar{display:grid;grid-template-columns:78px 1fr;gap:.6rem;align-items:center;margin:.4rem 0}
+.bar .bl{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.06em;text-transform:uppercase;color:#cdbfa8}
+.track{background:rgba(255,255,255,.1);border-radius:8px;height:32px;position:relative;overflow:hidden}
+.fill{height:100%;border-radius:8px;display:flex;align-items:center;justify-content:flex-end;padding-right:.55rem;font-weight:700;font-size:.84rem;color:#1f1c17;transition:width .6s cubic-bezier(.2,.7,.2,1);min-width:3.5rem}
+.detail{margin-top:1.6rem}
+.detail h4{font-family:'JetBrains Mono',monospace;font-size:.64rem;letter-spacing:.16em;text-transform:uppercase;color:var(--terra);margin-bottom:.5rem}
+table{width:100%;border-collapse:collapse;font-size:.9rem;background:var(--paper);border:1px solid var(--rule);border-radius:12px;overflow:hidden}
+th,td{padding:.5rem .7rem;border-bottom:1px solid var(--rule);text-align:left}
+th{font-family:'JetBrains Mono',monospace;font-size:.55rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink2)}
+td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+tr:last-child td{border-bottom:none}
+tr.tot td{font-weight:800;background:var(--bg2)}
+.pos{color:var(--moss)}.neg{color:var(--burg)}
+.note{font-size:.82rem;color:var(--ink2);margin-top:1rem;max-width:64ch}
+.foot{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink2);text-align:center;margin-top:2rem}
+</style>
+<link rel="stylesheet" href="heiben-design.css">
+<script src="heiben-nav.js" defer></script>
+</head>
+<body data-hb-welt="wissen">
+<div class="wrap">
+  <p class="eyebrow">HeiBen · Entscheidungshilfe</p>
+  <h1>Lohnt sich der <em>Jobwechsel</em> wirklich?</h1>
+  <p class="lead">Ein höheres Brutto klingt verlockend — aber es zählt, was am Monatsende übrig bleibt, nachdem Pendeln, Steuern und Lebenszeit verrechnet sind. Trag beide Jobs ein; gerechnet wird sofort. Deine Eingaben bleiben lokal in diesem Gerät.</p>
+
+  <div class="grid2">
+    <div class="job a">
+      <h3><span class="dot" style="background:var(--moss)"></span>Aktueller Job</h3>
+      <div class="field"><label>Bruttojahresgehalt (€)</label><input type="number" id="a_brutto" value="45000" step="1000"></div>
+      <div class="frow">
+        <div class="field"><label>Bonus / Jahr (€)</label><input type="number" id="a_bonus" value="1500" step="500"></div>
+        <div class="field"><label>Urlaubstage</label><input type="number" id="a_urlaub" value="28"></div>
+      </div>
+      <div class="frow">
+        <div class="field"><label>Wochenstunden</label><input type="number" id="a_std" value="40"></div>
+        <div class="field"><label>AG-Vorsorge (€/Mon)</label><input type="number" id="a_bav" value="20"></div>
+      </div>
+      <div class="frow">
+        <div class="field"><label>Pendel-km (einfach)</label><input type="number" id="a_km" value="12"></div>
+        <div class="field"><label>Büro-Tage / Woche</label><input type="number" id="a_bt" value="5"></div>
+      </div>
+    </div>
+
+    <div class="job b">
+      <h3><span class="dot" style="background:var(--terra)"></span>Das Angebot</h3>
+      <div class="field"><label>Bruttojahresgehalt (€)</label><input type="number" id="b_brutto" value="52000" step="1000"></div>
+      <div class="frow">
+        <div class="field"><label>Bonus / Jahr (€)</label><input type="number" id="b_bonus" value="3000" step="500"></div>
+        <div class="field"><label>Urlaubstage</label><input type="number" id="b_urlaub" value="30"></div>
+      </div>
+      <div class="frow">
+        <div class="field"><label>Wochenstunden</label><input type="number" id="b_std" value="40"></div>
+        <div class="field"><label>AG-Vorsorge (€/Mon)</label><input type="number" id="b_bav" value="100"></div>
+      </div>
+      <div class="frow">
+        <div class="field"><label>Pendel-km (einfach)</label><input type="number" id="b_km" value="35"></div>
+        <div class="field"><label>Büro-Tage / Woche</label><input type="number" id="b_bt" value="3"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="assum">
+    <div class="ah">Gemeinsame Annahmen</div>
+    <div class="arow">
+      <div class="field"><label>Kosten je Pendel-km (€)</label><input type="number" id="s_kmcost" value="0.35" step="0.05"></div>
+      <div class="field"><label>Ø Pendel-Tempo (km/h)</label><input type="number" id="s_speed" value="32"></div>
+      <div class="field"><label>Homeoffice-Tage/Wo (beide)</label><input type="number" id="s_ho" value="0"></div>
+    </div>
+  </div>
+
+  <div class="result" id="result"></div>
+
+  <div class="detail">
+    <h4>Aufschlüsselung pro Monat</h4>
+    <table id="breakdown"></table>
+    <p class="note" id="note"></p>
+  </div>
+
+  <p class="foot">HeiBen GmbH i. G. · „Heimat leben" · <a href="mein-heiben.html" style="color:var(--aub)">Mein HeiBen</a> · grobe Schätzung (Steuerklasse I, ohne Kirchensteuer) · keine Steuer- oder Finanzberatung</p>
+</div>
+
+<script>
+var KEY="heiben_job_v1";
+var IDS=["a_brutto","a_bonus","a_urlaub","a_std","a_bav","a_km","a_bt","b_brutto","b_bonus","b_urlaub","b_std","b_bav","b_km","b_bt","s_kmcost","s_speed","s_ho"];
+try{var saved=JSON.parse(localStorage.getItem(KEY))||{};IDS.forEach(function(id){if(saved[id]!=null)document.getElementById(id).value=saved[id];});}catch(e){}
+
+function num(id){var v=parseFloat(String(document.getElementById(id).value).replace(",","."));return isNaN(v)?0:v;}
+function eur(n){return (Math.round(n)).toLocaleString("de-DE")+" €";}
+function sgn(n){return (n>=0?"+":"−")+eur(Math.abs(n));}
+
+// Brutto -> Netto-Jahr (grob, Steuerklasse I)
+function nettoJahr(brutto){
+  brutto=+brutto||0; if(brutto<=0)return 0;
+  var sv=Math.min(brutto,62100)*0.20;
+  var zvE=Math.max(0,brutto-11604-Math.min(sv,brutto)*0.5);
+  return Math.max(0,brutto-sv-incomeTax(zvE));
+}
+function incomeTax(zvE){
+  if(zvE<=0)return 0;
+  if(zvE<=17000)return zvE*0.16;
+  if(zvE<=66000)return 2720+(zvE-17000)*0.30;
+  return 17420+(zvE-66000)*0.42;
+}
+function margTax(brutto){
+  var sv=Math.min(brutto,62100)*0.20; var zvE=Math.max(0,brutto-11604-Math.min(sv,brutto)*0.5);
+  if(zvE<=17000)return 0.16; if(zvE<=66000)return 0.30; return 0.42;
+}
+
+function calcJob(p){
+  var brutto=num(p+"brutto"), bonus=num(p+"bonus");
+  var nettoCash=nettoJahr(brutto+bonus)/12;
+  var bt=Math.max(0,num(p+"bt")-num("s_ho"));         // effektive Bürotage/Woche
+  var km=num(p+"km"); var speed=num("s_speed")||1;
+  var distMon=km*2*bt*4.33;                            // km/Monat
+  var pendelKost=distMon*num("s_kmcost");
+  var pendelZeitWo=km*2*bt/speed;                      // h/Woche
+  // Werbungskosten (Pendlerpauschale + Homeoffice), Wirkung nur ueber Pauschbetrag 1230
+  var arbeitswochen=45;
+  var pendlerpausch=(Math.min(km,20)*0.30+Math.max(0,km-20)*0.38)*bt*arbeitswochen;
+  var hoPausch=Math.min(num("s_ho")*arbeitswochen,210)*6;
+  var wk=pendlerpausch+hoPausch;
+  var steuervorteilJ=Math.max(0,wk-1230)*margTax(brutto);
+  var steuervorteil=steuervorteilJ/12;
+  var eff=nettoCash+steuervorteil-pendelKost;          // Netto-Netto/Monat
+  var std=num(p+"std")||1;
+  var lohnRein=nettoCash/(std*4.33);
+  var lohnEff=eff/((std+pendelZeitWo)*4.33);
+  return {brutto:brutto,bonus:bonus,nettoCash:nettoCash,steuervorteil:steuervorteil,pendelKost:pendelKost,
+    pendelZeitWo:pendelZeitWo,eff:eff,bav:num(p+"bav"),urlaub:num(p+"urlaub"),std:std,lohnRein:lohnRein,lohnEff:lohnEff};
+}
+
+function render(){
+  try{var o={};IDS.forEach(function(id){o[id]=document.getElementById(id).value;});localStorage.setItem(KEY,JSON.stringify(o));}catch(e){}
+  var A=calcJob("a_"), B=calcJob("b_");
+  var dEff=B.eff-A.eff, dZeit=B.pendelZeitWo-A.pendelZeitWo, dUrlaub=B.urlaub-A.urlaub, dBav=B.bav-A.bav;
+  // Verdict
+  var v="";
+  var moneyTxt = dEff>=0 ? '<span class="good">'+sgn(dEff*12)+' / Jahr</span> netto-netto' : '<span class="bad">'+sgn(dEff*12)+' / Jahr</span> netto-netto';
+  if(Math.abs(dEff)<15 && Math.abs(dZeit)<0.5){
+    v="Beide Jobs sind <b>praktisch gleichwertig</b> — am Geld solltest du es nicht festmachen. Entscheide nach Aufgabe, Team und Perspektive.";
+  } else if(dEff>=0 && dZeit<=0.25){
+    v="Das Angebot bringt "+moneyTxt+" — und das <span class=\"good\">ohne Mehraufwand beim Pendeln</span>. Wenn die Aufgabe passt: ein klares Ja.";
+  } else if(dEff>0 && dZeit>0.25){
+    var perH = dEff*12/(dZeit*45);
+    var vergleich = perH>=A.lohnRein ? '<span class="good">mehr</span>' : '<span class="bad">weniger</span>';
+    v="Das Angebot bringt "+moneyTxt+", kostet dich aber <b>"+dZeit.toFixed(1)+" h Pendeln pro Woche</b> extra. Macht <b>"+eur(perH)+" je zusätzlicher Pendelstunde</b> — "+vergleich+" als dein heutiger Netto-Stundenlohn von "+eur(A.lohnRein)+".";
+  } else if(dEff<0 && dZeit<0){
+    v="Das Angebot bringt zwar <span class=\"bad\">"+sgn(dEff*12)+" / Jahr</span> weniger Geld, schenkt dir aber <b>"+Math.abs(dZeit).toFixed(1)+" h Lebenszeit pro Woche</b> zurück. Das kann gut angelegtes Geld sein.";
+  } else {
+    v="Das Angebot bringt "+moneyTxt+"<b> und</b> mehr Pendeln. Rein rechnerisch der schlechtere Deal — es müsste über Inhalt oder Perspektive überzeugen.";
+  }
+  var extras=[];
+  if(dUrlaub) extras.push((dUrlaub>0?"+":"")+dUrlaub+" Urlaubstage");
+  if(dBav) extras.push((dBav>0?"+":"")+eur(dBav)+"/Mon Arbeitgeber-Vorsorge");
+  var extraTxt = extras.length? '<div style="margin-top:.7rem;font-size:.92rem;color:#cdbfa8">Nicht im Geld enthalten: '+extras.join(" · ")+'.</div>' : '';
+
+  var maxEff=Math.max(A.eff,B.eff,1);
+  document.getElementById("result").innerHTML =
+    '<p class="eyebrow">Das Urteil</p>'+
+    '<p class="verdict">'+v+'</p>'+ extraTxt +
+    '<div class="cmp">'+
+      box("Netto-Netto Aktuell",eur(A.eff),"pro Monat")+
+      box("Netto-Netto Angebot",eur(B.eff),"pro Monat")+
+      box("Differenz",sgn(dEff),"pro Monat")+
+      box("Stundenlohn* Angebot",eur(B.lohnEff),"inkl. Pendelzeit")+
+    '</div>'+
+    '<div class="bars">'+
+      barRow("Aktuell",A.eff,maxEff,"#9ec27f")+
+      barRow("Angebot",B.eff,maxEff,"#a97a1d")+
+    '</div>';
+
+  // breakdown
+  var rows=[
+    ["Netto (Gehalt + Bonus)",A.nettoCash,B.nettoCash,false],
+    ["+ Steuervorteil (Pendeln/HO)",A.steuervorteil,B.steuervorteil,false],
+    ["− Pendelkosten",-A.pendelKost,-B.pendelKost,false],
+    ["= Netto-Netto / Monat",A.eff,B.eff,true],
+    ["Arbeitgeber-Vorsorge (extra)",A.bav,B.bav,false]
+  ];
+  var html='<thead><tr><th>Posten</th><th class="n">Aktuell</th><th class="n">Angebot</th><th class="n">Δ</th></tr></thead><tbody>';
+  rows.forEach(function(r){
+    var d=r[2]-r[1];
+    html+='<tr class="'+(r[3]?"tot":"")+'"><td>'+r[0]+'</td><td class="n">'+eur(r[1])+'</td><td class="n">'+eur(r[2])+'</td><td class="n '+(d>=0?"pos":"neg")+'">'+sgn(d)+'</td></tr>';
+  });
+  html+='<tr><td>Pendelzeit / Woche</td><td class="n">'+A.pendelZeitWo.toFixed(1)+' h</td><td class="n">'+B.pendelZeitWo.toFixed(1)+' h</td><td class="n '+(dZeit<=0?"pos":"neg")+'">'+(dZeit>=0?"+":"−")+Math.abs(dZeit).toFixed(1)+' h</td></tr>';
+  html+='<tr><td>Urlaubstage</td><td class="n">'+A.urlaub+'</td><td class="n">'+B.urlaub+'</td><td class="n '+(dUrlaub>=0?"pos":"neg")+'">'+(dUrlaub>=0?"+":"")+dUrlaub+'</td></tr>';
+  html+='</tbody>';
+  document.getElementById("breakdown").innerHTML=html;
+  document.getElementById("note").innerHTML="* Netto-Stundenlohn inklusive Pendelzeit: Er rechnet die unbezahlte Fahrtzeit in den Lohn ein — oft der ehrlichste Vergleich. Der Steuervorteil greift nur, soweit deine Werbungskosten über dem Pauschbetrag von 1.230 € liegen. Pendlerpauschale ab dem 21. km mit 0,38 € berücksichtigt.";
+}
+function box(l,v,s){return '<div class="box"><div class="l">'+l+'</div><div class="v">'+v+'</div><div class="s">'+s+'</div></div>';}
+function barRow(label,val,max,col){var w=Math.max(8,val/max*100);return '<div class="bar"><span class="bl">'+label+'</span><div class="track"><div class="fill" style="width:'+w+'%;background:'+col+'">'+eur(val)+'</div></div></div>';}
+
+IDS.forEach(function(id){document.getElementById(id).addEventListener("input",render);});
+render();
+</script>
+</body>
+</html>

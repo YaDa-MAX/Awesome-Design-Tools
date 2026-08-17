@@ -1,0 +1,499 @@
+{
+  "batch": 8,
+  "region": "Europa",
+  "schema_version": 1,
+  "note": "Traditionelle, historisch etablierte Gerichte. Auswahl ohne Schweinefleisch; Feld 'substitution' nur dort, wo das Original mit Schwein zubereitet wird. Bilder als Platzhalter. Generisches Schema, direkt importierbar in PostgreSQL/Supabase/Directus/Strapi/Sanity.",
+  "recipes": [
+    {
+      "country": "Slowakei",
+      "continent": "Europa",
+      "recipe_name": "Bryndzové halušky",
+      "categories": ["Vegetarisch", "Hauptgericht"],
+      "short_description": "Kleine Kartoffelnocken mit cremigem Schafskäse (bryndza) und gerösteten Zwiebeln. Das Nationalgericht der Slowakei.",
+      "history": "Bryndzové halušky gelten als das Nationalgericht der Slowakei und verkörpern die Hirten- und Bergküche der Karpaten. Das Gericht verbindet zwei Grundpfeiler der slowakischen Ernährung: kleine Kartoffelnocken (halušky), die einem Spätzle- oder Gnocchi-Teig ähneln, und bryndza, einen würzig-cremigen Schafskäse, der traditionell von den Schäfern in den Bergen hergestellt wurde. Die Verbindung von Kartoffel und Schafskäse spiegelt die Almwirtschaft wider, in der Schafe Milch und Käse lieferten. Der warme Käse wird mit den frisch gekochten Nocken vermengt, bis eine cremige, leicht salzige Masse entsteht. Traditionell wird das Gericht mit ausgelassenem Speck und dessen Fett gekrönt; in dieser Fassung treten goldbraun geröstete Zwiebeln und etwas Butter an die Stelle des Schweinefleischs. Bryndzové halušky werden im ganzen Land geschätzt, von Berghütten bis zu Restaurants, und gelten als identitätsstiftendes Gericht. In dieser Variante kommen sie ohne Schwein aus.",
+      "ingredients": [
+        { "quantity": "1", "unit": "kg", "item": "mehligkochende Kartoffeln" },
+        { "quantity": "250", "unit": "g", "item": "Mehl" },
+        { "quantity": "1", "unit": "", "item": "Ei" },
+        { "quantity": "300", "unit": "g", "item": "bryndza (Schafsfrischkäse)" },
+        { "quantity": "3", "unit": "", "item": "Zwiebeln" },
+        { "quantity": "60", "unit": "g", "item": "Butter" },
+        { "quantity": "", "unit": "", "item": "Salz; Schnittlauch zum Servieren" }
+      ],
+      "instructions": [
+        "Kartoffeln fein reiben und mit Mehl, Ei und Salz zu einem zähen Teig verrühren.",
+        "Den Teig portionsweise durch ein Halušky- oder Spätzlesieb in siedendes Salzwasser drücken.",
+        "Aufgeschwommene Nocken abschöpfen und abtropfen lassen.",
+        "Bryndza mit etwas heißem Kochwasser cremig rühren.",
+        "Die warmen Nocken mit dem Käse vermengen, bis alles cremig ist.",
+        "Zwiebelringe in Butter goldbraun rösten und mit etwas Schnittlauch über die Halušky geben."
+      ],
+      "tips": [
+        "Den Teig zügig verarbeiten, damit die geriebenen Kartoffeln nicht dunkel werden.",
+        "Den Käse mit etwas Kochwasser geschmeidig machen.",
+        "Sofort servieren, solange die Masse cremig ist."
+      ],
+      "tags": ["Slowakei", "Bryndzové halušky", "Kartoffelnocken", "bryndza", "Schafskäse", "vegetarisch", "Karpaten", "Hirtenküche", "Nationalgericht", "Röstzwiebeln", "Bergküche", "Hauptgericht"],
+      "substitution": "Klassisch werden Bryndzové halušky mit ausgelassenem Speck und dessen Fett serviert. Wir verwenden stattdessen reichlich in Butter goldbraun geröstete Zwiebeln — sie geben die herzhafte, leicht süßliche Tiefe, ganz ohne Schwein.",
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Slowakei",
+      "continent": "Europa",
+      "recipe_name": "Zemiakové placky",
+      "categories": ["Vegetarisch", "Snack", "Beilage"],
+      "short_description": "Knusprige Kartoffelpuffer mit Knoblauch und Majoran, in der Pfanne goldbraun gebraten. Beliebter Kartoffelklassiker der slowakischen Küche.",
+      "history": "Zemiakové placky — Kartoffelpuffer — gehören zur bodenständigen Alltagsküche der Slowakei und sind in ähnlicher Form in ganz Mitteleuropa verbreitet. Sie spiegeln die zentrale Rolle der Kartoffel in der Ernährung der Region wider, die seit dem 18. und 19. Jahrhundert zum Grundnahrungsmittel wurde. Geriebene rohe Kartoffeln werden mit Mehl, Ei, reichlich Knoblauch und dem in der slowakischen Küche typischen Majoran zu einem Teig vermengt und in heißem Fett zu dünnen, knusprigen Fladen ausgebacken. Charakteristisch für die slowakische Variante ist die kräftige Würzung mit Knoblauch und Majoran, die den Puffern ihr unverwechselbares Aroma gibt. Zemiakové placky waren ein günstiges, sättigendes Essen, das aus einfachen Vorräten zubereitet werden konnte, und werden als Hauptgericht, Beilage oder Snack gegessen, oft pur oder mit etwas Sauerrahm. Sie sind von Natur aus vegetarisch und ohne Schweinefleisch und gehören zu den beliebten, schnell zubereiteten Gerichten der slowakischen Hausmannskost.",
+      "ingredients": [
+        { "quantity": "800", "unit": "g", "item": "mehligkochende Kartoffeln" },
+        { "quantity": "4", "unit": "Zehen", "item": "Knoblauch" },
+        { "quantity": "1", "unit": "", "item": "Ei" },
+        { "quantity": "4", "unit": "EL", "item": "Mehl" },
+        { "quantity": "1", "unit": "TL", "item": "getrockneter Majoran" },
+        { "quantity": "", "unit": "", "item": "Öl zum Braten, Salz, Pfeffer" }
+      ],
+      "instructions": [
+        "Kartoffeln fein reiben und die Flüssigkeit gut ausdrücken.",
+        "Mit zerdrücktem Knoblauch, Ei, Mehl, Majoran, Salz und Pfeffer zu einem Teig vermengen.",
+        "Reichlich Öl in einer Pfanne erhitzen.",
+        "Aus dem Teig dünne Fladen formen und in das heiße Öl geben.",
+        "Beidseitig goldbraun und knusprig braten.",
+        "Auf Küchenpapier abtropfen lassen und heiß servieren."
+      ],
+      "tips": [
+        "Die Kartoffeln gut ausdrücken — je trockener, desto knuspriger.",
+        "Knoblauch und Majoran sind die typische slowakische Würze.",
+        "Dünn ausbacken für maximale Knusprigkeit."
+      ],
+      "tags": ["Slowakei", "Zemiakové placky", "Kartoffelpuffer", "vegetarisch", "Knoblauch", "Majoran", "gebraten", "Hausmannskost", "Snack", "Mitteleuropa", "knusprig", "Beilage"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Slowakei",
+      "continent": "Europa",
+      "recipe_name": "Šúľance s makom",
+      "categories": ["Dessert", "Vegetarisch"],
+      "short_description": "Kleine Kartoffelteig-Röllchen, geschwenkt in gemahlenem Mohn und Zucker mit zerlassener Butter. Süße slowakische Mehlspeise.",
+      "history": "Šúľance s makom sind eine traditionelle süße Mehlspeise der Slowakei und in ähnlicher Form in der gesamten mitteleuropäischen Küche verbreitet. Es handelt sich um kleine, längliche Röllchen aus einem Kartoffel-Mehl-Teig, die von Hand geformt (das Wort „šúľať“ bedeutet rollen), gekocht und anschließend in zerlassener Butter, gemahlenem Mohn und Zucker geschwenkt werden. Mohn hat in der slowakischen und mitteleuropäischen Küche eine lange Tradition und spielt besonders in süßen Gerichten und Festtagsspeisen eine wichtige Rolle. Süße Hauptgerichte und Mehlspeisen waren in der Region weit verbreitet und galten als vollwertige Mahlzeit, nicht nur als Nachtisch. Šúľance s makom waren ein günstiges, sättigendes Essen aus einfachen Zutaten und werden bis heute als wohlig-süßes Gericht geschätzt, das an Kindheit und Großmutterküche erinnert. Als reine Kartoffel-Mehl-Mohn-Speise sind sie selbstverständlich vegetarisch und ohne Schweinefleisch und stehen für die süße Seite der slowakischen Hausmannskost.",
+      "ingredients": [
+        { "quantity": "500", "unit": "g", "item": "gekochte Kartoffeln (vom Vortag)" },
+        { "quantity": "200", "unit": "g", "item": "Mehl" },
+        { "quantity": "1", "unit": "", "item": "Ei" },
+        { "quantity": "120", "unit": "g", "item": "gemahlener Mohn" },
+        { "quantity": "80", "unit": "g", "item": "Zucker" },
+        { "quantity": "60", "unit": "g", "item": "Butter" },
+        { "quantity": "1", "unit": "Prise", "item": "Salz" }
+      ],
+      "instructions": [
+        "Kartoffeln fein zerdrücken und mit Mehl, Ei und Salz zu einem glatten Teig verkneten.",
+        "Aus dem Teig fingerdicke Rollen formen und in kurze, längliche Stücke schneiden, die Enden leicht anspitzen.",
+        "Die Šúľance in siedendem Salzwasser garen, bis sie aufschwimmen; abtropfen lassen.",
+        "Mohn mit Zucker mischen.",
+        "Die Röllchen in zerlassener Butter schwenken.",
+        "Mit der Mohn-Zucker-Mischung bestreuen und heiß servieren."
+      ],
+      "tips": [
+        "Kartoffeln vom Vortag ergeben einen besseren, festeren Teig.",
+        "Den Mohn frisch mahlen für das beste Aroma.",
+        "Heiß servieren, mit reichlich zerlassener Butter."
+      ],
+      "tags": ["Slowakei", "Šúľance", "Mohn", "Kartoffelteig", "süß", "vegetarisch", "Mehlspeise", "Mitteleuropa", "Hausmannskost", "Großmutterküche", "Butter", "Dessert"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Slowenien",
+      "continent": "Europa",
+      "recipe_name": "Štruklji",
+      "categories": ["Vegetarisch", "Beilage", "Dessert"],
+      "short_description": "Gerollte, gefüllte Teigrollen aus dünnem Teig, klassisch mit Quark (skuta), gedämpft oder gekocht. Vielseitige slowenische Spezialität.",
+      "history": "Štruklji gehören zu den bekanntesten und ältesten Gerichten der slowenischen Küche und sind in zahllosen regionalen Varianten überliefert. Es handelt sich um gerollte Teigrollen, bei denen ein dünn ausgezogener Teig mit einer Füllung bestrichen, fest aufgerollt und dann gekocht, gedämpft oder gebacken wird. Die Füllungen sind außerordentlich vielfältig und reichen von herzhaft bis süß: am verbreitetsten ist Quark (skuta), daneben gibt es Varianten mit Estragon, Walnuss, Äpfeln oder Kräutern. Štruklji haben in Slowenien eine so große Bedeutung, dass mehr als hundert verschiedene Sorten dokumentiert sind und sie als Teil des nationalen kulinarischen Erbes gelten. Sie können als Beilage zu Fleischgerichten, als eigenständiges Gericht oder als Dessert serviert werden. Ihre Wurzeln reichen weit zurück und verbinden bäuerliche Tradition mit festlicher Tafel. Die Quark-Variante ist von Natur aus vegetarisch und ohne Schweinefleisch und steht sinnbildlich für die Vielfalt und Tiefe der slowenischen Küche.",
+      "ingredients": [
+        { "quantity": "300", "unit": "g", "item": "Mehl" },
+        { "quantity": "150", "unit": "ml", "item": "lauwarmes Wasser" },
+        { "quantity": "1", "unit": "", "item": "Ei" },
+        { "quantity": "2", "unit": "EL", "item": "Öl" },
+        { "quantity": "500", "unit": "g", "item": "Quark (skuta)" },
+        { "quantity": "2", "unit": "", "item": "Eier (Füllung)" },
+        { "quantity": "50", "unit": "g", "item": "saure Sahne" },
+        { "quantity": "", "unit": "", "item": "Salz, etwas Zucker; Butterbrösel zum Servieren" }
+      ],
+      "instructions": [
+        "Mehl, Wasser, Ei, Öl und Salz zu einem geschmeidigen Teig kneten und ruhen lassen.",
+        "Den Teig sehr dünn ausziehen oder ausrollen.",
+        "Quark mit Eiern, saurer Sahne und etwas Salz und Zucker zu einer Füllung verrühren.",
+        "Die Füllung auf dem Teig verstreichen und diesen fest aufrollen.",
+        "Die Rolle in ein Tuch wickeln und in siedendem Wasser garen oder dämpfen (ca. 30 Minuten).",
+        "In Scheiben schneiden und mit gerösteten Butterbröseln servieren."
+      ],
+      "tips": [
+        "Den Teig möglichst dünn ausziehen — das ist die Kunst der Štruklji.",
+        "Im Tuch gegart behält die Rolle ihre Form.",
+        "Mit Butterbröseln bestreut schmecken sie am besten."
+      ],
+      "tags": ["Slowenien", "Štruklji", "Teigrolle", "Quark", "skuta", "vegetarisch", "kulinarisches Erbe", "gedämpft", "Beilage", "Hausmannskost", "vielseitig", "Dessert"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Slowenien",
+      "continent": "Europa",
+      "recipe_name": "Žganci",
+      "categories": ["Vegetarisch", "Beilage", "Frühstück"],
+      "short_description": "Ein krümeliger Brei aus Buchweizen- oder Maismehl, mit Butter oder Grieben. Bodenständiges Grundnahrungsmittel der slowenischen Bauernküche.",
+      "history": "Žganci sind eine traditionelle slowenische Mehlspeise und gehörten über Generationen zu den wichtigsten Grundnahrungsmitteln der ländlichen Bevölkerung. Klassisch werden sie aus Buchweizenmehl (ajdovi žganci) zubereitet, daneben gibt es Varianten aus Mais- oder Weizenmehl. Buchweizen hat in Slowenien eine lange Tradition und prägt zahlreiche Gerichte des Landes. Für Žganci wird das Mehl in heißem Salzwasser zu einem festen Brei gekocht, der anschließend mit einer Gabel oder einem Holzlöffel in unregelmäßige Krümel zerteilt und mit Fett — traditionell Butter oder Grieben — verfeinert wird. Das Gericht war ein günstiges, sättigendes Essen, das Bauern und Arbeitern Kraft gab und zu vielen Tageszeiten gegessen wurde, oft zum Frühstück mit Milch oder als Beilage zu Eintöpfen und Sauerkraut. Žganci spiegeln die schlichte, getreidebetonte Seite der slowenischen Küche wider. In der Fassung mit Butter sind sie von Natur aus vegetarisch und ohne Schweinefleisch.",
+      "ingredients": [
+        { "quantity": "300", "unit": "g", "item": "Buchweizenmehl (oder Maismehl)" },
+        { "quantity": "750", "unit": "ml", "item": "Wasser" },
+        { "quantity": "1", "unit": "TL", "item": "Salz" },
+        { "quantity": "60", "unit": "g", "item": "Butter" }
+      ],
+      "instructions": [
+        "Salzwasser zum Kochen bringen.",
+        "Das Buchweizenmehl in die Mitte einrieseln lassen, sodass ein Kegel entsteht; nicht rühren.",
+        "Etwa 15 Minuten bei kleiner Hitze kochen, dann einen Teil des Wassers abschöpfen.",
+        "Mit einem Kochlöffel oder einer Gabel das Mehl in unregelmäßige Krümel zerteilen und mit dem restlichen Wasser verbinden.",
+        "Zerlassene Butter darübergeben und untermischen.",
+        "Warm als Beilage, zum Frühstück mit Milch oder zu Sauerkraut servieren."
+      ],
+      "tips": [
+        "Das Mehl als Kegel einrieseln lassen und erst nach dem Garen zerteilen.",
+        "Mit reichlich Butter werden die Žganci besonders aromatisch.",
+        "Auch zu Eintöpfen und Sauerkraut eine klassische Beilage."
+      ],
+      "tags": ["Slowenien", "Žganci", "Buchweizen", "Brei", "vegetarisch", "Bauernküche", "Grundnahrungsmittel", "Butter", "Frühstück", "schlicht", "Getreideküche", "Beilage"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Slowenien",
+      "continent": "Europa",
+      "recipe_name": "Prekmurska gibanica",
+      "categories": ["Dessert", "Vegetarisch"],
+      "short_description": "Eine reichhaltige Schichtmehlspeise mit Mohn, Walnuss, Apfel und Quark zwischen dünnen Teigblättern. Das Festtagsgebäck der Region Prekmurje.",
+      "history": "Die Prekmurska gibanica ist eine der berühmtesten Süßspeisen Sloweniens und stammt aus der nordöstlichen Region Prekmurje. Sie genießt einen geschützten Status als traditionelle Spezialität in der EU. Charakteristisch ist ihr aufwendiger, vielschichtiger Aufbau: Zwischen dünnen Teig- oder Strudelblättern werden vier klassische Füllungen geschichtet — Mohn, Walnuss, geriebener Apfel und Quark —, oft jede zweimal, sodass ein hoher, reichhaltiger Kuchen mit acht oder mehr Lagen entsteht. Diese Kombination spiegelt die Fülle und Symbolik einer Festtagsspeise wider und galt als Ausdruck von Wohlstand und Gastfreundschaft. Die Prekmurska gibanica wurde traditionell zu großen Festen, Hochzeiten und Feiertagen gebacken und erfordert Geduld und Geschick. Mit Sahne oder saurer Sahne verfeinert, ist sie besonders saftig und gehaltvoll. Als reine Mehlspeise mit pflanzlichen und Milchfüllungen ist sie selbstverständlich vegetarisch und ohne Schweinefleisch und gilt als kulinarisches Wahrzeichen Sloweniens.",
+      "ingredients": [
+        { "quantity": "400", "unit": "g", "item": "dünne Strudel-/Filoteigblätter" },
+        { "quantity": "150", "unit": "g", "item": "gemahlener Mohn" },
+        { "quantity": "150", "unit": "g", "item": "gemahlene Walnüsse" },
+        { "quantity": "500", "unit": "g", "item": "geriebener Apfel" },
+        { "quantity": "400", "unit": "g", "item": "Quark" },
+        { "quantity": "200", "unit": "g", "item": "Zucker (auf die Füllungen verteilt)" },
+        { "quantity": "200", "unit": "ml", "item": "saure Sahne und 100 g Butter" },
+        { "quantity": "2", "unit": "", "item": "Eier; Rosinen, Zimt nach Geschmack" }
+      ],
+      "instructions": [
+        "Die vier Füllungen separat anrühren: Mohn mit Zucker, Walnuss mit Zucker, geriebenen Apfel mit Zimt, Quark mit Ei und Zucker.",
+        "Eine Form mit Butter ausstreichen und ein Teigblatt einlegen, mit Butter und etwas saurer Sahne beträufeln.",
+        "Nacheinander die Füllungen einschichten, jeweils durch ein Teigblatt getrennt und mit Butter/Sahne beträufelt.",
+        "Die Schichtung wiederholen, bis alle Füllungen verbraucht sind, mit Teigblättern abschließen.",
+        "Mit verquirltem Ei und saurer Sahne bestreichen.",
+        "Bei 180 °C 50–60 Minuten backen; gut auskühlen lassen und in Stücke schneiden."
+      ],
+      "tips": [
+        "Jede Schicht mit Butter und saurer Sahne beträufeln — das macht die Gibanica saftig.",
+        "Vollständig auskühlen lassen, damit sich die Schichten setzen.",
+        "Die Reihenfolge Mohn–Quark–Walnuss–Apfel ist klassisch."
+      ],
+      "tags": ["Slowenien", "Prekmurje", "Prekmurska gibanica", "Mohn", "Walnuss", "Apfel", "Quark", "Schichtgebäck", "geschützte Spezialität", "vegetarisch", "Festtag", "Dessert"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Spanien",
+      "continent": "Europa",
+      "recipe_name": "Paella valenciana",
+      "categories": ["Fleisch", "Hauptgericht"],
+      "short_description": "Safranreis aus der flachen Pfanne mit Huhn, Kaninchen, grünen Bohnen und Garrofó-Bohnen. Das Original aus Valencia.",
+      "history": "Die Paella valenciana ist das berühmteste Reisgericht Spaniens und stammt aus der Region Valencia, wo sie als Inbegriff der regionalen Identität gilt. Anders als die international verbreiteten Meeresfrüchte- oder gemischten Paellas enthält die authentische valencianische Paella traditionell kein Schwein und keine Meeresfrüchte, sondern Huhn, Kaninchen, grüne Flachbohnen (bajoqueta), die weiße Garrofó-Bohne, Tomate und Safran. Sie entstand als Mittagessen der Landarbeiter im Umland von Valencia, die das Gericht im Freien über Holzfeuer aus dem zubereiteten, was Hof und Feld hergaben — Reis aus der Albufera-Region, Geflügel, Kaninchen und Gemüse. Charakteristisch sind die flache, breite Pfanne (die eigentliche „paella“), die dünne Reisschicht und die begehrte geröstete Kruste am Boden, der „socarrat“. Die Paella valenciana ist von Natur aus ohne Schweinefleisch und steht sinnbildlich für die gesellige, im Freien zelebrierte Esskultur der Region.",
+      "ingredients": [
+        { "quantity": "400", "unit": "g", "item": "Paellareis (Rundkorn, z. B. Bomba)" },
+        { "quantity": "500", "unit": "g", "item": "Hähnchenteile" },
+        { "quantity": "400", "unit": "g", "item": "Kaninchenteile" },
+        { "quantity": "200", "unit": "g", "item": "grüne Flachbohnen" },
+        { "quantity": "150", "unit": "g", "item": "weiße Garrofó- oder dicke Bohnen" },
+        { "quantity": "1", "unit": "", "item": "Tomate, gerieben" },
+        { "quantity": "1", "unit": "Briefchen", "item": "Safran, 1 TL Paprikapulver" },
+        { "quantity": "1.2", "unit": "l", "item": "Hühnerbrühe" },
+        { "quantity": "", "unit": "", "item": "Olivenöl, Salz, Rosmarin" }
+      ],
+      "instructions": [
+        "Huhn und Kaninchen in der Paellapfanne in Olivenöl rundum kräftig anbraten.",
+        "Die Bohnen zugeben und mitbraten.",
+        "Geriebene Tomate und Paprikapulver einrühren und kurz anrösten.",
+        "Mit heißer Brühe auffüllen, Safran und Rosmarin zugeben und etwa 20 Minuten köcheln.",
+        "Den Reis gleichmäßig einstreuen und ohne weiteres Rühren bei mittlerer Hitze garen, bis die Flüssigkeit aufgenommen ist.",
+        "Zum Schluss die Hitze kurz erhöhen, damit sich der socarrat (Kruste) bildet; vor dem Servieren ruhen lassen."
+      ],
+      "tips": [
+        "Nach dem Einstreuen des Reises nicht mehr umrühren.",
+        "Die knusprige Kruste (socarrat) am Boden ist begehrt — am Ende kurz stärker erhitzen.",
+        "Die Paella vor dem Servieren einige Minuten ruhen lassen."
+      ],
+      "tags": ["Spanien", "Valencia", "Paella", "Reis", "Huhn", "Kaninchen", "Safran", "Bohnen", "Klassiker", "socarrat", "im Freien", "Hauptgericht"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Spanien",
+      "continent": "Europa",
+      "recipe_name": "Gazpacho andaluz",
+      "categories": ["Vegetarisch", "Vegan", "Suppe", "Vorspeise"],
+      "short_description": "Eine kalte, pürierte Suppe aus reifen Tomaten, Gurke, Paprika, Knoblauch und Olivenöl. Erfrischung aus dem heißen Andalusien.",
+      "history": "Gazpacho ist die berühmteste kalte Suppe Spaniens und stammt aus der südlichen Region Andalusien, wo die heißen Sommer eine erfrischende, ungekochte Speise nahelegten. Die Ursprünge reichen weit zurück; frühe Formen beruhten auf Brot, Olivenöl, Essig, Knoblauch und Wasser, die zerstoßen wurden — die Tomate kam erst nach der Einführung amerikanischer Zutaten hinzu und prägt das heutige, rote Gazpacho. Es war ursprünglich ein einfaches, sättigendes Essen der Landarbeiter, das aus haltbaren Grundzutaten und dem Gemüse der Saison bereitet wurde. Für das moderne Gazpacho andaluz werden reife Tomaten, Gurke, Paprika, Knoblauch, Brot, Olivenöl und Essig fein püriert und eiskalt serviert, oft mit fein gewürfeltem Gemüse als Einlage. Es ist leicht, vitaminreich und ideal für heiße Tage. Als rein pflanzliches Gericht ist Gazpacho von Natur aus vegan und ohne Schweinefleisch und gilt als Inbegriff der sommerlichen, mediterranen Küche Südspaniens.",
+      "ingredients": [
+        { "quantity": "1", "unit": "kg", "item": "reife Tomaten" },
+        { "quantity": "1", "unit": "", "item": "Salatgurke" },
+        { "quantity": "1", "unit": "", "item": "grüne Paprika" },
+        { "quantity": "1", "unit": "Zehe", "item": "Knoblauch" },
+        { "quantity": "50", "unit": "g", "item": "altbackenes Weißbrot" },
+        { "quantity": "5", "unit": "EL", "item": "Olivenöl extra vergine" },
+        { "quantity": "2", "unit": "EL", "item": "Sherry- oder Weinessig" },
+        { "quantity": "", "unit": "", "item": "Salz, kaltes Wasser" }
+      ],
+      "instructions": [
+        "Tomaten, Gurke und Paprika grob zerteilen.",
+        "Das Brot kurz in Wasser einweichen.",
+        "Alle Gemüse mit Knoblauch, Brot, Olivenöl, Essig und Salz fein pürieren.",
+        "Mit etwas kaltem Wasser auf die gewünschte Konsistenz verdünnen.",
+        "Für eine besonders feine Suppe durch ein Sieb passieren.",
+        "Mindestens 2 Stunden gut durchkühlen und eiskalt servieren, nach Wunsch mit Gemüsewürfeln."
+      ],
+      "tips": [
+        "Sehr reife, aromatische Tomaten sind entscheidend.",
+        "Gutes Olivenöl gibt dem Gazpacho Tiefe und Cremigkeit.",
+        "Eiskalt servieren — am besten über Nacht durchgekühlt."
+      ],
+      "tags": ["Spanien", "Andalusien", "Gazpacho", "kalte Suppe", "Tomaten", "Gurke", "Paprika", "vegan", "vegetarisch", "Sommerküche", "mediterran", "Vorspeise"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Spanien",
+      "continent": "Europa",
+      "recipe_name": "Tortilla española",
+      "categories": ["Vegetarisch", "Hauptgericht", "Vorspeise"],
+      "short_description": "Ein dickes, saftiges Omelett aus Kartoffeln, Zwiebeln und Ei, in der Pfanne gewendet. Spaniens allgegenwärtige Kartoffeltortilla.",
+      "history": "Die Tortilla española (auch tortilla de patatas) ist eines der bekanntesten und beliebtesten Gerichte Spaniens und in praktisch jeder Bar, jedem Haushalt und jeder Tapas-Auswahl des Landes zu finden. Sie besteht im Kern aus nur wenigen Zutaten: Kartoffeln, Eiern und Olivenöl, häufig ergänzt durch Zwiebeln. Die in Öl sanft gegarten Kartoffeln werden mit verquirltem Ei vermengt und in der Pfanne zu einem dicken, runden Omelett gebraten, das einmal gewendet wird, sodass es innen saftig und außen goldgelb ist. Die Tortilla verbreitete sich im 19. Jahrhundert als günstiges, sättigendes Essen und wurde zu einem nationalen Grundgericht. Bis heute wird über die „richtige“ Zubereitung diskutiert — vor allem über die Frage, ob mit oder ohne Zwiebeln und wie flüssig die Mitte sein darf. Sie wird warm oder kalt, als Hauptgericht, Tapa oder im Brot (bocadillo) gegessen. Als Kartoffel-Ei-Gericht ist sie selbstverständlich vegetarisch und ohne Schweinefleisch.",
+      "ingredients": [
+        { "quantity": "600", "unit": "g", "item": "festkochende Kartoffeln" },
+        { "quantity": "1", "unit": "", "item": "Zwiebel" },
+        { "quantity": "6", "unit": "", "item": "Eier" },
+        { "quantity": "200", "unit": "ml", "item": "Olivenöl" },
+        { "quantity": "", "unit": "", "item": "Salz" }
+      ],
+      "instructions": [
+        "Kartoffeln in dünne Scheiben schneiden, Zwiebel in Streifen.",
+        "Beides in reichlich Olivenöl bei mittlerer Hitze weich, aber nicht braun garen; abtropfen lassen.",
+        "Eier verquirlen, salzen und die Kartoffeln und Zwiebeln untermengen; kurz ziehen lassen.",
+        "Wenig Öl in einer Pfanne erhitzen und die Masse hineingeben, bei mittlerer Hitze stocken lassen.",
+        "Die Tortilla mithilfe eines Tellers wenden und die andere Seite fertig garen.",
+        "Innen saftig belassen; warm oder kalt servieren."
+      ],
+      "tips": [
+        "Die Kartoffeln im Öl gar ziehen, nicht braten.",
+        "Die Mitte darf leicht cremig bleiben — das ist typisch.",
+        "Mit einem Teller gelingt das Wenden am besten."
+      ],
+      "tags": ["Spanien", "Tortilla española", "Kartoffeltortilla", "Ei", "Kartoffeln", "vegetarisch", "Tapas", "Olivenöl", "Klassiker", "bocadillo", "Hausmannskost", "Hauptgericht"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Tschechien",
+      "continent": "Europa",
+      "recipe_name": "Svíčková na smetaně",
+      "categories": ["Fleisch", "Hauptgericht"],
+      "short_description": "Rinderlende in einer cremigen, pürierten Wurzelgemüsesauce, serviert mit Semmelknödeln, Preiselbeeren und Sahne. Das Nationalgericht Tschechiens.",
+      "history": "Svíčková na smetaně gilt als eines der Nationalgerichte Tschechiens und steht für die festliche, sonntägliche Tafel. Im Zentrum steht ein Stück Rinderlende (svíčková), das mariniert, mit reichlich Wurzelgemüse — Möhre, Sellerie, Petersilienwurzel — und Gewürzen geschmort und dann zu einer charakteristisch cremigen, leicht süßlich-säuerlichen Sauce verarbeitet wird, indem das Gemüse püriert und mit Sahne verfeinert wird. Das Gericht entwickelte sich in der bürgerlichen und gehobenen böhmischen Küche und wurde zu einem Inbegriff tschechischer Festessen. Serviert wird die Svíčková klassisch mit Semmelknödeln (houskové knedlíky), die die Sauce aufnehmen, sowie einem Klecks Schlagsahne, Preiselbeerkompott und einer Zitronenscheibe. Die Balance aus zartem Rind, samtiger Sauce, süßen Preiselbeeren und Sahne ist charakteristisch. Als reines Rindfleischgericht ist Svíčková von Natur aus ohne Schweinefleisch und gilt als das tschechische Sonntagsessen schlechthin.",
+      "ingredients": [
+        { "quantity": "1", "unit": "kg", "item": "Rinderlende oder Tafelspitz" },
+        { "quantity": "2", "unit": "", "item": "Möhren" },
+        { "quantity": "0.5", "unit": "", "item": "Knollensellerie, 1 Petersilienwurzel" },
+        { "quantity": "2", "unit": "", "item": "Zwiebeln" },
+        { "quantity": "250", "unit": "ml", "item": "Sahne" },
+        { "quantity": "1", "unit": "EL", "item": "Mehl" },
+        { "quantity": "5", "unit": "", "item": "Pimentkörner, 1 Lorbeerblatt, Thymian, etwas Essig und Zucker" },
+        { "quantity": "", "unit": "", "item": "Butter, Salz; Semmelknödel und Preiselbeeren zum Servieren" }
+      ],
+      "instructions": [
+        "Das Rindfleisch salzen und in Butter rundum kräftig anbraten; herausnehmen.",
+        "Grob geschnittenes Wurzelgemüse und Zwiebeln mit den Gewürzen anrösten.",
+        "Fleisch zurückgeben, mit etwas Wasser angießen und zugedeckt 2–2,5 Stunden schmoren, bis es zart ist.",
+        "Fleisch herausnehmen; das Lorbeerblatt entfernen und die Gemüsesauce fein pürieren.",
+        "Mit etwas Mehl gebunden und Sahne verfeinern, mit Essig, Zucker und Salz zur süßlich-säuerlichen Balance abschmecken.",
+        "Das Fleisch in Scheiben mit der Sauce, Semmelknödeln, Sahne und Preiselbeeren servieren."
+      ],
+      "tips": [
+        "Reichlich Wurzelgemüse gibt der pürierten Sauce ihre Cremigkeit.",
+        "Die Balance aus süß (Zucker, Preiselbeeren) und säuerlich (Essig) ist typisch.",
+        "Semmelknödel gehören untrennbar dazu."
+      ],
+      "tags": ["Tschechien", "Svíčková", "Rind", "Rahmsauce", "Wurzelgemüse", "Semmelknödel", "Preiselbeeren", "Nationalgericht", "Sonntagsessen", "böhmisch", "Festtag", "Hauptgericht"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Tschechien",
+      "continent": "Europa",
+      "recipe_name": "Bramboráky",
+      "categories": ["Vegetarisch", "Snack", "Beilage"],
+      "short_description": "Knusprige Kartoffelpuffer mit Knoblauch und Majoran, in der Pfanne goldbraun gebraten. Beliebter böhmischer Kartoffelklassiker.",
+      "history": "Bramboráky (auch bramborák oder cmunda) sind herzhafte Kartoffelpuffer und gehören zu den beliebtesten einfachen Gerichten der tschechischen Küche. Sie spiegeln die zentrale Rolle der Kartoffel in der böhmischen und mährischen Ernährung wider, die seit dem 18. und 19. Jahrhundert zum Grundnahrungsmittel wurde. Geriebene rohe Kartoffeln werden mit Mehl, Ei, reichlich Knoblauch und dem in der tschechischen Küche typischen Majoran zu einem Teig vermengt und in heißem Fett zu dünnen, knusprigen Fladen ausgebacken. Charakteristisch ist die kräftige Würzung mit Knoblauch und Majoran. Bramboráky waren ein günstiges, sättigendes Essen, das aus einfachen Vorräten zubereitet werden konnte, und sind sowohl als Hauptgericht und Beilage als auch als Snack und Imbiss verbreitet, etwa auf Märkten und Festen. In manchen Regionen werden sie auch mit Sauerkraut oder als Hülle für andere Speisen gereicht. In der klassischen Form sind sie von Natur aus vegetarisch und ohne Schweinefleisch.",
+      "ingredients": [
+        { "quantity": "800", "unit": "g", "item": "mehligkochende Kartoffeln" },
+        { "quantity": "4", "unit": "Zehen", "item": "Knoblauch" },
+        { "quantity": "1", "unit": "", "item": "Ei" },
+        { "quantity": "4", "unit": "EL", "item": "Mehl" },
+        { "quantity": "1", "unit": "TL", "item": "getrockneter Majoran" },
+        { "quantity": "", "unit": "", "item": "Öl zum Braten, Salz, Pfeffer" }
+      ],
+      "instructions": [
+        "Kartoffeln fein reiben und überschüssige Flüssigkeit ausdrücken.",
+        "Mit zerdrücktem Knoblauch, Ei, Mehl, Majoran, Salz und Pfeffer zu einem Teig vermengen.",
+        "Reichlich Öl in einer Pfanne erhitzen.",
+        "Dünne Fladen formen und ins heiße Öl geben.",
+        "Beidseitig goldbraun und knusprig braten.",
+        "Auf Küchenpapier abtropfen lassen und heiß servieren."
+      ],
+      "tips": [
+        "Die geriebenen Kartoffeln gut ausdrücken für maximale Knusprigkeit.",
+        "Knoblauch und Majoran großzügig verwenden — das ist typisch böhmisch.",
+        "Dünn ausbacken, damit sie durchgaren und knusprig werden."
+      ],
+      "tags": ["Tschechien", "Bramboráky", "Kartoffelpuffer", "vegetarisch", "Knoblauch", "Majoran", "böhmisch", "gebraten", "Snack", "Markt", "knusprig", "Beilage"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Tschechien",
+      "continent": "Europa",
+      "recipe_name": "Ovocné knedlíky",
+      "categories": ["Dessert", "Vegetarisch"],
+      "short_description": "Gefüllte Teigklöße mit ganzen Früchten wie Erdbeeren oder Pflaumen, übergossen mit Quark, Butterbröseln und Zucker. Süße böhmische Mehlspeise.",
+      "history": "Ovocné knedlíky — Obstknödel — sind eine traditionelle süße Mehlspeise der tschechischen Küche und ein beliebtes sommerliches Gericht. Sie gehören zur großen mitteleuropäischen Tradition der Klöße und süßen Hauptgerichte, die in Böhmen, Mähren und den Nachbarländern weit verbreitet ist. Ein Teig — klassisch aus Quark, Kartoffeln oder Grieß — wird um ganze Früchte wie Erdbeeren, Pflaumen, Aprikosen oder Heidelbeeren gewickelt, zu Klößen geformt und in Wasser gegart. Serviert werden sie warm, übergossen mit zerlassener Butter, gerösteten Bröseln oder gemahlenem Mohn und Zucker, oft mit einem Klecks Quark oder saurer Sahne. In Mitteleuropa galten solche süßen Mehlspeisen als vollwertiges Hauptgericht, nicht nur als Nachtisch, und nutzten das saisonale Obst aus Garten und Feld. Ovocné knedlíky erinnern an Kindheit und Großmutterküche und werden besonders in der Obstsaison gekocht. Als Teig-Obst-Speise sind sie selbstverständlich vegetarisch und ohne Schweinefleisch.",
+      "ingredients": [
+        { "quantity": "500", "unit": "g", "item": "Quark (oder gekochte Kartoffeln)" },
+        { "quantity": "250", "unit": "g", "item": "Mehl" },
+        { "quantity": "1", "unit": "", "item": "Ei" },
+        { "quantity": "500", "unit": "g", "item": "ganze Früchte (Erdbeeren, Pflaumen, Aprikosen)" },
+        { "quantity": "80", "unit": "g", "item": "Butter" },
+        { "quantity": "80", "unit": "g", "item": "Semmelbrösel (oder gemahlener Mohn)" },
+        { "quantity": "", "unit": "", "item": "Zucker, Prise Salz; Quark zum Servieren" }
+      ],
+      "instructions": [
+        "Quark mit Mehl, Ei und einer Prise Salz zu einem geschmeidigen Teig verkneten und kurz ruhen lassen.",
+        "Den Teig portionieren, flach drücken und je eine Frucht einwickeln, zu Klößen formen.",
+        "In siedendem Salzwasser garen, bis die Knödel aufschwimmen, dann noch einige Minuten ziehen lassen.",
+        "Semmelbrösel in Butter goldbraun rösten.",
+        "Die Knödel in den Butterbröseln wenden.",
+        "Mit Zucker und Quark bestreut warm servieren."
+      ],
+      "tips": [
+        "Die Früchte gut im Teig verschließen, damit kein Saft austritt.",
+        "Die Knödel nur ziehen, nicht sprudelnd kochen.",
+        "Mit gerösteten Butterbröseln oder Mohn servieren."
+      ],
+      "tags": ["Tschechien", "Ovocné knedlíky", "Obstknödel", "Quark", "Früchte", "süß", "vegetarisch", "Mehlspeise", "böhmisch", "Sommerküche", "Großmutterküche", "Dessert"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Ukraine",
+      "continent": "Europa",
+      "recipe_name": "Borsch",
+      "categories": ["Suppe", "Hauptgericht"],
+      "short_description": "Eine kräftig rote Rote-Bete-Suppe mit Kohl, Wurzelgemüse und Rind, vollendet mit saurer Sahne und Dill. Das Nationalgericht der Ukraine.",
+      "history": "Borsch ist das bekannteste Gericht der Ukraine und so eng mit der nationalen Identität verbunden, dass die ukrainische Kochkunst des Borsch in die UNESCO-Liste des dringend erhaltungsbedürftigen immateriellen Kulturerbes aufgenommen wurde. Die kräftig rote Suppe erhält ihre Farbe von der Roten Bete und vereint zudem Kohl, Möhren, Zwiebeln, Kartoffeln und Tomaten in einer herzhaften Brühe. Borsch hat zahllose regionale und familiäre Varianten — fast jede Familie hat ihr eigenes Rezept. Die Suppe entstand in der bäuerlichen Küche und nutzte das lagerfähige Wurzelgemüse, das durch die langen Winter trug. Traditionell wird Borsch oft mit Fleisch zubereitet und mit einem Klecks saurer Sahne (smetana) sowie frischem Dill und Knoblauchbrötchen (pampuschky) serviert. In dieser Fassung verwenden wir Rindfleisch statt des sonst teils üblichen Schweinefleischs; eine rein pflanzliche Variante ist ebenso verbreitet. Borsch steht sinnbildlich für die ukrainische Esskultur und Gastfreundschaft.",
+      "ingredients": [
+        { "quantity": "500", "unit": "g", "item": "Rindfleisch mit Knochen (für die Brühe)" },
+        { "quantity": "3", "unit": "", "item": "Rote Bete" },
+        { "quantity": "0.25", "unit": "", "item": "Weißkohl" },
+        { "quantity": "2", "unit": "", "item": "Möhren, 2 Kartoffeln, 1 Zwiebel" },
+        { "quantity": "2", "unit": "EL", "item": "Tomatenmark" },
+        { "quantity": "1", "unit": "EL", "item": "Essig oder Zitronensaft" },
+        { "quantity": "1", "unit": "Bund", "item": "Dill" },
+        { "quantity": "", "unit": "", "item": "Öl, Salz, Pfeffer, Lorbeer; saure Sahne zum Servieren" }
+      ],
+      "instructions": [
+        "Rindfleisch mit Wasser aufsetzen, aufkochen, abschäumen und etwa 1,5 Stunden zu einer Brühe garen.",
+        "Rote Bete und Möhren raspeln, mit Zwiebel, Tomatenmark und etwas Essig in Öl andünsten (Essig erhält die rote Farbe).",
+        "Gewürfelte Kartoffeln und geschnittenen Kohl in die Brühe geben und garen.",
+        "Die geschmorte Rote-Bete-Mischung zugeben und kurz mitkochen.",
+        "Mit Salz, Pfeffer und Lorbeer abschmecken; das Fleisch zerkleinert zurückgeben.",
+        "Mit saurer Sahne und reichlich frischem Dill servieren."
+      ],
+      "tips": [
+        "Etwas Essig oder Zitrone bewahrt die kräftig rote Farbe der Bete.",
+        "Borsch schmeckt am nächsten Tag noch besser.",
+        "Mit saurer Sahne und Dill gehört der typische Abschluss dazu."
+      ],
+      "tags": ["Ukraine", "Borsch", "Rote Bete", "Suppe", "Kohl", "Rind", "saure Sahne", "Dill", "Nationalgericht", "UNESCO-Kulturerbe", "Winterküche", "Hauptgericht"],
+      "substitution": "Borsch wird je nach Familie mit Rind, Schwein oder ganz ohne Fleisch zubereitet. Wir verwenden Rindfleisch für eine kräftige Brühe; für eine rein pflanzliche, ebenso traditionelle Fassung lässt sich das Fleisch weglassen und durch eine kräftige Gemüsebrühe und Bohnen ersetzen.",
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Ukraine",
+      "continent": "Europa",
+      "recipe_name": "Varenyky",
+      "categories": ["Vegetarisch", "Hauptgericht"],
+      "short_description": "Gefüllte Teigtaschen mit Kartoffel, Quark oder Kirschen, gekocht und mit gerösteten Zwiebeln oder saurer Sahne serviert. Ukrainische Klöße in vielen Varianten.",
+      "history": "Varenyky gehören zu den bekanntesten und beliebtesten Gerichten der Ukraine und sind tief in der nationalen Esskultur verankert. Es handelt sich um halbmondförmige, gefüllte Teigtaschen, die mit den unterschiedlichsten Füllungen zubereitet werden — herzhaft mit Kartoffeln, Quark, Sauerkraut oder Pilzen, süß mit Kirschen, Beeren oder Quark. Sie sind mit den Pierogi der polnischen und den Teigtaschen der weiteren osteuropäischen Küche verwandt und teilen eine lange gemeinsame Tradition. Varenyky gehören sowohl zur Alltags- als auch zur Festtagsküche und spielen bei Feiern, Familienzusammenkünften und Bräuchen eine Rolle; das gemeinsame Füllen und Formen ist oft ein geselliges Ereignis. Der dünn ausgerollte Teig wird mit der Füllung versehen, sorgfältig verschlossen und in Salzwasser gekocht; anschließend werden die Varenyky oft mit gerösteten Zwiebeln, Butter oder saurer Sahne (smetana) serviert. In den vegetarischen Füllungen mit Kartoffel, Quark oder Kirsche sind sie selbstverständlich ohne Schweinefleisch und gelten als ukrainisches Wohlfühlessen.",
+      "ingredients": [
+        { "quantity": "400", "unit": "g", "item": "Mehl" },
+        { "quantity": "1", "unit": "", "item": "Ei" },
+        { "quantity": "180", "unit": "ml", "item": "warmes Wasser" },
+        { "quantity": "500", "unit": "g", "item": "gekochte Kartoffeln" },
+        { "quantity": "200", "unit": "g", "item": "Quark (oder entkernte Kirschen für süße Variante)" },
+        { "quantity": "2", "unit": "", "item": "Zwiebeln" },
+        { "quantity": "50", "unit": "g", "item": "Butter" },
+        { "quantity": "", "unit": "", "item": "Salz, Pfeffer; saure Sahne zum Servieren" }
+      ],
+      "instructions": [
+        "Mehl, Ei, Wasser und Salz zu einem geschmeidigen Teig kneten und ruhen lassen.",
+        "Kartoffeln zerdrücken, mit Quark und einer angebratenen Zwiebel zu einer Füllung verrühren, würzen.",
+        "Den Teig dünn ausrollen und Kreise ausstechen.",
+        "Je etwas Füllung daraufsetzen, zu Halbmonden falten und die Ränder fest verschließen.",
+        "In siedendem Salzwasser kochen, bis die Varenyky aufschwimmen, dann noch kurz ziehen lassen.",
+        "Mit in Butter gerösteten Zwiebeln und saurer Sahne servieren."
+      ],
+      "tips": [
+        "Die Ränder gut verschließen, damit keine Füllung austritt.",
+        "Für die süße Variante Kirschen einfüllen und mit Zucker und Sahne servieren.",
+        "Gekochte Varenyky in Butter schwenken für mehr Aroma."
+      ],
+      "tags": ["Ukraine", "Varenyky", "Teigtaschen", "Kartoffel", "Quark", "Kirschen", "vegetarisch", "Röstzwiebeln", "saure Sahne", "Festtag", "Wohlfühlessen", "Hauptgericht"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Ukraine",
+      "continent": "Europa",
+      "recipe_name": "Deruny",
+      "categories": ["Vegetarisch", "Hauptgericht", "Snack"],
+      "short_description": "Knusprige Kartoffelpuffer aus geriebenen Kartoffeln und Zwiebeln, serviert mit saurer Sahne. Beliebter ukrainischer Kartoffelklassiker.",
+      "history": "Deruny sind ukrainische Kartoffelpuffer und gehören zu den beliebtesten Alltagsgerichten des Landes. Sie spiegeln die zentrale Rolle der Kartoffel in der ukrainischen und osteuropäischen Küche wider, die seit dem 18. und 19. Jahrhundert zum Grundnahrungsmittel wurde. Geriebene rohe Kartoffeln werden mit Zwiebel, Ei und etwas Mehl zu einem Teig vermengt und in heißem Öl zu knusprigen Fladen ausgebacken. Verwandte Kartoffelpuffer finden sich in vielen Ländern der Region; in der Ukraine sind Deruny besonders mit den nördlichen Regionen wie Polissja verbunden. Sie waren ein günstiges, sättigendes Essen, das aus einfachen Vorräten zubereitet werden konnte, und werden bis heute als Hauptgericht, Beilage oder Snack gegessen. Klassisch werden sie mit saurer Sahne (smetana) serviert, manchmal auch mit Pilzsauce. In der einfachen Form aus Kartoffeln, Zwiebeln und Ei sind sie von Natur aus vegetarisch und ohne Schweinefleisch und gelten als ukrainisches Wohlfühlessen.",
+      "ingredients": [
+        { "quantity": "800", "unit": "g", "item": "mehligkochende Kartoffeln" },
+        { "quantity": "1", "unit": "", "item": "Zwiebel" },
+        { "quantity": "1", "unit": "", "item": "Ei" },
+        { "quantity": "3", "unit": "EL", "item": "Mehl" },
+        { "quantity": "", "unit": "", "item": "Öl zum Braten, Salz, Pfeffer" },
+        { "quantity": "", "unit": "", "item": "saure Sahne zum Servieren" }
+      ],
+      "instructions": [
+        "Kartoffeln und Zwiebel fein reiben und überschüssige Flüssigkeit ausdrücken.",
+        "Mit Ei, Mehl, Salz und Pfeffer zu einem Teig vermengen.",
+        "Reichlich Öl in einer Pfanne erhitzen.",
+        "Dünne Fladen formen und ins heiße Öl geben.",
+        "Beidseitig goldbraun und knusprig braten.",
+        "Auf Küchenpapier abtropfen lassen und heiß mit saurer Sahne servieren."
+      ],
+      "tips": [
+        "Die geriebenen Kartoffeln gut ausdrücken für knusprige Deruny.",
+        "Die Zwiebel verhindert, dass die Masse dunkel wird.",
+        "Mit saurer Sahne servieren — klassisch und unverzichtbar."
+      ],
+      "tags": ["Ukraine", "Deruny", "Kartoffelpuffer", "vegetarisch", "Zwiebel", "saure Sahne", "gebraten", "Hausmannskost", "Snack", "Polissja", "Wohlfühlessen", "Hauptgericht"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    }
+  ],
+  "batch_summary": {
+    "batch": 8,
+    "region": "Europa",
+    "countries_processed": ["Slowakei", "Slowenien", "Spanien", "Tschechien", "Ukraine"],
+    "recipes_created": 15,
+    "recipes_with_images": 0,
+    "recipes_with_placeholders": 15,
+    "recipes_with_pork_substitution": 2
+  }
+}

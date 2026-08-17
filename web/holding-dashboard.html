@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>HeiBen Holding · Dashboard</title>
+<style>
+:root{--bg:#f3eee5;--bg-soft:#ebe3d4;--ink:#1f1c17;--ink-soft:#524a3e;--rule:#d8cdb7;--terracotta:#b04a31;}
+*{box-sizing:border-box;}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Manrope',-apple-system,Segoe UI,sans-serif;line-height:1.5;}
+.wrap{max-width:1180px;margin:0 auto;padding:0 1.2rem;}
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:1.1rem 0;border-bottom:1px solid var(--rule);}
+.wm{font-family:'Fraunces',serif;font-weight:700;font-size:1.4rem;}.wm .a{color:var(--terracotta);}.wm span{font-weight:400;font-size:.9rem;color:var(--ink-soft);}
+.back{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);text-decoration:none;}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-soft);margin-top:1.1rem;}
+h1{font-family:'Fraunces',serif;font-weight:340;font-size:clamp(1.7rem,4.4vw,2.5rem);margin:.4rem 0 .1rem;}
+.lede{color:var(--ink-soft);max-width:70ch;}
+.kpis{display:flex;gap:1rem;flex-wrap:wrap;margin:1rem 0;}
+.kpi{background:#fff;border:1px solid var(--rule);border-radius:12px;padding:.8rem 1.1rem;min-width:130px;flex:1;}
+.kpi .b{font-family:'Fraunces',serif;font-size:1.7rem;font-weight:560;}
+.kpi .l{font-family:'JetBrains Mono',monospace;font-size:.52rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);}
+.sec{font-family:'Fraunces',serif;font-size:1.2rem;margin:1.6rem 0 .6rem;}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:.8rem;}
+.card{background:#fff;border:1px solid var(--rule);border-radius:14px;padding:1rem;text-decoration:none;color:inherit;display:block;border-top:4px solid var(--ink);}
+.card h3{font-family:'Fraunces',serif;font-weight:480;font-size:1.05rem;margin:.1rem 0 .1rem;}
+.card .sub{font-size:.72rem;color:var(--ink-soft);}
+.card .big{font-family:'Fraunces',serif;font-size:1.5rem;font-weight:560;margin:.4rem 0 .1rem;}
+.card .mix{font-family:'JetBrains Mono',monospace;font-size:.56rem;color:var(--ink-soft);margin-top:.3rem;}
+.chartbox{background:#fff;border:1px solid var(--rule);border-radius:14px;padding:1rem 1.1rem;}
+.barrow{display:grid;grid-template-columns:140px 1fr 92px;align-items:center;gap:.6rem;margin:.35rem 0;}
+.barrow .nm{font-size:.78rem;}.barrow .val{text-align:right;font-family:'JetBrains Mono',monospace;font-size:.7rem;}
+.track{background:var(--bg-soft);border-radius:6px;height:16px;overflow:hidden;}
+.fillbar{height:100%;border-radius:6px;}
+table{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--rule);border-radius:12px;overflow:hidden;margin-top:.5rem;}
+th,td{text-align:left;padding:.5rem .7rem;border-bottom:1px solid var(--rule);font-size:.82rem;}
+th{font-family:'JetBrains Mono',monospace;font-size:.52rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);}
+td.r,th.r{text-align:right;}
+.dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:.4rem;vertical-align:middle;}
+.btn{display:inline-flex;align-items:center;border:0;cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:.56rem;letter-spacing:.08em;text-transform:uppercase;padding:.5rem .75rem;border-radius:8px;text-decoration:none;}
+.btn.ghost{background:none;border:1px solid var(--ink);color:var(--ink);}
+.note{font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--ink-soft);}
+.disc{background:var(--bg-soft);border:1px solid var(--rule);border-radius:12px;padding:.7rem 1rem;font-size:.82rem;color:var(--ink-soft);margin:1.4rem 0;}
+.krow{display:flex;gap:.5rem;flex-wrap:wrap;align-items:center;}
+.krow input{flex:1;min-width:120px;border:1px solid var(--rule);border-radius:8px;padding:.45rem .6rem;font:inherit;font-size:.82rem;background:#fff;}
+footer{margin-top:2.5rem;border-top:1px solid var(--rule);padding:1.2rem 0;color:var(--ink-soft);font-size:.8rem;}
+</style>
+<link rel="stylesheet" href="heiben-design.css">
+<script src="heiben-nav.js" defer></script>
+</head>
+<body data-hb-welt="holding">
+<div class="wrap">
+  <div class="topbar"><div class="wm"><span class="a">H</span>ei<span class="a">B</span>en <span>· Holding</span></div>
+    <a class="back" href="unternehmen.html">← Über uns</a></div>
+  <div class="eyebrow" id="eyebrow">HeiBen Holding · intern</div>
+  <h1>Holding-Dashboard</h1>
+  <p class="lede" id="lede">Aggregierter Blick über alle Welten. Buchung und Fakturierung bleiben je Welt in eigener Firmierung — das Dashboard fasst nur zusammen und verlinkt ins jeweilige Cockpit.</p>
+
+  <div class="kpis" id="kpis"></div>
+
+  <div class="sec">Welten</div>
+  <div class="cards" id="cards"></div>
+
+  <div class="sec">Volumen je Welt</div>
+  <div class="chartbox" id="chart"></div>
+
+  <div class="sec" style="display:flex;justify-content:space-between;align-items:center;">Letzte Vorgänge <span><button class="btn ghost" id="bw">Buchhaltung ↓</button> <button class="btn ghost" id="csv">CSV ↓ (alle)</button></span></div>
+  <div id="recent"></div>
+
+  <div class="sec">Kundenstamm <span class="note" style="text-transform:none;">(aus dem Register abgeleitet · Kontakte lokal gespeichert)</span></div>
+  <div class="chartbox" id="kundenForm">
+    <div class="krow">
+      <input id="kName" placeholder="Name / Firma">
+      <input id="kEmail" placeholder="E-Mail">
+      <input id="kTel" placeholder="Telefon">
+      <input id="kNotiz" placeholder="Notiz">
+      <button class="btn ghost" id="kSave">Speichern</button>
+    </div>
+    <div class="note" id="kHint" style="margin-top:.5rem;text-transform:none;">Vorhandener Name → ergänzt Kontakt/Notiz; neuer Name → legt an. Aktivität kommt automatisch aus den Welten.</div>
+  </div>
+  <div id="kunden"></div>
+
+  <div class="disc">Hinweis: Jede Welt ist eine eigene Rechtsperson (in Gründung). Erlöse, Belege und Steuern werden je Firmierung getrennt geführt; diese Übersicht ersetzt keine konsolidierte Bilanz.</div>
+  <footer>HeiBen Holding GmbH i. G. · Köln · <span class="note">„Heimat leben"</span></footer>
+</div>
+
+<script src="heiben-firmierungen.js"></script>
+<script src="heiben-angebot.js"></script>
+<script src="heiben-analytics.js"></script>
+<script>
+(function(){
+  var T=window.HeiBenTrack;
+  var WELTEN=window.HEIBEN_WELTEN||['reisen','wohnen','kulinarik','immobilien','studio'];
+  var L=window.HeiBenLedger;
+  function eur(n){ return (Math.round((+n||0)*100)/100).toLocaleString('de-DE',{minimumFractionDigits:2,maximumFractionDigits:2}); }
+  function eur0(n){ return Math.round(+n||0).toLocaleString('de-DE'); }
+
+  function render(){
+    var all=L.all();
+    var k=L.kpis(all);
+    document.getElementById('kpis').innerHTML=
+      '<div class="kpi"><div class="b">'+eur0(k.volumen)+' €</div><div class="l">Volumen gebucht</div></div>'+
+      '<div class="kpi"><div class="b">'+eur0(k.volumenMonat)+' €</div><div class="l">Volumen akt. Monat</div></div>'+
+      '<div class="kpi"><div class="b">'+eur0(k.pipeline)+' €</div><div class="l">Pipeline (Angebote)</div></div>'+
+      '<div class="kpi"><div class="b">'+k.conversion+' %</div><div class="l">Conversion</div></div>'+
+      '<div class="kpi"><div class="b">'+eur0(k.avgBuchung)+' €</div><div class="l">Ø Buchung</div></div>'+
+      '<div class="kpi"><div class="b">'+k.kunden+'</div><div class="l">aktive Kunden</div></div>';
+
+    // Welt-Karten
+    var perWelt={}; WELTEN.forEach(function(w){ perWelt[w]=L.kpis(all.filter(function(x){return x.welt===w;})); });
+    document.getElementById('cards').innerHTML=WELTEN.map(function(w){ var f=window.HEIBEN_FIRMA(w); var kk=perWelt[w];
+      return '<a class="card" style="border-top-color:'+f.farbe+';" href="welt-cockpit.html?welt='+w+'">'+
+        '<h3>'+f.kurz.replace('HeiBen ','')+'</h3><div class="sub">'+f.name+' '+(f.rechtsform||'')+'</div>'+
+        '<div class="big" style="color:'+f.farbe+';">'+eur0(kk.volumen)+' €</div>'+
+        '<div class="sub">'+kk.count+' Vorgänge · '+kk.gebucht+' gebucht</div>'+
+        '<div class="mix">Angebote '+kk.angebote+' · Buchungen '+kk.buchungen+' · offen '+kk.offen+'</div></a>';
+    }).join('');
+
+    // Balken Volumen je Welt
+    var max=1; WELTEN.forEach(function(w){ max=Math.max(max,perWelt[w].volumen); });
+    document.getElementById('chart').innerHTML=WELTEN.map(function(w){ var f=window.HEIBEN_FIRMA(w); var v=perWelt[w].volumen; var pct=Math.round(v/max*100);
+      return '<div class="barrow"><div class="nm">'+f.kurz.replace('HeiBen ','')+'</div>'+
+        '<div class="track"><div class="fillbar" style="width:'+pct+'%;background:'+f.farbe+';"></div></div>'+
+        '<div class="val">'+eur0(v)+' €</div></div>';
+    }).join('')+'<div class="note" style="margin-top:.5rem;">Anteil am höchsten Welt-Volumen ('+eur0(max)+' €). Vorläufige Werte, keine Konsolidierung.</div>';
+
+    // Letzte Vorgänge
+    var recent=all.slice().sort(function(a,b){ return (b.datum||'').localeCompare(a.datum||''); }).slice(0,12);
+    if(!recent.length){ document.getElementById('recent').innerHTML='<div class="disc">Noch keine Vorgänge. Sobald in den Welten Angebote/Buchungen entstehen, erscheinen sie hier. <a href="welt-cockpit.html?welt=reisen">Zum Reisen-Cockpit →</a></div>'; return; }
+    document.getElementById('recent').innerHTML='<table><thead><tr><th>Datum</th><th>Welt</th><th>Typ</th><th>Referenz</th><th>Titel/Kunde</th><th class="r">Volumen</th><th>Status</th></tr></thead><tbody>'+
+      recent.map(function(x){ var f=window.HEIBEN_FIRMA(x.welt); return '<tr><td>'+(x.datum||'').slice(0,10)+'</td>'+
+        '<td><span class="dot" style="background:'+f.farbe+';"></span>'+f.kurz.replace('HeiBen ','')+'</td>'+
+        '<td class="note" style="text-transform:none;">'+(x.typ==='angebot'?'Angebot':'Buchung')+'</td>'+
+        '<td><b>'+(x.referenz||'—')+'</b></td><td>'+(x.titel||x.kunde||'—')+'</td>'+
+        '<td class="r">'+(x.total!=null?eur(x.total)+' €':'')+'</td><td>'+(x.status||'')+'</td></tr>'; }).join('')+'</tbody></table>';
+  }
+
+  document.getElementById('csv').addEventListener('click',function(){
+    var all=L.all(); var head=['datum','welt','typ','referenz','titel','kunde','personen','volumen','status'];
+    var rows=all.map(function(x){ return [ (x.datum||'').slice(0,10),x.welt,x.typ,x.referenz,(x.titel||'').replace(/;/g,','),(x.kunde||'').replace(/;/g,','),x.persons||'',x.total!=null?(''+x.total).replace('.',','):'',x.status||'' ].join(';'); });
+    var csv=head.join(';')+'\n'+rows.join('\n');
+    var b=new Blob(["\ufeff"+csv],{type:'text/csv'}); var u=URL.createObjectURL(b); var el=document.createElement('a'); el.href=u; el.download='holding-vorgaenge.csv'; document.body.appendChild(el); el.click(); el.remove(); setTimeout(function(){URL.revokeObjectURL(u);},800);
+    if(T)T.ev('holding_csv',{});
+  });
+
+  document.getElementById('bw').addEventListener('click',function(){
+    var rows=L.buchhaltungRows(L.all()); function c(n){ return (''+n).replace('.',','); }
+    var head=['Datum','Belegart','Belegnr','Kunde','Welt','Firmierung','Brutto','Netto_19','USt_19','Netto_7','USt_7','Marge_§25','Zahlstatus','Status'];
+    var lines=rows.map(function(r){ return [r.datum,r.belegart,r.belegnr,(r.kunde||'').replace(/;/g,','),r.welt,(r.firma||'').replace(/;/g,','),c(r.brutto),c(r.netto19),c(r.ust19),c(r.netto7),c(r.ust7),c(r.margeBrutto),r.zahlstatus,r.status].join(';'); });
+    var csv=head.join(';')+'\n'+lines.join('\n'); var bb=new Blob(["\ufeff"+csv],{type:'text/csv'}); var u=URL.createObjectURL(bb); var el=document.createElement('a'); el.href=u; el.download='buchhaltung-holding.csv'; document.body.appendChild(el); el.click(); el.remove(); setTimeout(function(){URL.revokeObjectURL(u);},800); if(T)T.ev('holding_buchhaltung',{});
+  });
+  function esc(s){ return (''+(s||'')).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
+  function renderKunden(){
+    var rows=(window.HeiBenKunden?window.HeiBenKunden.derive(L.all()):[]);
+    var el=document.getElementById('kunden');
+    if(!rows.length){ el.innerHTML='<div class="disc">Noch keine Kund:innen. Lege oben einen Kontakt an, oder erzeuge Angebote/Buchungen in den Welten.</div>'; return; }
+    el.innerHTML='<table><thead><tr><th>Name</th><th>Welten</th><th class="r">Vorgänge</th><th class="r">gebucht</th><th class="r">Volumen</th><th>Letzte</th><th>Kontakt</th><th>Notiz</th></tr></thead><tbody>'+
+      rows.slice(0,30).map(function(r){
+        var dots=(r.welten||[]).map(function(w){ var f=window.HEIBEN_FIRMA(w); return '<span class="dot" title="'+(f&&f.kurz||w)+'" style="background:'+((f&&f.farbe)||'#999')+';"></span>'; }).join('')||'—';
+        var kont=[(r.email||''),(r.tel||'')].filter(Boolean).join(' · ');
+        return '<tr><td><b>'+esc(r.name)+'</b></td><td>'+dots+'</td>'+
+          '<td class="r">'+r.vorgaenge+'</td><td class="r">'+r.gebucht+'</td>'+
+          '<td class="r">'+eur0(r.volumen)+' €</td>'+
+          '<td class="note" style="text-transform:none;">'+((r.letzte||'').slice(0,10)||'—')+'</td>'+
+          '<td class="note" style="text-transform:none;">'+(esc(kont)||'—')+'</td>'+
+          '<td class="note" style="text-transform:none;">'+(esc(r.notiz||'')||'—')+'</td></tr>';
+      }).join('')+'</tbody></table>';
+  }
+  document.getElementById('kSave').addEventListener('click',function(){
+    var name=document.getElementById('kName').value.trim();
+    if(!name){ document.getElementById('kHint').textContent='Bitte einen Namen angeben.'; return; }
+    window.HeiBenKunden.upsert({name:name,email:document.getElementById('kEmail').value.trim(),tel:document.getElementById('kTel').value.trim(),notiz:document.getElementById('kNotiz').value.trim()});
+    ['kName','kEmail','kTel','kNotiz'].forEach(function(id){ document.getElementById(id).value=''; });
+    document.getElementById('kHint').textContent='Gespeichert (lokal).'; renderKunden(); render(); if(T)T.ev('holding_kunde_save',{});
+  });
+  render(); renderKunden();
+})();
+</script>
+<script src="heiben-legal.js"></script>
+</body>
+</html>

@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HeiBen Wohnen · Einrichtungsplaner</title>
+<meta name="description" content="Richte deine Räume selbst ein: Möbel und Produkte zusammenstellen, Budget und Marge kalkulieren, bestellen oder anfragen, Datenblätter ablegen — als Firmen- und Kundenansicht.">
+<style>
+:root{--bg:#f3eee5;--bg-soft:#ebe3d4;--ink:#1f1c17;--ink-soft:#524a3e;--rule:#d8cdb7;--terracotta:#b04a31;--accent:#4a5c39;--accent-d:#3a4a2c;}
+*{box-sizing:border-box;}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Manrope',-apple-system,Segoe UI,sans-serif;line-height:1.5;}
+.wrap{max-width:1180px;margin:0 auto;padding:0 1.2rem;}
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:1.1rem 0;border-bottom:1px solid var(--rule);}
+.wm{font-family:'Fraunces',serif;font-weight:700;font-size:1.4rem;}.wm .a{color:var(--terracotta);}
+.wm span{font-weight:400;font-size:.9rem;color:var(--ink-soft);}
+.back{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);text-decoration:none;}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:.64rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent-d);}
+h1{font-family:'Fraunces',serif;font-weight:340;font-size:clamp(1.6rem,4.2vw,2.4rem);margin:.9rem 0 .2rem;}
+.lede{color:var(--ink-soft);max-width:66ch;}
+.bar{display:flex;gap:.6rem;flex-wrap:wrap;align-items:center;margin:1rem 0;}
+.seg{display:inline-flex;border:1px solid var(--rule);border-radius:10px;overflow:hidden;background:#fff;}
+.seg button{border:0;background:none;padding:.5rem .9rem;font:inherit;font-size:.82rem;cursor:pointer;color:var(--ink-soft);}
+.seg button.on{background:var(--ink);color:#f3eee5;}
+.btn{display:inline-flex;align-items:center;gap:.3rem;border:0;cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;padding:.55rem .8rem;border-radius:8px;text-decoration:none;}
+.btn.ink{background:var(--ink);color:#f3eee5;}.btn.primary{background:var(--accent);color:#f3eee5;}
+.btn.ghost{background:none;border:1px solid var(--ink);color:var(--ink);}.btn.sm{padding:.35rem .6rem;font-size:.54rem;}
+.fld{display:flex;flex-direction:column;gap:3px;}
+.fld label{font-size:.62rem;color:var(--ink-soft);font-family:'JetBrains Mono',monospace;letter-spacing:.06em;text-transform:uppercase;}
+.fld input,.fld select{border:1px solid var(--rule);border-radius:8px;padding:.45rem .6rem;font:inherit;}
+.layout{display:grid;grid-template-columns:320px 1fr;gap:18px;align-items:start;}
+@media(max-width:860px){.layout{grid-template-columns:1fr;}}
+.panel{background:#fff;border:1px solid var(--rule);border-radius:16px;padding:1rem;}
+.panel h2{font-family:'Fraunces',serif;font-weight:480;font-size:1.1rem;margin:0 0 .5rem;}
+.chips{display:flex;gap:.35rem;flex-wrap:wrap;margin-bottom:.6rem;}
+.chip{display:inline-flex;align-items:center;gap:.34rem;border:1px solid var(--rule);background:#fff;border-radius:999px;padding:.3rem .68rem;font-size:.72rem;cursor:pointer;transition:border-color .12s,background .12s;}
+.chip::before{content:'';width:8px;height:8px;border-radius:50%;background:var(--c,transparent);flex:none;}
+.chip[data-kat=""]::before{display:none;}
+.chip:hover{border-color:var(--ink-soft);}
+.chip.on{background:var(--accent);border-color:var(--accent);color:#f3eee5;font-weight:600;}
+.search{width:100%;border:1px solid var(--rule);border-radius:9px;padding:.55rem .7rem;font:inherit;margin-bottom:.6rem;}
+.pal{display:flex;flex-direction:column;gap:.5rem;max-height:560px;overflow:auto;}
+.pcard{border:1px solid var(--rule);border-left:3px solid var(--c,var(--rule));border-radius:12px;padding:.6rem .72rem .58rem;cursor:grab;background:#fff;transition:transform .12s,box-shadow .12s,border-color .12s;}
+.pcard:hover{border-color:var(--ink);transform:translateY(-1px);box-shadow:0 6px 18px rgba(31,28,23,.08);}
+.pcard .tp{display:flex;justify-content:space-between;align-items:center;gap:.4rem;}
+.kat{font-family:'JetBrains Mono',monospace;font-size:.5rem;letter-spacing:.05em;text-transform:uppercase;padding:.12rem .46rem;border-radius:999px;color:#fff;background:var(--c,#666);}
+.pcard h3{font-family:'Fraunces',serif;font-weight:460;font-size:.98rem;margin:.15rem 0;}
+.pcard h3{margin:.22rem 0 .12rem;}
+.pmeta{display:flex;align-items:center;gap:.5rem;margin:.04rem 0 .14rem;}
+.pmeta .price{font-family:'Fraunces',serif;font-weight:600;font-size:1rem;color:var(--c,var(--ink));}
+.pmeta .lz{font-family:'JetBrains Mono',monospace;font-size:.54rem;letter-spacing:.03em;text-transform:uppercase;color:var(--ink-soft);border:1px solid var(--rule);border-radius:999px;padding:.05rem .42rem;}
+.pcard .sub{font-size:.71rem;color:var(--ink-soft);}
+.pcard .meta{font-size:.74rem;color:var(--ink-soft);}
+.mood{display:flex;flex-wrap:wrap;gap:8px;border:1px solid var(--rule);border-radius:16px;background:#fff;padding:1rem;margin:.4rem 0 1rem;min-height:96px;}
+.tile{border-radius:10px;color:#fff;padding:.6rem .7rem;min-width:120px;flex:1 1 120px;max-width:200px;}
+.tile .q{font-family:'JetBrains Mono',monospace;font-size:.6rem;opacity:.85;}
+.tile .nm{font-family:'Fraunces',serif;font-size:.92rem;margin-top:.15rem;line-height:1.15;}
+.moodempty{color:var(--ink-soft);font-size:.84rem;align-self:center;}
+.viewtoggle{display:inline-flex;gap:.3rem;}
+.viewtoggle button{font-family:'JetBrains Mono',monospace;font-size:.54rem;letter-spacing:.06em;text-transform:uppercase;border:1px solid var(--rule);background:#fff;border-radius:999px;padding:.28rem .6rem;cursor:pointer;}
+.viewtoggle button.on{background:var(--accent);border-color:var(--accent);color:#f3eee5;font-weight:600;}
+.room3dwrap{position:relative;border:1px solid var(--rule);border-radius:16px;overflow:hidden;background:#efe9dd;margin:.4rem 0 1rem;height:430px;}
+#room3d{display:block;width:100%;height:100%;cursor:grab;}
+#room3d:active{cursor:grabbing;}
+.r3dbar{position:absolute;left:10px;bottom:10px;display:flex;align-items:center;gap:.35rem;background:rgba(243,238,229,.86);border:1px solid var(--rule);border-radius:999px;padding:.24rem .5rem;}
+.r3dbar button{font-family:'JetBrains Mono',monospace;font-size:.54rem;text-transform:uppercase;letter-spacing:.05em;border:0;background:none;cursor:pointer;color:var(--ink);padding:.16rem .4rem;border-radius:7px;}
+.r3dbar button:hover{background:rgba(31,28,23,.08);}
+.r3dbar button.on{background:var(--accent);color:#f3eee5;}
+.r3dbar .note{font-size:.54rem;}
+.r3d-labels{position:absolute;inset:0;pointer-events:none;}
+.r3dprice{position:absolute;transform:translate(-50%,-120%);background:rgba(31,28,23,.86);color:#f3eee5;font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.02em;padding:.14rem .46rem;border-radius:999px;white-space:nowrap;border-left:3px solid var(--c,#b04a31);box-shadow:0 2px 8px rgba(31,28,23,.2);}
+.r3dbar .sep{width:1px;height:14px;background:var(--rule);margin:0 .1rem;}
+@media print{.room3dwrap,.viewtoggle{display:none!important;}}
+.rooms{display:flex;flex-direction:column;gap:14px;}
+.room{border:1px solid var(--rule);border-radius:16px;background:#fff;overflow:hidden;}
+.room.activeRoom{border-color:var(--accent);box-shadow:0 0 0 2px rgba(74,92,57,.25);}
+.room .rh{display:flex;align-items:center;justify-content:space-between;gap:.5rem;padding:.7rem .9rem;background:var(--bg-soft);}
+.room .rh input.nm{border:1px solid var(--rule);border-radius:7px;padding:.3rem .5rem;font:inherit;font-family:'Fraunces',serif;width:200px;}
+.drophint{padding:.6rem .9rem 1rem;min-height:48px;}
+.drophint.drop{background:rgba(74,92,57,.08);outline:2px dashed var(--accent);outline-offset:-6px;}
+.empty{color:var(--ink-soft);font-size:.84rem;padding:.4rem 0;}
+.item{position:relative;border-left:3px solid var(--rule);padding:.2rem 0 .6rem 1rem;margin-left:.4rem;}
+.item:before{content:"";position:absolute;left:-7px;top:.5rem;width:12px;height:12px;border-radius:50%;background:var(--accent);border:2px solid #fff;}
+.item .row1{display:flex;justify-content:space-between;align-items:flex-start;gap:.5rem;}
+.item h4{font-family:'Fraunces',serif;font-weight:480;font-size:1rem;margin:.1rem 0;}
+.item .meta{font-size:.76rem;color:var(--ink-soft);}
+.stt{font-family:'JetBrains Mono',monospace;font-size:.5rem;letter-spacing:.05em;text-transform:uppercase;padding:.12rem .45rem;border-radius:999px;margin-left:.3rem;}
+.stt.offen{background:#eee4d0;color:#8a7a55;}.stt.angefragt{background:#f3e3c2;color:#9c6f1f;}.stt.bestellt{background:#e7eede;color:#3f5130;}
+.qty{display:inline-flex;align-items:center;gap:.3rem;}
+.qty button{border:1px solid var(--rule);background:#fff;border-radius:6px;width:24px;height:24px;cursor:pointer;}
+.ctrls{display:flex;gap:.25rem;}
+.iconbtn{border:1px solid var(--rule);background:#fff;border-radius:7px;width:26px;height:26px;cursor:pointer;font-size:.8rem;line-height:1;}
+.exp{margin-top:.5rem;border-top:1px dashed var(--rule);padding-top:.5rem;display:none;}
+.exp.open{display:block;}
+.kv{font-size:.82rem;margin:.2rem 0;}.kv b{font-family:'Fraunces',serif;}
+.todo label{display:flex;gap:.4rem;align-items:flex-start;font-size:.82rem;margin:.2rem 0;}
+.docs{margin-top:.4rem;}.docrow{display:flex;align-items:center;gap:.4rem;font-size:.8rem;margin:.2rem 0;}
+.summary{margin-top:1rem;border:1px solid var(--rule);border-radius:14px;background:#fff;padding:.9rem 1rem;}
+.metrics{display:flex;gap:1.4rem;flex-wrap:wrap;margin-bottom:.6rem;}
+.metrics .b{font-family:'Fraunces',serif;font-size:1.3rem;font-weight:560;}
+.metrics .l{font-family:'JetBrains Mono',monospace;font-size:.54rem;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-soft);}
+.pos{display:flex;justify-content:space-between;gap:.6rem;font-size:.85rem;border-bottom:1px dashed var(--rule);padding:.28rem 0;}
+.pos .r{white-space:nowrap;}
+.pos.tot{border-bottom:0;border-top:2px solid var(--ink);font-family:'Fraunces',serif;font-weight:560;font-size:1rem;padding-top:.4rem;}
+.disc{background:var(--bg-soft);border:1px solid var(--rule);border-radius:12px;padding:.7rem 1rem;font-size:.82rem;color:var(--ink-soft);margin:1.4rem 0;}
+footer{margin-top:2.5rem;border-top:1px solid var(--rule);padding:1.3rem 0;color:var(--ink-soft);font-size:.8rem;}
+.note{font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--ink-soft);}
+.modal{position:fixed;inset:0;background:rgba(31,28,23,.6);display:none;align-items:center;justify-content:center;z-index:1000;padding:1rem;}
+.modal.open{display:flex;}
+.modal .box{background:#fff;border-radius:14px;width:min(900px,96vw);max-height:88vh;display:flex;flex-direction:column;overflow:hidden;}
+.modal .box.sm{width:min(440px,94vw);}
+.modal .mh{display:flex;justify-content:space-between;align-items:center;padding:.7rem 1rem;border-bottom:1px solid var(--rule);}
+.modal iframe{flex:1;border:0;width:100%;height:70vh;}
+.modal .mb{padding:1.1rem;}
+.spin{display:inline-block;width:16px;height:16px;border:3px solid var(--rule);border-top-color:var(--accent);border-radius:50%;animation:sp 1s linear infinite;vertical-align:-3px;}
+@keyframes sp{to{transform:rotate(360deg);}}
+.cust-head{display:none;}
+@media print{
+  .topbar,.bar,.palWrap,.iconbtn,.ctrls,.btn,.chips,.search,.disc,footer,.qty button,.room .rh input.nm{display:none!important;}
+  .layout{display:block;} .company-only{display:none!important;}
+  .cust-head{display:block;margin-bottom:1rem;} .room,.panel,.summary,.mood{border-color:#ccc;box-shadow:none;}
+}
+.kunde .company-only{display:none!important;}
+.kunde .cust-head{display:block;}
+#planWrap{position:relative;}
+#planCanvas{display:block;width:100%;height:100%;touch-action:none;cursor:grab;}
+#planCanvas:active{cursor:grabbing;}
+.planempty{position:absolute;inset:0;display:none;align-items:center;justify-content:center;text-align:center;color:var(--ink-soft);font-size:.9rem;padding:1.6rem;}
+.planbar{position:absolute;left:10px;bottom:10px;display:flex;align-items:center;gap:.35rem;background:rgba(243,238,229,.93);border:1px solid var(--rule);border-radius:14px;padding:.28rem .55rem;flex-wrap:wrap;max-width:calc(100% - 200px);}
+.planbar .plabel{font-family:'Fraunces',serif;font-size:.82rem;max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.planbar button{font-family:'JetBrains Mono',monospace;font-size:.54rem;text-transform:uppercase;letter-spacing:.05em;border:0;background:none;cursor:pointer;color:var(--ink);padding:.2rem .44rem;border-radius:7px;}
+.planbar button:hover{background:rgba(31,28,23,.08);}
+.planbar button.on{background:var(--accent);color:#f3eee5;}
+.planbar .sep{width:1px;height:14px;background:var(--rule);}
+.planbar .gin{display:inline-flex;align-items:center;gap:.2rem;font-family:'JetBrains Mono',monospace;font-size:.56rem;color:var(--ink-soft);}
+.planbar .gin input{width:44px;border:1px solid var(--rule);border-radius:6px;padding:.12rem .3rem;font:inherit;font-size:.64rem;}
+.planstats-wrap{position:absolute;right:10px;top:10px;width:172px;background:rgba(243,238,229,.95);border:1px solid var(--rule);border-radius:12px;padding:.6rem .65rem;box-shadow:0 4px 14px rgba(31,28,23,.1);}
+.planstats-wrap .ph{font-family:'JetBrains Mono',monospace;font-size:.54rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:.34rem;}
+.po{display:flex;justify-content:space-between;gap:.4rem;font-size:.74rem;padding:.13rem 0;border-bottom:1px dashed var(--rule);}
+.po:last-of-type{border-bottom:0;}
+.po b{font-family:'Fraunces',serif;}
+@media print{#planWrap{display:none!important;}}
+</style>
+<link rel="stylesheet" href="heiben-design.css">
+<script src="heiben-nav.js" defer></script>
+</head>
+<body data-hb-welt="wohnen">
+<div class="wrap" id="app">
+  <div class="topbar"><div class="wm"><span class="a">H</span>ei<span class="a">B</span>en <span>· Wohnen</span></div><a class="back" href="wohnen.html">← HeiBen Wohnen</a></div>
+  <div class="eyebrow">Einrichtungsplaner</div>
+  <h1>Deine Räume <em style="color:var(--accent-d);font-style:italic;">selbst einrichten</em></h1>
+  <p class="lede">Stelle Räume zusammen, wähle Möbel und Produkte, lege Mengen fest und kalkuliere Budget und Marge. Bestelle über Lieferanten-Schnittstellen oder frag per E-Mail an, hinterlege Datenblätter und Aufmaß-To-dos — und übergib alles als Kundenangebot.</p>
+
+  <div class="bar">
+    <div class="fld" style="min-width:220px;flex:1;"><label>Projekttitel</label><input id="title" placeholder="z. B. Wohnung Lindenstraße"></div>
+    <div class="fld"><label>Gespeicherte Projekte</label>
+      <span style="display:flex;gap:.3rem;"><select id="planSel"></select><button class="btn ghost sm" id="newPlan" title="Neues Projekt">＋</button><button class="iconbtn" id="delPlan" title="Projekt löschen">×</button></span></div>
+  </div>
+  <div class="bar" id="tplBar"><span class="note">Vorlagen:</span>
+    <button class="btn ghost sm" data-tpl="wohnzimmer-skandi">Wohnzimmer Skandi</button>
+    <button class="btn ghost sm" data-tpl="schlafzimmer-ruhe">Schlafzimmer Ruhe</button>
+    <button class="btn ghost sm" data-tpl="homeoffice">Home-Office kompakt</button>
+    <button class="btn ghost sm" data-tpl="esszimmer">Esszimmer Familie</button>
+  </div>
+  <div class="bar">
+    <span class="note">Ansicht:</span>
+    <div class="seg" id="viewSeg"><button data-view="firma" class="on">Firma (netto)</button><button data-view="kunde">Kunde</button></div>
+    <span class="fld cust-head" id="abWrap" style="display:none;"><label>Auftragsnummer</label><input id="ab" style="width:130px;" value=""></span>
+    <button class="btn ink sm" id="reqAll">✉ Gesamtanfrage</button>
+    <button class="btn ghost sm" id="print">🖨 Kundendokument</button>
+    <button class="btn ghost sm" id="expJson">JSON ↓</button>
+    <button class="btn ghost sm" id="impBtn">JSON ↑</button>
+    <button class="btn ghost sm" id="expCsv">Stückliste CSV ↓</button>
+    <input id="impFile" type="file" accept="application/json" style="display:none;">
+  </div>
+
+  <div class="cust-head" id="custHead" style="display:none;">
+    <div style="font-family:'Fraunces',serif;font-size:1.4rem;" id="custTitle">Ihr Einrichtungsvorschlag — HeiBen Wohnen</div>
+    <div class="note">Auftragsnummer: <b id="abShow"></b> · Preise inkl. Leistungen lt. Beschreibung.</div>
+  </div>
+
+  <div style="display:flex;align-items:center;justify-content:space-between;gap:.5rem;margin:.2rem 0;flex-wrap:wrap;">
+    <div class="note" id="moodLabel">Raum</div>
+    <div class="viewtoggle"><button data-view3d="3d" class="on">3D-Raum</button><button data-view3d="plan">Grundriss</button><button data-view3d="mood">Moodboard</button></div>
+  </div>
+  <div class="mood" id="mood" style="display:none;"></div>
+  <div class="room3dwrap" id="room3dWrap"><canvas id="room3d"></canvas>
+    <div class="r3dbar"><button data-r3d="mode3d" class="on">3D</button><button data-r3d="modeplan">Grundriss</button><span class="sep"></span><button data-r3d="rotate">Auto-Dreh</button><button data-r3d="reset">Ansicht</button></div></div>
+
+  <div class="room3dwrap" id="planWrap" style="display:none;">
+    <canvas id="planCanvas"></canvas>
+    <div class="planempty" id="planEmpty">Noch keine Möbel in diesem Raum — füge unten Produkte hinzu, dann ordne sie hier.</div>
+    <div class="planbar">
+      <span class="plabel" id="planRoomName">Raum</span><span class="sep"></span>
+      <label class="gin">B<input id="geoW" type="number" min="2" max="12" step="0.1" title="Raumbreite (m)"></label>
+      <label class="gin">T<input id="geoD" type="number" min="2" max="12" step="0.1" title="Raumtiefe (m)"></label>
+      <span class="sep"></span>
+      <button id="planMeasure" title="Maßband">Maßband</button>
+      <button id="planReset" title="Anordnung neu verteilen">Anordnung ↺</button>
+    </div>
+    <div class="planstats-wrap"><div class="ph">Raum-Kennzahlen</div><div id="planStats"></div>
+      <button class="btn primary sm" id="planBeleg" style="margin-top:.55rem;width:100%;justify-content:center;">Grundriss → Beleg</button></div>
+  </div>
+
+  <div class="layout">
+    <aside class="panel palWrap">
+      <h2>Produkte</h2>
+      <div class="chips" id="katChips"></div>
+      <input class="search" id="pSearch" placeholder="Suchen … Produkt">
+      <div class="note" style="margin-bottom:.4rem;display:flex;justify-content:space-between;gap:.5rem;"><span>Tippe <b>+ Raum</b> oder zieh eine Karte auf einen Raum.</span><span id="palCount" style="white-space:nowrap;"></span></div>
+      <div class="pal" id="pal"></div>
+    </aside>
+
+    <main>
+      <div class="rooms" id="rooms"></div>
+      <div style="margin-top:.8rem;"><button class="btn primary sm" id="addRoom">+ Raum hinzufügen</button>
+        <button class="btn ghost sm" id="clearPlan">Projekt leeren</button></div>
+      <div class="summary" id="summary"></div>
+      <div class="disc">HeiBen Wohnen plant und liefert. Bestellungen laufen über Lieferanten-Schnittstellen (Demo), sonst per E-Mail-Anfrage. Netto-Preise und Marge sind nur in der Firmenansicht sichtbar; Kund:innen sehen Endpreise und Auftragsnummer. Alle Daten liegen lokal im Browser.</div>
+    </main>
+  </div>
+
+  <footer>HeiBen Wohnen · Köln · <span class="note">„Heimat leben" — Raum für Raum.</span></footer>
+</div>
+
+<div class="modal" id="pdfModal"><div class="box"><div class="mh"><b id="pdfName">Vorschau</b><button class="btn ghost sm" id="pdfClose">schließen</button></div><iframe id="pdfFrame" title="Datenblatt-Vorschau"></iframe></div></div>
+<div class="modal" id="orderModal"><div class="box sm"><div class="mh"><b>Bestellung</b><button class="btn ghost sm" id="orderClose">schließen</button></div><div class="mb" id="orderBody"></div></div></div>
+
+<script src="heiben-firmierungen.js"></script>
+<script src="heiben-angebot.js"></script>
+<script src="vendor/jspdf/jspdf.umd.min.js"></script>
+<script src="heiben-pdf.js"></script>
+<script src="vendor/three/three.min.js"></script>
+<script src="vendor/three/OrbitControls.js"></script>
+<script src="heiben-room3d.js"></script>
+<script src="heiben-plan2d.js"></script>
+<script src="heiben-analytics.js"></script>
+<script>
+(function(){
+  var T=window.HeiBenTrack;
+  var KATLABEL={sofa:'Sofa & Sessel',tisch:'Tisch & Stuhl',bett:'Bett & Schlaf',schrank:'Schrank & Regal',leuchte:'Leuchten',deko:'Teppich & Deko',kueche:'Küche & Bad',buero:'Arbeiten',outdoor:'Garten & Balkon',kind:'Kinder',textil:'Vorhänge & Textil'};
+  var KATCOL={sofa:'#7d5260',tisch:'#9c6f1f',bett:'#3b6b6b',schrank:'#4a5c39',leuchte:'#b04a31',deko:'#8a7a55',kueche:'#792d29',buero:'#2f6f6b',outdoor:'#5c7d3a',kind:'#b07494',textil:'#a8743f'};
+  var ROOMCOL=['#4a5c39','#3b6b6b','#9c6f1f','#7d5260','#792d29','#1f1c17'];
+
+  var PR=[
+   {id:'sofa-3',t:"3-Sitzer Sofa 'Lina'",kat:'sofa',netto:480,preis:890,lz:6,masse:'210×95×85 cm',partner:'Polster-Manufaktur',book:{mode:'api'},todo:['Liefertermin','Aufgang/Treppenhaus prüfen'],desc:'Bezug in Naturtönen, Federkern, abnehmbare Bezüge.'},
+   {id:'sessel',t:"Ohrensessel 'Ruh'",kat:'sofa',netto:190,preis:349,lz:4,masse:'80×85×105 cm',partner:'Polster-Manufaktur',book:{mode:'email',email:'wohnen@heiben.de'},todo:['Liefertermin'],desc:'Klassischer Ohrensessel mit hoher Rückenlehne.'},
+   {id:'esstisch',t:"Esstisch Eiche 'Hof'",kat:'tisch',netto:320,preis:590,lz:5,masse:'180×90×76 cm',partner:'Tischlerei Bergisch',book:{mode:'api'},todo:['Liefertermin','Montage'],desc:'Massive Eiche, geölt, ausziehbar auf 240 cm.'},
+   {id:'stuhl',t:"Esszimmerstuhl 'Halm'",kat:'tisch',netto:60,preis:110,lz:4,masse:'45×52×82 cm',partner:'Tischlerei Bergisch',book:{mode:'email',email:'wohnen@heiben.de'},todo:['Liefertermin'],desc:'Holzstuhl mit gepolsterter Sitzfläche.'},
+   {id:'couchtisch',t:"Couchtisch 'Stein'",kat:'tisch',netto:95,preis:180,lz:3,masse:'110×60×40 cm',partner:'Tischlerei Bergisch',book:{mode:'email',email:'wohnen@heiben.de'},todo:['Liefertermin'],desc:'Tischplatte in Steinoptik auf Stahlgestell.'},
+   {id:'bett',t:"Bett 180×200 'Nest'",kat:'bett',netto:350,preis:650,lz:6,masse:'196×216×90 cm',partner:'Schlafkultur',book:{mode:'api'},todo:['Liefertermin','Montage'],desc:'Polsterbett mit Kopfteil, inkl. Lattenrost.'},
+   {id:'matratze',t:"Matratze 'Wolke'",kat:'bett',netto:180,preis:340,lz:2,masse:'180×200 cm',partner:'Schlafkultur',book:{mode:'api'},todo:['Liefertermin'],desc:'7-Zonen-Taschenfederkern, Härtegrad wählbar.'},
+   {id:'nachttisch',t:"Nachttisch 'Beistell'",kat:'bett',netto:70,preis:130,lz:3,masse:'45×40×50 cm',partner:'Tischlerei Bergisch',book:{mode:'email',email:'wohnen@heiben.de'},todo:['Liefertermin'],desc:'Schmaler Nachttisch mit Schublade.'},
+   {id:'kleiderschrank',t:"Kleiderschrank 'Ordnung'",kat:'schrank',netto:420,preis:780,lz:7,masse:'250×60×220 cm',partner:'Tischlerei Bergisch',book:{mode:'api'},todo:['Aufmaß','Liefertermin','Montage'],desc:'Schwebetürenschrank, individuelle Innenaufteilung.'},
+   {id:'buecherregal',t:"Bücherregal 'Wand'",kat:'schrank',netto:150,preis:280,lz:4,masse:'80×35×200 cm',partner:'Tischlerei Bergisch',book:{mode:'email',email:'wohnen@heiben.de'},todo:['Liefertermin','Wandbefestigung'],desc:'Offenes Regal aus Massivholz, fünf Böden.'},
+   {id:'sideboard',t:"Sideboard 'Flur'",kat:'schrank',netto:210,preis:390,lz:5,masse:'160×40×80 cm',partner:'Tischlerei Bergisch',book:{mode:'email',email:'wohnen@heiben.de'},todo:['Liefertermin'],desc:'Sideboard mit drei Türen, geölte Oberfläche.'},
+   {id:'pendel',t:"Pendelleuchte 'Mond'",kat:'leuchte',netto:70,preis:130,lz:3,masse:'Ø 40 cm',partner:'Lichtwerk',book:{mode:'email',email:'wohnen@heiben.de'},todo:['Elektriker-Termin'],desc:'Pendelleuchte mit Opalglas, warmweiß.'},
+   {id:'steh',t:"Stehleuchte 'Lese'",kat:'leuchte',netto:90,preis:160,lz:3,masse:'H 150 cm',partner:'Lichtwerk',book:{mode:'api'},todo:['Liefertermin'],desc:'Verstellbare Stehleuchte mit Leselicht.'},
+   {id:'teppich',t:"Teppich Wolle 'Feld'",kat:'deko',netto:120,preis:230,lz:2,masse:'200×300 cm',partner:'Teppichhaus',book:{mode:'email',email:'wohnen@heiben.de'},todo:['Liefertermin'],desc:'Handgewebter Wollteppich in Naturtönen.'},
+   {id:'vorhang',t:"Vorhang-Set 'Licht'",kat:'deko',netto:60,preis:110,lz:2,masse:'2× 140×260 cm',partner:'Teppichhaus',book:{mode:'email',email:'wohnen@heiben.de'},todo:['Aufmaß Fenster'],desc:'Halbtransparente Vorhänge inkl. Schiene.'},
+   {id:'spiegel',t:"Wandspiegel 'Weit'",kat:'deko',netto:80,preis:150,lz:2,masse:'80×180 cm',partner:'Glaswerk',book:{mode:'email',email:'wohnen@heiben.de'},todo:['Wandbefestigung'],desc:'Rahmenloser Wandspiegel, ganzkörperhoch.'},
+   {id:'kueche',t:"Küchenzeile 'Herd' (nach Aufmaß)",kat:'kueche',netto:1800,preis:3200,lz:10,masse:'nach Aufmaß',partner:'Küchenstudio',book:{mode:'api'},todo:['Aufmaß','Geräteauswahl','Liefertermin','Montage'],desc:'Geplante Küchenzeile inkl. Geräte, individuell nach Aufmaß.'},
+   {id:'baddusche',t:"Walk-in-Dusche 'Klar'",kat:'kueche',netto:650,preis:1150,lz:8,masse:'120×200 cm',partner:'Bad & Fliese',book:{mode:'api'},todo:['Aufmaß','Liefertermin','Montage'],desc:'Rahmenlose Glasdusche, inkl. Armatur.'},
+   {id:'waschtisch',t:"Waschtisch 'Becken'",kat:'kueche',netto:240,preis:430,lz:6,masse:'80×46 cm',partner:'Bad & Fliese',book:{mode:'email',email:'wohnen@heiben.de'},todo:['Liefertermin','Montage'],desc:'Waschtisch mit Unterschrank und Keramikbecken.'},
+   {id:'w-modsofa',t:"Modulsofa 'Weite'",kat:'sofa',netto:820,preis:1490,lz:8,masse:'300×170×72 cm',partner:'Polster-Manufaktur',book:{mode:'api'},todo:['Aufmaß','Aufgang prüfen','Liefertermin'],desc:'Modulares Ecksofa, frei kombinierbar, Stoff oder Leder.'},
+   {id:'w-daybed',t:"Tagesbett 'Siesta'",kat:'sofa',netto:390,preis:720,lz:5,masse:'200×90×40 cm',partner:'Polster-Manufaktur',book:{mode:'email',email:'wohnen@heiben.de'},todo:['Liefertermin'],desc:'Schlichtes Tagesbett mit Nackenrolle.'},
+   {id:'w-hocker',t:"Polsterhocker 'Knäuel'",kat:'sofa',netto:95,preis:180,lz:3,masse:'Ø55×42 cm',partner:'Weberei Rhein',book:{mode:'email',email:'wohnen@heiben.de'},todo:['Liefertermin'],desc:'Runder Hocker mit handgewebtem Wollbezug.'},
+   {id:'w-bistro',t:"Bistrotisch 'Eck'",kat:'tisch',netto:130,preis:240,lz:3,masse:'Ø70×74 cm',partner:'Stahl & Holz',book:{mode:'email',email:'wohnen@heiben.de'},todo:['Liefertermin'],desc:'Runder Bistrotisch, Eiche auf Stahlfuß.'},
+   {id:'w-beistell',t:"Beistelltisch 'Punkt'",kat:'tisch',netto:48,preis:95,lz:2,masse:'Ø40×50 cm',partner:'Tischlerei Bergisch',book:{mode:'email',email:'wohnen@heiben.de'},todo:['Liefertermin'],desc:'Kleiner Beistelltisch, stapelbar.'},
+   {id:'w-barhocker',t:"Barhocker 'Tresen'",kat:'tisch',netto:70,preis:130,lz:3,masse:'38×38×78 cm',partner:'Stahl & Holz',book:{mode:'email',email:'wohnen@heiben.de'},todo:['Liefertermin'],desc:'Höhenverstellbarer Barhocker mit Fußstütze.'},
+   {id:'w-matratze',t:"Matratze 'Wolke' 180×200",kat:'bett',netto:320,preis:590,lz:4,masse:'180×200×24 cm',partner:'Schlafkultur',book:{mode:'api'},todo:['Liefertermin'],desc:'Taschenfederkern, drei Härtegrade wählbar.'},
+   {id:'w-nachttisch',t:"Nachttisch 'Nah'",kat:'bett',netto:85,preis:160,lz:3,masse:'45×38×50 cm',partner:'Tischlerei Bergisch',book:{mode:'email',email:'wohnen@heiben.de'},todo:['Liefertermin'],desc:'Nachttisch mit Schublade, Eiche geölt.'},
+   {id:'w-kleiderschrank',t:"Kleiderschrank 'Falt' 3-türig",kat:'bett',netto:540,preis:980,lz:7,masse:'150×60×220 cm',partner:'Tischlerei Bergisch',book:{mode:'api'},todo:['Aufmaß','Liefertermin','Montage'],desc:'Dreitüriger Schrank mit Innenausstattung nach Wunsch.'},
+   {id:'w-regal',t:"Bücherregal 'Turm'",kat:'schrank',netto:175,preis:320,lz:4,masse:'80×30×200 cm',partner:'Tischlerei Bergisch',book:{mode:'email',email:'wohnen@heiben.de'},todo:['Liefertermin','Wandbefestigung'],desc:'Offenes Regal, fünf Böden, Massivholz.'},
+   {id:'w-sideboard',t:"Sideboard 'Lang'",kat:'schrank',netto:350,preis:640,lz:5,masse:'180×45×75 cm',partner:'Tischlerei Bergisch',book:{mode:'api'},todo:['Liefertermin'],desc:'Sideboard mit Schiebetüren und Soft-Close.'},
+   {id:'w-vitrine',t:"Vitrine 'Schau'",kat:'schrank',netto:295,preis:540,lz:5,masse:'90×40×180 cm',partner:'Glaswerk',book:{mode:'email',email:'wohnen@heiben.de'},todo:['Liefertermin'],desc:'Glasvitrine mit LED-Beleuchtung.'},
+   {id:'w-pendel',t:"Pendelleuchte 'Tropfen'",kat:'leuchte',netto:130,preis:240,lz:3,masse:'Ø35×40 cm',partner:'Lichtwerk Köln',book:{mode:'email',email:'wohnen@heiben.de'},todo:['Elektrik prüfen'],desc:'Mundgeblasenes Glas, warmweißes Licht.'},
+   {id:'w-steh',t:"Stehleuchte 'Bogen'",kat:'leuchte',netto:160,preis:290,lz:3,masse:'H 180 cm',partner:'Lichtwerk Köln',book:{mode:'email',email:'wohnen@heiben.de'},todo:['Liefertermin'],desc:'Bogenleuchte mit Marmorfuß, dimmbar.'},
+   {id:'w-tischl',t:"Tischleuchte 'Knopf'",kat:'leuchte',netto:62,preis:120,lz:2,masse:'Ø22×34 cm',partner:'Lichtwerk Köln',book:{mode:'email',email:'wohnen@heiben.de'},todo:['Liefertermin'],desc:'Kompakte Tischleuchte, Touch-Dimmer.'},
+   {id:'w-wand',t:"Wandleuchte 'Strich'",kat:'leuchte',netto:48,preis:95,lz:2,masse:'8×8×30 cm',partner:'Lichtwerk Köln',book:{mode:'email',email:'wohnen@heiben.de'},todo:['Elektrik prüfen'],desc:'Schlanke LED-Wandleuchte für indirektes Licht.'},
+   {id:'w-teppich',t:"Teppich 'Düne' 200×300",kat:'deko',netto:260,preis:480,lz:4,masse:'200×300 cm',partner:'Weberei Rhein',book:{mode:'email',email:'wohnen@heiben.de'},todo:['Liefertermin'],desc:'Handgewebter Wollteppich in Sandtönen.'},
+   {id:'w-kissen',t:"Kissen-Set 'Ruhe' (3-tlg.)",kat:'deko',netto:46,preis:90,lz:2,masse:'50×50 cm',partner:'Textilhaus Dom',book:{mode:'email',email:'wohnen@heiben.de'},todo:['Liefertermin'],desc:'Drei Kissen in abgestimmten Naturtönen.'},
+   {id:'w-vase',t:"Bodenvase 'Stehauf'",kat:'deko',netto:56,preis:110,lz:2,masse:'Ø25×60 cm',partner:'Keramik Severin',book:{mode:'email',email:'wohnen@heiben.de'},todo:['Liefertermin'],desc:'Handgetöpferte Bodenvase, matt glasiert.'},
+   {id:'w-bild',t:"Wandbild 'Rheinblick'",kat:'deko',netto:95,preis:180,lz:3,masse:'100×70 cm',partner:'Atelier Süd',book:{mode:'email',email:'wohnen@heiben.de'},todo:['Wandbefestigung'],desc:'Gerahmter Kunstdruck, limitierte Auflage.'},
+   {id:'w-insel',t:"Kücheninsel 'Treff'",kat:'kueche',netto:1050,preis:1900,lz:9,masse:'180×90×90 cm',partner:'Küchenstudio',book:{mode:'api'},todo:['Aufmaß','Geräteauswahl','Montage'],desc:'Freistehende Kochinsel mit Bar und Stauraum.'},
+   {id:'w-spiegelschrank',t:"Spiegelschrank 'Bad'",kat:'kueche',netto:175,preis:320,lz:4,masse:'80×15×70 cm',partner:'Bad & Fliese',book:{mode:'email',email:'wohnen@heiben.de'},todo:['Liefertermin','Montage'],desc:'Spiegelschrank mit LED und Steckdose.'},
+   {id:'w-badmoebel',t:"Badmöbel-Set 'Frisch'",kat:'kueche',netto:380,preis:690,lz:6,masse:'120 cm Breite',partner:'Bad & Fliese',book:{mode:'api'},todo:['Aufmaß','Liefertermin','Montage'],desc:'Waschtisch, Unterschrank und Hochschrank im Set.'},
+   {id:'w-schreibtisch',t:"Schreibtisch 'Werk'",kat:'buero',netto:260,preis:480,lz:4,masse:'160×80×74 cm',partner:'Stahl & Holz',book:{mode:'api'},todo:['Liefertermin','Montage'],desc:'Höhenverstellbarer Schreibtisch, Eiche/Stahl.'},
+   {id:'w-buerostuhl',t:"Bürostuhl 'Halt'",kat:'buero',netto:175,preis:320,lz:3,masse:'65×65×120 cm',partner:'Sitzwerk',book:{mode:'email',email:'wohnen@heiben.de'},todo:['Liefertermin'],desc:'Ergonomischer Drehstuhl mit Lordosenstütze.'},
+   {id:'w-aktenregal',t:"Aktenregal 'Ordnung'",kat:'buero',netto:140,preis:260,lz:3,masse:'80×40×180 cm',partner:'Stahl & Holz',book:{mode:'email',email:'wohnen@heiben.de'},todo:['Liefertermin','Wandbefestigung'],desc:'Offenes Büroregal mit fünf Fächern.'},
+   {id:'w-tischlampe',t:"Schreibtischleuchte 'Fokus'",kat:'buero',netto:58,preis:110,lz:2,masse:'Arm 60 cm',partner:'Lichtwerk Köln',book:{mode:'email',email:'wohnen@heiben.de'},todo:['Liefertermin'],desc:'Gelenkarmleuchte mit Tageslicht-LED.'},
+   {id:'w-gartenstuhl',t:"Gartenstuhl 'Sonne'",kat:'outdoor',netto:75,preis:140,lz:3,masse:'60×70×88 cm',partner:'Grünwerk Garten',book:{mode:'email',email:'wohnen@heiben.de'},todo:['Liefertermin'],desc:'Wetterfester Stapelstuhl aus FSC-Teak.'},
+   {id:'w-lounge',t:"Lounge-Set 'Terrasse' (4-tlg.)",kat:'outdoor',netto:700,preis:1290,lz:6,masse:'Set',partner:'Grünwerk Garten',book:{mode:'api'},todo:['Liefertermin','Aufbau'],desc:'Zwei Sessel, Sofa und Tisch inkl. Polster.'},
+   {id:'w-schirm',t:"Sonnenschirm 'Schatten' Ø300",kat:'outdoor',netto:155,preis:290,lz:3,masse:'Ø300 cm',partner:'Grünwerk Garten',book:{mode:'email',email:'wohnen@heiben.de'},todo:['Liefertermin'],desc:'Ampelschirm mit Kurbel, UV-beständig.'},
+   {id:'w-kuebel',t:"Pflanzkübel 'Wuchs' (2er)",kat:'outdoor',netto:85,preis:160,lz:2,masse:'Ø40×50 cm',partner:'Keramik Severin',book:{mode:'email',email:'wohnen@heiben.de'},todo:['Liefertermin'],desc:'Frostfeste Kübel im Zweierset, mit Bewässerung.'},
+   {id:'w-haengematte',t:"Hängematte 'Schaukel'",kat:'outdoor',netto:68,preis:130,lz:2,masse:'200×140 cm',partner:'Textilhaus Dom',book:{mode:'email',email:'wohnen@heiben.de'},todo:['Liefertermin'],desc:'Wetterfeste Hängematte inkl. Gestell.'},
+   {id:'w-kinderbett',t:"Kinderbett 'Wuschel' 70×140",kat:'kind',netto:155,preis:290,lz:4,masse:'144×74×70 cm',partner:'Kinderwelt Köln',book:{mode:'api'},todo:['Liefertermin','Montage'],desc:'Mitwachsendes Kinderbett, schadstoffgeprüft.'},
+   {id:'w-wickel',t:"Wickelkommode 'Pflege'",kat:'kind',netto:185,preis:340,lz:4,masse:'90×75×100 cm',partner:'Kinderwelt Köln',book:{mode:'email',email:'wohnen@heiben.de'},todo:['Liefertermin'],desc:'Kommode mit abnehmbarem Wickelaufsatz.'},
+   {id:'w-kinderstuhl',t:"Kinderstuhl 'Mitwachs'",kat:'kind',netto:62,preis:120,lz:2,masse:'40×45×80 cm',partner:'Kinderwelt Köln',book:{mode:'email',email:'wohnen@heiben.de'},todo:['Liefertermin'],desc:'Treppenhochstuhl, höhenverstellbar.'},
+   {id:'w-vorhang',t:"Vorhang 'Falte' (2 Bahnen)",kat:'textil',netto:85,preis:160,lz:3,masse:'140×260 cm',partner:'Textilhaus Dom',book:{mode:'email',email:'wohnen@heiben.de'},todo:['Aufmaß','Liefertermin'],desc:'Blickdichte Vorhänge mit Faltenband.'},
+   {id:'w-plaid',t:"Wollplaid 'Wärme'",kat:'textil',netto:58,preis:110,lz:2,masse:'130×170 cm',partner:'Weberei Rhein',book:{mode:'email',email:'wohnen@heiben.de'},todo:['Liefertermin'],desc:'Kuscheldecke aus Schurwolle, gewebt am Rhein.'},
+   {id:'w-bettwaesche',t:"Bettwäsche-Set 'Leinen'",kat:'textil',netto:68,preis:130,lz:2,masse:'135×200 cm',partner:'Textilhaus Dom',book:{mode:'email',email:'wohnen@heiben.de'},todo:['Liefertermin'],desc:'Gewaschenes Leinen, Knopfverschluss.'},
+   {id:'w-laeufer',t:"Teppichläufer 'Flur'",kat:'textil',netto:75,preis:140,lz:3,masse:'80×300 cm',partner:'Weberei Rhein',book:{mode:'email',email:'wohnen@heiben.de'},todo:['Liefertermin'],desc:'Strapazierfähiger Läufer für Flur und Diele.'},
+  ];
+  var byId={}; PR.forEach(function(p){byId[p.id]=p;});
+
+  var TEMPLATES={
+   'wohnzimmer-skandi':{title:'Wohnzimmer Skandi',rooms:[{name:'Wohnzimmer',acts:[{id:'sofa-3'},{id:'couchtisch'},{id:'teppich'},{id:'steh'},{id:'buecherregal'}]}]},
+   'schlafzimmer-ruhe':{title:'Schlafzimmer Ruhe',rooms:[{name:'Schlafzimmer',acts:[{id:'bett'},{id:'matratze'},{id:'nachttisch',qty:2},{id:'kleiderschrank'}]}]},
+   'homeoffice':{title:'Home-Office kompakt',rooms:[{name:'Arbeitszimmer',acts:[{id:'sideboard'},{id:'buecherregal'},{id:'steh'},{id:'sessel'}]}]},
+   'esszimmer':{title:'Esszimmer Familie',rooms:[{name:'Esszimmer',acts:[{id:'esstisch'},{id:'stuhl',qty:4},{id:'pendel'},{id:'sideboard'}]}]}
+  };
+
+  var SKEY='heiben-wohnen';
+  function uid(){ return Math.random().toString(36).slice(2,9); }
+  function newPlanObj(title){ return {id:uid(),title:title||'Neues Projekt',view:'firma',ab:'AB-'+Math.random().toString(36).slice(2,6).toUpperCase(),activeRoom:0,rooms:[{id:uid(),name:'Raum 1',items:[]}]}; }
+  function loadStore(){ try{var s=JSON.parse(localStorage.getItem(SKEY)); if(s&&s.plans&&s.current&&s.plans[s.current])return s;}catch(e){}
+    var p=newPlanObj('Mein Projekt'); var st={current:p.id,plans:{}}; st.plans[p.id]=p; return st; }
+  var store=loadStore();
+  function saveStore(){ try{localStorage.setItem(SKEY,JSON.stringify(store));}catch(e){} }
+  function P(){ return store.plans[store.current]; }
+
+  function db(){ return new Promise(function(res,rej){ var r=indexedDB.open('heiben-wohn',1);
+    r.onupgradeneeded=function(){ r.result.createObjectStore('docs'); };
+    r.onsuccess=function(){res(r.result);}; r.onerror=function(){rej(r.error);}; }); }
+  function dbPut(k,v){ return db().then(function(d){return new Promise(function(res,rej){ var tx=d.transaction('docs','readwrite'); tx.objectStore('docs').put(v,k); tx.oncomplete=function(){res();}; tx.onerror=function(){rej(tx.error);}; });}); }
+  function dbGet(k){ return db().then(function(d){return new Promise(function(res,rej){ var tx=d.transaction('docs','readonly'); var rq=tx.objectStore('docs').get(k); rq.onsuccess=function(){res(rq.result);}; rq.onerror=function(){rej(rq.error);}; });}); }
+
+  var fKat='', q='';
+  function renderKats(){ document.getElementById('katChips').innerHTML='<span class="chip on" data-kat="">Alle</span>'+Object.keys(KATLABEL).map(function(k){ return '<span class="chip" data-kat="'+k+'" style="--c:'+KATCOL[k]+'">'+KATLABEL[k]+'</span>'; }).join(''); }
+  function renderPal(){
+    var list=PR.filter(function(p){ if(fKat&&p.kat!==fKat)return false; if(q){ if((p.t).toLowerCase().indexOf(q)<0)return false; } return true; });
+    var rn=(P().rooms[P().activeRoom]?P().rooms[P().activeRoom].name:'Raum');
+    document.getElementById('pal').innerHTML=list.map(function(p){
+      return '<div class="pcard" draggable="true" data-id="'+p.id+'" style="--c:'+KATCOL[p.kat]+'">'+
+        '<div class="tp"><span class="kat">'+KATLABEL[p.kat]+'</span>'+
+        '<button class="btn primary sm" data-add="'+p.id+'">+ '+rn+'</button></div>'+
+        '<h3>'+p.t+'</h3>'+
+        '<div class="pmeta"><span class="price">ab '+p.preis+' €</span><span class="lz">'+p.lz+' Wo.</span></div>'+
+        '<div class="sub">'+p.masse+' · '+p.partner+'</div></div>';
+    }).join('')||'<p class="note">Kein Produkt für diese Auswahl.</p>';
+    var pc=document.getElementById('palCount'); if(pc) pc.textContent=list.length+' von '+PR.length+' Produkten';
+  }
+
+  var view3d='3d', room3d=null;
+  function items3d(){ var r=P().rooms[P().activeRoom]; if(!r)return []; return r.items.map(function(it){ var p=byId[it.prodId]; if(!p)return null; return {t:p.t,kat:p.kat,col:KATCOL[p.kat],masse:p.masse,preis:p.preis,qty:it.qty||1}; }).filter(Boolean); }
+  function update3D(){ if(view3d!=='3d')return; var wrap=document.getElementById('room3dWrap'); if(!(window.HeiBenRoom3D&&window.HeiBenRoom3D.available())){ if(wrap)wrap.innerHTML='<div class="moodempty" style="padding:1.4rem;">3D-Ansicht in diesem Browser nicht verfügbar.</div>'; return; } var cv=document.getElementById('room3d'); if(!cv)return; if(!room3d){ try{ room3d=window.HeiBenRoom3D.create(cv); }catch(e){ if(wrap)wrap.innerHTML='<div class="moodempty" style="padding:1.4rem;">3D-Ansicht konnte nicht geladen werden.</div>'; return; } } room3d.resize(); room3d.setItems(items3d()); }
+  function setView(mode){ view3d=mode; var mood=document.getElementById('mood'), wrap=document.getElementById('room3dWrap'), pw=document.getElementById('planWrap'); if(mood)mood.style.display=(mode==='mood'?'flex':'none'); if(wrap)wrap.style.display=(mode==='3d'?'block':'none'); if(pw)pw.style.display=(mode==='plan'?'block':'none'); document.querySelectorAll('[data-view3d]').forEach(function(b){ b.classList.toggle('on', b.dataset.view3d===mode); }); if(mode==='3d'){ setTimeout(update3D,30); } if(mode==='plan'){ setTimeout(refreshPlan,30); } }
+  function renderMood(){
+    var r=P().rooms[P().activeRoom]; var host=document.getElementById('mood');
+    document.getElementById('moodLabel').textContent='Moodboard · '+(r?r.name:'—');
+    if(!r||!r.items.length){ host.innerHTML='<div class="moodempty">Noch leer — füge Produkte zum aktiven Raum hinzu.</div>'; return; }
+    host.innerHTML=r.items.map(function(it){ var p=byId[it.prodId]; if(!p)return''; var col=KATCOL[p.kat];
+      return '<div class="tile" style="background:'+col+'"><div class="q">'+KATLABEL[p.kat]+' · ×'+(it.qty||1)+'</div><div class="nm">'+p.t.replace(/'/g,'')+'</div></div>'; }).join('');
+    if(view3d==='3d') update3D();
+  }
+
+  /* ---- Grundriss-Planer (2D, heiben-plan2d.js) ---- */
+  function lwNums(m){ return ((''+(m||'')).match(/\d+(?:[.,]\d+)?/g)||[]).map(function(x){return parseFloat(x.replace(',','.'));}); }
+  function isFlatKat(k){ return k==='deko'||k==='textil'; }
+  function footprint(p){ // Stellfläche w×d (m), gespiegelt zu room3d.dims für Konsistenz mit der 3D-Ansicht
+    var m=''+(p.masse||''), dia=/Ø/.test(m), n=lwNums(m), w,d;
+    if(dia && n.length>=1){ w=d=n[0]/100; }
+    else if(n.length>=2){ w=n[0]/100; d=n[1]/100; }
+    else { var f={sofa:[2.0,0.9],tisch:[1.2,0.7],bett:[1.6,2.0],schrank:[1.0,0.45],leuchte:[0.34,0.34],deko:[1.6,2.4],kueche:[1.8,0.6],buero:[1.4,0.7],outdoor:[0.62,0.66],kind:[1.0,0.62],textil:[1.4,0.5]}[p.kat]||[0.9,0.6];
+      w=f[0]; d=f[1]; if(n.length===1 && p.kat!=='leuchte' && p.kat!=='textil') w=n[0]/100; }
+    function cl(v){ return Math.max(0.2,Math.min(3.4,v||0.6)); }
+    return {w:cl(w),d:cl(d),flat:isFlatKat(p.kat)};
+  }
+  function roomGeo(r){ if(!r.geo)r.geo={w:4.5,d:3.6}; var g=r.geo; g.w=Math.max(2,Math.min(12,+g.w||4.5)); g.d=Math.max(2,Math.min(12,+g.d||3.6)); return g; }
+  function roomOpenings(g){ return {doors:[{wall:'bottom',at:0,width:0.9}], windows:[{wall:'top',at:0,width:Math.min(1.8,Math.max(0.8,g.w*0.4))}]}; }
+  function autoLayout(r){ var g=roomGeo(r), margin=0.28, gap=0.18;
+    var x0=-g.w/2+margin, x1=g.w/2-margin, z0=-g.d/2+margin, z1=g.d/2-margin;
+    var cx=x0, cz=z0, rowD=0; r.layout=r.layout||{};
+    r.items.forEach(function(it){ if(r.layout[it.instId])return; var p=byId[it.prodId]; if(!p)return; var fp=footprint(p);
+      if(cx+fp.w>x1+1e-6){ cx=x0; cz+=rowD+gap; rowD=0; }
+      var px=cx+fp.w/2, pz=cz+fp.d/2; if(pz+fp.d/2>z1) pz=Math.max(z0+fp.d/2, z1-fp.d/2);
+      r.layout[it.instId]={x:Math.round(px*100)/100,z:Math.round(pz*100)/100,rot:0};
+      cx+=fp.w+gap; rowD=Math.max(rowD,fp.d); });
+    Object.keys(r.layout).forEach(function(id){ if(!r.items.some(function(it){return it.instId===id;})) delete r.layout[id]; });
+  }
+  function buildPlanItems(r){ return r.items.map(function(it){ var p=byId[it.prodId]; if(!p)return null; var fp=footprint(p);
+    var L=(r.layout&&r.layout[it.instId])||{x:0,z:0,rot:0}, q=it.qty||1;
+    return {id:it.instId,t:p.t.replace(/'/g,'')+(q>1?' ×'+q:''),kat:p.kat,col:KATCOL[p.kat],w:fp.w,d:fp.d,x:L.x,z:L.z,rot:L.rot||0,flat:fp.flat}; }).filter(Boolean); }
+
+  var plan=null, planMeasure=false;
+  function mountPlan(){ if(plan)return plan; var cv=document.getElementById('planCanvas'); if(!cv||!window.HeiBenPlan2D)return null;
+    plan=window.HeiBenPlan2D.create(cv,{ onChange:function(pos){ var r=P().rooms[P().activeRoom]; if(!r)return; r.layout=r.layout||{};
+      Object.keys(pos).forEach(function(id){ r.layout[id]={x:Math.round(pos[id].x*100)/100,z:Math.round(pos[id].z*100)/100,rot:pos[id].rot||0}; });
+      saveStore(); updatePlanOverlay(); } });
+    return plan; }
+  function refreshPlan(){ if(view3d!=='plan')return; var p=mountPlan();
+    var r=P().rooms[P().activeRoom]; if(!r)return; var g=roomGeo(r);
+    var gw=document.getElementById('geoW'),gd=document.getElementById('geoD');
+    if(gw&&document.activeElement!==gw)gw.value=g.w; if(gd&&document.activeElement!==gd)gd.value=g.d;
+    document.getElementById('planRoomName').textContent=r.name;
+    document.getElementById('moodLabel').textContent='Grundriss · '+r.name;
+    document.getElementById('planEmpty').style.display=r.items.length?'none':'flex';
+    if(!p)return; autoLayout(r); saveStore(); var op=roomOpenings(g);
+    p.resize(); p.setRoom({w:g.w,d:g.d,doors:op.doors,windows:op.windows,name:r.name,shapeLabel:'rechteckig'});
+    p.setItems(buildPlanItems(r)); if(planMeasure)p.setMeasure(true); updatePlanOverlay();
+  }
+  function updatePlanOverlay(){ var r=P().rooms[P().activeRoom]; if(!r)return; var g=roomGeo(r);
+    var area=g.w*g.d, stk=0, preis=0, netto=0, foot=0, lines=0;
+    r.items.forEach(function(it){ var p=byId[it.prodId]; if(!p)return; var q=it.qty||1; lines++; stk+=q; preis+=p.preis*q; netto+=p.netto*q; var fp=footprint(p); if(!fp.flat)foot+=fp.w*fp.d*q; });
+    var ppm=area?Math.round(preis/area):0, bel=area?Math.round(foot/area*100):0, company=(P().view!=='kunde');
+    document.getElementById('planStats').innerHTML=
+      '<div class="po"><span>Fläche</span><b>'+area.toFixed(1).replace('.',',')+' m²</b></div>'+
+      '<div class="po"><span>Stück · Pos.</span><b>'+stk+' · '+lines+'</b></div>'+
+      (company?'<div class="po"><span>Netto</span><b>'+netto+' €</b></div>':'')+
+      '<div class="po"><span>Gesamt</span><b>'+preis+' €</b></div>'+
+      '<div class="po"><span>€/m²</span><b>'+ppm+' €</b></div>'+
+      '<div class="po"><span>Stellfläche</span><b>'+bel+' %</b></div>';
+  }
+  function onGeo(){ var r=P().rooms[P().activeRoom]; if(!r)return; var g=roomGeo(r);
+    var w=parseFloat(document.getElementById('geoW').value), d=parseFloat(document.getElementById('geoD').value);
+    if(w)g.w=Math.max(2,Math.min(12,w)); if(d)g.d=Math.max(2,Math.min(12,d)); saveStore(); refreshPlan(); }
+  function toggleMeasure(){ if(!plan)return; planMeasure=!planMeasure; plan.setMeasure(planMeasure); document.getElementById('planMeasure').classList.toggle('on',planMeasure); }
+  function resetLayout(){ var r=P().rooms[P().activeRoom]; if(!r)return; r.layout={}; saveStore(); refreshPlan(); if(T)T.ev('wohn_plan_reset',{}); }
+  function belegFromPlan(){ var r=P().rooms[P().activeRoom];
+    if(!r||!r.items.length){ alert('Dieser Raum hat noch keine Möbel.'); return; }
+    if(!window.HeiBenAngebot){ alert('Beleg-Modul nicht verfügbar.'); return; }
+    var pos=r.items.map(function(it){ var p=byId[it.prodId]; if(!p)return null; var q=it.qty||1; return {t:p.t.replace(/'/g,''),menge:q,einzel:p.preis,summe:p.preis*q}; }).filter(Boolean);
+    var total=pos.reduce(function(s,x){return s+x.summe;},0);
+    r.belegRef=r.belegRef||angRefW();
+    try{ if(window.HeiBenLedger) window.HeiBenLedger.log({welt:'wohnen',typ:'angebot',referenz:r.belegRef,status:'angebot',total:total,persons:0,n:pos.length,titel:(P().title?P().title+' · ':'')+r.name,kunde:(P().title||''),gueltigBis:plus14(),positionen:pos}); }catch(e){}
+    saveStore();
+    window.HeiBenAngebot.dokument({welt:'wohnen',typ:'angebot',referenz:r.belegRef,kunde:(P().title||'Kund:in')+' · '+r.name,positionen:pos,gueltigBis:plus14(),datum:new Date().toISOString()});
+    if(T)T.ev('wohn_plan_beleg',{ref:r.belegRef,room:r.name,total:total});
+  }
+  (function wirePlan(){ var map={planMeasure:toggleMeasure,planReset:resetLayout,planBeleg:belegFromPlan};
+    Object.keys(map).forEach(function(id){ var b=document.getElementById(id); if(b)b.addEventListener('click',map[id]); });
+    var gw=document.getElementById('geoW'),gd=document.getElementById('geoD'); if(gw)gw.addEventListener('change',onGeo); if(gd)gd.addEventListener('change',onGeo);
+  })();
+
+  function renderRooms(){
+    var host=document.getElementById('rooms'); host.innerHTML='';
+    P().rooms.forEach(function(r,ri){ var col=ROOMCOL[ri%ROOMCOL.length];
+      var el=document.createElement('div'); el.className='room'+(ri===P().activeRoom?' activeRoom':''); el.dataset.room=ri;
+      var itemsHtml=r.items.map(function(it){ var p=byId[it.prodId]; if(!p)return''; var qty=it.qty||1; var status=it.status||'offen';
+        var orderBtn=p.book.mode==='api'
+          ? '<button class="btn ink sm" data-order="'+it.instId+'">Bestellen</button>'
+          : '<button class="btn ink sm" data-mail="'+it.instId+'">Per E-Mail anfragen</button>';
+        var todo=(p.todo||[]).map(function(td,k){ var ck=it.checks&&it.checks[k]?'checked':''; return '<label><input type="checkbox" data-todo="'+it.instId+':'+k+'" '+ck+'> '+td+'</label>'; }).join('');
+        var docs=(it.docs||[]).map(function(dc){ return '<div class="docrow">📄 <a href="#" data-doc="'+dc.key+'">'+dc.name+'</a> <button class="iconbtn" data-docdel="'+it.instId+':'+dc.key+'" title="entfernen">×</button></div>'; }).join('');
+        return '<div class="item" data-inst="'+it.instId+'">'+
+          '<div class="row1"><div><h4>'+p.t+' <span class="stt '+status+' company-only">'+status+(it.ref?' · '+it.ref:'')+'</span></h4>'+
+          '<div class="meta">'+KATLABEL[p.kat]+' · '+p.masse+' · '+p.preis+' € / Stück</div>'+
+          '<div class="qty" style="margin-top:.3rem;"><button data-qm="'+it.instId+'">−</button><b>'+qty+'</b><button data-qp="'+it.instId+'">+</button> <span class="note">Stück</span></div></div>'+
+          '<div class="ctrls"><button class="iconbtn" data-exp="'+it.instId+'" title="Details">▾</button><button class="iconbtn" data-del="'+it.instId+'" title="entfernen">×</button></div></div>'+
+          '<div class="exp" id="exp-'+it.instId+'">'+
+            '<div class="kv company-only"><b>Netto:</b> '+p.netto+' € / Stück · Lieferant: '+p.partner+' · Lieferzeit '+p.lz+' Wo.</div>'+
+            '<div class="kv"><b>Preis (Kunde):</b> '+p.preis+' € / Stück · Zeile: '+(p.preis*qty)+' €</div>'+
+            '<div class="kv">'+p.desc+'</div>'+
+            '<div style="margin:.4rem 0;">'+orderBtn+'</div>'+
+            '<div class="company-only"><div class="note">Vor Lieferung zu erledigen (To-do):</div><div class="todo">'+(todo||'<span class="note">—</span>')+'</div></div>'+
+            '<div class="docs"><div class="note">Datenblätter / Unterlagen (PDF):</div>'+(docs||'')+
+              '<div class="docrow"><input type="file" accept="application/pdf" data-file="'+it.instId+'" style="font-size:.75rem;"></div></div>'+
+          '</div></div>';
+      }).join('') || '<div class="empty">Noch keine Produkte — tippe in der Palette auf „+ Raum" oder zieh eine Karte hierher.</div>';
+      el.innerHTML='<div class="rh"><div style="display:flex;align-items:center;gap:.5rem;"><span style="width:10px;height:18px;border-radius:3px;background:'+col+';display:inline-block;"></span>'+
+        '<input class="nm" value="'+(r.name||('Raum '+(ri+1)))+'" data-roomname="'+ri+'"></div>'+
+        '<div class="ctrls"><button class="btn ghost sm" data-setactive="'+ri+'">'+(ri===P().activeRoom?'aktiv':'wählen')+'</button><button class="iconbtn" data-delroom="'+ri+'" title="Raum löschen">×</button></div></div>'+
+        '<div class="drophint" data-drop="'+ri+'">'+itemsHtml+'</div>';
+      host.appendChild(el);
+    });
+    renderSummary(); renderMood(); if(view3d==='plan') refreshPlan();
+  }
+
+  function angRefW(){ return (window.HEIBEN_FIRMA?window.HEIBEN_FIRMA('wohnen').refPrefix:'AB-')+Math.random().toString(36).slice(2,8).toUpperCase(); }
+  function plus14(){ var d=new Date(); d.setDate(d.getDate()+14); return d.toISOString(); }
+  function planPositionen(){ var out=[]; P().rooms.forEach(function(r){ r.items.forEach(function(it){ var p=byId[it.prodId]; if(!p)return; var qty=it.qty||1; out.push({t:p.t.replace(/'/g,''),menge:qty,einzel:p.preis,summe:p.preis*qty}); }); }); return out; }
+  function logAngebot(pos,total){ if(!window.HeiBenLedger||!P().angebot)return; window.HeiBenLedger.log({welt:'wohnen',typ:'angebot',referenz:P().angebot.ref,status:'angebot',total:total,persons:0,n:pos.length,titel:(P().title||'Einrichtung'),kunde:(P().title||''),gueltigBis:P().angebot.gueltigBis,positionen:pos}); }
+  function makeAngebot(){ var pos=planPositionen(); if(!pos.length){ alert('Bitte zuerst Positionen planen.'); return; } var total=pos.reduce(function(s,x){return s+x.summe;},0); if(!P().angebot)P().angebot={ref:angRefW(),datum:new Date().toISOString(),gueltigBis:plus14()}; P().angebot.total=total; P().angebot.n=pos.length; saveStore(); logAngebot(pos,total); renderSummary(); if(T)T.ev('wohn_angebot',{ref:P().angebot.ref,total:total}); }
+  function printAngebot(){ if(!window.HeiBenAngebot)return; if(!P().angebot){ makeAngebot(); if(!P().angebot)return; } var pos=planPositionen(); var total=pos.reduce(function(s,x){return s+x.summe;},0); P().angebot.total=total; P().angebot.n=pos.length; saveStore(); logAngebot(pos,total); window.HeiBenAngebot.dokument({welt:'wohnen',typ:'angebot',referenz:P().angebot.ref,kunde:(P().title||'Kund:in'),positionen:pos,gueltigBis:P().angebot.gueltigBis,datum:P().angebot.datum}); if(T)T.ev('wohn_beleg',{ref:P().angebot.ref}); }
+  function docPanel(){ return '<div style="margin-top:.5rem;border-top:1px dotted var(--rule);padding-top:.45rem;"><button class="btn ghost sm" data-ang="doc">Einrichtungskonzept (PDF)</button></div>'; }
+  function makeDoc(){ if(!window.HeiBenPDF){alert('PDF-Modul nicht verfügbar.');return;} var sek=P().rooms.map(function(r){ return {name:r.name, items:r.items.map(function(it){ var p=byId[it.prodId]; if(!p)return null; return {t:p.t.replace(/'/g,''), meta:((p.masse?p.masse+' · ':'')+(p.partner||'')), preis:p.preis*(it.qty||1)}; }).filter(Boolean)}; }).filter(function(s){return s.items.length;}); if(!sek.length){alert('Bitte zuerst Positionen planen.');return;} var total=sek.reduce(function(s,x){return s+x.items.reduce(function(a,i){return a+(i.preis||0);},0);},0); window.HeiBenPDF.programm({welt:'wohnen',art:'Einrichtungskonzept',titel:(P().title||'Einrichtungskonzept'),kunde:(P().title||''),sektionen:sek,gesamt:total,hinweis:'Konzeptvorschlag, freibleibend. Preise inkl. gesetzlicher USt., zzgl. Lieferung/Montage nach Aufwand.'}); if(T)T.ev('wohn_konzept',{}); }
+  function angebotPanel(total){ var a=P().angebot; var h='<div style="margin-top:.7rem;border-top:1px dashed var(--rule);padding-top:.6rem;">'; if(!a){ return h+'<button class="btn primary sm" data-ang="make">Angebot erstellen</button><div class="note" style="margin-top:.3rem;">Druckfertiger Beleg in eigener Firmierung; erscheint als Angebot im Cockpit.</div></div>'; } return h+'<div class="pos"><span><b>Angebot '+a.ref+'</b> · '+(a.n||0)+' Position(en)'+(a.gueltigBis?' · gültig bis '+(''+a.gueltigBis).slice(0,10):'')+'</span><span class="r">'+total+' €</span></div>'+'<button class="btn primary sm" data-ang="print" style="margin-top:.3rem;">Angebot drucken</button> <button class="btn ghost sm" data-ang="make" style="margin-top:.3rem;">aktualisieren</button></div>'; }
+  var angWired=false;
+  function wireAng(){ if(angWired)return; var host=document.getElementById('summary'); if(!host)return; host.addEventListener('click',function(e){ var b=e.target.closest('[data-ang]'); if(!b)return; if(b.dataset.ang==='make')makeAngebot(); else if(b.dataset.ang==='print')printAngebot(); else if(b.dataset.ang==='doc')makeDoc(); }); angWired=true; }
+  function renderSummary(){
+    var rooms=P().rooms.length, pos=0, stk=0, netto=0, preis=0, lines=[];
+    P().rooms.forEach(function(r){ r.items.forEach(function(it){ var p=byId[it.prodId]; if(!p)return; var qty=it.qty||1; pos++; stk+=qty; netto+=p.netto*qty; preis+=p.preis*qty; lines.push({t:p.t,qty:qty,sum:p.preis*qty}); }); });
+    var marge=preis-netto, margePct=preis?Math.round(marge/preis*100):0;
+    var metrics='<div class="metrics">'+
+      '<div><div class="b">'+rooms+'</div><div class="l">Räume</div></div>'+
+      '<div><div class="b">'+pos+'</div><div class="l">Positionen</div></div>'+
+      '<div><div class="b">'+stk+'</div><div class="l">Stück</div></div>'+
+      '<div class="company-only"><div class="b">'+netto+' €</div><div class="l">Netto gesamt</div></div>'+
+      '<div class="company-only"><div class="b">'+marge+' € · '+margePct+'%</div><div class="l">Marge</div></div>'+
+      '<div><div class="b">'+preis+' €</div><div class="l">Gesamt (Kunde)</div></div>'+
+      '</div>';
+    var positions=lines.length?('<div class="note" style="margin:.2rem 0;">Positionen:</div>'+
+      lines.map(function(l){return '<div class="pos"><span>'+l.t.replace(/'/g,'')+' × '+l.qty+'</span><span class="r">'+l.sum+' €</span></div>';}).join('')+
+      '<div class="pos tot"><span>Gesamtpreis</span><span class="r">'+preis+' €</span></div>'):'';
+    document.getElementById('summary').innerHTML=metrics+positions+(lines.length?angebotPanel(preis):'')+(lines.length?docPanel():''); wireAng();
+  }
+
+  function addProd(prodId,roomIdx){ var r=P().rooms[roomIdx]; if(!r)return;
+    var ex=r.items.filter(function(x){return x.prodId===prodId;})[0];
+    if(ex){ ex.qty=(ex.qty||1)+1; } else { r.items.push({instId:uid(),prodId:prodId,qty:1,checks:{},docs:[],status:'offen'}); }
+    saveStore(); renderRooms(); renderPal(); if(T)T.ev('wohn_add',{prod:prodId}); }
+  function findInst(instId){ var rs=P().rooms; for(var i=0;i<rs.length;i++){ var it=rs[i].items.filter(function(x){return x.instId===instId;})[0]; if(it)return{r:i,it:it}; } return null; }
+
+  document.getElementById('pal').addEventListener('click',function(e){ var a=e.target.closest('[data-add]'); if(a){ addProd(a.dataset.add,P().activeRoom); } });
+  document.getElementById('pal').addEventListener('dragstart',function(e){ var c=e.target.closest('[data-id]'); if(c) e.dataTransfer.setData('text/id',c.dataset.id); });
+  document.getElementById('rooms').addEventListener('dragover',function(e){ var z=e.target.closest('[data-drop]'); if(z){ e.preventDefault(); z.classList.add('drop'); } });
+  document.getElementById('rooms').addEventListener('dragleave',function(e){ var z=e.target.closest('[data-drop]'); if(z) z.classList.remove('drop'); });
+  document.getElementById('rooms').addEventListener('drop',function(e){ var z=e.target.closest('[data-drop]'); if(z){ e.preventDefault(); z.classList.remove('drop'); var id=e.dataTransfer.getData('text/id'); if(id) addProd(id,+z.dataset.drop); } });
+
+  document.getElementById('rooms').addEventListener('change',function(e){
+    var rn=e.target.closest('[data-roomname]'); if(rn){ P().rooms[+rn.dataset.roomname].name=rn.value; saveStore(); renderMood(); renderPal(); return; }
+    var td=e.target.closest('[data-todo]'); if(td){ var pp=td.dataset.todo.split(':'); var f=findInst(pp[0]); if(f){ f.it.checks=f.it.checks||{}; f.it.checks[pp[1]]=td.checked; saveStore(); } return; }
+    var fl=e.target.closest('[data-file]'); if(fl && fl.files&&fl.files[0]){ var file=fl.files[0]; var f=findInst(fl.dataset.file); if(f){ var key=uid(); dbPut(key,{name:file.name,type:file.type,blob:file}).then(function(){ f.it.docs=f.it.docs||[]; f.it.docs.push({key:key,name:file.name}); saveStore(); renderRooms(); if(T)T.ev('wohn_doc',{}); }); } return; }
+  });
+
+  document.getElementById('rooms').addEventListener('click',function(e){
+    var t=e.target;
+    var sa=t.closest('[data-setactive]'); if(sa){ P().activeRoom=+sa.dataset.setactive; saveStore(); renderRooms(); renderPal(); return; }
+    var dr=t.closest('[data-delroom]'); if(dr){ var i=+dr.dataset.delroom; P().rooms.splice(i,1); if(!P().rooms.length)P().rooms.push({id:uid(),name:'Raum 1',items:[]}); P().activeRoom=Math.min(P().activeRoom,P().rooms.length-1); saveStore(); renderRooms(); renderPal(); return; }
+    var qm=t.closest('[data-qm]'); if(qm){ var f=findInst(qm.dataset.qm); if(f){ f.it.qty=Math.max(1,(f.it.qty||1)-1); saveStore(); renderRooms(); } return; }
+    var qp=t.closest('[data-qp]'); if(qp){ var f=findInst(qp.dataset.qp); if(f){ f.it.qty=(f.it.qty||1)+1; saveStore(); renderRooms(); } return; }
+    var ex=t.closest('[data-exp]'); if(ex){ var el=document.getElementById('exp-'+ex.dataset.exp); if(el)el.classList.toggle('open'); return; }
+    var del=t.closest('[data-del]'); if(del){ var f=findInst(del.dataset.del); if(f){ P().rooms[f.r].items=P().rooms[f.r].items.filter(function(x){return x.instId!==del.dataset.del;}); saveStore(); renderRooms(); } return; }
+    var mail=t.closest('[data-mail]'); if(mail){ sendMail(mail.dataset.mail); return; }
+    var od=t.closest('[data-order]'); if(od){ orderOnline(od.dataset.order); return; }
+    var doc=t.closest('[data-doc]'); if(doc){ e.preventDefault(); openDoc(doc.dataset.doc); return; }
+    var dcd=t.closest('[data-docdel]'); if(dcd){ var pp=dcd.dataset.docdel.split(':'); var f=findInst(pp[0]); if(f){ f.it.docs=(f.it.docs||[]).filter(function(x){return x.key!==pp[1];}); saveStore(); renderRooms(); } return; }
+  });
+
+  function sendMail(instId){ var f=findInst(instId); if(!f)return; var p=byId[f.it.prodId]; var to=p.book.email||'wohnen@heiben.de';
+    var subj='Produktanfrage: '+p.t.replace(/'/g,'');
+    var body='Guten Tag,\n\nfür ein HeiBen-Wohnprojekt fragen wir an:\n\n• '+p.t.replace(/'/g,'')+'\n• Maße: '+p.masse+'\n• Menge: '+(f.it.qty||1)+'\n• Lieferzeit: ca. '+p.lz+' Wochen\n\nBitte um Verfügbarkeit, Liefertermin und Konditionen.\n\nFreundliche Grüße\nHeiBen Wohnen';
+    window.location.href='mailto:'+encodeURIComponent(to)+'?subject='+encodeURIComponent(subj)+'&body='+encodeURIComponent(body);
+    f.it.status='angefragt'; saveStore(); renderRooms(); if(T)T.ev('wohn_mail',{prod:p.id});
+  }
+
+  function orderOnline(instId){ var f=findInst(instId); if(!f)return; var p=byId[f.it.prodId];
+    var om=document.getElementById('orderModal'), body=document.getElementById('orderBody'); var api=window.HEIBEN_ORDER_API;
+    body.innerHTML='<p><span class="spin"></span> Verbindung zu <b>'+p.partner+'</b> …</p><p class="note">'+(api?'Bestellung über Lieferanten-API.':'Demo-Bestellung (keine Live-API gesetzt).')+'</p>';
+    om.classList.add('open');
+    function rnd(){ return 'AB-'+Math.random().toString(36).slice(2,8).toUpperCase(); }
+    function finalize(ref,via){ f.it.status='bestellt'; f.it.ref=ref; saveStore(); renderRooms();
+      try{ if(window.HeiBenLedger) window.HeiBenLedger.log({welt:'wohnen',typ:'buchung',referenz:ref,status:'gebucht',total:((p.preis||0)*(f.it.qty||1)),persons:1,n:(f.it.qty||1),titel:(p.t||p.name||'Position'),kunde:(P().title||'')}); }catch(e){}
+      body.innerHTML='<p style="font-family:Fraunces,serif;font-size:1.2rem;">✓ Bestellt</p>'+
+        '<div class="kv"><b>'+p.t.replace(/\x27/g,'')+'</b></div><div class="kv">Lieferant: '+p.partner+'</div>'+
+        '<div class="kv">Menge: '+(f.it.qty||1)+' · Lieferzeit ca. '+p.lz+' Wo.</div>'+
+        '<div class="kv">Bestellreferenz: <b>'+ref+'</b></div>'+
+        '<p class="note" style="margin-top:.6rem;">'+via+' · konform zur HeiBen-Buchungs-/Bestell-API (POST /bookings → {reference,status}). Ohne erreichbare API greift die E-Mail-Anfrage.</p>'+
+        '<div style="margin-top:.6rem;"><button class="btn ink sm" id="orderOk">Schließen</button></div>';
+      document.getElementById('orderOk').addEventListener('click',function(){ om.classList.remove('open'); });
+      if(T)T.ev('wohn_order',{prod:p.id,ref:ref});
+    }
+    if(api){ var payload={reference:P().ab,items:[{productId:p.id,date:'',qty:f.it.qty||1}]};
+      fetch(api.replace(/\/+$/,'')+'/bookings',{method:'POST',headers:{'Content-Type':'application/json','Prefer':'code=201, example=gebucht'},body:JSON.stringify(payload)})
+        .then(function(r){ return r.json(); }).then(function(res){ finalize(res.reference||rnd(),'Lieferanten-API'); })
+        .catch(function(){ finalize(rnd(),'Demo-Fallback (API nicht erreichbar)'); });
+    } else { setTimeout(function(){ finalize(rnd(),'Demo'); },900); }
+  }
+  document.getElementById('orderClose').addEventListener('click',function(){ document.getElementById('orderModal').classList.remove('open'); });
+
+  function openDoc(key){ dbGet(key).then(function(rec){ if(!rec){alert('Dokument nicht gefunden.');return;} var url=URL.createObjectURL(rec.blob);
+    document.getElementById('pdfName').textContent=rec.name; document.getElementById('pdfFrame').src=url; document.getElementById('pdfModal').classList.add('open'); }); }
+  document.getElementById('pdfClose').addEventListener('click',function(){ document.getElementById('pdfModal').classList.remove('open'); document.getElementById('pdfFrame').src='about:blank'; });
+
+  function requestAll(){ var p=P(); var lines=[]; var total=0;
+    p.rooms.forEach(function(r){ if(!r.items.length)return; lines.push(r.name+':');
+      r.items.forEach(function(it){ var pr=byId[it.prodId]; if(!pr)return; var qty=it.qty||1; lines.push('  • '+qty+'× '+pr.t.replace(/'/g,'')+' ('+pr.masse+') — '+(pr.preis*qty)+' €'); total+=pr.preis*qty; });
+      lines.push('');
+    });
+    var subj='Einrichtungsanfrage: '+(p.title||'HeiBen-Wohnprojekt');
+    var body='Guten Tag,\n\nwir möchten folgendes Einrichtungsprojekt anfragen:\n\nProjekt: '+(p.title||'HeiBen-Wohnprojekt')+'\nAuftragsnr.: '+p.ab+'\n\n'+lines.join('\n')+'Gesamtpreis (Richtwert): '+total+' €\n\nBitte um Verfügbarkeit, Liefertermine und ein verbindliches Angebot.\n\nFreundliche Grüße\nHeiBen Wohnen';
+    window.location.href='mailto:'+encodeURIComponent('wohnen@heiben.de')+'?subject='+encodeURIComponent(subj)+'&body='+encodeURIComponent(body);
+    if(T)T.ev('wohn_request_all',{});
+  }
+  document.getElementById('reqAll').addEventListener('click',requestAll);
+
+  function download(name,content,type){ var b=new Blob([content],{type:type||'application/octet-stream'}); var u=URL.createObjectURL(b); var a=document.createElement('a'); a.href=u; a.download=name; document.body.appendChild(a); a.click(); a.remove(); setTimeout(function(){URL.revokeObjectURL(u);},1000); }
+  document.getElementById('expJson').addEventListener('click',function(){ download((P().title||'projekt').replace(/\s+/g,'_')+'.json', JSON.stringify(P(),null,2),'application/json'); });
+  document.getElementById('impBtn').addEventListener('click',function(){ document.getElementById('impFile').click(); });
+  document.getElementById('impFile').addEventListener('change',function(e){ var file=e.target.files[0]; if(!file)return; var r=new FileReader();
+    r.onload=function(){ try{ var p=JSON.parse(r.result); if(!p.rooms)throw 0; p.id=uid(); p.title=(p.title||'Importiertes Projekt'); store.plans[p.id]=p; store.current=p.id; saveStore(); fullRender(); }catch(err){ alert('Ungültige JSON-Datei.'); } };
+    r.readAsText(file); e.target.value=''; });
+  document.getElementById('expCsv').addEventListener('click',function(){ var p=P(); var rows=[['Raum','Produkt','Kategorie','Anzahl','Netto-EP','Netto-Summe','Kunden-EP','Kunden-Summe']];
+    p.rooms.forEach(function(r){ r.items.forEach(function(it){ var pr=byId[it.prodId]; if(!pr)return; var qty=it.qty||1;
+      rows.push([r.name,pr.t.replace(/'/g,''),KATLABEL[pr.kat],qty,pr.netto,pr.netto*qty,pr.preis,pr.preis*qty]); }); });
+    var csv='\ufeff'+rows.map(function(r){return r.join(';');}).join('\n');
+    download((p.title||'stueckliste').replace(/\s+/g,'_')+'_stueckliste.csv', csv,'text/csv'); if(T)T.ev('wohn_csv',{});
+  });
+
+  function renderPlanSel(){ var sel=document.getElementById('planSel'); sel.innerHTML='';
+    Object.keys(store.plans).forEach(function(id){ var o=document.createElement('option'); o.value=id; o.textContent=store.plans[id].title||'(ohne Titel)'; if(id===store.current)o.selected=true; sel.appendChild(o); }); }
+  document.getElementById('planSel').addEventListener('change',function(e){ store.current=e.target.value; saveStore(); fullRender(); });
+  document.getElementById('newPlan').addEventListener('click',function(){ var p=newPlanObj('Projekt '+(Object.keys(store.plans).length+1)); store.plans[p.id]=p; store.current=p.id; saveStore(); fullRender(); document.getElementById('title').focus(); });
+  document.getElementById('delPlan').addEventListener('click',function(){ if(Object.keys(store.plans).length<=1){ alert('Mindestens ein Projekt muss bestehen bleiben.'); return; } if(!confirm('Dieses Projekt löschen?'))return; delete store.plans[store.current]; store.current=Object.keys(store.plans)[0]; saveStore(); fullRender(); });
+
+  document.getElementById('tplBar').addEventListener('click',function(e){ var b=e.target.closest('[data-tpl]'); if(!b)return; loadTemplate(b.dataset.tpl); });
+  function loadTemplate(id){ var t=TEMPLATES[id]; if(!t)return; var p=newPlanObj(t.title);
+    p.rooms=t.rooms.map(function(room){ return {id:uid(),name:room.name,items:(room.acts||[]).map(function(a){ return {instId:uid(),prodId:a.id,qty:a.qty||1,checks:{},docs:[],status:'offen'}; })}; });
+    p.activeRoom=0; store.plans[p.id]=p; store.current=p.id; saveStore(); fullRender(); if(T)T.ev('wohn_template',{tpl:id});
+  }
+
+  document.getElementById('title').addEventListener('input',function(e){ P().title=e.target.value; document.getElementById('custTitle').textContent='Ihr Einrichtungsvorschlag — '+(e.target.value||'HeiBen Wohnen'); saveStore(); renderPlanSel(); });
+  function applyView(){ var p=P(); document.getElementById('app').classList.toggle('kunde',p.view==='kunde');
+    document.querySelectorAll('#viewSeg button').forEach(function(b){ b.classList.toggle('on',b.dataset.view===p.view); });
+    var show=p.view==='kunde';
+    document.getElementById('abWrap').style.display=show?'flex':'none';
+    document.getElementById('custHead').style.display=show?'block':'none';
+    document.getElementById('abShow').textContent=p.ab; renderSummary(); if(view3d==='plan') updatePlanOverlay(); }
+  document.getElementById('viewSeg').addEventListener('click',function(e){ var b=e.target.closest('[data-view]'); if(!b)return; P().view=b.dataset.view; saveStore(); applyView(); if(T)T.ev('wohn_view',{view:P().view}); });
+  document.getElementById('ab').addEventListener('input',function(e){ P().ab=e.target.value; document.getElementById('abShow').textContent=P().ab; saveStore(); });
+
+  document.getElementById('addRoom').addEventListener('click',function(){ P().rooms.push({id:uid(),name:'Raum '+(P().rooms.length+1),items:[]}); P().activeRoom=P().rooms.length-1; saveStore(); renderRooms(); renderPal(); });
+  document.getElementById('clearPlan').addEventListener('click',function(){ if(!confirm('Projekt leeren?'))return; P().rooms=[{id:uid(),name:'Raum 1',items:[]}]; P().activeRoom=0; saveStore(); renderRooms(); renderPal(); });
+  document.getElementById('print').addEventListener('click',function(){ window.print(); });
+  document.getElementById('katChips').addEventListener('click',function(e){ var c=e.target.closest('.chip'); if(!c)return;
+    document.querySelectorAll('#katChips .chip').forEach(function(x){x.classList.remove('on');}); c.classList.add('on'); fKat=c.dataset.kat||''; renderPal(); });
+  document.getElementById('pSearch').addEventListener('input',function(e){ q=e.target.value.trim().toLowerCase(); renderPal(); });
+
+  function fullRender(){ var p=P(); document.getElementById('title').value=p.title||''; document.getElementById('ab').value=p.ab; document.getElementById('custTitle').textContent='Ihr Einrichtungsvorschlag — '+(p.title||'HeiBen Wohnen'); renderPlanSel(); applyView(); renderKats(); renderPal(); renderRooms(); }
+  document.addEventListener('click',function(e){ var v=e.target.closest('[data-view3d]'); if(v){ setView(v.dataset.view3d); return; } var r=e.target.closest('[data-r3d]'); if(r&&room3d){ var k=r.dataset.r3d; if(k==='rotate'){ r.classList.toggle('on'); room3d.setAutoRotate(r.classList.contains('on')); } else if(k==='reset'){ room3d.resetView(); document.querySelectorAll('[data-r3d]').forEach(function(b){ if(b.dataset.r3d==='mode3d')b.classList.add('on'); if(b.dataset.r3d==='modeplan'||b.dataset.r3d==='rotate')b.classList.remove('on'); }); } else if(k==='mode3d'||k==='modeplan'){ room3d.setMode(k==='modeplan'?'plan':'3d'); document.querySelectorAll('[data-r3d="mode3d"],[data-r3d="modeplan"]').forEach(function(b){ b.classList.toggle('on', b.dataset.r3d===k); }); } } });
+  window.addEventListener('resize',function(){ if(room3d&&view3d==='3d') room3d.resize(); if(plan&&view3d==='plan') plan.resize(); });
+  fullRender(); setView('3d');
+})();
+</script>
+<script src="heiben-legal.js"></script>
+</body>
+</html>

@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>50 € im Monat ab 20 · HeiBen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;0,600;1,400&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f3eee5;--bg2:#ebe3d4;--paper:#fffdf8;--ink:#1f1c17;--ink2:#524a3e;--rule:#d8cdb7;--terra:#b04a31;--ochre:#a97a1d;--moss:#4a5c39;--burg:#792d29;--aub:#6b3951}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:'Manrope',system-ui,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:820px;margin:0 auto;padding:1.6rem 1.1rem 5rem}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.32em;text-transform:uppercase;color:var(--terra)}
+h1{font-family:'Fraunces',serif;font-weight:400;font-size:clamp(2rem,6.5vw,3.3rem);line-height:1.02;letter-spacing:-.02em;margin:.45rem 0 .5rem}
+h1 em{font-style:italic;color:var(--terra)}
+.lead{color:var(--ink2);max-width:60ch;font-size:1.02rem}
+.hero{background:var(--ink);color:var(--bg);border-radius:20px;padding:1.6rem 1.4rem 1.7rem;margin-top:1.4rem;text-align:center;overflow:hidden}
+.hero .cap{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:#cdbfa8}
+.hero .num{font-family:'Fraunces',serif;font-weight:500;font-size:clamp(3rem,16vw,5.5rem);line-height:1;color:var(--ochre);margin:.2rem 0;font-variant-numeric:tabular-nums}
+.hero .sub{font-size:.98rem;color:#e8e0d0}
+.hero .sub b{color:#9ec27f}
+.split{display:flex;gap:1.4rem;justify-content:center;margin-top:1rem;flex-wrap:wrap}
+.split div{text-align:center}
+.split .l{font-family:'JetBrains Mono',monospace;font-size:.54rem;letter-spacing:.1em;text-transform:uppercase;color:#cdbfa8}
+.split .v{font-family:'Fraunces',serif;font-size:1.3rem}
+.controls{background:var(--paper);border:1px solid var(--rule);border-radius:16px;padding:1.2rem 1.2rem 1.4rem;margin-top:1.1rem}
+.ctl{margin-top:1.1rem}
+.ctl:first-child{margin-top:0}
+.ctl .top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:.35rem}
+.ctl .name{font-weight:700}
+.ctl .val{font-family:'Fraunces',serif;font-size:1.3rem;color:var(--terra)}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:8px;border-radius:99px;background:var(--bg2);outline:none}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:24px;height:24px;border-radius:50%;background:var(--terra);border:3px solid var(--paper);cursor:pointer;box-shadow:0 1px 4px rgba(0,0,0,.25)}
+input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;background:var(--terra);border:3px solid var(--paper);cursor:pointer}
+.chips{display:flex;gap:.4rem;margin-top:.5rem;flex-wrap:wrap}
+.chips button{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.06em;text-transform:uppercase;border:1px solid var(--rule);background:var(--bg);border-radius:8px;padding:.3rem .6rem;cursor:pointer}
+.chips button.on{background:var(--moss);color:#fff;border-color:var(--moss)}
+.toggle{display:flex;align-items:center;gap:.6rem;margin-top:1.1rem;font-size:.9rem}
+.switch{position:relative;width:46px;height:26px;background:var(--bg2);border:1px solid var(--rule);border-radius:99px;cursor:pointer;transition:.2s}
+.switch.on{background:var(--moss)}
+.switch i{position:absolute;top:2px;left:2px;width:20px;height:20px;border-radius:50%;background:#fff;transition:.2s}
+.switch.on i{left:22px}
+canvas{width:100%;height:auto;display:block;margin-top:.4rem}
+.cards{display:grid;gap:1rem;margin-top:1.3rem}
+@media(min-width:680px){.cards{grid-template-columns:1fr 1fr}}
+.icard{background:var(--paper);border:1px solid var(--rule);border-radius:14px;padding:1.05rem 1.1rem}
+.icard.wide{grid-column:1/-1}
+.icard h4{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--terra);margin-bottom:.5rem}
+.mile{display:flex;justify-content:space-between;padding:.35rem 0;border-bottom:1px dashed var(--rule);font-variant-numeric:tabular-nums}
+.mile:last-child{border-bottom:none}
+.mile .a{color:var(--ink2);font-size:.9rem}
+.mile .k{font-weight:700}
+.wait{font-size:.96rem;line-height:1.5}
+.wait b{color:var(--burg);font-family:'Fraunces',serif;font-size:1.15rem}
+.latte{font-size:.96rem}
+.latte b{color:var(--moss)}
+.chart-card{background:var(--paper);border:1px solid var(--rule);border-radius:16px;padding:1.05rem 1.1rem 1.2rem;margin-top:1.1rem}
+.chart-card h4{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--terra);margin-bottom:.3rem}
+.legend{display:flex;gap:1rem;font-size:.78rem;color:var(--ink2);margin-top:.4rem}
+.legend span{display:inline-flex;align-items:center;gap:.35rem}
+.sw{width:12px;height:12px;border-radius:3px;display:inline-block}
+.foot{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink2);text-align:center;margin-top:2rem}
+</style>
+<link rel="stylesheet" href="heiben-design.css">
+<script src="heiben-nav.js" defer></script>
+</head>
+<body data-hb-welt="wissen">
+<div class="wrap">
+  <p class="eyebrow">HeiBen · Das Wunder des Zinseszins</p>
+  <h1>50 € im Monat ab 20 — <em>was wird daraus?</em></h1>
+  <p class="lead">Der mächtigste Verbündete beim Geld ist die Zeit. Wer früh anfängt, lässt vor allem den Zinseszins arbeiten — nicht den eigenen Geldbeutel. Spiel mit den Reglern und sieh selbst.</p>
+
+  <div class="hero">
+    <div class="cap">Dein Vermögen mit 67</div>
+    <div class="num" id="heroNum">–</div>
+    <div class="sub" id="heroSub"></div>
+    <div class="split">
+      <div><div class="l">Selbst eingezahlt</div><div class="v" id="hEin">–</div></div>
+      <div><div class="l">Geschenkter Gewinn</div><div class="v" id="hGew" style="color:#9ec27f">–</div></div>
+    </div>
+  </div>
+
+  <div class="controls">
+    <div class="ctl">
+      <div class="top"><span class="name">Sparrate pro Monat</span><span class="val" id="v_rate">50 €</span></div>
+      <input type="range" id="rate" min="10" max="1000" step="10" value="50">
+    </div>
+    <div class="ctl">
+      <div class="top"><span class="name">Startalter</span><span class="val" id="v_age">20</span></div>
+      <input type="range" id="age" min="18" max="50" step="1" value="20">
+    </div>
+    <div class="ctl">
+      <div class="top"><span class="name">Rendite pro Jahr</span><span class="val" id="v_rend">7,0 %</span></div>
+      <input type="range" id="rend" min="1" max="9" step="0.5" value="7">
+      <div class="chips" id="chips">
+        <button data-r="2">Tagesgeld · 2 %</button>
+        <button data-r="7" class="on">Welt-ETF · 7 %</button>
+        <button data-r="9">Optimistisch · 9 %</button>
+      </div>
+    </div>
+    <div class="toggle">
+      <div class="switch" id="infSwitch"><i></i></div>
+      <span>In heutiger Kaufkraft zeigen <span style="color:var(--ink2)">(2 % Inflation herausgerechnet)</span></span>
+    </div>
+  </div>
+
+  <div class="chart-card">
+    <h4>So wächst es über die Jahre</h4>
+    <canvas id="chart" width="800" height="320"></canvas>
+    <div class="legend"><span><i class="sw" style="background:#4a5c39"></i>Vermögen</span><span><i class="sw" style="background:#b04a31"></i>Selbst eingezahlt</span></div>
+  </div>
+
+  <div class="cards">
+    <div class="icard">
+      <h4>Meilensteine</h4>
+      <div id="miles"></div>
+    </div>
+    <div class="icard">
+      <h4>Die Kosten des Wartens</h4>
+      <p class="wait" id="wait"></p>
+    </div>
+    <div class="icard wide">
+      <h4>Zur Einordnung</h4>
+      <p class="latte" id="latte"></p>
+    </div>
+  </div>
+
+  <p class="foot">HeiBen GmbH i. G. · „Heimat leben" · <a href="mein-heiben.html" style="color:var(--aub)">Mein HeiBen</a> · Modellrechnung mit konstanter Rendite · keine Anlageberatung</p>
+</div>
+
+<script>
+var KEY="heiben_zins_v1";
+var ZIEL=67, INFL=0.02;
+var elRate=document.getElementById("rate"), elAge=document.getElementById("age"), elRend=document.getElementById("rend");
+var inflation=false;
+try{var sv=JSON.parse(localStorage.getItem(KEY))||{};if(sv.rate)elRate.value=sv.rate;if(sv.age)elAge.value=sv.age;if(sv.rend)elRend.value=sv.rend;if(sv.inf)inflation=true;}catch(e){}
+
+function eur(n){return (Math.round(n)).toLocaleString("de-DE")+" €";}
+function fv(rate,years,rendPct){var r=rendPct/100/12,n=Math.round(years*12);if(n<=0)return 0;return r>0?rate*((Math.pow(1+r,n)-1)/r):rate*n;}
+function real(v,years){return inflation? v/Math.pow(1+INFL,years):v;}
+
+// animierter Zaehler
+var counters={};
+function animate(el,to,fmt){
+  var from=counters[el.id]||0;counters[el.id]=to;var t0=null,dur=550;
+  function step(ts){if(!t0)t0=ts;var p=Math.min(1,(ts-t0)/dur);var e=1-Math.pow(1-p,3);var v=from+(to-from)*e;el.textContent=fmt(v);if(p<1)requestAnimationFrame(step);}
+  requestAnimationFrame(step);
+}
+
+function render(){
+  var rate=+elRate.value, age=+elAge.value, rend=+elRend.value;
+  document.getElementById("v_rate").textContent=eur(rate);
+  document.getElementById("v_age").textContent=age;
+  document.getElementById("v_rend").textContent=rend.toFixed(1).replace(".",",")+" %";
+  document.querySelectorAll("#chips button").forEach(function(b){b.classList.toggle("on",+b.dataset.r===rend);});
+  try{localStorage.setItem(KEY,JSON.stringify({rate:rate,age:age,rend:rend,inf:inflation}));}catch(e){}
+
+  var years=Math.max(0,ZIEL-age);
+  var end=real(fv(rate,years,rend),years);
+  var ein=rate*Math.round(years*12);
+  var gew=Math.max(0,end-real(ein,years));
+  animate(document.getElementById("heroNum"),end,function(v){return eur(v);});
+  document.getElementById("hEin").textContent=eur(real(ein,years));
+  document.getElementById("hGew").textContent=eur(gew);
+  var faktor= ein>0 ? end/real(ein,years) : 0;
+  document.getElementById("heroSub").innerHTML="Aus "+eur(rate)+" im Monat über "+years+" Jahre — am Ende ist dein Geld <b>"+faktor.toFixed(1).replace(".",",")+"-mal</b> so viel wert wie das, was du eingezahlt hast."+(inflation?" (in heutiger Kaufkraft)":"");
+
+  // Meilensteine
+  var ms=[40,50,60,67].filter(function(a){return a>age;});
+  var mh="";
+  ms.forEach(function(a){var y=a-age;var val=real(fv(rate,y,rend),y);mh+='<div class="mile"><span class="a">mit '+a+' Jahren</span><span class="k">'+eur(val)+'</span></div>';});
+  if(!ms.length)mh='<div class="mile"><span class="a">Startalter ≥ 67</span><span class="k">–</span></div>';
+  document.getElementById("miles").innerHTML=mh;
+
+  // Kosten des Wartens
+  var base=fv(rate,years,rend);
+  var w5=fv(rate,Math.max(0,years-5),rend);
+  var diff5=base-w5;
+  var perYear= years>0 ? (base-fv(rate,Math.max(0,years-1),rend)) : 0;
+  document.getElementById("wait").innerHTML="Wartest du nur <b>5 Jahre</b>, fehlen dir mit 67 ganze <b>"+eur(real(diff5,years))+"</b>. Jedes einzelne Jahr früher anzufangen bringt rund <b>"+eur(real(perYear,years))+"</b> mehr — allein durch Zeit, nicht durch mehr Einzahlung.";
+
+  // Latte-Faktor
+  var coffees=rate/4.5/4.33;
+  document.getElementById("latte").innerHTML="<b>"+eur(rate)+" im Monat</b> sind etwa <b>"+coffees.toFixed(1).replace(".",",")+" Coffees-to-go pro Woche</b>. Von den "+eur(end)+" am Ende stammen nur "+eur(real(ein,years))+" aus deiner Tasche — die übrigen <b>"+eur(gew)+"</b> macht der Zinseszins. Deshalb schlägt <em>früh und klein</em> fast immer <em>spät und groß</em>.";
+
+  drawChart(rate,age,rend);
+}
+
+function drawChart(rate,age,rend){
+  var cv=document.getElementById("chart"),ctx=cv.getContext("2d"),W=cv.width,H=cv.height;ctx.clearRect(0,0,W,H);
+  var padL=58,padR=14,padT=16,padB=28,pw=W-padL-padR,ph=H-padT-padB;
+  var ages=[],kap=[],einz=[];
+  for(var a=age;a<=ZIEL;a++){var y=a-age;kap.push(real(fv(rate,y,rend),y));einz.push(real(rate*Math.round(y*12),y));ages.push(a);}
+  var mx=Math.max.apply(null,kap)||1;
+  function X(i){return padL+(ages.length<=1?pw/2:i/(ages.length-1)*pw);}
+  function Y(v){return padT+(1-v/mx)*ph;}
+  // y gridlines
+  ctx.strokeStyle="#e6dcc8";ctx.fillStyle="#9a9079";ctx.font="10px 'JetBrains Mono',monospace";ctx.lineWidth=1;
+  for(var g=0;g<=4;g++){var v=mx*g/4,yy=Y(v);ctx.beginPath();ctx.moveTo(padL,yy);ctx.lineTo(W-padR,yy);ctx.stroke();ctx.fillText(Math.round(v/1000)+"k",6,yy+3);}
+  // Kapital-Flaeche
+  ctx.beginPath();ctx.moveTo(X(0),Y(kap[0]));
+  for(var i=1;i<kap.length;i++)ctx.lineTo(X(i),Y(kap[i]));
+  ctx.lineTo(X(kap.length-1),Y(0));ctx.lineTo(X(0),Y(0));ctx.closePath();
+  ctx.fillStyle="rgba(74,92,57,0.16)";ctx.fill();
+  ctx.beginPath();ctx.moveTo(X(0),Y(kap[0]));for(var j=1;j<kap.length;j++)ctx.lineTo(X(j),Y(kap[j]));
+  ctx.strokeStyle="#4a5c39";ctx.lineWidth=2.5;ctx.stroke();
+  // Einzahlung
+  ctx.beginPath();ctx.moveTo(X(0),Y(einz[0]));for(var k=1;k<einz.length;k++)ctx.lineTo(X(k),Y(einz[k]));
+  ctx.strokeStyle="#b04a31";ctx.lineWidth=2;ctx.setLineDash([5,4]);ctx.stroke();ctx.setLineDash([]);
+  // Meilenstein-Punkte + x-Labels
+  ctx.fillStyle="#524a3e";ctx.font="10px 'JetBrains Mono',monospace";ctx.textAlign="center";
+  [age,40,50,60,67].forEach(function(a){if(a<age||a>ZIEL)return;var idx=a-age;ctx.fillStyle="#1f1c17";ctx.beginPath();ctx.arc(X(idx),Y(kap[idx]),3.5,0,7);ctx.fill();ctx.fillStyle="#524a3e";ctx.fillText(a,X(idx),H-10);});
+  ctx.textAlign="left";
+}
+
+["input"].forEach(function(ev){elRate.addEventListener(ev,render);elAge.addEventListener(ev,render);elRend.addEventListener(ev,render);});
+document.querySelectorAll("#chips button").forEach(function(b){b.onclick=function(){elRend.value=b.dataset.r;render();};});
+document.getElementById("infSwitch").onclick=function(){inflation=!inflation;this.classList.toggle("on",inflation);render();};
+if(inflation)document.getElementById("infSwitch").classList.add("on");
+render();
+</script>
+</body>
+</html>

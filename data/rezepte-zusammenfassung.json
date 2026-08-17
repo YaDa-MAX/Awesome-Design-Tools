@@ -1,0 +1,214 @@
+{
+  "schema_version": 1,
+  "generated_for": "HeiBen Kulinarik – Rezeptdatenbank (Prompt 2)",
+  "summary": {
+    "countries_processed": 51,
+    "recipes_created": 153,
+    "recipes_with_images": 0,
+    "recipes_with_placeholders": 153
+  },
+  "details": {
+    "europa_laender": [
+      "Albanien",
+      "Andorra",
+      "Belarus",
+      "Belgien",
+      "Bosnien und Herzegowina",
+      "Bulgarien",
+      "Deutschland",
+      "Dänemark",
+      "Estland",
+      "Finnland",
+      "Frankreich",
+      "Griechenland",
+      "Irland",
+      "Island",
+      "Italien",
+      "Kosovo",
+      "Kroatien",
+      "Lettland",
+      "Liechtenstein",
+      "Litauen",
+      "Luxemburg",
+      "Malta",
+      "Moldau",
+      "Monaco",
+      "Montenegro",
+      "Niederlande",
+      "Nordmazedonien",
+      "Norwegen",
+      "Polen",
+      "Portugal",
+      "Rumänien",
+      "San Marino",
+      "Schweden",
+      "Schweiz",
+      "Serbien",
+      "Slowakei",
+      "Slowenien",
+      "Spanien",
+      "Tschechien",
+      "Ukraine",
+      "Ungarn",
+      "Vatikanstadt",
+      "Vereinigtes Königreich",
+      "Österreich"
+    ],
+    "nordafrika_laender": [
+      "Algerien",
+      "Libyen",
+      "Marokko",
+      "Mauretanien",
+      "Tunesien",
+      "Westsahara",
+      "Ägypten"
+    ],
+    "anzahl_europa": 44,
+    "anzahl_nordafrika": 7,
+    "rezepte_je_land": 3,
+    "rezepte_mit_schwein_substitution": 17,
+    "bildquelle": "Alle Bilder als Platzhalter ({'image_type':'placeholder','placeholder_text':'Bild folgt'}); lizenzgeprüfte Fotos folgen separat.",
+    "schwein_hinweis": "Auswahl durchgehend ohne Schweinefleisch. Feld 'substitution' nur, wenn das Original Schwein enthält."
+  },
+  "batches": [
+    {
+      "batch": 1,
+      "region": "Europa",
+      "file": "rezepte-europa-batch-01.json",
+      "countries": [
+        "Albanien",
+        "Andorra",
+        "Belgien",
+        "Bosnien und Herzegowina",
+        "Bulgarien"
+      ],
+      "recipes": 15
+    },
+    {
+      "batch": 2,
+      "region": "Europa",
+      "file": "rezepte-europa-batch-02.json",
+      "countries": [
+        "Dänemark",
+        "Deutschland",
+        "Estland",
+        "Finnland",
+        "Frankreich"
+      ],
+      "recipes": 15
+    },
+    {
+      "batch": 3,
+      "region": "Europa",
+      "file": "rezepte-europa-batch-03.json",
+      "countries": [
+        "Griechenland",
+        "Irland",
+        "Island",
+        "Italien",
+        "Kosovo"
+      ],
+      "recipes": 15
+    },
+    {
+      "batch": 4,
+      "region": "Europa",
+      "file": "rezepte-europa-batch-04.json",
+      "countries": [
+        "Kroatien",
+        "Lettland",
+        "Liechtenstein",
+        "Litauen",
+        "Luxemburg"
+      ],
+      "recipes": 15
+    },
+    {
+      "batch": 5,
+      "region": "Europa",
+      "file": "rezepte-europa-batch-05.json",
+      "countries": [
+        "Malta",
+        "Moldau",
+        "Monaco",
+        "Montenegro",
+        "Niederlande"
+      ],
+      "recipes": 15
+    },
+    {
+      "batch": 6,
+      "region": "Europa",
+      "file": "rezepte-europa-batch-06.json",
+      "countries": [
+        "Nordmazedonien",
+        "Norwegen",
+        "Österreich",
+        "Polen",
+        "Portugal"
+      ],
+      "recipes": 15
+    },
+    {
+      "batch": 7,
+      "region": "Europa",
+      "file": "rezepte-europa-batch-07.json",
+      "countries": [
+        "Rumänien",
+        "San Marino",
+        "Schweden",
+        "Schweiz",
+        "Serbien"
+      ],
+      "recipes": 15
+    },
+    {
+      "batch": 8,
+      "region": "Europa",
+      "file": "rezepte-europa-batch-08.json",
+      "countries": [
+        "Slowakei",
+        "Slowenien",
+        "Spanien",
+        "Tschechien",
+        "Ukraine"
+      ],
+      "recipes": 15
+    },
+    {
+      "batch": 9,
+      "region": "Europa/Nordafrika",
+      "file": "rezepte-batch-09.json",
+      "countries": [
+        "Ungarn",
+        "Vatikanstadt",
+        "Vereinigtes Königreich",
+        "Belarus",
+        "Ägypten"
+      ],
+      "recipes": 15
+    },
+    {
+      "batch": 10,
+      "region": "Nordafrika",
+      "file": "rezepte-batch-10.json",
+      "countries": [
+        "Algerien",
+        "Libyen",
+        "Marokko"
+      ],
+      "recipes": 9
+    },
+    {
+      "batch": 11,
+      "region": "Nordafrika",
+      "file": "rezepte-batch-11.json",
+      "countries": [
+        "Tunesien",
+        "Mauretanien",
+        "Westsahara"
+      ],
+      "recipes": 9
+    }
+  ]
+}

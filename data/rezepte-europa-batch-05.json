@@ -1,0 +1,510 @@
+{
+  "batch": 5,
+  "region": "Europa",
+  "schema_version": 1,
+  "note": "Traditionelle, historisch etablierte Gerichte. Auswahl ohne Schweinefleisch; Feld 'substitution' nur dort, wo das Original mit Schwein zubereitet wird. Bilder als Platzhalter. Generisches Schema, direkt importierbar in PostgreSQL/Supabase/Directus/Strapi/Sanity.",
+  "recipes": [
+    {
+      "country": "Malta",
+      "continent": "Europa",
+      "recipe_name": "Aljotta",
+      "categories": ["Fisch", "Suppe", "Hauptgericht"],
+      "short_description": "Eine kräftige maltesische Fischsuppe mit viel Knoblauch, Tomaten, Kräutern und Reis. Mediterrane Küstenküche aus dem Fang des Tages.",
+      "history": "Aljotta ist die traditionelle Fischsuppe Maltas und ein Paradebeispiel der mediterranen Inselküche, die stark von der geografischen Lage zwischen Sizilien und Nordafrika geprägt ist. Wie viele Fischsuppen des Mittelmeerraums entstand Aljotta als sparsames Gericht der Fischer, die kleinere Fische und Reste des Fangs zu einer nahrhaften Brühe verarbeiteten. Charakteristisch sind die großzügige Verwendung von Knoblauch, reife Tomaten, frische Kräuter wie Majoran und Minze sowie ein Schuss Zitrone, die der Suppe ihre mediterrane Frische geben. Häufig wird Reis mitgekocht, der die Suppe sättigender macht. Aljotta spiegelt die enge Bindung der maltesischen Bevölkerung an das Meer und die fastenfreundliche, fleischlose Küche der Insel wider, die katholisch geprägt ist und an Fastentagen Fischgerichte schätzte. Sie ist von Natur aus ohne Schweinefleisch und gilt als wärmendes, aromatisches Wohlfühlessen, das die Einfachheit und Frische guter Zutaten feiert.",
+      "ingredients": [
+        { "quantity": "1", "unit": "kg", "item": "gemischter Suppenfisch und Fischabschnitte" },
+        { "quantity": "1", "unit": "ganze Knolle", "item": "Knoblauch" },
+        { "quantity": "400", "unit": "g", "item": "reife Tomaten" },
+        { "quantity": "1", "unit": "", "item": "Zwiebel" },
+        { "quantity": "80", "unit": "g", "item": "Reis" },
+        { "quantity": "1", "unit": "Bund", "item": "frische Minze und Majoran" },
+        { "quantity": "5", "unit": "EL", "item": "Olivenöl" },
+        { "quantity": "1", "unit": "", "item": "Zitrone" },
+        { "quantity": "", "unit": "", "item": "Salz und Pfeffer" }
+      ],
+      "instructions": [
+        "Zwiebel und reichlich Knoblauch in Olivenöl sanft andünsten.",
+        "Tomaten zugeben und einköcheln lassen.",
+        "Mit Wasser aufgießen, salzen und den Fisch sowie die Abschnitte einlegen.",
+        "Etwa 20 Minuten köcheln, dann den Fisch herausnehmen, entgräten und das Fleisch zurückgeben.",
+        "Reis einstreuen und gar kochen.",
+        "Mit frischen Kräutern, Zitronensaft, Salz und Pfeffer abschmecken und heiß servieren."
+      ],
+      "tips": [
+        "Eine Mischung verschiedener Fische gibt die kräftigste Brühe.",
+        "Mit viel Knoblauch arbeiten — er prägt das Gericht.",
+        "Frische Kräuter und Zitrone erst zum Schluss zugeben."
+      ],
+      "tags": ["Malta", "Aljotta", "Fischsuppe", "Fisch", "Knoblauch", "Tomaten", "mediterran", "Küstenküche", "Reis", "Fastenspeise", "Inselküche", "Suppe"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Malta",
+      "continent": "Europa",
+      "recipe_name": "Bragioli",
+      "category_note": "Rinderrouladen",
+      "categories": ["Fleisch", "Hauptgericht"],
+      "short_description": "Dünne Rinderscheiben, gefüllt mit einer Mischung aus Ei, Semmelbröseln und Kräutern, gerollt und in Tomatensauce geschmort. Maltesische „Rinderoliven“.",
+      "history": "Bragioli, auf Maltesisch oft „beef olives“ genannt, sind gefüllte und geschmorte Rinderrouladen und ein klassisches Festtags- und Sonntagsgericht der maltesischen Küche. Der Name „olives“ bezieht sich nicht auf Oliven, sondern auf die olivenförmige Gestalt der kleinen Fleischrollen. Das Gericht spiegelt die Mischung der Einflüsse wider, die die maltesische Küche prägen — sizilianische, italienische und britische Spuren. Dünn geklopfte Rinderscheiben werden mit einer Farce aus hartgekochtem Ei, Semmelbröseln, Petersilie und Kräutern belegt, aufgerollt und dann langsam in einer Tomaten- und Weinsauce geschmort, bis das Fleisch zart ist. Serviert werden Bragioli mit der Sauce zu Kartoffeln, Reis oder Pasta. Als aufwendigeres Schmorgericht standen sie traditionell bei festlichen Anlässen auf dem Tisch. In dieser Fassung kommt eine Füllung ohne Schweinefleisch zum Einsatz, sodass das herzhafte Aroma erhalten bleibt. Bragioli gelten als eines der wärmsten Beispiele maltesischer Hausmannskost.",
+      "ingredients": [
+        { "quantity": "8", "unit": "Scheiben", "item": "dünn geschnittenes Rindfleisch (Rouladenfleisch)" },
+        { "quantity": "3", "unit": "", "item": "hartgekochte Eier, gehackt" },
+        { "quantity": "80", "unit": "g", "item": "Semmelbrösel" },
+        { "quantity": "1", "unit": "Bund", "item": "Petersilie" },
+        { "quantity": "2", "unit": "", "item": "Zwiebeln" },
+        { "quantity": "400", "unit": "g", "item": "passierte Tomaten" },
+        { "quantity": "100", "unit": "ml", "item": "Rotwein" },
+        { "quantity": "", "unit": "", "item": "Olivenöl, Salz, Pfeffer" }
+      ],
+      "instructions": [
+        "Eier, Semmelbrösel, gehackte Petersilie, etwas Zwiebel, Salz und Pfeffer zu einer Füllung mischen.",
+        "Die Rinderscheiben flach klopfen, mit Füllung belegen und fest aufrollen, mit Küchengarn fixieren.",
+        "Die Rouladen in Olivenöl rundum anbraten und herausnehmen.",
+        "Restliche Zwiebeln andünsten, mit Rotwein ablöschen und passierte Tomaten zugeben.",
+        "Rouladen zurücklegen und zugedeckt 1,5 Stunden sanft schmoren.",
+        "Garn entfernen und Bragioli mit der Sauce zu Kartoffeln oder Pasta servieren."
+      ],
+      "tips": [
+        "Das Fleisch dünn klopfen, damit es sich gut rollen lässt.",
+        "Langsam schmoren macht die Rouladen zart.",
+        "Die Sauce eignet sich hervorragend für Pasta als Vorspeise."
+      ],
+      "tags": ["Malta", "Bragioli", "beef olives", "Rind", "Rouladen", "Tomatensauce", "Schmorgericht", "Festtag", "Sonntagsessen", "mediterran", "Hausmannskost", "Hauptgericht"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Malta",
+      "continent": "Europa",
+      "recipe_name": "Pastizzi tal-irkotta",
+      "categories": ["Vegetarisch", "Snack", "Frühstück"],
+      "short_description": "Knusprige, rautenförmige Blätterteigtaschen mit cremiger Ricotta-Füllung. Maltas allgegenwärtiges Straßengebäck.",
+      "history": "Pastizzi sind das bekannteste Straßengebäck Maltas und ein fester Bestandteil der maltesischen Alltagskultur. Die kleinen, rautenförmigen Taschen aus vielschichtigem, knusprigem Teig werden klassisch mit zwei Füllungen angeboten: cremiger Ricotta (irkotta) oder einem Erbsenpüree. Verkauft werden sie heiß in spezialisierten Buden, den „pastizzeriji“, sowie in Bars und Bäckereien, und sie gelten als preiswertes, sättigendes Essen für unterwegs. Das geschichtete Gebäck verweist auf die mediterranen und nahöstlichen Teigtraditionen, die Malta über seine Geschichte als Kreuzungspunkt im Mittelmeer erreichten. Ricotta spielt in der maltesischen Küche eine große Rolle und füllt zahlreiche herzhafte und süße Gebäcke. Pastizzi sind so eng mit der Insel verbunden, dass sie als kulinarisches Wahrzeichen gelten und zu jeder Tageszeit gegessen werden. Die Ricotta-Variante ist von Natur aus vegetarisch und ohne Schweinefleisch und steht sinnbildlich für die unkomplizierte, volksnahe Seite der maltesischen Esskultur.",
+      "ingredients": [
+        { "quantity": "1", "unit": "Packung", "item": "Blätterteig (oder Filo, mehrfach geschichtet)" },
+        { "quantity": "500", "unit": "g", "item": "Ricotta" },
+        { "quantity": "2", "unit": "", "item": "Eier" },
+        { "quantity": "1", "unit": "Bund", "item": "Petersilie" },
+        { "quantity": "2", "unit": "", "item": "Frühlingszwiebeln (optional)" },
+        { "quantity": "", "unit": "", "item": "Salz, Pfeffer" }
+      ],
+      "instructions": [
+        "Ricotta mit Ei, gehackter Petersilie, Salz und Pfeffer zu einer cremigen Füllung verrühren.",
+        "Blätterteig ausrollen und in Quadrate schneiden.",
+        "Je einen Klecks Füllung mittig setzen.",
+        "Die Ränder zur typischen Rautenform zusammendrücken, sodass die Füllung sichtbar bleibt.",
+        "Mit verquirltem Ei bestreichen.",
+        "Bei 200 °C 20–25 Minuten goldbraun und knusprig backen; heiß servieren."
+      ],
+      "tips": [
+        "Die Ricotta gut abtropfen lassen, damit die Füllung nicht zu feucht wird.",
+        "Echte Pastizzi haben viele dünne Schichten — Blätterteig kommt dem nahe.",
+        "Heiß und frisch schmecken sie am besten."
+      ],
+      "tags": ["Malta", "Pastizzi", "Ricotta", "Blätterteig", "vegetarisch", "Straßenessen", "Snack", "mediterran", "Inselküche", "Gebäck", "Frühstück", "irkotta"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Moldau",
+      "continent": "Europa",
+      "recipe_name": "Mămăligă",
+      "categories": ["Vegetarisch", "Beilage", "Hauptgericht"],
+      "short_description": "Ein fester Maisbrei, gestürzt und in Stücke geschnitten, serviert mit Schafskäse (brânză) und saurer Sahne. Das Grundnahrungsmittel Moldaus.",
+      "history": "Mămăligă ist ein fester Maisbrei und gehört zu den ältesten und wichtigsten Grundnahrungsmitteln Moldaus sowie des angrenzenden Rumäniens. Mais kam nach Europa nach der Entdeckung Amerikas und setzte sich in der Region ab dem 17. und 18. Jahrhundert als günstiges, gut gedeihendes Getreide durch. Für die ländliche Bevölkerung wurde Mămăligă zur täglichen Sättigung und galt lange als „Brot der Armen“, das Weizenbrot ersetzte. Der Maisgrieß wird in Wasser unter ständigem Rühren zu einem dichten Brei gekocht, der so fest wird, dass man ihn stürzen und mit einem Faden oder Messer in Stücke schneiden kann. Serviert wird Mămăligă klassisch mit eingelegtem oder frischem Schafskäse (brânză), saurer Sahne (smântână) und manchmal einem Spiegelei. Sie begleitet zahlreiche Gerichte oder bildet selbst die Mahlzeit. Mămăligă ist von Natur aus vegetarisch und ohne Schweinefleisch und gilt als Symbol der bodenständigen moldauischen Küche.",
+      "ingredients": [
+        { "quantity": "250", "unit": "g", "item": "Maisgrieß (Polenta, mittel)" },
+        { "quantity": "1", "unit": "l", "item": "Wasser" },
+        { "quantity": "1", "unit": "TL", "item": "Salz" },
+        { "quantity": "200", "unit": "g", "item": "Schafskäse (brânză) oder Feta" },
+        { "quantity": "200", "unit": "g", "item": "saure Sahne (smântână)" },
+        { "quantity": "20", "unit": "g", "item": "Butter (optional)" }
+      ],
+      "instructions": [
+        "Wasser mit Salz zum Kochen bringen.",
+        "Maisgrieß langsam einrieseln lassen und dabei kräftig rühren, um Klumpen zu vermeiden.",
+        "Unter gelegentlichem Rühren bei kleiner Hitze etwa 25–30 Minuten zu einem sehr festen Brei kochen.",
+        "Die Mămăligă auf ein Brett stürzen.",
+        "Mit einem Faden oder Messer in dicke Stücke schneiden.",
+        "Mit zerbröseltem Schafskäse und saurer Sahne servieren."
+      ],
+      "tips": [
+        "Den Grieß einrieseln lassen und rühren — so wird der Brei klumpenfrei.",
+        "Je länger gerührt und gekocht, desto fester die Mămăligă.",
+        "Klassisch mit Schafskäse, saurer Sahne und einem Spiegelei."
+      ],
+      "tags": ["Moldau", "Mămăligă", "Maisbrei", "Polenta", "Schafskäse", "saure Sahne", "vegetarisch", "Grundnahrungsmittel", "Landküche", "Beilage", "brânză", "Hauptgericht"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Moldau",
+      "continent": "Europa",
+      "recipe_name": "Sarmale",
+      "categories": ["Fleisch", "Hauptgericht"],
+      "short_description": "In Kraut- oder Weinblätter gewickelte Röllchen aus Reis und gewürztem Rinderhack, langsam geschmort. Festtagsklassiker Moldaus, hier ohne Schwein.",
+      "history": "Sarmale sind gefüllte Kohl- oder Weinblattröllchen und ein zentrales Festtagsgericht Moldaus und Rumäniens, das zu Weihnachten, Ostern, Hochzeiten und Feiern auf dem Tisch steht. Das Gericht gehört zur großen Familie der gefüllten Blätter (dolma/sarma), die sich über die osmanische Zeit im gesamten Balkan, im Nahen Osten und in Osteuropa verbreitete; der Name leitet sich vom türkischen „sarmak“ (wickeln) ab. Saure Krautblätter oder im Sommer Weinblätter werden mit einer Mischung aus Reis, gehacktem Fleisch, Zwiebeln und Kräutern gefüllt, fest gerollt und in einem Topf geschichtet, oft mit Tomate, langsam über Stunden geschmort. Das lange, sanfte Garen verbindet die Aromen und macht die Röllchen zart. Serviert werden Sarmale traditionell mit Mămăligă und saurer Sahne. Üblicherweise wird Schweinehack verwendet; in dieser Fassung nehmen wir Rind, sodass der festliche Charakter ohne Schwein erhalten bleibt.",
+      "ingredients": [
+        { "quantity": "1", "unit": "", "item": "Kopf Sauerkraut/Spitzkohl oder Weinblätter" },
+        { "quantity": "500", "unit": "g", "item": "Rinderhack" },
+        { "quantity": "150", "unit": "g", "item": "Reis" },
+        { "quantity": "2", "unit": "", "item": "Zwiebeln" },
+        { "quantity": "2", "unit": "EL", "item": "Tomatenmark" },
+        { "quantity": "400", "unit": "g", "item": "passierte Tomaten" },
+        { "quantity": "1", "unit": "Zweig", "item": "Thymian, 1 Lorbeerblatt, Dill" },
+        { "quantity": "", "unit": "", "item": "Öl, Salz, Pfeffer; saure Sahne zum Servieren" }
+      ],
+      "instructions": [
+        "Zwiebeln andünsten und mit Hack, Reis, Tomatenmark, Kräutern, Salz und Pfeffer zu einer Füllung vermengen (Reis bleibt roh).",
+        "Krautblätter ablösen, dicke Rippen flach schneiden.",
+        "Je etwas Füllung auf ein Blatt geben, die Seiten einschlagen und fest aufrollen.",
+        "Die Röllchen dicht in einen Topf schichten.",
+        "Mit passierten Tomaten und Wasser angießen, bis sie knapp bedeckt sind, Lorbeer einlegen.",
+        "Zugedeckt 1,5–2 Stunden sehr sanft schmoren; mit Mămăligă und saurer Sahne servieren."
+      ],
+      "tips": [
+        "Den Reis nur halb so viel nehmen wie Platz ist — er quillt stark.",
+        "Die Röllchen dicht schichten, damit sie sich nicht öffnen.",
+        "Lange, sanfte Garzeit macht Sarmale zart und aromatisch."
+      ],
+      "tags": ["Moldau", "Sarmale", "Krautwickel", "Dolma", "Rind", "Reis", "Festtag", "Weihnachten", "osmanisch geprägt", "Schmorgericht", "saure Sahne", "Hauptgericht"],
+      "substitution": "Sarmale werden traditionell mit Schweinehack oder einer Schweine-Rind-Mischung gefüllt. Wir verwenden ausschließlich Rinderhack, gut gewürzt mit Zwiebeln und Kräutern; das lange Schmoren sorgt für Zartheit und Tiefe, ganz ohne Schwein.",
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Moldau",
+      "continent": "Europa",
+      "recipe_name": "Plăcintă",
+      "categories": ["Vegetarisch", "Snack", "Dessert"],
+      "short_description": "Dünn ausgezogene, gefüllte Teigfladen, klassisch mit Schafskäse, Kartoffel oder Apfel. Allgegenwärtiges moldauisches Gebäck.",
+      "history": "Plăcintă ist ein traditionelles gefülltes Teiggebäck Moldaus und Rumäniens und gehört zum festen Repertoire der häuslichen Küche. Der Name leitet sich vom lateinischen „placenta“ (Kuchen) ab und verweist auf die lange Geschichte flacher, gefüllter Backwaren in der Region. Charakteristisch ist ein sehr dünn ausgezogener oder ausgerollter Teig, der mit verschiedenen Füllungen versehen, eingeschlagen und in der Pfanne oder im Ofen gebacken wird. Die Füllungen reichen von herzhaft — Schafskäse (brânză) und Ei, Kartoffel, Kürbis oder Kraut — bis süß mit Apfel oder Kirschen. Plăcintă spiegelt die Verwertung einfacher, saisonaler Zutaten wider und war ein praktisches, sättigendes Essen, das man zu Hause buk und als Mahlzeit, Snack oder Süßspeise reichte. Es ist in zahllosen regionalen Varianten verbreitet und gilt als eines der typischsten Gebäcke Moldaus. Mit Käse-, Gemüse- oder Obstfüllung ist es vegetarisch und ohne Schweinefleisch.",
+      "ingredients": [
+        { "quantity": "400", "unit": "g", "item": "Mehl" },
+        { "quantity": "200", "unit": "ml", "item": "warmes Wasser" },
+        { "quantity": "4", "unit": "EL", "item": "Öl" },
+        { "quantity": "1", "unit": "Prise", "item": "Salz" },
+        { "quantity": "300", "unit": "g", "item": "Schafskäse (brânză) oder Feta" },
+        { "quantity": "1", "unit": "", "item": "Ei" },
+        { "quantity": "", "unit": "", "item": "Butter zum Bestreichen" }
+      ],
+      "instructions": [
+        "Mehl, Wasser, Öl und Salz zu einem geschmeidigen Teig kneten und ruhen lassen.",
+        "Teig in Portionen teilen und jede sehr dünn ausziehen oder ausrollen.",
+        "Käse mit Ei verrühren und mittig auf den Teig geben.",
+        "Die Ränder über der Füllung einschlagen, sodass ein flaches Päckchen entsteht.",
+        "In einer Pfanne mit etwas Butter beidseitig goldbraun backen (oder im Ofen).",
+        "Lauwarm in Stücke schneiden und servieren."
+      ],
+      "tips": [
+        "Den Teig möglichst dünn ausziehen — das ist typisch.",
+        "Für die süße Variante Apfel mit Zimt und Zucker füllen.",
+        "Frisch und lauwarm am besten."
+      ],
+      "tags": ["Moldau", "Plăcintă", "gefülltes Gebäck", "Schafskäse", "Teigfladen", "vegetarisch", "Snack", "Hausbäckerei", "brânză", "Landküche", "Apfel", "Dessert"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Monaco",
+      "continent": "Europa",
+      "recipe_name": "Barbagiuan",
+      "categories": ["Vegetarisch", "Snack", "Vorspeise"],
+      "short_description": "Kleine frittierte Teigtaschen, gefüllt mit Mangold und Ricotta. Das Wahrzeichengebäck des Fürstentums Monaco.",
+      "history": "Barbagiuan gilt als das Nationalgericht des Fürstentums Monaco und spiegelt dessen kulinarische Nähe zur ligurischen und niçoiser Küche wider. Der Name bedeutet sinngemäß „Onkel Johannes“ (barba Giuàn) im lokalen Dialekt. Es handelt sich um kleine, raviolo- oder taschenartige Gebäcke aus dünnem Teig, die traditionell mit Mangold (oder Spinat) und Ricotta gefüllt, manchmal mit Lauch, Zwiebel und Parmesan verfeinert und anschließend frittiert werden. Das Gericht gehört zur mediterranen Tradition gefüllter Teigwaren und nutzt das in der Region reichlich vorhandene Blattgemüse. Barbagiuan werden besonders zu Festen, dem monegassischen Nationalfeiertag und festlichen Anlässen zubereitet und als Vorspeise oder Fingerfood gereicht. Sie verkörpern die enge Verflechtung Monacos mit der umliegenden Riviera-Küche. In ihrer klassischen vegetarischen Füllung sind sie von Natur aus ohne Schweinefleisch und gelten als gastfreundliches, geselliges Gebäck.",
+      "ingredients": [
+        { "quantity": "300", "unit": "g", "item": "Mehl" },
+        { "quantity": "120", "unit": "ml", "item": "Wasser" },
+        { "quantity": "3", "unit": "EL", "item": "Olivenöl (Teig)" },
+        { "quantity": "400", "unit": "g", "item": "Mangold (oder Spinat)" },
+        { "quantity": "250", "unit": "g", "item": "Ricotta" },
+        { "quantity": "50", "unit": "g", "item": "Parmesan, gerieben" },
+        { "quantity": "1", "unit": "", "item": "Ei, 1 Zwiebel" },
+        { "quantity": "", "unit": "", "item": "Öl zum Frittieren, Salz, Pfeffer, Muskat" }
+      ],
+      "instructions": [
+        "Mehl, Wasser, Olivenöl und Salz zu einem glatten Teig kneten und ruhen lassen.",
+        "Mangold blanchieren, gut ausdrücken und fein hacken; Zwiebel andünsten.",
+        "Mangold, Zwiebel, Ricotta, Parmesan und Ei zu einer Füllung verrühren, mit Muskat würzen.",
+        "Teig sehr dünn ausrollen und kleine Quadrate ausschneiden.",
+        "Je etwas Füllung daraufsetzen, zu Täschchen verschließen und die Ränder andrücken.",
+        "In heißem Öl goldbraun frittieren und warm servieren."
+      ],
+      "tips": [
+        "Den Mangold sehr gut ausdrücken, sonst werden die Taschen feucht.",
+        "Den Teig dünn ausrollen für knusprige Hüllen.",
+        "Auch im Ofen gebacken eine etwas leichtere Variante."
+      ],
+      "tags": ["Monaco", "Barbagiuan", "Mangold", "Ricotta", "Teigtaschen", "frittiert", "vegetarisch", "Riviera", "ligurisch geprägt", "Nationalgericht", "Festtag", "Snack"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Monaco",
+      "continent": "Europa",
+      "recipe_name": "Stocafi",
+      "categories": ["Fisch", "Hauptgericht"],
+      "short_description": "Stockfisch, langsam in Tomaten, Oliven, Kapern und Wein geschmort. Ein monegassisches Schmorgericht aus getrocknetem Kabeljau.",
+      "history": "Stocafi ist die monegassische Zubereitung von Stockfisch — luftgetrocknetem, ungesalzenem Kabeljau — und ein traditionelles Gericht des Fürstentums, das eng mit der ligurischen und niçoiser Küche verwandt ist. Getrockneter Fisch war über Jahrhunderte im gesamten Mittelmeerraum ein bedeutendes Handels- und Vorratsgut, das auch fernab der Fanggebiete haltbar blieb und an Fastentagen gegessen wurde. Für Stocafi wird der harte Stockfisch zunächst mehrere Tage gewässert, um ihn wieder geschmeidig zu machen, und dann langsam in einer Sauce aus Tomaten, Zwiebeln, Oliven, Kapern, Knoblauch und Weißwein geschmort, bis er zart ist und die Aromen aufgenommen hat. Manche Versionen geben gegen Ende einen Schuss Anisschnaps oder Kräuter hinzu. Das Gericht steht für die mediterrane Tradition, Stockfisch durch geduldiges Wässern und Schmoren in eine Delikatesse zu verwandeln. Als Fischgericht ist Stocafi selbstverständlich ohne Schweinefleisch und gehört zur festen monegassischen Esskultur.",
+      "ingredients": [
+        { "quantity": "800", "unit": "g", "item": "Stockfisch (gewässert) oder Kabeljaufilet" },
+        { "quantity": "2", "unit": "", "item": "Zwiebeln" },
+        { "quantity": "600", "unit": "g", "item": "passierte Tomaten" },
+        { "quantity": "100", "unit": "g", "item": "schwarze Oliven" },
+        { "quantity": "2", "unit": "EL", "item": "Kapern" },
+        { "quantity": "150", "unit": "ml", "item": "Weißwein" },
+        { "quantity": "3", "unit": "Zehen", "item": "Knoblauch" },
+        { "quantity": "", "unit": "", "item": "Olivenöl, Kräuter, Salz, Pfeffer" }
+      ],
+      "instructions": [
+        "Den Stockfisch (falls verwendet) mehrere Tage unter mehrmaligem Wasserwechsel wässern und in Stücke schneiden.",
+        "Zwiebeln und Knoblauch in Olivenöl andünsten.",
+        "Mit Weißwein ablöschen, Tomaten zugeben und kurz einkochen.",
+        "Oliven und Kapern einrühren, mit Kräutern würzen.",
+        "Die Fischstücke einlegen und zugedeckt etwa 30–40 Minuten sanft schmoren.",
+        "Mit Salz und Pfeffer abschmecken und mit Brot oder Kartoffeln servieren."
+      ],
+      "tips": [
+        "Echten Stockfisch lange genug wässern, sonst bleibt er zäh und salzig.",
+        "Mit frischem Kabeljau gelingt eine schnellere Variante.",
+        "Oliven und Kapern geben die typische mediterrane Würze."
+      ],
+      "tags": ["Monaco", "Stocafi", "Stockfisch", "Kabeljau", "Fisch", "Tomaten", "Oliven", "Kapern", "mediterran", "ligurisch geprägt", "Schmorgericht", "Hauptgericht"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Monaco",
+      "continent": "Europa",
+      "recipe_name": "Fougasse monégasque",
+      "categories": ["Dessert", "Snack", "Vegetarisch"],
+      "short_description": "Ein süßes, flaches Hefegebäck, verziert mit Nüssen, Anis und roten und weißen Zuckerperlen. Festtagsgebäck Monacos in den Landesfarben.",
+      "history": "Die Fougasse monégasque ist ein traditionelles süßes Hefegebäck des Fürstentums Monaco und unterscheidet sich von den herzhaften Fougasses der südfranzösischen Provence. Sie wird besonders zu Weihnachten und festlichen Anlässen gebacken und gehört in Monaco traditionell zur Tafel des „gros souper“, des großen Weihnachtsmahls. Der flache, leicht süße Hefeteig wird mit Orangenblütenwasser und Anis aromatisiert und nach dem Backen mit Mandeln oder Walnüssen sowie roten und weißen Zuckerperlen oder Dragees verziert — die Farben Rot und Weiß sind zugleich die Farben Monacos. Das Gebäck verkörpert die Verbindung der monegassischen Küche mit der provenzalischen und ligurischen Backtradition, in der aromatisierte Festtagsbrote und -kuchen eine lange Geschichte haben. Die Fougasse wird in Stücke gebrochen und geteilt und gehört zu den symbolträchtigen Süßspeisen des Fürstentums. Als reines Hefe-Süßgebäck ist sie selbstverständlich ohne Schweinefleisch.",
+      "ingredients": [
+        { "quantity": "400", "unit": "g", "item": "Mehl" },
+        { "quantity": "150", "unit": "ml", "item": "lauwarme Milch" },
+        { "quantity": "20", "unit": "g", "item": "frische Hefe" },
+        { "quantity": "80", "unit": "g", "item": "Zucker" },
+        { "quantity": "2", "unit": "", "item": "Eier" },
+        { "quantity": "3", "unit": "EL", "item": "Orangenblütenwasser" },
+        { "quantity": "1", "unit": "TL", "item": "Anissamen" },
+        { "quantity": "", "unit": "", "item": "Mandeln/Walnüsse, rote und weiße Zuckerperlen" }
+      ],
+      "instructions": [
+        "Hefe in lauwarmer Milch mit etwas Zucker auflösen.",
+        "Mehl, Zucker, Eier, Orangenblütenwasser, Anis und die Hefemilch zu einem weichen Teig kneten.",
+        "Zugedeckt etwa 1 Stunde gehen lassen.",
+        "Den Teig flach und oval auf ein Blech drücken.",
+        "Mit verquirltem Ei bestreichen und mit Nüssen sowie roten und weißen Zuckerperlen verzieren.",
+        "Bei 180 °C 20–25 Minuten goldbraun backen; abkühlen lassen und in Stücke brechen."
+      ],
+      "tips": [
+        "Orangenblütenwasser und Anis geben das typische Aroma.",
+        "Rote und weiße Verzierung greift die Farben Monacos auf.",
+        "Den Teig nicht zu dick ausarbeiten — die Fougasse bleibt flach."
+      ],
+      "tags": ["Monaco", "Fougasse monégasque", "Hefegebäck", "süß", "Anis", "Orangenblütenwasser", "Weihnachten", "gros souper", "vegetarisch", "Festtag", "provenzalisch geprägt", "Dessert"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Montenegro",
+      "continent": "Europa",
+      "recipe_name": "Kačamak",
+      "categories": ["Vegetarisch", "Hauptgericht", "Beilage"],
+      "short_description": "Ein cremiger Brei aus Mais- (und teils Kartoffel-)Grieß, verrührt mit Käse und kajmak. Wärmendes Berggericht Montenegros.",
+      "history": "Kačamak ist ein traditionelles Brei- bzw. Pürreegericht der Bergregionen Montenegros und des angrenzenden Balkans. Es beruht auf Mais — und in manchen Varianten zusätzlich auf Kartoffeln —, die zu einem dichten, cremigen Brei verkocht und kräftig mit Käse und kajmak (einem rahmigen Milchprodukt) verrührt werden, bis eine geschmeidige, fettreiche Masse entsteht. Das Gericht stammt aus der Hirten- und Bergküche der Region, in der Mais ein wichtiges Getreide und Milchprodukte von Schafen und Kühen reichlich vorhanden waren. Kačamak war ein nahrhaftes, sättigendes Essen, das Familien und Hirten durch die kalten Monate trug und mit einfachen, lokal verfügbaren Zutaten auskam. Es wird heiß gegessen, oft mit zusätzlichem kajmak oder saurer Milch. Das Gericht ist in mehreren Balkanländern in Varianten verbreitet und gilt in Montenegro als typische Bergspezialität. Es ist von Natur aus vegetarisch und ohne Schweinefleisch.",
+      "ingredients": [
+        { "quantity": "250", "unit": "g", "item": "Maisgrieß" },
+        { "quantity": "300", "unit": "g", "item": "mehligkochende Kartoffeln" },
+        { "quantity": "1", "unit": "l", "item": "Wasser" },
+        { "quantity": "200", "unit": "g", "item": "kajmak (oder Frischkäse/saure Sahne)" },
+        { "quantity": "150", "unit": "g", "item": "junger Weißkäse, zerbröselt" },
+        { "quantity": "40", "unit": "g", "item": "Butter" },
+        { "quantity": "", "unit": "", "item": "Salz" }
+      ],
+      "instructions": [
+        "Kartoffeln schälen, würfeln und in gesalzenem Wasser weich kochen.",
+        "Maisgrieß einrieseln lassen und unter Rühren zu einem dicken Brei kochen.",
+        "Die Kartoffeln im Topf zerdrücken und mit dem Maisbrei verbinden.",
+        "Butter, kajmak und Käse einrühren, bis eine cremige Masse entsteht.",
+        "Bei kleiner Hitze kräftig durchrühren.",
+        "Heiß servieren, nach Wunsch mit zusätzlichem kajmak."
+      ],
+      "tips": [
+        "Kräftig rühren macht den Kačamak besonders cremig.",
+        "Junger, leicht salziger Käse passt am besten.",
+        "Heiß servieren — abgekühlt wird der Brei fest."
+      ],
+      "tags": ["Montenegro", "Kačamak", "Maisbrei", "Kartoffeln", "kajmak", "Käse", "vegetarisch", "Bergküche", "Balkan", "Winterküche", "Hirtenküche", "Hauptgericht"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Montenegro",
+      "continent": "Europa",
+      "recipe_name": "Crni rižot",
+      "categories": ["Fisch", "Hauptgericht"],
+      "short_description": "Tiefschwarzes Risotto mit Tintenfisch, gefärbt von dessen Tinte, mit Knoblauch, Wein und Olivenöl. Adriatische Küstenspezialität.",
+      "history": "Crni rižot — „schwarzes Risotto“ — ist eine Spezialität der montenegrinischen Adriaküste und gehört zur gemeinsamen kulinarischen Tradition der gesamten östlichen Adria, die Montenegro mit Kroatien und der italienischen Küste teilt. Charakteristisch ist die tiefschwarze Farbe, die durch die Tinte (Sepia) von Tintenfisch oder Sepia entsteht und dem Gericht zugleich ein intensives, meerig-mineralisches Aroma verleiht. Risotto als Zubereitungsart verweist auf den venezianischen und italienischen Einfluss entlang der Adria. Der Reis wird mit Zwiebel und Knoblauch angeschwitzt, mit Weißwein abgelöscht, nach und nach mit Fischfond aufgegossen und mit den Tintenfischstücken und ihrer Tinte zu einer cremigen, dunklen Masse gekocht. Olivenöl und Petersilie runden das Gericht ab. Crni rižot ist ein beliebtes Gericht der Küstenorte und Fischrestaurants und steht für die maritime Seite der montenegrinischen Küche. Als Fisch- und Meeresfrüchtegericht ist es selbstverständlich ohne Schweinefleisch.",
+      "ingredients": [
+        { "quantity": "320", "unit": "g", "item": "Risottoreis" },
+        { "quantity": "600", "unit": "g", "item": "Tintenfisch oder Sepia, küchenfertig" },
+        { "quantity": "2", "unit": "Beutel", "item": "Sepiatinte" },
+        { "quantity": "1", "unit": "", "item": "Zwiebel, 3 Zehen Knoblauch" },
+        { "quantity": "150", "unit": "ml", "item": "Weißwein" },
+        { "quantity": "1", "unit": "l", "item": "Fischfond, heiß" },
+        { "quantity": "5", "unit": "EL", "item": "Olivenöl" },
+        { "quantity": "1", "unit": "Bund", "item": "Petersilie" },
+        { "quantity": "", "unit": "", "item": "Salz, Pfeffer" }
+      ],
+      "instructions": [
+        "Tintenfisch in Ringe bzw. Stücke schneiden.",
+        "Zwiebel und Knoblauch in Olivenöl andünsten, Tintenfisch zugeben und kurz anbraten.",
+        "Reis einrühren und glasig anschwitzen, mit Weißwein ablöschen.",
+        "Nach und nach heißen Fischfond angießen und unter Rühren cremig kochen.",
+        "Die Sepiatinte einrühren, bis das Risotto tiefschwarz ist.",
+        "Mit Olivenöl, Petersilie, Salz und Pfeffer vollenden und sofort servieren."
+      ],
+      "tips": [
+        "Den Fond stets heiß angießen für ein gleichmäßiges Garen.",
+        "Sepiatinte gibt es separat im Beutel zu kaufen.",
+        "Das Risotto darf cremig-fließend bleiben, nicht zu trocken."
+      ],
+      "tags": ["Montenegro", "Crni rižot", "schwarzes Risotto", "Tintenfisch", "Sepia", "Reis", "Adria", "Küstenküche", "venezianisch geprägt", "Meeresfrüchte", "mediterran", "Hauptgericht"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Montenegro",
+      "continent": "Europa",
+      "recipe_name": "Priganice",
+      "categories": ["Dessert", "Snack", "Vegetarisch"],
+      "short_description": "Kleine, lockere frittierte Hefeteigbällchen, serviert mit Honig, Käse oder Marmelade. Geselliges Gebäck Montenegros zum Frühstück und Fest.",
+      "history": "Priganice sind kleine, frittierte Hefeteigbällchen und ein beliebtes traditionelles Gebäck Montenegros, das auch in Serbien und weiteren Teilen des Balkans verbreitet ist. Sie gehören zur weit gespannten Familie der frittierten Teiggebäcke der Region und sind eng mit Gastfreundschaft und geselligen Anlässen verbunden. Ein einfacher Hefeteig aus Mehl, Wasser oder Milch, Hefe und Salz wird gehen gelassen und dann löffelweise in heißem Öl zu lockeren, goldbraunen Kugeln ausgebacken. Priganice werden warm serviert und können sowohl süß als auch herzhaft gegessen werden: klassisch mit Honig, Marmelade, kajmak oder jungem Käse. Sie galten als unkompliziertes, sättigendes Essen, das schnell aus wenigen Grundzutaten zubereitet werden konnte, und gehören zum Frühstück ebenso wie zu Festen und Familienzusammenkünften. Priganice stehen für die warmherzige, gastfreundliche Seite der montenegrinischen Küche und sind als Hefegebäck selbstverständlich ohne Schweinefleisch.",
+      "ingredients": [
+        { "quantity": "400", "unit": "g", "item": "Mehl" },
+        { "quantity": "250", "unit": "ml", "item": "lauwarmes Wasser oder Milch" },
+        { "quantity": "15", "unit": "g", "item": "frische Hefe" },
+        { "quantity": "1", "unit": "TL", "item": "Zucker" },
+        { "quantity": "1", "unit": "Prise", "item": "Salz" },
+        { "quantity": "", "unit": "", "item": "Öl zum Frittieren" },
+        { "quantity": "", "unit": "", "item": "Honig, kajmak oder Marmelade zum Servieren" }
+      ],
+      "instructions": [
+        "Hefe mit Zucker in der lauwarmen Flüssigkeit auflösen.",
+        "Mit Mehl und Salz zu einem weichen, leicht klebrigen Teig verrühren.",
+        "Zugedeckt etwa 45 Minuten gehen lassen, bis er aufgegangen ist.",
+        "Öl in einem Topf erhitzen.",
+        "Mit nassen Händen oder zwei Löffeln kleine Teigportionen abstechen und goldbraun ausbacken.",
+        "Abtropfen lassen und warm mit Honig, kajmak oder Marmelade servieren."
+      ],
+      "tips": [
+        "Der Teig soll weich und klebrig sein — das macht die Priganice locker.",
+        "Mit nassen Händen lässt sich der Teig leichter abteilen.",
+        "Warm servieren, süß oder herzhaft."
+      ],
+      "tags": ["Montenegro", "Priganice", "Hefeteig", "frittiert", "Honig", "kajmak", "süß", "vegetarisch", "Frühstück", "Balkan", "Gastfreundschaft", "Snack"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Niederlande",
+      "continent": "Europa",
+      "recipe_name": "Erwtensoep",
+      "categories": ["Suppe", "Hauptgericht"],
+      "short_description": "Eine sehr dicke Erbsensuppe, so kräftig, dass der Löffel darin steht, mit Wurzelgemüse und geräucherter Wurst. Niederländisches Winteressen — hier mit Rindwurst.",
+      "history": "Erwtensoep, im Volksmund „snert“, ist die klassische niederländische Erbsensuppe und ein Inbegriff des winterlichen Wohlfühlessens der Niederlande. Sie ist berühmt für ihre außergewöhnliche Dicke — ein gutes snert ist so sämig, dass der Löffel aufrecht darin stehen bleiben soll. Grundlage sind getrocknete Spalterbsen, die mit Wurzelgemüse wie Sellerie, Lauch, Möhre und Kartoffel zu einem dichten Eintopf verkocht werden. Traditionell wird die Suppe mit Schweinefleisch und geräucherter Wurst (rookworst) zubereitet; in dieser Fassung ersetzen wir das Schwein durch eine geräucherte Rindwurst, sodass der prägende Rauchgeschmack erhalten bleibt. Erwtensoep ist eng mit der kalten Jahreszeit und besonders mit dem Schlittschuhlaufen auf zugefrorenen Grachten und Kanälen verbunden, wo sie traditionell zur Stärkung gereicht wurde. Serviert wird sie mit dunklem Roggenbrot. Die Suppe steht für die deftige, bodenständige Seite der niederländischen Küche.",
+      "ingredients": [
+        { "quantity": "500", "unit": "g", "item": "getrocknete Spalterbsen" },
+        { "quantity": "2", "unit": "l", "item": "Wasser oder Gemüsebrühe" },
+        { "quantity": "2", "unit": "", "item": "Möhren" },
+        { "quantity": "0.5", "unit": "", "item": "Knollensellerie" },
+        { "quantity": "1", "unit": "", "item": "Lauchstange" },
+        { "quantity": "2", "unit": "", "item": "Kartoffeln" },
+        { "quantity": "1", "unit": "", "item": "geräucherte Rindwurst" },
+        { "quantity": "", "unit": "", "item": "Salz, Pfeffer; Roggenbrot zum Servieren" }
+      ],
+      "instructions": [
+        "Spalterbsen mit Wasser aufsetzen, aufkochen und abschäumen.",
+        "Etwa 45 Minuten köcheln, bis die Erbsen zerfallen.",
+        "Gewürfeltes Wurzelgemüse, Lauch und Kartoffeln zugeben und weitere 30 Minuten kochen.",
+        "Die Suppe teilweise zerdrücken oder pürieren, bis sie sehr dick ist.",
+        "Die geräucherte Rindwurst in Scheiben darin erwärmen.",
+        "Kräftig mit Salz und Pfeffer abschmecken und mit Roggenbrot servieren."
+      ],
+      "tips": [
+        "Die Suppe soll sehr dick werden — ruhig lange einkochen.",
+        "Am nächsten Tag wird snert noch dicker und schmeckt am besten.",
+        "Etwas mehr Brühe nachgießen, falls sie zu fest wird."
+      ],
+      "tags": ["Niederlande", "Erwtensoep", "snert", "Erbsensuppe", "Spalterbsen", "Wurzelgemüse", "geräucherte Rindwurst", "Winterküche", "deftig", "Schlittschuhlaufen", "Wohlfühlessen", "Suppe"],
+      "substitution": "Erwtensoep wird klassisch mit Schweinefleisch und Schweine-Rauchwurst (rookworst) gekocht. Wir lassen das Schweinefleisch weg und geben stattdessen eine geräucherte Rindwurst hinein — sie liefert den prägenden Rauchgeschmack, sodass die Suppe ihren herzhaften Charakter behält.",
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Niederlande",
+      "continent": "Europa",
+      "recipe_name": "Bitterballen",
+      "categories": ["Fleisch", "Snack", "Vorspeise"],
+      "short_description": "Knusprig frittierte Kugeln mit einer cremigen, würzigen Rinderragout-Füllung, serviert mit Senf. Der klassische niederländische Borrel-Snack.",
+      "history": "Bitterballen sind der wohl bekannteste herzhafte Snack der Niederlande und ein fester Bestandteil der niederländischen „borrel“-Kultur — dem geselligen Beisammensein bei einem Getränk. Sie sind die runde Variante der Kroketten und bestehen aus einer dicken, abgekühlten und panierten Ragoutfüllung, die in heißem Öl knusprig frittiert wird. Die Füllung beruht auf einer kräftigen Mehlschwitze (Roux), gebunden mit Brühe und gewürzt mit Fleisch — klassisch zerzupftes Rindfleisch oder Kalb —, Petersilie und Muskat. Bitterballen werden heiß serviert, traditionell mit grobem Senf zum Dippen, und sind in Cafés, Bars und auf Feiern allgegenwärtig. Ihr Name wird mit dem früher dazu gereichten Kräuterbitter („bittertje“) in Verbindung gebracht. Als auf Rind- oder Kalbfleisch basierender Snack sind sie ohne Schweinefleisch zuzubereiten. Bitterballen verkörpern die gesellige, ungezwungene Seite der niederländischen Esskultur und gehören zu jedem Umtrunk.",
+      "ingredients": [
+        { "quantity": "400", "unit": "g", "item": "gekochtes Rind- oder Kalbfleisch, fein zerzupft" },
+        { "quantity": "60", "unit": "g", "item": "Butter" },
+        { "quantity": "80", "unit": "g", "item": "Mehl" },
+        { "quantity": "500", "unit": "ml", "item": "kräftige Rinderbrühe" },
+        { "quantity": "1", "unit": "Bund", "item": "Petersilie" },
+        { "quantity": "2", "unit": "", "item": "Eier (zum Panieren)" },
+        { "quantity": "", "unit": "", "item": "Mehl und Semmelbrösel zum Panieren" },
+        { "quantity": "", "unit": "", "item": "Öl zum Frittieren, Salz, Pfeffer, Muskat; Senf zum Servieren" }
+      ],
+      "instructions": [
+        "Aus Butter und Mehl eine Roux rühren, mit Brühe zu einer sehr dicken Sauce aufkochen.",
+        "Fleisch und gehackte Petersilie einrühren, mit Salz, Pfeffer und Muskat kräftig würzen.",
+        "Die Masse in einer Form mehrere Stunden kalt stellen, bis sie fest ist.",
+        "Mit nassen Händen kleine Kugeln formen.",
+        "Die Kugeln in Mehl, verquirltem Ei und Semmelbröseln panieren.",
+        "In heißem Öl goldbraun und knusprig frittieren und heiß mit Senf servieren."
+      ],
+      "tips": [
+        "Die Ragoutmasse muss vor dem Formen gut durchgekühlt und fest sein.",
+        "Doppelt panieren gibt eine besonders stabile Kruste.",
+        "Vorsicht: Die Füllung wird sehr heiß."
+      ],
+      "tags": ["Niederlande", "Bitterballen", "Rind", "Kroketten", "frittiert", "borrel", "Snack", "Ragout", "Senf", "gesellig", "Café-Kultur", "Vorspeise"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Niederlande",
+      "continent": "Europa",
+      "recipe_name": "Stroopwafels",
+      "categories": ["Dessert", "Snack", "Vegetarisch"],
+      "short_description": "Zwei dünne, knusprige Waffelscheiben, verklebt mit einer Schicht Karamellsirup. Die berühmte Sirupwaffel aus Gouda.",
+      "history": "Stroopwafels — Sirupwaffeln — sind eines der bekanntesten süßen Gebäcke der Niederlande und stammen ursprünglich aus der Stadt Gouda, wo sie im späten 18. oder frühen 19. Jahrhundert entstanden sein sollen. Der Überlieferung nach wurden sie von Bäckern aus Resten wie Bröseln und Sirup hergestellt, was ihnen den Ruf eines erschwinglichen Gebäcks der einfachen Leute einbrachte. Eine Stroopwafel besteht aus zwei dünnen, in einem speziellen Waffeleisen gebackenen Teigscheiben, die noch warm waagerecht aufgeschnitten und mit einer Schicht aus Karamellsirup (stroop) zusammengeklebt werden. Charakteristisch ist die Kombination aus knuspriger Waffel und zäh-süßer Sirupfüllung. Traditionell legt man die Stroopwafel auf eine dampfende Tasse Kaffee oder Tee, sodass die Wärme den Sirup leicht erweichen lässt. Heute werden sie auf Märkten frisch gebacken sowie abgepackt verkauft und sind ein niederländisches Wahrzeichen. Als süßes Gebäck sind sie selbstverständlich ohne Schweinefleisch.",
+      "ingredients": [
+        { "quantity": "250", "unit": "g", "item": "Mehl" },
+        { "quantity": "125", "unit": "g", "item": "Butter" },
+        { "quantity": "80", "unit": "g", "item": "brauner Zucker" },
+        { "quantity": "1", "unit": "", "item": "Ei" },
+        { "quantity": "10", "unit": "g", "item": "Hefe (oder 1 TL Backpulver)" },
+        { "quantity": "1", "unit": "TL", "item": "Zimt" },
+        { "quantity": "200", "unit": "g", "item": "Sirup (z. B. Zuckerrübensirup)" },
+        { "quantity": "50", "unit": "g", "item": "Butter (Füllung)" }
+      ],
+      "instructions": [
+        "Mehl, Butter, Zucker, Ei, Hefe und Zimt zu einem festen Teig verkneten und kurz ruhen lassen.",
+        "Kleine Teigkugeln formen und im heißen Waffeleisen sehr dünn und knusprig backen.",
+        "Die noch warmen Waffeln vorsichtig waagerecht halbieren.",
+        "Für die Füllung Sirup mit Butter und etwas Zimt erwärmen, bis er streichfähig ist.",
+        "Den Sirup auf eine Waffelhälfte streichen und mit der zweiten zusammensetzen.",
+        "Kurz fest werden lassen; warm auf einer Tasse Kaffee oder Tee servieren."
+      ],
+      "tips": [
+        "Die Waffeln müssen sehr dünn und knusprig sein.",
+        "Das Halbieren gelingt nur, solange die Waffeln warm sind.",
+        "Auf eine heiße Tasse gelegt, wird der Sirup herrlich weich."
+      ],
+      "tags": ["Niederlande", "Stroopwafels", "Sirupwaffel", "Gouda", "Karamell", "süß", "vegetarisch", "Markt", "Kaffeegebäck", "Wahrzeichen", "stroop", "Dessert"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    }
+  ],
+  "batch_summary": {
+    "batch": 5,
+    "region": "Europa",
+    "countries_processed": ["Malta", "Moldau", "Monaco", "Montenegro", "Niederlande"],
+    "recipes_created": 15,
+    "recipes_with_images": 0,
+    "recipes_with_placeholders": 15,
+    "recipes_with_pork_substitution": 2
+  }
+}

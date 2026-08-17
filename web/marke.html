@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Markenhandbuch · HeiBen</title>
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;1,400&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f3eee5;--bg2:#ebe3d4;--paper:#fffdf8;--ink:#1f1c17;--ink2:#524a3e;--rule:#d8cdb7;--terra:#b04a31;--ochre:#a97a1d;--moss:#4a5c39;--burg:#792d29;--aub:#6b3951;--good:#6f8f4e;--goodl:#9ec27f;--bad:#e7a48f}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:'Manrope',system-ui,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:860px;margin:0 auto;padding:1.8rem 1.1rem 5rem}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.32em;text-transform:uppercase;color:var(--terra)}
+h1{font-family:'Fraunces',serif;font-weight:400;font-size:clamp(2.1rem,6.5vw,3.2rem);line-height:1.02;letter-spacing:-.02em;margin:.3rem 0 .5rem}
+h1 em{font-style:italic;color:var(--terra)}
+.lead{color:var(--ink2);max-width:62ch;font-size:1.02rem}
+section{margin-top:2.6rem}
+.h2{font-family:'Fraunces',serif;font-weight:500;font-size:1.5rem;margin-bottom:.9rem}
+.h2 small{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ochre);display:block;margin-bottom:.25rem}
+.card{background:var(--paper);border:1px solid var(--rule);border-radius:16px;padding:1.2rem 1.3rem}
+.card+.card{margin-top:.8rem}
+.card p+p{margin-top:.6rem}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
+@media(max-width:640px){.grid2{grid-template-columns:1fr}}
+.chips{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.6rem}
+.chip{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;border:1px solid var(--rule);background:var(--paper);border-radius:999px;padding:.3rem .7rem;color:var(--ink2)}
+.logorow{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:.8rem}
+.logobox{border:1px solid var(--rule);border-radius:14px;display:flex;align-items:center;justify-content:center;min-height:130px;padding:1rem;background:var(--paper)}
+.logobox.dark{background:var(--ink)}
+.logobox.sand{background:var(--bg2)}
+.lnote{font-size:.78rem;color:var(--ink2);margin-top:.35rem;text-align:center}
+.swatches{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:.7rem}
+.sw{border:1px solid var(--rule);border-radius:12px;overflow:hidden;background:var(--paper)}
+.sw .c{height:56px}
+.sw .m{padding:.5rem .65rem}
+.sw .n{font-weight:700;font-size:.82rem}
+.sw .x{font-family:'JetBrains Mono',monospace;font-size:.66rem;color:var(--ink2)}
+.sw .r{font-size:.7rem;color:var(--ink2);line-height:1.35;margin-top:.15rem}
+.type .card>div+div{margin-top:.9rem;border-top:1px dashed var(--rule);padding-top:.9rem}
+.tl{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ochre)}
+.comp{display:flex;flex-wrap:wrap;gap:1rem;align-items:center}
+.btn{border:0;font:inherit;font-weight:700;border-radius:11px;padding:.68rem 1.25rem;cursor:pointer}
+.btn.pri{background:var(--ink);color:var(--bg)}
+.btn.sek{background:transparent;color:var(--ink);border:1px solid var(--rule)}
+.btn:focus-visible{outline:2px solid var(--ochre);outline-offset:2px}
+.pill{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;border-radius:999px;padding:.28rem .7rem}
+.pill.offen{background:var(--ochre);color:#fffdf8}
+.pill.done{color:var(--good);border:1px solid var(--good);background:transparent}
+.medal{width:46px;height:46px;border-radius:50%;background:var(--terra);color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-size:1.15rem}
+.qopt{display:flex;gap:.6rem;align-items:center;border:1px solid var(--moss);background:#e9f0e0;border-radius:11px;padding:.65rem .85rem;font-weight:600;min-width:230px}
+.qopt .let{font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--moss)}
+.band{background:var(--ink);color:var(--bg);border-radius:16px;padding:1rem 1.2rem;display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+.band .t{font-family:'Fraunces',serif;font-size:1.15rem;color:#fff}
+.band .s{font-size:.85rem;color:#cdbfa8}
+.dd{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
+@media(max-width:640px){.dd{grid-template-columns:1fr}}
+.dd .card b{display:block;font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:.5rem}
+.dd .yes b{color:var(--good)}.dd .no b{color:var(--burg)}
+.dd p{font-size:.92rem}
+.foot{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink2);text-align:center;margin-top:2.4rem}
+.foot a{color:var(--aub)}
+a{color:var(--terra)}
+</style>
+<link rel="stylesheet" href="heiben-design.css">
+<script src="heiben-kennzahlen.js"></script>
+<script src="heiben-nav.js" defer></script>
+</head>
+<body data-hb-welt="holding">
+<div class="wrap">
+  <p class="eyebrow">HeiBen · Markenhandbuch · Version 1.0</p>
+  <h1>Die Marke <em>HeiBen</em></h1>
+  <p class="lead">Zwei Familien, ein Haus: <b>Hei</b>n und <b>Ben</b>khaouda. Dieses Handbuch hält fest, wofür die Marke steht und wie sie aussieht — verbindlich für alle Werkzeuge, Seiten und Partner-Auftritte.</p>
+
+  <section>
+    <div class="h2"><small>Teil A · Strategie</small>Markenkern</div>
+    <div class="card">
+      <p><b>HeiBen macht Alltags- und Finanzkompetenz zu einem Zuhause-Gefühl.</b> Wissen, das man wirklich braucht — Wohnung, Geld, Verträge, Vorsorge — in kleinen täglichen Ritualen statt in Belehrung. Alles läuft lokal auf dem eigenen Gerät: Vertrauen ist hier Technik, nicht Versprechen.</p>
+      <p>Familiengeführt aus Köln, für junge Erwachsene und Familien — und als seriöses White-Label-System für Partner, die ihren Kundinnen und Mitarbeitern dasselbe schenken wollen.</p>
+    </div>
+    <div class="grid2" style="margin-top:.8rem">
+      <div class="card">
+        <p><b>Name: „HeiBen" bleibt.</b> Die Fusion der Familiennamen ist Substanz, kein Kunstwort. Das <b style="color:var(--terra)">Binnen-B</b> wird zum Markenzeichen: In der Wortmarke tragen H und B Terrakotta — die Brücke zwischen den beiden Familien.</p>
+      </div>
+      <div class="card">
+        <p><b>Claim: „Heimat leben" bleibt.</b> Er ist differenzierend, überall verankert und trägt B2C wie B2B. Geprüfte Alternativen — „Wissen wohnt hier." und „Heimat ist ein Verb." — leben als Sekundärzeilen weiter, ersetzen den Claim aber nicht.</p>
+      </div>
+    </div>
+    <div class="card" style="margin-top:.8rem">
+      <p><b>Persönlichkeit</b> — fünf Attribute, an denen sich jeder Text und jedes Layout messen lässt:</p>
+      <div class="chips"><span class="chip">geerdet</span><span class="chip">warmherzig</span><span class="chip">verlässlich</span><span class="chip">neugierig</span><span class="chip">kölsches Augenzwinkern</span></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="h2"><small>Teil A · Tonalität</small>So klingt HeiBen</div>
+    <div class="dd">
+      <div class="card yes"><b>So ja</b>
+        <p>„Dein Notgroschen hält 4,2 Monate. Solide — zwei mehr wären ein Polster."</p>
+        <p style="margin-top:.5rem">„Was sitzt, kommt seltener wieder; was wackelt, öfter."</p>
+      </div>
+      <div class="card no"><b>So nicht</b>
+        <p>„Optimieren Sie jetzt Ihre Financial-Wellness-Journey!"</p>
+        <p style="margin-top:.5rem">„Nur heute: Schalte Premium-Features frei!!"</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="h2"><small>Teil B · Logo-System</small>Signet „Giebel über dem Strom"</div>
+    <div class="card" style="margin-bottom:.8rem">
+      <p>Das Signet verbindet <b>Dach</b> (Heimat, Familie, Schutz) und <b>Welle</b> (der Rhein, das Fließende, Köln) zu einem Zeichen, das ohne Worte funktioniert — im Favicon, als App-Icon, im Co-Branding. Konstruktion: Giebelwinkel ≈ 100°, Wellenlänge = Giebelbreite, Strichstärken im Verhältnis 13:12. <b>Schutzraum:</b> rundum mindestens die Höhe des Giebels.</p>
+    </div>
+    <div class="logorow">
+      <div>
+        <div class="logobox">
+          <svg viewBox="0 0 260 64" style="height:44px" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10 40 L30 16 L50 40" fill="none" stroke="#1f1c17" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M10 50 C16.5 45.8 23.5 54.2 30 50 C36.5 45.8 43.5 54.2 50 50" fill="none" stroke="#b04a31" stroke-width="5.5" stroke-linecap="round"/>
+            <text x="66" y="49" font-family="Fraunces,serif" font-weight="560" font-size="44" letter-spacing="-1"><tspan fill="#b04a31">H</tspan><tspan fill="#1f1c17">ei</tspan><tspan fill="#b04a31">B</tspan><tspan fill="#1f1c17">en</tspan></text>
+          </svg>
+        </div><div class="lnote">Primär-Lockup auf Papier</div>
+      </div>
+      <div>
+        <div class="logobox dark">
+          <svg viewBox="0 0 260 64" style="height:44px" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10 40 L30 16 L50 40" fill="none" stroke="#fffdf8" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M10 50 C16.5 45.8 23.5 54.2 30 50 C36.5 45.8 43.5 54.2 50 50" fill="none" stroke="#b04a31" stroke-width="5.5" stroke-linecap="round"/>
+            <text x="66" y="49" font-family="Fraunces,serif" font-weight="560" font-size="44" letter-spacing="-1"><tspan fill="#b04a31">H</tspan><tspan fill="#fffdf8">ei</tspan><tspan fill="#b04a31">B</tspan><tspan fill="#fffdf8">en</tspan></text>
+          </svg>
+        </div><div class="lnote">Auf Tinte (dunkle Flächen)</div>
+      </div>
+      <div>
+        <div class="logobox sand">
+          <svg viewBox="0 0 64 64" style="height:52px" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 40 L32 16 L52 40" fill="none" stroke="#1f1c17" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M12 50 C18.5 45.8 25.5 54.2 32 50 C38.5 45.8 45.5 54.2 52 50" fill="none" stroke="#b04a31" stroke-width="5.5" stroke-linecap="round"/>
+          </svg>
+        </div><div class="lnote">Signet solo (kompakt)</div>
+      </div>
+      <div>
+        <div class="logobox">
+          <svg viewBox="0 0 64 64" style="height:52px" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 40 L32 16 L52 40" fill="none" stroke="#1f1c17" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M12 50 C18.5 45.8 25.5 54.2 32 50 C38.5 45.8 45.5 54.2 52 50" fill="none" stroke="#1f1c17" stroke-width="5.5" stroke-linecap="round"/>
+          </svg>
+        </div><div class="lnote">Monochrom (Stempel, Fax, Prägung)</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="h2"><small>Teil B · Farbwelt</small>Warm, papierhaft, geprüft</div>
+    <div class="swatches">
+      <div class="sw"><div class="c" style="background:#f3eee5"></div><div class="m"><div class="n">Sand</div><div class="x">#f3eee5</div><div class="r">Grundfläche</div></div></div>
+      <div class="sw"><div class="c" style="background:#ebe3d4"></div><div class="m"><div class="n">Schimmer</div><div class="x">#ebe3d4</div><div class="r">Zweitfläche, Balken</div></div></div>
+      <div class="sw"><div class="c" style="background:#fffdf8;border-bottom:1px solid var(--rule)"></div><div class="m"><div class="n">Papier</div><div class="x">#fffdf8</div><div class="r">Karten, Formulare</div></div></div>
+      <div class="sw"><div class="c" style="background:#1f1c17"></div><div class="m"><div class="n">Tinte</div><div class="x">#1f1c17</div><div class="r">Text, dunkle Bänder · 16,7:1</div></div></div>
+      <div class="sw"><div class="c" style="background:#524a3e"></div><div class="m"><div class="n">Sekundärtinte</div><div class="x">#524a3e</div><div class="r">Nebentext · 8,6:1</div></div></div>
+      <div class="sw"><div class="c" style="background:#d8cdb7"></div><div class="m"><div class="n">Linie</div><div class="x">#d8cdb7</div><div class="r">Rahmen, Trenner</div></div></div>
+      <div class="sw"><div class="c" style="background:#b04a31"></div><div class="m"><div class="n">Terrakotta</div><div class="x">#b04a31</div><div class="r">Primär: Links, Akzente · 5,3:1 auf Papier, 4,7:1 auf Sand (AA)</div></div></div>
+      <div class="sw"><div class="c" style="background:#a97a1d"></div><div class="m"><div class="n">Altgold</div><div class="x">#a97a1d</div><div class="r">Labels, Eyebrows · 3,8:1 auf Papier — nie für Fließtext</div></div></div>
+      <div class="sw"><div class="c" style="background:#4a5c39"></div><div class="m"><div class="n">Moos</div><div class="x">#4a5c39</div><div class="r">Positiv, Bestätigung</div></div></div>
+      <div class="sw"><div class="c" style="background:#792d29"></div><div class="m"><div class="n">Burgund</div><div class="x">#792d29</div><div class="r">Fehler, Warnung</div></div></div>
+      <div class="sw"><div class="c" style="background:#6b3951"></div><div class="m"><div class="n">Aubergine</div><div class="x">#6b3951</div><div class="r">Querverweise, Meta</div></div></div>
+      <div class="sw"><div class="c" style="background:linear-gradient(90deg,#9ec27f 50%,#e7a48f 50%)"></div><div class="m"><div class="n">Semantik hell</div><div class="x">#9ec27f · #e7a48f</div><div class="r">Gut/Schlecht auf Tinte</div></div></div>
+    </div>
+    <div class="card" style="margin-top:.8rem">
+      <p><b>Was sich geändert hat — und warum.</b> Terrakotta wurde von #c2533a auf <b>#b04a31</b> vertieft: Als Link- und Textfarbe erreichte das Alt-Terra auf Sand nur 3,96:1 — jetzt liegt es überall über 4,5:1 (WCAG AA). Ocker wurde von #d29939 auf <b>Altgold #a97a1d</b> geerdet: 2,5:1 war für Labels zu schwach, 3,8:1 trägt. Regel dazu: Gold nur für große, dekorative Typo und Grafik — Fließtext ist immer Tinte oder Terrakotta. Alles andere bleibt: Die Wärme ist die Marke.</p>
+    </div>
+  </section>
+
+  <section class="type">
+    <div class="h2"><small>Teil B · Typografie</small>Drei Stimmen</div>
+    <div class="card">
+      <div><span class="tl">Fraunces · Überschriften &amp; Zahlen mit Gewicht</span>
+        <div style="font-family:'Fraunces',serif;font-size:2rem;line-height:1.1;margin-top:.3rem">Heimat ist ein <em style="color:var(--terra)">Verb</em>.</div>
+      </div>
+      <div><span class="tl">Manrope · Fließtext &amp; Bedienung</span>
+        <p style="margin-top:.3rem">Klare Sätze, konkrete Zahlen, ein Lächeln in der Zeile. Nie belehren, immer einladen.</p>
+      </div>
+      <div><span class="tl">JetBrains Mono · Labels, Eyebrows, Werte</span>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.28em;text-transform:uppercase;color:var(--ochre);margin-top:.3rem">HeiBen · Heimat leben</div>
+      </div>
+      <div><span class="tl">Skala</span>
+        <p style="margin-top:.3rem;font-size:.92rem;color:var(--ink2)">H1 2,1–3,2 rem (clamp) · H2 1,5 rem · H3 1,15 rem · Lead 1,02 rem · Body 1 rem / 1,6 · Label 0,58–0,66 rem Versalien. Radius 11 px (Bedienung) / 16 px (Karten), Schatten sparsam, Linien statt Flächen.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="h2"><small>Teil B · Komponenten</small>Der Werkzeugkasten</div>
+    <div class="card">
+      <div class="comp">
+        <button class="btn pri">Weiter</button>
+        <button class="btn sek">Zurück</button>
+        <span class="pill offen">Tagesdosis heute offen →</span>
+        <span class="pill done">Erledigt ✓</span>
+        <span class="medal">7</span>
+        <div class="qopt"><span class="let">A</span><span>Ein Roggenbrötchen mit Käse</span></div>
+        <svg width="72" height="72" viewBox="0 0 72 72" aria-hidden="true"><circle cx="36" cy="36" r="30" fill="none" stroke="#ebe3d4" stroke-width="8"/><circle cx="36" cy="36" r="30" fill="none" stroke="#b04a31" stroke-width="8" stroke-linecap="round" stroke-dasharray="188.5" stroke-dashoffset="71.6" transform="rotate(-90 36 36)"/><text x="36" y="42" text-anchor="middle" font-family="Fraunces,serif" font-size="17" fill="#1f1c17">62</text></svg>
+      </div>
+    </div>
+    <div class="band" style="margin-top:.8rem">
+      <svg width="46" height="46" viewBox="0 0 64 64" aria-hidden="true"><path d="M12 40 L32 16 L52 40" fill="none" stroke="#fffdf8" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 50 C18.5 45.8 25.5 54.2 32 50 C38.5 45.8 45.5 54.2 52 50" fill="none" stroke="#b04a31" stroke-width="5.5" stroke-linecap="round"/></svg>
+      <div><div class="t">Dein HeiBen-Stand</div><div class="s" id="hbKzBand">60 von 544 Begriffen · 3 von 16 Pfaden · 4-Tage-Serie</div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="h2"><small>Teil B · Partner</small>Co-Branding &amp; White-Label</div>
+    <div class="card">
+      <p>Das System ist auf Geschäftskunden vorbereitet: Das Signet steht links, das Partnerlogo rechts, getrennt durch eine Linie in <span style="color:var(--ink2)">#d8cdb7</span>. Partnerfarben belegen ausschließlich die Akzent-Rollen (Terrakotta/Altgold), niemals Flächen und Tinte — so bleibt jede Ableitung ruhig, lesbar und erkennbar HeiBen. Alle Farben liegen als CSS-Variablen vor; ein Partner-Theme ist ein einziger <code>:root</code>-Block. <a href="partner-demo.html">Lebende Demo „Rheinwohnen eG" →</a></p>
+    </div>
+  </section>
+
+  <p class="foot">HeiBen GmbH i. G. · „Heimat leben" · <a href="strategie.html">Geschäftsmodell</a> · <a href="mein-heiben.html">Mein HeiBen</a> · <a href="index.html">Zur Startseite</a></p>
+</div>
+<script>
+/* Nenner des Demo-Stands aus den echten Kennzahlen (heiben-kennzahlen.js) */
+(function(){var k=window.HEIBEN_KZ,el=document.getElementById('hbKzBand');
+if(k&&el)el.textContent='60 von '+k.karten+' Begriffen · 3 von '+k.lernpfade+' Pfaden · 4-Tage-Serie';})();
+</script>
+</body>
+</html>

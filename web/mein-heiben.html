@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mein HeiBen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;1,400&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f3eee5;--bg2:#ebe3d4;--paper:#fffdf8;--ink:#1f1c17;--ink2:#524a3e;--rule:#d8cdb7;--terra:#b04a31;--ochre:#a97a1d;--moss:#4a5c39;--burg:#792d29;--aub:#6b3951;--good:#6f8f4e;
+--bildung:#4a5c39;--beruf:#6b3951;--finanzen:#b04a31;--wohnen:#a97a1d;--familie:#792d29;--gesundheit:#4a5c39;--recht:#6b3951;--digital:#b04a31;--buero:#524a3e;--freizeit:#a97a1d;--alter:#792d29;--lw:#6b3951}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:'Manrope',system-ui,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:840px;margin:0 auto;padding:1.6rem 1.1rem 5rem}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.3em;text-transform:uppercase;color:var(--aub)}
+h1{font-family:'Fraunces',serif;font-weight:400;font-size:clamp(2rem,7vw,3.2rem);line-height:1.02;letter-spacing:-.02em;margin:.35rem 0 .1rem}
+h1 em{font-style:italic;color:var(--terra)}
+.sub{color:var(--ink2);font-size:1.0rem}
+section{margin-top:1.5rem}
+.h2{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--aub);margin-bottom:.7rem}
+/* Hero */
+.hero{display:flex;align-items:center;gap:1.3rem;background:var(--ink);color:var(--bg);border-radius:20px;padding:1.4rem 1.3rem}
+.hero .ringwrap{flex:0 0 auto;position:relative;width:118px;height:118px}
+.hero .ringwrap .pc{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.hero .ringwrap .pc b{font-family:'Fraunces',serif;font-size:1.9rem;color:var(--ochre);line-height:1}
+.hero .ringwrap .pc span{font-family:'JetBrains Mono',monospace;font-size:.5rem;letter-spacing:.1em;text-transform:uppercase;color:#cdbfa8;margin-top:.15rem}
+.hero .htext{flex:1 1 auto;min-width:0}
+.hero .htext .t{font-family:'Fraunces',serif;font-size:1.3rem;color:#fff;line-height:1.2}
+.hero .htext .d{color:#cdbfa8;font-size:.92rem;margin-top:.3rem}
+/* Tagesdosis-Banner */
+.daily{display:flex;align-items:center;gap:1rem;text-decoration:none;color:inherit;border-radius:16px;padding:1rem 1.2rem;margin-top:1rem;border:1px solid var(--rule)}
+.daily.open{background:linear-gradient(150deg,#b04a31,#a97a1d);border-color:transparent;color:#fff}
+.daily.done{background:rgba(111,143,78,.13);border-color:rgba(111,143,78,.4)}
+.daily .di{flex:1 1 auto}
+.daily .dk{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;opacity:.85}
+.daily.done .dk{color:var(--moss)}
+.daily .dt{font-family:'Fraunces',serif;font-size:1.3rem;line-height:1.15;margin-top:.15rem}
+.daily.done .dt{color:#3c4a2c}
+.daily .dd{font-size:.9rem;opacity:.9;margin-top:.1rem}
+.daily .arrow{flex:0 0 auto;font-family:'Fraunces',serif;font-size:1.5rem}
+.daily.done .arrow{color:var(--moss)}
+/* Säulen */
+.pillars{display:grid;gap:.9rem}@media(min-width:620px){.pillars{grid-template-columns:1fr 1fr 1fr}}
+.pillar{display:block;text-decoration:none;color:inherit;background:var(--paper);border:1px solid var(--rule);border-radius:16px;padding:1.1rem 1.1rem 1.2rem}
+.pillar:hover{border-color:var(--aub)}
+.pillar .pk{font-family:'JetBrains Mono',monospace;font-size:.56rem;letter-spacing:.12em;text-transform:uppercase;color:var(--terra)}
+.pillar .pv{font-family:'Fraunces',serif;font-size:2.1rem;line-height:1;margin:.4rem 0 .05rem}
+.pillar .pv small{font-size:1rem;color:var(--ink2)}
+.pillar .pl{font-size:.86rem;color:var(--ink2)}
+.bar{height:7px;background:var(--bg2);border-radius:99px;overflow:hidden;margin:.7rem 0 .55rem}
+.bar i{display:block;height:100%;border-radius:99px;width:0;transition:width .5s ease}
+.pillar .more{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.06em;text-transform:uppercase;color:var(--aub)}
+.pillar .meta{font-size:.78rem;color:var(--ink2);margin-top:.2rem}
+/* Listen-Karten */
+.row{display:flex;align-items:center;gap:.7rem;background:var(--paper);border:1px solid var(--rule);border-radius:12px;padding:.7rem .9rem;text-decoration:none;color:inherit;margin-bottom:.5rem}
+.row:hover{border-color:var(--aub)}
+.row .dot{flex:0 0 auto;width:10px;height:10px;border-radius:3px;background:var(--kc,#b04a31)}
+.row .rt{flex:1 1 auto;min-width:0;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.row .rv{flex:0 0 auto;font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--ink2)}
+.row .arr{flex:0 0 auto;color:var(--aub);font-family:'Fraunces',serif}
+.results{display:grid;gap:.6rem}@media(min-width:560px){.results{grid-template-columns:1fr 1fr}}
+.res{background:var(--paper);border:1px solid var(--rule);border-left:3px solid var(--ochre);border-radius:0 12px 12px 0;padding:.7rem .9rem;text-decoration:none;color:inherit;display:block}
+.res:hover{border-color:var(--ochre)}
+.res .rk{font-family:'JetBrains Mono',monospace;font-size:.54rem;letter-spacing:.1em;text-transform:uppercase;color:var(--terra)}
+.res .rr{font-family:'Fraunces',serif;font-size:1.05rem;margin-top:.15rem;line-height:1.2}
+/* Werkzeuge */
+.tools{display:grid;grid-template-columns:1fr 1fr;gap:.6rem}@media(min-width:560px){.tools{grid-template-columns:1fr 1fr 1fr}}
+.tool{display:flex;flex-direction:column;gap:.15rem;text-decoration:none;color:inherit;background:var(--paper);border:1px solid var(--rule);border-radius:13px;padding:.8rem .9rem}
+.tool:hover{border-color:var(--terra)}
+.tool .tn{font-weight:700}
+.tool .td{font-size:.78rem;color:var(--ink2);line-height:1.35}
+.empty{color:var(--ink2);font-size:.9rem;background:var(--paper);border:1px dashed var(--rule);border-radius:12px;padding:.9rem 1rem}
+.foot{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink2);text-align:center;margin-top:2.4rem}
+.foot a{color:var(--aub)}
+</style>
+<link rel="stylesheet" href="heiben-design.css">
+<script src="heiben-nav.js" defer></script>
+</head>
+<body data-hb-welt="konto">
+<div class="wrap">
+  <p class="eyebrow" id="greet">HeiBen</p>
+  <h1>Mein <em>HeiBen</em></h1>
+  <p class="sub" id="subline">Dein persönlicher Überblick — alles an einem Ort.</p>
+
+  <section>
+    <div class="hero">
+      <div class="ringwrap" id="ringwrap"></div>
+      <div class="htext"><div class="t" id="heroT"></div><div class="d" id="heroD"></div></div>
+    </div>
+    <a class="daily" id="daily" href="tagesdosis.html"></a>
+  </section>
+
+  <section id="wocheSec"></section>
+
+  <section>
+    <div class="h2">Deine drei Säulen</div>
+    <div class="pillars" id="pillars"></div>
+  </section>
+
+  <section id="erfolgeSec"></section>
+
+  <section id="continueSec" style="display:none">
+    <div class="h2">Weiter, wo du warst</div>
+    <div id="continue"></div>
+  </section>
+
+  <section id="resultsSec" style="display:none">
+    <div class="h2">Gespeicherte Ergebnisse</div>
+    <div class="results" id="results"></div>
+  </section>
+
+  <section>
+    <div class="h2">Alle Werkzeuge</div>
+    <div class="tools" id="tools"></div>
+  </section>
+
+  <p class="foot">HeiBen GmbH i. G. · „Heimat leben" · alles lokal auf deinem Gerät · <a href="index.html">Zur Startseite</a></p>
+</div>
+
+<script src="tagesdosis-daten.js"></script>
+<script src="lebenswissen-daten.js"></script>
+<script src="lernpfade-daten.js"></script>
+<script src="heiben-erfolge.js"></script>
+<script src="heiben-rueckblick.js"></script>
+<script>
+function el(id){return document.getElementById(id);}
+function get(k,f){try{var v=JSON.parse(localStorage.getItem(k));return v==null?f:v;}catch(e){return f;}}
+function pad(n){return n<10?"0"+n:""+n;}
+function dstr(d){return d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate());}
+function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
+
+var BANK=(typeof TD_BANK!=="undefined")?TD_BANK:[];
+var ART=(typeof ARTIKEL!=="undefined")?ARTIKEL:[];
+var PF=(typeof PFADE!=="undefined")?PFADE:[];
+var AMAP={}; ART.forEach(function(a){AMAP[a.id]=a;});
+
+/* — Daten lesen — */
+var today=new Date(), TODAY=dstr(today), YEST=dstr(new Date(today.getTime()-86400000));
+// Karten
+var ks=get("heiben_karten_v1",{mastered:{},gewusst:0,bestStreak:0});
+var kMast=ks.mastered?Object.keys(ks.mastered).length:0, kTot=BANK.length||544;
+var dueN=0; if(ks.sr){var _now=Date.now(); for(var _id in ks.sr){ if(ks.sr[_id]&&ks.sr[_id].due<=_now)dueN++; }}
+// Tagesdosis
+var td=get("heiben-tagesdosis",{streak:0,best:0,total:0,last:null});
+var doneToday=td.last===TODAY;
+// Lernpfade
+var lp=get("heiben-lernpfad",{}); var verlauf=get("heiben-verlauf",[]);
+var readSet={}; (verlauf||[]).forEach(function(h){var m=String(h.u||"").match(/[?&]id=([^&]+)/);if(m)readSet[decodeURIComponent(m[1])]=1;});
+function isDone(id){ if(lp[id]===true)return true; if(lp[id]===false)return false; return !!readSet[id]; }
+var pfDone=0, artDone={}, artTot=0;
+PF.forEach(function(p){ var d=0; p.steps.forEach(function(s){artTot++; if(isDone(s[0])){d++;artDone[s[0]]=1;}}); if(d===p.steps.length)pfDone++; });
+var artDoneN=Object.keys(artDone).length;
+
+/* — Gesamtstand — */
+var pK=kTot?kMast/kTot:0, pP=artTot?artDoneN/artTot:0, pD=Math.min((td.total||0)/30,1);
+var overall=Math.round((pK+pP+pD)/3*100);
+
+/* — Begrüßung — */
+var h=today.getHours();
+el("greet").textContent=(h<11?"Guten Morgen":h<18?"Guten Tag":"Guten Abend")+" · "+["Sonntag","Montag","Dienstag","Mittwoch","Donnerstag","Freitag","Samstag"][today.getDay()];
+
+/* — Hero-Ring — */
+(function(){
+  var size=118,sw=10,r=(size-sw)/2,c=2*Math.PI*r,off=c*(1-overall/100);
+  el("ringwrap").innerHTML=
+    '<svg width="'+size+'" height="'+size+'" viewBox="0 0 '+size+' '+size+'">'+
+      '<circle cx="'+size/2+'" cy="'+size/2+'" r="'+r+'" fill="none" stroke="rgba(255,255,255,.13)" stroke-width="'+sw+'"/>'+
+      '<circle cx="'+size/2+'" cy="'+size/2+'" r="'+r+'" fill="none" stroke="#a97a1d" stroke-width="'+sw+'" stroke-linecap="round" stroke-dasharray="'+c.toFixed(1)+'" stroke-dashoffset="'+off.toFixed(1)+'" transform="rotate(-90 '+size/2+' '+size/2+')"/>'+
+    '</svg><div class="pc"><b>'+overall+'%</b><span>Dein Stand</span></div>';
+  var msg = overall===0 ? "Frisch dabei — der beste Moment, um zu starten."
+          : overall<34 ? "Ein guter Anfang ist gemacht. Bleib dran, es trägt."
+          : overall<67 ? "Stark — du bist mittendrin und es wächst sichtbar."
+          : "Beeindruckend. Du hast dir ein echtes Fundament aufgebaut.";
+  el("heroT").textContent=msg;
+  el("heroD").innerHTML=kMast+" von "+kTot+" Begriffen gemeistert · "+artDoneN+" Pfad-Artikel gelesen · "+(td.streak||0)+"-Tage-Serie";
+})();
+
+/* — Tagesdosis-Banner — */
+(function(){
+  var d=el("daily");
+  if(doneToday){ d.className="daily done";
+    d.innerHTML='<div class="di"><div class="dk">Tagesdosis</div><div class="dt">Heute erledigt</div><div class="dd">Serie bei '+(td.streak||0)+' Tagen — morgen geht\u2019s weiter.</div></div><div class="arrow">\u2713</div>';
+  } else { d.className="daily open";
+    d.innerHTML='<div class="di"><div class="dk">Tagesdosis · 2 Minuten</div><div class="dt">Heute noch offen</div><div class="dd">'+((td.streak||0)>0?'Halte deine '+td.streak+'-Tage-Serie am Leben.':'Starte heute deine Serie.')+'</div></div><div class="arrow">\u2192</div>';
+  }
+})();
+
+/* — Säulen — */
+(function(){
+  function bar(pct,col){return '<div class="bar"><i style="width:'+Math.round(pct*100)+'%;background:'+col+'"></i></div>';}
+  var pies=[
+    {u:(dueN>0?"begriffskarten.html?kat=faellig":"begriffskarten.html"),k:"Begriffskarten",v:kMast,tot:kTot,unit:"Begriffe gemeistert",p:pK,col:"var(--terra)",
+     meta:"Längste Serie: "+(ks.bestStreak||0)+" · „Gewusst“: "+(ks.gewusst||0)+"×"+(dueN>0?" · <b style=\"color:var(--terra)\">"+dueN+" fällig</b>":""),
+     more:(dueN>0?dueN+" fällig wiederholen →":null)},
+    {u:"lernpfade.html",k:"Lernpfade",v:pfDone,tot:PF.length,unit:"Pfade gemeistert",p:PF.length?pfDone/PF.length:0,col:"var(--ochre)",
+     meta:artDoneN+" von "+artTot+" Artikeln erledigt"},
+    {u:"tagesdosis.html",k:"Tagesdosis",v:(td.streak||0),tot:null,unit:"Tage in Folge",p:pD,col:"var(--moss)",
+     meta:"Bestmarke "+(td.best||0)+" · "+(td.total||0)+" Tage gesamt"}
+  ];
+  el("pillars").innerHTML=pies.map(function(o){
+    return '<a class="pillar" href="'+o.u+'"><div class="pk">'+o.k+'</div>'+
+      '<div class="pv">'+o.v+(o.tot!=null?'<small> / '+o.tot+'</small>':'')+'</div>'+
+      '<div class="pl">'+o.unit+'</div>'+bar(o.p,o.col)+
+      '<div class="meta">'+o.meta+'</div>'+
+      '<div class="more">'+(o.more||"Öffnen →")+'</div></a>';
+  }).join('');
+})();
+
+/* — Weiter wo du warst (Verlauf) — */
+(function(){
+  var items=(verlauf||[]).slice(0,5);
+  if(!items.length)return;
+  el("continueSec").style.display="";
+  el("continue").innerHTML=items.map(function(it){
+    var kc=it.k?'var(--'+it.k+')':'var(--lw)';
+    var tag=it.ty==='lw'?'Artikel':(it.ty||'');
+    return '<a class="row" href="'+esc(it.u)+'" style="--kc:'+kc+'"><span class="dot"></span>'+
+      '<span class="rt">'+esc(it.n||'')+'</span><span class="rv">'+esc(tag)+'</span><span class="arr">→</span></a>';
+  }).join('');
+})();
+
+/* — Gespeicherte Ergebnisse (heiben_results, ohne Säulen-Dubletten) — */
+(function(){
+  var R=get("heiben_results",{}); var keys=Object.keys(R).filter(function(k){return k!=="lernpfade"&&k!=="tagesdosis";});
+  // nach Zeit sortieren
+  keys.sort(function(a,b){return (R[b].ts||0)-(R[a].ts||0);});
+  if(!keys.length)return;
+  el("resultsSec").style.display="";
+  el("results").innerHTML=keys.map(function(k){var o=R[k];
+    return '<a class="res" href="'+esc(o.u||'#')+'"><div class="rk">'+esc(o.t||k)+'</div><div class="rr">'+esc(o.v||'')+'</div></a>';
+  }).join('');
+})();
+
+/* — Abzeichen — */
+(function(){
+  if(!window.HeibenErfolge)return;
+  var R=get("heiben_results",{});
+  var resultCount=Object.keys(R).filter(function(k){return k!=="lernpfade"&&k!=="tagesdosis"&&k!=="pflanzen";}).length;
+  var ctx={kMast:kMast,kTot:kTot,best:(td.best||0),tdTotal:(td.total||0),pfDone:pfDone,pfTot:PF.length,resultCount:resultCount};
+  el("erfolgeSec").innerHTML=HeibenErfolge.sectionHTML(ctx,{nextN:3});
+})();
+
+/* — Deine Woche — */
+(function(){
+  if(!window.HeibenRueckblick)return;
+  el("wocheSec").innerHTML=HeibenRueckblick.cardHTML();
+})();
+
+/* — Werkzeuge — */
+(function(){
+  var T=[
+    {u:"tagesdosis.html",n:"Tagesdosis",d:"Begriff & Frage des Tages"},
+    {u:"lernpfade.html",n:"Lernpfade",d:"Geführt durch die Themen"},
+    {u:"begriffskarten.html",n:"Begriffskarten",d:"544 Begriffe zum Lernen"},
+    {u:"zuhause-ordner.html",n:"Zuhause-Ordner",d:"Notfall- & Familienordner — anlegen, abhaken, ausdrucken"},
+    {u:"wissen.html",n:"Wissen für Zuhause",d:"Eine Suche über alle acht Kompendien"},
+    {u:"pflanzen.html",n:"Pflanzenwissen",d:"Anbau & Deko — Garten bis Indoor"},
+    {u:"haushalt.html",n:"Selbermachen",d:"Reparaturen & Haushaltspflege Schritt für Schritt"},
+    {u:"lebensmittel.html",n:"Lebensmittel-Wissen",d:"Richtig lagern, Frische erkennen, Reste retten"},
+    {u:"papierkram.html",n:"Papierkram",d:"Aufbewahren, kündigen, entsorgen — mit Fristen"},
+    {u:"digital.html",n:"Sicher im Netz",d:"Betrug erkennen, Konten & Familie schützen"},
+    {u:"erstehilfe.html",n:"Erste Hilfe",d:"Ruhig & richtig handeln — vom Pflaster bis zur 112"},
+    {u:"auto.html",n:"Rund ums Auto",d:"Panne, Wartung, Kosten — souverän statt hilflos"},
+    {u:"finanzen.html",n:"Finanz-Grundwissen",d:"Konto, Steuern, Vorsorge, Eigentum — mit Faustregeln"},
+    {u:"studio-lebenswissen.html",n:"Lebenswissen",d:"Über 160 Wegweiser"},
+    {u:"mieten-oder-kaufen.html",n:"Mieten oder kaufen",d:"Die ehrliche Rechnung"},
+    {u:"finanzcheck.html",n:"Finanzcheck",d:"Dein Geld auf einen Blick"},
+    {u:"steuererklaerung.html",n:"Steuererklärung",d:"Grundlagen ohne Schrecken"},
+    {u:"zinseszins.html",n:"Zinseszins",d:"Sieh dein Geld wachsen"}
+  ];
+  el("tools").innerHTML=T.map(function(o){return '<a class="tool" href="'+o.u+'"><span class="tn">'+o.n+'</span><span class="td">'+o.d+'</span></a>';}).join('');
+})();
+</script>
+</body>
+</html>

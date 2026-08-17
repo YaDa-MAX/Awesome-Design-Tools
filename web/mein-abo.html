@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>HeiBen · Mein Abo &amp; Empfehlungen</title>
+<style>
+:root{--bg:#f3eee5;--bg-soft:#ebe3d4;--ink:#1f1c17;--ink-soft:#524a3e;--rule:#d8cdb7;--terracotta:#b04a31;--kuli:#6b3951;--ochre:#a97a1d;--wohnen:#4a5c39;--immo:#792d29;}
+*{box-sizing:border-box;}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Manrope',-apple-system,Segoe UI,sans-serif;line-height:1.55;}
+.wrap{max-width:920px;margin:0 auto;padding:0 1.5rem;}
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:1.1rem 0;border-bottom:1px solid var(--rule);}
+.wm{font-family:'Fraunces',serif;font-weight:700;font-size:1.4rem;}.wm .a{color:var(--terracotta);}
+.back{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);text-decoration:none;}
+h1{font-family:'Fraunces',serif;font-weight:340;font-size:clamp(1.8rem,4.5vw,2.6rem);margin:1.6rem 0 .3rem;}
+h2{font-family:'Fraunces',serif;font-weight:440;font-size:1.35rem;margin:2.2rem 0 .8rem;}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:.64rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-soft);}
+.card{background:#fff;border:1px solid var(--rule);border-radius:16px;padding:18px;margin:.8rem 0;}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;}@media(max-width:640px){.grid2{grid-template-columns:1fr;}}
+.muted{color:var(--ink-soft);font-size:.9rem;}
+.btn{display:inline-block;border:0;cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;padding:.7rem 1.1rem;border-radius:9px;text-decoration:none;margin:.3rem .3rem 0 0;}
+.btn.primary{background:var(--kuli);color:#f3eee5;}.btn.terra{background:var(--terracotta);color:#f3eee5;}.btn.dark{background:var(--ink);color:#f3eee5;}
+.btn.ghost{background:none;border:1px solid var(--ink);color:var(--ink);}
+.tag{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;padding:.2rem .55rem;border-radius:999px;}
+.tag.ok{background:#e7eede;color:var(--wohnen);}.tag.warn{background:#f3e6cf;color:#8a5a16;}.tag.off{background:#efe1df;color:var(--immo);}
+table{width:100%;border-collapse:collapse;font-size:.88rem;}
+td,th{text-align:left;padding:.5rem .4rem;border-bottom:1px dotted var(--rule);}
+th{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);}
+input{border:1px solid var(--rule);background:var(--bg);border-radius:8px;padding:.55rem .7rem;font:inherit;}
+.kpi{display:flex;gap:1.4rem;flex-wrap:wrap;}.kpi .b{font-family:'Fraunces',serif;font-size:1.7rem;font-weight:560;color:var(--kuli);}.kpi .l{font-family:'JetBrains Mono',monospace;font-size:.56rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);}
+.rew{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.6rem;}
+.rew .t{border:1px solid var(--rule);border-radius:10px;padding:.5rem .7rem;font-size:.82rem;}
+.rew .t.done{background:#e7eede;border-color:#cbd9bd;}
+footer{margin-top:3rem;border-top:1px solid var(--rule);padding:1.4rem 0;color:var(--ink-soft);font-size:.8rem;}
+.note{font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--ink-soft);}
+</style>
+<link rel="stylesheet" href="heiben-design.css">
+<script src="heiben-nav.js" defer></script>
+</head>
+<body data-hb-welt="konto">
+<div class="wrap">
+  <div class="topbar"><div class="wm"><span class="a">H</span>ei<span class="a">B</span>en <span style="font-weight:400;font-size:.9rem;color:var(--ink-soft)">· Mein Konto</span></div><a class="back" href="kulinarik-app.html">← App</a></div>
+  <div class="eyebrow">Selbstverwaltung</div>
+  <h1>Mein Abo &amp; Empfehlungen</h1>
+  <p class="muted">Abos, Rechnungen, Zahlungsmethode, Guthaben und Erinnerungen — alles an einem Ort.</p>
+
+  <h2>Abos</h2>
+  <div id="abos"></div>
+
+  <h2>Zahlungsmethode</h2>
+  <div class="card" id="payCard"></div>
+
+  <h2>Rechnungen</h2>
+  <div class="card"><table id="invTable"><thead><tr><th>Beleg</th><th>Datum</th><th>Leistung</th><th>Betrag</th><th>Status</th></tr></thead><tbody id="invBody"></tbody></table><p class="note" id="invEmpty"></p></div>
+
+  <h2>Empfehlungen &amp; Guthaben</h2>
+  <div class="card">
+    <div class="kpi">
+      <div><div class="b" id="kInv">0</div><div class="l">Einladungen</div></div>
+      <div><div class="b" id="kCred">0&nbsp;€</div><div class="l">Guthaben</div></div>
+      <div><div class="b" id="kStreak">0</div><div class="l">Streak (Tage)</div></div>
+    </div>
+    <div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.8rem;">
+      <input id="refLink" style="flex:1;min-width:220px;" readonly>
+      <button class="btn ghost" id="copyRef">Link kopieren</button>
+    </div>
+    <p class="muted" style="margin-top:.6rem;">Freund erhält 10 % auf die erste Bestellung, du 5 € Guthaben je Einladung.</p>
+    <div class="eyebrow" style="margin-top:1rem;">Streak-Belohnungen</div>
+    <div class="rew" id="rewTiers"></div>
+    <button class="btn terra" id="claimBtn" style="margin-top:.7rem;">Verfügbare Belohnungen einlösen</button>
+  </div>
+
+  <h2>Erinnerungen</h2>
+  <div class="card">
+    <p class="muted" id="reEngage"></p>
+    <p class="muted">Lokale Erinnerungen halten deine Koch-Serie am Leben (keine Server nötig, läuft im Browser).</p>
+    <button class="btn dark" id="remBtn">Erinnerungen aktivieren</button>
+    <button class="btn ghost" id="remTest">Test-Benachrichtigung</button>
+    <p class="note" id="remState"></p>
+  </div>
+
+  <footer>HeiBen Holding GmbH (i.&nbsp;G.) · Köln · <span class="note">Prototyp ohne echten Zahlungsanbieter — Lifecycle &amp; Belege werden lokal simuliert.</span></footer>
+</div>
+
+<script src="heiben-konto.js"></script>
+<script src="heiben-analytics.js"></script>
+<script src="heiben-produkt.js"></script>
+<script>
+(function(){
+  var HP=window.HeiBenProdukt, fmt=HP.fmt;
+  var SCOPES=[['lebenswissen','Lebenswissen'],['app','Kulinarik-App']];
+
+  function renderAbos(){
+    document.getElementById('abos').innerHTML=SCOPES.map(function(sc){
+      var s=HP.aboState(sc[0]); var p=HP.PLANS[sc[0]];
+      var tag = s.status==='aktiv'?'<span class="tag ok">aktiv</span>'
+              : s.trial?'<span class="tag warn">Probemonat</span>'
+              : s.status.indexOf('gekündigt')===0?'<span class="tag warn">gekündigt – läuft aus</span>'
+              : s.status==='abgelaufen'?'<span class="tag off">abgelaufen</span>':'<span class="tag off">kein Abo</span>';
+      var info='';
+      if(s.trial) info='Probemonat bis '+new Date(s.trialUntil).toLocaleDateString('de-DE')+'.';
+      else if(s.active && s.nextBilling) info='Nächste Abrechnung am '+new Date(s.nextBilling).toLocaleDateString('de-DE')+' ('+(s.cycle==='jahr'?fmt(p.jahr)+'/Jahr':fmt(p.monat)+'/Monat')+').';
+      else if(s.active) info='Läuft bis '+new Date(s.until).toLocaleDateString('de-DE')+' — keine Verlängerung.';
+      var actions='';
+      if(s.active && s.autoRenew) actions='<button class="btn ghost" data-cancel="'+sc[0]+'">Kündigen</button>';
+      else if(s.active && !s.autoRenew) actions='<button class="btn primary" data-resume="'+sc[0]+'">Verlängerung fortsetzen</button>';
+      else { actions='<button class="btn ghost" data-trial="'+sc[0]+'">Probemonat</button>'+
+        '<button class="btn primary" data-sub="'+sc[0]+'|monat">Monatlich '+fmt(p.monat)+'</button>'+
+        '<button class="btn terra" data-sub="'+sc[0]+'|jahr">Jährlich '+fmt(p.jahr)+' (Vorkasse)</button>'; }
+      if(s.active && s.cycle!=='jahr') actions+='<button class="btn ghost" data-sub="'+sc[0]+'|jahr">Auf Jahr (Vorkasse) wechseln</button>';
+      return '<div class="card"><div style="display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;"><b style="font-family:\'Fraunces\',serif;font-size:1.15rem;">'+sc[1]+'</b>'+tag+'</div>'+
+        '<p class="muted" style="margin:.4rem 0 .2rem;">'+(info||p.nutzen)+'</p>'+actions+'</div>';
+    }).join('');
+  }
+  function renderPay(){
+    var pm=HP.paymentMethod();
+    document.getElementById('payCard').innerHTML = pm
+      ? '<p>Hinterlegt: <b>'+pm.brand+' •••• '+pm.last4+'</b> <button class="btn ghost" id="payChange">Ändern</button></p>'
+      : '<div style="display:flex;gap:.5rem;flex-wrap:wrap;align-items:center;"><input id="payNum" placeholder="Kartennummer (Demo)" style="flex:1;min-width:220px;"><button class="btn dark" id="paySave">Speichern</button></div><p class="note" style="margin-top:.5rem;">Demo — es werden keine echten Zahlungsdaten verarbeitet oder übertragen.</p>';
+    var ps=document.getElementById('paySave'); if(ps) ps.onclick=function(){ var r=HP.setPaymentMethod(document.getElementById('payNum').value); HP.toast(r.ok?'Zahlungsmethode gespeichert ✓':r.error); renderPay(); };
+    var pc=document.getElementById('payChange'); if(pc) pc.onclick=function(){ try{localStorage.removeItem('heiben-pay');}catch(e){} renderPay(); };
+  }
+  function renderInv(){
+    var inv=HP.invoices(); var b=document.getElementById('invBody');
+    b.innerHTML=inv.map(function(i){ return '<tr><td>'+i.id+'</td><td>'+new Date(i.date).toLocaleDateString('de-DE')+'</td><td>'+(i.scope==='app'?'Kulinarik-App':'Lebenswissen')+' · '+(i.cycle==='jahr'?'Jahr':'Monat')+'</td><td>'+fmt(i.amount)+'</td><td><span class="tag ok">'+i.status+'</span></td></tr>'; }).join('');
+    document.getElementById('invEmpty').textContent = inv.length?'':'Noch keine Rechnungen — sie entstehen beim ersten Abo.';
+  }
+  function renderRef(){
+    var r=HP.refState(), s=HP.streakState();
+    document.getElementById('kInv').textContent=r.invited;
+    document.getElementById('kCred').textContent=fmt((r.creditsCt||0)/100);
+    document.getElementById('kStreak').textContent=s.count;
+    document.getElementById('refLink').value=HP.refLink();
+    var rw=HP.streakReward();
+    document.getElementById('rewTiers').innerHTML=rw.tiers.map(function(t){ var done=rw.claimed.indexOf(t.d)>=0; var reach=s.count>=t.d;
+      return '<div class="t'+(done?' done':'')+'">'+t.d+' Tage → '+fmt(t.ct/100)+(done?' ✓':(reach?' · einlösbar':''))+'</div>'; }).join('');
+  }
+  function renderRem(){
+    var re=HP.reEngage(); document.getElementById('reEngage').textContent= re?re.msg:'Du bist aktuell. Schön!';
+    document.getElementById('remState').textContent = HP.remindersOn()?'Erinnerungen sind aktiv.':'Erinnerungen sind aus.';
+    if(re){ HP.notify('HeiBen Kulinarik', re.msg); }
+  }
+  function renderAll(){ renderAbos(); renderPay(); renderInv(); renderRef(); renderRem(); }
+
+  document.addEventListener('click',function(e){
+    var t;
+    if((t=e.target.closest('[data-cancel]'))){ HP.cancel(t.dataset.cancel); HP.toast('Gekündigt — Zugang bis Periodenende.'); renderAll(); }
+    else if((t=e.target.closest('[data-resume]'))){ HP.resume(t.dataset.resume); HP.toast('Verlängerung wieder aktiv ✓'); renderAll(); }
+    else if((t=e.target.closest('[data-trial]'))){ var r=HP.startTrial(t.dataset.trial); HP.toast(r.ok?'Probemonat gestartet ✓':r.error); renderAll(); }
+    else if((t=e.target.closest('[data-sub]'))){ var x=t.dataset.sub.split('|'); HP.subscribe(x[0],x[1]); HP.toast('Abo aktiv ✓'); renderAll(); }
+  });
+  document.getElementById('copyRef').onclick=function(){ HP.copy(HP.refLink()); HP.creditWerber(); renderRef(); HP.toast('Link kopiert — +5 € Guthaben bei Einlösung ✓'); };
+  document.getElementById('claimBtn').onclick=function(){ var r=HP.claimRewards(); HP.toast(r.got?('+'+fmt(r.got/100)+' Guthaben gutgeschrieben ✓'):'Aktuell nichts einzulösen.'); renderRef(); };
+  document.getElementById('remBtn').onclick=function(){ HP.enableReminders().then(function(r){ HP.toast(r.ok?'Erinnerungen aktiv ✓':r.error); renderRem(); }); };
+  document.getElementById('remTest').onclick=function(){ if(!HP.notify('HeiBen Kulinarik','Zeit für deinen Wochenplan 🍲')) HP.toast('Erst Erinnerungen aktivieren.'); };
+
+  renderAll();
+})();
+</script>
+<script src="heiben-legal.js"></script>
+</body>
+</html>

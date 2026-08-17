@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HeiBen Studio · Lebenswissen-Bibliothek</title>
+<meta name="description" content="Die Lebenswissen-Bibliothek: durchsuchbares Alltagswissen für jede Lebensphase — von Bildung über Finanzen bis Gesundheit.">
+<style>
+:root{--bg:#f3eee5;--bg-soft:#ebe3d4;--ink:#1f1c17;--ink-soft:#524a3e;--rule:#d8cdb7;--terracotta:#b04a31;--accent:#1f1c17;--kuli:#6b3951;}
+*{box-sizing:border-box;}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Manrope',-apple-system,Segoe UI,sans-serif;line-height:1.5;}
+.wrap{max-width:1040px;margin:0 auto;padding:0 1.5rem;}
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:1.1rem 0;border-bottom:1px solid var(--rule);}
+.wm{font-family:'Fraunces',serif;font-weight:700;font-size:1.4rem;}.wm .a{color:var(--terracotta);}
+.wm span{font-weight:400;font-size:.9rem;color:var(--ink-soft);}
+.back{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);text-decoration:none;}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:.64rem;letter-spacing:.18em;text-transform:uppercase;color:var(--kuli);}
+h1{font-family:'Fraunces',serif;font-weight:340;font-size:clamp(2rem,5vw,3rem);margin:1rem 0 .2rem;}
+.lede{color:var(--ink-soft);max-width:62ch;}
+.search{margin-top:1.2rem;}
+.search input{width:100%;border:1px solid var(--rule);background:#fff;border-radius:12px;padding:.8rem 1rem;font:inherit;}
+.chips{display:flex;gap:.4rem;flex-wrap:wrap;margin:.9rem 0 .3rem;}
+.chip{border:1px solid var(--rule);background:#fff;border-radius:999px;padding:.4rem .85rem;font-size:.78rem;cursor:pointer;}
+.chip.on{background:var(--ink);border-color:var(--ink);color:#f3eee5;font-weight:600;}
+.note{font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--ink-soft);}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px;margin-top:1rem;}
+.card{background:#fff;border:1px solid var(--rule);border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:.45rem;text-decoration:none;color:inherit;}
+.card:hover{border-color:var(--ink);}
+.card .top{display:flex;justify-content:space-between;align-items:center;gap:.4rem;}
+.kat{font-family:'JetBrains Mono',monospace;font-size:.54rem;letter-spacing:.06em;text-transform:uppercase;background:var(--bg-soft);color:var(--ink-soft);padding:.15rem .5rem;border-radius:999px;}
+.prem{font-family:'JetBrains Mono',monospace;font-size:.5rem;letter-spacing:.06em;text-transform:uppercase;background:var(--kuli);color:#f3eee5;padding:.15rem .5rem;border-radius:999px;}
+.card h3{font-family:'Fraunces',serif;font-weight:480;font-size:1.05rem;margin:0;line-height:1.25;}
+.card .kurz{font-size:.85rem;color:var(--ink-soft);}
+.card .age{font-size:.7rem;color:var(--ink-soft);}
+.cta{background:var(--ink);color:#f3eee5;border-radius:18px;padding:1.3rem 1.4rem;margin:2.2rem 0 0;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;}
+.cta h2{font-family:'Fraunces',serif;font-weight:420;font-size:1.3rem;margin:0;color:#f3eee5;}
+.cta p{margin:.2rem 0 0;color:#d8cdb7;font-size:.9rem;}
+.btn{display:inline-block;border:0;cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;padding:.8rem 1.2rem;border-radius:9px;text-decoration:none;background:var(--terracotta);color:#f3eee5;}
+footer{margin-top:3rem;border-top:1px solid var(--rule);padding:1.4rem 0;color:var(--ink-soft);font-size:.8rem;}
+</style>
+<link rel="stylesheet" href="heiben-design.css">
+<script src="heiben-nav.js" defer></script>
+</head>
+<body data-hb-welt="studio">
+<div class="wrap">
+  <div class="topbar"><div class="wm"><span class="a">H</span>ei<span class="a">B</span>en <span>· Studio</span></div><span style="display:flex;gap:1rem;align-items:center;"><a class="back" href="studio-lebenswissen-redaktion.html">Redaktion ↗</a><a class="back" href="studio-lebenswissen.html">← Lebenswissen</a></span></div>
+  <div class="eyebrow">Lebenswissen · Bibliothek</div>
+  <h1>Alltagswissen für <em style="color:var(--kuli);font-style:italic;">jede Lebensphase</em></h1>
+  <p class="lede">Verständlich, sortiert und durchsuchbar: von Schulabschluss über erste Wohnung und Finanzen bis Gesundheit und Vorsorge. Such ein Thema oder filtere nach Kategorie.</p>
+
+  <div class="search"><input id="q" type="search" placeholder="Suchen … z. B. „Miete", „Vorsorge", „Bewerbung""></div>
+  <div class="chips" id="kats"></div>
+  <div id="count" class="note"></div>
+  <div class="grid" id="grid"></div>
+
+  <div class="cta">
+    <div><h2>Mehr in der Tiefe</h2><p>Mit der Mitgliedschaft schaltest du zu jedem Thema Vertiefungen, Checklisten und Vorlagen frei — ab 1,90 €/Monat, erster Monat gratis.</p></div>
+    <a class="btn" href="studio-lebenswissen.html#mitglied">Probemonat starten</a>
+  </div>
+
+  <footer>HeiBen Studio · Lebenswissen · <span class="note">Wissen, das durchs Leben trägt.</span></footer>
+</div>
+
+<script src="lebenswissen-daten.js"></script>
+<script src="heiben-analytics.js"></script>
+<script>
+(function(){
+  var T=window.HeiBenTrack, D=window.LW_DATA||{};
+  var ARTIKEL=D.ARTIKEL||[], KATS=D.KATS||{};
+  var activeKat='', q='';
+  function katName(k){ return (KATS[k]&&KATS[k].n)||k; }
+  function katChips(){
+    var h='<span class="chip'+(activeKat===''?' on':'')+'" data-k="">Alle</span>';
+    Object.keys(KATS).forEach(function(k){ h+='<span class="chip'+(activeKat===k?' on':'')+'" data-k="'+k+'">'+KATS[k].n+'</span>'; });
+    return h;
+  }
+  function match(a){
+    if(activeKat && a.k!==activeKat) return false;
+    if(q){
+      var hay=((a.t||'')+' '+(a.kurz||'')+' '+((a.s||[]).join(' '))).toLowerCase();
+      if(hay.indexOf(q)<0) return false;
+    }
+    return true;
+  }
+  function card(a){
+    var age=(a.a&&a.a.length===2)?(a.a[0]+'–'+a.a[1]+' Jahre'):'';
+    return '<a class="card" href="'+(a.url?a.url:('studio-lebenswissen-artikel.html?id='+encodeURIComponent(a.id)))+'" data-id="'+a.id+'">'+
+      '<div class="top"><span class="kat">'+katName(a.k)+'</span>'+(a.interaktiv?'<span class="prem" style="background:#4a5c39;">Interaktiv</span>':(a.prem?'<span class="prem">Vertiefung</span>':''))+'</div>'+
+      '<h3>'+a.t+'</h3>'+
+      '<div class="kurz">'+(a.kurz||'')+'</div>'+
+      (age?'<div class="age">'+age+'</div>':'')+'</a>';
+  }
+  function render(){
+    document.getElementById('kats').innerHTML=katChips();
+    var list=ARTIKEL.filter(match);
+    document.getElementById('count').textContent=list.length+' von '+ARTIKEL.length+' Beiträgen';
+    document.getElementById('grid').innerHTML=list.map(card).join('')||'<p class="note">Nichts gefunden — andere Suche oder Kategorie probieren.</p>';
+  }
+  document.getElementById('kats').addEventListener('click',function(e){
+    var c=e.target.closest('.chip'); if(!c)return; activeKat=c.dataset.k; if(T)T.ev('lw_filter',{kat:activeKat}); render();
+  });
+  document.getElementById('q').addEventListener('input',function(e){ q=e.target.value.trim().toLowerCase(); render(); });
+  document.getElementById('grid').addEventListener('click',function(e){
+    var a=e.target.closest('[data-id]'); if(a && T) T.ev('lw_open',{id:a.dataset.id});
+  });
+  if(!ARTIKEL.length){ document.getElementById('count').textContent='Daten konnten nicht geladen werden.'; }
+  render();
+})();
+</script>
+<script src="heiben-legal.js"></script>
+</body>
+</html>

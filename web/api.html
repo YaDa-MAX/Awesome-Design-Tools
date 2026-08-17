@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>HeiBen · API-Dokumentation</title>
+<link rel="stylesheet" href="vendor/swagger-ui/swagger-ui.css">
+<style>
+  :root{--bg:#f3eee5;--bg-soft:#ebe3d4;--ink:#1f1c17;--ink-soft:#524a3e;--rule:#d8cdb7;--terracotta:#b04a31;--kuli:#6b3951;}
+  body{margin:0;background:var(--bg);font-family:'Manrope',-apple-system,Segoe UI,sans-serif;}
+  .hb-top{display:flex;align-items:center;justify-content:space-between;max-width:1100px;margin:0 auto;padding:1.1rem 1.5rem;border-bottom:1px solid var(--rule);}
+  .hb-top .wm{font-family:'Fraunces',Georgia,serif;font-weight:700;font-size:1.4rem;color:var(--ink);}
+  .hb-top .wm .a{color:var(--terracotta);}
+  .hb-top .wm span{font-weight:400;font-size:.9rem;color:var(--ink-soft);}
+  .hb-top a{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);text-decoration:none;}
+  .hb-hero{max-width:1100px;margin:0 auto;padding:1.4rem 1.5rem .4rem;}
+  .hb-hero .eyebrow{font-family:'JetBrains Mono',monospace;font-size:.64rem;letter-spacing:.18em;text-transform:uppercase;color:var(--kuli);}
+  .hb-hero h1{font-family:'Fraunces',Georgia,serif;font-weight:340;font-size:clamp(1.7rem,4vw,2.4rem);margin:.3rem 0 .2rem;color:var(--ink);}
+  .hb-draft{max-width:1100px;margin:.4rem auto 0;padding:.7rem 1.5rem;}
+  .hb-draft span{display:inline-block;background:#fbf6ea;border:1px solid var(--terracotta);border-radius:10px;padding:.5rem .9rem;font-size:.82rem;color:var(--ink-soft);}
+  /* Swagger-UI etwas in die CI einbetten */
+  #swagger-ui{max-width:1100px;margin:0 auto;padding:0 .5rem 3rem;}
+  .swagger-ui .topbar{display:none;}
+  .swagger-ui .info{margin:18px 0;}
+  .swagger-ui .info .title{font-family:'Fraunces',Georgia,serif;font-weight:440;}
+  .swagger-ui, .swagger-ui .opblock-tag, .swagger-ui .opblock .opblock-summary-operation-id, .swagger-ui table{font-family:'Manrope',-apple-system,sans-serif;}
+</style>
+<link rel="stylesheet" href="heiben-design.css">
+<script src="heiben-nav.js" defer></script>
+</head>
+<body data-hb-welt="holding">
+  <div class="hb-top">
+    <div class="wm"><span class="a">H</span>ei<span class="a">B</span>en <span>· API-Dokumentation</span></div>
+    <a href="unternehmen.html">← Unternehmen</a>
+  </div>
+  <div class="hb-hero">
+    <div class="eyebrow">Backend · intern</div>
+    <h1>HeiBen Platform API</h1>
+  </div>
+  <div class="hb-draft"><span>⚠️ Entwurf · interaktive Ansicht der OpenAPI-3.1-Spezifikation. „Try it out" benötigt ein laufendes Backend; die Server-URLs sind Beispiele.</span></div>
+
+  <div id="swagger-ui"></div>
+
+  <script src="vendor/swagger-ui/swagger-ui-bundle.js"></script>
+  <script>
+    window.addEventListener('load', function () {
+      window.ui = SwaggerUIBundle({
+        url: 'openapi.yaml',
+        dom_id: '#swagger-ui',
+        deepLinking: true,
+        docExpansion: 'list',
+        defaultModelsExpandDepth: 0,
+        presets: [SwaggerUIBundle.presets.apis],
+        layout: 'BaseLayout'
+      });
+    });
+  </script>
+  <script src="heiben-legal.js"></script>
+</body>
+</html>

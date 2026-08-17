@@ -1,0 +1,13 @@
+{
+  "appId": "de.heiben.app",
+  "appName": "HeiBen",
+  "webDir": "www",
+  "backgroundColor": "#f3eee5",
+  "server": { "androidScheme": "https", "iosScheme": "https" },
+  "ios": { "contentInset": "always", "backgroundColor": "#f3eee5" },
+  "android": { "backgroundColor": "#f3eee5" },
+  "plugins": {
+    "SplashScreen": { "launchShowDuration": 900, "backgroundColor": "#f3eee5", "showSpinner": false },
+    "StatusBar": { "style": "DARK", "backgroundColor": "#f3eee5" }
+  }
+}

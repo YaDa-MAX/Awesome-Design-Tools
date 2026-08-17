@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Köln-Heimat-Quiz · HeiBen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;1,400&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f3eee5;--bg2:#ebe3d4;--paper:#fffdf8;--ink:#1f1c17;--ink2:#524a3e;--rule:#d8cdb7;--terra:#b04a31;--ochre:#a97a1d;--moss:#4a5c39;--burg:#792d29;--aub:#6b3951;--good:#6f8f4e;--bad:#b04a31}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:'Manrope',system-ui,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:680px;margin:0 auto;padding:1.6rem 1.1rem 5rem}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.32em;text-transform:uppercase;color:var(--terra)}
+.dom{display:block;margin:.6rem 0 .1rem}
+h1{font-family:'Fraunces',serif;font-weight:400;font-size:clamp(2rem,6.5vw,3.1rem);line-height:1.02;letter-spacing:-.02em;margin:.2rem 0 .5rem}
+h1 em{font-style:italic;color:var(--terra)}
+.lead{color:var(--ink2);max-width:60ch;font-size:1.02rem}
+.prog{display:flex;justify-content:space-between;align-items:center;font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink2);margin:1.4rem 0 .5rem}
+.prog #pscore{color:var(--terra)}
+.qbox h3{font-family:'Fraunces',serif;font-weight:500;font-size:1.35rem;line-height:1.25;margin-bottom:.9rem}
+.opts{display:flex;flex-direction:column;gap:.5rem}
+.opts button{text-align:left;border:1px solid var(--rule);background:var(--paper);border-radius:11px;padding:.7rem .85rem;cursor:pointer;font:inherit;font-weight:600;color:var(--ink);transition:.12s;display:flex;gap:.6rem;align-items:flex-start}
+.opts button:hover:not(:disabled){border-color:var(--terra)}
+.opts button .let{font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--terra);flex:none;width:1.1rem}
+.opts button.correct{background:#e9f0e0;border-color:var(--moss)}
+.opts button.correct .let{color:var(--moss)}
+.opts button.wrong{background:#f4e3df;border-color:var(--burg)}
+.opts button.wrong .let{color:var(--burg)}
+.opts button:disabled{cursor:default}
+.why{display:none;margin-top:.8rem;font-size:.94rem;color:var(--ink2);background:var(--paper);border:1px solid var(--rule);border-radius:11px;padding:.8rem .9rem;line-height:1.5}
+.why.show{display:block}
+.why b{color:var(--ink)}
+.next{margin-top:1rem;border:0;background:var(--ink);color:var(--bg);font:inherit;font-weight:700;border-radius:11px;padding:.7rem 1.3rem;cursor:pointer;display:none}
+.next.show{display:inline-block}
+.keyhint{display:none;text-align:center;font-family:'JetBrains Mono',monospace;font-size:.55rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink2);margin-top:.8rem}
+.keyhint b{color:var(--terra);font-weight:600}
+@media (hover:hover) and (pointer:fine){.keyhint{display:block}}
+.opts button:focus-visible,.next:focus-visible,.again button:focus-visible{outline:2px solid var(--ochre);outline-offset:2px}
+.result{background:var(--ink);color:var(--bg);border-radius:18px;padding:1.6rem 1.3rem;margin-top:.6rem;text-align:center;display:none}
+.result.show{display:block}
+.result .eyebrow{color:var(--ochre)}
+.ring{margin:.6rem auto .2rem;display:block}
+.band{font-family:'Fraunces',serif;font-style:italic;font-size:1.55rem;margin-top:.3rem;line-height:1.15}
+.rsub{color:#cdbfa8;font-size:.95rem;margin-top:.4rem;max-width:46ch;margin-left:auto;margin-right:auto}
+.best{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ochre);margin-top:.8rem}
+.again{display:flex;gap:.5rem;justify-content:center;margin-top:1.1rem;flex-wrap:wrap}
+.again button{border:1px solid rgba(255,255,255,.4);background:transparent;color:var(--bg);font:inherit;font-weight:700;border-radius:11px;padding:.6rem 1.1rem;cursor:pointer}
+.again button.pri{background:var(--ochre);color:var(--ink);border-color:var(--ochre)}
+.xlink{text-align:center;margin-top:1.3rem}
+.xlink a{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink2);text-decoration:none;border-bottom:1px solid var(--rule)}
+.foot{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink2);text-align:center;margin-top:1.8rem}
+</style>
+<link rel="stylesheet" href="heiben-design.css">
+<script src="heiben-nav.js" defer></script>
+</head>
+<body data-hb-welt="holding">
+<div class="wrap">
+  <p class="eyebrow">HeiBen · Heimat leben</p>
+  <svg class="dom" width="58" height="46" viewBox="0 0 58 46" aria-hidden="true">
+    <g fill="none" stroke="var(--terra)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round">
+      <path d="M6 44 V16"/><path d="M52 44 V16"/>
+      <path d="M16 44 V14 L23 3 L30 14 V44"/>
+      <path d="M28 44 V14 L35 3 L42 14 V44"/>
+      <path d="M23 3 V-1 M35 3 V-1"/>
+      <path d="M4 44 H54"/>
+    </g>
+  </svg>
+  <h1>Wie <em>kölsch</em> bist du?</h1>
+  <p class="lead">Dom, Karneval, Kölsch, Klüngel — zwölf Fragen rund um die Stadt am Rhing, jede mit einer kleinen Erklärung. Am Ende sagt dir das Kölschometer, wo du stehst. Alaaf!</p>
+
+  <div id="game">
+    <div class="prog"><span id="pnum"></span><span id="pscore"></span></div>
+    <div class="qbox" id="qbox"></div>
+    <div class="keyhint"><b>1</b>–<b>4</b> Antwort wählen · <b>Enter</b> weiter</div>
+  </div>
+
+  <div class="result" id="result"></div>
+
+  <div class="xlink"><a href="wissensquiz.html">Mehr Allgemeinwissen? → Lebenswissen-Quiz</a></div>
+  <p class="foot">HeiBen GmbH i. G. · „Heimat leben" · <a href="mein-heiben.html" style="color:var(--aub)">Mein HeiBen</a> · mit Augenzwinkern, ohne Anspruch auf kölsche Vollständigkeit</p>
+</div>
+
+<script>
+var KEY="heiben_koeln_v1";
+var st={best:0,plays:0};
+try{var sv=JSON.parse(localStorage.getItem(KEY));if(sv){st.best=sv.best||0;st.plays=sv.plays||0;}}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(st));}catch(e){}}
+
+var BANK=[
+ {q:`Wann wurde der Kölner Dom nach gut 600 Jahren endlich fertiggestellt?`,o:["1880","1248","1945","2001"],a:0,why:`Grundsteinlegung war 1248 — doch erst 1880 stand der Dom vollendet. Dazwischen ruhte der Bau über 300 Jahre.`},
+ {q:`Was war der Kölner Dom von 1880 bis 1884?`,o:["Das höchste Gebäude der Welt","Die größte Kirche der Welt","Das erste Haus mit Aufzug","Der längste Tunnel Europas"],a:0,why:`Mit 157 Metern war er vier Jahre lang das höchste Bauwerk der Welt — bis das Washington Monument ihn ablöste.`},
+ {q:`Mit welchem Ruf grüßt man sich im Kölner Karneval?`,o:["Kölle Alaaf","Helau","Ahoi","Narri Narro"],a:0,why:`„Kölle Alaaf" heißt sinngemäß „Köln über alles". „Helau" ruft man in Düsseldorf und Mainz — in Köln lieber nicht.`},
+ {q:`Du bestellst im Brauhaus einen „Halve Hahn". Was bekommst du?`,o:["Ein Roggenbrötchen mit Käse","Ein halbes Hähnchen","Eine halbe Portion Pommes","Ein kleines Kölsch"],a:0,why:`Der Klassiker-Reinfall: Ein „Halve Hahn" ist ein Röggelchen mit einer dicken Scheibe Gouda — kein Geflügel weit und breit.`},
+ {q:`Wie viel passt in eine „Stange", das typische Kölschglas?`,o:["0,2 Liter","0,5 Liter","0,33 Liter","1,0 Liter"],a:0,why:`Kölsch kommt in der schlanken 0,2-Liter-Stange — angeblich, damit es frisch bleibt. Der Köbes bringt einfach immer Nachschub.`},
+ {q:`Wer ist im Brauhaus der „Köbes"?`,o:["Der Kellner","Der Wirt","Ein Stammgast","Das Fass"],a:0,why:`Der Köbes ist der traditionell wortkarge Kellner. Er bringt das Kölsch im „Kranz" und macht Striche auf dem Deckel.`},
+ {q:`Welches Rheinufer meinen Kölner mit der „schäl Sick"?`,o:["Die rechte (östliche) Seite","Die linke (westliche) Seite","Die Innenstadt","Die Südstadt"],a:0,why:`Vom Dom aus gesehen ist die rechtsrheinische Seite die „schäl Sick" — die „schiefe Seite". Altstädter blicken da gern herab.`},
+ {q:`Welches Tier ist das Maskottchen des 1. FC Köln?`,o:["Ein Geißbock namens Hennes","Ein Adler","Ein Löwe","Eine Ziege namens Otto"],a:0,why:`Der Geißbock Hennes — benannt nach Trainer Hennes Weisweiler — ist seit 1950 das lebende Wappentier des Effzeh.`},
+ {q:`Wofür stehen die drei Kronen im Kölner Stadtwappen?`,o:["Die Heiligen Drei Könige","Drei alte Königreiche","Drei Brauereien","Drei Stadttore"],a:0,why:`Die Gebeine der Heiligen Drei Könige kamen 1164 nach Köln — ihr Schrein steht im Dom, ihre Kronen zieren bis heute das Wappen.`},
+ {q:`Was symbolisieren die elf schwarzen „Flammen" im Stadtwappen?`,o:["Die 11.000 Jungfrauen der heiligen Ursula","Die elf Karnevalsregeln","Elf Stadtteile","Den Karnevalsbeginn am 11.11."],a:0,why:`Sie erinnern an die Legende der heiligen Ursula und ihrer 11.000 Jungfrauen. Dass der Karneval am 11.11. startet, ist hübscher Zufall.`},
+ {q:`Was bezeichnet die berühmte Kölner Zahl „4711" ursprünglich?`,o:["Eine Hausnummer in der Glockengasse","Das Gründungsjahr der Stadt","Eine Telefonnummer","Die Zahl der Kirchen"],a:0,why:`Unter französischer Besatzung wurden Häuser durchnummeriert — die „4711" in der Glockengasse wurde zum Markennamen des Kölnisch Wassers.`},
+ {q:`Nach wem ist die römische „Colonia" benannt, aus der Köln entstand?`,o:["Agrippina, hier geboren","Kaiser Nero","Julius Cäsar","Apostel Petrus"],a:0,why:`Die in Köln geborene Agrippina ließ ihren Geburtsort 50 n. Chr. zur „Colonia" erheben — daraus wurde über die Jahrhunderte „Köln".`},
+ {q:`Wie nennen Kölner spöttisch-liebevoll jemanden, der nicht von hier stammt?`,o:["Imi","Pänz","Jeck","Bützje"],a:0,why:`„Imi" kommt von „Imitation". „Pänz" sind Kinder, ein „Jeck" ein Narr und ein „Bützje" ein Küsschen — gern verteilt im Karneval.`},
+ {q:`Wofür ist die Hohenzollernbrücke neben Zügen heute bekannt?`,o:["Tausende Liebesschlösser","Die längste Brücke Europas","Eine Achterbahn","Einen Wochenmarkt"],a:0,why:`Verliebte hängen Schlösser ans Geländer und werfen den Schlüssel in den Rhein. Das Gewicht summiert sich auf viele Tonnen.`},
+ {q:`Aus welchen drei Figuren besteht das Kölner „Dreigestirn"?`,o:["Prinz, Bauer und Jungfrau","König, Königin und Narr","Prinz, Prinzessin und Hofnarr","Bauer, Müller und Schmied"],a:0,why:`Prinz, Bauer und Jungfrau führen den Karneval an — die „Jungfrau" wird traditionell von einem Mann verkörpert.`},
+ {q:`Was bedeutet das urkölsche Wort „Klüngel"?`,o:["Über Beziehungen Dinge regeln","Ein Karnevalstanz","Ein Stück Kuchen","Ein Stadtteil"],a:0,why:`„Mer kennt sich, mer hilft sich" — der Klüngel ist das halb augenzwinkernde Kölner Prinzip, Dinge über gute Bekanntschaften zu erledigen.`},
+ {q:`Welchen Rang belegt Köln unter Deutschlands größten Städten?`,o:["Die viertgrößte Stadt","Die größte Stadt","Die zweitgrößte Stadt","Die zehntgrößte Stadt"],a:0,why:`Mit gut einer Million Einwohnern ist Köln nach Berlin, Hamburg und München die viertgrößte Stadt Deutschlands.`},
+ {q:`Was schützt die „Kölsch-Konvention" von 1986?`,o:["Nur Bier aus dem Raum Köln darf Kölsch heißen","Die Baupläne des Doms","Den Rosenmontagszug","Die Höhe der Bierstange"],a:0,why:`Seit 1986 ist Kölsch geschützt: ein helles, obergäriges Bier aus dem Kölner Raum. Andernorts darf es nicht so heißen.`},
+ {q:`Wie viele große romanische Kirchen prägen die Kölner Altstadt?`,o:["Zwölf","Drei","Sieben","Zwanzig"],a:0,why:`Zwölf romanische Kirchen wie Groß St. Martin bilden einen einzigartigen Kranz rund um die Altstadt.`},
+ {q:`Wann beginnt offiziell die Kölner „fünfte Jahreszeit"?`,o:["Am 11.11. um 11:11 Uhr","An Silvester","Am Aschermittwoch","Am 1. Advent"],a:0,why:`Pünktlich am 11.11. um 11:11 Uhr startet die Session — die Elf gilt als die närrische Zahl schlechthin.`},
+ {q:`Welcher Tag ist der Höhepunkt des Straßenkarnevals mit dem großen Umzug?`,o:["Rosenmontag","Aschermittwoch","Karfreitag","Heiligabend"],a:0,why:`Der Rosenmontagszug zieht kilometerlang durch die Stadt — mit „Kamelle" und „Strüßjer" für die jubelnde Menge.`},
+ {q:`Was ist im Karneval ein „Bützje"?`,o:["Ein Küsschen","Ein Bonbon","Ein Kostüm","Ein Tanzschritt"],a:0,why:`Ein „Bützje" ist ein kleiner Wangenkuss — im Karneval großzügig und ganz unverfänglich verteilt.`},
+ {q:`Tünnes und Schäl sind zwei berühmte Kölner …`,o:["Puppentheater-Figuren","Brauereien","Karnevalsprinzen","Rheinschiffe"],a:0,why:`Das schlitzohrige Duo stammt aus dem Hänneschen-Puppentheater und steht für den kölschen Volkswitz.`},
+ {q:`Wer gilt als Erfinder des „Eau de Cologne" um 1709?`,o:["Johann Maria Farina","Konrad Adenauer","Agrippina","Hennes Weisweiler"],a:0,why:`Der zugewanderte Farina schuf ein Duftwasser und benannte es nach seiner neuen Heimat Köln.`},
+ {q:`Welches Amt hatte Konrad Adenauer, bevor er erster Bundeskanzler wurde?`,o:["Oberbürgermeister von Köln","Dompropst","Trainer des FC","Karnevalsprinz"],a:0,why:`Von 1917 bis 1933 lenkte Adenauer als Oberbürgermeister die Geschicke der Stadt.`},
+ {q:`Welcher Stadtteil liegt dem Dom direkt gegenüber am rechten Rheinufer?`,o:["Deutz","Ehrenfeld","Nippes","Sülz"],a:0,why:`Deutz liegt rechtsrheinisch — heute mit Messe, LANXESS arena und einem eigenen Bahnhof.`},
+ {q:`Was meint ein Kölner, wenn er von seinem „Veedel" spricht?`,o:["Sein Stadtviertel","Sein Lieblingsbier","Seinen Fußballverein","Seine Straßenbahnlinie"],a:0,why:`Das Veedel ist mehr als ein Stadtteil — es steht für Nachbarschaft, Zusammenhalt und Identität.`},
+ {q:`Welcher Weltmeister von 2014 gilt als Wahl-Kölner und FC-Idol?`,o:["Lukas Podolski","Toni Kroos","Thomas Müller","Mesut Özil"],a:0,why:`„Poldi" wuchs im Kölner Umland auf und blieb dem 1. FC Köln zeitlebens eng verbunden.`},
+ {q:`Wer ist der traditionelle Erzrivale des 1. FC Köln?`,o:["Borussia Mönchengladbach","FC Bayern München","Schalke 04","Hamburger SV"],a:0,why:`Das rheinische Derby gegen Gladbach ist für beide Lager das Spiel des Jahres.`},
+ {q:`Wo trägt der 1. FC Köln seine Heimspiele aus?`,o:["Im RheinEnergieStadion in Müngersdorf","In der LANXESS arena","Im Olympiastadion","Im Rheinpark"],a:0,why:`Das Stadion im grünen Müngersdorf ist seit Jahrzehnten die Heimstätte des Effzeh.`},
+ {q:`Was bewahrt der goldene Dreikönigsschrein im Dom auf?`,o:["Die Gebeine der Heiligen Drei Könige","Den Stadtschlüssel","Römische Münzen","Eine alte Bibel"],a:0,why:`Der größte Reliquienschrein des Abendlandes machte Köln im Mittelalter zum bedeutenden Pilgerziel.`},
+ {q:`Wie überstand der Kölner Dom den Zweiten Weltkrieg?`,o:["Getroffen, aber stehen geblieben","Völlig unzerstört","Komplett zerstört","Vorher abgebaut"],a:0,why:`Trotz zahlreicher Bombentreffer blieb der Dom erhalten — während weite Teile der Stadt in Trümmern lagen.`},
+ {q:`Was prägt die Silhouette des modernen Rheinauhafens?`,o:["Drei kranförmige Hochhäuser","Ein Riesenrad","Ein Leuchtturm","Eine Achterbahn"],a:0,why:`Die drei „Kranhäuser" zitieren die alten Hafenkräne und sind zum Wahrzeichen des neuen Köln geworden.`},
+ {q:`Was überquert die Kölner Seilbahn?`,o:["Den Rhein","Den Hauptbahnhof","Den Dom","Die Ringe"],a:0,why:`Die Rheinseilbahn schwebt zwischen Zoo und Rheinpark — sie war die erste Seilbahn über einen Fluss in Deutschland.`},
+ {q:`Welcher Spruch gehört zum „Kölschen Grundgesetz"?`,o:["Et hätt noch emmer jot jejange","Ende gut, alles gut","Ohne Fleiß kein Preis","Der frühe Vogel fängt den Wurm"],a:0,why:`Die augenzwinkernden Lebensregeln raten zu Gelassenheit: Bisher ist ja noch immer alles gut gegangen.`},
+ {q:`Wer brachte 1164 die Gebeine der Heiligen Drei Könige nach Köln?`,o:["Rainald von Dassel","Konrad von Hochstaden","Albertus Magnus","Engelbert von Berg"],a:0,why:`Erzbischof und Reichskanzler Rainald von Dassel holte die Reliquien aus dem eroberten Mailand — ein Coup, der Köln zur Pilgermetropole machte.`},
+ {q:`Welcher Erzbischof legte 1248 den Grundstein des gotischen Doms?`,o:["Konrad von Hochstaden","Rainald von Dassel","Philipp von Heinsberg","Maximilian Heinrich"],a:0,why:`Am 15. August 1248 legte Konrad von Hochstaden den Grundstein — der Beginn von über 600 Jahren Bauzeit.`},
+ {q:`Wie heißt die größte freischwingende läutbare Glocke der Welt im Dom?`,o:["Decke Pitter","Lange Hein","Dicke Berta","Kölsche Klang"],a:0,why:`Die St.-Petrus-Glocke von 1923, im Volksmund „Decke Pitter", wiegt rund 24 Tonnen und läutet nur zu hohen Festen.`},
+ {q:`Was ist an der Westfassade des Kölner Doms weltweit einzigartig?`,o:["Sie ist die größte Kirchenfassade der Welt","Sie besteht aus Beton","Sie ist beweglich","Sie ist vergoldet"],a:0,why:`Mit rund 7.000 Quadratmetern gilt die Westfassade als die größte Kirchenfassade der Welt.`},
+ {q:`Welcher Volksglaube rankt sich um die ständige Baustelle am Dom?`,o:["Wird er ganz fertig, geht die Welt unter","Er bringt ewigen Regen","Der Rhein versiegt","Der Karneval endet"],a:0,why:`Der Spruch „Wenn der Dom fertig ist, geht die Welt unter" erklärt augenzwinkernd, warum immer irgendwo ein Gerüst steht.`},
+ {q:`Welches römische Bodenmosaik ist das Herzstück des Römisch-Germanischen Museums?`,o:["Das Dionysos-Mosaik","Das Medusa-Mosaik","Das Neptun-Mosaik","Das Apollon-Mosaik"],a:0,why:`Das prächtige Dionysos-Mosaik wurde 1941 beim Bunkerbau neben dem Dom entdeckt — das Museum wurde später darüber gebaut.`},
+ {q:`Was verbirgt sich unter dem historischen Kölner Rathaus?`,o:["Das römische Praetorium","Ein altes Bierlager","Ein Luftschutzbunker","Eine Schatzkammer"],a:0,why:`Unter dem Rathaus liegen die Reste des Praetoriums, des Statthalterpalasts der römischen Provinz Niedergermanien.`},
+ {q:`Womit vertrieben die Kölner der Sage nach ihre fleißigen „Heinzelmännchen"?`,o:["Eine Schneidersfrau streute Erbsen aus","Ein Hahn krähte zu laut","Der Dom stürzte ein","Der Rhein trat über die Ufer"],a:0,why:`Aus Neugier streute eine Schneidersfrau Erbsen auf die Treppe — die Heinzelmännchen stürzten, verschwanden für immer, und seither muss der Kölner selber ran.`},
+ {q:`In welchem Jahr wurde der organisierte Kölner Karneval mit Festkomitee gegründet?`,o:["1823","1748","1900","1949"],a:0,why:`1823 ordnete ein „festordnendes Comitee" das wilde Treiben — im selben Jahr rollte der erste Rosenmontagszug.`},
+ {q:`Was parodieren die „Roten Funken", das älteste Kölner Traditionskorps?`,o:["Die alten Kölner Stadtsoldaten","Die preußische Garde","Die Feuerwehr","Die Domherren"],a:0,why:`Die Roten Funken von 1823 nehmen die einst wenig kriegerischen Stadtsoldaten liebevoll auf die Schippe — inklusive „Stippeföttche"-Tanz.`},
+ {q:`Wie viele Tore besaß die mittelalterliche Kölner Stadtmauer?`,o:["Zwölf","Vier","Acht","Vierundzwanzig"],a:0,why:`Von den einst zwölf Stadttoren stehen noch vier, darunter die Hahnentorburg und die Severinstorburg.`},
+ {q:`Wann wurde die alte Universität zu Köln gegründet?`,o:["1388","1648","1818","1919"],a:0,why:`1388 als eine der ältesten Universitäten Europas gegründet, 1798 geschlossen und 1919 neu gegründet.`},
+ {q:`Welche romanische Kirche besitzt einen einzigartigen zehneckigen Kuppelbau?`,o:["St. Gereon","Groß St. Martin","St. Aposteln","St. Kunibert"],a:0,why:`Das Dekagon von St. Gereon war im 13. Jahrhundert einer der größten Kuppelräume des Abendlandes.`},
+ {q:`Welcher bedeutende Gelehrte lehrte im Mittelalter in Köln?`,o:["Albertus Magnus","Erasmus von Rotterdam","Paracelsus","Martin Luther"],a:0,why:`Albertus Magnus baute in Köln das „Studium generale" auf — zu seinen Schülern zählte Thomas von Aquin.`},
+ {q:`Welches bekannte Melissengeist-Unternehmen hat seinen Ursprung in Köln?`,o:["Klosterfrau","Dr. Oetker","Henkel","Dr. Best"],a:0,why:`Maria Clementine Martin gründete 1826 in Köln die Marke Klosterfrau — der Melissengeist ist bis heute ein Klassiker.`},
+ {q:`Welcher Autohersteller betreibt seit 1930 ein großes Werk in Köln-Niehl?`,o:["Ford","Volkswagen","Opel","Mercedes"],a:0,why:`Die Ford-Werke in Niehl mit eigenem Rheinhafen sind seit Jahrzehnten einer der größten Arbeitgeber der Stadt.`},
+ {q:`Welche dieser Marken ist KEINE Kölsch-Brauerei?`,o:["Warsteiner","Gaffel","Früh","Reissdorf"],a:0,why:`Gaffel, Früh und Reissdorf brauen Kölsch — Warsteiner dagegen ist ein Pils aus dem Sauerland.`},
+ {q:`Welcher öffentlich-rechtliche Sender hat seinen Hauptsitz in Köln?`,o:["WDR","NDR","BR","MDR"],a:0,why:`Der Westdeutsche Rundfunk (WDR) sitzt mitten in Köln — die Stadt ist einer der wichtigsten Medienstandorte Deutschlands.`},
+ {q:`Was geschieht in der Karnevalsnacht zu Aschermittwoch mit dem „Nubbel"?`,o:["Eine Strohpuppe wird verbrannt","Ein Fass wird angestochen","Der Dom wird beleuchtet","Ein Maibaum wird gepflanzt"],a:0,why:`Der „Nubbel", eine lebensgroße Strohpuppe, wird verbrannt — er nimmt symbolisch alle Sünden der tollen Tage mit sich.`},
+ {q:`Zu welcher Dialektgruppe gehört die kölsche Sprache?`,o:["Ripuarisch","Alemannisch","Bairisch","Friesisch"],a:0,why:`Kölsch zählt zum Ripuarischen, einer mittelfränkischen Mundartgruppe am Rhein — mit eigener Grammatik und eigenem Wortschatz.`}
+];
+var ROUND=12;
+var queue=[], idx=0, score=0, answered=false, curOpts=[], curCorrect=0;
+var LET=["A","B","C","D","E"];
+
+function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+
+function start(){
+  queue=shuffle(BANK).slice(0,ROUND);
+  idx=0; score=0; answered=false;
+  document.getElementById("result").className="result";
+  document.getElementById("game").style.display="";
+  render();
+}
+
+function render(){
+  answered=false;
+  var q=queue[idx];
+  document.getElementById("pnum").textContent="Frage "+(idx+1)+" / "+queue.length;
+  document.getElementById("pscore").textContent=score+" richtig";
+  var opts=shuffle(q.o.map(function(t,i){return {t:t,correct:i===q.a};}));
+  curOpts=opts; curCorrect=-1;
+  opts.forEach(function(o,i){if(o.correct)curCorrect=i;});
+  var html='<h3>'+q.q+'</h3><div class="opts">';
+  opts.forEach(function(o,i){ html+='<button data-i="'+i+'"><span class="let">'+LET[i]+'</span><span>'+o.t+'</span></button>'; });
+  html+='</div><div class="why" id="why"></div><button class="next" id="next">Weiter</button>';
+  document.getElementById("qbox").innerHTML=html;
+  Array.prototype.forEach.call(document.querySelectorAll('#qbox .opts button'),function(b){
+    b.addEventListener("click",function(){choose(parseInt(b.getAttribute("data-i"),10));});
+  });
+  document.getElementById("next").addEventListener("click",advance);
+}
+
+function choose(i){
+  if(answered)return; answered=true;
+  var correct = !!(curOpts[i] && curOpts[i].correct);
+  if(correct)score++;
+  var btns=document.querySelectorAll('#qbox .opts button');
+  Array.prototype.forEach.call(btns,function(b,bi){
+    b.disabled=true;
+    if(bi===curCorrect)b.classList.add("correct");
+    else if(bi===i)b.classList.add("wrong");
+  });
+  var why=document.getElementById("why");
+  why.innerHTML='<b>'+(correct?"Richtig!":"Knapp daneben.")+'</b> '+queue[idx].why;
+  why.classList.add("show");
+  var nx=document.getElementById("next"); nx.classList.add("show");
+  nx.textContent=(idx===queue.length-1)?"Auswerten":"Weiter";
+  document.getElementById("pscore").textContent=score+" richtig";
+}
+
+function advance(){ if(idx<queue.length-1){idx++;render();window.scrollTo({top:0,behavior:"smooth"});} else finish(); }
+
+function band(p){
+  if(p>=92)return["Dem Dom sing Hätzblättche","Du bes kölscher als et Wasser em Rhing. Mer säht: Alaaf!","#9ec27f"];
+  if(p>=75)return["Kölsche Jung, kölsch Mädche","Dat sitz. Et Veedel es stolz op dich.","#9ec27f"];
+  if(p>=55)return["Halver Kölsche","Du bes op'm richtige Wääch — noch e bessche üben, dann passt et.","#a97a1d"];
+  if(p>=35)return["Zojereiste mit Potenzial","Du häss et Tor erwischt, ävver et Veedel kennt dich noch nit.","#a97a1d"];
+  return["Imi — ävver willkomme","Du kütts nit vun hee. Macht nix: Imis dörfe och metfiere.","#e7a48f"];
+}
+
+function ring(p){
+  var s=160,sw=14,r=(s-sw)/2-4,c=2*Math.PI*r,off=c*(1-p/100);
+  var col=p>=75?"#9ec27f":(p>=45?"#a97a1d":"#e7a48f");
+  return '<svg class="ring" width="'+s+'" height="'+s+'" viewBox="0 0 '+s+' '+s+'">'+
+    '<circle cx="'+s/2+'" cy="'+s/2+'" r="'+r+'" fill="none" stroke="rgba(255,255,255,.14)" stroke-width="'+sw+'"/>'+
+    '<circle cx="'+s/2+'" cy="'+s/2+'" r="'+r+'" fill="none" stroke="'+col+'" stroke-width="'+sw+'" stroke-linecap="round" stroke-dasharray="'+c.toFixed(1)+'" stroke-dashoffset="'+off.toFixed(1)+'" transform="rotate(-90 '+s/2+' '+s/2+')"/>'+
+    '<text x="'+s/2+'" y="'+(s/2-2)+'" text-anchor="middle" font-family="Fraunces,serif" font-size="34" fill="#fffdf8">'+p+'%</text>'+
+    '<text x="'+s/2+'" y="'+(s/2+22)+'" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="12" fill="#cdbfa8">'+score+' / '+queue.length+'</text>'+
+  '</svg>';
+}
+
+function finish(){
+  document.getElementById("game").style.display="none";
+  var p=Math.round(score/queue.length*100);
+  st.plays++;
+  var isBest=score>st.best;
+  if(isBest)st.best=score;
+  save();
+  var bd=band(p);
+  var r=document.getElementById("result");
+  r.innerHTML='<p class="eyebrow">Kölschometer</p>'+ring(p)+
+    '<div class="band" style="color:'+bd[2]+'">'+bd[0]+'</div>'+
+    '<div class="rsub">'+bd[1]+'</div>'+
+    '<div class="best">'+(isBest?"Neuer Bestwert!":"Bestwert: "+st.best+" / "+queue.length)+'</div>'+
+    '<div class="again">'+
+      '<button class="pri" id="rep">Noch e Rund</button>'+
+      '<button id="quiz" onclick="location.href=\'wissensquiz.html\'">Zum Wissensquiz</button>'+
+    '</div>';
+  r.classList.add("show");
+  document.getElementById("rep").addEventListener("click",function(){start();window.scrollTo({top:0,behavior:"smooth"});});
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+// Tastatursteuerung
+document.addEventListener("keydown",function(e){
+  var game=document.getElementById("game");
+  if(!game||game.style.display==="none")return;
+  var qbox=document.getElementById("qbox"); if(!qbox||!qbox.innerHTML)return;
+  var k=e.key, isBtn=e.target&&e.target.tagName==="BUTTON";
+  if(!answered){
+    var opts=document.querySelectorAll('#qbox .opts button'), n=-1;
+    if(/^[1-9]$/.test(k))n=parseInt(k,10)-1;
+    else{var lc=k.length===1?k.toLowerCase():"";if(lc>="a"&&lc<="i")n=lc.charCodeAt(0)-97;}
+    if(n>=0&&n<opts.length){e.preventDefault();choose(n);}
+    return;
+  }
+  if(k==="Enter"||k===" "||k==="Spacebar"){ if(isBtn)return; e.preventDefault(); advance(); }
+});
+
+start();
+</script>
+</body>
+</html>

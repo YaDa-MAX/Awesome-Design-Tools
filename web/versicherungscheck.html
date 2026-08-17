@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Versicherungs-Check · HeiBen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;1,400&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f3eee5;--bg2:#ebe3d4;--paper:#fffdf8;--ink:#1f1c17;--ink2:#524a3e;--rule:#d8cdb7;--terra:#b04a31;--ochre:#a97a1d;--moss:#4a5c39;--burg:#792d29;--aub:#6b3951}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:'Manrope',system-ui,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:780px;margin:0 auto;padding:1.6rem 1.1rem 5rem}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.32em;text-transform:uppercase;color:var(--terra)}
+h1{font-family:'Fraunces',serif;font-weight:400;font-size:clamp(2rem,6.5vw,3.2rem);line-height:1.02;letter-spacing:-.02em;margin:.45rem 0 .5rem}
+h1 em{font-style:italic;color:var(--terra)}
+.lead{color:var(--ink2);max-width:60ch;font-size:1.02rem}
+.card{background:var(--paper);border:1px solid var(--rule);border-radius:16px;padding:1.1rem 1.15rem;margin-top:1.1rem}
+.card h3{font-family:'Fraunces',serif;font-weight:500;font-size:1.2rem;margin-bottom:.6rem}
+.qrow{display:flex;justify-content:space-between;align-items:center;gap:.8rem;padding:.5rem 0;border-bottom:1px solid var(--rule)}
+.qrow:last-child{border-bottom:none}
+.qrow span{font-weight:600}
+.toggle{display:inline-flex;border:1px solid var(--rule);border-radius:999px;overflow:hidden;flex:none}
+.toggle button{border:none;background:var(--bg);color:var(--ink2);font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;padding:.4rem .8rem;cursor:pointer}
+.toggle button.on{background:var(--ink);color:var(--bg)}
+.result{margin-top:1.4rem}
+.verdict{background:var(--ink);color:var(--bg);border-radius:18px;padding:1.3rem 1.3rem;margin-bottom:1.1rem}
+.verdict .eyebrow{color:var(--ochre)}
+.verdict p{font-family:'Fraunces',serif;font-size:clamp(1.3rem,4vw,1.7rem);line-height:1.25;margin-top:.4rem}
+.verdict b{color:var(--ochre)}
+.tier{margin-top:1rem}
+.tier h4{font-family:'JetBrains Mono',monospace;font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:.5rem;display:flex;align-items:center;gap:.5rem}
+.tier h4 .badge{font-size:.5rem;padding:.1rem .45rem;border-radius:999px;color:#fff}
+.item{background:var(--paper);border:1px solid var(--rule);border-radius:12px;padding:.75rem .9rem;margin-bottom:.55rem;border-left-width:4px}
+.item .nm{font-weight:700}
+.item .rs{font-size:.9rem;color:var(--ink2);margin-top:.1rem}
+.t1 .item{border-left-color:var(--burg)} .t2 .item{border-left-color:var(--ochre)} .t3 .item{border-left-color:#b8ad95}
+.t1 .badge{background:var(--burg)} .t2 .badge{background:var(--ochre)} .t3 .badge{background:#8a8169}
+.foot{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink2);text-align:center;margin-top:2rem}
+</style>
+<link rel="stylesheet" href="heiben-design.css">
+<script src="heiben-nav.js" defer></script>
+</head>
+<body data-hb-welt="wissen">
+<div class="wrap">
+  <p class="eyebrow">HeiBen · Richtig versichert</p>
+  <h1>Welche Versicherung brauchst du <em>wirklich?</em></h1>
+  <p class="lead">Die meisten sind falsch versichert: zahlen für Handy und Brille, aber nicht fürs Existenzielle. Beantworte ein paar Fragen zu deiner Situation — und sieh, was wichtig ist und was du dir sparen kannst.</p>
+
+  <div class="card">
+    <h3>Deine Situation</h3>
+    <div id="questions"></div>
+  </div>
+
+  <div class="result" id="result"></div>
+
+  <p class="foot">HeiBen GmbH i. G. · „Heimat leben" · <a href="mein-heiben.html" style="color:var(--aub)">Mein HeiBen</a> · allgemeine Orientierung, keine Versicherungsberatung</p>
+</div>
+
+<script>
+var KEY="heiben_vers_v1";
+var Q=[
+ {id:"einkommen",t:"Hast du ein eigenes Einkommen (Job/Ausbildung)?",d:true},
+ {id:"haushalt",t:"Hast du einen eigenen Haushalt mit Möbeln & Technik?",d:true},
+ {id:"auto",t:"Fährst du ein eigenes Auto?",d:false},
+ {id:"familie",t:"Leben andere von deinem Einkommen (Kinder, Partner)?",d:false},
+ {id:"selbst",t:"Bist du selbstständig?",d:false},
+ {id:"eigentum",t:"Besitzt du Wohneigentum?",d:false},
+ {id:"hund",t:"Hast du einen Hund?",d:false},
+ {id:"reisen",t:"Reist du ins Ausland?",d:true}
+];
+var s={};Q.forEach(function(q){s[q.id]=q.d;});
+try{var sv=JSON.parse(localStorage.getItem(KEY));if(sv)Q.forEach(function(q){if(sv[q.id]!=null)s[q.id]=sv[q.id];});}catch(e){}
+
+function renderQ(){
+  var c=document.getElementById("questions");c.innerHTML="";
+  Q.forEach(function(q){
+    var row=document.createElement("div");row.className="qrow";
+    row.innerHTML='<span>'+q.t+'</span><span class="toggle"><button data-id="'+q.id+'" data-v="1"'+(s[q.id]?' class="on"':'')+'>Ja</button><button data-id="'+q.id+'" data-v="0"'+(!s[q.id]?' class="on"':'')+'>Nein</button></span>';
+    c.appendChild(row);
+  });
+  c.querySelectorAll("button").forEach(function(b){b.onclick=function(){s[b.dataset.id]=b.dataset.v==="1";b.parentNode.querySelectorAll("button").forEach(function(x){x.classList.toggle("on",x===b);});compute();};});
+}
+
+function compute(){
+  try{localStorage.setItem(KEY,JSON.stringify(s));}catch(e){}
+  var t1=[],t2=[];
+  // Unverzichtbar
+  t1.push(["Privathaftpflicht","Der wichtigste Schutz überhaupt — deckt Schäden, die du anderen zufügst, bis in Millionenhöhe. Wenige Euro im Monat."]);
+  t1.push(["Krankenversicherung","Gesetzlich Pflicht. Achte als Berufseinsteiger auf die richtige Wahl von Kasse und Zusatzbeitrag."]);
+  if(s.einkommen)t1.push(["Berufsunfähigkeitsversicherung","Deine Arbeitskraft ist dein größtes Vermögen. Je jünger und gesünder du abschließt, desto günstiger."]);
+  if(s.auto)t1.push(["Kfz-Haftpflicht","Gesetzlich Pflicht für jedes Auto. Eine Vollkasko lohnt nur bei neueren Fahrzeugen."]);
+  if(s.familie)t1.push(["Risikolebensversicherung","Sichert die Menschen ab, die von dir abhängen, falls dir etwas zustößt — günstig und wichtig."]);
+  // Sinnvoll
+  if(s.haushalt)t2.push(["Hausratversicherung","Ersetzt dein Hab und Gut nach Feuer, Einbruch oder Wasserschaden. Fahrrad und Elementarschäden ggf. einschließen."]);
+  if(s.reisen)t2.push(["Auslandsreise-Krankenversicherung","Wenige Euro im Jahr, schützt aber vor enormen Behandlungs- und Rücktransportkosten im Ausland."]);
+  if(s.hund)t2.push(["Tierhalter-Haftpflicht (Hund)","In einigen Bundesländern Pflicht, sonst dringend zu empfehlen — Hundeschäden können teuer werden."]);
+  if(s.eigentum)t2.push(["Wohngebäudeversicherung","Für Eigentümer praktisch unverzichtbar: schützt das Gebäude selbst gegen Feuer, Sturm und Leitungswasser."]);
+  if(s.selbst)t2.push(["Berufs-/Betriebshaftpflicht","Für Selbstständige zentral — sichert Schäden aus deiner beruflichen Tätigkeit ab."]);
+  if(s.auto||s.eigentum||s.selbst)t2.push(["Rechtsschutzversicherung","Situativ sinnvoll (Verkehr, Beruf, Wohnen). Genau auf Bausteine und Wartezeiten achten."]);
+  // Überflüssig (immer)
+  var t3=[
+    ["Handy- & Elektronikversicherung","Teuer im Verhältnis zum Nutzen. Lieber das Geld zurücklegen und im Schadensfall selbst zahlen."],
+    ["Brillenversicherung","Lohnt sich fast nie — die Beiträge übersteigen meist den möglichen Nutzen."],
+    ["Sterbegeldversicherung","Für junge Menschen unnötig und renditeschwach. Lieber selbst ansparen."],
+    ["Einzelne Glasbruch-/Insassen-/Reisegepäck-Policen","Kleinteilige Zusatzpolicen, deren Risiko überschaubar ist — meist verzichtbar."],
+    ["Garantieverlängerungen","Reine Marge des Händlers. Die gesetzliche Gewährleistung deckt das Wichtigste bereits ab."]
+  ];
+  var n1=t1.length,n3=t3.length;
+  var html='<div class="verdict"><p class="eyebrow">Dein Ergebnis</p><p>Für deine Situation sind <b>'+n1+' Versicherungen</b> wirklich wichtig — und mindestens <b>'+n3+'</b> kannst du dir sparen.</p></div>';
+  html+=tier("Unverzichtbar","Das gehört zur Grundausstattung","t1",t1);
+  if(t2.length)html+=tier("Sinnvoll für dich","Je nach Situation empfehlenswert","t2",t2);
+  html+=tier("Meist überflüssig","Spar dir das Geld","t3",t3);
+  document.getElementById("result").innerHTML=html;
+}
+function tier(title,sub,cls,items){
+  return '<div class="tier '+cls+'"><h4><span class="badge">'+items.length+'</span>'+title+' · <span style="color:var(--ink2);font-weight:400;text-transform:none;letter-spacing:0">'+sub+'</span></h4>'+
+    items.map(function(it){return '<div class="item"><div class="nm">'+it[0]+'</div><div class="rs">'+it[1]+'</div></div>';}).join("")+'</div>';
+}
+renderQ();compute();
+</script>
+</body>
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>HeiBen — Visitenkarten (85 × 55 mm)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..500&family=Manrope:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --ink:#1f1c17; --perg:#f3eee5; --perg-soft:#ebe3d4; --inksoft:#524a3e; --rule:#d8cdb7;
+    --terracotta:#c2533a; --ochre:#d39a3a; --moss:#4b5d3a; --burgundy:#7a2e2a; --inkacc:#2c2620;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{background:#cfc6b4;font-family:'Manrope',sans-serif;color:var(--ink);padding:2.5rem 1rem;}
+  .screen-only{max-width:760px;margin:0 auto 2rem;}
+  .screen-only h1{font-family:'Fraunces',serif;font-weight:300;font-size:2rem;letter-spacing:-0.02em;}
+  .screen-only h1 em{font-style:italic;color:var(--terracotta);}
+  .screen-only p{color:var(--inksoft);max-width:62ch;margin-top:0.5rem;font-size:0.95rem;}
+  .hint{font-family:'JetBrains Mono',monospace;font-size:0.72rem;letter-spacing:0.1em;background:var(--ink);color:var(--perg);padding:1rem 1.3rem;margin-top:1rem;line-height:1.6;}
+  .hint b{color:var(--ochre);}
+
+  .sheet{max-width:760px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+
+  /* 85 x 55 mm Karte; +3mm Beschnitt optional in der Druckerei */
+  .card{
+    width:85mm;height:55mm;background:var(--perg);position:relative;overflow:hidden;
+    box-shadow:0 6px 18px rgba(31,28,23,0.18);
+    display:flex;flex-direction:column;justify-content:space-between;padding:7mm;
+    page-break-inside:avoid;
+  }
+  /* Vorderseiten: heller Grund, farbiger Akzentstreifen links */
+  .card.front{border-left:3mm solid var(--terracotta);}
+  .card.front.reisen{border-left-color:var(--ochre);}
+  .card.front.wohnen{border-left-color:var(--moss);}
+  .card.front.immobilien{border-left-color:var(--burgundy);}
+  .card.front.studio{border-left-color:var(--inkacc);}
+
+  .wm{font-family:'Fraunces',serif;font-weight:400;font-size:24pt;letter-spacing:-0.5pt;line-height:1;}
+  .wm .b{font-style:italic;color:var(--terracotta);}
+  .reisen .wm .b{color:var(--ochre);} .wohnen .wm .b{color:var(--moss);}
+  .immobilien .wm .b{color:var(--burgundy);} .studio .wm .b{color:var(--inkacc);}
+  .div-label{font-family:'JetBrains Mono',monospace;font-size:6.5pt;letter-spacing:2.5pt;text-transform:uppercase;color:var(--inksoft);margin-top:1.5mm;}
+
+  .person .nm{font-family:'Fraunces',serif;font-weight:500;font-size:12.5pt;line-height:1.1;}
+  .person .pos{font-family:'JetBrains Mono',monospace;font-size:6.5pt;letter-spacing:1.5pt;text-transform:uppercase;color:var(--terracotta);margin-top:1mm;}
+  .reisen .person .pos{color:var(--ochre);} .wohnen .person .pos{color:var(--moss);}
+  .immobilien .person .pos{color:var(--burgundy);} .studio .person .pos{color:var(--inkacc);}
+  .contact{font-size:8pt;color:var(--inksoft);line-height:1.5;margin-top:2mm;}
+
+  /* Rückseite: dunkel, zentriertes Monogramm + verstecktes Wort */
+  .card.back{background:var(--ink);align-items:center;justify-content:center;text-align:center;border:none;}
+  .card.back .mono{font-family:'Fraunces',serif;font-size:30pt;color:var(--perg);letter-spacing:-1pt;}
+  .card.back .mono .b{font-style:italic;color:var(--ochre);}
+  .card.back .claim{font-family:'Fraunces',serif;font-style:italic;font-weight:300;font-size:10pt;color:rgba(243,238,229,0.75);margin-top:3mm;}
+  .card.back .url{font-family:'JetBrains Mono',monospace;font-size:6.5pt;letter-spacing:2pt;text-transform:uppercase;color:var(--ochre);margin-top:4mm;}
+
+  @media print{
+    body{background:#fff;padding:0;}
+    .screen-only{display:none;}
+    .sheet{gap:0;max-width:none;display:block;}
+    .card{box-shadow:none;margin:0 auto 4mm;}
+    @page{margin:12mm;}
+  }
+</style>
+</head>
+<body>
+  <div class="screen-only">
+    <h1>Visitenkarten <em>85 × 55 mm</em></h1>
+    <p>Druckfertige Karten je Einheit, Vorder- und Rückseite. Die Rückseite trägt für alle Einheiten dasselbe Motiv — die Marke und das versteckte Wort —, die Vorderseite den jeweiligen Akzentstreifen.</p>
+    <div class="hint">
+      <b>Drucken:</b> über die Druckfunktion des Browsers als PDF speichern (Maßstab 100 %, keine Skalierung). Für die Druckerei empfiehlt sich zusätzlich 3&nbsp;mm Beschnitt — das legt die Druckerei i.&nbsp;d.&nbsp;R. selbst an. <b>Schrift:</b> beim PDF-Export werden die Web-Schriften eingebettet, sodass die Karte überall identisch aussieht.
+    </div>
+  </div>
+
+  <div class="sheet">
+    <!-- Holding -->
+    <div class="card front holding">
+      <div><div class="wm">Hei<span class="b">B</span>en</div><div class="div-label">Holding · Köln</div></div>
+      <div class="person"><div class="nm">[Vorname Nachname]</div><div class="pos">Geschäftsführung</div>
+        <div class="contact">+49 221 000000 · [name]@heiben.de<br>www.heiben.de · Musterstraße 1, 50667 Köln</div></div>
+    </div>
+    <div class="card back"><div><div class="mono">Hei<span class="b">B</span>en</div><div class="claim">Heimat leben.</div><div class="url">www.heiben.de</div></div></div>
+
+    <!-- Reisen -->
+    <div class="card front reisen">
+      <div><div class="wm">Hei<span class="b">B</span>en</div><div class="div-label">Reisen · Hospitality</div></div>
+      <div class="person"><div class="nm">[Vorname Nachname]</div><div class="pos">Reiseplanung</div>
+        <div class="contact">+49 221 000000 · [name]@heiben.de<br>reisen.heiben.de · Köln</div></div>
+    </div>
+    <div class="card back"><div><div class="mono">Hei<span class="b">B</span>en</div><div class="claim">Heimat ist überall, wo man genau hinschaut.</div><div class="url">reisen.heiben.de</div></div></div>
+
+    <!-- Wohnen -->
+    <div class="card front wohnen">
+      <div><div class="wm">Hei<span class="b">B</span>en</div><div class="div-label">Wohnen · Interior</div></div>
+      <div class="person"><div class="nm">[Vorname Nachname]</div><div class="pos">Innenarchitektur</div>
+        <div class="contact">+49 221 000000 · [name]@heiben.de<br>wohnen.heiben.de · Köln</div></div>
+    </div>
+    <div class="card back"><div><div class="mono">Hei<span class="b">B</span>en</div><div class="claim">Räume, in denen man bleiben will.</div><div class="url">wohnen.heiben.de</div></div></div>
+
+    <!-- Immobilien -->
+    <div class="card front immobilien">
+      <div><div class="wm">Hei<span class="b">B</span>en</div><div class="div-label">Immobilien</div></div>
+      <div class="person"><div class="nm">[Vorname Nachname]</div><div class="pos">Bestand & Vermögen</div>
+        <div class="contact">+49 221 000000 · [name]@heiben.de<br>immobilien.heiben.de · Köln</div></div>
+    </div>
+    <div class="card back"><div><div class="mono">Hei<span class="b">B</span>en</div><div class="claim">Werte, die Generationen verbinden.</div><div class="url">immobilien.heiben.de</div></div></div>
+
+    <!-- Studio -->
+    <div class="card front studio">
+      <div><div class="wm">Hei<span class="b">B</span>en</div><div class="div-label">Studio · Magazin</div></div>
+      <div class="person"><div class="nm">[Vorname Nachname]</div><div class="pos">Redaktion</div>
+        <div class="contact">+49 221 000000 · [name]@heiben.de<br>studio.heiben.de · Köln</div></div>
+    </div>
+    <div class="card back"><div><div class="mono">Hei<span class="b">B</span>en</div><div class="claim">Geschichten vom Zuhausefinden.</div><div class="url">studio.heiben.de</div></div></div>
+  </div>
+</body>
+</html>

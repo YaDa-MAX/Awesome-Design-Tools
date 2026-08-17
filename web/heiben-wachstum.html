@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>HeiBen · Wachstum &amp; Conversion (Backoffice)</title>
+<style>
+:root{--bg:#f3eee5;--bg-soft:#ebe3d4;--ink:#1f1c17;--ink-soft:#524a3e;--rule:#d8cdb7;--terracotta:#b04a31;--kuli:#6b3951;--ochre:#a97a1d;--wohnen:#4a5c39;--immo:#792d29;}
+*{box-sizing:border-box;}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Manrope',-apple-system,Segoe UI,sans-serif;line-height:1.5;}
+.wrap{max-width:960px;margin:0 auto;padding:0 1.5rem;}
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:1.1rem 0;border-bottom:1px solid var(--rule);}
+.wm{font-family:'Fraunces',serif;font-weight:700;font-size:1.4rem;}.wm .a{color:var(--terracotta);}
+.back{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);text-decoration:none;}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:.64rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-soft);}
+h1{font-family:'Fraunces',serif;font-weight:340;font-size:clamp(1.8rem,4.5vw,2.6rem);margin:1.4rem 0 .2rem;}
+h2{font-family:'Fraunces',serif;font-weight:440;font-size:1.3rem;margin:2rem 0 .6rem;}
+.card{background:#fff;border:1px solid var(--rule);border-radius:16px;padding:18px;margin:.8rem 0;}
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}@media(max-width:640px){.kpis{grid-template-columns:1fr;}}
+.kpi{background:var(--bg-soft);border-radius:12px;padding:14px;}
+.kpi .b{font-family:'Fraunces',serif;font-size:2rem;font-weight:560;color:var(--kuli);}
+.kpi .l{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);}
+.bar{display:flex;align-items:center;gap:.7rem;margin:.45rem 0;}
+.bar .lab{flex:0 0 160px;font-size:.84rem;}
+.bar .track{flex:1;background:var(--bg-soft);border-radius:8px;height:26px;overflow:hidden;}
+.bar .fill{height:100%;background:linear-gradient(90deg,var(--kuli),var(--terracotta));display:flex;align-items:center;justify-content:flex-end;padding-right:.5rem;color:#fff;font-size:.78rem;font-variant-numeric:tabular-nums;min-width:1.6rem;}
+.btn{display:inline-block;border:0;cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;padding:.65rem 1rem;border-radius:9px;margin:.3rem .3rem 0 0;}
+.btn.dark{background:var(--ink);color:#f3eee5;}.btn.ghost{background:none;border:1px solid var(--ink);color:var(--ink);}
+.note{font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--ink-soft);}
+</style>
+<link rel="stylesheet" href="heiben-design.css">
+<script src="heiben-nav.js" defer></script>
+</head>
+<body data-hb-welt="holding">
+<div class="wrap">
+  <div class="topbar"><div class="wm"><span class="a">H</span>ei<span class="a">B</span>en <span style="font-weight:400;font-size:.9rem;color:var(--ink-soft)">· Backoffice</span></div><a class="back" href="manufaktur-maschinencode.html">← Backoffice</a></div>
+  <div class="eyebrow">Wachstum · Conversion-Tracking</div>
+  <h1>Wachstums-Dashboard</h1>
+  <p class="note">Clientseitig erfasste Funnel-Ereignisse (ohne Backend). Im Live-Betrieb fließen dieselben Events an die Auswertung — und zurück ins Cashflow-Modell.</p>
+
+  <h2>Conversion</h2>
+  <div class="card"><div class="kpis" id="kpis"></div></div>
+
+  <h2>Funnel</h2>
+  <div class="card" id="funnel"></div>
+
+  <h2>A/B-Test · Paywall-CTA</h2>
+  <div class="card" id="abtest"></div>
+
+  <h2>Empfehlungen &amp; Loyalty</h2>
+  <div class="card" id="loyal"></div>
+
+  <div style="margin-top:1.2rem;">
+    <button class="btn dark" id="demo">Beispiel-Funnel laden</button>
+    <button class="btn ghost" id="reset">Ereignisse zurücksetzen</button>
+    <a class="btn ghost" href="heiben-automation.html" style="text-decoration:none;">E-Mail-Automation →</a>
+  </div>
+</div>
+
+<script src="heiben-produkt.js"></script>
+<script src="heiben-analytics.js"></script>
+<script src="heiben-ab.js"></script>
+<script>
+(function(){
+  var T=window.HeiBenTrack, HP=window.HeiBenProdukt;
+  function render(){
+    var f=T.funnel();
+    document.getElementById('kpis').innerHTML=
+      '<div class="kpi"><div class="b">'+f.conv.besuch_trial+'%</div><div class="l">Besuch → Probemonat</div></div>'+
+      '<div class="kpi"><div class="b">'+f.conv.trial_abo+'%</div><div class="l">Probemonat → Abo</div></div>'+
+      '<div class="kpi"><div class="b">'+f.conv.besuch_abo+'%</div><div class="l">Besuch → Abo</div></div>';
+    var max=Math.max(1,Math.max.apply(null,f.steps.map(function(s){return s.v;})));
+    document.getElementById('funnel').innerHTML=f.steps.map(function(s){
+      var w=Math.round(s.v/max*100);
+      return '<div class="bar"><div class="lab">'+s.k+'</div><div class="track"><div class="fill" style="width:'+Math.max(w,3)+'%">'+s.v+'</div></div></div>';
+    }).join('');
+    var ab=(window.HeiBenAB)?HeiBenAB.results('paywall_cta',['A','B']):[];
+    var labels={A:'A · „Probemonat 30 Tage"',B:'B · „7 Tage, dann 14,90 \u20ac/Jahr"'};
+    document.getElementById('abtest').innerHTML = ab.every(function(x){return x.views===0;})
+      ? '<p class="note">Noch keine Paywall-Aufrufe erfasst \u2014 „Beispiel-Funnel laden" zeigt Demo-Werte.</p>'
+      : '<table style="width:100%;border-collapse:collapse;font-size:.9rem;"><thead><tr>'+
+        '<th style="text-align:left;padding:.4rem 0;">Variante</th><th>Aufrufe</th><th>Starts</th><th>Conversion</th></tr></thead><tbody>'+
+        ab.map(function(x){ var best=Math.max.apply(null,ab.map(function(y){return y.rate;})); return '<tr><td style="padding:.4rem 0;">'+(labels[x.v]||x.v)+'</td><td style="text-align:center">'+x.views+'</td><td style="text-align:center">'+x.conv+'</td><td style="text-align:center;font-weight:600;color:'+(x.rate===best&&best>0?'var(--wohnen)':'var(--ink)')+'">'+x.rate+'%'+(x.rate===best&&best>0?' \u2605':'')+'</td></tr>'; }).join('')+'</tbody></table>';
+    var r=HP.refState(), s=HP.streakState();
+    document.getElementById('loyal').innerHTML=
+      '<div class="kpis">'+
+      '<div class="kpi"><div class="b">'+r.invited+'</div><div class="l">Einladungen</div></div>'+
+      '<div class="kpi"><div class="b">'+HP.fmt((r.creditsCt||0)/100)+'</div><div class="l">ausgegebenes Guthaben</div></div>'+
+      '<div class="kpi"><div class="b">'+s.best+'</div><div class="l">längste Streak</div></div>'+
+      '</div>';
+  }
+  document.getElementById('demo').onclick=function(){
+    function n(name,k){ for(var i=0;i<k;i++) T.ev(name,{demo:1}); }
+    n('page_view',120); n('lead_magnet',38); n('trial_start',24); n('subscribe',9);
+    n('configurator_add_to_cart',17); n('kochbuch_purchase',13); n('referral_invite',7); n('bundle',5);
+    for(var i=0;i<70;i++){ T.ev('ab_view',{exp:'paywall_cta',v:'A'}); if(i<10)T.ev('ab_convert',{exp:'paywall_cta',v:'A'}); }
+    for(var j=0;j<70;j++){ T.ev('ab_view',{exp:'paywall_cta',v:'B'}); if(j<17)T.ev('ab_convert',{exp:'paywall_cta',v:'B'}); }
+    render();
+  };
+  document.getElementById('reset').onclick=function(){ T.clear(); render(); };
+  render();
+})();
+</script>
+</body>
+</html>

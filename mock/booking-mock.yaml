@@ -1,0 +1,345 @@
+openapi: 3.1.0
+info:
+  title: HeiBen Reisen — Buchungs-API
+  version: 1.0.0
+  description: >
+    Partner-Schnittstelle für den HeiBen Reise-Planer. Bildet den Buchungsfluss
+    Verfügbarkeit → Angebot (Quote) → Buchung → Status → Storno ab.
+    Produkte (`productId`) entsprechen den Aktivitäten/Leistungen des Planers
+    (z. B. `drachenfels`, `koeln-dom`). Wird im Planer keine API erreicht, greift
+    automatisch der E-Mail-Anfrage-Fallback.
+  contact:
+    name: HeiBen Reisen
+    email: reisen@heiben.de
+  license:
+    name: Proprietär
+servers:
+  - url: https://api.heiben.de/booking/v1
+    description: Produktion
+  - url: https://sandbox.api.heiben.de/booking/v1
+    description: Sandbox
+  - url: http://127.0.0.1:4010
+    description: Lokaler Prism-Mock
+tags:
+  - name: Verfügbarkeit
+    description: Prüfung von Terminen, Plätzen und Preisen.
+  - name: Angebote
+    description: Unverbindliche Angebote (Quotes) aus mehreren Leistungen.
+  - name: Buchungen
+    description: Verbindliche Buchungen, Statusabfrage und Storno.
+paths:
+  /availability:
+    get:
+      tags: [Verfügbarkeit]
+      summary: Verfügbarkeit und Preis prüfen
+      operationId: getAvailability
+      parameters:
+        - name: productId
+          in: query
+          required: true
+          description: Kennung der Leistung/Aktivität.
+          schema: { type: string, examples: [drachenfels] }
+        - name: date
+          in: query
+          required: true
+          schema: { type: string, format: date, examples: ["2026-07-18"] }
+        - name: persons
+          in: query
+          required: false
+          schema: { type: integer, minimum: 1, maximum: 60, default: 1, examples: [2] }
+      responses:
+        "200":
+          description: Verfügbarkeitsergebnis.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Availability" }
+              examples:
+                verfuegbar:
+                  summary: Verfügbar
+                  value:
+                    productId: drachenfels
+                    date: "2026-07-18"
+                    persons: 2
+                    available: true
+                    remaining: 18
+                    unitPrice: { amount: 29.0, currency: EUR }
+                    totalPrice: { amount: 58.0, currency: EUR }
+        "400": { $ref: "#/components/responses/Problem" }
+        "401": { $ref: "#/components/responses/Problem" }
+        "404": { $ref: "#/components/responses/Problem" }
+  /quotes:
+    post:
+      tags: [Angebote]
+      summary: Angebot (Quote) erstellen
+      operationId: createQuote
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/QuoteRequest" }
+            examples:
+              wochenende:
+                summary: Zwei Leistungen, 2 Personen
+                value:
+                  persons: 2
+                  reference: FB-7X2A
+                  items:
+                    - { productId: drachenfels, date: "2026-07-18" }
+                    - { productId: koeln-dom, date: "2026-07-19" }
+      responses:
+        "201":
+          description: Angebot erstellt.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Quote" }
+              examples:
+                quote:
+                  value:
+                    quoteId: q_9f2c7a
+                    persons: 2
+                    currency: EUR
+                    validUntil: "2026-07-04T23:59:59Z"
+                    items:
+                      - { productId: drachenfels, title: "Drachenfels-Runde", date: "2026-07-18", unitPrice: { amount: 29.0, currency: EUR }, lineTotal: { amount: 58.0, currency: EUR } }
+                      - { productId: koeln-dom, title: "Köln: Dom & Altstadt", date: "2026-07-19", unitPrice: { amount: 25.0, currency: EUR }, lineTotal: { amount: 50.0, currency: EUR } }
+                    total: { amount: 108.0, currency: EUR }
+        "400": { $ref: "#/components/responses/Problem" }
+        "401": { $ref: "#/components/responses/Problem" }
+        "422": { $ref: "#/components/responses/Problem" }
+  /bookings:
+    post:
+      tags: [Buchungen]
+      summary: Buchung anlegen
+      description: Bucht entweder ein bestehendes Angebot (`quoteId`) oder direkt eine Liste von Leistungen (`items`).
+      operationId: createBooking
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/BookingRequest" }
+            examples:
+              ausQuote:
+                summary: Aus Angebot
+                value:
+                  quoteId: q_9f2c7a
+                  customer: { name: "Familie Muster", email: "muster@example.de" }
+              direkt:
+                summary: Direkt
+                value:
+                  persons: 2
+                  customer: { name: "Familie Muster", email: "muster@example.de" }
+                  items:
+                    - { productId: drachenfels, date: "2026-07-18" }
+      responses:
+        "201":
+          description: Buchung bestätigt.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Booking" }
+              examples:
+                gebucht:
+                  value:
+                    reference: HB-6MK2V1
+                    status: confirmed
+                    persons: 2
+                    createdAt: "2026-06-19T10:15:00Z"
+                    items:
+                      - { productId: drachenfels, title: "Drachenfels-Runde", date: "2026-07-18", status: confirmed }
+                    total: { amount: 58.0, currency: EUR }
+        "401": { $ref: "#/components/responses/Problem" }
+        "409":
+          description: Nicht mehr verfügbar.
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+        "422": { $ref: "#/components/responses/Problem" }
+  /bookings/{reference}:
+    get:
+      tags: [Buchungen]
+      summary: Buchungsstatus abrufen
+      operationId: getBooking
+      parameters:
+        - name: reference
+          in: path
+          required: true
+          schema: { type: string, examples: [HB-6MK2V1] }
+      responses:
+        "200":
+          description: Buchung gefunden.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Booking" }
+        "401": { $ref: "#/components/responses/Problem" }
+        "404": { $ref: "#/components/responses/Problem" }
+  /bookings/{reference}/cancellation:
+    post:
+      tags: [Buchungen]
+      summary: Buchung stornieren
+      operationId: cancelBooking
+      parameters:
+        - name: reference
+          in: path
+          required: true
+          schema: { type: string, examples: [HB-6MK2V1] }
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                reason: { type: string, examples: ["Termin verschoben"] }
+      responses:
+        "200":
+          description: Storniert.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Cancellation" }
+              examples:
+                storno:
+                  value:
+                    reference: HB-6MK2V1
+                    status: cancelled
+                    cancelledAt: "2026-06-20T09:00:00Z"
+                    refund: { amount: 58.0, currency: EUR }
+        "401": { $ref: "#/components/responses/Problem" }
+        "404": { $ref: "#/components/responses/Problem" }
+        "409":
+          description: Storno nicht mehr möglich.
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  responses:
+    Problem:
+      description: Fehler (RFC 9457).
+      content:
+        application/problem+json:
+          schema: { $ref: "#/components/schemas/Problem" }
+          examples:
+            beispiel:
+              value:
+                type: "https://api.heiben.de/problems/not-available"
+                title: "Nicht verfügbar"
+                status: 409
+                detail: "Für das gewählte Datum sind keine Plätze mehr frei."
+  schemas:
+    Money:
+      type: object
+      required: [amount, currency]
+      properties:
+        amount: { type: number, minimum: 0, examples: [29.0] }
+        currency: { type: string, enum: [EUR], default: EUR }
+    Customer:
+      type: object
+      required: [name]
+      properties:
+        name: { type: string, examples: ["Familie Muster"] }
+        email: { type: string, format: email, examples: ["muster@example.de"] }
+        phone: { type: string, examples: ["+49 221 1234567"] }
+    Availability:
+      type: object
+      required: [productId, date, available]
+      properties:
+        productId: { type: string }
+        date: { type: string, format: date }
+        persons: { type: integer, minimum: 1 }
+        available: { type: boolean }
+        remaining: { type: integer, minimum: 0 }
+        unitPrice: { $ref: "#/components/schemas/Money" }
+        totalPrice: { $ref: "#/components/schemas/Money" }
+    LineItemRequest:
+      type: object
+      required: [productId, date]
+      properties:
+        productId: { type: string, examples: [drachenfels] }
+        date: { type: string, format: date }
+        persons: { type: integer, minimum: 1 }
+    QuoteRequest:
+      type: object
+      required: [items]
+      properties:
+        persons: { type: integer, minimum: 1, maximum: 60, default: 1 }
+        reference: { type: string, description: "Optionale Freizeit-Buchungsnummer des Planers." }
+        items:
+          type: array
+          minItems: 1
+          items: { $ref: "#/components/schemas/LineItemRequest" }
+    QuoteItem:
+      type: object
+      required: [productId, date, unitPrice, lineTotal]
+      properties:
+        productId: { type: string }
+        title: { type: string }
+        date: { type: string, format: date }
+        unitPrice: { $ref: "#/components/schemas/Money" }
+        lineTotal: { $ref: "#/components/schemas/Money" }
+    Quote:
+      type: object
+      required: [quoteId, items, total]
+      properties:
+        quoteId: { type: string, examples: [q_9f2c7a] }
+        persons: { type: integer }
+        currency: { type: string, enum: [EUR] }
+        validUntil: { type: string, format: date-time }
+        items:
+          type: array
+          items: { $ref: "#/components/schemas/QuoteItem" }
+        total: { $ref: "#/components/schemas/Money" }
+    BookingRequest:
+      type: object
+      description: "Entweder quoteId ODER items angeben."
+      properties:
+        quoteId: { type: string }
+        persons: { type: integer, minimum: 1, maximum: 60 }
+        customer: { $ref: "#/components/schemas/Customer" }
+        items:
+          type: array
+          items: { $ref: "#/components/schemas/LineItemRequest" }
+      anyOf:
+        - required: [quoteId]
+        - required: [items]
+    BookingItem:
+      type: object
+      required: [productId, date, status]
+      properties:
+        productId: { type: string }
+        title: { type: string }
+        date: { type: string, format: date }
+        status: { type: string, enum: [confirmed, pending, cancelled] }
+    Booking:
+      type: object
+      required: [reference, status, items, total]
+      properties:
+        reference: { type: string, examples: [HB-6MK2V1] }
+        status: { type: string, enum: [confirmed, pending, cancelled] }
+        persons: { type: integer }
+        createdAt: { type: string, format: date-time }
+        customer: { $ref: "#/components/schemas/Customer" }
+        items:
+          type: array
+          items: { $ref: "#/components/schemas/BookingItem" }
+        total: { $ref: "#/components/schemas/Money" }
+    Cancellation:
+      type: object
+      required: [reference, status]
+      properties:
+        reference: { type: string }
+        status: { type: string, enum: [cancelled] }
+        cancelledAt: { type: string, format: date-time }
+        refund: { $ref: "#/components/schemas/Money" }
+    Problem:
+      type: object
+      description: Fehlerobjekt nach RFC 9457.
+      required: [title, status]
+      properties:
+        type: { type: string, format: uri }
+        title: { type: string }
+        status: { type: integer }
+        detail: { type: string }
+        instance: { type: string }

@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Deine erste Steuererklärung · HeiBen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;1,400&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f3eee5;--bg2:#ebe3d4;--paper:#fffdf8;--ink:#1f1c17;--ink2:#524a3e;--rule:#d8cdb7;--terra:#b04a31;--ochre:#a97a1d;--moss:#4a5c39;--burg:#792d29;--aub:#6b3951}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:'Manrope',system-ui,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:760px;margin:0 auto;padding:1.6rem 1.1rem 5rem}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.32em;text-transform:uppercase;color:var(--terra)}
+h1{font-family:'Fraunces',serif;font-weight:400;font-size:clamp(2rem,6.5vw,3.2rem);line-height:1.02;letter-spacing:-.02em;margin:.45rem 0 .5rem}
+h1 em{font-style:italic;color:var(--terra)}
+.lead{color:var(--ink2);max-width:60ch;font-size:1.02rem}
+.seg{display:inline-flex;background:var(--bg2);border:1px solid var(--rule);border-radius:999px;padding:.25rem;margin-top:1.3rem;gap:.2rem}
+.seg button{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;border:none;background:transparent;color:var(--ink2);padding:.5rem .9rem;border-radius:999px;cursor:pointer}
+.seg button.on{background:var(--ink);color:var(--bg)}
+.card{background:var(--paper);border:1px solid var(--rule);border-radius:16px;padding:1.1rem 1.15rem;margin-top:1.1rem}
+.card h3{font-family:'Fraunces',serif;font-weight:500;font-size:1.25rem;margin-bottom:.2rem}
+.card .sub{font-size:.85rem;color:var(--ink2);margin-bottom:.5rem}
+.field{margin-top:.85rem}
+.field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.15rem}
+.field .hint{font-size:.78rem;color:var(--ink2);margin-bottom:.3rem}
+.field input,.field select{width:100%;padding:.55rem .6rem;border:1px solid var(--rule);border-radius:9px;background:var(--bg);color:var(--ink);font:inherit;font-weight:600}
+.field input:focus,.field select:focus{outline:none;border-color:var(--terra);background:#fff}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:.7rem}
+.result{position:sticky;bottom:0;margin-top:1.5rem;background:var(--ink);color:var(--bg);border-radius:18px 18px 14px 14px;padding:1.3rem 1.3rem 1.4rem;box-shadow:0 -8px 30px rgba(31,28,23,.18)}
+.result .eyebrow{color:var(--ochre)}
+.big{font-family:'Fraunces',serif;font-weight:400;font-size:clamp(2.4rem,11vw,3.6rem);line-height:1;margin:.25rem 0 .1rem;color:#9ec27f}
+.big.zero{color:#e7a48f}
+.verdict{font-size:.96rem;color:#e8e0d0;margin-top:.5rem}
+.verdict b{color:var(--ochre)}
+.mini{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.6rem;margin-top:1rem}
+.mini .m{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);border-radius:11px;padding:.6rem .7rem}
+.mini .l{font-family:'JetBrains Mono',monospace;font-size:.5rem;letter-spacing:.06em;text-transform:uppercase;color:#cdbfa8}
+.mini .v{font-family:'Fraunces',serif;font-size:1.15rem;margin-top:.1rem}
+.foot{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink2);text-align:center;margin-top:2rem}
+.hidden{display:none}
+.callout{background:var(--bg2);border-left:3px solid var(--terra);border-radius:0 10px 10px 0;padding:.7rem .9rem;margin-top:.9rem;font-size:.88rem}
+.callout b{color:var(--burg)}
+.subseg{display:inline-flex;gap:.4rem;margin-top:.3rem}
+.subseg button{font-size:.78rem;border:1px solid var(--rule);background:var(--bg);border-radius:8px;padding:.35rem .7rem;cursor:pointer;font-weight:600}
+.subseg button.on{background:var(--terra);color:#fff;border-color:var(--terra)}
+</style>
+<link rel="stylesheet" href="heiben-design.css">
+<script src="heiben-nav.js" defer></script>
+</head>
+<body data-hb-welt="wissen">
+<div class="wrap">
+  <p class="eyebrow">HeiBen · Geld zurückholen</p>
+  <h1>Deine erste <em>Steuererklärung</em></h1>
+  <p class="lead">Für die meisten Berufseinsteiger und Studierenden ist die Steuererklärung kein Papierkrieg, sondern ein Geschenk: Im Schnitt gibt es vierstellig zurück. Hier siehst du live, wo dein Geld liegt — und wie viel davon dir zusteht.</p>
+
+  <div class="seg" id="seg">
+    <button data-m="job" class="on">Berufseinsteiger</button>
+    <button data-m="stud">Studierende</button>
+  </div>
+
+  <!-- ===== JOB ===== -->
+  <div id="panel-job">
+    <div class="card">
+      <h3>Dein erstes (Teil-)Jahr</h3>
+      <div class="sub">Der größte Hebel überhaupt: Wer mitten im Jahr anfängt, zahlt monatlich zu viel Lohnsteuer — als hätte man das ganze Jahr so verdient.</div>
+      <div class="frow">
+        <div class="field"><label>Bruttojahresgehalt (€)</label><div class="hint">Hochgerechnet auf 12 Monate</div><input type="number" id="j_brutto" value="48000" step="1000"></div>
+        <div class="field"><label>Monate gearbeitet</label><div class="hint">Im betrachteten Jahr</div><input type="number" id="j_monate" value="6" min="1" max="12"></div>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Werbungskosten</h3>
+      <div class="sub">Alles über dem Pauschbetrag von 1.230 € senkt zusätzlich deine Steuer.</div>
+      <div class="frow">
+        <div class="field"><label>Pendel-km (einfach)</label><div class="hint">Zur Arbeit</div><input type="number" id="j_km" value="18"></div>
+        <div class="field"><label>Arbeitstage / Jahr</label><div class="hint">~220 bei Vollzeit</div><input type="number" id="j_tage" value="110"></div>
+      </div>
+      <div class="frow">
+        <div class="field"><label>Homeoffice-Tage</label><div class="hint">6 €/Tag, max. 210</div><input type="number" id="j_ho" value="40"></div>
+        <div class="field"><label>Arbeitsmittel (€)</label><div class="hint">Laptop, Möbel, Fachliteratur</div><input type="number" id="j_mittel" value="900"></div>
+      </div>
+      <div class="frow">
+        <div class="field"><label>Fortbildung & Reisen (€)</label><input type="number" id="j_fort" value="0"></div>
+        <div class="field"><label>Bewerbungs- & Umzugskosten (€)</label><input type="number" id="j_bew" value="300"></div>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Extra-Posten</h3>
+      <div class="frow">
+        <div class="field"><label>Spenden (€)</label><input type="number" id="j_spenden" value="0"></div>
+        <div class="field"><label>Handwerker-Lohnkosten (€)</label><div class="hint">20 % direkt von der Steuer</div><input type="number" id="j_hand" value="0"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== STUDENT ===== -->
+  <div id="panel-stud" class="hidden">
+    <div class="card">
+      <h3>Welches Studium?</h3>
+      <div class="sub">Das entscheidet über alles — der Unterschied ist riesig.</div>
+      <div class="subseg" id="studtype">
+        <button data-t="zweit" class="on">Master / Zweitausbildung</button>
+        <button data-t="erst">Erststudium</button>
+      </div>
+      <div class="callout" id="studInfo"></div>
+    </div>
+    <div class="card">
+      <h3>Deine Studienkosten / Jahr</h3>
+      <div class="frow">
+        <div class="field"><label>Semesterbeiträge (€)</label><input type="number" id="s_sem" value="700"></div>
+        <div class="field"><label>Fachbücher & Laptop (€)</label><input type="number" id="s_mittel" value="800"></div>
+      </div>
+      <div class="frow">
+        <div class="field"><label>Fahrten Uni: km (einfach)</label><input type="number" id="s_km" value="9"></div>
+        <div class="field"><label>Uni-Tage / Jahr</label><input type="number" id="s_tage" value="120"></div>
+      </div>
+      <div class="frow">
+        <div class="field"><label>Zweitwohnung am Studienort (€/Jahr)</label><input type="number" id="s_wohnung" value="0"></div>
+        <div class="field"><label>Auslandssemester / Praktikum (€)</label><input type="number" id="s_ausland" value="0"></div>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Nebenjob?</h3>
+      <div class="field"><label>Einbehaltene Lohnsteuer aus Nebenjob (€)</label><div class="hint">Steht auf der Lohnabrechnung; bei Minijob meist 0</div><input type="number" id="s_lst" value="0"></div>
+    </div>
+  </div>
+
+  <div class="result" id="result"></div>
+  <p class="foot">HeiBen GmbH i. G. · „Heimat leben" · <a href="mein-heiben.html" style="color:var(--aub)">Mein HeiBen</a> · grobe Schätzung · keine Steuerberatung</p>
+</div>
+
+<script>
+var KEY="heiben_steuer_v1";
+var IDS=["j_brutto","j_monate","j_km","j_tage","j_ho","j_mittel","j_fort","j_bew","j_spenden","j_hand","s_sem","s_mittel","s_km","s_tage","s_wohnung","s_ausland","s_lst"];
+var mode="job", studtype="zweit";
+try{var sv=JSON.parse(localStorage.getItem(KEY))||{};IDS.forEach(function(id){if(sv[id]!=null)document.getElementById(id).value=sv[id];});if(sv._mode)mode=sv._mode;if(sv._st)studtype=sv._st;}catch(e){}
+
+function num(id){var v=parseFloat(String(document.getElementById(id).value).replace(",","."));return isNaN(v)?0:v;}
+function eur(n){return (Math.round(n)).toLocaleString("de-DE")+" €";}
+function zvE(b){var sv=Math.min(b,62100)*0.20;return Math.max(0,b-11604-Math.min(sv,b)*0.5);}
+function incomeTax(z){if(z<=0)return 0;if(z<=17000)return z*0.16;if(z<=66000)return 2720+(z-17000)*0.30;return 17420+(z-66000)*0.42;}
+function pendler(km,tage){return (Math.min(km,20)*0.30+Math.max(0,km-20)*0.38)*tage;}
+
+function renderJob(){
+  var brutto=num("j_brutto"), m=Math.max(1,Math.min(12,num("j_monate")));
+  var withheld=incomeTax(zvE(brutto))/12*m;            // einbehaltene Lohnsteuer
+  var actualGross=brutto/12*m;                          // tatsaechlich verdient
+  var pp=pendler(num("j_km"),num("j_tage"));
+  var ho=Math.min(num("j_ho"),210)*6;
+  var wk=pp+ho+num("j_mittel")+num("j_fort")+num("j_bew");
+  var wkExtra=Math.max(0,wk-1230);
+  var spenden=num("j_spenden");
+  var zFinal=Math.max(0,zvE(actualGross)-wkExtra-spenden);
+  var owedBefore=incomeTax(zFinal);
+  var hand=Math.min(owedBefore,num("j_hand")*0.20);
+  var owed=Math.max(0,owedBefore-hand);
+  var refund=Math.max(0,withheld-owed);
+  var midyearOnly=Math.max(0,withheld-incomeTax(zvE(actualGross)));
+  var byDeduction=refund-midyearOnly;
+
+  var driver = midyearOnly>byDeduction ? "der unterjährige Einstieg" : "deine Werbungskosten";
+  var v;
+  if(refund<5){
+    v="Hier ist wenig zu holen — entweder hast du fast volles Jahr gearbeitet oder kaum Steuer gezahlt. Eine Abgabe lohnt sich trotzdem, sobald Werbungskosten dazukommen.";
+  } else {
+    v="Geschätzte Erstattung. Größter Hebel: <b>"+driver+"</b>. "+(wkExtra>0?"Deine Werbungskosten liegen "+eur(wkExtra)+" über dem Pauschbetrag.":"Tipp: Schon "+eur(1231)+" Werbungskosten knacken den Pauschbetrag.");
+  }
+  document.getElementById("result").innerHTML=
+    '<p class="eyebrow">Geschätzte Erstattung</p>'+
+    '<div class="big'+(refund<5?' zero':'')+'">'+eur(refund)+'</div>'+
+    '<div class="verdict">'+v+'</div>'+
+    '<div class="mini">'+
+      mbox("Einbehalten",eur(withheld))+
+      mbox("Durch Einstieg",eur(midyearOnly))+
+      mbox("Durch Absetzen",eur(Math.max(0,byDeduction)))+
+    '</div>';
+}
+
+function renderStud(){
+  var costs=num("s_sem")+num("s_mittel")+pendler(num("s_km"),num("s_tage"))+num("s_wohnung")+num("s_ausland");
+  var info=document.getElementById("studInfo");
+  var out;
+  if(studtype==="zweit"){
+    info.innerHTML="<b>Glücksfall.</b> Master oder eine Ausbildung nach abgeschlossener Erstausbildung zählen als <b>Werbungskosten</b> — du sammelst einen Verlustvortrag, auch ganz ohne Einkommen.";
+    var future=costs*0.28;
+    out='<p class="eyebrow">Dein Steuer-Bonus für später</p>'+
+        '<div class="big">'+eur(future)+'</div>'+
+        '<div class="verdict">Mit der Erklärung sicherst du dir einen <b>Verlustvortrag von '+eur(costs)+'</b>. Sobald du ins Berufsleben startest, verrechnest du ihn mit deinem Einkommen — das spart geschätzt '+eur(future)+' Steuern. <b>Wichtig:</b> Du musst die Erklärung einreichen, sonst verfällt der Vortrag. Rückwirkend bis zu vier Jahre möglich.</div>'+
+        '<div class="mini">'+mbox("Verlustvortrag",eur(costs))+mbox("Ersparnis später",eur(future))+mbox("Aufwand",'1 Abend')+'</div>';
+  } else {
+    info.innerHTML="<b>Schade.</b> Im Erststudium zählen die Kosten nur als <b>Sonderausgaben</b> (max. 6.000 €/Jahr) — ohne Einkommen verfallen sie. Prüfe genau, ob nicht doch eine abgeschlossene Ausbildung vorliegt (dann gilt die viel bessere Regel oben).";
+    var lst=num("s_lst");
+    var refund=Math.min(lst, costs*0.20);
+    out='<p class="eyebrow">Geschätzte Erstattung</p>'+
+        '<div class="big'+(refund<5?' zero':'')+'">'+eur(refund)+'</div>'+
+        '<div class="verdict">'+(lst>0?'Aus deinem Nebenjob wurde Lohnsteuer einbehalten — die holst du dir anteilig zurück.':'Ohne einbehaltene Lohnsteuer im Erststudium bleibt meist nichts zu erstatten. Hattest du einen Job mit Steuerabzug, trag ihn oben ein.')+' Die '+eur(costs)+' Studienkosten wirken hier nur als Sonderausgaben.</div>'+
+        '<div class="mini">'+mbox("Studienkosten",eur(costs))+mbox("Lohnsteuer",eur(lst))+mbox("Erstattung",eur(refund))+'</div>';
+  }
+  document.getElementById("result").innerHTML=out;
+}
+
+function mbox(l,v){return '<div class="m"><div class="l">'+l+'</div><div class="v">'+v+'</div></div>';}
+
+function save(){try{var o={};IDS.forEach(function(id){o[id]=document.getElementById(id).value;});o._mode=mode;o._st=studtype;localStorage.setItem(KEY,JSON.stringify(o));}catch(e){}}
+function render(){save(); if(mode==="job")renderJob(); else renderStud();}
+
+document.querySelectorAll("#seg button").forEach(function(b){b.onclick=function(){
+  mode=b.dataset.m; document.querySelectorAll("#seg button").forEach(function(x){x.classList.toggle("on",x===b);});
+  document.getElementById("panel-job").classList.toggle("hidden",mode!=="job");
+  document.getElementById("panel-stud").classList.toggle("hidden",mode!=="stud"); render();
+};});
+document.querySelectorAll("#studtype button").forEach(function(b){b.onclick=function(){
+  studtype=b.dataset.t; document.querySelectorAll("#studtype button").forEach(function(x){x.classList.toggle("on",x===b);}); render();
+};});
+IDS.forEach(function(id){document.getElementById(id).addEventListener("input",render);});
+// restore mode UI
+document.querySelectorAll("#seg button").forEach(function(x){x.classList.toggle("on",x.dataset.m===mode);});
+document.getElementById("panel-job").classList.toggle("hidden",mode!=="job");
+document.getElementById("panel-stud").classList.toggle("hidden",mode!=="stud");
+document.querySelectorAll("#studtype button").forEach(function(x){x.classList.toggle("on",x.dataset.t===studtype);});
+render();
+</script>
+</body>
+</html>

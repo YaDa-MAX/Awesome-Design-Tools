@@ -1,0 +1,505 @@
+{
+  "batch": 6,
+  "region": "Europa",
+  "schema_version": 1,
+  "note": "Traditionelle, historisch etablierte Gerichte. Auswahl ohne Schweinefleisch; Feld 'substitution' nur dort, wo das Original mit Schwein zubereitet wird. Bilder als Platzhalter. Generisches Schema, direkt importierbar in PostgreSQL/Supabase/Directus/Strapi/Sanity.",
+  "recipes": [
+    {
+      "country": "Nordmazedonien",
+      "continent": "Europa",
+      "recipe_name": "Tavče gravče",
+      "categories": ["Vegetarisch", "Hauptgericht"],
+      "short_description": "Weiße Bohnen, in einer würzigen Paprika-Zwiebel-Sauce in der irdenen Pfanne gebacken. Das Nationalgericht Nordmazedoniens.",
+      "history": "Tavče gravče — wörtlich „Bohnen in der Pfanne“ — gilt als das Nationalgericht Nordmazedoniens und ist nach dem Tongefäß (tavče) benannt, in dem es zubereitet wird. Das Gericht beruht auf weißen Bohnen, einem Grundnahrungsmittel der Region, die zunächst gekocht und dann mit einer Sauce aus reichlich Zwiebeln, Paprikapulver und Kräutern in der irdenen Pfanne im Ofen gebacken werden, bis sich oben eine leicht krustige Schicht bildet. Bohnengerichte gehören seit Langem zur bodenständigen Küche des Balkans und boten eine günstige, nahrhafte Mahlzeit. Charakteristisch ist die kräftige Würze mit rotem Paprikapulver und getrockneter Minze. Während manche Varianten Wurst enthalten, ist die reine Bohnenfassung verbreitet und traditionell. Tavče gravče wird heiß direkt aus der Pfanne gegessen, oft mit Brot, und gehört sowohl zur Alltags- als auch zur Festtagsküche. Es ist von Natur aus vegetarisch und ohne Schweinefleisch und steht sinnbildlich für die einfache, herzhafte Küche Nordmazedoniens.",
+      "ingredients": [
+        { "quantity": "500", "unit": "g", "item": "weiße Bohnen, über Nacht eingeweicht" },
+        { "quantity": "3", "unit": "", "item": "Zwiebeln" },
+        { "quantity": "2", "unit": "EL", "item": "edelsüßes Paprikapulver" },
+        { "quantity": "1", "unit": "TL", "item": "getrocknete Minze" },
+        { "quantity": "1", "unit": "", "item": "rote Paprika" },
+        { "quantity": "5", "unit": "EL", "item": "Sonnenblumen- oder Olivenöl" },
+        { "quantity": "1", "unit": "", "item": "frische Chili (optional)" },
+        { "quantity": "", "unit": "", "item": "Salz, Pfeffer" }
+      ],
+      "instructions": [
+        "Die eingeweichten Bohnen in frischem Wasser etwa 1 Stunde weich, aber nicht zerfallen kochen; abgießen.",
+        "Zwiebeln in Öl glasig dünsten, vom Herd ziehen und Paprikapulver einrühren.",
+        "Bohnen mit den Zwiebeln, etwas Kochwasser, Minze, Salz und Pfeffer mischen.",
+        "Alles in eine irdene Form geben, mit Paprikastreifen und Chili belegen.",
+        "Im Ofen bei 200 °C 30–40 Minuten backen, bis die Flüssigkeit reduziert ist und sich oben eine Kruste bildet.",
+        "Heiß direkt aus der Form mit Brot servieren."
+      ],
+      "tips": [
+        "Die Bohnen vorgaren, aber nicht zerkochen — sie sollen Form behalten.",
+        "Paprikapulver erst nach dem Herd einrühren, sonst wird es bitter.",
+        "Getrocknete Minze ist die typische Würze."
+      ],
+      "tags": ["Nordmazedonien", "Tavče gravče", "weiße Bohnen", "vegetarisch", "Paprika", "Ofengericht", "Balkan", "Nationalgericht", "irdene Pfanne", "Minze", "deftig", "Hauptgericht"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Nordmazedonien",
+      "continent": "Europa",
+      "recipe_name": "Ajvar",
+      "categories": ["Vegetarisch", "Vegan", "Beilage", "Vorspeise"],
+      "short_description": "Eine sämige Paste aus gerösteter roter Paprika und Aubergine, mit Knoblauch und Öl. Der Aufstrich- und Beilagenklassiker des Balkans.",
+      "history": "Ajvar ist eine der bekanntesten Spezialitäten Nordmazedoniens und des gesamten Balkans und gilt vielerorts als Inbegriff der herbstlichen Vorratsküche. Die sämige Paste wird aus gerösteten roten Paprika hergestellt, oft ergänzt durch geröstete Aubergine, Knoblauch und Öl. Traditionell wird Ajvar im Spätsommer und Herbst in großen Mengen zubereitet, wenn Paprika reif und günstig ist — die gemeinsame Herstellung im Familien- und Nachbarschaftskreis ist ein soziales Ereignis. Die Paprika werden über offener Flamme oder im Ofen geröstet, gehäutet und mit Knoblauch und Öl zu einer Paste verkocht und schließlich in Gläsern haltbar gemacht, um auch im Winter Farbe und Aroma auf den Tisch zu bringen. Ajvar wird als Aufstrich, Beilage oder Dip gegessen, etwa zu Brot, gegrilltem Fleisch oder Käse. Je nach Rezept ist es mild oder scharf. Es ist von Natur aus vegan und ohne Schweinefleisch und steht für die Tradition, die Ernte zu konservieren.",
+      "ingredients": [
+        { "quantity": "2", "unit": "kg", "item": "rote Spitzpaprika" },
+        { "quantity": "1", "unit": "", "item": "Aubergine" },
+        { "quantity": "4", "unit": "Zehen", "item": "Knoblauch" },
+        { "quantity": "120", "unit": "ml", "item": "Sonnenblumen- oder Olivenöl" },
+        { "quantity": "2", "unit": "EL", "item": "Rotweinessig" },
+        { "quantity": "1", "unit": "", "item": "frische Chili (optional)" },
+        { "quantity": "", "unit": "", "item": "Salz" }
+      ],
+      "instructions": [
+        "Paprika und Aubergine im Ofen oder über offener Flamme rundum rösten, bis die Haut schwarz wird.",
+        "Abgedeckt ausdampfen lassen, dann häuten und entkernen.",
+        "Das Fruchtfleisch fein hacken oder grob pürieren.",
+        "Mit Knoblauch, Öl, Essig und Salz in einem Topf bei kleiner Hitze einkochen.",
+        "Unter Rühren köcheln, bis eine dicke, glänzende Paste entsteht.",
+        "Heiß in saubere Gläser füllen oder frisch als Beilage servieren."
+      ],
+      "tips": [
+        "Gut gehäutete Paprika ergibt eine feine Paste ohne Hautstücke.",
+        "Geduldig einkochen — Ajvar soll dick und konzentriert sein.",
+        "In sterilisierten Gläsern hält es monatelang."
+      ],
+      "tags": ["Nordmazedonien", "Ajvar", "Paprika", "Aubergine", "vegan", "vegetarisch", "Aufstrich", "Beilage", "Balkan", "Vorratsküche", "Herbst", "Dip"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Nordmazedonien",
+      "continent": "Europa",
+      "recipe_name": "Revani",
+      "categories": ["Dessert", "Vegetarisch"],
+      "short_description": "Ein saftiger Grießkuchen, nach dem Backen mit Zuckersirup getränkt. Süße Spezialität mit osmanischen Wurzeln.",
+      "history": "Revani (auch Ravani) ist ein süßer, sirupgetränkter Grießkuchen, der in Nordmazedonien, Griechenland, der Türkei und weiten Teilen des früheren osmanischen Raums verbreitet ist. Wie viele sirupbasierte Süßspeisen der Region geht er auf die osmanische Hofküche zurück, in der das Tränken von Gebäck mit Zucker- oder Honigsirup eine zentrale Technik war. Charakteristisch für Revani ist die Verwendung von Grieß im Teig, der dem Kuchen eine leicht körnige, saftige Textur verleiht und den Sirup besonders gut aufnimmt. Nach dem Backen wird der noch warme oder abgekühlte Kuchen mit einem aromatisierten Zuckersirup übergossen, sodass er durchtränkt und sehr saftig wird. Oft wird er mit Zitrone oder Orange aromatisiert und in Rauten geschnitten serviert. Revani gehört zu festlichen Anlässen, Gästebewirtung und der Süßspeisenkultur Nordmazedoniens. Als reiner Grieß-Zucker-Kuchen ist er selbstverständlich vegetarisch und ohne Schweinefleisch und spiegelt die ausgeprägte Vorliebe der Region für sirupgetränkte Backwaren wider.",
+      "ingredients": [
+        { "quantity": "200", "unit": "g", "item": "feiner Grieß" },
+        { "quantity": "100", "unit": "g", "item": "Mehl" },
+        { "quantity": "4", "unit": "", "item": "Eier" },
+        { "quantity": "150", "unit": "g", "item": "Zucker (Teig)" },
+        { "quantity": "100", "unit": "ml", "item": "Öl" },
+        { "quantity": "1", "unit": "TL", "item": "Backpulver" },
+        { "quantity": "1", "unit": "", "item": "Zitrone (Schale und Saft)" },
+        { "quantity": "300", "unit": "g", "item": "Zucker und 300 ml Wasser (Sirup)" }
+      ],
+      "instructions": [
+        "Eier mit Zucker schaumig schlagen, Öl und Zitronenschale einrühren.",
+        "Grieß, Mehl und Backpulver unterheben.",
+        "Den Teig in eine gefettete Form geben und bei 180 °C 25–30 Minuten goldgelb backen.",
+        "Aus Zucker, Wasser und Zitronensaft einen Sirup kochen.",
+        "Den Sirup gleichmäßig über den noch warmen Kuchen gießen.",
+        "Einige Stunden durchziehen lassen, in Rauten schneiden und servieren."
+      ],
+      "tips": [
+        "Den Grieß im Teig sorgt für die typisch saftige Textur.",
+        "Heißer Sirup auf warmen Kuchen zieht am besten ein.",
+        "Vor dem Servieren gut durchtränken lassen."
+      ],
+      "tags": ["Nordmazedonien", "Revani", "Grießkuchen", "Sirup", "süß", "osmanisch geprägt", "Festtag", "vegetarisch", "Zitrone", "Balkan", "Gästegebäck", "Dessert"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Norwegen",
+      "continent": "Europa",
+      "recipe_name": "Fårikål",
+      "categories": ["Fleisch", "Hauptgericht"],
+      "short_description": "Ein schlichter Eintopf aus Lamm bzw. Hammel und Weißkohl, geschichtet und mit ganzen Pfefferkörnern langsam geschmort. Norwegens Nationalgericht.",
+      "history": "Fårikål — wörtlich „Schaf in Kohl“ — gilt als das Nationalgericht Norwegens und wird traditionell im Herbst gegessen, wenn Lamm geschlachtet wird und Kohl Saison hat. Das Gericht ist Inbegriff der schlichten, ehrlichen norwegischen Küche: In einem großen Topf werden Stücke von Lamm oder Hammel mit Knochen und Weißkohl in Schichten gelegt, mit ganzen schwarzen Pfefferkörnern, Salz und etwas Mehl bestreut und mit Wasser sehr lange sanft geschmort, bis das Fleisch zart vom Knochen fällt und der Kohl mürbe ist. Mehr braucht es nicht — die Zutaten sprechen für sich. Fårikål hat in Norwegen einen so hohen Stellenwert, dass ihm ein eigener Feiertag, der „Fårikålens dag“ am letzten Donnerstag im September, gewidmet ist. Das Gericht spiegelt die Bedeutung der Schafzucht und der einfachen Eintopfküche im kühlen Klima wider. Als reines Lamm-Kohl-Gericht ist es selbstverständlich ohne Schweinefleisch.",
+      "ingredients": [
+        { "quantity": "1.5", "unit": "kg", "item": "Lamm- oder Hammelfleisch mit Knochen, in Stücken" },
+        { "quantity": "1.5", "unit": "kg", "item": "Weißkohl" },
+        { "quantity": "2", "unit": "EL", "item": "ganze schwarze Pfefferkörner" },
+        { "quantity": "2", "unit": "EL", "item": "Mehl" },
+        { "quantity": "500", "unit": "ml", "item": "Wasser" },
+        { "quantity": "", "unit": "", "item": "Salz" },
+        { "quantity": "", "unit": "", "item": "Salzkartoffeln zum Servieren" }
+      ],
+      "instructions": [
+        "Kohl in dicke Spalten schneiden.",
+        "Fleisch und Kohl abwechselnd in einen großen Topf schichten, dabei mit Salz, Mehl und Pfefferkörnern bestreuen.",
+        "Wasser angießen, bis der Topf zu etwa einem Drittel gefüllt ist.",
+        "Zugedeckt aufkochen, dann bei kleiner Hitze 1,5–2 Stunden sehr sanft schmoren.",
+        "Das Fleisch soll zart vom Knochen fallen und der Kohl mürbe sein.",
+        "Mit Salzkartoffeln servieren."
+      ],
+      "tips": [
+        "Die Pfefferkörner ganz lassen — sie würzen, ohne zu dominieren.",
+        "Lange, sanfte Garzeit ist entscheidend.",
+        "Am nächsten Tag schmeckt Fårikål noch besser."
+      ],
+      "tags": ["Norwegen", "Fårikål", "Lamm", "Hammel", "Weißkohl", "Eintopf", "Nationalgericht", "Herbst", "Skandinavien", "schlicht", "Schmorgericht", "Hauptgericht"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Norwegen",
+      "continent": "Europa",
+      "recipe_name": "Gravlaks",
+      "categories": ["Fisch", "Vorspeise"],
+      "short_description": "Lachsfilet, mehrere Tage in Salz, Zucker und Dill gebeizt, hauchdünn aufgeschnitten und mit süßer Senfsauce serviert. Skandinavische Delikatesse.",
+      "history": "Gravlaks (auch Gravad Lachs) ist eine traditionelle skandinavische Art, Lachs zu konservieren, und in Norwegen, Schweden und Dänemark gleichermaßen verbreitet. Der Name leitet sich von „graven Lachs“ ab — wörtlich „vergrabener Lachs“: Historisch wurde der Fisch von Fischern in Salz eingerieben und im Sand vergraben oder beschwert, um ihn durch milde Fermentation und Beizen haltbar zu machen. Die heutige Methode verzichtet auf das Vergraben und beizt den Lachs stattdessen mehrere Tage in einer Mischung aus Salz, Zucker und reichlich frischem Dill, beschwert im Kühlschrank, bis das Fleisch fest und aromatisch ist. Anschließend wird das Filet hauchdünn aufgeschnitten und klassisch mit einer süßlich-würzigen Senf-Dill-Sauce (hovmästarsås) sowie Brot serviert. Gravlaks gehört zu festlichen Anlässen, Buffets und der Weihnachtstafel Skandinaviens. Als reiner gebeizter Fisch ist er selbstverständlich ohne Schweinefleisch und zählt zu den elegantesten Spezialitäten der nordischen Küche.",
+      "ingredients": [
+        { "quantity": "800", "unit": "g", "item": "Lachsfilet mit Haut (sehr frisch)" },
+        { "quantity": "60", "unit": "g", "item": "grobes Salz" },
+        { "quantity": "50", "unit": "g", "item": "Zucker" },
+        { "quantity": "2", "unit": "Bund", "item": "frischer Dill" },
+        { "quantity": "1", "unit": "TL", "item": "grob gemahlener weißer Pfeffer" },
+        { "quantity": "3", "unit": "EL", "item": "süßer Senf (Sauce)" },
+        { "quantity": "1", "unit": "EL", "item": "Weißweinessig, etwas Öl (Sauce)" }
+      ],
+      "instructions": [
+        "Salz, Zucker und Pfeffer mischen und das Lachsfilet rundum damit einreiben.",
+        "Reichlich gehackten Dill auf das Fleisch legen.",
+        "Den Lachs in Folie wickeln, in eine Form legen und mit einem Gewicht beschweren.",
+        "2–3 Tage im Kühlschrank beizen, dabei täglich wenden.",
+        "Für die Sauce Senf, Essig, etwas Zucker, Öl und Dill verrühren.",
+        "Den Lachs trocken tupfen, hauchdünn aufschneiden und mit der Sauce und Brot servieren."
+      ],
+      "tips": [
+        "Nur sehr frischen Lachs in Sushi-Qualität verwenden.",
+        "Das Beschweren sorgt für eine feste Textur.",
+        "Schräg und dünn aufschneiden für die beste Konsistenz."
+      ],
+      "tags": ["Norwegen", "Gravlaks", "Lachs", "gebeizt", "Dill", "Fisch", "Skandinavien", "Senfsauce", "Festtag", "Buffet", "nordisch", "Vorspeise"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Norwegen",
+      "continent": "Europa",
+      "recipe_name": "Lefse",
+      "categories": ["Vegetarisch", "Snack", "Dessert"],
+      "short_description": "Weiche Fladen aus Kartoffelteig, auf der Platte gebacken und süß mit Butter, Zucker und Zimt gefüllt. Traditionelles norwegisches Gebäck.",
+      "history": "Lefse ist ein traditionelles norwegisches Fladengebäck mit langer Geschichte und zahlreichen regionalen Varianten. Besonders verbreitet ist die Kartoffel-Lefse (potetlefse), bei der gekochte, zerstampfte Kartoffeln mit Mehl, Butter und etwas Sahne zu einem Teig verarbeitet, sehr dünn ausgerollt und auf einer heißen, trockenen Platte (takke) gebacken werden. Die Kartoffel wurde in Norwegen zu einem zentralen Grundnahrungsmittel, und Lefse war eine Art, sie haltbar und vielseitig zu verwenden. Die weichen Fladen lassen sich gut lagern und wurden traditionell in größeren Mengen für den Vorrat und für Feste gebacken. Gegessen wird Lefse oft süß: mit Butter bestrichen und mit Zucker und Zimt bestreut, dann zusammengerollt oder gefaltet. Sie gehört zur Weihnachts- und Festtagsküche ebenso wie zum Alltag und ist in norwegischstämmigen Gemeinden bis heute ein Stück gelebter Tradition. Als Kartoffel-Mehl-Gebäck ist sie selbstverständlich vegetarisch und ohne Schweinefleisch.",
+      "ingredients": [
+        { "quantity": "600", "unit": "g", "item": "mehligkochende Kartoffeln" },
+        { "quantity": "200", "unit": "g", "item": "Mehl" },
+        { "quantity": "50", "unit": "g", "item": "Butter" },
+        { "quantity": "60", "unit": "ml", "item": "Sahne" },
+        { "quantity": "1", "unit": "Prise", "item": "Salz" },
+        { "quantity": "", "unit": "", "item": "Butter, Zucker und Zimt zum Füllen" }
+      ],
+      "instructions": [
+        "Kartoffeln kochen, schälen und fein zerstampfen; vollständig auskühlen lassen.",
+        "Mit Butter, Sahne und Salz vermengen, dann das Mehl unterarbeiten.",
+        "Den Teig portionieren und sehr dünn rund ausrollen.",
+        "Die Fladen auf einer heißen, trockenen Pfanne oder Platte beidseitig backen, bis sich helle Flecken bilden.",
+        "Abkühlen lassen oder warm mit Butter bestreichen.",
+        "Mit Zucker und Zimt bestreuen, zusammenrollen und servieren."
+      ],
+      "tips": [
+        "Den Kartoffelteig erst kalt verarbeiten, dann lässt er sich dünn ausrollen.",
+        "Auf einer trockenen, heißen Platte backen — ohne Fett.",
+        "Lefse hält sich gut und lässt sich später wieder erwärmen."
+      ],
+      "tags": ["Norwegen", "Lefse", "Kartoffelfladen", "vegetarisch", "Zimt", "Zucker", "Skandinavien", "Weihnachten", "Vorratsküche", "Fladenbrot", "süß", "Snack"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Österreich",
+      "continent": "Europa",
+      "recipe_name": "Wiener Schnitzel",
+      "categories": ["Fleisch", "Hauptgericht"],
+      "short_description": "Eine dünn geklopfte Kalbsschnitte in goldener, luftiger Panade, in Butterschmalz schwimmend ausgebacken. Wahrzeichen der Wiener Küche.",
+      "history": "Das Wiener Schnitzel ist das bekannteste Gericht der österreichischen Küche und ein Symbol Wiens. Per Definition und nach österreichischem Recht besteht das echte Wiener Schnitzel aus Kalbfleisch; die Variante aus anderem Fleisch muss als „Schnitzel Wiener Art“ gekennzeichnet werden. Eine dünn geklopfte Kalbsschnitte wird in Mehl, verquirltem Ei und Semmelbröseln paniert und in reichlich heißem Butterschmalz oder Öl schwimmend ausgebacken, sodass die Panade luftig aufgeht und sich vom Fleisch leicht abhebt — das berühmte „Soufflieren“. Die Herkunft ist umstritten; eine verbreitete, allerdings nicht belegte Erzählung verbindet es mit der norditalienischen Cotoletta alla milanese. Spätestens im 19. Jahrhundert wurde das panierte Schnitzel zum festen Bestandteil der Wiener Küche. Serviert wird es klassisch mit Kartoffelsalat oder Petersilienkartoffeln und einer Zitronenspalte. Da das echte Wiener Schnitzel aus Kalb besteht, ist es von Natur aus ohne Schweinefleisch.",
+      "ingredients": [
+        { "quantity": "4", "unit": "", "item": "Kalbsschnitzel (je ca. 150 g)" },
+        { "quantity": "100", "unit": "g", "item": "Mehl" },
+        { "quantity": "2", "unit": "", "item": "Eier" },
+        { "quantity": "150", "unit": "g", "item": "Semmelbrösel" },
+        { "quantity": "200", "unit": "g", "item": "Butterschmalz (oder neutrales Öl)" },
+        { "quantity": "1", "unit": "", "item": "Zitrone" },
+        { "quantity": "", "unit": "", "item": "Salz" }
+      ],
+      "instructions": [
+        "Die Schnitzel zwischen Folie dünn klopfen und salzen.",
+        "Drei Teller mit Mehl, verquirltem Ei und Semmelbröseln vorbereiten.",
+        "Schnitzel zuerst in Mehl, dann durchs Ei ziehen und in Bröseln wenden, die Panade nur leicht andrücken.",
+        "Reichlich Butterschmalz erhitzen, sodass das Schnitzel schwimmen kann.",
+        "Bei mittlerer bis hoher Hitze backen und die Pfanne dabei schwenken, damit die Panade souffliert.",
+        "Wenden, goldbraun fertig backen, abtropfen und mit Zitrone servieren."
+      ],
+      "tips": [
+        "Genug Fett verwenden, damit das Schnitzel schwimmt — das lässt die Panade aufgehen.",
+        "Die Panade nur leicht andrücken, nicht festpressen.",
+        "Sofort servieren, solange die Panade knusprig ist."
+      ],
+      "tags": ["Österreich", "Wien", "Wiener Schnitzel", "Kalb", "paniert", "Butterschmalz", "Klassiker", "Wahrzeichen", "Wiener Küche", "Zitrone", "festlich", "Hauptgericht"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Österreich",
+      "continent": "Europa",
+      "recipe_name": "Tafelspitz",
+      "categories": ["Fleisch", "Hauptgericht"],
+      "short_description": "Zartes Rindfleisch, sanft in würziger Brühe gekocht, serviert mit Apfel-Kren und Röstkartoffeln. Ein Klassiker der Wiener bürgerlichen Küche.",
+      "history": "Tafelspitz ist ein klassisches Gericht der Wiener Küche und benannt nach dem gleichnamigen Teilstück des Rindfleischs, einem mageren, zarten Stück aus der Hüfte. Das in Brühe gekochte Rindfleisch hat in Wien eine besonders ehrwürdige Tradition und war ein Lieblingsessen des Kaisers Franz Joseph I., was zu seinem Ruf als Gericht der bürgerlich-höfischen Küche beitrug. Das Fleisch wird zusammen mit Wurzelgemüse und Gewürzen sehr sanft in Wasser gegart, bis es zart ist; die dabei entstehende kräftige Rindsuppe wird oft als eigener Gang mit Einlage vorab serviert. Der Tafelspitz selbst wird in Scheiben quer zur Faser geschnitten und klassisch mit Apfelkren (geriebener Meerrettich mit Apfel), Schnittlauchsauce und Rösterdäpfeln (Röstkartoffeln) gereicht. Das Gericht verkörpert die Wiener Tradition der Rindfleischküche, die zahlreiche Teilstücke unterscheidet und schätzt. Als reines Rindfleischgericht ist Tafelspitz von Natur aus ohne Schweinefleisch.",
+      "ingredients": [
+        { "quantity": "1.2", "unit": "kg", "item": "Tafelspitz (Rind)" },
+        { "quantity": "2", "unit": "", "item": "Möhren" },
+        { "quantity": "0.5", "unit": "", "item": "Knollensellerie" },
+        { "quantity": "1", "unit": "", "item": "Lauchstange, 1 Zwiebel" },
+        { "quantity": "1", "unit": "TL", "item": "Pfefferkörner, 1 Lorbeerblatt, Liebstöckel" },
+        { "quantity": "1", "unit": "", "item": "Apfel und 100 g Meerrettich (Apfelkren)" },
+        { "quantity": "", "unit": "", "item": "Salz; Kartoffeln und Schnittlauch zum Servieren" }
+      ],
+      "instructions": [
+        "Eine halbierte Zwiebel ohne Fett dunkel anrösten (für Farbe und Aroma).",
+        "Tafelspitz in siedendes Wasser geben, abschäumen und salzen.",
+        "Geröstete Zwiebel, grob geschnittenes Wurzelgemüse und Gewürze zugeben.",
+        "Bei sehr kleiner Hitze 2,5–3 Stunden gar ziehen lassen, nicht sprudelnd kochen.",
+        "Für den Apfelkren Apfel und Meerrettich fein reiben und mischen.",
+        "Das Fleisch quer zur Faser aufschneiden und mit Brühe, Apfelkren und Röstkartoffeln servieren."
+      ],
+      "tips": [
+        "Die Brühe nur ziehen lassen — sprudelndes Kochen macht das Fleisch zäh.",
+        "Quer zur Faser schneiden für zarte Scheiben.",
+        "Die Suppe vorab mit Einlage als eigenen Gang servieren."
+      ],
+      "tags": ["Österreich", "Wien", "Tafelspitz", "Rind", "gekocht", "Rindsuppe", "Apfelkren", "Meerrettich", "bürgerliche Küche", "Klassiker", "Kaiser Franz Joseph", "Hauptgericht"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Österreich",
+      "continent": "Europa",
+      "recipe_name": "Sachertorte",
+      "categories": ["Dessert", "Vegetarisch"],
+      "short_description": "Eine dichte Schokoladentorte mit einer Schicht Marillenmarmelade unter einer dunklen Schokoladenglasur. Wiens berühmteste Torte.",
+      "history": "Die Sachertorte ist die wohl berühmteste Torte Österreichs und ein Wahrzeichen Wiens. Sie wurde 1832 vom damals erst sechzehnjährigen Franz Sacher erfunden, der als Lehrling am Hof des Fürsten Metternich ein Dessert für hohe Gäste kreieren sollte. Sein Sohn Eduard Sacher verfeinerte das Rezept später, und die Torte wurde im von ihm gegründeten Hotel Sacher zum Mythos. Charakteristisch ist die Kombination aus einem dichten, nicht zu süßen Schokoladenbiskuit, einer Schicht Marillenmarmelade (Aprikosenkonfitüre) und einer glänzenden, dunklen Schokoladenglasur. Über die „echte“ Sachertorte und die Frage, ob die Marmelade nur unter der Glasur oder auch in der Mitte liegt, gab es sogar einen jahrelangen Rechtsstreit zwischen dem Hotel Sacher und der Konditorei Demel. Serviert wird die Torte klassisch mit ungesüßtem Schlagobers (Schlagsahne). Als Schokoladen-Süßspeise ist sie selbstverständlich vegetarisch und ohne Schweinefleisch.",
+      "ingredients": [
+        { "quantity": "140", "unit": "g", "item": "Zartbitterschokolade" },
+        { "quantity": "140", "unit": "g", "item": "Butter" },
+        { "quantity": "110", "unit": "g", "item": "Puderzucker" },
+        { "quantity": "6", "unit": "", "item": "Eier (getrennt)" },
+        { "quantity": "140", "unit": "g", "item": "Mehl" },
+        { "quantity": "200", "unit": "g", "item": "Marillenmarmelade (Aprikose)" },
+        { "quantity": "200", "unit": "g", "item": "Schokolade und 150 g Zucker (Glasur)" }
+      ],
+      "instructions": [
+        "Geschmolzene Schokolade mit Butter und Puderzucker schaumig rühren, Eigelbe einrühren.",
+        "Eiweiß steif schlagen, mit dem Mehl abwechselnd unter die Masse heben.",
+        "In einer Springform bei 170 °C etwa 50–60 Minuten backen; auskühlen lassen.",
+        "Den Boden einmal durchschneiden, mit erwärmter Marillenmarmelade bestreichen und zusammensetzen, außen dünn mit Marmelade überziehen.",
+        "Für die Glasur Zucker mit Wasser aufkochen, Schokolade darin schmelzen und glatt rühren.",
+        "Die Torte mit der Glasur überziehen, fest werden lassen und mit Schlagobers servieren."
+      ],
+      "tips": [
+        "Die Marmelade durch ein Sieb streichen für eine glatte Schicht.",
+        "Die Glasur in einem Guss auftragen, dann wird sie spiegelglatt.",
+        "Mit ungesüßtem Schlagobers servieren — er balanciert die Süße."
+      ],
+      "tags": ["Österreich", "Wien", "Sachertorte", "Schokolade", "Marillenmarmelade", "Torte", "süß", "vegetarisch", "Kaffeehaus", "Klassiker", "Hotel Sacher", "Dessert"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Polen",
+      "continent": "Europa",
+      "recipe_name": "Pierogi ruskie",
+      "categories": ["Vegetarisch", "Hauptgericht"],
+      "short_description": "Gefüllte Teigtaschen mit Kartoffel und Quark, gekocht und mit Butter und Zwiebeln serviert. Polens beliebteste Pierogi-Variante.",
+      "history": "Pierogi gehören zu den bekanntesten Gerichten der polnischen Küche, und die Variante „pierogi ruskie“ — wörtlich „ruthenische Pierogi“ — ist eine der beliebtesten. Der Name verweist nicht auf Russland, sondern auf die historische Region Ruthenien (heute Grenzgebiet zwischen Polen und der Ukraine), aus der die Füllung stammt. Gefüllt werden die halbmondförmigen Teigtaschen mit einer Mischung aus gekochten Kartoffeln und Quark oder Topfen (twaróg), gewürzt mit gebratenen Zwiebeln. Pierogi haben in Polen eine lange Tradition und gehören sowohl zur Alltagsküche als auch zu Festtagen, etwa Weihnachten. Der dünn ausgerollte Teig wird mit der Füllung gefüllt, sorgfältig verschlossen und in Salzwasser gekocht; anschließend werden die Pierogi oft in Butter geschwenkt und mit gerösteten Zwiebeln serviert. Pierogi ruskie sind von Natur aus vegetarisch und ohne Schweinefleisch und gelten als gemütliches, sättigendes Wohlfühlessen, das in vielen polnischen Haushalten von Hand zubereitet wird.",
+      "ingredients": [
+        { "quantity": "400", "unit": "g", "item": "Mehl" },
+        { "quantity": "1", "unit": "", "item": "Ei" },
+        { "quantity": "180", "unit": "ml", "item": "warmes Wasser" },
+        { "quantity": "500", "unit": "g", "item": "gekochte Kartoffeln" },
+        { "quantity": "250", "unit": "g", "item": "Quark/Topfen (twaróg)" },
+        { "quantity": "2", "unit": "", "item": "Zwiebeln" },
+        { "quantity": "50", "unit": "g", "item": "Butter" },
+        { "quantity": "", "unit": "", "item": "Salz, Pfeffer" }
+      ],
+      "instructions": [
+        "Mehl, Ei, Wasser und Salz zu einem geschmeidigen Teig kneten und ruhen lassen.",
+        "Eine Zwiebel würfeln, anbraten und mit den zerdrückten Kartoffeln und Quark zu einer Füllung mischen, würzen.",
+        "Den Teig dünn ausrollen und Kreise ausstechen.",
+        "Je etwas Füllung daraufsetzen, zu Halbmonden falten und die Ränder fest verschließen.",
+        "In siedendem Salzwasser kochen, bis die Pierogi aufschwimmen, dann noch 2 Minuten ziehen lassen.",
+        "Mit in Butter gerösteten Zwiebeln servieren."
+      ],
+      "tips": [
+        "Die Ränder gut verschließen, damit keine Füllung austritt.",
+        "Gekochte Pierogi anschließend in Butter schwenken für mehr Aroma.",
+        "Reste lassen sich am nächsten Tag knusprig anbraten."
+      ],
+      "tags": ["Polen", "Pierogi", "pierogi ruskie", "Teigtaschen", "Kartoffel", "Quark", "vegetarisch", "Röstzwiebeln", "Weihnachten", "Wohlfühlessen", "twaróg", "Hauptgericht"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Polen",
+      "continent": "Europa",
+      "recipe_name": "Bigos",
+      "categories": ["Fleisch", "Hauptgericht"],
+      "short_description": "Der „Jägereintopf“ aus Sauerkraut und Weißkohl, langsam mit Rindfleisch, geräucherter Rindwurst und Trockenpflaumen geschmort. Polens herzhaftes Nationalgericht.",
+      "history": "Bigos, oft als „Jägereintopf“ übersetzt, gilt als eines der Nationalgerichte Polens und hat eine lange Geschichte in der polnischen und litauischen Adelsküche, wo es seit Jahrhunderten in Liedern und Literatur verewigt ist. Grundlage sind Sauerkraut und frischer Weißkohl, die zusammen mit Fleisch, Zwiebeln, getrockneten Pilzen, Trockenpflaumen und Gewürzen über lange Zeit geschmort werden. Charakteristisch ist, dass Bigos durch mehrfaches Aufwärmen über mehrere Tage immer besser wird, da sich die Aromen verbinden und vertiefen — traditionell kochte man große Mengen vor. Üblicherweise enthält Bigos verschiedene Schweinefleischsorten und -würste; in dieser Fassung verwenden wir Rindfleisch und geräucherte Rindwurst, sodass die herzhaft-rauchige Tiefe und der Charakter des Gerichts ohne Schwein erhalten bleiben. Bigos wird besonders in der kalten Jahreszeit und zu Festen wie Weihnachten gegessen und mit Brot oder Kartoffeln serviert. Es verkörpert die deftige, geduldige Schmorküche Polens.",
+      "ingredients": [
+        { "quantity": "700", "unit": "g", "item": "Sauerkraut" },
+        { "quantity": "500", "unit": "g", "item": "Weißkohl" },
+        { "quantity": "500", "unit": "g", "item": "Rindfleisch zum Schmoren" },
+        { "quantity": "300", "unit": "g", "item": "geräucherte Rindwurst" },
+        { "quantity": "30", "unit": "g", "item": "getrocknete Pilze" },
+        { "quantity": "8", "unit": "", "item": "Trockenpflaumen" },
+        { "quantity": "2", "unit": "", "item": "Zwiebeln, 2 Lorbeerblätter, Piment, Wacholder" },
+        { "quantity": "", "unit": "", "item": "Öl, Salz, Pfeffer" }
+      ],
+      "instructions": [
+        "Getrocknete Pilze einweichen; Rindfleisch würfeln und kräftig anbraten.",
+        "Zwiebeln andünsten, Sauerkraut und in Streifen geschnittenen Weißkohl zugeben.",
+        "Fleisch, eingeweichte Pilze (mit Wasser), Trockenpflaumen und Gewürze zugeben.",
+        "Zugedeckt bei kleiner Hitze mindestens 2 Stunden schmoren, gelegentlich umrühren.",
+        "Die in Scheiben geschnittene Rindwurst zugeben und mitschmoren.",
+        "Mit Salz und Pfeffer abschmecken; am besten an den Folgetagen erneut aufwärmen und mit Brot servieren."
+      ],
+      "tips": [
+        "Bigos wird durch mehrfaches Aufwärmen über Tage immer besser.",
+        "Getrocknete Pilze und Pflaumen geben Tiefe und eine dezente Süße.",
+        "Geduldig und lange schmoren ist der Schlüssel."
+      ],
+      "tags": ["Polen", "Bigos", "Jägereintopf", "Sauerkraut", "Weißkohl", "Rind", "geräucherte Rindwurst", "Trockenpflaumen", "Winterküche", "Nationalgericht", "Schmorgericht", "Hauptgericht"],
+      "substitution": "Klassischer Bigos enthält verschiedene Schweinefleischsorten und Schweinewurst (kiełbasa). Wir verwenden stattdessen Rindfleisch und geräucherte Rindwurst; getrocknete Pilze und Trockenpflaumen sorgen für zusätzliche Tiefe, sodass der herzhafte, rauchige Charakter ohne Schwein erhalten bleibt.",
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Polen",
+      "continent": "Europa",
+      "recipe_name": "Sernik",
+      "categories": ["Dessert", "Vegetarisch"],
+      "short_description": "Ein dichter, cremiger Käsekuchen aus polnischem Quark (twaróg), oft mit Rosinen oder Zitrusaroma. Die polnische Käsekuchentradition.",
+      "history": "Sernik ist der polnische Käsekuchen und eines der beliebtesten Desserts des Landes mit einer langen Tradition. Anders als der mit Frischkäse zubereitete amerikanische Cheesecake beruht der echte Sernik auf einem speziellen, fettreichen Quark (twaróg ser), der dem Kuchen seine charakteristisch dichte, zugleich cremige und leicht körnige Textur gibt. Käsekuchen aus Quark haben in Polen und Mitteleuropa eine lange Geschichte; eine berühmte regionale Variante ist der „sernik krakowski“ aus Krakau mit einem charakteristischen Teiggitter. Der Quark wird mit Eiern, Zucker und oft etwas Zitronen- oder Vanillearoma zu einer Masse verrührt, häufig auf einem Mürbeteigboden gebacken und gelegentlich mit Rosinen verfeinert. Sernik gehört zu Feiertagen wie Ostern und Weihnachten ebenso wie zur sonntäglichen Kaffeetafel und wird in vielen Haushalten nach überliefertem Familienrezept gebacken. Als Quark-Süßspeise ist er selbstverständlich vegetarisch und ohne Schweinefleisch und gilt als Inbegriff polnischer Backtradition.",
+      "ingredients": [
+        { "quantity": "1", "unit": "kg", "item": "Quark (twaróg, fettreich)" },
+        { "quantity": "200", "unit": "g", "item": "Zucker" },
+        { "quantity": "5", "unit": "", "item": "Eier" },
+        { "quantity": "80", "unit": "g", "item": "Butter, weich" },
+        { "quantity": "2", "unit": "EL", "item": "Speisestärke" },
+        { "quantity": "1", "unit": "", "item": "Zitrone (Schale) oder Vanille" },
+        { "quantity": "200", "unit": "g", "item": "Mürbeteig (Boden)" },
+        { "quantity": "60", "unit": "g", "item": "Rosinen (optional)" }
+      ],
+      "instructions": [
+        "Den Mürbeteigboden in eine Form drücken und kurz vorbacken.",
+        "Quark mehrmals durch ein Sieb streichen oder pürieren, damit er fein wird.",
+        "Butter mit Zucker schaumig rühren, Eigelbe und Quark einarbeiten, Stärke und Aroma zugeben.",
+        "Eiweiß steif schlagen und vorsichtig unterheben; nach Wunsch Rosinen zugeben.",
+        "Die Masse auf den Boden geben und bei 160 °C etwa 60–70 Minuten backen.",
+        "Im ausgeschalteten Ofen langsam abkühlen lassen, damit der Kuchen nicht reißt."
+      ],
+      "tips": [
+        "Fettreichen Quark verwenden und gut passieren — das macht die Creme fein.",
+        "Langsames Abkühlen im Ofen verhindert Risse.",
+        "Am besten gekühlt am nächsten Tag servieren."
+      ],
+      "tags": ["Polen", "Sernik", "Käsekuchen", "Quark", "twaróg", "süß", "vegetarisch", "Ostern", "Weihnachten", "Kaffeetafel", "Backtradition", "Dessert"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Portugal",
+      "continent": "Europa",
+      "recipe_name": "Bacalhau à brás",
+      "categories": ["Fisch", "Hauptgericht"],
+      "short_description": "Zerzupfter Stockfisch mit dünnen Kartoffelstäbchen und Zwiebeln, gebunden mit Ei und bestreut mit Oliven und Petersilie. Lissabonner Klassiker.",
+      "history": "Bacalhau à brás ist eines der bekanntesten Gerichte der portugiesischen Küche und stammt aus Lissabon, traditionell aus dem Stadtviertel Bairro Alto. Es gehört zur immensen Familie der portugiesischen Bacalhau-Gerichte: Getrockneter und gesalzener Kabeljau (bacalhau) ist seit Jahrhunderten ein nationales Grundnahrungsmittel und kulturelles Symbol Portugals, obwohl der Fisch aus fernen Gewässern stammt — man sagt, es gebe für jeden Tag des Jahres ein Bacalhau-Rezept. Für à brás wird der gewässerte, zerzupfte Stockfisch mit fein geschnittenen, frittierten Kartoffelstäbchen (oder Strohkartoffeln) und gedünsteten Zwiebeln vermengt und mit verquirltem Ei gebunden, das die Masse cremig zusammenhält, ohne fest zu stocken. Garniert wird mit schwarzen Oliven und frischer Petersilie. Das Gericht ist eine clevere, sättigende Art, Stockfisch zu verwerten, und gehört zur Alltags- wie Wohlfühlküche. Als Fisch-Ei-Kartoffel-Gericht ist es selbstverständlich ohne Schweinefleisch.",
+      "ingredients": [
+        { "quantity": "500", "unit": "g", "item": "Stockfisch (bacalhau), gewässert und zerzupft" },
+        { "quantity": "600", "unit": "g", "item": "Kartoffeln (in dünne Stäbchen geschnitten)" },
+        { "quantity": "2", "unit": "", "item": "Zwiebeln" },
+        { "quantity": "6", "unit": "", "item": "Eier" },
+        { "quantity": "100", "unit": "g", "item": "schwarze Oliven" },
+        { "quantity": "1", "unit": "Bund", "item": "Petersilie" },
+        { "quantity": "3", "unit": "Zehen", "item": "Knoblauch" },
+        { "quantity": "", "unit": "", "item": "Olivenöl, Salz, Pfeffer" }
+      ],
+      "instructions": [
+        "Die Kartoffelstäbchen in Öl knusprig frittieren und abtropfen lassen.",
+        "Zwiebeln und Knoblauch in Olivenöl glasig dünsten.",
+        "Den zerzupften Stockfisch zugeben und kurz mitbraten.",
+        "Die frittierten Kartoffeln unterheben.",
+        "Verquirlte Eier angießen und bei kleiner Hitze rühren, bis die Masse cremig bindet (nicht fest stocken).",
+        "Mit Oliven und reichlich Petersilie bestreut sofort servieren."
+      ],
+      "tips": [
+        "Den Stockfisch ausreichend wässern, sonst wird es zu salzig.",
+        "Das Ei nur cremig binden lassen, nicht durchgaren.",
+        "Sofort servieren, solange es cremig ist."
+      ],
+      "tags": ["Portugal", "Lissabon", "Bacalhau à brás", "Stockfisch", "Kabeljau", "Fisch", "Kartoffeln", "Ei", "Oliven", "Klassiker", "Wohlfühlessen", "Hauptgericht"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Portugal",
+      "continent": "Europa",
+      "recipe_name": "Caldo verde",
+      "categories": ["Suppe", "Vegetarisch"],
+      "short_description": "Eine grüne Suppe aus Kartoffelpüree und feinen Streifen von Grünkohl, vollendet mit gutem Olivenöl. Portugals beliebteste Suppe, hier ohne Schwein.",
+      "history": "Caldo verde — „grüne Brühe“ — gilt als eine der beliebtesten und bekanntesten Suppen Portugals und stammt ursprünglich aus der nördlichen Region Minho. Die Grundlage ist denkbar einfach und bäuerlich: Kartoffeln werden mit Zwiebel und Knoblauch weich gekocht und zu einer sämigen Basis püriert, in die anschließend hauchfein geschnittener Grünkohl (couve galega) gegeben und nur kurz mitgegart wird, damit er seine Farbe behält. Ein großzügiger Schuss gutes Olivenöl rundet die Suppe ab. Traditionell wird Caldo verde mit Scheiben einer geräucherten Wurst (chouriço) und mit Maisbrot (broa) serviert; in dieser Fassung verzichten wir auf die Schweinewurst und holen die herzhafte Tiefe aus Olivenöl, Knoblauch und einer kräftigen Gemüsebasis, optional mit einer geräucherten Rindwurst. Caldo verde gehört in Portugal zu Festen, Hochzeiten und der Alltagsküche gleichermaßen und steht für die schlichte, gemüsebetonte Seite der portugiesischen Küche.",
+      "ingredients": [
+        { "quantity": "500", "unit": "g", "item": "mehligkochende Kartoffeln" },
+        { "quantity": "300", "unit": "g", "item": "Grünkohl (sehr fein geschnitten)" },
+        { "quantity": "1", "unit": "", "item": "Zwiebel" },
+        { "quantity": "3", "unit": "Zehen", "item": "Knoblauch" },
+        { "quantity": "1.2", "unit": "l", "item": "Gemüsebrühe" },
+        { "quantity": "6", "unit": "EL", "item": "Olivenöl extra vergine" },
+        { "quantity": "1", "unit": "", "item": "geräucherte Rindwurst (optional)" },
+        { "quantity": "", "unit": "", "item": "Salz, Pfeffer; Maisbrot zum Servieren" }
+      ],
+      "instructions": [
+        "Zwiebel und Knoblauch in etwas Olivenöl andünsten.",
+        "Gewürfelte Kartoffeln zugeben, mit Brühe auffüllen und weich kochen.",
+        "Die Suppe fein pürieren, bis eine sämige Basis entsteht; salzen und pfeffern.",
+        "Den sehr fein geschnittenen Grünkohl einrühren und nur 4–5 Minuten mitgaren, damit er grün bleibt.",
+        "Optional eine geräucherte Rindwurst in Scheiben kurz mitziehen lassen.",
+        "Mit einem großzügigen Schuss Olivenöl und Maisbrot servieren."
+      ],
+      "tips": [
+        "Den Grünkohl so fein wie möglich schneiden — das ist typisch.",
+        "Nur kurz mitgaren, damit die Suppe leuchtend grün bleibt.",
+        "Ein gutes Olivenöl zum Schluss macht den Geschmack aus."
+      ],
+      "tags": ["Portugal", "Minho", "Caldo verde", "Grünkohl", "Kartoffeln", "Suppe", "vegetarisch", "Olivenöl", "Landküche", "Festtag", "geräucherte Rindwurst", "Wohlfühlessen"],
+      "substitution": "Caldo verde wird klassisch mit Scheiben portugiesischer Schweinewurst (chouriço) zubereitet. Wir lassen diese weg; die herzhafte Tiefe kommt aus Knoblauch, gutem Olivenöl und der Kartoffelbasis. Wer mag, gibt eine geräucherte Rindwurst statt chouriço hinein.",
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Portugal",
+      "continent": "Europa",
+      "recipe_name": "Pastéis de nata",
+      "categories": ["Dessert", "Vegetarisch"],
+      "short_description": "Kleine Blätterteigtörtchen mit cremiger Eier-Vanille-Füllung und karamellisierter Oberfläche. Portugals berühmtestes Gebäck.",
+      "history": "Pastéis de nata sind die berühmtesten Süßgebäcke Portugals und international ein Wahrzeichen der portugiesischen Küche. Ihren Ursprung haben sie im Hieronymitenkloster (Mosteiro dos Jerónimos) im Lissabonner Stadtteil Belém, wo Mönche schon vor dem 18. Jahrhundert die Törtchen herstellten. Klöster nutzten große Mengen Eigelb — Eiweiß diente unter anderem zum Stärken von Wäsche und zum Klären von Wein —, woraus zahlreiche eigelbreiche Süßspeisen entstanden. Nach der Auflösung der Klöster wurde das Rezept 1837 an eine nahegelegene Zuckerraffinerie verkauft, aus der die bis heute bestehende „Fábrica de Pastéis de Belém“ hervorging, deren Originalrezept als Geheimnis gilt; diese Törtchen heißen geschützt „Pastéis de Belém“. Charakteristisch sind der knusprige, vielschichtige Blätterteig und die cremige Eiercreme, die bei sehr hoher Hitze gebacken wird, bis die Oberfläche dunkle, karamellisierte Flecken bekommt. Serviert werden sie lauwarm, oft mit Zimt und Puderzucker. Als reines Teig-Ei-Gebäck sind sie selbstverständlich ohne Schweinefleisch.",
+      "ingredients": [
+        { "quantity": "1", "unit": "Rolle", "item": "Blätterteig" },
+        { "quantity": "500", "unit": "ml", "item": "Milch" },
+        { "quantity": "6", "unit": "", "item": "Eigelb" },
+        { "quantity": "200", "unit": "g", "item": "Zucker" },
+        { "quantity": "40", "unit": "g", "item": "Mehl oder Stärke" },
+        { "quantity": "1", "unit": "", "item": "Zimtstange und 1 Stück Zitronenschale" },
+        { "quantity": "", "unit": "", "item": "Zimt und Puderzucker zum Servieren" }
+      ],
+      "instructions": [
+        "Milch mit Zimtstange und Zitronenschale erwärmen; ziehen lassen und abseihen.",
+        "Zucker, Mehl und Eigelbe verrühren, die warme Milch einrühren und zu einer Creme einkochen; abkühlen lassen.",
+        "Blätterteig fest aufrollen, in Scheiben schneiden und in Muffinförmchen zu Mulden ausdrücken.",
+        "Die Creme in die Teigmulden füllen.",
+        "Bei sehr hoher Hitze (möglichst 250 °C) backen, bis Teig knusprig ist und die Oberfläche dunkle Flecken bekommt.",
+        "Lauwarm mit etwas Zimt und Puderzucker servieren."
+      ],
+      "tips": [
+        "Sehr hohe Hitze erzeugt die typischen karamellisierten Flecken.",
+        "Die Creme darf nicht zu fest werden — sie soll cremig bleiben.",
+        "Lauwarm schmecken Pastéis de nata am besten."
+      ],
+      "tags": ["Portugal", "Lissabon", "Belém", "Pastéis de nata", "Blätterteig", "Eiercreme", "süß", "vegetarisch", "Klostergebäck", "Wahrzeichen", "Zimt", "Dessert"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    }
+  ],
+  "batch_summary": {
+    "batch": 6,
+    "region": "Europa",
+    "countries_processed": ["Nordmazedonien", "Norwegen", "Österreich", "Polen", "Portugal"],
+    "recipes_created": 15,
+    "recipes_with_images": 0,
+    "recipes_with_placeholders": 15,
+    "recipes_with_pork_substitution": 2
+  }
+}

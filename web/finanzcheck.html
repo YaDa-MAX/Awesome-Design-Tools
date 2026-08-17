@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Finanz-Gesundheitscheck · HeiBen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;1,400&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f3eee5;--bg2:#ebe3d4;--paper:#fffdf8;--ink:#1f1c17;--ink2:#524a3e;--rule:#d8cdb7;--terra:#b04a31;--ochre:#a97a1d;--moss:#4a5c39;--burg:#792d29;--aub:#6b3951}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:'Manrope',system-ui,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:760px;margin:0 auto;padding:1.6rem 1.1rem 5rem}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.32em;text-transform:uppercase;color:var(--terra)}
+h1{font-family:'Fraunces',serif;font-weight:400;font-size:clamp(2rem,6.5vw,3.2rem);line-height:1.02;letter-spacing:-.02em;margin:.45rem 0 .5rem}
+h1 em{font-style:italic;color:var(--terra)}
+.lead{color:var(--ink2);max-width:60ch;font-size:1.02rem}
+.q{background:var(--paper);border:1px solid var(--rule);border-radius:14px;padding:1rem 1.1rem;margin-top:1rem}
+.q .num{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.1em;color:var(--terra)}
+.q h3{font-family:'Fraunces',serif;font-weight:500;font-size:1.18rem;margin:.15rem 0 .6rem}
+.opts{display:flex;flex-direction:column;gap:.4rem}
+.opts button{text-align:left;border:1px solid var(--rule);background:var(--bg);border-radius:10px;padding:.6rem .8rem;cursor:pointer;font:inherit;font-weight:600;color:var(--ink);transition:.12s}
+.opts button:hover{border-color:var(--terra)}
+.opts button.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.result{position:sticky;top:.6rem;z-index:5;background:var(--ink);color:var(--bg);border-radius:18px;padding:1.3rem 1.3rem 1.4rem;margin-top:1.3rem}
+.result .eyebrow{color:var(--ochre)}
+.scorewrap{display:flex;align-items:baseline;gap:.6rem}
+.score{font-family:'Fraunces',serif;font-weight:500;font-size:clamp(3rem,15vw,4.6rem);line-height:1}
+.scoremax{font-size:1.2rem;color:#cdbfa8}
+.band{font-family:'Fraunces',serif;font-style:italic;font-size:1.25rem;margin-top:.2rem}
+.dims{margin-top:1rem;display:grid;gap:.4rem}
+.dim{display:grid;grid-template-columns:96px 1fr;gap:.6rem;align-items:center}
+.dim .dl{font-family:'JetBrains Mono',monospace;font-size:.54rem;letter-spacing:.04em;text-transform:uppercase;color:#cdbfa8}
+.dtrack{background:rgba(255,255,255,.12);border-radius:6px;height:12px;overflow:hidden}
+.dfill{height:100%;border-radius:6px;transition:width .5s cubic-bezier(.2,.7,.2,1)}
+.steps{margin-top:1.4rem}
+.steps h4{font-family:'JetBrains Mono',monospace;font-size:.64rem;letter-spacing:.16em;text-transform:uppercase;color:var(--terra);margin-bottom:.6rem}
+.step{display:flex;gap:.7rem;background:var(--paper);border:1px solid var(--rule);border-left:3px solid var(--terra);border-radius:0 12px 12px 0;padding:.8rem .9rem;margin-bottom:.6rem}
+.step .n{font-family:'Fraunces',serif;font-size:1.4rem;color:var(--terra);line-height:1}
+.step .tx{font-size:.92rem}
+.step .tx b{color:var(--burg)}
+.foot{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink2);text-align:center;margin-top:2rem}
+</style>
+<link rel="stylesheet" href="heiben-design.css">
+<script src="heiben-nav.js" defer></script>
+</head>
+<body data-hb-welt="wissen">
+<div class="wrap">
+  <p class="eyebrow">HeiBen · Standortbestimmung</p>
+  <h1>Bist du finanziell <em>gut aufgestellt?</em></h1>
+  <p class="lead">Sieben ehrliche Fragen, ein Score und ein klarer Plan. In zwei Minuten weißt du, wo du stehst — und welche drei Schritte als Nächstes am meisten bringen.</p>
+
+  <div class="result" id="result"></div>
+  <div id="questions"></div>
+
+  <p class="foot">HeiBen GmbH i. G. · „Heimat leben" · <a href="mein-heiben.html" style="color:var(--aub)">Mein HeiBen</a> · Orientierung, keine Finanzberatung</p>
+</div>
+
+<script>
+var KEY="heiben_check_v1";
+var Q=[
+ {id:"notgroschen",dl:"Notgroschen",q:"Wie viel Reserve liegt für Notfälle bereit?",
+  o:[["Keine",0],["Unter 1 Monatsausgabe",6],["1–3 Monatsausgaben",13],["3–6 Monatsausgaben",18],["Mehr als 6",20]],max:20,
+  act:"Bau zuerst einen Notgroschen auf — rund drei Monatsausgaben auf einem separaten Tagesgeldkonto. Das ist das Fundament, das alles andere entspannt."},
+ {id:"sparquote",dl:"Sparquote",q:"Wie viel deines Einkommens sparst oder investierst du?",
+  o:[["Nichts",0],["Unter 5 %",6],["5–10 %",11],["10–20 %",16],["Über 20 %",18]],max:18,
+  act:"Richte einen automatischen Sparplan ein — am besten direkt nach Gehaltseingang. Schon kleine Beträge wirken über die Jahre enorm."},
+ {id:"schulden",dl:"Schulden",q:"Hast du teure Schulden (Dispo, Kreditkarte, Konsumkredit)?",
+  o:[["Dauerhaft im Dispo / Minus",0],["Ab und zu im Minus",9],["Nur ein Ratenkredit mit Plan",14],["Keine teuren Schulden",18]],max:18,
+  act:"Räum teure Schulden zuerst ab — Dispo und Kreditkarte sind die teuersten Kredite überhaupt. Eine klare Tilgungs-Reihenfolge bringt dich schneller raus."},
+ {id:"ueberblick",dl:"Überblick",q:"Weißt du, wofür dein Geld jeden Monat draufgeht?",
+  o:[["Keine Ahnung",0],["So ungefähr",6],["Ziemlich genau",10]],max:10,
+  act:"Verschaff dir einen Überblick: einen Monat lang jede Ausgabe notieren. Das öffnet fast immer die Augen — und zeigt die größten Hebel."},
+ {id:"haftpflicht",dl:"Haftpflicht",q:"Hast du eine private Haftpflichtversicherung?",
+  o:[["Nein",0],["Ja",10]],max:10,
+  act:"Hol dir eine private Haftpflicht — wenige Euro im Monat, aber sie schützt dich vor Schäden, die dich sonst ein Leben lang belasten könnten."},
+ {id:"absicherung",dl:"Arbeitskraft",q:"Ist deine Arbeitskraft abgesichert (Berufsunfähigkeit)?",
+  o:[["Nein, kein Thema",0],["Auf dem Schirm, noch nicht",5],["Ja, abgesichert",12]],max:12,
+  act:"Sichere deine Arbeitskraft ab: Eine Berufsunfähigkeitsversicherung ist je jünger und gesünder du abschließt, desto günstiger — und dein größtes Vermögen."},
+ {id:"vorsorge",dl:"Altersvorsorge",q:"Sorgst du über die gesetzliche Rente hinaus vor?",
+  o:[["Nichts",0],["Ein bisschen / unregelmäßig",6],["Regelmäßig (ETF, bAV …)",12]],max:12,
+  act:"Starte deine Altersvorsorge — der Zinseszins braucht vor allem Zeit, nicht viel Geld. Jedes Jahr früher zählt doppelt."}
+];
+var ans={};
+try{var sv=JSON.parse(localStorage.getItem(KEY));if(sv)ans=sv;}catch(e){}
+
+var counter=0;
+function animateScore(to){var from=counter;counter=to;var t0=null;function step(ts){if(!t0)t0=ts;var p=Math.min(1,(ts-t0)/600);var e=1-Math.pow(1-p,3);document.getElementById("scoreNum").textContent=Math.round(from+(to-from)*e);if(p<1)requestAnimationFrame(step);}requestAnimationFrame(step);}
+
+function renderQ(){
+  var c=document.getElementById("questions");c.innerHTML="";
+  Q.forEach(function(q,qi){
+    var div=document.createElement("div");div.className="q";
+    var opts=q.o.map(function(o,oi){return '<button data-q="'+q.id+'" data-p="'+o[1]+'" data-oi="'+oi+'"'+(ans[q.id]&&ans[q.id].oi===oi?' class="on"':'')+'>'+o[0]+'</button>';}).join("");
+    div.innerHTML='<div class="num">Frage '+(qi+1)+' / '+Q.length+'</div><h3>'+q.q+'</h3><div class="opts">'+opts+'</div>';
+    c.appendChild(div);
+  });
+  c.querySelectorAll("button").forEach(function(b){b.onclick=function(){
+    ans[b.dataset.q]={p:+b.dataset.p,oi:+b.dataset.oi};
+    b.parentNode.querySelectorAll("button").forEach(function(x){x.classList.toggle("on",x===b);});
+    compute();
+  };});
+}
+
+function colorFor(ratio){return ratio>=0.8?"#9ec27f":ratio>=0.45?"#a97a1d":"#e7a48f";}
+
+function compute(){
+  try{localStorage.setItem(KEY,JSON.stringify(ans));}catch(e){}
+  var score=0,answered=0;
+  Q.forEach(function(q){if(ans[q.id]){score+=ans[q.id].p;answered++;}});
+  var band,bandCol;
+  if(answered<Q.length){band="Beantworte alle Fragen für dein Ergebnis …";bandCol="#cdbfa8";}
+  else if(score<40){band="Da ist ordentlich Luft nach oben — fang oben an.";bandCol="#e7a48f";}
+  else if(score<65){band="Solide Basis, ein paar Hebel fehlen noch.";bandCol="#a97a1d";}
+  else if(score<85){band="Stark aufgestellt für dein Alter.";bandCol="#9ec27f";}
+  else{band="Vorbildlich. Großer Respekt.";bandCol="#9ec27f";}
+  var dims=Q.map(function(q){var p=ans[q.id]?ans[q.id].p:0;var r=p/q.max;return '<div class="dim"><span class="dl">'+q.dl+'</span><div class="dtrack"><div class="dfill" style="width:'+(r*100)+'%;background:'+colorFor(r)+'"></div></div></div>';}).join("");
+  var steps="";
+  if(answered===Q.length){
+    var gaps=Q.filter(function(q){return ans[q.id].p<q.max;}).map(function(q){return {q:q,gap:q.max-ans[q.id].p};}).sort(function(a,b){return b.gap-a.gap;}).slice(0,3);
+    if(gaps.length){
+      steps='<div class="steps"><h4>Deine nächsten Schritte</h4>'+gaps.map(function(g,i){return '<div class="step"><span class="n">'+(i+1)+'</span><span class="tx">'+g.q.act+'</span></div>';}).join("")+'</div>';
+    } else {
+      steps='<div class="steps"><h4>Deine nächsten Schritte</h4><div class="step"><span class="n">★</span><span class="tx">Du hast in jeder Kategorie das Maximum — bleib einfach dran und überprüfe deinen Plan einmal im Jahr.</span></div></div>';
+    }
+  }
+  document.getElementById("result").innerHTML=
+    '<p class="eyebrow">Dein Finanz-Score</p>'+
+    '<div class="scorewrap"><span class="score" id="scoreNum">0</span><span class="scoremax">/ 100</span></div>'+
+    '<div class="band" style="color:'+bandCol+'">'+band+'</div>'+
+    '<div class="dims">'+dims+'</div>'+steps;
+  animateScore(score);
+}
+
+renderQ();compute();
+</script>
+</body>
+</html>

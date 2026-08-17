@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HeiBen Manufaktur · Design-Galerie</title>
+<meta name="description" content="Inspiration aus der HeiBen Manufaktur: von der Community geteilte Eigendesigns zum Remixen und Selbstgestalten.">
+<style>
+:root{--bg:#f3eee5;--bg-soft:#ebe3d4;--ink:#1f1c17;--ink-soft:#524a3e;--rule:#d8cdb7;--terracotta:#b04a31;--kuli:#6b3951;--ochre:#a97a1d;--wohnen:#4a5c39;--immo:#792d29;}
+*{box-sizing:border-box;}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Manrope',-apple-system,Segoe UI,sans-serif;line-height:1.5;}
+.wrap{max-width:1040px;margin:0 auto;padding:0 1.5rem;}
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:1.1rem 0;border-bottom:1px solid var(--rule);}
+.wm{font-family:'Fraunces',serif;font-weight:700;font-size:1.4rem;}.wm .a{color:var(--terracotta);}
+.back{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);text-decoration:none;}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--terracotta);}
+h1{font-family:'Fraunces',serif;font-weight:340;font-size:clamp(2rem,5vw,3rem);margin:.4rem 0 .4rem;}
+.lede{color:var(--ink-soft);max-width:60ch;}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:18px;margin:2rem 0;}
+.card{background:#fff;border:1px solid var(--rule);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;}
+.tile{aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;position:relative;padding:1rem;text-align:center;}
+.tile .obj{border-radius:8px;box-shadow:0 10px 24px rgba(31,28,23,.22);display:flex;align-items:center;justify-content:center;color:#f3eee5;font-family:'Fraunces',serif;font-weight:340;}
+.tile .tt{position:absolute;top:.6rem;left:.6rem;font-family:'JetBrains Mono',monospace;font-size:.54rem;letter-spacing:.08em;text-transform:uppercase;background:rgba(31,28,23,.55);color:#f3eee5;padding:.15rem .5rem;border-radius:999px;}
+.meta{padding:14px;display:flex;flex-direction:column;gap:.3rem;flex:1;}
+.meta b{font-family:'Fraunces',serif;font-weight:480;}
+.meta .sub{font-size:.78rem;color:var(--ink-soft);}
+.acts{display:flex;gap:.4rem;margin-top:auto;padding-top:.6rem;}
+.btn{display:inline-block;border:0;cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;padding:.5rem .8rem;border-radius:8px;text-decoration:none;}
+.btn.primary{background:var(--terracotta);color:#f3eee5;}.btn.ghost{background:none;border:1px solid var(--ink);color:var(--ink);}
+.banner{background:var(--ink);color:#f3eee5;border-radius:16px;padding:1.4rem 1.6rem;margin-top:1rem;display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;align-items:center;}
+footer{margin-top:3rem;border-top:1px solid var(--rule);padding:1.4rem 0;color:var(--ink-soft);font-size:.8rem;}
+.note{font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--ink-soft);}
+</style>
+<link rel="stylesheet" href="heiben-design.css">
+<script src="heiben-nav.js" defer></script>
+</head>
+<body data-hb-welt="wohnen">
+<div class="wrap">
+  <div class="topbar"><div class="wm"><span class="a">H</span>ei<span class="a">B</span>en <span style="font-weight:400;font-size:.9rem;color:var(--ink-soft)">· Galerie</span></div><a class="back" href="manufaktur-gestalten.html">← Selbst gestalten</a></div>
+  <div class="eyebrow">Manufaktur · Community</div>
+  <h1>Design-Galerie</h1>
+  <p class="lede">Von Hand entworfen, hier geteilt: Eigendesigns zum Stöbern und <b>Remixen</b>. Tippe auf „Remixen", öffne das Design im Konfigurator und mach es zu deinem.</p>
+
+  <div class="banner">
+    <div><b style="font-family:'Fraunces',serif;font-size:1.2rem;">Dein Design hier zeigen?</b><br><span style="color:#d8cdb7;font-size:.88rem;">Gestalte etwas und veröffentliche es mit einem Klick aus dem Konfigurator.</span></div>
+    <a class="btn primary" href="manufaktur-gestalten.html">Selbst gestalten →</a>
+  </div>
+
+  <div class="grid" id="grid"></div>
+
+  <footer>HeiBen Manufaktur · Köln · <span class="note">Prototyp: deine veröffentlichten Designs liegen auf diesem Gerät. Im Live-Betrieb wird die Galerie geräteübergreifend kuratiert.</span></footer>
+</div>
+
+<script src="heiben-analytics.js"></script>
+<script src="heiben-produkt.js"></script>
+<script>
+(function(){
+  var HP=window.HeiBenProdukt;
+  var MATCOL={PLA:'#b04a31','PLA-Holz':'#7a5230',PETG:'#4a5c39','PLA-Matt':'#6b3951'};
+  function colOf(m){ return MATCOL[m]||'#6b3951'; }
+  function encD(payload){ try{ return btoa(unescape(encodeURIComponent(JSON.stringify(payload)))); }catch(e){ return ''; } }
+  // Beispiel-Designs (kuratierter Grundstock)
+  var SEED=[
+    {typ:'schild',material:'PLA',title:'Türschild „Familie Hein"',by:'Atelier',params:{text:'Familie Hein',line2:'Köln · 2026',W:120,D:55}},
+    {typ:'vase',material:'PETG',title:'Twist-Vase 18 cm',by:'mira_k',params:{rb:35,rt:48,H:180,twist:140}},
+    {typ:'box',material:'PLA',title:'Stiftbox „Werkstatt"',by:'tom',params:{W:120,D:80,H:60}},
+    {typ:'schild',material:'PLA-Holz',title:'Gartenschild „Kräuter"',by:'lena',params:{text:'Kräutergarten',line2:'',W:140,D:50}},
+    {typ:'vase',material:'PLA',title:'Bechervase klein',by:'Atelier',params:{rb:28,rt:34,H:90,twist:0}},
+    {typ:'box',material:'PETG',title:'Aufbewahrung 9×7',by:'sara',params:{W:90,D:70,H:45}}
+  ];
+  function published(){ try{ return JSON.parse(localStorage.getItem('heiben-galerie'))||[]; }catch(e){ return []; } }
+  function tileLabel(d){ return d.typ==='schild'?(d.params&&d.params.text||'Schild'):(d.typ==='vase'?'Vase':'Box'); }
+  function tileShape(d){
+    if(d.typ==='vase') return 'width:46%;height:74%;border-radius:40% 40% 18% 18%;';
+    if(d.typ==='box')  return 'width:64%;height:52%;border-radius:6px;';
+    return 'width:78%;height:48%;border-radius:6px;font-size:.8rem;padding:.3rem;'; // schild
+  }
+  function render(){
+    var all=published().map(function(d){d._mine=true;return d;}).concat(SEED);
+    document.getElementById('grid').innerHTML=all.map(function(d){
+      var enc=encD({typ:d.typ,material:d.material,params:d.params||{}});
+      var col=colOf(d.material);
+      return '<div class="card"><div class="tile" style="background:linear-gradient(160deg,#efe7d8,#e3d7c0)">'+
+        '<span class="tt">'+(d._mine?'deins · ':'')+(d.material||'PLA')+'</span>'+
+        '<div class="obj" style="'+tileShape(d)+'background:linear-gradient(150deg,'+col+',#1f1c17)">'+(d.typ==='schild'?(d.params&&d.params.text||''):'')+'</div></div>'+
+        '<div class="meta"><b>'+d.title+'</b><span class="sub">'+tileLabel(d)+' · von '+(d.by||'du')+'</span>'+
+        '<div class="acts"><a class="btn primary" href="manufaktur-gestalten.html?d='+enc+'">Remixen</a>'+
+        '<button class="btn ghost" data-share="'+enc+'">Teilen</button></div></div></div>';
+    }).join('');
+  }
+  document.getElementById('grid').addEventListener('click',function(e){
+    var b=e.target.closest('[data-share]'); if(!b)return;
+    var url=location.origin+location.pathname.replace(/[^\/]+$/,'manufaktur-gestalten.html')+'?d='+b.dataset.share;
+    if(HP){ HP.copy(url); HP.toast('Link kopiert — teile dieses Design ✓'); }
+    if(window.HeiBenTrack)HeiBenTrack.ev('gallery_share',{});
+  });
+  render();
+})();
+</script>
+<script src="heiben-legal.js"></script>
+</body>
+</html>

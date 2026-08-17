@@ -1,0 +1,12 @@
+{
+  "name": "heiben-mock",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Mock-Server für die HeiBen Platform API (ohne echtes Backend).",
+  "scripts": {
+    "mock": "prism mock ../web/openapi.yaml -p 4010 -h 127.0.0.1"
+  },
+  "devDependencies": {
+    "@stoplight/prism-cli": "^5.14.2"
+  }
+}

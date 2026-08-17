@@ -1,0 +1,516 @@
+{
+  "batch": 4,
+  "region": "Europa",
+  "schema_version": 1,
+  "note": "Traditionelle, historisch etablierte Gerichte. Auswahl ohne Schweinefleisch; Feld 'substitution' nur dort, wo das Original mit Schwein zubereitet wird. Bilder als Platzhalter. Generisches Schema, direkt importierbar in PostgreSQL/Supabase/Directus/Strapi/Sanity.",
+  "recipes": [
+    {
+      "country": "Kroatien",
+      "continent": "Europa",
+      "recipe_name": "Brudet",
+      "categories": ["Fisch", "Suppe", "Hauptgericht"],
+      "short_description": "Ein dalmatinischer Fischeintopf aus verschiedenen Fischen und Meeresfrüchten in würziger Tomatensauce, klassisch mit Polenta serviert. Küstenküche der Adria.",
+      "history": "Brudet (auch Brodet oder Brodetto) ist ein Fischeintopf der kroatischen Adriaküste und Inseln und gehört zur gemeinsamen kulinarischen Tradition des nördlichen Mittelmeers, mit Verwandten an der italienischen Adriaküste. Sein Ursprung liegt in der Fischerküche: Brudet entstand als Art, den gemischten Fang — verschiedene Fische, oft auch weniger edle Sorten, sowie Tintenfisch oder Muscheln — gemeinsam in einem Topf zu einem sättigenden Gericht zu verarbeiten. Charakteristisch ist die würzige Sauce aus Tomaten, Zwiebeln, Knoblauch, Olivenöl und Essig oder Wein, in der die Fischstücke sanft schmoren. Eine ungeschriebene Regel besagt, den Topf während des Garens nicht umzurühren, sondern nur zu schwenken, damit der Fisch nicht zerfällt. Traditionell wird Brudet mit Polenta serviert, die die aromatische Sauce aufnimmt. Jede Familie und jeder Küstenort pflegt eigene Varianten. Als Fischgericht ist es selbstverständlich ohne Schweinefleisch und steht für die maritime Seite der dalmatinischen Küche.",
+      "ingredients": [
+        { "quantity": "1.2", "unit": "kg", "item": "gemischter Fisch (z. B. Drachenkopf, Meeräsche, Tintenfisch)" },
+        { "quantity": "2", "unit": "", "item": "Zwiebeln" },
+        { "quantity": "3", "unit": "Zehen", "item": "Knoblauch" },
+        { "quantity": "400", "unit": "g", "item": "passierte Tomaten" },
+        { "quantity": "100", "unit": "ml", "item": "Weißwein" },
+        { "quantity": "1", "unit": "EL", "item": "Rotweinessig" },
+        { "quantity": "5", "unit": "EL", "item": "Olivenöl" },
+        { "quantity": "1", "unit": "Bund", "item": "Petersilie" },
+        { "quantity": "", "unit": "", "item": "Salz, Pfeffer; Polenta zum Servieren" }
+      ],
+      "instructions": [
+        "Fisch küchenfertig vorbereiten und in große Stücke schneiden.",
+        "Zwiebeln und Knoblauch in Olivenöl sanft andünsten.",
+        "Tomaten, Wein und Essig zugeben und kurz einkochen.",
+        "Die Fischstücke einlegen (festfleischige zuerst, zarte später) und mit Wasser knapp bedecken.",
+        "Zugedeckt 25–30 Minuten sanft schmoren, dabei nicht umrühren, nur den Topf schwenken.",
+        "Mit Petersilie bestreuen und mit frisch gekochter Polenta servieren."
+      ],
+      "tips": [
+        "Nicht umrühren — nur schwenken, damit der Fisch ganz bleibt.",
+        "Eine Mischung verschiedener Fische gibt die beste Tiefe.",
+        "Polenta nimmt die würzige Sauce ideal auf."
+      ],
+      "tags": ["Kroatien", "Dalmatien", "Adria", "Brudet", "Fisch", "Meeresfrüchte", "Eintopf", "Tomaten", "Polenta", "Küstenküche", "mediterran", "Hauptgericht"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Kroatien",
+      "continent": "Europa",
+      "recipe_name": "Pašticada",
+      "categories": ["Fleisch", "Hauptgericht"],
+      "short_description": "Dalmatinischer Schmorbraten vom Rind, tagelang mariniert und in Wein mit Trockenpflaumen langsam geschmort, serviert mit hausgemachten Gnocchi. Festtagsgericht der Küste.",
+      "history": "Pašticada ist das festliche Schmorgericht Dalmatiens und gilt als eines der aufwendigsten und angesehensten Gerichte der kroatischen Küche. Es wird zu Hochzeiten, Feiertagen und besonderen Anlässen zubereitet und verlangt mehrere Tage Vorbereitung. Ein Stück Rindfleisch wird zunächst mit Knoblauch und Möhre gespickt, in Essig oder Wein mariniert und dann sehr langsam in einer komplexen Sauce aus Rotwein, dem dalmatinischen Likörwein Prošek, Trockenpflaumen, Tomate und Aromaten geschmort, bis es zart zerfällt. Die Kombination aus Säure, Süße der Pflaumen und Tiefe des Weins ergibt das charakteristische süßlich-würzige Aroma. Serviert wird Pašticada klassisch mit hausgemachten Gnocchi (njoki), die die Sauce aufnehmen. Das Gericht spiegelt venezianische und mediterrane Einflüsse der dalmatinischen Küstengeschichte wider. In der klassischen Fassung wird das Fleisch oft mit Speck gespickt; in unserer Variante verzichten wir darauf, ohne an Tiefe zu verlieren.",
+      "ingredients": [
+        { "quantity": "1.5", "unit": "kg", "item": "Rinderschmorbraten" },
+        { "quantity": "2", "unit": "Zehen", "item": "Knoblauch, in Stiften (zum Spicken)" },
+        { "quantity": "1", "unit": "", "item": "Möhre, in Stiften (zum Spicken)" },
+        { "quantity": "500", "unit": "ml", "item": "Rotwein" },
+        { "quantity": "100", "unit": "ml", "item": "Prošek oder süßer Likörwein" },
+        { "quantity": "8", "unit": "", "item": "Trockenpflaumen" },
+        { "quantity": "2", "unit": "", "item": "Zwiebeln, 2 EL Tomatenmark" },
+        { "quantity": "1", "unit": "EL", "item": "Rotweinessig" },
+        { "quantity": "", "unit": "", "item": "Öl, Salz, Pfeffer, Lorbeer, Nelken; Gnocchi zum Servieren" }
+      ],
+      "instructions": [
+        "Das Fleisch mit Knoblauch- und Möhrenstiften spicken, mit Essig und etwas Wein übergießen und über Nacht marinieren.",
+        "Abtupfen, salzen und in Öl rundum kräftig anbraten.",
+        "Zwiebeln und Tomatenmark anrösten, mit Rotwein und Prošek ablöschen.",
+        "Fleisch zurückgeben, Trockenpflaumen, Lorbeer und Nelken zugeben.",
+        "Zugedeckt 3–4 Stunden sehr sanft schmoren, bis das Fleisch zart ist.",
+        "Sauce passieren oder pürieren, abschmecken; Fleisch in Scheiben mit Gnocchi servieren."
+      ],
+      "tips": [
+        "Die lange Marinade und das sanfte Schmoren sind entscheidend.",
+        "Die Trockenpflaumen geben die typische süßliche Tiefe.",
+        "Hausgemachte Gnocchi gehören klassisch dazu."
+      ],
+      "tags": ["Kroatien", "Dalmatien", "Pašticada", "Rind", "Schmorbraten", "Rotwein", "Trockenpflaumen", "Gnocchi", "Festtag", "venezianisch geprägt", "süßlich-würzig", "Hauptgericht"],
+      "substitution": "Klassische Pašticada wird oft mit Speck gespickt oder enthält Pancetta. Wir spicken stattdessen nur mit Knoblauch und Möhre und holen die Tiefe aus kräftigem Anbraten, Rotwein und Prošek. Wer eine rauchige Note möchte, gibt etwas geräuchertes Rind in die Sauce.",
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Kroatien",
+      "continent": "Europa",
+      "recipe_name": "Fritule",
+      "categories": ["Dessert", "Snack", "Vegetarisch"],
+      "short_description": "Kleine, frittierte Hefeteigbällchen mit Rosinen und Zitrusaroma, bestäubt mit Puderzucker. Festtagsgebäck der kroatischen Küste, besonders zur Weihnachtszeit.",
+      "history": "Fritule sind kleine, frittierte Teigbällchen, die in Kroatien — vor allem an der Adriaküste, in Dalmatien und Istrien — traditionell zur Weihnachts- und Festtagszeit gebacken werden. Sie gehören zur weit verbreiteten mediterranen Familie der frittierten Süßgebäcke und sind mit ähnlichen Spezialitäten in Italien und im weiteren Mittelmeerraum verwandt. Der Hefeteig wird häufig mit Rosinen, abgeriebener Zitrusschale und manchmal einem Schuss Rum oder Weinbrand aromatisiert, zu kleinen Kugeln in heißem Öl ausgebacken und warm mit Puderzucker bestäubt. Ihre kleine, runde Form und die unkomplizierte Zubereitung machten sie zu einem geselligen Gebäck, das in großen Mengen für Feste und Familienzusammenkünfte hergestellt wird. Fritule sind in der Adventszeit auf Weihnachtsmärkten und in Haushalten allgegenwärtig, werden aber auch zu anderen Festen gebacken. Als süßes Hefegebäck sind sie selbstverständlich ohne Schweinefleisch und stehen für die festliche, gastfreundliche Seite der kroatischen Küstenküche.",
+      "ingredients": [
+        { "quantity": "300", "unit": "g", "item": "Mehl" },
+        { "quantity": "200", "unit": "ml", "item": "lauwarme Milch" },
+        { "quantity": "15", "unit": "g", "item": "frische Hefe" },
+        { "quantity": "2", "unit": "EL", "item": "Zucker" },
+        { "quantity": "1", "unit": "", "item": "Ei" },
+        { "quantity": "60", "unit": "g", "item": "Rosinen" },
+        { "quantity": "1", "unit": "", "item": "Bio-Zitrone und Orange (Schale)" },
+        { "quantity": "1", "unit": "EL", "item": "Rum (optional)" },
+        { "quantity": "", "unit": "", "item": "Öl zum Frittieren, Puderzucker" }
+      ],
+      "instructions": [
+        "Hefe in lauwarmer Milch mit etwas Zucker auflösen.",
+        "Mehl, Zucker, Ei, Zitrus- und Orangenschale, Rum und die Hefemilch zu einem zähen Teig verrühren; Rosinen unterheben.",
+        "Zugedeckt etwa 1 Stunde gehen lassen, bis der Teig Blasen wirft.",
+        "Öl in einem Topf erhitzen (etwa 170 °C).",
+        "Mit zwei Löffeln kleine Teigportionen abstechen und goldbraun ausbacken.",
+        "Auf Küchenpapier abtropfen lassen und warm mit Puderzucker bestäubt servieren."
+      ],
+      "tips": [
+        "Das Öl nicht zu heiß führen, sonst bleiben die Fritule innen roh.",
+        "Mit zwei Löffeln gelingen gleichmäßige Kugeln.",
+        "Frisch und warm schmecken sie am besten."
+      ],
+      "tags": ["Kroatien", "Dalmatien", "Istrien", "Fritule", "Hefeteig", "frittiert", "Rosinen", "Weihnachten", "süß", "vegetarisch", "Festtag", "Dessert"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Lettland",
+      "continent": "Europa",
+      "recipe_name": "Aukstā zupa",
+      "categories": ["Vegetarisch", "Suppe", "Vorspeise"],
+      "short_description": "Eine kalte, leuchtend pinke Sommersuppe aus Kefir und Roter Bete mit Gurke, Ei und Dill. Erfrischung für heiße Tage im Baltikum.",
+      "history": "Aukstā zupa — die „kalte Suppe“ — ist Lettlands Version der im gesamten Baltikum und Osteuropa verbreiteten kalten Rote-Bete-Kefir-Suppe und ein Inbegriff des lettischen Sommers. Sie gehört zur Familie der kalten Sauermilchsuppen, die sich über die historischen Verbindungen der Region mit dem litauischen, polnischen und russischen Raum verbreiteten. Grundlage ist Kefir oder dicke Sauermilch, die mit gekochter, geraspelter Roter Bete leuchtend rosa gefärbt wird; dazu kommen frische Gurke, hartgekochtes Ei, Frühlingszwiebeln und reichlich Dill. Die Suppe wird eiskalt serviert, oft begleitet von warmen, in der Schale gekochten Kartoffeln, was den Reiz des Temperaturkontrasts ausmacht. Aukstā zupa entstand als erfrischendes, leichtes Sommergericht, das ohne langes Kochen auskommt und die sommerliche Fülle an Gurken, Bete und Kräutern nutzt. Sie ist von Natur aus vegetarisch und ohne Schweinefleisch und gehört zu den beliebtesten saisonalen Gerichten Lettlands.",
+      "ingredients": [
+        { "quantity": "1", "unit": "l", "item": "Kefir" },
+        { "quantity": "3", "unit": "", "item": "Rote Bete, gekocht und geraspelt" },
+        { "quantity": "1", "unit": "", "item": "Salatgurke" },
+        { "quantity": "3", "unit": "", "item": "hartgekochte Eier" },
+        { "quantity": "3", "unit": "", "item": "Frühlingszwiebeln" },
+        { "quantity": "1", "unit": "Bund", "item": "Dill" },
+        { "quantity": "4", "unit": "", "item": "Kartoffeln (warm, zum Servieren)" },
+        { "quantity": "", "unit": "", "item": "Salz" }
+      ],
+      "instructions": [
+        "Gurke fein würfeln oder raspeln, Frühlingszwiebeln und Dill hacken.",
+        "Zwei Eier würfeln, eines für die Garnitur zurückbehalten.",
+        "Kefir mit der geraspelten Roten Bete verrühren, bis die Suppe leuchtend rosa ist.",
+        "Gurke, Eier, Frühlingszwiebeln und Dill unterrühren, salzen.",
+        "Mindestens 1 Stunde kühl stellen.",
+        "Eiskalt mit warmen Salzkartoffeln und dem restlichen Ei servieren."
+      ],
+      "tips": [
+        "Sehr kalt servieren — der Kontrast zu den warmen Kartoffeln ist typisch.",
+        "Reichlich frischer Dill ist entscheidend.",
+        "Die Konsistenz mit etwas Wasser oder Buttermilch regeln."
+      ],
+      "tags": ["Lettland", "Baltikum", "Aukstā zupa", "kalte Suppe", "Rote Bete", "Kefir", "Gurke", "Dill", "vegetarisch", "Sommerküche", "erfrischend", "Suppe"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Lettland",
+      "continent": "Europa",
+      "recipe_name": "Sklandrausis",
+      "categories": ["Dessert", "Snack", "Vegetarisch"],
+      "short_description": "Eine süße Roggenteig-Tarte mit einer Doppelfüllung aus Kartoffel- und Möhrenpüree, gewürzt mit Kümmel und Zimt. Spezialität aus der Region Kurzeme mit geschütztem Status.",
+      "history": "Sklandrausis (auch sklandu rausis) ist eine traditionelle süße Tarte aus der westlettischen Region Kurzeme (Kurland) und gilt als eines der ältesten überlieferten Gebäcke Lettlands mit livischen Wurzeln. Es genießt als „Sklandrausis“ einen geschützten Status als garantiert traditionelle Spezialität in der EU. Charakteristisch ist der Boden aus Roggenteig, der zu einem kleinen, randhohen Körbchen geformt und mit zwei Schichten gefüllt wird: zuerst einem Kartoffelpüree, darüber einem süßen Möhrenpüree, gewürzt unter anderem mit Kümmel und Zimt. Roggen, Kartoffel und Möhre spiegeln die Grundzutaten der lettischen Bauernküche wider. Das Gebäck wurde traditionell zu Festen, Beerdigungen und Feiertagen hergestellt und ist ungewöhnlich, weil es ein herzhaft anmutendes Wurzelgemüse in ein süßes Gebäck verwandelt. Sklandrausis wird kalt gegessen und hält sich gut. Es ist von Natur aus vegetarisch und ohne Schweinefleisch und gilt als kulinarisches Erbe der Region.",
+      "ingredients": [
+        { "quantity": "250", "unit": "g", "item": "Roggenmehl" },
+        { "quantity": "60", "unit": "g", "item": "Butter (Teig)" },
+        { "quantity": "100", "unit": "ml", "item": "Wasser" },
+        { "quantity": "400", "unit": "g", "item": "Kartoffeln" },
+        { "quantity": "400", "unit": "g", "item": "Möhren" },
+        { "quantity": "1", "unit": "", "item": "Ei" },
+        { "quantity": "3", "unit": "EL", "item": "Zucker oder Honig" },
+        { "quantity": "1", "unit": "TL", "item": "Kümmel, 0,5 TL Zimt" },
+        { "quantity": "100", "unit": "ml", "item": "Sahne" }
+      ],
+      "instructions": [
+        "Roggenmehl mit Butter, etwas Salz und Wasser zu einem festen Teig verkneten.",
+        "Kleine Teigkreise ausrollen und zu randhohen Körbchen formen.",
+        "Kartoffeln weich kochen, mit etwas Kümmel zu Püree stampfen.",
+        "Möhren weich kochen, mit Zucker, Zimt, Ei und Sahne zu einem süßen Püree verarbeiten.",
+        "In die Körbchen zuerst Kartoffel-, dann Möhrenpüree füllen.",
+        "Bei 200 °C 20–25 Minuten backen, bis der Rand fest ist; kalt servieren."
+      ],
+      "tips": [
+        "Der Roggenteig ist fester als Weizenteig — zügig formen.",
+        "Die Möhrenfüllung kräftig süßen und würzen, sie gibt den Charakter.",
+        "Sklandrausis schmeckt kalt am besten und hält mehrere Tage."
+      ],
+      "tags": ["Lettland", "Kurzeme", "Sklandrausis", "Roggen", "Möhre", "Kartoffel", "Tarte", "geschützte Spezialität", "vegetarisch", "kulinarisches Erbe", "süß", "Dessert"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Lettland",
+      "continent": "Europa",
+      "recipe_name": "Rupjmaizes kārtojums",
+      "categories": ["Dessert", "Vegetarisch"],
+      "short_description": "Ein geschichtetes Dessert aus zerbröseltem süßem Roggenbrot, Preiselbeer- oder Cranberrymarmelade und Schlagsahne. Die süße Verwandlung des lettischen Roggenbrots.",
+      "history": "Rupjmaizes kārtojums — wörtlich „Roggenbrot-Schichtung“ — ist ein klassisches lettisches Dessert, das die zentrale Rolle des dunklen Roggenbrots in der lettischen Esskultur auf süße Weise feiert. Roggenbrot (rupjmaize) ist in Lettland weit mehr als eine Beilage; es ist ein Identitätssymbol und Grundnahrungsmittel mit langer Tradition. Für das Dessert wird süßes Roggenbrot getrocknet, zerbröselt und oft mit Zucker, Zimt und etwas Preiselbeeren oder Cranberries angeröstet, dann schichtweise mit Fruchtmarmelade und steif geschlagener Sahne in Gläsern oder einer Schale angerichtet. Das Ergebnis verbindet die herzhafte, leicht säuerliche Tiefe des Roggenbrots mit der Süße der Sahne und der Frische der Beeren. Das Dessert ist eine clevere Art, übrig gebliebenes Brot zu verwerten, und gehört zu festlichen Anlässen und Sonntagen. Es ist von Natur aus vegetarisch und ohne Schweinefleisch und gilt als typisch lettische Süßspeise.",
+      "ingredients": [
+        { "quantity": "300", "unit": "g", "item": "süßes Roggenbrot" },
+        { "quantity": "3", "unit": "EL", "item": "Zucker" },
+        { "quantity": "1", "unit": "TL", "item": "Zimt" },
+        { "quantity": "200", "unit": "g", "item": "Preiselbeer- oder Cranberrymarmelade" },
+        { "quantity": "400", "unit": "ml", "item": "Schlagsahne" },
+        { "quantity": "1", "unit": "TL", "item": "Vanillezucker" },
+        { "quantity": "50", "unit": "g", "item": "frische Cranberries oder Preiselbeeren (optional)" }
+      ],
+      "instructions": [
+        "Roggenbrot fein zerbröseln.",
+        "Brösel mit Zucker und Zimt in einer Pfanne ohne Fett leicht anrösten, bis sie duften; auskühlen lassen.",
+        "Sahne mit Vanillezucker steif schlagen.",
+        "In Gläsern abwechselnd Brösel, Marmelade und Sahne schichten.",
+        "Mit einer Sahneschicht abschließen.",
+        "Mehrere Stunden kühl stellen und mit frischen Beeren garniert servieren."
+      ],
+      "tips": [
+        "Echtes süßes Roggenbrot gibt den authentischen Geschmack.",
+        "Die Brösel vor dem Schichten gut auskühlen lassen.",
+        "Das Dessert vor dem Servieren durchziehen lassen."
+      ],
+      "tags": ["Lettland", "Baltikum", "Roggenbrot", "Dessert", "Preiselbeeren", "Cranberry", "Sahne", "Schichtdessert", "vegetarisch", "Resteküche", "süß", "Sonntagsessen"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Liechtenstein",
+      "continent": "Europa",
+      "recipe_name": "Käsknöpfle",
+      "categories": ["Vegetarisch", "Hauptgericht"],
+      "short_description": "Kleine Teigknöpfle, geschichtet mit kräftigem Bergkäse und gekrönt von Röstzwiebeln, oft mit Apfelmus gereicht. Das Nationalgericht Liechtensteins.",
+      "history": "Käsknöpfle gelten als das Nationalgericht Liechtensteins und sind eng mit der alpenländischen Küche des Alpenrheintals verwandt, die das Fürstentum mit der Schweiz und Vorarlberg teilt. Knöpfle sind kleine, rundliche Teignocken aus einem Eierteig, verwandt mit den Spätzle, jedoch kürzer und gedrungener. In Liechtenstein werden sie mit reichlich würzigem Bergkäse geschichtet und mit goldbraun gerösteten Zwiebeln serviert. Das Gericht entstand aus der bäuerlichen und alpinen Vorratsküche: Mehl, Eier und Käse waren auch in den Bergen verfügbar und ergaben ein sättigendes, wärmendes Essen. Traditionell werden Käsknöpfle mit Apfelmus serviert, dessen Süße und Säure einen Kontrast zum herzhaften Käse bildet. Das Gericht hat einen hohen Stellenwert in der lokalen Identität und wird zu Festen wie im Alltag gegessen. Es ist von Natur aus vegetarisch und ohne Schweinefleisch und steht sinnbildlich für die deftige Bergküche Liechtensteins.",
+      "ingredients": [
+        { "quantity": "400", "unit": "g", "item": "Mehl" },
+        { "quantity": "4", "unit": "", "item": "Eier" },
+        { "quantity": "150", "unit": "ml", "item": "Wasser oder Milch" },
+        { "quantity": "250", "unit": "g", "item": "würziger Bergkäse, gerieben" },
+        { "quantity": "3", "unit": "", "item": "Zwiebeln, in Ringen" },
+        { "quantity": "50", "unit": "g", "item": "Butter" },
+        { "quantity": "", "unit": "", "item": "Salz, Pfeffer, Muskat" },
+        { "quantity": "", "unit": "", "item": "Apfelmus zum Servieren" }
+      ],
+      "instructions": [
+        "Mehl, Eier, Wasser, Salz und Muskat zu einem zähen Teig schlagen, bis er Blasen wirft.",
+        "Teig durch ein Knöpflesieb in siedendes Salzwasser drücken.",
+        "Aufgeschwommene Knöpfle abschöpfen und abtropfen lassen.",
+        "Zwiebelringe in Butter langsam goldbraun rösten.",
+        "Knöpfle und geriebenen Käse abwechselnd schichten, bis der Käse schmilzt.",
+        "Mit Röstzwiebeln bestreut und Apfelmus servieren."
+      ],
+      "tips": [
+        "Der Teig muss zäh sein und Blasen werfen.",
+        "Eine Mischung kräftiger Bergkäse gibt am meisten Geschmack.",
+        "Apfelmus gehört in Liechtenstein klassisch dazu."
+      ],
+      "tags": ["Liechtenstein", "Käsknöpfle", "Knöpfle", "Bergkäse", "vegetarisch", "Alpenküche", "Röstzwiebeln", "Apfelmus", "Nationalgericht", "deftig", "Alpenrheintal", "Hauptgericht"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Liechtenstein",
+      "continent": "Europa",
+      "recipe_name": "Ribel",
+      "categories": ["Vegetarisch", "Frühstück", "Dessert"],
+      "short_description": "Ein in der Pfanne goldbraun geröstetes Gericht aus Mais- und Weizengrieß, in krümelige Stücke zerteilt und süß mit Apfelmus oder Milchkaffee gegessen. Alpenrheintaler Tradition.",
+      "history": "Ribel (auch Riebel oder Türkenribel) ist eine traditionelle Mehlspeise des Alpenrheintals, die Liechtenstein mit dem benachbarten Vorarlberg und dem St. Galler Rheintal teilt; als „Rheintaler Ribel“ genießt das Gericht in der Region einen geschützten Herkunftsstatus. Grundlage ist Grieß aus Mais (im Dialekt „Türken“) und Weizen, der in Milch oder Wasser eingeweicht, dann in der Pfanne in Butter oder Fett geröstet und mit der Gabel in unregelmäßige Krümel zerteilt wird. Der Mais kam ab dem 18. Jahrhundert ins Rheintal und wurde zum prägenden Getreide der Region, weshalb Ribel über Generationen ein Grundnahrungsmittel der ländlichen Bevölkerung war — sättigend, günstig und aus eigenem Anbau. Gegessen wird Ribel traditionell süß, etwa mit Apfelmus, Kompott, Milch oder Milchkaffee, sowohl zum Frühstück als auch als einfache Hauptmahlzeit. Es ist von Natur aus vegetarisch und ohne Schweinefleisch und steht für die bodenständige Maisküche des Alpenrheintals.",
+      "ingredients": [
+        { "quantity": "250", "unit": "g", "item": "Maisgrieß (Ribelmais oder Polenta, mittel)" },
+        { "quantity": "100", "unit": "g", "item": "Weizengrieß" },
+        { "quantity": "500", "unit": "ml", "item": "Milch" },
+        { "quantity": "1", "unit": "Prise", "item": "Salz" },
+        { "quantity": "60", "unit": "g", "item": "Butter" },
+        { "quantity": "", "unit": "", "item": "Apfelmus oder Kompott zum Servieren" }
+      ],
+      "instructions": [
+        "Mais- und Weizengrieß mit der gesalzenen Milch verrühren und 1–2 Stunden quellen lassen.",
+        "Butter in einer großen Pfanne erhitzen.",
+        "Die Grießmasse hineingeben und bei mittlerer Hitze rösten.",
+        "Mit zwei Gabeln oder dem Pfannenwender die Masse in unregelmäßige Krümel zerteilen.",
+        "Weiterrösten, bis die Ribel goldbraun und leicht knusprig sind.",
+        "Warm mit Apfelmus oder Kompott servieren."
+      ],
+      "tips": [
+        "Das Quellen vorab macht die Ribel locker.",
+        "Geduldig rösten — die goldbraunen Krümel sind das Ziel.",
+        "Klassisch süß, schmeckt aber auch herzhaft."
+      ],
+      "tags": ["Liechtenstein", "Ribel", "Mais", "Grieß", "Alpenrheintal", "Vorarlberg", "vegetarisch", "Apfelmus", "geschützte Herkunft", "Frühstück", "Maisküche", "Dessert"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Liechtenstein",
+      "continent": "Europa",
+      "recipe_name": "Hafalaab",
+      "categories": ["Fleisch", "Hauptgericht", "Suppe"],
+      "short_description": "Kleine Klöße aus Maisgrieß und Mehl, in kräftiger Rinderbrühe gegart. Ein deftiges traditionelles Gericht Liechtensteins.",
+      "history": "Hafalaab ist ein traditionelles Klößchengericht Liechtensteins und der angrenzenden Alpenregion und gilt neben den Käsknöpfle als eine der typischen lokalen Spezialitäten. Der Name bezeichnet kleine, längliche Klöße aus einem Teig, der traditionell Maisgrieß (im Dialekt „Türkenmehl“) und Weizenmehl verbindet — ein weiteres Beispiel für die prägende Rolle des Maises im Alpenrheintal. Die geformten Klöße werden in einer Brühe gegart und in dieser serviert oder herausgenommen und gebraten. Wie viele Gerichte der alpinen Vorratsküche entstand Hafalaab aus einfachen, lagerfähigen Grundzutaten und lieferte eine sättigende Mahlzeit. Traditionell wird das Gericht mit Speck und in einer fleischigen Brühe zubereitet; in unserer Fassung verwenden wir eine kräftige Rinderbrühe und geräuchertes Rind, um es ohne Schwein zuzubereiten. Hafalaab wird als wärmendes, herzhaftes Essen geschätzt und gehört zum kulinarischen Erbe des Fürstentums.",
+      "ingredients": [
+        { "quantity": "200", "unit": "g", "item": "Maisgrieß" },
+        { "quantity": "150", "unit": "g", "item": "Weizenmehl" },
+        { "quantity": "2", "unit": "", "item": "Eier" },
+        { "quantity": "150", "unit": "ml", "item": "Wasser" },
+        { "quantity": "1.5", "unit": "l", "item": "kräftige Rinderbrühe" },
+        { "quantity": "100", "unit": "g", "item": "geräuchertes Rind, gewürfelt" },
+        { "quantity": "2", "unit": "", "item": "Zwiebeln" },
+        { "quantity": "", "unit": "", "item": "Salz, Pfeffer, Schnittlauch" }
+      ],
+      "instructions": [
+        "Maisgrieß, Mehl, Eier, Wasser und Salz zu einem festen Teig verkneten.",
+        "Aus dem Teig kleine, längliche Klöße formen.",
+        "Die Brühe zum Sieden bringen.",
+        "Klöße einlegen und etwa 15 Minuten gar ziehen lassen.",
+        "Zwiebeln und geräuchertes Rind in etwas Fett anbraten.",
+        "Hafalaab in der Brühe oder mit den Röstzwiebeln und Rind angerichtet servieren, mit Schnittlauch bestreuen."
+      ],
+      "tips": [
+        "Den Teig fest genug halten, damit die Klöße nicht zerfallen.",
+        "Eine kräftige, gut gewürzte Brühe ist die Basis.",
+        "Übrige Hafalaab lassen sich am nächsten Tag knusprig braten."
+      ],
+      "tags": ["Liechtenstein", "Hafalaab", "Mais", "Klöße", "Rinderbrühe", "Alpenrheintal", "deftig", "kulinarisches Erbe", "Winterküche", "geräuchertes Rind", "Maisküche", "Hauptgericht"],
+      "substitution": "Hafalaab wird traditionell mit Speck und in einer Schweinebrühe zubereitet. Wir verwenden stattdessen eine kräftige Rinderbrühe und angebratenes geräuchertes Rind mit Röstzwiebeln — das liefert die herzhaft-rauchige Tiefe, ganz ohne Schwein.",
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Litauen",
+      "continent": "Europa",
+      "recipe_name": "Cepelinai",
+      "categories": ["Fleisch", "Hauptgericht"],
+      "short_description": "Große, zeppelinförmige Klöße aus rohen und gekochten Kartoffeln, gefüllt mit gewürztem Rinderhack, serviert mit Sauce und Röstzwiebeln. Litauens Nationalgericht.",
+      "history": "Cepelinai gelten als das Nationalgericht Litauens und verdanken ihren Namen ihrer länglichen Form, die an Zeppeline erinnert — die Bezeichnung kam im 20. Jahrhundert auf. Es handelt sich um große Klöße aus einer Mischung roher, geriebener und gekochter, zerstampfter Kartoffeln, die zu einer formbaren Masse verbunden und um eine Füllung gewickelt werden. Die Kartoffel wurde im 18. und 19. Jahrhundert zum Grundnahrungsmittel Litauens, und Cepelinai sind ein Paradebeispiel der daraus entstandenen reichhaltigen Kartoffelküche. Die Klöße werden behutsam in Salzwasser gegart, bis sie eine glatte, leicht gummiartige Hülle bekommen, und mit einer Sauce sowie reichlich Röstzwiebeln serviert. Traditionell ist die Füllung aus Hackfleisch; in unserer Fassung verwenden wir Rind statt des sonst üblichen Schweinefleischs. Auch vegetarische Varianten mit Quark (varškė) oder Pilzen sind verbreitet. Cepelinai sind ein deftiges, sättigendes Sonntags- und Festtagsgericht und ein Stolz der litauischen Küche.",
+      "ingredients": [
+        { "quantity": "1.5", "unit": "kg", "item": "mehligkochende Kartoffeln (roh)" },
+        { "quantity": "400", "unit": "g", "item": "Kartoffeln (gekocht)" },
+        { "quantity": "400", "unit": "g", "item": "Rinderhack" },
+        { "quantity": "2", "unit": "", "item": "Zwiebeln" },
+        { "quantity": "2", "unit": "EL", "item": "Kartoffelstärke" },
+        { "quantity": "200", "unit": "ml", "item": "saure Sahne (Sauce)" },
+        { "quantity": "", "unit": "", "item": "Butter, Salz, Pfeffer, Majoran" }
+      ],
+      "instructions": [
+        "Rohe Kartoffeln fein reiben und die Flüssigkeit kräftig ausdrücken, die abgesetzte Stärke zurückgeben.",
+        "Mit den zerstampften gekochten Kartoffeln und etwas Stärke zu einer formbaren Masse verkneten, salzen.",
+        "Zwiebeln dünsten, mit dem Hack, Salz, Pfeffer und Majoran zu einer Füllung anbraten; abkühlen lassen.",
+        "Aus der Kartoffelmasse Fladen formen, Füllung daraufgeben und zu Klößen verschließen.",
+        "In siedendem Salzwasser etwa 25–30 Minuten sanft gar ziehen lassen (nicht sprudelnd kochen).",
+        "Mit Röstzwiebeln und saurer Sahne servieren."
+      ],
+      "tips": [
+        "Die geriebenen Kartoffeln gut ausdrücken, sonst zerfallen die Klöße.",
+        "Das Wasser darf nur sieden, nicht sprudeln.",
+        "Reichlich Röstzwiebeln gehören dazu."
+      ],
+      "tags": ["Litauen", "Cepelinai", "Kartoffelklöße", "Rind", "Kartoffeln", "Nationalgericht", "Röstzwiebeln", "saure Sahne", "deftig", "Sonntagsessen", "Baltikum", "Hauptgericht"],
+      "substitution": "Cepelinai werden klassisch mit Schweinehack gefüllt und teils mit Grieben serviert. Wir füllen sie stattdessen mit gewürztem Rinderhack; eine ebenso traditionelle vegetarische Variante nutzt Quark (varškė) oder Pilze. Statt Schweinegrieben sorgen reichlich Röstzwiebeln in Butter für die herzhafte Note.",
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Litauen",
+      "continent": "Europa",
+      "recipe_name": "Šaltibarščiai",
+      "categories": ["Vegetarisch", "Suppe", "Vorspeise"],
+      "short_description": "Eine leuchtend pinke kalte Suppe aus Kefir und Roter Bete mit Gurke, Ei und Dill, serviert mit warmen Kartoffeln. Litauens Sommerklassiker.",
+      "history": "Šaltibarščiai — die „kalte Bete“ — ist die wohl bekannteste Sommerspeise Litauens und durch ihre intensiv rosa Farbe ein regelrechtes Wahrzeichen der litauischen Küche. Sie gehört zur Familie der kalten Rote-Bete-Sauermilchsuppen, die im gesamten Baltikum, in Polen und in der Region verbreitet sind. Grundlage ist Kefir oder Buttermilch, die mit gekochter, geraspelter Roter Bete ihre charakteristische leuchtend pinke Farbe erhält. Hinzu kommen frische Gurke, hartgekochtes Ei, Frühlingszwiebeln und reichlich Dill. Serviert wird die eiskalte Suppe traditionell mit einer Beilage warmer, in der Schale gekochter oder gebratener Kartoffeln — der Kontrast von kalt und warm ist ein wesentlicher Teil des Genusses. Šaltibarščiai entstand als erfrischendes, schnell zubereitetes Sommergericht, das die saisonale Fülle an Bete, Gurke und Kräutern nutzt. Sie ist von Natur aus vegetarisch und ohne Schweinefleisch und gehört in den heißen Monaten auf nahezu jeden litauischen Tisch.",
+      "ingredients": [
+        { "quantity": "1", "unit": "l", "item": "Kefir" },
+        { "quantity": "3", "unit": "", "item": "Rote Bete, gekocht und geraspelt" },
+        { "quantity": "1", "unit": "", "item": "Salatgurke" },
+        { "quantity": "3", "unit": "", "item": "hartgekochte Eier" },
+        { "quantity": "1", "unit": "Bund", "item": "Dill" },
+        { "quantity": "3", "unit": "", "item": "Frühlingszwiebeln" },
+        { "quantity": "5", "unit": "", "item": "Kartoffeln (warm, zum Servieren)" },
+        { "quantity": "", "unit": "", "item": "Salz" }
+      ],
+      "instructions": [
+        "Gurke fein würfeln, Frühlingszwiebeln und Dill hacken.",
+        "Zwei Eier würfeln, eines zur Garnitur zurückbehalten.",
+        "Kefir mit der geraspelten Roten Bete verrühren, bis die Suppe leuchtend rosa ist.",
+        "Gurke, Eier, Zwiebeln und Dill unterrühren und salzen.",
+        "Mindestens 1 Stunde gut durchkühlen.",
+        "Eiskalt mit warmen Salz- oder Bratkartoffeln und dem restlichen Ei servieren."
+      ],
+      "tips": [
+        "Möglichst kalt servieren — der Temperaturkontrast macht das Gericht aus.",
+        "Reichlich Dill ist Pflicht.",
+        "Mit Buttermilch wird die Suppe etwas milder."
+      ],
+      "tags": ["Litauen", "Šaltibarščiai", "kalte Suppe", "Rote Bete", "Kefir", "Gurke", "Dill", "vegetarisch", "Sommerküche", "Baltikum", "erfrischend", "Suppe"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Litauen",
+      "continent": "Europa",
+      "recipe_name": "Šakotis",
+      "categories": ["Dessert", "Vegetarisch"],
+      "short_description": "Ein hoher, baumkuchenartiger Spießkuchen mit charakteristischen Zacken, Schicht für Schicht über offener Flamme oder im Ofen gebacken. Litauisches Festtags- und Hochzeitsgebäck.",
+      "history": "Šakotis — der „verzweigte“ Kuchen, im Deutschen als Baumkuchen bekannt — ist ein traditionelles Festtagsgebäck Litauens und Polens und gehört zu den eindrucksvollsten Backwerken der Region. Sein Name verweist auf die charakteristischen Zacken und „Äste“, die entstehen, wenn flüssiger Eierteig schichtweise auf einen rotierenden Spieß gegossen und über Hitze gebacken wird, sodass herabtropfender Teig die spitzen Auswüchse bildet. Diese Backtechnik des Spießkuchens ist alt und in mehreren europäischen Traditionen verbreitet. In Litauen ist Šakotis untrennbar mit Hochzeiten, Taufen, Weihnachten und anderen großen Festen verbunden; der hohe, baumartige Kuchen wird als festlicher Mittelpunkt präsentiert und in Stücke geteilt. Seine Herstellung ist aufwendig und erfordert Geduld und Geschick, weshalb er oft von spezialisierten Bäckern stammt. Eine ofentaugliche, vereinfachte Form lässt sich auf einem rotierenden Spieß oder geschichtet zubereiten. Als reines Eier-Mehl-Zucker-Gebäck ist er selbstverständlich ohne Schweinefleisch.",
+      "ingredients": [
+        { "quantity": "10", "unit": "", "item": "Eier (getrennt)" },
+        { "quantity": "250", "unit": "g", "item": "Butter, weich" },
+        { "quantity": "250", "unit": "g", "item": "Zucker" },
+        { "quantity": "250", "unit": "g", "item": "Mehl" },
+        { "quantity": "50", "unit": "g", "item": "Speisestärke" },
+        { "quantity": "100", "unit": "ml", "item": "saure Sahne" },
+        { "quantity": "1", "unit": "Prise", "item": "Salz, etwas Vanille" }
+      ],
+      "instructions": [
+        "Butter mit der Hälfte des Zuckers und den Eigelben schaumig schlagen, saure Sahne und Vanille einrühren.",
+        "Mehl und Stärke unterheben, bis ein glatter, fließfähiger Teig entsteht.",
+        "Eiweiß mit dem restlichen Zucker steif schlagen und vorsichtig unterheben.",
+        "Auf einem über der Hitze rotierenden Spieß den Teig in dünnen Schichten auftragen und jede Schicht goldbraun backen lassen, bevor die nächste folgt.",
+        "Alternativ im Ofen mit Grillfunktion Schicht für Schicht auf einem Spieß oder in einer hohen Form backen.",
+        "Vollständig auskühlen lassen und in Stücke schneiden."
+      ],
+      "tips": [
+        "Jede Teigschicht vor der nächsten goldbraun backen lassen — das gibt die typischen Zacken.",
+        "Der Teig muss dünnflüssig genug sein, um zu tropfen.",
+        "Geduld ist der wichtigste Bestandteil dieses Kuchens."
+      ],
+      "tags": ["Litauen", "Šakotis", "Baumkuchen", "Spießkuchen", "Festtag", "Hochzeit", "süß", "vegetarisch", "Backhandwerk", "Weihnachten", "Baltikum", "Dessert"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Luxemburg",
+      "continent": "Europa",
+      "recipe_name": "Judd mat Gaardebounen",
+      "categories": ["Fleisch", "Hauptgericht"],
+      "short_description": "Geräucherter Nacken mit dicken Saubohnen in heller Sauce, dazu Salzkartoffeln. Das Nationalgericht Luxemburgs — hier in einer Fassung mit geräuchertem Rind.",
+      "history": "Judd mat Gaardebounen — „Nacken mit Saubohnen“ — gilt als das Nationalgericht Luxemburgs. Traditionell besteht es aus geräuchertem und gepökeltem Schweinenacken, der gewässert und gekocht wird, serviert mit dicken Saubohnen (Gaardebounen, Acker- oder Puffbohnen) in einer hellen, mehlgebundenen Sauce und Salzkartoffeln. Das Gericht wurzelt in der bäuerlichen Küche und der Tradition, Fleisch durch Pökeln und Räuchern haltbar zu machen, sowie im Anbau von Ackerbohnen, einer alten Hülsenfrucht der Region. Es wird besonders im Frühsommer gegessen, wenn die frischen Saubohnen Saison haben, und gehört zu Festen, Volksfesten und der nationalen Esskultur. Da das Originalgericht auf geräuchertem Schweinefleisch beruht, das hier kulturell zentral ist, bieten wir eine Fassung mit geräuchertem Rind an, die den charakteristischen Rauchgeschmack und die Verbindung mit den Saubohnen bewahrt. So bleibt das Wesen des luxemburgischen Klassikers erhalten, ohne Schweinefleisch.",
+      "ingredients": [
+        { "quantity": "800", "unit": "g", "item": "geräucherte Rinderbrust oder Pastrami am Stück" },
+        { "quantity": "600", "unit": "g", "item": "dicke Bohnen (Saubohnen), frisch oder TK" },
+        { "quantity": "1", "unit": "", "item": "Zwiebel" },
+        { "quantity": "30", "unit": "g", "item": "Butter, 30 g Mehl (helle Mehlschwitze)" },
+        { "quantity": "200", "unit": "ml", "item": "Brühe vom Fleisch" },
+        { "quantity": "1", "unit": "Bund", "item": "Bohnenkraut und Petersilie" },
+        { "quantity": "800", "unit": "g", "item": "Kartoffeln" },
+        { "quantity": "", "unit": "", "item": "Salz, Pfeffer" }
+      ],
+      "instructions": [
+        "Das geräucherte Rind in Wasser mit Zwiebel und Bohnenkraut etwa 1–1,5 Stunden sanft garen; Brühe aufbewahren.",
+        "Dicke Bohnen kurz blanchieren und nach Wunsch aus der zähen Haut lösen.",
+        "Aus Butter und Mehl eine helle Mehlschwitze rühren und mit der Fleischbrühe zu einer hellen Sauce aufgießen.",
+        "Die Bohnen in der Sauce erwärmen, mit Bohnenkraut, Salz und Pfeffer abschmecken.",
+        "Kartoffeln als Salzkartoffeln kochen.",
+        "Das Fleisch in Scheiben mit den Bohnen in Sauce und Salzkartoffeln servieren."
+      ],
+      "tips": [
+        "Die Garbrühe des Fleischs gibt der Sauce ihren Geschmack.",
+        "Frische Saubohnen aus den Hülsen lösen, wenn sie Saison haben.",
+        "Bohnenkraut ist das klassische Gewürz zu dicken Bohnen."
+      ],
+      "tags": ["Luxemburg", "Judd mat Gaardebounen", "Nationalgericht", "geräuchertes Rind", "Saubohnen", "dicke Bohnen", "Salzkartoffeln", "Landküche", "Frühsommer", "deftig", "Rauchfleisch", "Hauptgericht"],
+      "substitution": "Das Original besteht aus geräuchertem, gepökeltem Schweinenacken. Da das Gericht kulturell zentral ist, ersetzen wir das Schwein durch geräucherte Rinderbrust oder Pastrami — sie liefern den prägenden Rauchgeschmack und die herzhafte Verbindung mit den Saubohnen, sodass der Charakter des luxemburgischen Klassikers erhalten bleibt.",
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Luxemburg",
+      "continent": "Europa",
+      "recipe_name": "Gromperekichelcher",
+      "categories": ["Vegetarisch", "Snack", "Beilage"],
+      "short_description": "Knusprig frittierte Kartoffelpuffer mit Zwiebel, Petersilie und etwas Schalotte, gewürzt und goldbraun gebacken. Beliebtes Markt- und Festessen Luxemburgs.",
+      "history": "Gromperekichelcher — wörtlich „Kartoffelküchlein“ — sind ein traditioneller luxemburgischer Snack und gehören zu den beliebtesten Spezialitäten auf Märkten, Volksfesten und der Schueberfouer, dem großen Jahrmarkt in der Hauptstadt. Es handelt sich um würzige Puffer aus geriebenen rohen Kartoffeln, vermengt mit Zwiebel, Schalotte, Petersilie, Ei und etwas Mehl, die in heißem Fett knusprig goldbraun ausgebacken werden. Sie sind verwandt mit den Kartoffelpuffern und Reibekuchen der gesamten Region und entstanden aus der bäuerlichen Kartoffelküche, die einfache Grundzutaten in ein schmackhaftes Essen verwandelte. Anders als manche Reibekuchenvarianten werden Gromperekichelcher kräftig mit Zwiebel und Kräutern gewürzt, was ihnen ihren typischen Geschmack gibt. Gegessen werden sie heiß aus der Hand, oft mit Apfelmus. Sie sind von Natur aus vegetarisch und ohne Schweinefleisch und stehen für die geselligen, volksnahen Seiten der luxemburgischen Esskultur.",
+      "ingredients": [
+        { "quantity": "800", "unit": "g", "item": "mehligkochende Kartoffeln" },
+        { "quantity": "1", "unit": "", "item": "Zwiebel" },
+        { "quantity": "2", "unit": "", "item": "Schalotten" },
+        { "quantity": "1", "unit": "", "item": "Ei" },
+        { "quantity": "3", "unit": "EL", "item": "Mehl" },
+        { "quantity": "1", "unit": "Bund", "item": "Petersilie" },
+        { "quantity": "", "unit": "", "item": "Öl zum Ausbacken, Salz, Pfeffer, Muskat" },
+        { "quantity": "", "unit": "", "item": "Apfelmus zum Servieren" }
+      ],
+      "instructions": [
+        "Kartoffeln fein reiben und die Flüssigkeit gut ausdrücken.",
+        "Zwiebel und Schalotten fein reiben oder hacken, Petersilie hacken.",
+        "Alles mit Ei und Mehl vermengen, mit Salz, Pfeffer und Muskat würzen.",
+        "Reichlich Öl in einer Pfanne erhitzen.",
+        "Aus der Masse flache Küchlein formen und beidseitig goldbraun und knusprig ausbacken.",
+        "Auf Küchenpapier abtropfen lassen und heiß, gern mit Apfelmus, servieren."
+      ],
+      "tips": [
+        "Die Kartoffeln gut ausdrücken — je trockener die Masse, desto knuspriger.",
+        "Kräftig mit Zwiebel und Petersilie würzen, das ist typisch.",
+        "Heiß aus der Pfanne schmecken sie am besten."
+      ],
+      "tags": ["Luxemburg", "Gromperekichelcher", "Kartoffelpuffer", "vegetarisch", "Zwiebel", "Petersilie", "Markt", "Schueberfouer", "Straßenessen", "frittiert", "Apfelmus", "Snack"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Luxemburg",
+      "continent": "Europa",
+      "recipe_name": "Bouneschlupp",
+      "categories": ["Vegetarisch", "Suppe", "Hauptgericht"],
+      "short_description": "Eine herzhafte grüne Bohnensuppe mit Kartoffeln, Lauch und etwas Sahne. Ländliches Wohlfühlessen Luxemburgs.",
+      "history": "Bouneschlupp — grüne Bohnensuppe — ist eines der bekanntesten Alltagsgerichte Luxemburgs und ein Inbegriff der bodenständigen, ländlichen Küche des Landes. Sie beruht auf grünen Bohnen (Stangen- oder Brechbohnen), die zusammen mit Kartoffeln, Zwiebeln und Lauch zu einer sättigenden Suppe gekocht und oft mit etwas Sahne oder Mehlschwitze gebunden werden. Das Gericht entstand aus der Selbstversorgung der Bauernhaushalte, die das im Sommer reichlich vorhandene Gemüse aus dem eigenen Garten verwerteten und für die kalte Jahreszeit haltbar machten. Während traditionelle Fassungen häufig mit geräucherter Wurst oder Speck angereichert werden, ist die reine Gemüsesuppe ebenso verbreitet und alltäglich. Bouneschlupp wird das ganze Jahr über gegessen und gilt als wärmendes, nahrhaftes Wohlfühlessen. In dieser vegetarischen Fassung holen wir die herzhafte Tiefe aus Lauch, Kartoffeln und einem kräftigen Gemüsefond. Die Suppe steht für die unaufgeregte, gartennahe Esskultur Luxemburgs.",
+      "ingredients": [
+        { "quantity": "600", "unit": "g", "item": "grüne Bohnen, geputzt" },
+        { "quantity": "4", "unit": "", "item": "Kartoffeln, gewürfelt" },
+        { "quantity": "1", "unit": "", "item": "Lauchstange" },
+        { "quantity": "2", "unit": "", "item": "Zwiebeln" },
+        { "quantity": "1.2", "unit": "l", "item": "Gemüsebrühe" },
+        { "quantity": "100", "unit": "ml", "item": "Sahne" },
+        { "quantity": "1", "unit": "Zweig", "item": "Bohnenkraut" },
+        { "quantity": "1", "unit": "Bund", "item": "Petersilie" },
+        { "quantity": "", "unit": "", "item": "Butter, Salz, Pfeffer" }
+      ],
+      "instructions": [
+        "Zwiebeln und Lauch in Butter andünsten.",
+        "Bohnen in Stücke schneiden und mit den Kartoffeln zugeben.",
+        "Mit Gemüsebrühe auffüllen, Bohnenkraut zugeben und etwa 25 Minuten köcheln.",
+        "Einen Teil der Kartoffeln zerdrücken, damit die Suppe leicht bindet.",
+        "Sahne einrühren und mit Salz und Pfeffer abschmecken.",
+        "Mit gehackter Petersilie bestreut servieren."
+      ],
+      "tips": [
+        "Etwas zerdrückte Kartoffel bindet die Suppe auf natürliche Weise.",
+        "Bohnenkraut ist das klassische Gewürz zu grünen Bohnen.",
+        "Wer mag, gibt geräucherte Rinderwurst statt Speck dazu."
+      ],
+      "tags": ["Luxemburg", "Bouneschlupp", "Bohnensuppe", "grüne Bohnen", "Kartoffeln", "Lauch", "vegetarisch", "Landküche", "Wohlfühlessen", "Gartengemüse", "Suppe", "Hausmannskost"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    }
+  ],
+  "batch_summary": {
+    "batch": 4,
+    "region": "Europa",
+    "countries_processed": ["Kroatien", "Lettland", "Liechtenstein", "Litauen", "Luxemburg"],
+    "recipes_created": 15,
+    "recipes_with_images": 0,
+    "recipes_with_placeholders": 15,
+    "recipes_with_pork_substitution": 4
+  }
+}

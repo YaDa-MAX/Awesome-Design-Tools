@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lebenswissen-Quiz · HeiBen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;1,400&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f3eee5;--bg2:#ebe3d4;--paper:#fffdf8;--ink:#1f1c17;--ink2:#524a3e;--rule:#d8cdb7;--terra:#b04a31;--ochre:#a97a1d;--moss:#4a5c39;--burg:#792d29;--aub:#6b3951;--good:#4a5c39;--bad:#792d29}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:'Manrope',system-ui,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:720px;margin:0 auto;padding:1.6rem 1.1rem 5rem}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.32em;text-transform:uppercase;color:var(--terra)}
+h1{font-family:'Fraunces',serif;font-weight:400;font-size:clamp(2rem,6.5vw,3.2rem);line-height:1.02;letter-spacing:-.02em;margin:.45rem 0 .5rem}
+h1 em{font-style:italic;color:var(--terra)}
+.lead{color:var(--ink2);max-width:60ch;font-size:1.02rem}
+.cats{display:flex;flex-wrap:wrap;gap:.45rem;margin-top:1.1rem}
+.cats button{border:1px solid var(--rule);background:var(--paper);border-radius:999px;padding:.45rem .85rem;cursor:pointer;font:inherit;font-weight:600;font-size:.82rem;color:var(--ink2)}
+.cats button.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.cats button .b{font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--ochre);margin-left:.35rem}
+.cats button.on .b{color:var(--ochre)}
+.prog{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink2);margin-top:1.3rem;display:flex;justify-content:space-between}
+.qbox{background:var(--paper);border:1px solid var(--rule);border-radius:16px;padding:1.2rem 1.1rem 1.3rem;margin-top:.5rem}
+.qbox h3{font-family:'Fraunces',serif;font-weight:500;font-size:1.3rem;line-height:1.2;margin-bottom:.8rem}
+.opts{display:flex;flex-direction:column;gap:.5rem}
+.opts button{text-align:left;border:1px solid var(--rule);background:var(--bg);border-radius:11px;padding:.7rem .85rem;cursor:pointer;font:inherit;font-weight:600;color:var(--ink);transition:.12s;display:flex;gap:.6rem;align-items:flex-start}
+.opts button:hover:not(:disabled){border-color:var(--terra)}
+.opts button .let{font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--terra);flex:none;width:1.1rem}
+.opts button.correct{background:#e9f0e0;border-color:var(--moss)}
+.opts button.correct .let{color:var(--moss)}
+.opts button.wrong{background:#f4e3df;border-color:var(--burg)}
+.opts button.wrong .let{color:var(--burg)}
+.opts button:disabled{cursor:default}
+.why{margin-top:.9rem;border-left:3px solid var(--ochre);padding:.2rem 0 .2rem .75rem;font-size:.92rem;color:var(--ink2);display:none}
+.why.show{display:block}
+.why b{color:var(--ink)}
+.next{margin-top:1rem;border:0;background:var(--ink);color:var(--bg);font:inherit;font-weight:700;border-radius:11px;padding:.7rem 1.3rem;cursor:pointer;display:none}
+.next.show{display:inline-block}
+/* Ergebnis */
+.result{background:var(--ink);color:var(--bg);border-radius:18px;padding:1.6rem 1.3rem;margin-top:.6rem;text-align:center;display:none}
+.result.show{display:block}
+.result .eyebrow{color:var(--ochre)}
+.ring{margin:.6rem auto .2rem;display:block}
+.band{font-family:'Fraunces',serif;font-style:italic;font-size:1.5rem;margin-top:.3rem}
+.rsub{color:#cdbfa8;font-size:.9rem;margin-top:.3rem}
+.best{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ochre);margin-top:.7rem}
+.again{display:flex;gap:.5rem;justify-content:center;margin-top:1.1rem;flex-wrap:wrap}
+.again button{border:1px solid rgba(255,255,255,.4);background:transparent;color:var(--bg);font:inherit;font-weight:700;border-radius:11px;padding:.6rem 1.1rem;cursor:pointer}
+.again button.pri{background:var(--ochre);color:var(--ink);border-color:var(--ochre)}
+.foot{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink2);text-align:center;margin-top:2rem}
+.cats button:focus-visible,.opts button:focus-visible,.next:focus-visible,.again button:focus-visible{outline:2px solid var(--ochre);outline-offset:2px}
+.keyhint{display:none;text-align:center;font-family:'JetBrains Mono',monospace;font-size:.55rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink2);margin-top:.8rem}
+.keyhint b{color:var(--terra);font-weight:600}
+@media (hover:hover) and (pointer:fine){.keyhint{display:block}}
+</style>
+<link rel="stylesheet" href="heiben-design.css">
+<script src="heiben-nav.js" defer></script>
+</head>
+<body data-hb-welt="wissen">
+<div class="wrap">
+  <p class="eyebrow">HeiBen · Lebenswissen</p>
+  <h1>Wie viel <em>Lebenswissen</em> steckt in dir?</h1>
+  <p class="lead">Kurze Fragen aus Geld, Recht, Job, Wohnen, Gesundheit und Digitalem — mit Erklärung zu jeder Antwort. Wähl ein Gebiet und finde es heraus.</p>
+
+  <div class="cats" id="cats"></div>
+
+  <div id="game">
+    <div class="prog"><span id="pnum"></span><span id="pcat"></span></div>
+    <div class="qbox" id="qbox"></div>
+    <div class="keyhint"><b>1</b>–<b>4</b> Antwort wählen · <b>Enter</b> weiter</div>
+  </div>
+
+  <div class="result" id="result"></div>
+
+  <div class="xlink" style="text-align:center;margin-top:1.3rem"><a href="begriffskarten.html" style="font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink2);text-decoration:none;border-bottom:1px solid var(--rule)">Begriffe pauken? → Begriffskarten</a></div>
+  <p class="foot">HeiBen GmbH i. G. · „Heimat leben" · <a href="mein-heiben.html" style="color:var(--aub)">Mein HeiBen</a> · Orientierungswissen, keine Rechts- oder Finanzberatung</p>
+</div>
+
+<script>
+var KEY="heiben_quiz_v1";
+var ROUND=10;
+
+var KATLBL={finanzen:"Finanzen",recht:"Recht",digital:"Digitales",buero:"Büro & Software",beruf:"Beruf",gesundheit:"Gesundheit",wohnen:"Wohnen",gemischt:"Alles gemischt"};
+var KATORDER=["gemischt","finanzen","recht","beruf","wohnen","gesundheit","digital","buero"];
+
+var BANK=[
+ // ---- Finanzen ----
+ {k:"finanzen",q:"Wofür steht die 4-%-Regel bei der finanziellen Unabhängigkeit?",o:["Man entnimmt jährlich rund 4 % des Vermögens","Man spart 4 % vom Gehalt","Kredite kosten 4 % Zinsen","Die Inflation beträgt 4 %"],a:0,why:"Grob: Wer jährlich etwa 4 % seines Vermögens entnimmt, kann meist dauerhaft davon leben — die FU-Zahl ist rund das 25-Fache der Jahresausgaben."},
+ {k:"finanzen",q:"Was beschreibt der Zinseszins-Effekt?",o:["Zinsen werden auf bereits erhaltene Zinsen verzinst","Der Staat zahlt Zinsen zurück","Zinsen sinken mit der Zeit","Die Bank verdoppelt die Einlage"],a:0,why:"Erträge erzeugen selbst wieder Erträge — über lange Zeiträume wächst das Kapital dadurch exponentiell."},
+ {k:"finanzen",q:"Was ist die ‚Lawine‘-Methode beim Abtragen mehrerer Schulden?",o:["Zuerst die Schuld mit dem höchsten Zins","Zuerst die kleinste Schuld","Alle gleichmäßig","Zuerst die größte Summe"],a:0,why:"Die Lawine tilgt zuerst den teuersten Kredit (höchster Zins) — mathematisch der günstigste Weg. Der Schneeball beginnt bei der kleinsten Summe für schnelle Erfolge."},
+ {k:"finanzen",q:"Wie groß sollte ein Notgroschen als Faustregel sein?",o:["3–6 Monatsausgaben","Ein Monatsgehalt","Ein Jahresgehalt","100.000 €"],a:0,why:"Drei bis sechs Monatsausgaben gelten als Reserve für Unvorhergesehenes — getrennt vom übrigen Geld geparkt."},
+ {k:"finanzen",q:"Was ist ein Dispokredit?",o:["Ein teurer Überziehungskredit aufs Girokonto","Ein zinsfreies Darlehen","Eine staatliche Förderung","Eine Versicherung"],a:0,why:"Der Dispo erlaubt das Überziehen des Kontos — meist zu sehr hohen Zinsen. Ihn dauerhaft zu nutzen ist eine der teuersten Schuldenarten."},
+ {k:"finanzen",q:"Bis zu welcher Höhe bleiben Kapitalerträge pro Person mit Freistellungsauftrag steuerfrei?",o:["1.000 € im Jahr","100 € im Jahr","10.000 € im Jahr","Unbegrenzt"],a:0,why:"Bis zum Sparerpauschbetrag von 1.000 Euro bleiben Kapitalerträge steuerfrei; darüber greift die Abgeltungssteuer."},
+ // ---- Recht ----
+ {k:"recht",q:"Wie lange haftet der Verkäufer bei neuer Ware gesetzlich für Mängel?",o:["2 Jahre","6 Monate","10 Jahre","Lebenslang"],a:0,why:"Die gesetzliche Gewährleistung beträgt bei Neuware zwei Jahre — unabhängig von einer freiwilligen Garantie des Herstellers."},
+ {k:"recht",q:"Worin unterscheiden sich Garantie und Gewährleistung?",o:["Garantie ist freiwillig, Gewährleistung gesetzlich","Beide sind gesetzlich","Garantie kommt vom Staat","Gewährleistung ist freiwillig"],a:0,why:"Die Gewährleistung schreibt das Gesetz dem Verkäufer vor; die Garantie ist eine freiwillige Zusage von Hersteller oder Händler."},
+ {k:"recht",q:"Innerhalb welcher Frist kann man ein Erbe ab Kenntnis ausschlagen?",o:["6 Wochen","6 Monate","2 Wochen","2 Jahre"],a:0,why:"Wer ein überschuldetes Erbe nicht will, muss es binnen sechs Wochen beim Nachlassgericht ausschlagen — sonst gilt es als angenommen."},
+ {k:"recht",q:"‚Gekauft wie gesehen‘ beim Privatkauf — was stimmt?",o:["Die Gewährleistung kann ausgeschlossen werden, arglistig verschwiegene Mängel aber nicht","Nichts kann ausgeschlossen werden","Der Käufer hat immer 2 Jahre Gewährleistung","Rückgabe ist jederzeit möglich"],a:0,why:"Privatverkäufer dürfen die Gewährleistung ausschließen. Verschwiegene, arglistig verheimlichte Mängel bleiben trotzdem angreifbar."},
+ {k:"recht",q:"Welche Frist gilt typischerweise beim Widerruf eines Online-Kaufs?",o:["14 Tage","Kein Widerruf möglich","30 Tage","Nur mit Kassenbon"],a:0,why:"Bei Online-Käufen besteht in der Regel ein 14-tägiges Widerrufsrecht — anders als im Laden, wo Umtausch reine Kulanz ist."},
+ {k:"recht",q:"Wer haftet grundsätzlich für die Schulden eines Verstorbenen?",o:["Die Erben, sofern sie nicht ausschlagen","Niemand","Immer der Staat","Immer die Bank"],a:0,why:"Mit dem Erbe gehen auch Schulden über; im Zweifel haften Erben — es sei denn, sie schlagen aus oder begrenzen die Haftung."},
+ // ---- Beruf ----
+ {k:"beruf",q:"Was bedeutet im Zeugnis ‚stets zu unserer vollsten Zufriedenheit‘?",o:["Bestnote (sehr gut)","Befriedigend","Ausreichend","Mangelhaft"],a:0,why:"Je mehr Steigerungsworte wie ‚stets‘ und ‚vollste‘ fehlen, desto schlechter die verschlüsselte Note — diese Formel ist die Bestnote."},
+ {k:"beruf",q:"In welche zwei großen Blöcke teilen sich die Abzüge auf der Lohnabrechnung?",o:["Steuern und Sozialabgaben","Miete und Strom","Brutto und Trinkgeld","Urlaub und Krankheit"],a:0,why:"Vom Brutto gehen Steuern (Lohnsteuer, Soli, ggf. Kirchensteuer) und die vier Sozialversicherungen ab, bis das Netto übrig bleibt."},
+ {k:"beruf",q:"Was ist die Steuerklasse auf der Lohnabrechnung?",o:["Eine Vorauszahlung, die die Steuererklärung später glättet","Der endgültige Steuersatz","Die Höhe der Rente","Ein Bonus vom Arbeitgeber"],a:0,why:"Die Steuerklasse bestimmt nur die monatlich einbehaltene Lohnsteuer — zu viel oder zu wenig wird über die Steuererklärung ausgeglichen."},
+ {k:"beruf",q:"Was darf man bei der Kleinunternehmerregelung NICHT?",o:["Die Vorsteuer aus eigenen Einkäufen zurückholen","Rechnungen schreiben","Gewinn machen","Privatkunden bedienen"],a:0,why:"Ohne ausgewiesene Umsatzsteuer entfällt der Vorsteuerabzug — bei hohen Anfangsinvestitionen kann die Regelung deshalb teuer werden."},
+ {k:"beruf",q:"Hat man in Deutschland Anspruch auf ein Arbeitszeugnis?",o:["Ja, ein qualifiziertes und wohlwollendes","Nein","Nur bei Kündigung durch den Chef","Erst nach zehn Jahren"],a:0,why:"Es muss wohlwollend formuliert sein, darf aber nicht lügen — aus diesem Spagat entstand die verschlüsselte Zeugnissprache."},
+ {k:"beruf",q:"Wie hoch ist der Arbeitnehmer-Pauschbetrag für Werbungskosten?",o:["1.230 €","100 €","10.000 €","0 €"],a:0,why:"Bis zu diesem Betrag zieht das Finanzamt Werbungskosten ohne Nachweis ab; erst darüber bringt das Einzeln-Angeben zusätzliche Ersparnis."},
+ // ---- Wohnen ----
+ {k:"wohnen",q:"Wie hoch ist die Kappungsgrenze für Mieterhöhungen in drei Jahren (Normalfall)?",o:["20 %","5 %","50 %","100 %"],a:0,why:"Innerhalb von drei Jahren darf die Miete höchstens um 20 % steigen, in angespannten Märkten nur um 15 % — zusätzlich begrenzt durch die Vergleichsmiete."},
+ {k:"wohnen",q:"Womit muss ein Vermieter eine Mieterhöhung begründen?",o:["Mit Mietspiegel oder Vergleichswohnungen","Gar nicht","Mit der Inflation","Mit seinem eigenen Bedarf"],a:0,why:"Ohne schlüssige Begründung und korrekte Form ist die Erhöhung unwirksam — unabhängig davon, ob die Höhe zulässig wäre."},
+ {k:"wohnen",q:"Wie oft fällt der Rundfunkbeitrag in einer WG an?",o:["Einmal pro Wohnung","Einmal pro Person","Gar nicht","Pro Zimmer"],a:0,why:"Der Beitrag (18,36 € im Monat) wird pro Wohnung erhoben, nicht pro Person — eine WG teilt ihn also."},
+ {k:"wohnen",q:"Was begrenzt eine Mieterhöhung zusätzlich zur Kappungsgrenze?",o:["Die ortsübliche Vergleichsmiete","Die Zimmerzahl","Das Wetter","Nichts weiter"],a:0,why:"Beide Schranken gelten gleichzeitig: Die Miete darf weder die Vergleichsmiete überschreiten noch die Kappungsgrenze sprengen."},
+ {k:"wohnen",q:"In welcher Form muss eine Mieterhöhung dem Mieter zugehen?",o:["In Textform, begründet, mit Zustimmungsfrist","Mündlich genügt","Per Aushang im Hausflur","Gar nicht"],a:0,why:"Formfehler — fehlende Begründung oder Frist — machen die Erhöhung unwirksam."},
+ {k:"wohnen",q:"Was begrenzt in bestimmten Gebieten die Miete bei Neuvermietung?",o:["Die Mietpreisbremse","Die Garantie","Der Dispo","Die Hausratversicherung"],a:0,why:"Wo die Mietpreisbremse gilt, darf die neue Miete nur begrenzt über der ortsüblichen Vergleichsmiete liegen."},
+ // ---- Gesundheit ----
+ {k:"gesundheit",q:"Wie lange zahlt der Arbeitgeber bei Krankheit das volle Gehalt weiter?",o:["6 Wochen","2 Wochen","6 Monate","1 Jahr"],a:0,why:"In den ersten sechs Wochen derselben Erkrankung gilt die Entgeltfortzahlung; danach übernimmt die Krankenkasse das geringere Krankengeld."},
+ {k:"gesundheit",q:"Wann muss man den Arbeitgeber bei Krankheit informieren?",o:["Unverzüglich, möglichst vor Arbeitsbeginn","Erst mit der AU-Bescheinigung","Nach drei Tagen","Gar nicht"],a:0,why:"Die Meldung muss sofort erfolgen — unabhängig von der ärztlichen Bescheinigung, die heute meist elektronisch an die Kasse geht."},
+ {k:"gesundheit",q:"Was zahlt die Krankenkasse nach den ersten sechs Wochen?",o:["Krankengeld, weniger als das Netto","Das volle Gehalt","Nichts","Eine Rente"],a:0,why:"Das Krankengeld liegt deutlich unter dem Nettogehalt und ist gedeckelt — bei langer Krankheit eine wichtige, aber knappe Absicherung."},
+ {k:"gesundheit",q:"Ab wann verlangen viele Arbeitsverträge eine Krankschreibung?",o:["Oft ab dem 4. Tag, manchmal ab dem 1.","Immer erst ab dem 10. Tag","Nie","Erst nach einem Monat"],a:0,why:"Gesetzlich ist sie spätestens ab dem vierten Tag fällig, der Vertrag kann sie aber schon ab dem ersten verlangen — ein Blick hinein lohnt."},
+ {k:"gesundheit",q:"Was ist der Unterschied zwischen Krankmeldung und AU-Bescheinigung?",o:["Meldung = Info an den Chef, AU = ärztlicher Nachweis","Es ist dasselbe","Die AU geht an den Chef, die Meldung an den Arzt","Beides macht der Arzt"],a:0,why:"Die Krankmeldung ist die sofortige Information an den Arbeitgeber; die AU ist der ärztliche Nachweis, der elektronisch an die Kasse läuft."},
+ {k:"gesundheit",q:"Krankengeld ist im Vergleich zum Nettogehalt …",o:["niedriger und gedeckelt","höher","genau gleich","unbegrenzt"],a:0,why:"Deshalb lohnt bei absehbar langer Krankheit, die Höhe früh mit der Kasse zu klären und ggf. eine Krankentagegeldversicherung zu prüfen."},
+ // ---- Digital ----
+ {k:"digital",q:"Warum ist dasselbe Passwort bei vielen Diensten gefährlich?",o:["Ein Datenleck öffnet dann alle Konten","Es ist zu schwer zu merken","Es verbraucht Speicher","Es ist langsamer"],a:0,why:"Taucht ein wiederverwendetes Passwort in einem Leck auf, probieren Angreifer es automatisiert überall — ein Passwortmanager mit eigenen Passwörtern verhindert das."},
+ {k:"digital",q:"Was leistet die Zwei-Faktor-Authentifizierung?",o:["Einen zweiten Nachweis zusätzlich zum Passwort","Ein doppelt langes Passwort","Zwei E-Mail-Adressen","Eine zweite Festplatte"],a:0,why:"Selbst ein gestohlenes Passwort nützt wenig, wenn zusätzlich ein zweiter Faktor wie ein App-Code verlangt wird."},
+ {k:"digital",q:"Wofür steht die 3-2-1-Regel beim Sichern von Daten?",o:["3 Kopien, 2 Medien, 1 extern","3 Festplatten am selben Ort","3 Passwörter","3 Cloud-Konten"],a:0,why:"Drei Kopien auf zwei verschiedenen Medien, davon eine an einem anderen Ort — so übersteht man Defekt, Diebstahl und Anbieterausfall."},
+ {k:"digital",q:"Ein KI-Sprachmodell …",o:["sagt überzeugend auch Falsches und gehört geprüft","kennt immer die Wahrheit","schlägt live im Internet nach","kann nichts erfinden"],a:0,why:"Sprachmodelle erzeugen wahrscheinliche Wortfolgen, ohne Inhalte zu verstehen — Fakten und Zahlen sollte man stets gegenprüfen."},
+ {k:"digital",q:"Was ist ein typisches Zeichen für ‚Romance-Scam‘?",o:["Aus der Ferne wird um Geld gebeten","Schnelle Treffen im Café","Ein ehrliches Profilbild","Gemeinsame Freunde"],a:0,why:"Über Wochen wird Nähe aufgebaut, ein Treffen scheitert stets an Ausreden, dann folgt die Geldbitte — an reine Online-Bekanntschaften gehört niemals Geld."},
+ {k:"digital",q:"Welches Recht gibt die DSGVO jeder Person gegenüber Diensten?",o:["Auskunft über die gespeicherten Daten","Kostenloses Internet","Mehr Speicherplatz","Garantie auf Geräte"],a:0,why:"Über das Auskunftsrecht müssen Anbieter offenlegen, welche Daten sie speichern — die Grundlage, um den eigenen digitalen Fußabdruck zu steuern."},
+ // ---- Büro & Software ----
+ {k:"buero",q:"Was bewirkt das Dollarzeichen in einem Excel-Bezug wie $A$1?",o:["Der Bezug bleibt beim Kopieren fest","Es formatiert als Währung","Es summiert die Spalte","Es macht den Text fett"],a:0,why:"Ein mit Dollarzeichen fixierter (absoluter) Bezug wandert beim Kopieren nicht mit — der häufigste Stolperstein für Einsteiger."},
+ {k:"buero",q:"Womit beginnt jede Excel-Formel?",o:["Mit einem Gleichheitszeichen","Mit einem Pluszeichen","Mit einem Doppelpunkt","Mit dem Wort ‚Formel‘"],a:0,why:"Das Gleichheitszeichen sagt Excel: rechne, statt nur anzuzeigen."},
+ {k:"buero",q:"Wozu dient eine Pivot-Tabelle?",o:["Große Datenmengen ohne Formeln auswerten","Bilder einfügen","Text formatieren","E-Mails versenden"],a:0,why:"Per Ziehen von Feldern gruppiert und summiert sie Rohdaten automatisch — eine Auswertung in Sekunden statt langer Formeln."},
+ {k:"buero",q:"Warum sind Formatvorlagen in Word so nützlich?",o:["Eine Änderung wirkt überall und ermöglicht das Inhaltsverzeichnis","Sie machen Text bunt","Sie sparen Speicherplatz","Sie verschlüsseln das Dokument"],a:0,why:"Vorlagen bündeln das Aussehen unter einem Namen; ändert man sie, ändert sich alles Zugehörige — und erst dadurch entsteht das automatische Inhaltsverzeichnis."},
+ {k:"buero",q:"Welcher Diagrammtyp eignet sich am besten für einen Verlauf über die Zeit?",o:["Liniendiagramm","Kreisdiagramm","Tabelle","Punktwolke"],a:0,why:"Linien zeigen Entwicklungen über die Zeit; Balken vergleichen Größen, Kreise zeigen Anteile an einem Ganzen."},
+ {k:"buero",q:"Welche Tastenkombination macht eine Aktion rückgängig?",o:["Strg + Z","Strg + S","Strg + P","Strg + A"],a:0,why:"Strg+Z (Mac: ⌘+Z) nimmt den letzten Schritt zurück. Strg+S speichert, Strg+P druckt, Strg+A markiert alles."}
+];
+
+var st={best:{}};
+try{var sv=JSON.parse(localStorage.getItem(KEY));if(sv&&sv.best)st.best=sv.best;}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(st));}catch(e){}}
+
+var curKat="gemischt", queue=[], idx=0, score=0, answered=false;
+
+function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+
+function startKat(k){
+  curKat=k;
+  var src = k==="gemischt" ? BANK.slice() : BANK.filter(function(x){return x.k===k;});
+  queue = shuffle(src).slice(0, Math.min(ROUND, src.length)).map(function(item){
+    var order=shuffle([0,1,2,3]);
+    return {k:item.k,q:item.q,why:item.why,o:order.map(function(i){return item.o[i];}),a:order.indexOf(item.a)};
+  });
+  idx=0; score=0; answered=false;
+  document.getElementById("result").className="result";
+  document.getElementById("game").style.display="";
+  syncCats(); renderQ();
+}
+
+function syncCats(){
+  document.getElementById("cats").innerHTML=KATORDER.map(function(k){
+    var b = st.best[k]!=null ? '<span class="b">'+st.best[k]+'%</span>' : '';
+    return '<button data-k="'+k+'"'+(k===curKat?' class="on"':'')+'>'+KATLBL[k]+b+'</button>';
+  }).join("");
+  Array.prototype.forEach.call(document.querySelectorAll('#cats button'),function(b){
+    b.addEventListener("click",function(){startKat(b.getAttribute("data-k"));});
+  });
+}
+
+var LET=["A","B","C","D"];
+function renderQ(){
+  var q=queue[idx]; answered=false;
+  document.getElementById("pnum").textContent="Frage "+(idx+1)+" / "+queue.length;
+  document.getElementById("pcat").textContent=KATLBL[curKat];
+  var html='<h3>'+q.q+'</h3><div class="opts">';
+  q.o.forEach(function(opt,i){
+    html+='<button data-i="'+i+'"><span class="let">'+LET[i]+'</span><span>'+opt+'</span></button>';
+  });
+  html+='</div><div class="why" id="why"></div><button class="next" id="next">Weiter</button>';
+  document.getElementById("qbox").innerHTML=html;
+  Array.prototype.forEach.call(document.querySelectorAll('#qbox .opts button'),function(b){
+    b.addEventListener("click",function(){choose(parseInt(b.getAttribute("data-i"),10));});
+  });
+  document.getElementById("next").addEventListener("click",advance);
+}
+
+function choose(i){
+  if(answered)return; answered=true;
+  var q=queue[idx];
+  var btns=document.querySelectorAll('#qbox .opts button');
+  Array.prototype.forEach.call(btns,function(b){
+    b.disabled=true;
+    var bi=parseInt(b.getAttribute("data-i"),10);
+    if(bi===q.a)b.classList.add("correct");
+    else if(bi===i)b.classList.add("wrong");
+  });
+  if(i===q.a)score++;
+  var why=document.getElementById("why");
+  why.innerHTML=(i===q.a?'<b>Richtig.</b> ':'<b>Nicht ganz.</b> ')+q.why;
+  why.classList.add("show");
+  document.getElementById("next").classList.add("show");
+  document.getElementById("next").textContent = (idx===queue.length-1)?"Auswerten":"Weiter";
+}
+
+function advance(){
+  if(idx<queue.length-1){idx++;renderQ();window.scrollTo({top:0,behavior:"smooth"});}
+  else finish();
+}
+
+function band(p){
+  if(p>=90)return["Lebensweise:r","Beeindruckend — das sitzt.","var(--good)"];
+  if(p>=70)return["Gut belesen","Solide Basis, ein paar Lücken noch.","var(--ochre)"];
+  if(p>=50)return["Solides Halbwissen","Die Richtung stimmt — dranbleiben.","var(--ochre)"];
+  if(p>=30)return["Da geht noch was","Gutes Übungsfeld. Die Erklärungen helfen.","var(--bad)"];
+  return["Frisch dabei","Jede Frage ist eine gelernte Sache mehr.","var(--bad)"];
+}
+
+function ring(p){
+  var c=document.createElement("canvas");c.width=160;c.height=160;c.className="ring";
+  var x=c.getContext("2d");var cx=80,cy=80,r=64;
+  x.lineWidth=14;x.lineCap="round";
+  x.strokeStyle="rgba(255,255,255,.14)";x.beginPath();x.arc(cx,cy,r,0,Math.PI*2);x.stroke();
+  var col=p>=70?"#9ec27f":(p>=40?"#a97a1d":"#e7a48f");
+  x.strokeStyle=col;x.beginPath();x.arc(cx,cy,r,-Math.PI/2,-Math.PI/2+Math.PI*2*(p/100));x.stroke();
+  x.fillStyle="#fffdf8";x.textAlign="center";
+  x.font="500 38px Fraunces, serif";x.fillText(p+"%",cx,cy+6);
+  x.font="600 11px 'JetBrains Mono', monospace";x.fillStyle="#cdbfa8";x.fillText(score+" / "+queue.length,cx,cy+30);
+  return c;
+}
+
+function finish(){
+  document.getElementById("game").style.display="none";
+  var p=Math.round(score/queue.length*100);
+  var prevBest=st.best[curKat]||0;
+  var isBest=p>prevBest;
+  if(isBest){st.best[curKat]=p;save();}
+  var bd=band(p);
+  var r=document.getElementById("result");
+  r.innerHTML='<p class="eyebrow">'+KATLBL[curKat]+'</p>';
+  r.appendChild(ring(p));
+  var extra=document.createElement("div");
+  extra.innerHTML='<div class="band" style="color:'+bd[2]+'">'+bd[0]+'</div>'+
+    '<div class="rsub">'+bd[1]+'</div>'+
+    '<div class="best">'+(isBest?"Neuer Bestwert!":"Bestwert: "+(st.best[curKat]||p)+"%")+'</div>'+
+    '<div class="again">'+
+      '<button class="pri" id="rep">Nochmal</button>'+
+      '<button id="mix">Anderes Gebiet</button>'+
+    '</div>';
+  r.appendChild(extra);
+  r.classList.add("show");
+  document.getElementById("rep").addEventListener("click",function(){startKat(curKat);window.scrollTo({top:0,behavior:"smooth"});});
+  document.getElementById("mix").addEventListener("click",function(){document.getElementById("result").className="result";document.getElementById("game").style.display="";window.scrollTo({top:0,behavior:"smooth"});});
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+// Tastatursteuerung
+document.addEventListener("keydown",function(e){
+  var game=document.getElementById("game");
+  if(!game||game.style.display==="none")return;
+  var qbox=document.getElementById("qbox"); if(!qbox||!qbox.innerHTML)return;
+  var k=e.key, isBtn=e.target&&e.target.tagName==="BUTTON";
+  if(!answered){
+    var opts=document.querySelectorAll('#qbox .opts button'), n=-1;
+    if(/^[1-9]$/.test(k))n=parseInt(k,10)-1;
+    else{var lc=k.length===1?k.toLowerCase():"";if(lc>="a"&&lc<="i")n=lc.charCodeAt(0)-97;}
+    if(n>=0&&n<opts.length){e.preventDefault();choose(n);}
+    return;
+  }
+  if(k==="Enter"||k===" "||k==="Spacebar"){ if(isBtn)return; e.preventDefault(); advance(); }
+});
+
+// Startkategorie aus ?kat=
+var pk=new URLSearchParams(location.search).get("kat");
+if(pk && KATLBL[pk]) curKat=pk;
+startKat(curKat);
+</script>
+</body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HeiBen Kulinarik · Was koche ich heute?</title>
+<meta name="description" content="Keine Idee, was kochen? Sag uns Zeit, Lust und Ernährung — HeiBen Kulinarik schlägt dir ein passendes Gericht vor.">
+<style>
+:root{--bg:#f3eee5;--bg-soft:#ebe3d4;--ink:#1f1c17;--ink-soft:#524a3e;--rule:#d8cdb7;--terracotta:#b04a31;--accent:#6b3951;--accent-d:#52283d;}
+*{box-sizing:border-box;}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Manrope',-apple-system,Segoe UI,sans-serif;line-height:1.5;}
+.wrap{max-width:920px;margin:0 auto;padding:0 1.5rem;}
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:1.1rem 0;border-bottom:1px solid var(--rule);}
+.wm{font-family:'Fraunces',serif;font-weight:700;font-size:1.4rem;}.wm .a{color:var(--terracotta);}
+.wm span{font-weight:400;font-size:.9rem;color:var(--ink-soft);}
+.back{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);text-decoration:none;}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:.64rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);}
+h1{font-family:'Fraunces',serif;font-weight:340;font-size:clamp(2rem,5vw,3rem);margin:1rem 0 .2rem;}
+.lede{color:var(--ink-soft);max-width:58ch;}
+.panel{background:#fff;border:1px solid var(--rule);border-radius:18px;padding:1.2rem 1.3rem;margin-top:1.2rem;}
+.row{display:flex;gap:1rem;flex-wrap:wrap;align-items:flex-end;}
+.field{display:flex;flex-direction:column;gap:4px;}
+.field label{font-size:.74rem;color:var(--ink-soft);}
+.field select{border:1px solid var(--rule);background:var(--bg);border-radius:8px;padding:.55rem .7rem;font:inherit;min-width:150px;}
+.btn{display:inline-block;border:0;cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;padding:.75rem 1.15rem;border-radius:9px;text-decoration:none;margin:.3rem .3rem 0 0;}
+.btn.primary{background:var(--accent);color:#f3eee5;}.btn.ink{background:var(--ink);color:#f3eee5;}
+.btn.ghost{background:none;border:1px solid var(--ink);color:var(--ink);}
+.btn.sm{padding:.5rem .8rem;font-size:.58rem;}
+.result{margin-top:1.2rem;}
+.dish{background:#fff;border:1px solid var(--rule);border-radius:16px;overflow:hidden;}
+.dish .hd{background:linear-gradient(150deg,var(--accent),#1f1c17);color:#f3eee5;padding:1rem 1.2rem;}
+.dish .hd h2{font-family:'Fraunces',serif;font-weight:480;font-size:1.5rem;margin:0;color:#f3eee5;}
+.dish .hd .tags{display:flex;gap:.4rem;flex-wrap:wrap;margin-top:.5rem;}
+.dish .hd .tag{font-family:'JetBrains Mono',monospace;font-size:.56rem;letter-spacing:.06em;text-transform:uppercase;background:rgba(243,238,229,.18);padding:.15rem .55rem;border-radius:999px;}
+.dish .bd{padding:1rem 1.2rem;}
+.dish .bd p{margin:.2rem 0 .6rem;color:var(--ink-soft);}
+.dish .acts{display:flex;gap:.4rem;flex-wrap:wrap;}
+.alt{margin-top:1rem;}
+.alt .note{font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--ink-soft);}
+.alt .pills{display:flex;gap:.4rem;flex-wrap:wrap;margin-top:.4rem;}
+.pill{border:1px solid var(--rule);background:#fff;border-radius:999px;padding:.35rem .8rem;font-size:.78rem;cursor:pointer;}
+footer{margin-top:3rem;border-top:1px solid var(--rule);padding:1.4rem 0;color:var(--ink-soft);font-size:.8rem;}
+.note{font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--ink-soft);}
+</style>
+<link rel="stylesheet" href="heiben-design.css">
+<script src="heiben-nav.js" defer></script>
+</head>
+<body data-hb-welt="kulinarik">
+<div class="wrap">
+  <div class="topbar"><div class="wm"><span class="a">H</span>ei<span class="a">B</span>en <span>· Kulinarik</span></div><a class="back" href="kulinarik.html">← HeiBen Kulinarik</a></div>
+  <div class="eyebrow">Kulinarik · Heute kochen</div>
+  <h1>Was koche ich <em style="color:var(--accent);font-style:italic;">heute?</em></h1>
+  <p class="lede">Drei kurze Fragen — und du hast ein Gericht. Alle Rezepte ohne Schwein, alltagstauglich und in der HeiBen-App mit Mengen, Nährwerten und Einkaufsliste.</p>
+
+  <div class="panel">
+    <div class="row">
+      <div class="field"><label>Wie viel Zeit?</label><select id="qZeit"><option value="0">egal</option><option value="20">bis 20 Min</option><option value="40">bis 40 Min</option></select></div>
+      <div class="field"><label>Worauf Lust?</label><select id="qLust"><option value="">egal</option><option value="schnell">schnell &amp; einfach</option><option value="gesund">leicht &amp; gesund</option><option value="herzhaft">herzhaft</option></select></div>
+      <div class="field"><label>Ernährung</label><select id="qErn"><option value="">egal</option><option value="vegetarisch">vegetarisch</option><option value="vegan">vegan</option></select></div>
+      <button class="btn primary" id="go">Gericht vorschlagen</button>
+    </div>
+  </div>
+
+  <div class="result" id="result"></div>
+
+  <footer>HeiBen Kulinarik · Köln · <span class="note">Heimat schmeckt man.</span></footer>
+</div>
+
+<script src="heiben-analytics.js"></script>
+<script>
+(function(){
+  var T=window.HeiBenTrack;
+  var R=[
+    {id:'shakshuka',t:'Shakshuka mit Feta',zeit:25,lust:['herzhaft','gesund'],ern:'vegetarisch',kcal:380,kurz:'Tomaten-Paprika-Sugo mit pochierten Eiern und Feta — ein Pfannengericht für jede Tageszeit.'},
+    {id:'dal',t:'Roter Linsen-Dal mit Spinat',zeit:30,lust:['gesund','herzhaft'],ern:'vegan',kcal:420,kurz:'Cremiger Dal mit Ingwer, Kreuzkümmel und frischem Spinat. Sättigt und ist günstig.'},
+    {id:'ofengemuese',t:'Ofengemüse mit Halloumi',zeit:35,lust:['gesund'],ern:'vegetarisch',kcal:450,kurz:'Bunt geröstetes Gemüse mit goldenem Halloumi und Kräuter-Joghurt.'},
+    {id:'limone',t:'Pasta al Limone',zeit:20,lust:['schnell'],ern:'vegetarisch',kcal:520,kurz:'Pasta in seidiger Zitronen-Parmesan-Sauce — fertig in 20 Minuten.'},
+    {id:'reispfanne',t:'Hähnchen-Reispfanne',zeit:30,lust:['herzhaft'],ern:'fleisch',kcal:560,kurz:'Reis, knackiges Gemüse und mariniertes Hähnchen aus einer Pfanne.'},
+    {id:'curry',t:'Kichererbsen-Curry',zeit:25,lust:['gesund','herzhaft'],ern:'vegan',kcal:430,kurz:'Kokos-Tomaten-Curry mit Kichererbsen — schnell, würzig, vorratstauglich.'},
+    {id:'ruehrei',t:'Kräuter-Rührei auf Brot',zeit:10,lust:['schnell'],ern:'vegetarisch',kcal:340,kurz:'Cremiges Rührei mit frischen Kräutern auf kräftigem Sauerteig.'},
+    {id:'bolo',t:'Rinderhack-Bolognese',zeit:40,lust:['herzhaft'],ern:'fleisch',kcal:610,kurz:'Langsam geschmorte Bolognese aus Rinderhack — Sonntagsgericht für jeden Tag.'}
+  ];
+  var ernRank={vegan:0,vegetarisch:1,fleisch:2};
+  function match(r,zeit,lust,ern){
+    if(zeit && r.zeit>zeit) return false;
+    if(lust && r.lust.indexOf(lust)<0) return false;
+    if(ern==='vegetarisch' && ernRank[r.ern]>1) return false;
+    if(ern==='vegan' && ernRank[r.ern]>0) return false;
+    return true;
+  }
+  function dishHtml(r){
+    var tags=[r.zeit+' Min', r.ern.charAt(0).toUpperCase()+r.ern.slice(1), '≈'+r.kcal+' kcal'];
+    return '<div class="dish"><div class="hd"><h2>'+r.t+'</h2><div class="tags">'+tags.map(function(x){return '<span class="tag">'+x+'</span>';}).join('')+'</div></div>'+
+      '<div class="bd"><p>'+r.kurz+'</p><div class="acts">'+
+      '<a class="btn ink sm" href="kulinarik-mealplanner.html">Im Mealplanner öffnen</a>'+
+      '<a class="btn ghost sm" href="kulinarik-app.html">Mehr in der App</a></div></div></div>';
+  }
+  function altPills(list,chosen){
+    var others=list.filter(function(r){return r.id!==chosen.id;}).slice(0,4);
+    if(!others.length) return '';
+    return '<div class="alt"><div class="note">Auch passend:</div><div class="pills">'+
+      others.map(function(r){return '<span class="pill" data-id="'+r.id+'">'+r.t+'</span>';}).join('')+'</div></div>';
+  }
+  var lastList=[];
+  function suggest(){
+    var zeit=+document.getElementById('qZeit').value, lust=document.getElementById('qLust').value, ern=document.getElementById('qErn').value;
+    var list=R.filter(function(r){return match(r,zeit,lust,ern);});
+    lastList=list;
+    if(T)T.ev('kulinarik_heute',{zeit:zeit,lust:lust,ern:ern,treffer:list.length});
+    var box=document.getElementById('result');
+    if(!list.length){ box.innerHTML='<p class="note">Kein Treffer — lockere eine Vorgabe (z. B. mehr Zeit) und probiere erneut.</p>'; return; }
+    var pick=list[Math.floor(Math.random()*list.length)];
+    box.innerHTML=dishHtml(pick)+altPills(list,pick)+'<div style="margin-top:1rem;"><button class="btn ghost sm" id="again">Anderes vorschlagen</button></div>';
+  }
+  document.getElementById('go').addEventListener('click',suggest);
+  document.getElementById('result').addEventListener('click',function(e){
+    var p=e.target.closest('[data-id]');
+    if(p){ var r=R.filter(function(x){return x.id===p.dataset.id;})[0]; if(r){ document.getElementById('result').innerHTML=dishHtml(r)+altPills(lastList,r)+'<div style="margin-top:1rem;"><button class="btn ghost sm" id="again">Anderes vorschlagen</button></div>'; } return; }
+    if(e.target.id==='again'){ suggest(); }
+  });
+})();
+</script>
+<script src="heiben-legal.js"></script>
+</body>
+</html>

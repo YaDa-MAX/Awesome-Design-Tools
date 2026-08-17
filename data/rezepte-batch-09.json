@@ -1,0 +1,500 @@
+{
+  "batch": 9,
+  "region": "Europa/Nordafrika",
+  "schema_version": 1,
+  "note": "Abschluss Europa (Ungarn, Vatikanstadt, Vereinigtes Königreich, Belarus) und Beginn Nordafrika (Ägypten). Auswahl ohne Schweinefleisch; Feld 'substitution' nur dort, wo das Original mit Schwein zubereitet wird. Die nordafrikanischen Küchen sind überwiegend muslimisch geprägt und von Natur aus ohne Schweinefleisch. Vatikanstadt hat keine eigenständige Nationalküche; die Gerichte sind römisch-italienisch und entsprechend gekennzeichnet. Bilder als Platzhalter. Generisches Schema, direkt importierbar in PostgreSQL/Supabase/Directus/Strapi/Sanity.",
+  "recipes": [
+    {
+      "country": "Ungarn",
+      "continent": "Europa",
+      "recipe_name": "Gulyás",
+      "categories": ["Fleisch", "Suppe", "Hauptgericht"],
+      "short_description": "Eine kräftige Suppe aus Rindfleisch, Zwiebeln, Kartoffeln und reichlich Paprika. Das ursprüngliche ungarische Gulasch der Hirten.",
+      "history": "Gulyás ist das bekannteste Gericht Ungarns und untrennbar mit der nationalen Identität verbunden. Anders als das im Ausland verbreitete dicke „Gulasch“ ist der ungarische Gulyás traditionell eine Suppe (gulyásleves). Sein Name leitet sich von den Rinderhirten (gulyás) der ungarischen Tiefebene ab, die das Gericht über offenem Feuer im Kessel (bogrács) kochten. Ursprünglich ein einfaches Hirtenessen aus Rindfleisch, Zwiebeln und Wasser, wurde es durch die Paprika geprägt, die ab dem 18. und 19. Jahrhundert zum charakteristischen Gewürz der ungarischen Küche wurde und dem Gulyás seine rote Farbe und Tiefe gibt. Hinzu kommen Kartoffeln, Möhren und oft kleine Teigtropfen (csipetke). Der ungarische Gulyás ist von Natur aus mit Rindfleisch zubereitet und kommt ohne Schweinefleisch aus. Er steht sinnbildlich für die Pusztaküche und die Bedeutung der Paprika und wird bis heute als wärmendes, geselliges Gericht geschätzt.",
+      "ingredients": [
+        { "quantity": "700", "unit": "g", "item": "Rindfleisch (Wade oder Schulter), gewürfelt" },
+        { "quantity": "3", "unit": "", "item": "Zwiebeln" },
+        { "quantity": "3", "unit": "EL", "item": "edelsüßes Paprikapulver" },
+        { "quantity": "3", "unit": "", "item": "Kartoffeln" },
+        { "quantity": "2", "unit": "", "item": "Möhren, 1 Paprika, 2 Tomaten" },
+        { "quantity": "1", "unit": "TL", "item": "Kümmel, 2 Zehen Knoblauch" },
+        { "quantity": "1.5", "unit": "l", "item": "Wasser oder Rinderbrühe" },
+        { "quantity": "", "unit": "", "item": "Öl, Salz, Pfeffer" }
+      ],
+      "instructions": [
+        "Zwiebeln in Öl goldgelb dünsten, vom Herd ziehen und das Paprikapulver einrühren.",
+        "Rindfleischwürfel zugeben und mit Kümmel und Knoblauch anrösten.",
+        "Mit Wasser oder Brühe auffüllen und bei kleiner Hitze etwa 1,5 Stunden sanft garen.",
+        "Gewürfelte Kartoffeln, Möhren, Paprika und Tomaten zugeben.",
+        "Weitergaren, bis das Fleisch zart und das Gemüse weich ist.",
+        "Mit Salz und Pfeffer abschmecken; nach Wunsch kleine Teigtropfen (csipetke) mitkochen."
+      ],
+      "tips": [
+        "Das Paprikapulver erst nach dem Herd einrühren, sonst wird es bitter.",
+        "Lange, sanfte Garzeit macht das Rindfleisch zart.",
+        "Mit frischem Brot servieren."
+      ],
+      "tags": ["Ungarn", "Gulyás", "Gulaschsuppe", "Rind", "Paprika", "Suppe", "Puszta", "Hirtenküche", "Nationalgericht", "Kessel", "Winterküche", "Hauptgericht"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Ungarn",
+      "continent": "Europa",
+      "recipe_name": "Halászlé",
+      "categories": ["Fisch", "Suppe", "Hauptgericht"],
+      "short_description": "Eine feurig rote Fischsuppe aus Süßwasserfisch und viel Paprika. Festtagssuppe der ungarischen Flusslandschaften.",
+      "history": "Halászlé — die ungarische Fischersuppe — ist eine kräftige, scharf-paprizierte Suppe aus Süßwasserfisch und gehört zu den traditionsreichsten Gerichten Ungarns. Sie entstand bei den Fischern entlang der großen Flüsse, vor allem der Donau und der Theiß, sowie am Plattensee, die ihren Fang — häufig Karpfen, aber auch Wels und andere Süßwasserfische — über offenem Feuer im Kessel zu einer würzigen Suppe verkochten. Charakteristisch ist die intensive rote Farbe und Schärfe durch reichlich ungarisches Paprikapulver. Regionale Schulen unterscheiden sich: Die Variante aus Szeged wird passiert und sämig, die aus Baja mit Nudeln serviert. Halászlé hat einen festen Platz in der Festtagsküche und gehört in vielen Familien traditionell zum Heiligabend. Die Zubereitung gilt als kleine Kunst, und der Fischsud aus Kopf und Gräten bildet die geschmackliche Grundlage. Als reine Fischsuppe ist Halászlé selbstverständlich ohne Schweinefleisch und steht für die Verbindung der ungarischen Küche mit ihren Gewässern.",
+      "ingredients": [
+        { "quantity": "1.5", "unit": "kg", "item": "Süßwasserfisch (Karpfen, Wels), küchenfertig" },
+        { "quantity": "3", "unit": "", "item": "Zwiebeln" },
+        { "quantity": "3", "unit": "EL", "item": "edelsüßes Paprikapulver" },
+        { "quantity": "1", "unit": "TL", "item": "scharfes Paprikapulver" },
+        { "quantity": "2", "unit": "", "item": "Tomaten, 1 Paprika" },
+        { "quantity": "1.5", "unit": "l", "item": "Wasser" },
+        { "quantity": "", "unit": "", "item": "Salz" }
+      ],
+      "instructions": [
+        "Fischköpfe, Gräten und Abschnitte mit Zwiebeln und Wasser zu einem kräftigen Fischsud kochen.",
+        "Den Sud durch ein Sieb passieren und zurück in den Topf geben.",
+        "Paprikapulver, gewürfelte Tomaten und Paprika einrühren.",
+        "Die filetierten Fischstücke in den Sud legen.",
+        "Bei kleiner Hitze sanft garen, dabei nicht umrühren, nur den Topf schwenken.",
+        "Mit Salz abschmecken und heiß mit Brot servieren."
+      ],
+      "tips": [
+        "Der Sud aus Kopf und Gräten ist die geschmackliche Basis.",
+        "Nicht umrühren, damit der Fisch ganz bleibt.",
+        "Reichlich gutes Paprikapulver gibt Farbe und Tiefe."
+      ],
+      "tags": ["Ungarn", "Halászlé", "Fischsuppe", "Karpfen", "Paprika", "scharf", "Donau", "Theiß", "Festtag", "Heiligabend", "Süßwasserfisch", "Suppe"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Ungarn",
+      "continent": "Europa",
+      "recipe_name": "Dobos torta",
+      "categories": ["Dessert", "Vegetarisch"],
+      "short_description": "Eine vielschichtige Biskuittorte mit Schokoladenbuttercreme und einer knackigen Karamellschicht obenauf. Klassiker der ungarischen Konditorkunst.",
+      "history": "Die Dobos torta (Dobos-Torte) ist eine der berühmtesten Torten Ungarns und ein Meilenstein der mitteleuropäischen Konditorkunst. Sie wurde 1885 vom Budapester Konditor József C. Dobos kreiert und auf der Budapester Nationalausstellung vorgestellt. Charakteristisch sind die zahlreichen dünnen Biskuitböden, die mit Schokoladenbuttercreme geschichtet werden, sowie die markante oberste Schicht aus hartem, glänzendem Karamell, die in Tortenstücke geschnitten und oft dekorativ aufgesetzt wird. Zu ihrer Zeit war die Torte eine Innovation: Die Karamelldecke und die haltbare Buttercreme machten sie ungewöhnlich lange frisch, was sie auch für den Versand und die damalige Lagerung geeignet machte. Dobos hielt sein Rezept lange geheim und gab es erst Jahre später an die Budapester Konditorinnung weiter. Die Dobos torta gilt bis heute als Symbol der ungarischen Kaffeehaus- und Backkultur. Als reine Biskuit-Buttercreme-Karamell-Torte ist sie selbstverständlich vegetarisch und ohne Schweinefleisch.",
+      "ingredients": [
+        { "quantity": "6", "unit": "", "item": "Eier" },
+        { "quantity": "150", "unit": "g", "item": "Zucker (Biskuit)" },
+        { "quantity": "120", "unit": "g", "item": "Mehl" },
+        { "quantity": "250", "unit": "g", "item": "Butter (Creme)" },
+        { "quantity": "150", "unit": "g", "item": "Zartbitterschokolade (Creme)" },
+        { "quantity": "3", "unit": "", "item": "Eier und 100 g Zucker (Creme)" },
+        { "quantity": "150", "unit": "g", "item": "Zucker (Karamell)" }
+      ],
+      "instructions": [
+        "Aus Eiern, Zucker und Mehl mehrere dünne, runde Biskuitböden backen (meist sechs).",
+        "Für die Creme Eier mit Zucker über dem Wasserbad cremig schlagen, abkühlen lassen.",
+        "Weiche Butter und geschmolzene Schokolade einrühren, bis eine glatte Buttercreme entsteht.",
+        "Die Böden mit der Schokoladencreme schichten und auch außen einstreichen.",
+        "Für die Karamelldecke Zucker hellbraun schmelzen und auf einen Biskuitboden gießen, sofort in Tortenstücke vorschneiden.",
+        "Die karamellisierte Platte auf die Torte setzen; gut durchkühlen lassen."
+      ],
+      "tips": [
+        "Die Biskuitböden möglichst gleich groß und dünn backen.",
+        "Das Karamell zügig verarbeiten, bevor es erstarrt.",
+        "Die Torte vor dem Servieren durchkühlen lassen."
+      ],
+      "tags": ["Ungarn", "Budapest", "Dobos torta", "Biskuittorte", "Schokolade", "Buttercreme", "Karamell", "süß", "vegetarisch", "Kaffeehaus", "Konditorkunst", "Dessert"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Vatikanstadt",
+      "continent": "Europa",
+      "recipe_name": "Carciofi alla romana",
+      "categories": ["Vegetarisch", "Vegan", "Beilage", "Vorspeise"],
+      "short_description": "Ganze Artischocken, geschmort in Olivenöl mit Minze, Petersilie und Knoblauch. Römische Spezialität aus dem Umfeld des Vatikans.",
+      "history": "Die Vatikanstadt besitzt keine eigenständige Nationalküche; gegessen wird die römisch-italienische Küche der umgebenden Stadt Rom. Carciofi alla romana — Artischocken nach römischer Art — gehören zu den klassischen Gerichten dieser Küche und sind besonders im Frühjahr verbreitet, wenn die römische Artischocke (carciofo romanesco) Saison hat. Das Gericht hat tiefe Wurzeln in der römischen Tradition, in der die Artischocke seit Jahrhunderten eine herausragende Rolle spielt — auch in der jüdisch-römischen Küche des historischen Ghettos. Für die römische Variante werden ganze, geputzte Artischocken mit einer Füllung aus Minze (mentuccia), Petersilie und Knoblauch versehen und kopfüber in Olivenöl und etwas Wasser sanft geschmort, bis sie butterzart sind. Anders als die frittierten „carciofi alla giudia“ werden sie also gedünstet. Das Gericht ist ein fester Bestandteil der römischen Tafel und der Saisonküche. Als reines Gemüsegericht ist es von Natur aus vegan und ohne Schweinefleisch.",
+      "ingredients": [
+        { "quantity": "6", "unit": "", "item": "große Artischocken" },
+        { "quantity": "1", "unit": "Bund", "item": "Minze (möglichst mentuccia)" },
+        { "quantity": "1", "unit": "Bund", "item": "Petersilie" },
+        { "quantity": "4", "unit": "Zehen", "item": "Knoblauch" },
+        { "quantity": "120", "unit": "ml", "item": "Olivenöl" },
+        { "quantity": "1", "unit": "", "item": "Zitrone" },
+        { "quantity": "", "unit": "", "item": "Salz, Pfeffer, Wasser" }
+      ],
+      "instructions": [
+        "Artischocken putzen, die äußeren harten Blätter entfernen und in Zitronenwasser legen.",
+        "Minze, Petersilie und Knoblauch fein hacken, mit Salz, Pfeffer und etwas Öl mischen.",
+        "Die Kräutermischung zwischen die Blätter und in die Mitte der Artischocken drücken.",
+        "Die Artischocken kopfüber dicht in einen Topf stellen.",
+        "Mit Olivenöl und etwas Wasser angießen, sodass sie zur Hälfte bedeckt sind.",
+        "Zugedeckt 30–40 Minuten sanft schmoren, bis sie butterzart sind; lauwarm servieren."
+      ],
+      "tips": [
+        "Die Artischocken in Zitronenwasser legen, damit sie nicht braun werden.",
+        "Kopfüber schmoren, damit die Füllung im Inneren bleibt.",
+        "Lauwarm mit etwas vom Schmoröl servieren."
+      ],
+      "tags": ["Vatikanstadt", "Rom", "Carciofi alla romana", "Artischocken", "vegan", "vegetarisch", "Minze", "Olivenöl", "römisch", "Saisonküche", "mediterran", "Beilage"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Vatikanstadt",
+      "continent": "Europa",
+      "recipe_name": "Cacio e pepe",
+      "categories": ["Vegetarisch", "Hauptgericht"],
+      "short_description": "Pasta mit einer cremigen Sauce aus nur Pecorino-Käse und schwarzem Pfeffer. Die Essenz der römischen Küche.",
+      "history": "Cacio e pepe — „Käse und Pfeffer“ — ist eines der bekanntesten Gerichte der römischen Küche, die auch in der Vatikanstadt die alltägliche Küche darstellt, da der Vatikan keine eigenständige Nationalküche besitzt. Das Gericht ist ein Paradebeispiel der „cucina povera“: Aus nur drei Zutaten — Pasta, Pecorino Romano und schwarzem Pfeffer — entsteht ein erstaunlich reichhaltiges Gericht. Seine Wurzeln liegen in der Hirten- und Arbeiterküche der Region Latium; getrockneter Pecorino, Pfeffer und Pasta waren haltbare, transportable Grundzutaten, die auch unterwegs eine sättigende Mahlzeit ergaben. Die Kunst liegt in der Emulsion: Aus dem geriebenen Pecorino und stärkehaltigem Nudelwasser wird eine cremige Sauce gerührt, die die Pasta umhüllt, ohne zu verklumpen. Cacio e pepe gehört zu den vier klassischen römischen Pastagerichten und ist heute weit über Rom hinaus beliebt. Als reines Käse-Pasta-Gericht ist es von Natur aus vegetarisch und ohne Schweinefleisch.",
+      "ingredients": [
+        { "quantity": "400", "unit": "g", "item": "Pasta (Tonnarelli oder Spaghetti)" },
+        { "quantity": "200", "unit": "g", "item": "Pecorino Romano, fein gerieben" },
+        { "quantity": "2", "unit": "TL", "item": "schwarzer Pfeffer, frisch gemahlen" },
+        { "quantity": "", "unit": "", "item": "Salz (sparsam, der Käse ist salzig)" }
+      ],
+      "instructions": [
+        "Pasta in wenig Salzwasser al dente kochen; das stärkehaltige Nudelwasser aufbewahren.",
+        "Pfeffer in einer Pfanne kurz trocken anrösten, bis er duftet.",
+        "Den geriebenen Pecorino mit etwas lauwarmem (nicht kochendem) Nudelwasser zu einer glatten Creme rühren.",
+        "Die abgetropfte Pasta mit dem gerösteten Pfeffer und etwas Nudelwasser schwenken.",
+        "Die Käsecreme zugeben und unter Schwenken zu einer cremigen Sauce emulgieren.",
+        "Mit zusätzlichem Pecorino und Pfeffer bestreut sofort servieren."
+      ],
+      "tips": [
+        "Das Nudelwasser darf nicht zu heiß sein, sonst verklumpt der Käse.",
+        "Stärkehaltiges Nudelwasser ist der Schlüssel zur cremigen Emulsion.",
+        "Zügig arbeiten und sofort servieren."
+      ],
+      "tags": ["Vatikanstadt", "Rom", "Cacio e pepe", "Pasta", "Pecorino", "Pfeffer", "vegetarisch", "cucina povera", "römisch", "Latium", "Klassiker", "Hauptgericht"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Vatikanstadt",
+      "continent": "Europa",
+      "recipe_name": "Maritozzi",
+      "categories": ["Dessert", "Frühstück", "Vegetarisch"],
+      "short_description": "Weiche, leicht süße Hefebrötchen, aufgeschnitten und üppig mit Schlagsahne gefüllt. Römisches Frühstücksgebäck.",
+      "history": "Maritozzi sind ein traditionelles süßes Hefegebäck der römischen Küche, die auch in der Vatikanstadt die alltägliche Esskultur prägt, da der Vatikan keine eigene Nationalküche hat. Die weichen, ovalen Brötchen aus einem leicht süßen, mit etwas Orangenschale und Honig aromatisierten Hefeteig werden aufgeschnitten und großzügig mit Schlagsahne gefüllt. Ihr Ursprung reicht weit zurück; eine verbreitete Erzählung verbindet den Namen mit dem römischen Dialektwort „maritozzo“ für den künftigen Ehemann („marito“), der seiner Verlobten das Gebäck — manchmal mit einem versteckten Ring oder Schmuckstück — schenkte, weshalb die Maritozzi besonders mit der Fastenzeit und dem Frühjahr in Verbindung gebracht werden. Heute sind sie ein beliebtes Frühstücksgebäck, das in römischen Bars zum Cappuccino gegessen wird, und haben über Rom hinaus an Popularität gewonnen. Als süßes Hefegebäck mit Sahnefüllung sind sie selbstverständlich vegetarisch und ohne Schweinefleisch.",
+      "ingredients": [
+        { "quantity": "400", "unit": "g", "item": "Mehl" },
+        { "quantity": "150", "unit": "ml", "item": "lauwarme Milch" },
+        { "quantity": "20", "unit": "g", "item": "frische Hefe" },
+        { "quantity": "70", "unit": "g", "item": "Zucker" },
+        { "quantity": "1", "unit": "", "item": "Ei" },
+        { "quantity": "50", "unit": "g", "item": "Butter, 1 EL Honig" },
+        { "quantity": "1", "unit": "", "item": "Bio-Orange (Schale)" },
+        { "quantity": "300", "unit": "ml", "item": "Schlagsahne; Puderzucker" }
+      ],
+      "instructions": [
+        "Hefe in lauwarmer Milch mit etwas Zucker auflösen.",
+        "Mehl, Zucker, Ei, Honig, Orangenschale und die Hefemilch zu einem Teig kneten, weiche Butter einarbeiten.",
+        "Zugedeckt etwa 1,5 Stunden gehen lassen.",
+        "Längliche Brötchen formen, nochmals gehen lassen und bei 180 °C goldbraun backen; auskühlen lassen.",
+        "Die Brötchen längs einschneiden.",
+        "Steif geschlagene Sahne hineinfüllen, glatt streichen und mit Puderzucker bestäuben."
+      ],
+      "tips": [
+        "Den Teig gut gehen lassen, damit die Brötchen luftig werden.",
+        "Erst nach dem Auskühlen mit Sahne füllen.",
+        "Die Sahnefüllung großzügig und glatt abstreichen."
+      ],
+      "tags": ["Vatikanstadt", "Rom", "Maritozzi", "Hefegebäck", "Sahne", "süß", "Frühstück", "vegetarisch", "römisch", "Cappuccino", "Fastenzeit", "Dessert"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Vereinigtes Königreich",
+      "continent": "Europa",
+      "recipe_name": "Fish and Chips",
+      "categories": ["Fisch", "Hauptgericht"],
+      "short_description": "In knusprigem Bierteig frittierter Weißfisch mit dicken Pommes, serviert mit Essig und Erbsenpüree. Das britische Nationalgericht zum Mitnehmen.",
+      "history": "Fish and Chips gelten als das britische Nationalgericht und sind seit dem 19. Jahrhundert fest in der Esskultur des Vereinigten Königreichs verankert. Die Kombination aus frittiertem Fisch und frittierten Kartoffelstäbchen entstand in der Zeit der Industrialisierung, als sie zum erschwinglichen, sättigenden Essen der Arbeiterklasse wurde. Der frittierte Fisch geht vermutlich auf jüdische Einwanderer zurück, die fritierten Fisch nach britischer Überlieferung mitbrachten, während die „chips“ — dicke, frittierte Kartoffelstäbchen — sich parallel verbreiteten; im Lauf des 19. Jahrhunderts wuchsen beide zur klassischen Kombination zusammen. Die spezialisierten Imbisse, die „chippies“, wurden zu einer britischen Institution. Verwendet wird meist Kabeljau oder Schellfisch, in einem knusprigen Bier- oder Wasserteig ausgebacken, traditionell mit Malzessig beträufelt und mit Erbsenpüree (mushy peas) serviert. Klassisch isst man Fish and Chips aus Papier. Als Fisch- und Kartoffelgericht ist es selbstverständlich ohne Schweinefleisch und steht sinnbildlich für britisches Alltags-Comfortfood.",
+      "ingredients": [
+        { "quantity": "4", "unit": "", "item": "Filets von Kabeljau oder Schellfisch" },
+        { "quantity": "200", "unit": "g", "item": "Mehl" },
+        { "quantity": "250", "unit": "ml", "item": "kaltes Bier (oder Sprudelwasser)" },
+        { "quantity": "1", "unit": "TL", "item": "Backpulver" },
+        { "quantity": "1", "unit": "kg", "item": "mehligkochende Kartoffeln" },
+        { "quantity": "", "unit": "", "item": "Öl zum Frittieren, Salz, Malzessig" },
+        { "quantity": "300", "unit": "g", "item": "grüne Erbsen (mushy peas)" }
+      ],
+      "instructions": [
+        "Kartoffeln in dicke Stäbchen schneiden, wässern, trocknen und zweifach frittieren (erst sanft, dann heiß und knusprig).",
+        "Mehl, Backpulver und Salz mit kaltem Bier zu einem dickflüssigen Teig verrühren.",
+        "Die Fischfilets in Mehl wenden, durch den Teig ziehen.",
+        "In heißem Öl (ca. 180 °C) goldbraun und knusprig ausbacken.",
+        "Erbsen weich kochen und grob zu mushy peas zerdrücken.",
+        "Fisch und Chips mit Salz und Malzessig sowie den Erbsen servieren."
+      ],
+      "tips": [
+        "Kaltes Bier und kalter Teig ergeben eine besonders knusprige Hülle.",
+        "Die Chips zweifach frittieren — erst weich garen, dann knusprig bräunen.",
+        "Mit Malzessig beträufeln — typisch britisch."
+      ],
+      "tags": ["Vereinigtes Königreich", "Fish and Chips", "Kabeljau", "Fisch", "Bierteig", "Pommes", "Nationalgericht", "mushy peas", "Malzessig", "Comfortfood", "Imbiss", "Hauptgericht"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Vereinigtes Königreich",
+      "continent": "Europa",
+      "recipe_name": "Shepherd's Pie",
+      "categories": ["Fleisch", "Hauptgericht"],
+      "short_description": "Geschmortes Lammhack mit Gemüse unter einer goldbraunen Haube aus Kartoffelpüree, im Ofen überbacken. Britischer Auflaufklassiker.",
+      "history": "Shepherd's Pie ist ein klassischer britischer Auflauf und ein Inbegriff der heimeligen britischen Hausmannskost. Charakteristisch ist die Schichtung aus einer herzhaften Hackfleischfüllung mit Gemüse und einer Haube aus Kartoffelpüree, die im Ofen goldbraun überbacken wird. Der Name „Shepherd“ (Schäfer) verweist darauf, dass das Gericht traditionell mit Lammfleisch zubereitet wird — wird Rindfleisch verwendet, spricht man von „Cottage Pie“. Die Speise entstand im 18. und 19. Jahrhundert als sparsame Art, Reste von gebratenem Fleisch mit Kartoffeln zu einer neuen Mahlzeit zu verwerten, nachdem die Kartoffel in Großbritannien und Irland zum Grundnahrungsmittel geworden war. Sie war ein günstiges, sättigendes Essen für ländliche und arbeitende Haushalte. Heute gilt Shepherd's Pie als beliebtes Wohlfühlgericht, das warm und mit Gemüsebeilage serviert wird. Mit Lammhack zubereitet ist es von Natur aus ohne Schweinefleisch und steht sinnbildlich für die bodenständige britische Küche.",
+      "ingredients": [
+        { "quantity": "600", "unit": "g", "item": "Lammhack" },
+        { "quantity": "2", "unit": "", "item": "Möhren" },
+        { "quantity": "1", "unit": "", "item": "Zwiebel" },
+        { "quantity": "100", "unit": "g", "item": "Erbsen" },
+        { "quantity": "2", "unit": "EL", "item": "Tomatenmark, 1 EL Worcestersauce" },
+        { "quantity": "300", "unit": "ml", "item": "Lamm- oder Gemüsebrühe" },
+        { "quantity": "1", "unit": "kg", "item": "mehligkochende Kartoffeln" },
+        { "quantity": "60", "unit": "g", "item": "Butter, etwas Milch" },
+        { "quantity": "", "unit": "", "item": "Öl, Salz, Pfeffer, Thymian" }
+      ],
+      "instructions": [
+        "Zwiebel und Möhren würfeln und andünsten, das Lammhack zugeben und kräftig anbraten.",
+        "Tomatenmark und Worcestersauce einrühren, mit Brühe auffüllen und mit Thymian würzen.",
+        "Erbsen zugeben und die Füllung einköcheln, bis sie sämig ist; in eine Auflaufform geben.",
+        "Kartoffeln kochen und mit Butter und Milch zu einem cremigen Püree stampfen.",
+        "Das Püree auf die Füllung streichen und mit einer Gabel die Oberfläche aufrauen.",
+        "Bei 200 °C 25–30 Minuten goldbraun überbacken."
+      ],
+      "tips": [
+        "Die aufgeraute Püreeoberfläche wird besonders knusprig.",
+        "Die Füllung gut einkochen, damit der Auflauf nicht wässrig wird.",
+        "Mit Lamm ist es Shepherd's, mit Rind Cottage Pie."
+      ],
+      "tags": ["Vereinigtes Königreich", "Shepherd's Pie", "Lamm", "Kartoffelpüree", "Auflauf", "Hausmannskost", "Comfortfood", "Ofengericht", "Resteküche", "Winterküche", "britisch", "Hauptgericht"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Vereinigtes Königreich",
+      "continent": "Europa",
+      "recipe_name": "Scones",
+      "categories": ["Dessert", "Frühstück", "Vegetarisch"],
+      "short_description": "Lockere, leicht süße Backwerke, aufgeschnitten und mit Clotted Cream und Marmelade serviert. Herzstück der britischen Teestunde.",
+      "history": "Scones sind ein klassisches britisches Backwerk und untrennbar mit der Tradition des Nachmittagstees (afternoon tea) und besonders des „cream tea“ verbunden. Ihre Ursprünge liegen in den britischen Inseln, vermutlich in Schottland, wo frühe Formen auf einer Platte gebacken wurden; mit der Verbreitung von Backpulver und Öfen im 19. Jahrhundert entstand der heutige, lockere, hoch aufgehende Scone. Der Teig aus Mehl, Butter, etwas Zucker und Milch oder Buttermilch wird nur kurz zusammengefügt, ausgestochen und rasch gebacken. Klassisch werden Scones lauwarm aufgeschnitten und mit Clotted Cream (einem dicken Rahm) und Erdbeer- oder Himbeermarmelade serviert. Eine bis heute scherzhaft geführte regionale Debatte zwischen Devon und Cornwall dreht sich um die „richtige“ Reihenfolge von Sahne und Marmelade. Scones gehören zur Teekultur, zu Festen und zum Sonntag und werden oft auch mit Rosinen gebacken. Als Backwerk sind sie selbstverständlich vegetarisch und ohne Schweinefleisch.",
+      "ingredients": [
+        { "quantity": "350", "unit": "g", "item": "Mehl" },
+        { "quantity": "1", "unit": "EL", "item": "Backpulver" },
+        { "quantity": "80", "unit": "g", "item": "kalte Butter" },
+        { "quantity": "40", "unit": "g", "item": "Zucker" },
+        { "quantity": "150", "unit": "ml", "item": "Milch" },
+        { "quantity": "1", "unit": "", "item": "Ei (zum Bestreichen)" },
+        { "quantity": "", "unit": "", "item": "Clotted Cream und Marmelade zum Servieren" }
+      ],
+      "instructions": [
+        "Mehl, Backpulver und Zucker mischen, die kalte Butter einreiben, bis eine krümelige Masse entsteht.",
+        "Die Milch zügig einarbeiten, bis ein weicher Teig entsteht; nicht lange kneten.",
+        "Den Teig fingerdick ausrollen und runde Scones ausstechen.",
+        "Auf ein Blech setzen und mit verquirltem Ei bestreichen.",
+        "Bei 200 °C 12–15 Minuten goldbraun und hoch aufgegangen backen.",
+        "Lauwarm aufschneiden und mit Clotted Cream und Marmelade servieren."
+      ],
+      "tips": [
+        "Den Teig nur kurz zusammenfügen, sonst werden die Scones fest.",
+        "Mit kalter Butter arbeiten für eine lockere Krume.",
+        "Beim Ausstechen gerade nach unten drücken, nicht drehen — dann gehen sie höher auf."
+      ],
+      "tags": ["Vereinigtes Königreich", "Scones", "afternoon tea", "cream tea", "Clotted Cream", "Marmelade", "Gebäck", "süß", "vegetarisch", "Teestunde", "britisch", "Dessert"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Belarus",
+      "continent": "Europa",
+      "recipe_name": "Draniki",
+      "categories": ["Vegetarisch", "Hauptgericht", "Snack"],
+      "short_description": "Knusprige Kartoffelpuffer aus fein geriebenen Kartoffeln, serviert mit saurer Sahne. Das Nationalgericht von Belarus.",
+      "history": "Draniki gelten als das Nationalgericht von Belarus und spiegeln die herausragende Rolle der Kartoffel in der belarussischen Küche wider — Belarus ist für seine vielfältige Kartoffelküche bekannt, und die Kartoffel ist tief in der nationalen Esskultur verankert. Draniki sind knusprige Puffer aus fein geriebenen rohen Kartoffeln, die mit Zwiebel und etwas Mehl oder Ei gebunden und in heißem Öl goldbraun ausgebacken werden. Im Unterschied zu manchen Nachbarvarianten wird der Teig oft besonders schlicht gehalten, damit der Kartoffelgeschmack im Vordergrund steht. Das Gericht entstand in der bäuerlichen Küche als günstiges, sättigendes Essen aus dem wichtigsten Grundnahrungsmittel und wurde zu einem Symbol der belarussischen Identität. Serviert werden Draniki klassisch mit saurer Sahne (smetana), manchmal mit gedünsteten Pilzen oder Zwiebeln. In der einfachen Form aus Kartoffeln und Zwiebeln sind sie von Natur aus vegetarisch und ohne Schweinefleisch und gehören zur Alltags- wie Festtagsküche.",
+      "ingredients": [
+        { "quantity": "1", "unit": "kg", "item": "mehligkochende Kartoffeln" },
+        { "quantity": "1", "unit": "", "item": "Zwiebel" },
+        { "quantity": "2", "unit": "EL", "item": "Mehl" },
+        { "quantity": "1", "unit": "", "item": "Ei" },
+        { "quantity": "", "unit": "", "item": "Öl zum Braten, Salz, Pfeffer" },
+        { "quantity": "", "unit": "", "item": "saure Sahne zum Servieren" }
+      ],
+      "instructions": [
+        "Kartoffeln und Zwiebel fein reiben und überschüssige Flüssigkeit ausdrücken.",
+        "Mit Mehl, Ei, Salz und Pfeffer zu einem Teig vermengen.",
+        "Reichlich Öl in einer Pfanne erhitzen.",
+        "Esslöffelweise dünne Fladen ins heiße Öl geben.",
+        "Beidseitig goldbraun und knusprig braten.",
+        "Auf Küchenpapier abtropfen lassen und heiß mit saurer Sahne servieren."
+      ],
+      "tips": [
+        "Die geriebenen Kartoffeln gut ausdrücken für knusprige Draniki.",
+        "Die Zwiebel verhindert das Braunwerden der Masse.",
+        "Klassisch mit reichlich saurer Sahne servieren."
+      ],
+      "tags": ["Belarus", "Draniki", "Kartoffelpuffer", "vegetarisch", "Zwiebel", "saure Sahne", "Nationalgericht", "Kartoffelküche", "gebraten", "Hausmannskost", "Snack", "Hauptgericht"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Belarus",
+      "continent": "Europa",
+      "recipe_name": "Chaladnik",
+      "categories": ["Vegetarisch", "Suppe", "Vorspeise"],
+      "short_description": "Eine kalte, leuchtend rosa Suppe aus Roter Bete und Kefir mit Gurke, Ei und Dill, serviert mit warmen Kartoffeln. Belarussische Sommererfrischung.",
+      "history": "Chaladnik (auch Kholodnik) ist die belarussische kalte Rote-Bete-Suppe und gehört zur Familie der kalten Sauermilchsuppen, die in Belarus, Litauen, Polen und der gesamten Region verbreitet sind. Der Name leitet sich vom Wort für „kalt“ ab. Grundlage ist Kefir oder dicke Sauermilch, die mit gekochter, geraspelter Roter Bete leuchtend rosa gefärbt wird; hinzu kommen frische Gurke, hartgekochtes Ei, Frühlingszwiebeln und reichlich Dill. Die Suppe wird eiskalt serviert, traditionell begleitet von warmen, in der Schale gekochten Kartoffeln, deren Wärme einen reizvollen Kontrast zur kühlen Suppe bildet. Chaladnik entstand als erfrischendes, leichtes Sommergericht, das ohne langes Kochen auskommt und die sommerliche Fülle an Bete, Gurke und Kräutern nutzt. Sie spiegelt die enge kulinarische Verwandtschaft der Länder zwischen Ostsee und Belarus wider. Als Gericht aus Sauermilch und Gemüse ist sie von Natur aus vegetarisch und ohne Schweinefleisch.",
+      "ingredients": [
+        { "quantity": "1", "unit": "l", "item": "Kefir" },
+        { "quantity": "3", "unit": "", "item": "Rote Bete, gekocht und geraspelt" },
+        { "quantity": "1", "unit": "", "item": "Salatgurke" },
+        { "quantity": "3", "unit": "", "item": "hartgekochte Eier" },
+        { "quantity": "1", "unit": "Bund", "item": "Dill" },
+        { "quantity": "3", "unit": "", "item": "Frühlingszwiebeln" },
+        { "quantity": "5", "unit": "", "item": "Kartoffeln (warm, zum Servieren)" },
+        { "quantity": "", "unit": "", "item": "Salz" }
+      ],
+      "instructions": [
+        "Gurke fein würfeln, Frühlingszwiebeln und Dill hacken.",
+        "Zwei Eier würfeln, eines für die Garnitur zurückbehalten.",
+        "Kefir mit der geraspelten Roten Bete verrühren, bis die Suppe leuchtend rosa ist.",
+        "Gurke, Eier, Zwiebeln und Dill unterrühren und salzen.",
+        "Mindestens 1 Stunde gut durchkühlen.",
+        "Eiskalt mit warmen Salzkartoffeln und dem restlichen Ei servieren."
+      ],
+      "tips": [
+        "Sehr kalt servieren — der Kontrast zu den warmen Kartoffeln ist typisch.",
+        "Reichlich frischer Dill gehört dazu.",
+        "Mit etwas Wasser oder Buttermilch die Konsistenz regeln."
+      ],
+      "tags": ["Belarus", "Chaladnik", "kalte Suppe", "Rote Bete", "Kefir", "Gurke", "Dill", "vegetarisch", "Sommerküche", "erfrischend", "osteuropäisch", "Suppe"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Belarus",
+      "continent": "Europa",
+      "recipe_name": "Kartoflyanaya babka",
+      "categories": ["Vegetarisch", "Hauptgericht", "Beilage"],
+      "short_description": "Ein im Ofen gebackener Auflauf aus geriebenen Kartoffeln und Zwiebeln mit knuspriger Oberfläche, serviert mit saurer Sahne. Herzhafte belarussische Kartoffelspezialität.",
+      "history": "Kartoflyanaya babka — „Kartoffelbabka“ — ist ein traditioneller belarussischer Kartoffelauflauf und ein weiteres Beispiel für die zentrale Rolle der Kartoffel in der Küche des Landes. Anders als die in der Pfanne gebratenen Draniki wird die Babka aus einer Masse geriebener Kartoffeln und Zwiebeln in einer Form im Ofen gebacken, bis sie innen weich und saftig und außen goldbraun und knusprig ist. Das Gericht entstand in der bäuerlichen Küche als sättigendes, einfaches Essen, das eine ganze Familie aus dem wichtigsten Grundnahrungsmittel versorgte. Traditionell wird die Babka mit ausgelassenem Speck und Grieben angereichert; in dieser Fassung verwenden wir reichlich geröstete Zwiebeln und Butter, sodass sie ohne Schwein auskommt. Serviert wird sie warm, klassisch mit saurer Sahne (smetana). Kartoflyanaya babka gehört zur herzhaften Alltags- und Festtagsküche von Belarus und steht sinnbildlich für die erfindungsreiche Kartoffelküche des Landes.",
+      "ingredients": [
+        { "quantity": "1.2", "unit": "kg", "item": "mehligkochende Kartoffeln" },
+        { "quantity": "2", "unit": "", "item": "Zwiebeln" },
+        { "quantity": "2", "unit": "", "item": "Eier" },
+        { "quantity": "60", "unit": "g", "item": "Butter" },
+        { "quantity": "2", "unit": "EL", "item": "Mehl" },
+        { "quantity": "", "unit": "", "item": "Salz, Pfeffer; saure Sahne zum Servieren" }
+      ],
+      "instructions": [
+        "Kartoffeln fein reiben und überschüssige Flüssigkeit ausdrücken.",
+        "Zwiebeln würfeln und in Butter goldbraun rösten.",
+        "Geriebene Kartoffeln mit Röstzwiebeln, Eiern, Mehl, Salz und Pfeffer vermengen.",
+        "Die Masse in eine gebutterte Auflaufform geben und glatt streichen.",
+        "Mit Butterflöckchen belegen und bei 190 °C 50–60 Minuten backen, bis die Oberfläche goldbraun und knusprig ist.",
+        "Etwas ruhen lassen, in Stücke schneiden und mit saurer Sahne servieren."
+      ],
+      "tips": [
+        "Die Kartoffeln gut ausdrücken, damit die Babka nicht wässrig wird.",
+        "Reichlich Röstzwiebeln geben die herzhafte Tiefe.",
+        "Vor dem Anschneiden kurz ruhen lassen."
+      ],
+      "tags": ["Belarus", "Kartoflyanaya babka", "Kartoffelauflauf", "vegetarisch", "Zwiebeln", "Ofengericht", "saure Sahne", "Kartoffelküche", "Röstzwiebeln", "Hausmannskost", "deftig", "Hauptgericht"],
+      "substitution": "Traditionell wird die Kartoffelbabka mit ausgelassenem Speck und Grieben vom Schwein zubereitet. Wir verwenden stattdessen reichlich in Butter geröstete Zwiebeln — sie geben die herzhafte Tiefe, ganz ohne Schwein. Wer eine rauchige Note möchte, brät etwas geräuchertes Rind mit an.",
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Ägypten",
+      "continent": "Afrika",
+      "recipe_name": "Koshari",
+      "categories": ["Vegan", "Vegetarisch", "Hauptgericht"],
+      "short_description": "Ein sättigendes Schichtgericht aus Reis, Linsen und Nudeln mit Kichererbsen, würziger Tomatensauce und knusprigen Röstzwiebeln. Das Nationalgericht Ägyptens.",
+      "history": "Koshari (auch Kushari) gilt als das Nationalgericht Ägyptens und ist das allgegenwärtige Straßen- und Alltagsessen des Landes, besonders in Kairo. Es ist ein außergewöhnliches Mischgericht, das Reis, braune Linsen, kleine Nudeln und Kichererbsen in einer Schüssel vereint, gekrönt von einer würzigen, mit Essig und Knoblauch abgeschmeckten Tomatensauce und reichlich knusprig frittierten Zwiebeln. Seine Wurzeln sind ein Spiegel der Handelsgeschichte: Der Reis-Linsen-Kern erinnert an indische Gerichte wie Kichari, die Nudeln und Tomaten kamen über mediterrane und italienische Einflüsse hinzu, sodass Koshari im 19. und frühen 20. Jahrhundert in seiner heutigen Form entstand. Als rein pflanzliches, günstiges und sehr sättigendes Gericht wurde es zum Essen der einfachen Leute und ist von Natur aus vegan und ohne Schweinefleisch. Spezialisierte Koshari-Lokale servieren es in großen Mengen. Koshari verkörpert die multikulturelle, erfinderische Seite der ägyptischen Küche.",
+      "ingredients": [
+        { "quantity": "200", "unit": "g", "item": "Reis" },
+        { "quantity": "200", "unit": "g", "item": "braune Linsen" },
+        { "quantity": "150", "unit": "g", "item": "kleine Nudeln (Makkaroni und Vermicelli)" },
+        { "quantity": "200", "unit": "g", "item": "gekochte Kichererbsen" },
+        { "quantity": "3", "unit": "", "item": "Zwiebeln (zum Frittieren)" },
+        { "quantity": "500", "unit": "g", "item": "passierte Tomaten" },
+        { "quantity": "3", "unit": "Zehen", "item": "Knoblauch, 2 EL Essig" },
+        { "quantity": "1", "unit": "TL", "item": "Kreuzkümmel, Chili" },
+        { "quantity": "", "unit": "", "item": "Öl, Salz" }
+      ],
+      "instructions": [
+        "Linsen weich kochen; Reis und Nudeln separat garen.",
+        "Zwiebeln in feine Ringe schneiden und in reichlich Öl knusprig goldbraun frittieren.",
+        "Für die Sauce Knoblauch anbraten, passierte Tomaten, Essig, Kreuzkümmel und Chili zugeben und einkochen.",
+        "Reis, Linsen, Nudeln und Kichererbsen vermengen oder schichten.",
+        "Mit der würzigen Tomatensauce übergießen.",
+        "Großzügig mit den knusprigen Röstzwiebeln bestreuen und servieren."
+      ],
+      "tips": [
+        "Die Röstzwiebeln sehr knusprig frittieren — sie sind das Herz des Gerichts.",
+        "Essig und Knoblauch geben der Sauce die typische Würze.",
+        "Alle Komponenten warm zusammenführen und sofort servieren."
+      ],
+      "tags": ["Ägypten", "Koshari", "Kushari", "Reis", "Linsen", "Nudeln", "Kichererbsen", "vegan", "vegetarisch", "Röstzwiebeln", "Straßenessen", "Nationalgericht"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Ägypten",
+      "continent": "Afrika",
+      "recipe_name": "Ful medames",
+      "categories": ["Vegan", "Vegetarisch", "Frühstück", "Hauptgericht"],
+      "short_description": "Langsam geschmorte Saubohnen, zerdrückt und mit Olivenöl, Zitrone, Knoblauch und Kreuzkümmel angemacht. Ägyptens uraltes Frühstücksgericht.",
+      "history": "Ful medames — geschmorte Saubohnen (Ackerbohnen) — ist eines der ältesten und wichtigsten Gerichte der ägyptischen Küche und gilt neben Koshari als nationales Grundgericht. Seine Geschichte reicht außerordentlich weit zurück; Saubohnen gehören zu den ältesten Kulturpflanzen der Region, und Hinweise auf das Gericht oder seine Vorläufer reichen bis in die Antike. Die getrockneten Bohnen werden über viele Stunden, traditionell über Nacht, sehr langsam weich geschmort und dann zerdrückt und mit Olivenöl, Zitronensaft, Knoblauch, Kreuzkümmel und Salz angemacht; oft kommen gehackte Tomaten, Petersilie oder ein hartgekochtes Ei dazu. Ful medames ist vor allem als sättigendes, eiweißreiches Frühstück verbreitet und wird mit Fladenbrot gegessen, das zum Auftunken dient. Als günstiges, nahrhaftes Essen ist es in allen Bevölkerungsschichten beliebt und von Natur aus vegan und ohne Schweinefleisch. Ful medames verkörpert die uralte, bohnenbasierte Tradition der ägyptischen Alltagsküche.",
+      "ingredients": [
+        { "quantity": "400", "unit": "g", "item": "getrocknete Saubohnen (Ful, Ackerbohnen)" },
+        { "quantity": "4", "unit": "EL", "item": "Olivenöl" },
+        { "quantity": "2", "unit": "", "item": "Zitronen (Saft)" },
+        { "quantity": "4", "unit": "Zehen", "item": "Knoblauch" },
+        { "quantity": "1", "unit": "TL", "item": "gemahlener Kreuzkümmel" },
+        { "quantity": "2", "unit": "", "item": "Tomaten, 1 Bund Petersilie" },
+        { "quantity": "", "unit": "", "item": "Salz; Fladenbrot und Eier zum Servieren" }
+      ],
+      "instructions": [
+        "Die Saubohnen über Nacht einweichen.",
+        "In frischem Wasser sehr langsam mehrere Stunden weich schmoren, bis sie zerfallen.",
+        "Knoblauch mit Salz und Kreuzkümmel zerdrücken.",
+        "Die Bohnen teilweise zerdrücken und mit Knoblauch, Olivenöl und Zitronensaft anmachen.",
+        "Mit gewürfelten Tomaten und gehackter Petersilie verfeinern.",
+        "Warm mit Fladenbrot und nach Wunsch einem hartgekochten Ei servieren."
+      ],
+      "tips": [
+        "Sehr langes, sanftes Garen macht die Bohnen cremig.",
+        "Reichlich Zitrone, Knoblauch und Kreuzkümmel geben den typischen Geschmack.",
+        "Mit Fladenbrot zum Auftunken servieren."
+      ],
+      "tags": ["Ägypten", "Ful medames", "Saubohnen", "Ackerbohnen", "vegan", "vegetarisch", "Frühstück", "Olivenöl", "Kreuzkümmel", "antik", "Grundnahrungsmittel", "Hauptgericht"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    },
+    {
+      "country": "Ägypten",
+      "continent": "Afrika",
+      "recipe_name": "Molokhia",
+      "categories": ["Suppe", "Hauptgericht"],
+      "short_description": "Ein sämiger grüner Eintopf aus fein gehackten Jutemalvenblättern mit Knoblauch und Koriander, serviert über Reis und mit Hähnchen. Ägyptisches Traditionsgericht.",
+      "history": "Molokhia (auch Mulukhiyah) ist ein traditionsreiches Gericht der ägyptischen Küche und im gesamten östlichen Mittelmeerraum verbreitet. Es wird aus den Blättern der Jutemalve zubereitet, die fein gehackt werden und der Speise ihre charakteristische grüne Farbe und leicht schleimig-sämige Konsistenz geben. Das Gericht hat eine sehr lange Geschichte in Ägypten; Hinweise auf den Verzehr der Pflanze reichen bis in die Antike zurück, und Molokhia gilt vielen als uraltes Essen des Niltals. Die gehackten Blätter werden in einer Brühe gegart und mit einer aromatischen „Takleya“ aus in Öl oder Butter gebratenem Knoblauch und gemahlenem Koriander vollendet, die kurz vor dem Servieren untergerührt wird und den typischen Duft erzeugt. Molokhia wird klassisch über Reis und häufig mit Hähnchen, Kaninchen oder als vegetarische Variante mit Gemüsebrühe serviert. Als Gericht aus Blattgemüse und Geflügel oder rein pflanzlich ist es von Natur aus ohne Schweinefleisch und gehört zur Alltags- wie Festtagsküche Ägyptens.",
+      "ingredients": [
+        { "quantity": "500", "unit": "g", "item": "Molokhia-Blätter (frisch, TK oder getrocknet)" },
+        { "quantity": "1.2", "unit": "l", "item": "Hähnchen- oder Gemüsebrühe" },
+        { "quantity": "1", "unit": "", "item": "Hähnchen, in Teilen (optional)" },
+        { "quantity": "6", "unit": "Zehen", "item": "Knoblauch" },
+        { "quantity": "2", "unit": "TL", "item": "gemahlener Koriander" },
+        { "quantity": "3", "unit": "EL", "item": "Butter oder Öl (Takleya)" },
+        { "quantity": "", "unit": "", "item": "Salz; Reis und Fladenbrot zum Servieren" }
+      ],
+      "instructions": [
+        "Eine kräftige Brühe ansetzen (mit Hähnchen, falls verwendet, das separat gar gekocht wird).",
+        "Die Molokhia-Blätter sehr fein hacken (frisch) oder vorbereiten (TK/getrocknet).",
+        "Die Blätter in die siedende Brühe geben und bei kleiner Hitze garen; nicht stark kochen.",
+        "Für die Takleya Knoblauch fein hacken und in Butter oder Öl mit dem Koriander goldgelb braten, bis es duftet.",
+        "Die Takleya in die Molokhia einrühren — sie verströmt das typische Aroma.",
+        "Mit Salz abschmecken und über Reis, mit dem Hähnchen und Fladenbrot servieren."
+      ],
+      "tips": [
+        "Die Molokhia nur sanft garen, nicht sprudelnd kochen.",
+        "Die Takleya aus Knoblauch und Koriander ist der aromatische Schlüssel.",
+        "Über Reis und mit Fladenbrot servieren."
+      ],
+      "tags": ["Ägypten", "Molokhia", "Mulukhiyah", "Jutemalve", "Blattgemüse", "Knoblauch", "Koriander", "Eintopf", "antik", "Niltal", "Reis", "Hauptgericht"],
+      "image": { "image_type": "placeholder", "placeholder_text": "Bild folgt" }
+    }
+  ],
+  "batch_summary": {
+    "batch": 9,
+    "region": "Europa/Nordafrika",
+    "countries_processed": ["Ungarn", "Vatikanstadt", "Vereinigtes Königreich", "Belarus", "Ägypten"],
+    "recipes_created": 15,
+    "recipes_with_images": 0,
+    "recipes_with_placeholders": 15,
+    "recipes_with_pork_substitution": 1
+  }
+}
