@@ -674,3 +674,22 @@ STATUS: Entwurf v2.2 zur Sichtung; bei Freigabe Uebernahme in index.html (Plan o
 
 ## CLAUDE.MD FUER CLAUDE CODE ANGELEGT (nach Container-Reset aus Zip -2989 restauriert)
 Projekt-Root enthaelt jetzt CLAUDE.md (wird von Claude Code automatisch gelesen): Arbeitsweise, Pflicht-Workflow (SW-Bump/Handover/Kennzahlen), Architektur-Regeln, stabile Vertraege, Test-Muster inkl. aller Lektionen, Status inkl. startseite-neu-Freigabestand. Bei Regel-Aenderungen CLAUDE.md mitpflegen. Uebergabe-Paket: /mnt/user-data/outputs/heiben_remake_claudecode.zip.
+## KIT NACH GIT UEBERNOMMEN (Repo YaDa-MAX/Awesome-Design-Tools, Branch claude/heiben-claude-md-bdj8ho)
+Der komplette Kit-Bestand aus dem Uebergabe-Zip liegt jetzt versioniert im Repo-ROOT (nicht in einem
+Unterordner) — damit stimmen alle Pfade aus CLAUDE.md unveraendert: web/, tools/gen_kennzahlen.js,
+_WEITERARBEIT.md, REMAKE-KONZEPT.md. Uebernommen: web/ (101 HTML + assets/ + vendor/), docs/ (22 MD),
+app/, assets/, brand/, contract/, data/, exporte/, mock/, print/, tools/, vorlagen/,
+build-suche-index.js, build_standalone.py, UEBERGABE-NAECHSTER-CHAT.md. mock/__pycache__ verworfen und
+via .gitignore ausgeschlossen. KEINE inhaltliche Aenderung an web/ -> SW bleibt korrekt bei
+heiben-v20260622-2989 (kein Bump, weil kein Asset veraendert wurde).
+ALTBESTAND DES REPOS bleibt vorerst liegen (README.md, index.js, package.json, Media/,
+Awesome-Design-*.md, docs/ mit js|css|assets|modules|server.js|index-*.html der Fremd-Vorlage) —
+keine Dateinamen-Kollision mit dem Kit ausser CLAUDE.md (= Kit-Fassung). Aufraeumen erst auf Ansage.
+IMPORT-VERIFIKATION (headless Chromium, python3 -m http.server 8180, Noise-Filter wie in CLAUDE.md):
+alle 101 Seiten inkl. startseite-neu.html geladen -> 0 Seiten mit Befund, 0 PageErrors,
+0 Console-Errors. Struktur-Gegenprobe: 11 Bruecken-Seiten, heiben-kennzahlen.js 5/8/370/16/91/544/165,
+`grep -L heiben-design.css web/*.html` -> nur startseite-neu.html (erwartet, Standalone-Entwurf).
+NAECHSTER SCHRITT: User-Ziel "Remake des gesamten". W1-W7 sind laut Protokoll fertig; offen sind
+Freigabe/Uebernahme von startseite-neu.html v2.2 als index.html und der Backlog (gen_tagesdosis_daten.py,
+Kompendium-Stationen-Autohaken, Behoerdengaenge-Kompendium, Brutto-Netto-Rechner). Scope-Klaerung
+mit dem User vor Beginn.
