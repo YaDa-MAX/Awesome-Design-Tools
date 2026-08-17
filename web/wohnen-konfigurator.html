@@ -211,19 +211,7 @@
 <meta name="twitter:title" content="HeiBen Wohnen — 3D-Raumkonfigurator &amp; Shop" />
 <meta name="twitter:description" content="Raum dreidimensional zusammenstellen, Möbel wählen und vollständig bestellen — mit eingebauter, einfacher Verwaltung für Produkte und Räume." />
 <meta name="twitter:image" content="assets/hero-light.png" />
-<style id="hb-motion">
-/* HeiBen Motion — dezente Scroll-Reveals im Stil großer Produkt-Websites */
-html{scroll-behavior:smooth;}
-::selection{background:rgba(109,58,82,.18);}
-@keyframes hbUp{from{opacity:0;transform:translateY(26px);}to{opacity:1;transform:none;}}
-.hb-rv{opacity:0;}
-.hb-rv.hb-go{animation:hbUp .9s cubic-bezier(.16,1,.3,1) var(--hbd,0s) both;}
-.hb-rv.hb-done{opacity:1;animation:none;}
-@media (prefers-reduced-motion: reduce){
-  html{scroll-behavior:auto;}
-  .hb-rv{opacity:1!important;animation:none!important;transform:none!important;}
-}
-</style>
+<link rel="stylesheet" href="hb-motion.css">
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
@@ -4706,141 +4694,10 @@ renderRoomSwitch(); renderCatalog(); renderCart(); renderInspector();
 function start(){ if(window.THREE){ try{ initThree(); }catch(e){ webglOK=false; showNoWebGL(); } } else setTimeout(start,80); }
 start();
 </script>
-<script id="hb-motion-js">
-(function(){
-  if(!('IntersectionObserver' in window)) return;
-  if(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  var els=[];
-  document.querySelectorAll('section, header.subhero, footer').forEach(function(el){ el.classList.add('hb-rv'); els.push(el); });
-  document.querySelectorAll('[class*="grid"]').forEach(function(g){
-    if(g.closest('nav')) return;
-    Array.prototype.slice.call(g.children,0,12).forEach(function(el,i){
-      el.classList.add('hb-rv'); el.style.setProperty('--hbd',(Math.min(i,8)*0.075)+'s'); els.push(el);
-    });
-  });
-  els.forEach(function(el){
-    el.addEventListener('animationend',function h(){ el.classList.add('hb-done'); el.removeEventListener('animationend',h); });
-  });
-  var io=new IntersectionObserver(function(entries){
-    entries.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add('hb-go'); io.unobserve(en.target); } });
-  },{threshold:.05,rootMargin:'0px 0px -4% 0px'});
-  els.forEach(function(el){ io.observe(el); });
-  /* Sicherheitsnetz: nach 3s ist garantiert alles sichtbar */
-  setTimeout(function(){ els.forEach(function(el){ el.classList.add('hb-go'); }); io.disconnect(); },3000);
-})();
-</script>
+<script id="hb-motion-js" src="hb-motion.js"></script>
 <script src="heiben-konto.js"></script>
 <script id="konto-nav">window.HeiBenKonto&&HeiBenKonto.navWidget();</script>
-<script id="suche-nav">
-(function(){
-  var nav=document.querySelector('nav'); if(!nav||document.getElementById('hbSearch')) return;
-  if(getComputedStyle(nav).position==='static') nav.style.position='relative';
-  var st=document.createElement('style');
-  st.textContent='#hbSearch{position:relative;display:inline-flex;align-items:center;gap:7px;border:1px solid var(--rule,#d8cdb7);border-radius:999px;background:#fff;padding:8px 15px;margin:6px 0 6px 14px;vertical-align:middle;}'+
-   '#hbSearch .lupe{color:#a39a8a;font-size:.95rem;line-height:1;pointer-events:none;}'+
-   '#hbSearch input{border:0;background:none;outline:none;font:inherit;font-size:.85rem;color:var(--ink,#1f1c17);width:130px;transition:width .25s ease;}'+
-   '#hbSearch input::placeholder{color:#a39a8a;}'+
-   '#hbSearch:focus-within{border-color:var(--terracotta,#b04a31);}'+
-   '#hbSearch:focus-within input{width:200px;}'+
-   '#hbSearchDrop{display:none;position:absolute;top:calc(100% + 8px);left:0;min-width:300px;max-width:min(420px,92vw);background:var(--bg,#f3eee5);border:1px solid var(--rule,#d8cdb7);box-shadow:0 18px 40px rgba(31,28,23,.16);z-index:80;}'+
-   '#hbSearchDrop.open{display:block;}'+
-   '#hbSearchDrop a{display:block;padding:10px 14px;border-bottom:1px solid var(--rule,#d8cdb7);text-decoration:none;color:var(--ink,#1f1c17);font-size:.86rem;line-height:1.35;}'+
-   '#hbSearchDrop a:last-child{border-bottom:0;}'+
-   '#hbSearchDrop a:hover{background:#fff;}'+
-   '#hbSearchDrop a small{display:block;font-family:\'JetBrains Mono\',monospace;font-size:.56rem;letter-spacing:.12em;text-transform:uppercase;color:#a39a8a;margin-top:2px;}'+
-   '#hbSearchDrop .all{font-family:\'JetBrains Mono\',monospace;font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--terracotta,#b04a31);}'+
-   '@media (max-width:780px){#hbSearch{margin-left:24px;} #hbSearch input{width:34vw;} #hbSearch:focus-within input{width:42vw;} #hbSearchDrop{position:fixed;left:12px;right:12px;min-width:0;max-width:none;}}';
-  document.head.appendChild(st);
-  var form=document.createElement('form'); form.id='hbSearch'; form.setAttribute('role','search');
-  form.innerHTML='<span class="lupe" aria-hidden="true">⌕</span><input id="hbSearchInput" type="search" placeholder="Suche" autocomplete="off" aria-label="Suche" /><div id="hbSearchDrop" role="listbox"></div>';
-  var k=document.getElementById('hbKontoNav');
-  if(k) nav.insertBefore(form,k); else nav.appendChild(form);
-  var inp=form.querySelector('input'), drop=form.querySelector('#hbSearchDrop');
-  var IDX=null, loading=false;
-  function loadIdx(cb){
-    if(window.HEIBEN_SUCHE){ IDX=window.HEIBEN_SUCHE; cb(); return; }
-    if(loading) return; loading=true;
-    var sc=document.createElement('script'); sc.src='suche-index.js';
-    sc.onload=function(){ IDX=window.HEIBEN_SUCHE||[]; cb(); };
-    document.head.appendChild(sc);
-  }
-  var GR={rezept:'Rezept · Kulinarik',lebenswissen:'Lebenswissen · Studio',magazin:'Magazin · Studio',schaufenster:'Schaufenster',seite:'Seite'};
-  function esc(t){ return String(t).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
-  function suggest(){
-    var q=inp.value.trim().toLowerCase();
-    if(q.length<2||!IDX){ drop.classList.remove('open'); return; }
-    var words=q.split(/\s+/).filter(Boolean), hits=[];
-    for(var i=0;i<IDX.length&&hits.length<60;i++){
-      var e=IDX[i], h=e.h.toLowerCase(), s=(e.s||'').toLowerCase(), x=(e.x||'').toLowerCase(), sc=0, ok=true;
-      for(var w=0;w<words.length;w++){
-        var ww=words[w];
-        if(h.indexOf(ww)>=0) sc+=(h.indexOf(ww)===0?5:3);
-        else if(s.indexOf(ww)>=0) sc+=2;
-        else if(x.indexOf(ww)>=0) sc+=1;
-        else { ok=false; break; }
-      }
-      if(ok) hits.push([sc,e]);
-    }
-    hits.sort(function(a,b){return b[0]-a[0];});
-    if(!hits.length){ drop.innerHTML='<a class="all" href="suche.html?q='+encodeURIComponent(inp.value)+'">Keine Schnelltreffer — alle Ergebnisse ansehen →</a>'; drop.classList.add('open'); return; }
-    drop.innerHTML=hits.slice(0,7).map(function(hh){
-      var e=hh[1];
-      return '<a href="'+esc(e.u)+'">'+esc(e.h)+'<small>'+esc(GR[e.t]||e.t)+'</small></a>';
-    }).join('')+'<a class="all" href="suche.html?q='+encodeURIComponent(inp.value)+'">Alle Ergebnisse ('+hits.length+(hits.length>=60?'+':'')+') →</a>';
-    drop.classList.add('open');
-  }
-  var t=null;
-  inp.addEventListener('focus',function(){ loadIdx(suggest); });
-  inp.addEventListener('input',function(){ clearTimeout(t); t=setTimeout(function(){ loadIdx(suggest); },130); });
-  form.addEventListener('submit',function(e){ e.preventDefault(); var q=inp.value.trim(); if(q) location.href='suche.html?q='+encodeURIComponent(q); });
-  document.addEventListener('click',function(e){ if(!form.contains(e.target)) drop.classList.remove('open'); });
-  document.addEventListener('keydown',function(e){ if(e.key==='Escape') drop.classList.remove('open'); });
-})();
-</script>
-<script id="hb-pwa">
-(function(){
-  /* Service-Worker registrieren */
-  if('serviceWorker' in navigator){
-    window.addEventListener('load',function(){ navigator.serviceWorker.register('service-worker.js').catch(function(){}); });
-  }
-  /* Bereits als App installiert? Dann keine Aufforderung. */
-  function standalone(){ return window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone===true; }
-  if(standalone()) return;
-  try{ if(localStorage.getItem('heiben-pwa-dismiss')==='1') return; }catch(e){}
-  var deferred=null;
-  function bar(html){
-    if(document.getElementById('hbInstall')) return document.getElementById('hbInstall');
-    var d=document.createElement('div'); d.id='hbInstall';
-    d.style.cssText='position:fixed;left:12px;right:12px;bottom:12px;z-index:9000;max-width:520px;margin:0 auto;background:var(--ink,#1f1c17);color:#f3eee5;border-radius:14px;padding:13px 14px;box-shadow:0 14px 40px rgba(31,28,23,.35);display:flex;align-items:center;gap:12px;font-family:Manrope,system-ui,sans-serif;';
-    d.innerHTML=html;
-    document.body.appendChild(d); return d;
-  }
-  function dismiss(){ try{localStorage.setItem('heiben-pwa-dismiss','1');}catch(e){} var b=document.getElementById('hbInstall'); if(b) b.remove(); }
-  /* Android / Desktop-Chromium: echtes Installieren */
-  window.addEventListener('beforeinstallprompt',function(e){
-    e.preventDefault(); deferred=e;
-    var d=bar('<img src="assets/favicon-192.png" alt="" style="width:38px;height:38px;border-radius:9px;flex:0 0 auto" />'+
-      '<div style="flex:1;line-height:1.35"><b style="font-size:.92rem">HeiBen als App installieren</b><br><span style="font-size:.78rem;opacity:.8">Schnellzugriff, Offline-Nutzung, eigenes Symbol.</span></div>'+
-      '<button id="hbInstBtn" style="flex:0 0 auto;border:0;border-radius:8px;background:#b04a31;color:#fff;padding:9px 13px;font-family:\'JetBrains Mono\',monospace;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;cursor:pointer">Installieren</button>'+
-      '<button id="hbInstX" aria-label="Schließen" style="flex:0 0 auto;border:0;background:none;color:#f3eee5;font-size:1.1rem;cursor:pointer;opacity:.7">✕</button>');
-    d.querySelector('#hbInstBtn').addEventListener('click',function(){ if(!deferred) return; deferred.prompt(); deferred.userChoice.then(function(){ deferred=null; var b=document.getElementById('hbInstall'); if(b) b.remove(); }); });
-    d.querySelector('#hbInstX').addEventListener('click',dismiss);
-  });
-  window.addEventListener('appinstalled',function(){ var b=document.getElementById('hbInstall'); if(b) b.remove(); });
-  /* iOS Safari: kein beforeinstallprompt -> Hinweis „Teilen -> Zum Home-Bildschirm" */
-  var ua=navigator.userAgent||'';
-  var isIOS=/iphone|ipad|ipod/i.test(ua);
-  var isSafari=/safari/i.test(ua)&&!/crios|fxios|edgios/i.test(ua);
-  if(isIOS&&isSafari){
-    setTimeout(function(){
-      if(standalone()||document.getElementById('hbInstall')) return;
-      var d=bar('<img src="assets/favicon-192.png" alt="" style="width:38px;height:38px;border-radius:9px;flex:0 0 auto" />'+
-        '<div style="flex:1;line-height:1.35"><b style="font-size:.92rem">Zum Home-Bildschirm hinzufügen</b><br><span style="font-size:.78rem;opacity:.8">Tippen Sie auf <b>Teilen</b> ▵ und dann „Zum Home-Bildschirm".</span></div>'+
-        '<button id="hbInstX" aria-label="Schließen" style="flex:0 0 auto;border:0;background:none;color:#f3eee5;font-size:1.1rem;cursor:pointer;opacity:.7">✕</button>');
-      d.querySelector('#hbInstX').addEventListener('click',dismiss);
-    },1600);
-  }
-})();
-</script>
+<script id="suche-nav" src="hb-suche-nav.js"></script>
+<script id="hb-pwa" src="hb-pwa.js"></script>
 </body>
 </html>

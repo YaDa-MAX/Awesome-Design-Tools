@@ -1,0 +1,17 @@
+/* HeiBen — ausgelagert aus 34 Seiten (Remake v3, Welle 1).
+   Inhalt wortgleich uebernommen, nicht ueberarbeitet. */
+/* HeiBen Menü: Burger auf allen Größen + Werkzeuge; mobile Korrekturen */
+#hbBurger{display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;border:1px solid var(--rule,#d8cdb7);background:none;font-size:1.15rem;line-height:1;cursor:pointer;color:var(--ink,#1f1c17);margin-left:10px;}
+#hbBurger:hover{border-color:var(--terracotta,#b04a31);color:var(--terracotta,#b04a31);}
+#hbMobileMenu{display:none;position:absolute;top:100%;right:0;left:0;background:var(--bg,#f3eee5);border-bottom:1px solid var(--rule,#d8cdb7);padding:6px 24px 14px;z-index:70;box-shadow:0 18px 40px rgba(31,28,23,.12);}
+#hbMobileMenu.open{display:flex;flex-direction:column;}
+#hbMobileMenu a{padding:12px 0;border-bottom:1px solid var(--rule,#d8cdb7);text-decoration:none;color:var(--ink,#1f1c17);font-family:'JetBrains Mono',monospace;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;}
+#hbMobileMenu a:last-child{border-bottom:0;}
+#hbMobileMenu .hb-mlabel{margin:14px 0 2px;font-family:'JetBrains Mono',monospace;font-size:.56rem;letter-spacing:.22em;text-transform:uppercase;color:var(--terracotta,#b04a31);}
+@media (min-width:781px){
+  #hbMobileMenu{left:auto;width:320px;border:1px solid var(--rule,#d8cdb7);}
+}
+.hero.wrap{padding-left:24px;padding-right:24px;}
+@media (max-width:780px){
+  .hero.wrap{padding-left:24px!important;padding-right:24px!important;}
+}

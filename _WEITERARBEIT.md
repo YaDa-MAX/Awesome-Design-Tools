@@ -730,3 +730,55 @@ HTML 6,2 -> ~3,0 MB, Kopf 101/101, Offline 101/101, mein-heiben <120 KB.
 OFFEN — 3 Entscheidungen vor W1 (siehe REMAKE-KONZEPT-V3.md §6): (1) Reihenfolge Substanz-zuerst vs.
 Startseite-vorziehen, (2) Backoffice-Schicht behalten+rahmen oder aus der Sitemap nehmen,
 (3) Repo-Altbestand der Fork-Vorlage Awesome-Design-Tools entfernen?
+
+## REMAKE V3 · WELLE 1: ENTDOPPELUNG + BILDER ALS DATEIEN (SW -2990)
+User-Entscheide vorab: (1) Substanz zuerst, Startseite zuletzt; (2) Backoffice-Seiten behalten und
+als interner Bereich rahmen (-> V3-W6); (3) vom Fork-Altbestand nur README.md ersetzen.
+NEU tools/entdoppeln.py (Pruef-/Anwendungslauf, Mapping-Tabelle md5-Praefix -> Zieldatei; nur was
+dort steht, wird angefasst). AUSGELAGERT aus dem Markup, WORTGLEICH:
+- styles.css (46,9K) — Leitfassung fuer 29 Seiten. WICHTIG: styles.css war ein TOTES File (von 0
+  Seiten verlinkt, build_standalone.py inlined es); die lebenden Kopien lagen inline und waren in
+  DREI Fassungen auseinandergedriftet. Unterschiede exakt: .cross-grid.quad repeat(4) vs repeat(5)
+  und die Regel .cross-card.kulinarik. BEIDE Selektoren kommen im Markup NUR in familie.html vor,
+  und familie.html trug bereits die Leitfassung -> Zusammenfuehrung ergebnisgleich fuer jede Seite.
+  styles.css traegt jetzt die Leitfassung, damit build_standalone.py weiter stimmt.
+- hb-bestand-redaktion.css (37,9K x2), hb-bestand-statisch.css (12,4K x6), hb-weltmosaik.css (2,8K x8),
+  hb-menue.css (1,5K x34), hb-motion.css (0,6K x42)
+- hb-kulinarik-core.js (21,6K x5), hb-schaufenster-core.js (12,5K x3), hb-magazin-core.js (11,5K x3),
+  hb-anfrage-core.js (11,5K x3), hb-anfrage-app.js (9,5K x3), hb-suche-nav.js (5,0K x25),
+  hb-pwa.js (3,6K x42), hb-motion.js (1,3K x37)
+  (mehrere trugen den Kommentar "eingebunden aus _src/...-core.js" — die Auslagerung stellt den
+  urspruenglichen Zustand wieder her; ein _src/ existiert im Kit nicht mehr.)
+BILDER: alle 20 base64-Vorkommen (1.195 KB) durch assets/-Dateien ersetzt — jede war md5-identisch
+mit einer bereits vorhandenen Datei (wordmark-*, hero-light). Einziger Rest: ein 0-KB-webp-Pruefpixel
+in wohnen-konfigurator.html (kein Asset, bleibt).
+SERVICE-WORKER: 16 Eintraege ergaenzt (die 13 neuen Dateien + styles.css + heiben-design.css +
+heiben-nav.js — die drei letzten waren NIE precached, d.h. das Fundament fehlte offline schon vorher).
+Precache jetzt 127 Eintraege, alle Dateien existieren. Version -2989 -> -2990.
+ERGEBNIS: HTML 6.204 KB -> 2.901 KB (-53,2%), O 61 -> 29 KB/Seite. base64 19,3% -> 0%. Restliche
+byte-identische Redundanz 28 KB (1,0%). 42 von 101 Seiten veraendert, 31.040 Zeilen entfernt.
+VERIFIKATION (Vorher-Stand via `git archive HEAD web` auf Port 8181, Nachher auf 8180):
+- LAYOUT-FINGERABDRUCK je Seite (jedes sichtbare Element: Tag/Klasse/x/y/Breite/Hoehe + color,
+  background, font-size/weight, display, grid-template-columns, border-top-color), 42/42 geaenderte
+  Seiten: 41 exakt identisch. index.html zeigte 6 Elemente mit 0,5px Y-Versatz.
+- DIAGNOSE index.html: der Nachher-Stand wich AUCH VON SICH SELBST ab (Kontrolllauf 8180 vs 8180),
+  Vorher jittert 431,76/431,99, Nachher 431,99/432,25 — kein Vorgaenger und kein Vorfahr aendert die
+  Hoehe. Gegenprobe MIT `document.fonts.ready` + 1,5s + 2 rAF: Vorher 430,250 / Nachher 430,250 in je
+  6 Laeufen, exakt gleich. -> Schrift-Swap-Timing des Messverfahrens, KEINE Layoutaenderung.
+  LEKTION fuer kuenftige Vorher/Nachher-Messungen: immer auf document.fonts.ready warten, sonst
+  misst man den Font-Swap statt des Layouts.
+- node --check ueber alle 13 neuen JS-Dateien: fehlerfrei.
+- SWEEP: alle 101 Seiten -> 0 PageErrors, 0 Console-Errors.
+AUSSERDEM: README.md durch eine HeiBen-Fassung ersetzt (Fork-Herkunft und Vorlagen-Dateien darin
+benannt); CLAUDE.md fortgeschrieben (SW -2990/naechste -2991, Regel "gemeinsame Dateien IMMER
+precachen", Regel "nie wieder inlinen, Bilder nie als base64", Status v3).
+NEBENBEFUNDE fuer spaetere Wellen (NICHT angefasst): (a) nur noch 4 Seiten haben ueberhaupt ein
+<nav>-Element, hb-suche-nav.js haengt aber an `document.querySelector('nav')` -> auf ~21 der 25
+Seiten wirkungslos; (b) hb-bestand-statisch.css (12,4K) und hb-bestand-redaktion.css (37,9K) sind
+aeltere Teilfassungen desselben Stylesheets — Zusammenfuehrung erst nach Sichtpruefung, NICHT
+blind; (c) inline-JS ist jetzt 63,5% des HTML (1.841 KB), Spitzenreiter wohnen-konfigurator.html
+mit 752 KB in EINER Seite.
+NAECHSTER SCHRITT bei "Weiter": V3-W2 KOPF-GENERATOR — tools/seiten.json (Welt/Titel/Description/Typ
+je Seite) + tools/gen_kopf.js schreibt einen normierten Kopfblock zwischen <!-- hb:kopf --> Marker:
+description/canonical/og/twitter/theme-color in Weltfarbe/manifest/Favicons/heiben-design.css/
+heiben-nav.js/heiben-legal.js/SW-Registrierung/JSON-LD. Ziel: Audit-Abschnitt 2 auf 101/101.

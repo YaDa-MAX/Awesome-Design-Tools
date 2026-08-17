@@ -15,12 +15,17 @@ Statisches HTML/JS/CSS-**PWA ohne Build-Schritt**, offline-fähig, localStorage.
 
 ## Pflicht-Workflow nach JEDER Änderung unter web/
 1. Service-Worker-Version bumpen: `web/service-worker.js`, Muster `heiben-v20260622-NNNN`
-   (aktuell **-2989**, nächste -2990). Neue Standalone-Seiten NICHT precachen.
+   (aktuell **-2990**, nächste -2991). Neue Standalone-Seiten NICHT precachen; neue *gemeinsame*
+   Dateien (CSS/JS) dagegen IMMER in `PRECACHE` aufnehmen, sonst bricht Offline.
 2. `_WEITERARBEIT.md`: alte Versionsnummern ersetzen + neuen Abschnitt anhängen (Guard gegen Doppel).
 3. Nach Datenänderungen (`web/*-daten.js`, Begriffskarten): `cd web && node ../tools/gen_kennzahlen.js`.
 
 ## Architektur-Regeln (Remake-Fundament, W1–W7 abgeschlossen)
 - `web/heiben-design.css`: **ausschließlich `.hb-`-Klassen, nie Element-Selektoren** (Kollisionsschutz).
+- Gemeinsame Bestands-Stile/Skripte liegen seit v3-W1 als Dateien vor (`styles.css` = Leitfassung
+  auf 29 Seiten, `hb-menue.css`, `hb-motion.css/.js`, `hb-pwa.js`, `hb-suche-nav.js`,
+  `hb-*-core.js` …). **Nie wieder inlinen** — `build_standalone.py` ist die einzige Ausnahme
+  (erzeugt bewusst eigenständige Einzelseiten). Bilder immer aus `assets/`, nie als base64.
 - `web/heiben-nav.js`: baut `div role="banner"`/`div role="navigation"` — **niemals `header`/`nav`-Elemente**
   (Bestand stylt `nav{}` als Element-Selektor). Einbau je Seite: `<link heiben-design.css>` +
   `<script heiben-nav.js defer>` vor `</head>` + `<body data-hb-welt="reisen|wohnen|immobilien|studio|kulinarik|wissen|konto|holding">`.
@@ -51,6 +56,9 @@ Statisches HTML/JS/CSS-**PWA ohne Build-Schritt**, offline-fähig, localStorage.
 ## Status & Nächstes
 - Remake-Wellen 1–7 fertig: 100/100 Seiten auf dem Fundament, 11 Brücken, QS-Protokoll in
   `_WEITERARBEIT.md`. MCP/W8 **gestrichen**.
+- **Remake v3 läuft** (Blaupause `REMAKE-KONZEPT-V3.md`, Messinstrument `tools/audit_v3.py`).
+  V3-W1 fertig: Entdoppelung + Bilder als Dateien, HTML 6,2 → 2,9 MB, bewiesen unsichtbar.
+  Nächste Welle: **V3-W2 Kopf-Generator** (`tools/gen_kopf.js` + `tools/seiten.json`).
 - `web/startseite-neu.html` = **Freigabe-Entwurf v2.2** (nicht verlinkt, nicht precached):
   Scrollytelling mit 5 CSS-3D-Objekten (Koffer/Haus/Tür/Glühbirne/Kochtopf), Lebenslinien-Regie
   (ein→pin→aus, globale Lerp-Glättung SY mit Teleport-Snap), Bewegungsprofile je Objekt (MOTION),

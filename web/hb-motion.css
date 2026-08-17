@@ -1,0 +1,13 @@
+/* HeiBen — ausgelagert aus 42 Seiten (Remake v3, Welle 1).
+   Inhalt wortgleich uebernommen, nicht ueberarbeitet. */
+/* HeiBen Motion — dezente Scroll-Reveals im Stil großer Produkt-Websites */
+html{scroll-behavior:smooth;}
+::selection{background:rgba(109,58,82,.18);}
+@keyframes hbUp{from{opacity:0;transform:translateY(26px);}to{opacity:1;transform:none;}}
+.hb-rv{opacity:0;}
+.hb-rv.hb-go{animation:hbUp .9s cubic-bezier(.16,1,.3,1) var(--hbd,0s) both;}
+.hb-rv.hb-done{opacity:1;animation:none;}
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto;}
+  .hb-rv{opacity:1!important;animation:none!important;transform:none!important;}
+}

@@ -1,5 +1,5 @@
 /* HeiBen Service-Worker — Offline-Fähigkeit & App-Shell (v20260615-1323) */
-const CACHE='heiben-v20260622-2989';
+const CACHE='heiben-v20260622-2990';
 const PRECACHE=[
   "index.html",
   "404.html",
@@ -111,7 +111,24 @@ const PRECACHE=[
   "kulinarik-kochbuch.html",
   "kulinarik-mealplanner.html",
   "heiben-wachstum.html",
-  "kulinarik-app.html"
+  "kulinarik-app.html",
+  /* Remake v3 · Welle 1 — ausgelagerte gemeinsame Dateien */
+  "styles.css",
+  "heiben-design.css",
+  "heiben-nav.js",
+  "hb-bestand-redaktion.css",
+  "hb-bestand-statisch.css",
+  "hb-weltmosaik.css",
+  "hb-menue.css",
+  "hb-motion.css",
+  "hb-motion.js",
+  "hb-pwa.js",
+  "hb-suche-nav.js",
+  "hb-kulinarik-core.js",
+  "hb-schaufenster-core.js",
+  "hb-magazin-core.js",
+  "hb-anfrage-core.js",
+  "hb-anfrage-app.js"
 ];
 self.addEventListener('install',function(e){
   self.skipWaiting();
