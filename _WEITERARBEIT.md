@@ -693,3 +693,40 @@ NAECHSTER SCHRITT: User-Ziel "Remake des gesamten". W1-W7 sind laut Protokoll fe
 Freigabe/Uebernahme von startseite-neu.html v2.2 als index.html und der Backlog (gen_tagesdosis_daten.py,
 Kompendium-Stationen-Autohaken, Behoerdengaenge-Kompendium, Brutto-Netto-Rechner). Scope-Klaerung
 mit dem User vor Beginn.
+
+## REMAKE V3 — BLAUPAUSE + SUBSTANZ-AUDIT (keine web/-Aenderung, SW bleibt -2989)
+User-Auftrag: "Neue Remake Runde ueber alles bestehende". Erstes Deliverable = Blaupause, gestuetzt
+auf ein GEMESSENES Audit statt auf Annahmen. Neu: REMAKE-KONZEPT-V3.md (Arbeitsplan, ersetzt v2 als
+Plan; REMAKE-KONZEPT.md bleibt als Historie) + tools/audit_v3.py (reproduzierbares Messinstrument,
+Aufruf `cd web && python3 ../tools/audit_v3.py`, 8 Abschnitte, dient als Fortschrittsbeleg je Welle).
+LEITSATZ V3: v2 hat den RAHMEN vereinheitlicht (Nav/Design auf 100 Seiten), v3 vereinheitlicht, WAS
+IM RAHMEN STEHT.
+AUDIT-BEFUNDE (Ist bei SW -2989, 101 Seiten):
+- GEWICHT: 6.204 KB HTML (O 61 KB/Seite); inline style 33,1% / inline script 38,5% / base64 19,3%.
+  1.874 KB liegen BYTE-IDENTISCH mehrfach (46-KB-CSS-Block in 29 Seiten = faktisch styles.css,
+  3-KB-JS in 42, 5-KB-JS in 25); mit base64 zusammen 3.069 KB = 49,5% des HTML vermeidbar.
+  index.html besteht zu 88% aus base64-Bildern, die als assets/hero-*.png schon existieren.
+- KOPF: design.css 100/101, nav 99/101, ABER description 52, og 35, theme-color 42, SW-Reg 42,
+  manifest 41, heiben-legal.js 29, JSON-LD 2, canonical 0. -> PWA laeuft auf <50% der Seiten,
+  Disclaimer-Schicht auf 29.
+- AUFFINDBARKEIT: 0 kaputte Links, aber 21 VERWAISTE Seiten (14 davon Rechner/Werkzeuge). Suchindex
+  348 Eintraege auf nur 18 Zielseiten (indexiert Inhalte, keine Seiten) -> 83 Seiten unauffindbar.
+  v2 §2.1 "Werkzeuge wohnen in ihrer Welt" ist NICHT umgesetzt (Nav ja, Verlinkung nein).
+- OFFLINE: 62/101 precached; NICHT dabei alle 8 Kompendien, wissen.html, lernpfade, begriffskarten,
+  tagesdosis, mein-heiben, zuhause-ordner -> Offline bricht genau am Wissenskern.
+- SPEICHER: 88 distinkte localStorage-Schluessel in ZWEI Schemata (59x heiben-..., 29x heiben_..._v1),
+  kein Register, kein Export/Import; mein-heiben liest 5 davon -> die "Klammer" klammert nicht.
+- KANON: heiben-firmierungen.js nur auf 7/101 Seiten eingebunden, Weltfarben ~1.050x hart kodiert.
+- GEWICHTUNG: wissen 31 / holding 22 / kulinarik 12 / wohnen 10 / studio 9 / immobilien 5 / konto 5 /
+  reisen 5 -> die fuenf OPERATIVEN Welten stellen nur 41% des Bestands. 11 Backoffice-Seiten.
+- LADELAST: mein-heiben 909 KB (laedt lebenswissen-daten 649K + tagesdosis-daten 206K komplett),
+  wohnen-konfigurator 798 KB, index 450 KB, wissen 356 KB — startseite-neu 34 KB (Massstab!).
+PLAN: E1 gen_kopf.js+seiten.json | E2 Entdoppelung (styles.css verlinken statt inlinen) | E3 base64
+raus | E4 heiben-speicher.js (Register+Export/Import, Schluesselnamen UNVERAENDERT) | E5 Weltfarben
+nur noch aus der Registry | E6 heiben-werkzeuge.js + Seiten-Index in der Suche | E7 Precache
+generiert + Datenmodul-Kurzfassungen. Wellen V3-W1..W7 mit je einem verifizierten Deliverable;
+W1-W3 ausdruecklich UNSICHTBAR (kein sichtbares Ergebnis darf sich aendern). Ziel nach W1-W3:
+HTML 6,2 -> ~3,0 MB, Kopf 101/101, Offline 101/101, mein-heiben <120 KB.
+OFFEN — 3 Entscheidungen vor W1 (siehe REMAKE-KONZEPT-V3.md §6): (1) Reihenfolge Substanz-zuerst vs.
+Startseite-vorziehen, (2) Backoffice-Schicht behalten+rahmen oder aus der Sitemap nehmen,
+(3) Repo-Altbestand der Fork-Vorlage Awesome-Design-Tools entfernen?
