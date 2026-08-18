@@ -1,5 +1,5 @@
 # HeiBen Remake — Blaupause v3 · Substanz-Fassung
-Stand: SW `heiben-v20260622-2989` · 101 Seiten · Messgrundlage `tools/audit_v3.py`
+Stand: SW `heiben-v20260622-2992` · 102 Seiten · Messgrundlage `tools/audit_v3.py`
 Auftrag: „Neue Remake-Runde über alles bestehende."
 Verhältnis zu v2: **v3 ist der neue Arbeitsplan**, `REMAKE-KONZEPT.md` (v2) bleibt als Historie
 liegen — die dort getroffenen Struktur- und Geschäftsmodell-Entscheide gelten unverändert weiter.
@@ -146,8 +146,13 @@ Drei Ziele, in dieser Reihenfolge:
 3. **Geschäftsmodell schärfen.** Die fünf Welten tragen die Fiktion — nicht das Backoffice.
    Reisen und Immobilien auf Augenhöhe bringen; „Mein HeiBen" zur echten Klammer machen.
 
-**Nicht-Ziele (ausdrücklich):** kein Framework, kein Build-Schritt zur Laufzeit, kein neues
-Design-System, keine Neuerfindung der fünf Welten, keine Änderung an den Fiktions-Fakten.
+**Nicht-Ziele (ausdrücklich):** kein Framework, kein Build-Schritt zur Laufzeit, keine
+Neuerfindung der fünf Welten, keine Änderung an den Fiktions-Fakten.
+
+> *Nachtrag zu v3-W3:* „kein neues Design-System" stand hier ursprünglich ebenfalls. Der Auftrag
+> „Designgrundstruktur und Aufbau aller Animationen überdenken" hat das aufgehoben — die
+> Grundstruktur ist neu gefasst (§ 3a). Die **Marken-DNA bleibt unverändert**: dieselbe warme
+> Palette, dieselben Schriften, dieselben Weltfarben. Neu ist die Ordnung, nicht der Ausdruck.
 Werkzeuge unter `tools/` sind Pflegewerkzeuge (wie `gen_kennzahlen.js`), kein Build.
 
 ---
@@ -194,17 +199,53 @@ Detailseite.
 
 ---
 
+## 3a. Designgrundstruktur (v3-W3, umgesetzt)
+
+Das Audit der Gestaltungsebene über alle 152 Stilquellen ergab: **104 Hex-Farben** und 98
+rgb/rgba-Werte, **160 verschiedene `font-size`-Werte**, 24 Radien, 37 Schatten, 47
+`transition`-Werte — und **87 Custom Properties in 834 Deklarationen**, weil praktisch jede Seite
+ihren eigenen `:root`-Block mitbringt (`--bg` allein 67-mal neu definiert). `prefers-reduced-motion`
+wurde in **4 von 152** Quellen beachtet. Das ist keine Geschmacksfrage, sondern fehlende Grammatik.
+
+**Entscheid: Rollen statt Werte.** `heiben-design.css` trägt jetzt vier Ebenen:
+
+| Ebene | Inhalt |
+|---|---|
+| 1 Tokens | Fläche · Schrift · Linie · Akzent/Signal · Weltfarben · Schriftskala (9 Stufen, `clamp()`) · Raum (4-px-Raster) · Form · Höhe · **Bewegung** · Ebenen |
+| 2 Weltzuweisung | `[data-hb-welt]` setzt `--hb-welt`; Bauteile nennen nie eine Weltfarbe |
+| 3 Bestand v2 | die Bauteile aus W1, Zeichen für Zeichen unverändert — ihre Tokens zeigen nur noch auf die Rollen (gleiche Werte) |
+| 4 Bausteine v3 | Gerüst, Schrift, Raster, Fläche, Weltkachel, Taste, Marke, Wert/Band, Notiz, Steckbrief, Feld, Bühne |
+
+**Bewegung bekommt eine Grammatik.** Bisher gab es *einen* Effekt, ausgewählt über Element- und
+Substring-Treffer (`section`, `footer`, `[class*="grid"]`) — und bei Bewegungsruhe stieg das Skript
+komplett aus. Neu:
+
+- **Vokabular in Tokens**: fünf Dauern (90/180/320/620/900 ms), vier Kurven, drei Wege, eine Stufung.
+  Die Altwerte waren exakt `--hb-zeit-szene` + `--hb-ease-ein` + `--hb-weg-mittel` — der Bestand
+  bleibt dadurch unverändert.
+- **Ansage statt Rateverfahren**: `data-hb-motion="auf|ein|skala|seite|linie"` im Markup. Die Seite
+  sagt *was*, `hb-motion.js` sagt nur *wann*. Stufung ergibt sich aus der Geschwisterfolge.
+- **Zwei Pfade, ein Beobachter**: der Bestandspfad ist eingefroren; `<body data-hb-regie="ansage">`
+  schaltet ihn ab, damit neue Seiten nur zeigen, was sie ansagen.
+- **Bewegungsruhe ist eine Einstellung, kein Ausstieg**: die Token-Dauern und -Wege gehen auf null,
+  die Gestalt bleibt, der Inhalt bleibt sichtbar — und die Einstellung wird zur Laufzeit nachgezogen.
+
+Vorführung und Regelwerk: **`web/designsystem.html`**.
+
+---
+
 ## 4. Wellenplan v3 — je eine Welle, je ein verifiziertes Deliverable
 
-| Welle | Inhalt | Verifikation |
+| Welle | Inhalt | Stand |
 |---|---|---|
-| **V3-W1** | **E2 + E3: Entdoppelung & Bilder.** Reine Substanz-Operation, kein sichtbarer Unterschied. | `audit_v3.py`: HTML < 3,3 MB · visueller Vorher/Nachher-Abgleich auf 6 Leitseiten · 0 PE |
-| **V3-W2** | **E1: Kopf-Generator** + `tools/seiten.json` für alle 101 Seiten. | Audit §2: alle Merkmale 101/101 · Manifest/SW auf jeder Seite · 0 PE |
-| **V3-W3** | **E7: Offline & Ladelast.** Precache generiert, Datenmodule geteilt. | Audit §4: 100/100 precached · `mein-heiben` < 120 KB · Offline-Test (Netz aus, 10 Seiten) |
-| **V3-W4** | **E6: Auffindbarkeit.** Werkzeug-Register in die Welten, Seiten-Index in die Suche. | Audit §3: 0 Waisen · Suche findet jede Seite über ihren Titel · 0 PE |
-| **V3-W5** | **E4 + E5: Speicher-Vertrag & Farbkanon.** `mein-heiben` wird echtes Cockpit über alle Welten, mit Export/Import. | Audit §5/§6 · Persistenz-Test je Welt · Export→Reset→Import stellt Stand her · 0 PE |
-| **V3-W6** | **Welt-Balance.** Reisen und Immobilien auf Augenhöhe (Substanz, nicht Seitenzahl); Entscheid über die 11 Backoffice-Seiten (§ 6, Frage 2). | Audit §7 · Brücken-Check · 0 PE |
-| **V3-W7** | **Startseite + Gesamt-QS.** Übernahme `startseite-neu.html` → `index.html` nach dem in `_WEITERARBEIT.md` festgehaltenen Plan; Abschluss-Sweep über die komplette Sitemap. | Volles Audit · 101/101 Seiten 0 PE/0 Console-Errors · Abschlussprotokoll |
+| **V3-W1** | **E2 + E3: Entdoppelung & Bilder.** | **fertig** — HTML 6.204 → 2.901 KB (−53,2 %), Layout-Fingerabdruck 42/42 Seiten unverändert, 0 PE |
+| **V3-W2** | **E1: Kopf-Generator** + `tools/seiten.json`. | **fertig** — Kopf 100/100, Sitemap 18 → 88 URLs, 11 Seiten auf noindex, 100/100 layoutneutral, 0 PE |
+| **V3-W3** | **Designgrundstruktur & Bewegung** (§ 3a) — vorgezogen auf Wunsch. | **fertig** — Token-Ebene, Weltzuweisung, Bausteine v3, Bewegungsgrammatik, `designsystem.html` |
+| **V3-W4** | **E7: Offline & Ladelast.** Precache generiert, Datenmodule geteilt. | Audit § 4: 100/100 precached · `mein-heiben` < 120 KB · Offline-Test |
+| **V3-W5** | **E6: Auffindbarkeit.** Werkzeug-Register in die Welten, Seiten-Index in die Suche. | Audit § 3: 0 Waisen · Suche findet jede Seite |
+| **V3-W6** | **E4 + E5-Rollout: Speicher-Vertrag & Farbkanon.** Die ~1.050 hart kodierten Weltfarben auf `var(--hb-welt)` umstellen; `mein-heiben` als echtes Cockpit mit Export/Import. | Audit § 5/§ 6 · Persistenz- und Export-Test |
+| **V3-W7** | **Welt-Balance & Backoffice-Rahmung.** Reisen und Immobilien auf Augenhöhe; die 11 internen Seiten sichtbar als interner Bereich rahmen (Entscheid des Users). | Audit § 7 · Brücken-Check |
+| **V3-W8** | **Startseite + Gesamt-QS.** Übernahme `startseite-neu.html` → `index.html`; Abschluss-Sweep. | volles Audit · 0 PE überall · Abschlussprotokoll |
 
 Pro Welle gilt der Pflicht-Workflow aus CLAUDE.md: SW-Version bumpen, `_WEITERARBEIT.md`
 fortschreiben, nach Datenänderungen `gen_kennzahlen.js` laufen lassen.

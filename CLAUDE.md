@@ -5,7 +5,7 @@ Fiktive Kölner Familienholding **HeiBen** („Heimat leben", GmbH i. G., GF imm
 & Katharina Hein) mit **fünf Welten**: Reisen `#a97a1d` · Wohnen `#4a5c39` · Immobilien `#792d29`
 · Studio `#1f1c17` · Kulinarik `#6b3951` (kanonisch: `web/heiben-firmierungen.js`).
 Statisches HTML/JS/CSS-**PWA ohne Build-Schritt**, offline-fähig, localStorage. Web-Root: `web/`
-(101 Seiten). Blaupause: `REMAKE-KONZEPT.md`. Fortlaufendes Log & Detailwissen: `_WEITERARBEIT.md`
+(102 Seiten). Blaupause: `REMAKE-KONZEPT.md`. Fortlaufendes Log & Detailwissen: `_WEITERARBEIT.md`
 (IMMER lesen, IMMER fortschreiben).
 
 ## Arbeitsweise (bindend)
@@ -15,7 +15,7 @@ Statisches HTML/JS/CSS-**PWA ohne Build-Schritt**, offline-fähig, localStorage.
 
 ## Pflicht-Workflow nach JEDER Änderung unter web/
 1. Service-Worker-Version bumpen: `web/service-worker.js`, Muster `heiben-v20260622-NNNN`
-   (aktuell **-2991**, nächste -2992). Neue Standalone-Seiten NICHT precachen; neue *gemeinsame*
+   (aktuell **-2992**, nächste -2993). Neue Standalone-Seiten NICHT precachen; neue *gemeinsame*
    Dateien (CSS/JS) dagegen IMMER in `PRECACHE` aufnehmen, sonst bricht Offline.
 2. `_WEITERARBEIT.md`: alte Versionsnummern ersetzen + neuen Abschnitt anhängen (Guard gegen Doppel).
 3. Nach Datenänderungen (`web/*-daten.js`, Begriffskarten): `cd web && node ../tools/gen_kennzahlen.js`.
@@ -24,6 +24,16 @@ Statisches HTML/JS/CSS-**PWA ohne Build-Schritt**, offline-fähig, localStorage.
 
 ## Architektur-Regeln (Remake-Fundament, W1–W7 abgeschlossen)
 - `web/heiben-design.css`: **ausschließlich `.hb-`-Klassen, nie Element-Selektoren** (Kollisionsschutz).
+- **Designgrundstruktur (seit v3-W3)**: `heiben-design.css` hat vier Ebenen — Tokens (Farbe,
+  Schrift, Raum, Form, Höhe, **Bewegung**), Weltzuweisung über `[data-hb-welt]`, den unveränderten
+  Bestand aus W1, neue Bausteine. **Kein Bauteil nennt je einen Wert, nur eine Rolle**
+  (`var(--hb-welt)` statt Hex, `var(--hb-zeit-kurz)` statt `180ms`). Vorführung: `designsystem.html`.
+- **Bewegung (seit v3-W3)**: `data-hb-motion="auf|ein|skala|seite|linie"` sagt WAS, `hb-motion.js`
+  sagt WANN; Stufung aus der Geschwisterfolge oder `data-hb-stufe`. Neue Seiten setzen
+  `<body data-hb-regie="ansage">` — das schaltet den **eingefrorenen** Bestandspfad
+  (`section`/`footer`/`[class*="grid"]` → `.hb-rv`) ab. Bewegungsruhe wird in der Token-Ebene
+  beantwortet (Dauern/Wege auf 0), nie durch Ausstieg. `hb-motion.js` startet SOFORT (nicht erst
+  bei DOMContentLoaded), sonst blitzt der Inhalt auf.
 - Gemeinsame Bestands-Stile/Skripte liegen seit v3-W1 als Dateien vor (`styles.css` = Leitfassung
   auf 29 Seiten, `hb-menue.css`, `hb-motion.css/.js`, `hb-pwa.js`, `hb-suche-nav.js`,
   `hb-*-core.js` …). **Nie wieder inlinen** — `build_standalone.py` ist die einzige Ausnahme
@@ -45,6 +55,8 @@ Statisches HTML/JS/CSS-**PWA ohne Build-Schritt**, offline-fähig, localStorage.
 - localStorage: `heiben-lernpfad`, `heiben-verlauf`, `heiben_results`, `heiben_pflanzen_v1`,
   `heiben_ordner_v1` (+ Welt-Speicher der Planer/Konfiguratoren).
 - Deep-Links: `#id` (Kompendien-Steckbriefe), `?id=`, `?q=` (wissen.html), `?welt=` (welt-cockpit).
+- Attribut-Namensraum: `data-welt` gehört `heiben-nav.js` (Weltlinks) — für eigene Schalter NIE
+  wiederverwenden, sonst fängt die Navigation den Klick ab (in W3 passiert).
 - Daten-Arrays (`*-daten.js`) nur ans Ende erweitern, `id`-Felder stabil. `PFADE` ist `var` (script-scope).
 - Fiktions-Fakten: GmbH i. G., Benkhaouda/Hein, „Heimat leben", Köln.
 
@@ -66,8 +78,11 @@ Statisches HTML/JS/CSS-**PWA ohne Build-Schritt**, offline-fähig, localStorage.
 - **Remake v3 läuft** (Blaupause `REMAKE-KONZEPT-V3.md`, Messinstrument `tools/audit_v3.py`).
   V3-W1 fertig: Entdoppelung + Bilder als Dateien, HTML 6,2 → 2,9 MB, bewiesen unsichtbar.
   V3-W2 fertig: Kopf-Generator, Dokumentkopf 100/100, Sitemap 18 → 88 URLs, 11 interne Seiten
-  auf noindex. Nächste Welle: **V3-W3 Offline & Ladelast** (Precache generieren,
-  Datenmodule teilen, `mein-heiben` von 909 KB auf < 120 KB).
+  auf noindex.
+  V3-W3 fertig: Designgrundstruktur + Bewegungsgrammatik neu gefasst, `designsystem.html` als
+  lebender Styleguide; Marken-DNA unverändert, Bestand layoutneutral.
+  Nächste Welle: **V3-W4 Offline & Ladelast** (Precache generieren, Datenmodule teilen,
+  `mein-heiben` von 909 KB auf < 120 KB).
 - `web/startseite-neu.html` = **Freigabe-Entwurf v2.2** (nicht verlinkt, nicht precached):
   Scrollytelling mit 5 CSS-3D-Objekten (Koffer/Haus/Tür/Glühbirne/Kochtopf), Lebenslinien-Regie
   (ein→pin→aus, globale Lerp-Glättung SY mit Teleport-Snap), Bewegungsprofile je Objekt (MOTION),

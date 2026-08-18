@@ -1,13 +1,71 @@
-/* HeiBen — ausgelagert aus 42 Seiten (Remake v3, Welle 1).
-   Inhalt wortgleich uebernommen, nicht ueberarbeitet. */
-/* HeiBen Motion — dezente Scroll-Reveals im Stil großer Produkt-Websites */
-html{scroll-behavior:smooth;}
-::selection{background:rgba(109,58,82,.18);}
-@keyframes hbUp{from{opacity:0;transform:translateY(26px);}to{opacity:1;transform:none;}}
-.hb-rv{opacity:0;}
-.hb-rv.hb-go{animation:hbUp .9s cubic-bezier(.16,1,.3,1) var(--hbd,0s) both;}
-.hb-rv.hb-done{opacity:1;animation:none;}
+/* ============================================================
+   HeiBen Bewegung — Remake v3, Welle 3.
+   Bewegung hat hier eine Grammatik, kein Sammelsurium:
+     ROLLE   was der Eintritt bedeutet   (auf · ein · skala · seite · linie)
+     DAUER   aus --hb-zeit-*
+     KURVE   aus --hb-ease-*
+     WEG     aus --hb-weg-*
+     STUFE   Versatz je Geschwister aus --hb-stufe
+   Alle Werte kommen aus heiben-design.css. Hier steht keine Zahl,
+   die nicht als Rolle benannt ist.
+
+   BEWEGUNGSRUHE: prefers-reduced-motion setzt in der Token-Ebene die
+   Dauern und Wege auf null. Bauteile bleiben damit SICHTBAR und an
+   ihrem Platz — es wird nichts abgeschaltet, was Inhalt trägt.
+   ============================================================ */
+
+html{scroll-behavior:smooth}
+::selection{background:color-mix(in srgb,var(--hb-akzent,#b04a31) 20%,transparent)}
+
+/* ---------- Bestandspfad (W1): .hb-rv → .hb-go ----------
+   Wortgleiche Wirkung wie bisher, nur in Tokens ausgedrückt:
+   .9s = --hb-zeit-szene · cubic-bezier(.16,1,.3,1) = --hb-ease-ein
+   translateY(26px) = --hb-weg-mittel. */
+@keyframes hbUp{
+  from{opacity:0;transform:translateY(var(--hb-weg-mittel,26px))}
+  to{opacity:1;transform:none}
+}
+.hb-rv{opacity:0}
+.hb-rv.hb-go{animation:hbUp var(--hb-zeit-szene,.9s) var(--hb-ease-ein,cubic-bezier(.16,1,.3,1)) var(--hbd,0s) both}
+.hb-rv.hb-done{opacity:1;animation:none}
+
+/* ---------- Ansagepfad (v3): data-hb-motion ----------
+   Auszeichnung statt Rateverfahren. Die Seite sagt, was eintreten soll;
+   hb-motion.js sagt nur, WANN. */
+[data-hb-motion]{
+  --hb-eintritt-weg:var(--hb-weg-mittel);
+  opacity:0;
+  transition:opacity var(--hb-zeit-lang) var(--hb-ease-ein) var(--hb-verzug,0ms),
+             transform var(--hb-zeit-lang) var(--hb-ease-ein) var(--hb-verzug,0ms);
+  will-change:opacity,transform}
+[data-hb-motion].hb-sicht{opacity:1;transform:none}
+
+[data-hb-motion="auf"]   {transform:translateY(var(--hb-eintritt-weg))}
+[data-hb-motion="ein"]   {transform:none}
+[data-hb-motion="skala"] {transform:scale(.965)}
+[data-hb-motion="seite"] {transform:translateX(calc(var(--hb-eintritt-weg) * -1))}
+[data-hb-motion="seite-rechts"]{transform:translateX(var(--hb-eintritt-weg))}
+[data-hb-motion="linie"] {transform:scaleX(0);transform-origin:0 50%;opacity:1}
+[data-hb-motion="linie"].hb-sicht{transform:scaleX(1)}
+
+/* Betonter Eintritt für einzelne Blickfänge — leichter Überschwung. */
+[data-hb-motion][data-hb-betont]{transition-timing-function:var(--hb-ease-betont)}
+/* Ruhiger, langer Eintritt für ganze Bühnen. */
+[data-hb-motion][data-hb-ruhig]{--hb-eintritt-weg:var(--hb-weg-gross);
+  transition-duration:var(--hb-zeit-szene)}
+
+/* ---------- Wiederkehrende Regungen ---------- */
+@keyframes hbPuls{0%,100%{opacity:.55}50%{opacity:1}}
+@keyframes hbSchweb{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.hb-puls{animation:hbPuls 2.4s var(--hb-ease-standard) infinite}
+.hb-schwebt{animation:hbSchweb 5s var(--hb-ease-standard) infinite}
+
+/* ---------- Bewegungsruhe ----------
+   Die Tokens stehen schon auf null; hier wird nur noch abgeschaltet,
+   was von sich aus endlos läuft, und das Scrollen beruhigt. */
 @media (prefers-reduced-motion: reduce){
-  html{scroll-behavior:auto;}
-  .hb-rv{opacity:1!important;animation:none!important;transform:none!important;}
+  html{scroll-behavior:auto}
+  .hb-rv{opacity:1!important;animation:none!important;transform:none!important}
+  [data-hb-motion]{opacity:1!important;transform:none!important;transition:none!important}
+  .hb-puls,.hb-schwebt{animation:none!important}
 }

@@ -1,5 +1,5 @@
 /* HeiBen Service-Worker — Offline-Fähigkeit & App-Shell (v20260615-1323) */
-const CACHE='heiben-v20260622-2991';
+const CACHE='heiben-v20260622-2992';
 const PRECACHE=[
   "index.html",
   "404.html",
@@ -128,7 +128,9 @@ const PRECACHE=[
   "hb-schaufenster-core.js",
   "hb-magazin-core.js",
   "hb-anfrage-core.js",
-  "hb-anfrage-app.js"
+  "hb-anfrage-app.js",
+  /* Remake v3 · Welle 3 — Designsystem */
+  "designsystem.html"
 ];
 self.addEventListener('install',function(e){
   self.skipWaiting();

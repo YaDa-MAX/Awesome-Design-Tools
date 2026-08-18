@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<!-- hb:kopf — erzeugt von tools/gen_kopf.js aus tools/seiten.json. Nicht von Hand ändern. -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Designsystem · HeiBen</title>
+<meta name="description" content="Die Grundstruktur hinter allen Seiten: Farbrollen, Schriftskala, Raum- und Formmaße, Höhenstufen und das Bewegungsvokabular — an fünf Welten vorführbar.">
+<link rel="canonical" href="https://www.heiben.de/designsystem.html">
+<meta name="theme-color" content="#f3eee5">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="application-name" content="HeiBen">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="HeiBen">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="HeiBen">
+<meta property="og:locale" content="de_DE">
+<meta property="og:url" content="https://www.heiben.de/designsystem.html">
+<meta property="og:title" content="Designsystem · HeiBen">
+<meta property="og:description" content="Die Grundstruktur hinter allen Seiten: Farbrollen, Schriftskala, Raum- und Formmaße, Höhenstufen und das Bewegungsvokabular — an fünf Welten vorführbar.">
+<meta property="og:image" content="assets/hero-light.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Designsystem · HeiBen">
+<meta name="twitter:description" content="Die Grundstruktur hinter allen Seiten: Farbrollen, Schriftskala, Raum- und Formmaße, Höhenstufen und das Bewegungsvokabular — an fünf Welten vorführbar.">
+<meta name="twitter:image" content="assets/hero-light.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Designsystem · HeiBen","description":"Die Grundstruktur hinter allen Seiten: Farbrollen, Schriftskala, Raum- und Formmaße, Höhenstufen und das Bewegungsvokabular — an fünf Welten vorführbar.","url":"https://www.heiben.de/designsystem.html","inLanguage":"de-DE","isPartOf":{"@type":"WebSite","name":"HeiBen","url":"https://www.heiben.de/"},"publisher":{"@type":"Organization","name":"HeiBen Holding GmbH"}}</script>
+<!-- /hb:kopf -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Manrope:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="heiben-design.css">
+<link rel="stylesheet" href="hb-motion.css">
+<style>
+/* Nur was die Schaustücke dieser Seite selbst betrifft — das System steckt
+   vollständig in heiben-design.css und hb-motion.css. */
+*{box-sizing:border-box}
+body{margin:0;background:var(--hb-grund);color:var(--hb-text);font-family:var(--hb-sans);
+  line-height:var(--hb-zeile-weit);-webkit-font-smoothing:antialiased}
+.ds-probe{display:flex;flex-wrap:wrap;gap:var(--hb-raum-3);align-items:flex-end}
+.ds-farbe{width:112px}
+.ds-farbe i{display:block;height:56px;border-radius:var(--hb-rund-m);
+  border:1px solid var(--hb-linie);box-shadow:var(--hb-hoehe-1)}
+.ds-farbe b{display:block;font-family:var(--hb-mono);font-size:.66rem;margin-top:var(--hb-raum-2);
+  color:var(--hb-text);font-weight:400}
+.ds-farbe span{font-family:var(--hb-mono);font-size:.6rem;color:var(--hb-text-zart)}
+.ds-zeile{display:grid;grid-template-columns:minmax(96px,15%) 1fr;gap:var(--hb-raum-4);
+  align-items:baseline;padding-block:var(--hb-raum-3);border-bottom:1px solid var(--hb-linie-zart)}
+.ds-zeile>code{font-family:var(--hb-mono);font-size:.68rem;color:var(--hb-text-zart)}
+.ds-raum{background:var(--hb-welt);height:14px;border-radius:2px}
+.ds-form{width:96px;height:64px;background:var(--hb-welt-zart);border:1px solid var(--hb-welt-linie);
+  display:grid;place-items:center;font-family:var(--hb-mono);font-size:.62rem;color:var(--hb-welt)}
+.ds-hoehe{width:112px;height:72px;background:var(--hb-papier);border-radius:var(--hb-rund-m);
+  display:grid;place-items:center;font-family:var(--hb-mono);font-size:.62rem;color:var(--hb-text-zart)}
+.ds-buehne-demo{border-radius:var(--hb-rund-xl);padding:var(--hb-raum-8) var(--hb-raum-5)}
+.ds-schalter{display:flex;flex-wrap:wrap;gap:var(--hb-raum-2)}
+.ds-schalter button{font-family:var(--hb-mono);font-size:var(--hb-s-mikro);
+  letter-spacing:var(--hb-sperr-mikro);text-transform:uppercase;cursor:pointer;
+  padding:var(--hb-raum-2) var(--hb-raum-4);border-radius:var(--hb-rund-voll);
+  border:1px solid var(--hb-linie-stark);background:var(--hb-papier);color:var(--hb-text-leise);
+  transition:border-color var(--hb-zeit-kurz) var(--hb-ease-standard),
+             color var(--hb-zeit-kurz) var(--hb-ease-standard),
+             background var(--hb-zeit-kurz) var(--hb-ease-standard)}
+.ds-schalter button[aria-pressed="true"]{border-color:var(--hb-welt);color:var(--hb-welt);
+  background:var(--hb-welt-zart)}
+.ds-buehnchen{background:var(--hb-grund-2);border-radius:var(--hb-rund-l);
+  padding:var(--hb-raum-6) var(--hb-raum-5);display:grid;gap:var(--hb-raum-3);
+  place-items:center;min-height:150px;text-align:center}
+.ds-marke{width:60px;height:60px;border-radius:var(--hb-rund-m);background:var(--hb-welt);
+  display:grid;place-items:center;color:var(--hb-text-invers);font-family:var(--hb-serif);
+  font-size:1.5rem}
+.ds-strich{height:3px;background:var(--hb-welt);width:100%}
+table.ds-tab{width:100%;border-collapse:collapse;font-size:var(--hb-s-klein)}
+table.ds-tab th,table.ds-tab td{text-align:left;padding:var(--hb-raum-3) var(--hb-raum-2);
+  border-bottom:1px solid var(--hb-linie-zart);vertical-align:top}
+table.ds-tab th{font-family:var(--hb-mono);font-size:var(--hb-s-mikro);
+  letter-spacing:var(--hb-sperr-mikro);text-transform:uppercase;color:var(--hb-text-zart)}
+table.ds-tab code{font-family:var(--hb-mono);font-size:.7rem;color:var(--hb-welt)}
+</style>
+<script src="heiben-nav.js" defer></script>
+<script src="heiben-legal.js" defer></script>
+<script id="hb-pwa" src="hb-pwa.js" defer></script>
+</head>
+<body data-hb-welt="holding" data-hb-regie="ansage">
+
+<main class="hb-satz">
+
+  <header class="hb-abschnitt">
+    <span class="hb-augenbraue">Fundament · Remake v3</span>
+    <h1 class="hb-display">Eine Grammatik<br><em class="hb-kursiv">für alles Sichtbare.</em></h1>
+    <p class="hb-vorspann" style="margin-top:var(--hb-raum-5)">
+      Vor dieser Seite lagen 104 Hex-Farben, 160 Schriftgrößen und 87 Custom Properties in
+      834 Deklarationen im Bestand — und Bewegungsruhe wurde in 4 von 152 Stilquellen beachtet.
+      Hier steht stattdessen ein Satz benannter Rollen. Kein Bauteil kennt eine Farbe, eine Größe
+      oder eine Dauer; es kennt nur, wofür sie da ist.
+    </p>
+    <div class="ds-schalter" style="margin-top:var(--hb-raum-6)" id="dsSchalter" role="group" aria-label="Welt wählen">
+      <button type="button" data-ds-welt="holding" aria-pressed="true">Holding</button>
+      <button type="button" data-ds-welt="reisen" aria-pressed="false">Reisen</button>
+      <button type="button" data-ds-welt="wohnen" aria-pressed="false">Wohnen</button>
+      <button type="button" data-ds-welt="immobilien" aria-pressed="false">Immobilien</button>
+      <button type="button" data-ds-welt="studio" aria-pressed="false">Studio</button>
+      <button type="button" data-ds-welt="kulinarik" aria-pressed="false">Kulinarik</button>
+    </div>
+    <p class="hb-beischrift" style="margin-top:var(--hb-raum-3)">
+      Ein Attribut am <code>&lt;body&gt;</code> — alles darunter folgt. Nichts auf dieser Seite
+      nennt eine Weltfarbe beim Namen.
+    </p>
+  </header>
+
+  <hr class="hb-linie-quer">
+
+  <!-- ============ FARBE ============ -->
+  <section class="hb-abschnitt--eng">
+    <span class="hb-augenbraue" data-hb-motion="ein">01 — Farbe</span>
+    <h2 class="hb-titel-2" data-hb-motion="auf">Rollen statt Namen</h2>
+    <p class="hb-fliess" data-hb-motion="auf" style="margin-top:var(--hb-raum-4)">
+      Eine Farbe heißt nicht mehr „Ocker“, sondern „Akzent der Welt“. Damit lässt sich die Welt
+      wechseln, ohne ein einziges Bauteil anzufassen.
+    </p>
+
+    <h3 class="hb-titel-3" style="margin-top:var(--hb-raum-6)">Fläche &amp; Schrift</h3>
+    <div class="ds-probe" style="margin-top:var(--hb-raum-4)">
+      <div class="ds-farbe"><i style="background:var(--hb-grund)"></i><b>--hb-grund</b><span>Seitengrund</span></div>
+      <div class="ds-farbe"><i style="background:var(--hb-grund-2)"></i><b>--hb-grund-2</b><span>Streifen</span></div>
+      <div class="ds-farbe"><i style="background:var(--hb-papier)"></i><b>--hb-papier</b><span>erhoben</span></div>
+      <div class="ds-farbe"><i style="background:var(--hb-tief)"></i><b>--hb-tief</b><span>Bühne</span></div>
+      <div class="ds-farbe"><i style="background:var(--hb-text)"></i><b>--hb-text</b><span>Schrift</span></div>
+      <div class="ds-farbe"><i style="background:var(--hb-text-leise)"></i><b>--hb-text-leise</b><span>2. Ordnung</span></div>
+      <div class="ds-farbe"><i style="background:var(--hb-text-zart)"></i><b>--hb-text-zart</b><span>Beischrift</span></div>
+      <div class="ds-farbe"><i style="background:var(--hb-linie)"></i><b>--hb-linie</b><span>Trennung</span></div>
+    </div>
+
+    <h3 class="hb-titel-3" style="margin-top:var(--hb-raum-7)">Akzent, Signal, Welt</h3>
+    <div class="ds-probe" style="margin-top:var(--hb-raum-4)">
+      <div class="ds-farbe"><i style="background:var(--hb-akzent)"></i><b>--hb-akzent</b><span>Handlung</span></div>
+      <div class="ds-farbe"><i style="background:var(--hb-gut)"></i><b>--hb-gut</b><span>bestätigt</span></div>
+      <div class="ds-farbe"><i style="background:var(--hb-warnung)"></i><b>--hb-warnung</b><span>Vorsicht</span></div>
+      <div class="ds-farbe"><i style="background:var(--hb-fehler)"></i><b>--hb-fehler</b><span>Fehler</span></div>
+      <div class="ds-farbe"><i style="background:var(--hb-welt);"></i><b>--hb-welt</b><span>aktive Welt</span></div>
+      <div class="ds-farbe"><i style="background:var(--hb-welt-zart)"></i><b>--hb-welt-zart</b><span>Tönung</span></div>
+      <div class="ds-farbe"><i style="background:var(--hb-welt-linie)"></i><b>--hb-welt-linie</b><span>Kante</span></div>
+    </div>
+  </section>
+
+  <hr class="hb-linie-quer">
+
+  <!-- ============ SCHRIFT ============ -->
+  <section class="hb-abschnitt--eng">
+    <span class="hb-augenbraue" data-hb-motion="ein">02 — Schrift</span>
+    <h2 class="hb-titel-2" data-hb-motion="auf">Eine Reihe, fließend</h2>
+    <p class="hb-fliess" data-hb-motion="auf" style="margin-top:var(--hb-raum-4)">
+      Neun Stufen mit dem Verhältnis ~1,25, die großen per <code>clamp()</code> an die Fensterbreite
+      gekoppelt. Fraunces trägt die Aussage, Manrope den Text, JetBrains Mono die Beschriftung.
+    </p>
+    <div style="margin-top:var(--hb-raum-6)">
+      <div class="ds-zeile"><code>--hb-s-display</code><span style="font-family:var(--hb-serif);font-weight:300;font-size:var(--hb-s-display);line-height:var(--hb-zeile-eng);letter-spacing:var(--hb-sperr-eng)">Heimat leben</span></div>
+      <div class="ds-zeile"><code>--hb-s-h1</code><span style="font-family:var(--hb-serif);font-size:var(--hb-s-h1);line-height:var(--hb-zeile-eng)">Fünf Welten, ein Dach</span></div>
+      <div class="ds-zeile"><code>--hb-s-h2</code><span style="font-family:var(--hb-serif);font-size:var(--hb-s-h2);line-height:var(--hb-zeile-mittel)">Wissen für Zuhause</span></div>
+      <div class="ds-zeile"><code>--hb-s-h3</code><span style="font-family:var(--hb-sans);font-weight:600;font-size:var(--hb-s-h3)">Was Sie hier finden</span></div>
+      <div class="ds-zeile"><code>--hb-s-lead</code><span style="font-size:var(--hb-s-lead);color:var(--hb-text-leise)">Der Vorspann führt in den Text.</span></div>
+      <div class="ds-zeile"><code>--hb-s-gross</code><span style="font-size:var(--hb-s-gross)">Fließtext, betont.</span></div>
+      <div class="ds-zeile"><code>--hb-s-basis</code><span style="font-size:var(--hb-s-basis)">Fließtext in Manrope, 1,62 Zeilenhöhe, 64 Zeichen Satzbreite.</span></div>
+      <div class="ds-zeile"><code>--hb-s-klein</code><span style="font-size:var(--hb-s-klein);color:var(--hb-text-leise)">Beschriftung und Hinweise.</span></div>
+      <div class="ds-zeile"><code>--hb-s-mikro</code><span style="font-family:var(--hb-mono);font-size:var(--hb-s-mikro);letter-spacing:var(--hb-sperr-mikro);text-transform:uppercase;color:var(--hb-welt)">Eyebrow · Kapitälchen</span></div>
+    </div>
+  </section>
+
+  <hr class="hb-linie-quer">
+
+  <!-- ============ RAUM & FORM ============ -->
+  <section class="hb-abschnitt--eng">
+    <span class="hb-augenbraue" data-hb-motion="ein">03 — Raum &amp; Form</span>
+    <h2 class="hb-titel-2" data-hb-motion="auf">Vier Pixel als Maß</h2>
+    <div style="margin-top:var(--hb-raum-5)">
+      <div class="ds-zeile"><code>--hb-raum-1 … 4</code><span><span class="ds-raum" style="display:block;width:4px"></span></span></div>
+      <div class="ds-zeile"><code>--hb-raum-4</code><span><span class="ds-raum" style="display:block;width:16px"></span></span></div>
+      <div class="ds-zeile"><code>--hb-raum-6</code><span><span class="ds-raum" style="display:block;width:32px"></span></span></div>
+      <div class="ds-zeile"><code>--hb-raum-8</code><span><span class="ds-raum" style="display:block;width:64px"></span></span></div>
+      <div class="ds-zeile"><code>--hb-raum-10</code><span><span class="ds-raum" style="display:block;width:128px"></span></span></div>
+    </div>
+    <div class="hb-reihe" style="margin-top:var(--hb-raum-6)">
+      <div class="ds-form" style="border-radius:var(--hb-rund-s)">rund-s</div>
+      <div class="ds-form" style="border-radius:var(--hb-rund-m)">rund-m</div>
+      <div class="ds-form" style="border-radius:var(--hb-rund-l)">rund-l</div>
+      <div class="ds-form" style="border-radius:var(--hb-rund-xl)">rund-xl</div>
+      <div class="ds-form" style="border-radius:var(--hb-rund-voll)">voll</div>
+    </div>
+    <div class="hb-reihe" style="margin-top:var(--hb-raum-6)">
+      <div class="ds-hoehe" style="box-shadow:var(--hb-hoehe-1)">hoehe-1</div>
+      <div class="ds-hoehe" style="box-shadow:var(--hb-hoehe-2)">hoehe-2</div>
+      <div class="ds-hoehe" style="box-shadow:var(--hb-hoehe-3)">hoehe-3</div>
+      <div class="ds-hoehe" style="box-shadow:var(--hb-hoehe-4)">hoehe-4</div>
+    </div>
+    <p class="hb-beischrift" style="margin-top:var(--hb-raum-4)">
+      Schatten sind warm getönt (<code>rgba(31,28,23,…)</code>), nie neutrales Schwarz — sonst
+      kippt die Papierfarbe ins Graue.
+    </p>
+  </section>
+
+  <hr class="hb-linie-quer">
+
+  <!-- ============ BEWEGUNG ============ -->
+  <section class="hb-abschnitt--eng">
+    <span class="hb-augenbraue" data-hb-motion="ein">04 — Bewegung</span>
+    <h2 class="hb-titel-2" data-hb-motion="auf">Dauer, Kurve, Weg</h2>
+    <p class="hb-fliess" data-hb-motion="auf" style="margin-top:var(--hb-raum-4)">
+      Bewegung hat eine Grammatik: eine <em>Rolle</em> sagt, was der Eintritt bedeutet, drei Tokens
+      sagen wie. Das Markup sagt <b>was</b>, <code>hb-motion.js</code> sagt nur <b>wann</b> —
+      statt wie bisher per Element- und Substring-Treffer zu raten.
+    </p>
+
+    <table class="ds-tab" style="margin-top:var(--hb-raum-6)">
+      <thead><tr><th>Token</th><th>Wert</th><th>Wofür</th></tr></thead>
+      <tbody>
+        <tr><td><code>--hb-zeit-sofort</code></td><td>90 ms</td><td>Zustandswechsel direkt am Zeiger</td></tr>
+        <tr><td><code>--hb-zeit-kurz</code></td><td>180 ms</td><td>Hover, Fokus, kleine Flächen</td></tr>
+        <tr><td><code>--hb-zeit-mittel</code></td><td>320 ms</td><td>Ein- und Ausblenden, Aufklappen</td></tr>
+        <tr><td><code>--hb-zeit-lang</code></td><td>620 ms</td><td>Eintritt größerer Flächen</td></tr>
+        <tr><td><code>--hb-zeit-szene</code></td><td>900 ms</td><td>Bühnenwechsel, Scroll-Regie</td></tr>
+        <tr><td><code>--hb-ease-standard</code></td><td>.4, 0, .2, 1</td><td>Anfang und Ende gebremst</td></tr>
+        <tr><td><code>--hb-ease-ein</code></td><td>.16, 1, .3, 1</td><td>Eintritt: schnell an, weich aus</td></tr>
+        <tr><td><code>--hb-ease-aus</code></td><td>.4, 0, 1, 1</td><td>Austritt: zieht weg</td></tr>
+        <tr><td><code>--hb-ease-betont</code></td><td>.34, 1.4, .64, 1</td><td>leichter Überschwung</td></tr>
+        <tr><td><code>--hb-weg-klein/-mittel/-gross</code></td><td>10 / 26 / 56 px</td><td>Strecke des Eintritts</td></tr>
+        <tr><td><code>--hb-stufe</code></td><td>70 ms</td><td>Versatz je Geschwisterelement</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="hb-titel-3" style="margin-top:var(--hb-raum-7)">Die fünf Rollen</h3>
+    <div class="hb-raster" style="--hb-min:200px;margin-top:var(--hb-raum-4)" id="dsBuehne">
+      <div class="ds-buehnchen"><div class="ds-marke" data-hb-motion="auf">A</div><code class="hb-beischrift">auf</code><span class="hb-beischrift">hebt sich herein</span></div>
+      <div class="ds-buehnchen"><div class="ds-marke" data-hb-motion="ein">E</div><code class="hb-beischrift">ein</code><span class="hb-beischrift">blendet auf</span></div>
+      <div class="ds-buehnchen"><div class="ds-marke" data-hb-motion="skala">S</div><code class="hb-beischrift">skala</code><span class="hb-beischrift">tritt heran</span></div>
+      <div class="ds-buehnchen"><div class="ds-marke" data-hb-motion="seite">◀</div><code class="hb-beischrift">seite</code><span class="hb-beischrift">schiebt herein</span></div>
+      <div class="ds-buehnchen"><span class="ds-strich" data-hb-motion="linie"></span><code class="hb-beischrift">linie</code><span class="hb-beischrift">zieht sich auf</span></div>
+    </div>
+    <div class="hb-reihe" style="margin-top:var(--hb-raum-4)">
+      <button type="button" class="hb-taste hb-taste--leise" id="dsWiederholen">Noch einmal zeigen</button>
+      <span class="hb-beischrift" id="dsRuheHinweis"></span>
+    </div>
+
+    <div class="hb-notiz" style="margin-top:var(--hb-raum-6)">
+      <b>Bewegungsruhe ist kein Sonderfall.</b> Bei <code>prefers-reduced-motion</code> gehen in der
+      Token-Ebene die Dauern und Wege auf null — die Gestalt bleibt, der Inhalt bleibt sichtbar.
+      Bisher stieg das Skript stattdessen komplett aus, und 148 von 152 Stilquellen beachteten die
+      Einstellung gar nicht.
+    </div>
+  </section>
+
+  <hr class="hb-linie-quer">
+
+  <!-- ============ BAUSTEINE ============ -->
+  <section class="hb-abschnitt--eng">
+    <span class="hb-augenbraue" data-hb-motion="ein">05 — Bausteine</span>
+    <h2 class="hb-titel-2" data-hb-motion="auf">Was daraus gebaut wird</h2>
+
+    <div class="hb-raster" style="--hb-min:260px;margin-top:var(--hb-raum-6)">
+      <a class="hb-kachel" href="#" data-hb-motion="auf">
+        <span class="hb-augenbraue">Weltkachel</span>
+        <h3 class="hb-titel-3">Die Kante trägt die Farbe</h3>
+        <p class="hb-fliess" style="margin-top:var(--hb-raum-2)">Beim Zeigen wächst der Streifen auf volle Höhe.</p>
+      </a>
+      <div class="hb-flaeche hb-flaeche--hebt hb-flaeche--welt" data-hb-motion="auf">
+        <span class="hb-augenbraue">Fläche</span>
+        <h3 class="hb-titel-3">Karte mit Kopfkante</h3>
+        <p class="hb-fliess" style="margin-top:var(--hb-raum-2)">Hebt sich beim Zeigen um drei Pixel.</p>
+      </div>
+      <div class="hb-flaeche hb-flaeche--zart" data-hb-motion="auf">
+        <span class="hb-augenbraue">Fläche, getönt</span>
+        <h3 class="hb-titel-3">Ruhiger Hintergrund</h3>
+        <p class="hb-fliess" style="margin-top:var(--hb-raum-2)">Tönung aus der Weltfarbe, 9 % auf Papier.</p>
+      </div>
+    </div>
+
+    <div class="hb-reihe" style="margin-top:var(--hb-raum-6)">
+      <button type="button" class="hb-taste">Haupthandlung</button>
+      <button type="button" class="hb-taste hb-taste--leise">Nebenhandlung</button>
+      <button type="button" class="hb-taste hb-taste--rand">Dritte Wahl</button>
+      <span class="hb-marke"><i class="hb-punkt"></i> Merker</span>
+    </div>
+
+    <div class="hb-band" style="margin-top:var(--hb-raum-6)">
+      <div class="hb-wert"><b>5</b><span>Welten</span></div>
+      <div class="hb-wert"><b>8</b><span>Kompendien</span></div>
+      <div class="hb-wert"><b>370</b><span>Steckbriefe</span></div>
+      <div class="hb-wert"><b>16</b><span>Lernpfade</span></div>
+      <div class="hb-wert"><b>544</b><span>Begriffskarten</span></div>
+    </div>
+
+    <div class="hb-stapel" style="margin-top:var(--hb-raum-6)">
+      <div class="hb-notiz"><b>Hinweis.</b> Standardton in der Weltfarbe.</div>
+      <div class="hb-notiz hb-notiz--warnung"><b>Vorsicht.</b> Etwas kann schiefgehen.</div>
+      <div class="hb-notiz hb-notiz--gut"><b>Erledigt.</b> Bestätigung.</div>
+      <div class="hb-notiz hb-notiz--fehler"><b>Fehler.</b> Etwas ist schiefgegangen.</div>
+    </div>
+
+    <dl style="margin-top:var(--hb-raum-6)">
+      <div class="hb-brief"><dt>Firmierung</dt><dd>HeiBen Holding GmbH i. G., Köln</dd></div>
+      <div class="hb-brief"><dt>Geschäftsführung</dt><dd>Yakin Benkhaouda &amp; Katharina Hein</dd></div>
+      <div class="hb-brief"><dt>Claim</dt><dd>Heimat leben</dd></div>
+    </dl>
+
+    <div style="margin-top:var(--hb-raum-6);max-width:420px">
+      <label class="hb-beischrift" for="dsFeld">Feld mit Fokusring in der Weltfarbe</label>
+      <input class="hb-feld" id="dsFeld" type="text" placeholder="Tippen …" style="margin-top:var(--hb-raum-2)">
+    </div>
+
+    <div class="hb-buehne ds-buehne-demo" style="margin-top:var(--hb-raum-7)">
+      <span class="hb-augenbraue">Bühne</span>
+      <h3 class="hb-titel-2" style="margin-top:var(--hb-raum-2)">Dunkel, ohne zweite Palette</h3>
+      <p class="hb-fliess" style="margin-top:var(--hb-raum-3)">
+        <code>.hb-buehne</code> schreibt die Rollen für seinen Teilbaum um. Die Bauteile darin
+        bleiben dieselben — sie fragen ja nur nach Rollen.
+      </p>
+      <div class="hb-reihe" style="margin-top:var(--hb-raum-4)">
+        <button type="button" class="hb-taste">Handlung</button>
+        <span class="hb-marke"><i class="hb-punkt"></i> Merker</span>
+      </div>
+    </div>
+  </section>
+
+  <hr class="hb-linie-quer">
+
+  <section class="hb-abschnitt--eng">
+    <span class="hb-augenbraue">06 — Regeln</span>
+    <h2 class="hb-titel-2">Woran sich das hält</h2>
+    <ul class="hb-fliess" style="margin-top:var(--hb-raum-4);padding-left:1.2rem">
+      <li>Ausschließlich <code>.hb-</code>-Klassen und <code>:root</code>-Tokens. Keine Element-Selektoren.</li>
+      <li>Kein Bauteil nennt eine Farbe, eine Größe oder eine Dauer beim Wert — nur bei ihrer Rolle.</li>
+      <li>Weltfarben kommen aus <code>heiben-firmierungen.js</code> und werden über
+          <code>[data-hb-welt]</code> zugewiesen. Nie wieder Hex im Bauteil.</li>
+      <li>Die Bauteile aus Welle W1 liegen unter 100 Seiten und bleiben Zeichen für Zeichen
+          unverändert; ihre Tokens zeigen jetzt auf die Rollen — gleiche Werte, eine Quelle.</li>
+      <li>Bewegungsruhe wird in der Token-Ebene beantwortet, nicht in jedem Bauteil einzeln.</li>
+    </ul>
+    <p class="hb-beischrift" style="margin-top:var(--hb-raum-5)">
+      Quellen: <code>heiben-design.css</code> (Tokens + Bauteile) · <code>hb-motion.css</code> und
+      <code>hb-motion.js</code> (Bewegung) · Messung: <code>tools/audit_v3.py</code>.
+    </p>
+  </section>
+
+  <p class="hb-foot">HeiBen Holding GmbH i. G. · Fiktion · <a href="index.html">Zur Startseite</a></p>
+</main>
+
+<script src="hb-motion.js"></script>
+<script>
+(function(){
+  var schalter=document.getElementById('dsSchalter');
+  if(schalter){
+    schalter.addEventListener('click',function(e){
+      var b=e.target.closest('button[data-ds-welt]'); if(!b) return;
+      schalter.querySelectorAll('button').forEach(function(x){ x.setAttribute('aria-pressed', String(x===b)); });
+      document.body.setAttribute('data-hb-welt', b.getAttribute("data-ds-welt"));
+    });
+  }
+  var ruhig=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var hinweis=document.getElementById('dsRuheHinweis');
+  if(hinweis) hinweis.textContent = ruhig
+    ? 'Bewegungsruhe ist aktiv — alles steht sofort an seinem Platz.'
+    : 'Bewegungsruhe ist nicht aktiv.';
+  var knopf=document.getElementById('dsWiederholen'), buehne=document.getElementById('dsBuehne');
+  if(knopf&&buehne){
+    knopf.addEventListener('click',function(){
+      var els=buehne.querySelectorAll('[data-hb-motion]');
+      els.forEach(function(el){ el.classList.remove('hb-sicht'); });
+      requestAnimationFrame(function(){ requestAnimationFrame(function(){
+        els.forEach(function(el){ el.classList.add('hb-sicht'); });
+      });});
+    });
+  }
+})();
+</script>
+</body>
+</html>

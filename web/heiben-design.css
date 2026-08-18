@@ -1,25 +1,157 @@
 /* ============================================================
-   HeiBen Fundament — zentrales Design-System (Remake v2, W1)
-   Regel: ausschließlich .hb-Klassen und :root-Tokens.
-   KEINE Element-Selektoren → keine Interferenz mit Bestand.
-   Marken-DNA: warme Palette, Fraunces/Manrope/JetBrains Mono.
+   HeiBen Fundament — Design-System
+   Remake v3, Welle 3: Grundstruktur neu gefasst.
+
+   AUFBAU DIESER DATEI
+   1. Token-Ebene v3   — Farbe, Schrift, Raum, Form, Höhe, Bewegung als ROLLEN
+   2. Weltzuweisung    — [data-hb-welt] setzt --hb-welt; nie wieder Hex im Bauteil
+   3. Bestand v2       — die Bauteile aus Welle 1 (W1), Zeichen für Zeichen unverändert
+   4. Bausteine v3     — neue Bauteile auf der Token-Ebene
+
+   REGELN (unverändert bindend)
+   - ausschließlich .hb-Klassen und :root-Tokens, KEINE Element-Selektoren
+   - Weltfarben kanonisch aus heiben-firmierungen.js
+   - Marken-DNA: warme Palette, Fraunces / Manrope / JetBrains Mono
    ============================================================ */
 
+/* ============================================================
+   1. TOKEN-EBENE — Rollen, keine Namen.
+   Eine Farbe heißt nicht „ocker", sie heißt „Akzent der Welt".
+   Wer ein Bauteil baut, greift NUR hierauf zu.
+   ============================================================ */
 :root{
-  /* Grundpalette (Marken-DNA) */
-  --hb-bg:#f3eee5; --hb-bg2:#ebe3d4; --hb-paper:#fffdf8;
-  --hb-ink:#1f1c17; --hb-ink2:#524a3e; --hb-rule:#d8cdb7;
-  --hb-terra:#b04a31; --hb-ochre:#a97a1d; --hb-moss:#4a5c39;
-  --hb-burg:#792d29; --hb-aub:#6b3951; --hb-good:#6f8f4e;
-  /* Weltfarben (kanonisch: heiben-firmierungen.js) */
+  /* --- Fläche: vom Grund zum Papier --- */
+  --hb-grund:#f3eee5;          /* Seitengrund, warmes Leinen */
+  --hb-grund-2:#ebe3d4;        /* abgesetzter Streifen, Bühne */
+  --hb-papier:#fffdf8;         /* erhobene Fläche: Karte, Feld */
+  --hb-tief:#1f1c17;           /* dunkle Bühne */
+  --hb-tief-2:#2a251d;         /* dunkle Bühne, abgesetzt */
+
+  /* --- Schrift --- */
+  --hb-text:#1f1c17;
+  --hb-text-leise:#524a3e;     /* Fließtext zweiter Ordnung */
+  --hb-text-zart:#7d7364;      /* Beschriftung, Metazeile */
+  --hb-text-invers:#f3eee5;
+
+  /* --- Linie --- */
+  --hb-linie:#d8cdb7;          /* Standardtrennung */
+  --hb-linie-zart:#e6dcc8;
+  --hb-linie-stark:#bfb094;
+
+  /* --- Akzent & Signal --- */
+  --hb-akzent:#b04a31;         /* Terrakotta: Handlung, Hervorhebung */
+  --hb-akzent-tief:#8e3a26;
+  --hb-gut:#6f8f4e;
+  --hb-warnung:#a97a1d;
+  --hb-fehler:#8e3a26;
+
+  /* --- Weltfarben (kanonisch: heiben-firmierungen.js) --- */
   --hb-w-reisen:#a97a1d; --hb-w-wohnen:#4a5c39; --hb-w-immobilien:#792d29;
   --hb-w-studio:#1f1c17; --hb-w-kulinarik:#6b3951;
-  /* Typo-Stacks */
+  /* Fallback, solange kein data-hb-welt gesetzt ist (Holding-Ton) */
+  --hb-welt:#1f1c17;
+  --hb-welt-zart:color-mix(in srgb, var(--hb-welt) 9%, var(--hb-papier));
+  --hb-welt-linie:color-mix(in srgb, var(--hb-welt) 28%, var(--hb-linie));
+
+  /* --- Schrift-Stacks --- */
   --hb-serif:'Fraunces',Georgia,serif;
   --hb-sans:'Manrope',system-ui,sans-serif;
   --hb-mono:'JetBrains Mono',ui-monospace,monospace;
-  /* Form */
+
+  /* --- Schriftskala: eine Reihe, fließend. Verhältnis ~1,25 --- */
+  --hb-s-mikro:.62rem;                                  /* Eyebrow, Kapitälchen */
+  --hb-s-klein:.78rem;                                  /* Beschriftung */
+  --hb-s-basis:1rem;                                    /* Fließtext */
+  --hb-s-gross:1.125rem;                                /* Fließtext betont */
+  --hb-s-lead:clamp(1.15rem,.95rem + .7vw,1.4rem);      /* Vorspann */
+  --hb-s-h3:clamp(1.3rem,1.1rem + .8vw,1.65rem);
+  --hb-s-h2:clamp(1.7rem,1.3rem + 1.6vw,2.4rem);
+  --hb-s-h1:clamp(2.2rem,1.5rem + 3.2vw,3.6rem);
+  --hb-s-display:clamp(2.8rem,1.6rem + 5.4vw,5.2rem);
+
+  /* --- Zeilen & Laufweite --- */
+  --hb-zeile-eng:1.08;         /* Display */
+  --hb-zeile-mittel:1.3;       /* Überschrift */
+  --hb-zeile-weit:1.62;        /* Fließtext */
+  --hb-sperr-mikro:.3em;       /* Eyebrow */
+  --hb-sperr-eng:-.02em;       /* Display */
+  --hb-mass:64ch;              /* Lesebreite */
+
+  /* --- Raum: 4-px-Raster, benannte Stufen --- */
+  --hb-raum-1:4px;  --hb-raum-2:8px;  --hb-raum-3:12px; --hb-raum-4:16px;
+  --hb-raum-5:24px; --hb-raum-6:32px; --hb-raum-7:48px; --hb-raum-8:64px;
+  --hb-raum-9:96px; --hb-raum-10:128px;
+  --hb-breite:1100px;          /* Satzspiegel */
+  --hb-breite-eng:760px;       /* Lesespalte */
+
+  /* --- Form --- */
+  --hb-rund-s:8px; --hb-rund-m:12px; --hb-rund-l:18px; --hb-rund-xl:26px;
+  --hb-rund-voll:999px;
+  /* Aliasse aus v2 — Bestand greift darauf zu, Werte unverändert */
   --hb-r-s:11px; --hb-r-m:14px; --hb-r-l:18px;
+
+  /* --- Höhe: warm getönt, nie neutrales Schwarz --- */
+  --hb-hoehe-1:0 1px 2px rgba(31,28,23,.06);
+  --hb-hoehe-2:0 4px 14px rgba(31,28,23,.09);
+  --hb-hoehe-3:0 12px 32px rgba(31,28,23,.13);
+  --hb-hoehe-4:0 24px 60px rgba(31,28,23,.18);
+
+  /* --- Bewegung: Dauer, Kurve, Weg. Das ganze Vokabular. --- */
+  --hb-zeit-sofort:90ms;       /* Zustandswechsel am Zeiger */
+  --hb-zeit-kurz:180ms;        /* Hover, Fokus, kleine Flächen */
+  --hb-zeit-mittel:320ms;      /* Ein-/Ausblenden, Aufklappen */
+  --hb-zeit-lang:620ms;        /* Eintritt größerer Flächen */
+  --hb-zeit-szene:900ms;       /* Bühnenwechsel, Scroll-Regie */
+  --hb-ease-standard:cubic-bezier(.4,0,.2,1);    /* Anfang und Ende gebremst */
+  --hb-ease-ein:cubic-bezier(.16,1,.3,1);        /* Eintritt: schnell, weich aus */
+  --hb-ease-aus:cubic-bezier(.4,0,1,1);          /* Austritt: zieht weg */
+  --hb-ease-betont:cubic-bezier(.34,1.4,.64,1);  /* leichter Überschwung */
+  --hb-weg-klein:10px; --hb-weg-mittel:26px; --hb-weg-gross:56px;
+  --hb-stufe:70ms;             /* Versatz je Geschwisterelement */
+
+  /* --- Ebenen --- */
+  --hb-z-grund:0; --hb-z-erhoben:10; --hb-z-klebend:100;
+  --hb-z-nav:500; --hb-z-schleier:900; --hb-z-hinweis:1000;
+}
+
+/* ============================================================
+   2. WELTZUWEISUNG — ein Attribut, alle Bauteile folgen.
+   Damit steht die Weltfarbe genau EINMAL im System statt
+   tausendfach als Hex-Wert in den Seiten.
+   ============================================================ */
+[data-hb-welt="reisen"]    {--hb-welt:var(--hb-w-reisen)}
+[data-hb-welt="wohnen"]    {--hb-welt:var(--hb-w-wohnen)}
+[data-hb-welt="immobilien"]{--hb-welt:var(--hb-w-immobilien)}
+[data-hb-welt="studio"]    {--hb-welt:var(--hb-w-studio)}
+[data-hb-welt="kulinarik"] {--hb-welt:var(--hb-w-kulinarik)}
+[data-hb-welt="wissen"]    {--hb-welt:var(--hb-akzent)}
+[data-hb-welt="konto"]     {--hb-welt:var(--hb-w-studio)}
+[data-hb-welt="holding"]   {--hb-welt:var(--hb-w-studio)}
+
+/* Bewegungsruhe ist kein Sonderfall, sondern eine Einstellung:
+   die Dauern gehen auf null, die Wege auch — die Gestalt bleibt. */
+@media (prefers-reduced-motion: reduce){
+  :root{
+    --hb-zeit-sofort:1ms; --hb-zeit-kurz:1ms; --hb-zeit-mittel:1ms;
+    --hb-zeit-lang:1ms;   --hb-zeit-szene:1ms; --hb-stufe:0ms;
+    --hb-weg-klein:0px;   --hb-weg-mittel:0px; --hb-weg-gross:0px;
+  }
+}
+
+/* ============================================================
+   3. BESTAND v2 — Bauteile aus Remake-Welle W1, Zeichen für Zeichen
+   unverändert übernommen. Sie liegen unter 100 Seiten; jede Änderung
+   hier wäre eine Änderung am ganzen Bestand.
+
+   Ihre Tokens zeigen ab jetzt auf die Rollen der Token-Ebene. Die
+   WERTE sind dieselben wie bisher — die Bauteile sehen unverändert
+   aus, hängen aber nicht mehr an eigenen Hex-Werten.
+   ============================================================ */
+:root{
+  --hb-bg:var(--hb-grund); --hb-bg2:var(--hb-grund-2); --hb-paper:var(--hb-papier);
+  --hb-ink:var(--hb-text); --hb-ink2:var(--hb-text-leise); --hb-rule:var(--hb-linie);
+  --hb-terra:var(--hb-akzent); --hb-ochre:var(--hb-w-reisen); --hb-moss:var(--hb-w-wohnen);
+  --hb-burg:var(--hb-w-immobilien); --hb-aub:var(--hb-w-kulinarik); --hb-good:var(--hb-gut);
 }
 
 /* ---------- Navigation (heiben-nav.js) ---------- */
@@ -113,3 +245,143 @@
 .hb-foot{font-family:var(--hb-mono);font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;
   color:var(--hb-ink2);text-align:center;margin-top:2.4rem}
 .hb-foot a{color:var(--hb-aub)}
+
+/* ============================================================
+   4. BAUSTEINE v3 — alles ausschließlich aus Tokens.
+   Kein Bauteil kennt eine Farbe, eine Größe oder eine Dauer;
+   es kennt nur deren Rolle. Weltfarbe kommt aus [data-hb-welt].
+   ============================================================ */
+
+/* ---------- Gerüst ---------- */
+.hb-satz{max-width:var(--hb-breite);margin-inline:auto;padding-inline:var(--hb-raum-5)}
+.hb-spalte{max-width:var(--hb-breite-eng);margin-inline:auto}
+.hb-abschnitt{padding-block:var(--hb-raum-9)}
+.hb-abschnitt--eng{padding-block:var(--hb-raum-7)}
+.hb-stapel>*+*{margin-top:var(--hb-raum-4)}
+.hb-stapel--weit>*+*{margin-top:var(--hb-raum-6)}
+.hb-linie-quer{border:0;border-top:1px solid var(--hb-linie);margin-block:var(--hb-raum-7)}
+
+/* ---------- Schrift ---------- */
+.hb-augenbraue{font-family:var(--hb-mono);font-size:var(--hb-s-mikro);
+  letter-spacing:var(--hb-sperr-mikro);text-transform:uppercase;color:var(--hb-welt);
+  display:block;margin-bottom:var(--hb-raum-3)}
+.hb-display{font-family:var(--hb-serif);font-weight:300;font-size:var(--hb-s-display);
+  line-height:var(--hb-zeile-eng);letter-spacing:var(--hb-sperr-eng);color:var(--hb-text);margin:0}
+.hb-titel{font-family:var(--hb-serif);font-weight:400;font-size:var(--hb-s-h1);
+  line-height:var(--hb-zeile-eng);letter-spacing:var(--hb-sperr-eng);color:var(--hb-text);margin:0}
+.hb-titel-2{font-family:var(--hb-serif);font-weight:400;font-size:var(--hb-s-h2);
+  line-height:var(--hb-zeile-mittel);color:var(--hb-text);margin:0}
+.hb-titel-3{font-family:var(--hb-sans);font-weight:600;font-size:var(--hb-s-h3);
+  line-height:var(--hb-zeile-mittel);color:var(--hb-text);margin:0}
+.hb-kursiv{font-style:italic;color:var(--hb-welt)}
+.hb-vorspann{font-family:var(--hb-sans);font-size:var(--hb-s-lead);line-height:var(--hb-zeile-weit);
+  color:var(--hb-text-leise);max-width:var(--hb-mass);margin:0}
+.hb-fliess{font-family:var(--hb-sans);font-size:var(--hb-s-basis);line-height:var(--hb-zeile-weit);
+  color:var(--hb-text-leise);max-width:var(--hb-mass)}
+.hb-beischrift{font-family:var(--hb-mono);font-size:var(--hb-s-klein);color:var(--hb-text-zart)}
+
+/* ---------- Raster ---------- */
+.hb-raster{display:grid;gap:var(--hb-raum-5);
+  grid-template-columns:repeat(auto-fit,minmax(min(var(--hb-min,260px),100%),1fr))}
+.hb-raster--eng{gap:var(--hb-raum-3)}
+.hb-reihe{display:flex;flex-wrap:wrap;gap:var(--hb-raum-3);align-items:center}
+
+/* ---------- Fläche (Karte) ---------- */
+.hb-flaeche{background:var(--hb-papier);border:1px solid var(--hb-linie);
+  border-radius:var(--hb-rund-l);padding:var(--hb-raum-5);
+  box-shadow:var(--hb-hoehe-1);
+  transition:box-shadow var(--hb-zeit-kurz) var(--hb-ease-standard),
+             transform var(--hb-zeit-kurz) var(--hb-ease-standard),
+             border-color var(--hb-zeit-kurz) var(--hb-ease-standard)}
+.hb-flaeche--hebt:hover,.hb-flaeche--hebt:focus-within{
+  box-shadow:var(--hb-hoehe-3);transform:translateY(-3px);border-color:var(--hb-welt-linie)}
+.hb-flaeche--welt{border-top:3px solid var(--hb-welt)}
+.hb-flaeche--zart{background:var(--hb-welt-zart)}
+
+/* ---------- Weltkachel: die Farbe trägt die Kante ---------- */
+.hb-kachel{position:relative;display:block;text-decoration:none;color:inherit;
+  background:var(--hb-papier);border:1px solid var(--hb-linie);border-radius:var(--hb-rund-l);
+  padding:var(--hb-raum-5) var(--hb-raum-5) var(--hb-raum-5) calc(var(--hb-raum-5) + 6px);
+  overflow:hidden;box-shadow:var(--hb-hoehe-1);
+  transition:box-shadow var(--hb-zeit-mittel) var(--hb-ease-standard),
+             transform var(--hb-zeit-mittel) var(--hb-ease-standard)}
+.hb-kachel::before{content:"";position:absolute;inset:0 auto 0 0;width:6px;background:var(--hb-welt);
+  transform:scaleY(.34);transform-origin:50% 0;
+  transition:transform var(--hb-zeit-lang) var(--hb-ease-ein)}
+.hb-kachel:hover,.hb-kachel:focus-visible{box-shadow:var(--hb-hoehe-3);transform:translateY(-4px)}
+.hb-kachel:hover::before,.hb-kachel:focus-visible::before{transform:scaleY(1)}
+
+/* ---------- Taste ---------- */
+.hb-taste{display:inline-flex;align-items:center;gap:var(--hb-raum-2);
+  font-family:var(--hb-mono);font-size:var(--hb-s-mikro);letter-spacing:var(--hb-sperr-mikro);
+  text-transform:uppercase;text-decoration:none;cursor:pointer;
+  padding:var(--hb-raum-3) var(--hb-raum-5);border-radius:var(--hb-rund-s);
+  border:1px solid var(--hb-welt);background:var(--hb-welt);color:var(--hb-text-invers);
+  transition:background var(--hb-zeit-kurz) var(--hb-ease-standard),
+             color var(--hb-zeit-kurz) var(--hb-ease-standard),
+             transform var(--hb-zeit-sofort) var(--hb-ease-standard),
+             box-shadow var(--hb-zeit-kurz) var(--hb-ease-standard)}
+.hb-taste:hover{box-shadow:var(--hb-hoehe-2);transform:translateY(-1px)}
+.hb-taste:active{transform:translateY(0)}
+.hb-taste--leise{background:transparent;color:var(--hb-welt)}
+.hb-taste--leise:hover{background:var(--hb-welt-zart)}
+.hb-taste--rand{background:transparent;color:var(--hb-text);border-color:var(--hb-linie-stark)}
+.hb-taste--rand:hover{border-color:var(--hb-welt);color:var(--hb-welt)}
+
+/* ---------- Marke, Merker ---------- */
+.hb-marke{display:inline-flex;align-items:center;gap:var(--hb-raum-1);
+  font-family:var(--hb-mono);font-size:var(--hb-s-mikro);letter-spacing:.14em;text-transform:uppercase;
+  padding:var(--hb-raum-1) var(--hb-raum-3);border-radius:var(--hb-rund-voll);
+  background:var(--hb-welt-zart);color:var(--hb-welt);border:1px solid var(--hb-welt-linie)}
+.hb-punkt{width:8px;height:8px;border-radius:var(--hb-rund-voll);background:var(--hb-welt);
+  display:inline-block;flex:0 0 auto}
+
+/* ---------- Zahl & Band ---------- */
+.hb-wert{display:flex;flex-direction:column;gap:var(--hb-raum-1)}
+.hb-wert b{font-family:var(--hb-serif);font-weight:400;font-size:var(--hb-s-h2);
+  line-height:1;color:var(--hb-welt);font-variant-numeric:tabular-nums}
+.hb-wert span{font-family:var(--hb-mono);font-size:var(--hb-s-mikro);
+  letter-spacing:var(--hb-sperr-mikro);text-transform:uppercase;color:var(--hb-text-zart)}
+.hb-band{display:grid;gap:var(--hb-raum-5);
+  grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+  padding-block:var(--hb-raum-6);border-block:1px solid var(--hb-linie)}
+
+/* ---------- Notiz (Hinweis, Warnung, Bestätigung) ---------- */
+.hb-notiz{border-left:3px solid var(--hb-welt);background:var(--hb-welt-zart);
+  border-radius:0 var(--hb-rund-m) var(--hb-rund-m) 0;padding:var(--hb-raum-4) var(--hb-raum-5);
+  font-family:var(--hb-sans);font-size:var(--hb-s-klein);line-height:var(--hb-zeile-weit);
+  color:var(--hb-text-leise)}
+.hb-notiz--warnung{--hb-welt:var(--hb-warnung)}
+.hb-notiz--gut{--hb-welt:var(--hb-gut)}
+.hb-notiz--fehler{--hb-welt:var(--hb-fehler)}
+.hb-notiz b{color:var(--hb-text)}
+
+/* ---------- Steckbrief-Zeile ---------- */
+.hb-brief{display:grid;grid-template-columns:minmax(120px,22%) 1fr;gap:var(--hb-raum-4);
+  padding-block:var(--hb-raum-4);border-bottom:1px solid var(--hb-linie-zart)}
+.hb-brief dt{font-family:var(--hb-mono);font-size:var(--hb-s-mikro);
+  letter-spacing:var(--hb-sperr-mikro);text-transform:uppercase;color:var(--hb-text-zart);margin:0}
+.hb-brief dd{margin:0;font-family:var(--hb-sans);font-size:var(--hb-s-basis);
+  line-height:var(--hb-zeile-weit);color:var(--hb-text-leise)}
+@media (max-width:560px){.hb-brief{grid-template-columns:1fr;gap:var(--hb-raum-1)}}
+
+/* ---------- Feld ---------- */
+.hb-feld{font-family:var(--hb-sans);font-size:var(--hb-s-basis);color:var(--hb-text);
+  background:var(--hb-papier);border:1px solid var(--hb-linie-stark);
+  border-radius:var(--hb-rund-s);padding:var(--hb-raum-3) var(--hb-raum-4);width:100%;
+  transition:border-color var(--hb-zeit-kurz) var(--hb-ease-standard),
+             box-shadow var(--hb-zeit-kurz) var(--hb-ease-standard)}
+.hb-feld:focus{outline:none;border-color:var(--hb-welt);
+  box-shadow:0 0 0 3px color-mix(in srgb,var(--hb-welt) 22%,transparent)}
+
+/* ---------- Bühne (dunkel) ---------- */
+.hb-buehne{background:var(--hb-tief);color:var(--hb-text-invers);position:relative;overflow:hidden;
+  --hb-text:var(--hb-text-invers);--hb-text-leise:#cdc3b2;--hb-text-zart:#9a9082;
+  --hb-papier:var(--hb-tief-2);--hb-linie:#3a332a;--hb-linie-zart:#332d25}
+.hb-buehne::after{content:"";position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(120% 80% at 50% 0%,transparent 40%,rgba(0,0,0,.28) 100%)}
+.hb-buehne>*{position:relative;z-index:1}
+
+/* ---------- Sichtbarer Fokus, überall gleich ---------- */
+.hb-satz :focus-visible,.hb-flaeche :focus-visible,.hb-kachel:focus-visible,.hb-taste:focus-visible{
+  outline:2px solid var(--hb-welt);outline-offset:3px;border-radius:var(--hb-rund-s)}

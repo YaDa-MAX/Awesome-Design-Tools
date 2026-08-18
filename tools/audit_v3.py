@@ -250,6 +250,55 @@ def ladelast(txt):
         print(f"  {p:<26}{kb(tot):>10}   {gross}")
 
 
+
+def designebene(txt):
+    titel("9. DESIGNEBENE (Fragmentierung der Gestaltung)")
+    quellen = []
+    for f in sorted(glob.glob("*.css")):
+        quellen.append((f, open(f, encoding="utf-8").read()))
+    for f, s in txt.items():
+        for m in RE_STYLE.findall(s):
+            quellen.append((f, m))
+    alles = "\n".join(c for _, c in quellen)
+
+    def n(rx, wandel=lambda x: x):
+        return len({wandel(m) for m in re.findall(rx, alles, re.I)}), \
+               len(re.findall(rx, alles, re.I))
+
+    zeilen = [
+        ("Hex-Farben", n(r"#[0-9a-f]{3,8}\b", str.lower)),
+        ("rgb/rgba-Farben", n(r"rgba?\([^)]*\)")),
+        ("font-size-Werte", n(r"font-size:\s*([^;}\n]+)", str.strip)),
+        ("border-radius-Werte", n(r"border-radius:\s*([^;}\n]+)", str.strip)),
+        ("box-shadow-Werte", n(r"box-shadow:\s*([^;}\n]+)", str.strip)),
+        ("transition-Werte", n(r"transition:\s*([^;}\n]+)", str.strip)),
+        ("Easings", n(r"cubic-bezier\([^)]*\)")),
+        ("@keyframes", n(r"@keyframes\s+([\w-]+)")),
+    ]
+    print(f"{'Merkmal':<24}{'verschieden':>12}{'Vorkommen':>12}")
+    for name, (v, g) in zeilen:
+        print(f"{name:<24}{v:>12}{g:>12}")
+
+    var = defaultdict(int)
+    for m in re.findall(r"(--[\w-]+)\s*:", alles):
+        var[m] += 1
+    hb = {k: v for k, v in var.items() if k.startswith("--hb-")}
+    print(f"\nCustom Properties gesamt: {len(var)} verschiedene, "
+          f"{sum(var.values())} Deklarationen")
+    print(f"  davon Fundament (--hb-*): {len(hb)} verschiedene, {sum(hb.values())} Deklarationen")
+    mehrfach = sorted(((v, k) for k, v in var.items() if v > 10), reverse=True)[:5]
+    if mehrfach:
+        print("  am haeufigsten neu deklariert: "
+              + ", ".join(f"{k} ({v}x)" for v, k in mehrfach))
+
+    ruhe = sum(1 for _, c in quellen if "prefers-reduced-motion" in c)
+    print(f"\nBewegungsruhe beachtet: {ruhe} von {len(quellen)} Stilquellen")
+    ansage = sum(1 for s in txt.values() if "data-hb-motion" in s)
+    regie = sum(1 for s in txt.values() if 'data-hb-regie="ansage"' in s)
+    welt = sum(1 for s in txt.values() if "data-hb-welt" in s)
+    print(f"Ansagepfad [data-hb-motion]: {ansage} Seiten (davon {regie} nur Ansage)")
+    print(f"Weltzuweisung [data-hb-welt]: {welt} Seiten")
+
 def main():
     ziel = sys.argv[1] if len(sys.argv) > 1 else "."
     if os.path.isdir(ziel):
@@ -267,6 +316,7 @@ def main():
     kanon(txt)
     gewichtung(txt)
     ladelast(txt)
+    designebene(txt)
     print("\nFertig. Bezugsdokument: REMAKE-KONZEPT-V3.md")
 
 

@@ -826,3 +826,73 @@ vorquittiert, Messung nach document.fonts.ready + 2 rAF):
   heiben-nav.js/heiben-legal.js sind Kommentare bzw. sichtbarer Text in unternehmen.html).
 - SWEEP: alle 101 Seiten -> 0 PageErrors, 0 Console-Errors.
 NAECHSTER SCHRITT: siehe folgender Abschnitt (Design-Auftrag des Users).
+
+## REMAKE V3 · WELLE 3: DESIGNGRUNDSTRUKTUR + BEWEGUNGSGRAMMATIK (SW -2992)
+User-Auftrag: "Designe neu und ueberdenke gesamte Designgrundstruktur und Aufbau aller Animationen
+und Darstellungen." Wellenplan entsprechend umgestellt (Design vorgezogen, Offline/Ladelast jetzt W4).
+AUDIT DER GESTALTUNGSEBENE (152 Stilquellen, neu als Abschnitt 9 in tools/audit_v3.py):
+104 Hex-Farben + 98 rgb/rgba · 160 font-size-Werte · 24 Radien · 37 Schatten · 47 transitions ·
+4 Easings · 13 keyframes · 87 Custom Properties in 834 Deklarationen (--bg/--ink/--rule je 67x neu
+definiert, weil praktisch jede Seite ihren eigenen :root-Block mitbringt) · prefers-reduced-motion
+in 4 von 152 Quellen beachtet. Befund: keine Geschmacksfrage, sondern fehlende Grammatik.
+NEU heiben-design.css (115 -> 387 Zeilen, 21 KB), VIER EBENEN:
+ 1 TOKENS als ROLLEN — Flaeche (grund/grund-2/papier/tief), Schrift (text/leise/zart/invers),
+   Linie (zart/normal/stark), Akzent+Signal, 5 Weltfarben, Schriftskala mit NEUN Stufen
+   (mikro..display, die grossen per clamp()), Zeilen/Sperrung/Mass, Raum als 4-px-Raster
+   (raum-1..10), Form (rund-s..xl+voll), Hoehe (4 Stufen, WARM getoent rgba(31,28,23,..), nie
+   neutrales Schwarz), BEWEGUNG (5 Dauern, 4 Kurven, 3 Wege, Stufung), Ebenen (z-*).
+ 2 WELTZUWEISUNG — [data-hb-welt] setzt --hb-welt (+ --hb-welt-zart / --hb-welt-linie via
+   color-mix). Damit steht die Weltfarbe EINMAL im System statt ~1.050-mal als Hex in den Seiten.
+   Der Rollout auf die Bestandsseiten ist W6, das Fundament steht ab jetzt.
+ 3 BESTAND v2 — die W1-Bauteile ZEICHEN FUER ZEICHEN unveraendert; ihre Tokens (--hb-bg, --hb-ink,
+   --hb-rule, --hb-terra ...) zeigen jetzt per var() auf die Rollen. Gleiche Werte, eine Quelle.
+ 4 BAUSTEINE v3 — Geruest (satz/spalte/abschnitt/stapel/linie-quer), Schrift (augenbraue/display/
+   titel/titel-2/titel-3/vorspann/fliess/beischrift), Raster, Flaeche (+hebt/welt/zart), Weltkachel
+   (Farbkante waechst beim Zeigen), Taste (3 Auspraegungen), Marke+Punkt, Wert+Band, Notiz
+   (4 Toene ueber --hb-welt-Umschreibung), Steckbrief-Zeile, Feld, Buehne (dunkel, schreibt die
+   Rollen fuer ihren Teilbaum um -> KEINE zweite Palette noetig), einheitlicher Fokusring.
+BEWEGUNG NEU GEFASST (hb-motion.css 12 -> 71 Zeilen, hb-motion.js 24 -> 118 Zeilen):
+ - VOKABULAR in Tokens: zeit-sofort/kurz/mittel/lang/szene = 90/180/320/620/900 ms;
+   ease-standard/ein/aus/betont; weg-klein/mittel/gross = 10/26/56 px; stufe 70 ms.
+   GLUECKSFALL: die Altwerte (.9s, cubic-bezier(.16,1,.3,1), 26px) SIND exakt zeit-szene +
+   ease-ein + weg-mittel -> der Bestandspfad laesst sich in Tokens ausdruecken, ohne dass sich
+   irgendetwas aendert.
+ - ANSAGE STATT RATEVERFAHREN: data-hb-motion="auf|ein|skala|seite|seite-rechts|linie" im Markup.
+   Bisher wurde per Element- und SUBSTRING-Treffer geraten ([class*="grid"]) — genau die
+   Kollisionsanfaelligkeit, die im CSS seit jeher verboten ist. Stufung aus der Geschwisterfolge
+   (oder data-hb-stufe), Zusatzflaggen data-hb-betont / data-hb-ruhig.
+ - ZWEI PFADE, EIN BEOBACHTER: Bestandspfad eingefroren; <body data-hb-regie="ansage"> schaltet ihn
+   ab, damit neue Seiten nur zeigen, was sie ansagen.
+ - BEWEGUNGSRUHE ist eine EINSTELLUNG, kein Ausstieg: die Token-Dauern und -Wege gehen auf null,
+   Gestalt und Inhalt bleiben. Zusaetzlich wird die Einstellung zur LAUFZEIT nachgezogen
+   (matchMedia change). Bisher stieg das Skript komplett aus.
+NEU web/designsystem.html (349 Z., 22 KB, verlinkt aus marke.html, precached, typ "holding"):
+lebender Styleguide mit Weltschalter (ein Attribut am body faerbt die ganze Seite um), Farbrollen,
+Schriftskala, Raum/Form/Hoehe, dem kompletten Bewegungsvokabular als Tabelle, den fuenf Rollen als
+Live-Vorfuehrung mit Wiederholen-Knopf, allen Bausteinen und dem Regelwerk.
+DREI FEHLER WAEHREND DER WELLE GEFUNDEN UND BEHOBEN:
+ 1. NAMENSKOLLISION: mein Weltschalter nutzte data-welt — das gehoert heiben-nav.js (Weltlinks).
+    Der Testklick landete auf der Navigation und navigierte nach kulinarik.html. Umbenannt auf
+    data-ds-welt; Regel in CLAUDE.md aufgenommen.
+ 2. SICHERHEITSNETZ: meine erste Fassung setzte nach 3 s auch 'hb-done' — das haette laufende
+    Animationen mittendrin abgeschnitten. Getrennt in alleZeigen() (sofort sichtbar, fuer
+    Bewegungsruhe) und netzAuffangen() (nur Eintritt ausloesen).
+ 3. STARTZEITPUNKT: erste Fassung wartete auf DOMContentLoaded. Der Bestand bindet die Datei am
+    ENDE des <body> ein und setzt die Reveal-Klassen noch waehrend des Parsens — spaeteres Setzen
+    kann den Inhalt kurz aufblitzen lassen. Jetzt: sofort starten, bei DOMContentLoaded nachtragen;
+    start() ist ueber data-hb-erfasst idempotent.
+VERIFIKATION (W2-Stand via git archive auf 8181 gegen W3 auf 8180, Messung nach fonts.ready + 2 rAF):
+ - Layout-Fingerabdruck aller 100 Bestandsseiten: 97 identisch. Dieselben 3 Seiten wie in W2
+   (begriffskarten, koeln-quiz, wissensquiz) mit derselben Signatur — nur Textbreite, Position und
+   Hoehe gleich = Zufallsinhalt, in W2 bereits per Kontrolllauf vorher-gegen-vorher bewiesen.
+ - designsystem.html: Bestandspfad 0 (Regie=ansage greift), 21 angesagte Elemente, 21 eingetreten,
+   0 unsichtbar, Stufung 0/70/140 ms bei Geschwistern; Weltwechsel faerbt Kante und Augenbraue
+   korrekt (kulinarik #6b3951, reisen #a97a1d, wohnen #4a5c39, holding #1f1c17); 0 PageErrors.
+ - Audit-Abschnitt 9 neu: misst Fragmentierung, Fundament-Tokens, Bewegungsruhe-Abdeckung und die
+   Verbreitung des Ansagepfads. --hb-* jetzt 99 Rollen in 126 Deklarationen (statt verstreuter Werte).
+MARKEN-DNA UNVERAENDERT: dieselbe warme Palette, dieselben Schriften, dieselben Weltfarben. Neu ist
+die Ordnung, nicht der Ausdruck. Die Nicht-Ziel-Zeile "kein neues Design-System" in
+REMAKE-KONZEPT-V3.md wurde entsprechend mit Nachtrag korrigiert statt still gelassen.
+NAECHSTER SCHRITT bei "Weiter": V3-W4 OFFLINE & LADELAST — Precache aus dem Dateibestand generieren
+(tools/gen_sw.js), grosse Datenmodule (lebenswissen 649K, kulinarik 519K, tagesdosis 206K) fuer
+Uebersichtszwecke durch generierte Kurzfassungen ersetzen, mein-heiben von 909 KB auf < 120 KB.

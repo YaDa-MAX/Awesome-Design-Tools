@@ -51,6 +51,12 @@
    "titel": "Datenschutzerklärung — HeiBen Holding GmbH",
    "beschreibung": "Datenschutzerklärung der HeiBen Holding GmbH gemäß DSGVO."
   },
+  "designsystem.html": {
+   "welt": "holding",
+   "typ": "holding",
+   "titel": "Designsystem · HeiBen",
+   "beschreibung": "Die Grundstruktur hinter allen Seiten: Farbrollen, Schriftskala, Raum- und Formmaße, Höhenstufen und das Bewegungsvokabular — an fünf Welten vorführbar."
+  },
   "digital.html": {
    "welt": "wissen",
    "typ": "kompendium",
