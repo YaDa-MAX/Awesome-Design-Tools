@@ -1,7 +1,7 @@
 {
  "_hinweis": "Registry fuer tools/gen_kopf.js. Von Hand pflegen: neue Seite hier eintragen, dann `node ../tools/gen_kopf.js` in web/ laufen lassen.",
  "_basis": "https://www.heiben.de/",
- "_typen": "start | welt | weltseite | kompendium | werkzeug | wissen | konto | holding | legal | intern (noindex) | standalone (wird ausgelassen)",
+ "_typen": "start | welt | weltseite | kompendium | werkzeug | wissen | konto | holding | legal | intern (noindex) | standalone (wird ausgelassen) · werkzeug-Eintraege tragen zusaetzlich 'gruppe' fuer das Register",
  "seiten": {
   "404.html": {
    "welt": "holding",
@@ -67,7 +67,8 @@
    "welt": "wissen",
    "typ": "werkzeug",
    "titel": "Die erste eigene Wohnung · HeiBen",
-   "beschreibung": "Ausziehen kostet zweimal — einmal viel zum Einzug, dann jeden Monat. Trag deine Wunschwohnung ein und sieh, ob sie zu deinem Einkommen passt."
+   "beschreibung": "Ausziehen kostet zweimal — einmal viel zum Einzug, dann jeden Monat. Trag deine Wunschwohnung ein und sieh, ob sie zu deinem Einkommen passt.",
+   "gruppe": "Wohnen & Immobilien"
   },
   "erstehilfe.html": {
    "welt": "wissen",
@@ -85,7 +86,8 @@
    "welt": "wissen",
    "typ": "werkzeug",
    "titel": "Finanz-Gesundheitscheck · HeiBen",
-   "beschreibung": "Sieben ehrliche Fragen, ein Score, ein klarer Plan: In zwei Minuten weißt du, wo du stehst und welche drei Schritte am meisten bringen."
+   "beschreibung": "Sieben ehrliche Fragen, ein Score, ein klarer Plan: In zwei Minuten weißt du, wo du stehst und welche drei Schritte am meisten bringen.",
+   "gruppe": "Geld & Vorsorge"
   },
   "finanzen.html": {
    "welt": "wissen",
@@ -97,13 +99,15 @@
    "welt": "wissen",
    "typ": "werkzeug",
    "titel": "Wann bist du finanziell frei? · HeiBen",
-   "beschreibung": "Wann wirft dein Vermögen genug ab, um die Ausgaben zu decken? Die 4-%-Regel macht daraus eine konkrete Zahl — spiel mit den Reglern."
+   "beschreibung": "Wann wirft dein Vermögen genug ab, um die Ausgaben zu decken? Die 4-%-Regel macht daraus eine konkrete Zahl — spiel mit den Reglern.",
+   "gruppe": "Geld & Vorsorge"
   },
   "gehaltsverhandlung.html": {
    "welt": "wissen",
    "typ": "werkzeug",
    "titel": "Gehaltsverhandlung · HeiBen",
-   "beschreibung": "Jede Erhöhung wird zur neuen Basis für alle künftigen. Hier siehst du, was eine gelungene Verhandlung über das ganze Berufsleben wert ist."
+   "beschreibung": "Jede Erhöhung wird zur neuen Basis für alle künftigen. Hier siehst du, was eine gelungene Verhandlung über das ganze Berufsleben wert ist.",
+   "gruppe": "Beruf & Bildung"
   },
   "haushalt.html": {
    "welt": "wissen",
@@ -157,7 +161,8 @@
    "welt": "immobilien",
    "typ": "werkzeug",
    "titel": "Wie viel Immobilie kannst du dir leisten? · HeiBen",
-   "beschreibung": "Wir rechnen rückwärts: von der monatlich leistbaren Rate zum realistischen Kaufpreis — inklusive der Nebenkosten, die viele übersehen."
+   "beschreibung": "Wir rechnen rückwärts: von der monatlich leistbaren Rate zum realistischen Kaufpreis — inklusive der Nebenkosten, die viele übersehen.",
+   "gruppe": "Wohnen & Immobilien"
   },
   "impressum.html": {
    "welt": "holding",
@@ -176,19 +181,22 @@
    "welt": "wissen",
    "typ": "werkzeug",
    "titel": "Lohnt sich der Jobwechsel? · HeiBen",
-   "beschreibung": "Höheres Brutto heißt nicht mehr Netto. Trag beide Jobs ein und sieh, was nach Pendeln, Steuern und Lebenszeit übrig bleibt. Alles bleibt lokal."
+   "beschreibung": "Höheres Brutto heißt nicht mehr Netto. Trag beide Jobs ein und sieh, was nach Pendeln, Steuern und Lebenszeit übrig bleibt. Alles bleibt lokal.",
+   "gruppe": "Beruf & Bildung"
   },
   "koeln-quiz.html": {
    "welt": "holding",
    "typ": "werkzeug",
    "titel": "Köln-Heimat-Quiz · HeiBen",
-   "beschreibung": "Dom, Karneval, Kölsch, Klüngel: zwölf Fragen rund um die Stadt am Rhing, jede mit Erklärung. Am Ende sagt das Kölschometer, wo du stehst."
+   "beschreibung": "Dom, Karneval, Kölsch, Klüngel: zwölf Fragen rund um die Stadt am Rhing, jede mit Erklärung. Am Ende sagt das Kölschometer, wo du stehst.",
+   "gruppe": "Üben & Spielen"
   },
   "konsumcheck.html": {
    "welt": "wissen",
    "typ": "werkzeug",
    "titel": "Konsum-Check · HeiBen",
-   "beschreibung": "Was Abos wirklich kosten und was ein einzelner Kauf an Lebenszeit und entgangener Rendite bedeutet — hochgerechnet aufs Jahr und aufs Jahrzehnt."
+   "beschreibung": "Was Abos wirklich kosten und was ein einzelner Kauf an Lebenszeit und entgangener Rendite bedeutet — hochgerechnet aufs Jahr und aufs Jahrzehnt.",
+   "gruppe": "Geld & Vorsorge"
   },
   "konto-verwaltung.html": {
    "welt": "konto",
@@ -344,7 +352,8 @@
    "welt": "wissen",
    "typ": "werkzeug",
    "titel": "Mieten oder kaufen? · HeiBen",
-   "beschreibung": "Nicht Miete gegen Kauf, sondern: Wo stehst du nach einigen Jahren wirklich? Beide Wege als Vermögen durchgerechnet, mit fairen Annahmen."
+   "beschreibung": "Nicht Miete gegen Kauf, sondern: Wo stehst du nach einigen Jahren wirklich? Beide Wege als Vermögen durchgerechnet, mit fairen Annahmen.",
+   "gruppe": "Wohnen & Immobilien"
   },
   "papierkram.html": {
    "welt": "wissen",
@@ -374,7 +383,8 @@
    "welt": "reisen",
    "typ": "werkzeug",
    "titel": "Reisebudget-Planer · HeiBen",
-   "beschreibung": "Die Reise kostet selten nur den Flug. Alle Posten realistisch planen, Kosten pro Person und Tag sehen — und wie lange du dafür sparen musst."
+   "beschreibung": "Die Reise kostet selten nur den Flug. Alle Posten realistisch planen, Kosten pro Person und Tag sehen — und wie lange du dafür sparen musst.",
+   "gruppe": "Unterwegs"
   },
   "reisen-anfrage.html": {
    "welt": "reisen",
@@ -422,19 +432,22 @@
    "welt": "wissen",
    "typ": "werkzeug",
    "titel": "Schuldenfrei werden · HeiBen",
-   "beschreibung": "Mit der richtigen Reihenfolge bist du schneller und billiger raus. Trag deine Schulden ein und vergleiche die zwei besten Strategien."
+   "beschreibung": "Mit der richtigen Reihenfolge bist du schneller und billiger raus. Trag deine Schulden ein und vergleiche die zwei besten Strategien.",
+   "gruppe": "Geld & Vorsorge"
   },
   "shortcut-speedrun.html": {
    "welt": "wissen",
    "typ": "werkzeug",
    "titel": "Shortcut-Speedrun · HeiBen",
-   "beschreibung": "60 Sekunden, so viele Tastenkürzel wie möglich — die echte Tastenkombination drücken, Tempo entscheidet. Wie weit kommst du?"
+   "beschreibung": "60 Sekunden, so viele Tastenkürzel wie möglich — die echte Tastenkombination drücken, Tempo entscheidet. Wie weit kommst du?",
+   "gruppe": "Üben & Spielen"
   },
   "sparziel.html": {
    "welt": "wissen",
    "typ": "werkzeug",
    "titel": "Sparziel-Planer · HeiBen",
-   "beschreibung": "Notgroschen, Führerschein, Eurotrip oder Kaution: Ziel anlegen, Einzahlungen mitschreiben, Fortschritt wachsen sehen. Alles bleibt lokal."
+   "beschreibung": "Notgroschen, Führerschein, Eurotrip oder Kaution: Ziel anlegen, Einzahlungen mitschreiben, Fortschritt wachsen sehen. Alles bleibt lokal.",
+   "gruppe": "Geld & Vorsorge"
   },
   "startseite-neu.html": {
    "welt": "",
@@ -446,7 +459,8 @@
    "welt": "wissen",
    "typ": "werkzeug",
    "titel": "Deine erste Steuererklärung · HeiBen",
-   "beschreibung": "Für Berufseinsteiger und Studierende ist die Steuererklärung meist ein Geschenk. Hier siehst du live, wo dein Geld liegt und was dir zusteht."
+   "beschreibung": "Für Berufseinsteiger und Studierende ist die Steuererklärung meist ein Geschenk. Hier siehst du live, wo dein Geld liegt und was dir zusteht.",
+   "gruppe": "Geld & Vorsorge"
   },
   "strategie.html": {
    "welt": "holding",
@@ -458,7 +472,8 @@
    "welt": "wissen",
    "typ": "werkzeug",
    "titel": "Stromfresser-Detektiv · HeiBen",
-   "beschreibung": "Die Stromrechnung aufgeschlüsselt: Geräte mit Wattzahl und täglicher Nutzung eintragen und die heimlichen Kostentreiber finden."
+   "beschreibung": "Die Stromrechnung aufgeschlüsselt: Geräte mit Wattzahl und täglicher Nutzung eintragen und die heimlichen Kostentreiber finden.",
+   "gruppe": "Wohnen & Immobilien"
   },
   "studio-artikel.html": {
    "welt": "studio",
@@ -518,7 +533,8 @@
    "welt": "wissen",
    "typ": "werkzeug",
    "titel": "Studium oder Ausbildung? · HeiBen",
-   "beschreibung": "Ausbildung bringt früh Geld, Studium kostet erst Zeit — beide Wege übers Berufsleben durchgerechnet, samt dem Punkt, ab dem das Studium aufholt."
+   "beschreibung": "Ausbildung bringt früh Geld, Studium kostet erst Zeit — beide Wege übers Berufsleben durchgerechnet, samt dem Punkt, ab dem das Studium aufholt.",
+   "gruppe": "Beruf & Bildung"
   },
   "suche.html": {
    "welt": "wissen",
@@ -536,7 +552,8 @@
    "welt": "wissen",
    "typ": "werkzeug",
    "titel": "Tastenkürzel-Trainer · HeiBen",
-   "beschreibung": "Echte Tastenkombination drücken statt Multiple Choice: So wandern die wichtigsten Shortcuts von der Maus in die Finger."
+   "beschreibung": "Echte Tastenkombination drücken statt Multiple Choice: So wandern die wichtigsten Shortcuts von der Maus in die Finger.",
+   "gruppe": "Üben & Spielen"
   },
   "unternehmen.html": {
    "welt": "holding",
@@ -548,13 +565,15 @@
    "welt": "wissen",
    "typ": "werkzeug",
    "titel": "Versicherungs-Check · HeiBen",
-   "beschreibung": "Viele zahlen für Handy und Brille, aber nicht fürs Existenzielle. Ein paar Fragen zu deiner Situation — und du weißt, was wirklich wichtig ist."
+   "beschreibung": "Viele zahlen für Handy und Brille, aber nicht fürs Existenzielle. Ein paar Fragen zu deiner Situation — und du weißt, was wirklich wichtig ist.",
+   "gruppe": "Geld & Vorsorge"
   },
   "wahr-oder-falsch.html": {
    "welt": "wissen",
    "typ": "werkzeug",
    "titel": "Wahr oder Falsch · HeiBen",
-   "beschreibung": "Zwölf Aussagen zu Geld, Recht, Job, Wohnen und Digitalem — manche stimmen, manche sind hartnäckige Mythen. Wie leicht bist du zu täuschen?"
+   "beschreibung": "Zwölf Aussagen zu Geld, Recht, Job, Wohnen und Digitalem — manche stimmen, manche sind hartnäckige Mythen. Wie leicht bist du zu täuschen?",
+   "gruppe": "Üben & Spielen"
   },
   "welt-cockpit.html": {
    "welt": "holding",
@@ -578,7 +597,8 @@
    "welt": "wissen",
    "typ": "werkzeug",
    "titel": "Lebenswissen-Quiz · HeiBen",
-   "beschreibung": "Kurze Fragen aus Geld, Recht, Job, Wohnen, Gesundheit und Digitalem — mit Erklärung zu jeder Antwort. Gebiet wählen und herausfinden."
+   "beschreibung": "Kurze Fragen aus Geld, Recht, Job, Wohnen, Gesundheit und Digitalem — mit Erklärung zu jeder Antwort. Gebiet wählen und herausfinden.",
+   "gruppe": "Üben & Spielen"
   },
   "wohnen-anfrage.html": {
    "welt": "wohnen",
@@ -608,7 +628,8 @@
    "welt": "wissen",
    "typ": "werkzeug",
    "titel": "50 € im Monat ab 20 · HeiBen",
-   "beschreibung": "Der mächtigste Verbündete beim Geld ist die Zeit. Spiel mit den Reglern und sieh, was aus 50 € im Monat ab 20 wird."
+   "beschreibung": "Der mächtigste Verbündete beim Geld ist die Zeit. Spiel mit den Reglern und sieh, was aus 50 € im Monat ab 20 wird.",
+   "gruppe": "Geld & Vorsorge"
   },
   "zuhause-ordner.html": {
    "welt": "konto",

@@ -31,8 +31,33 @@ const header = raw.split('\n')[0];
 require(INDEX);
 const OLD = global.window.HEIBEN_SUCHE || [];
 
-// Nicht-Lebenswissen behalten; Hub-Seite Wegweiser-Zahl aktualisieren
-const nonLW = OLD.filter(e => e.t !== 'lebenswissen').map(e => {
+// Seiten-Eintraege kommen seit v3-W5 aus tools/seiten.json und werden hier neu
+// erzeugt — vorher kannte die Suche nur 14 von 102 Seiten.
+const REG = JSON.parse(fs.readFileSync(path.join(__dirname, 'tools', 'seiten.json'), 'utf8'));
+const LABEL = {
+  reisen: 'Reisen', wohnen: 'Wohnen', immobilien: 'Immobilien', studio: 'Studio',
+  kulinarik: 'Kulinarik', wissen: 'Wissen', konto: 'Mein HeiBen', holding: 'Unternehmen',
+};
+const entities = (t) => String(t).replace(/&(amp|lt|gt|quot|#39|nbsp);/g,
+  (_, e) => ({ amp: '&', lt: '<', gt: '>', quot: '"', '#39': "'", nbsp: ' ' }[e]));
+const seitenEintraege = Object.keys(REG.seiten)
+  .filter((d) => {
+    const e = REG.seiten[d];
+    // Standalone-Entwuerfe und interne Bereiche gehoeren nicht in die oeffentliche Suche.
+    return e.typ !== 'standalone' && e.typ !== 'intern' && d !== '404.html'
+      && fs.existsSync(path.join(WEB, d));
+  })
+  .map((d) => {
+    const e = REG.seiten[d];
+    const art = e.typ === 'werkzeug' ? 'Werkzeug'
+      : e.typ === 'kompendium' ? 'Kompendium'
+      : e.typ === 'legal' ? 'Rechtliches' : (LABEL[e.welt] || 'Seite');
+    return { t: 'seite', u: d, h: entities(e.titel).replace(/\s*[·—-]\s*HeiBen$/, ''),
+      s: art, x: entities(e.beschreibung) };
+  });
+
+// Nicht-Lebenswissen und Nicht-Seiten behalten; Hub-Seite Wegweiser-Zahl aktualisieren
+const nonLW = OLD.filter(e => e.t !== 'lebenswissen' && e.t !== 'seite').map(e => {
   if (e.t === 'seite' && e.u === 'studio-lebenswissen.html') {
     return Object.assign({}, e, { x: e.x.replace(/\b\d+ Wegweiser/, D.ARTIKEL.length + ' Wegweiser') });
   }
@@ -48,6 +73,7 @@ const lw = D.ARTIKEL.map(a => ({
   x: a.kurz || ''
 }));
 
-const out = nonLW.concat(lw);
+const out = nonLW.concat(seitenEintraege, lw);
 fs.writeFileSync(INDEX, header + '\n' + 'window.HEIBEN_SUCHE=' + JSON.stringify(out) + ';\n', 'utf8');
-console.log('Suchindex neu: ' + out.length + ' Eintraege (' + nonLW.length + ' uebrige + ' + lw.length + ' Lebenswissen).');
+console.log('Suchindex neu: ' + out.length + ' Eintraege (' + nonLW.length + ' uebrige + '
+  + seitenEintraege.length + ' Seiten + ' + lw.length + ' Lebenswissen).');

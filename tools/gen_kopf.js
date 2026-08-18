@@ -157,6 +157,26 @@ for (const datei of Object.keys(SEITEN)) {
   }
 }
 
+/* heiben-werkzeuge.js — das Register der Rechner und Werkzeuge, damit sie in den
+   Welten und im Wissens-Hub auftauchen können (Remake v3, Welle 5). Quelle ist
+   dieselbe Registry; wer ein Werkzeug einträgt, muss nichts weiter pflegen. */
+const REIHENFOLGE = ['Geld & Vorsorge', 'Wohnen & Immobilien', 'Beruf & Bildung',
+  'Unterwegs', 'Üben & Spielen'];
+const werkzeuge = Object.keys(SEITEN)
+  .filter((d) => SEITEN[d].typ === 'werkzeug' && fs.existsSync(d))
+  .map((d) => ({ u: d, t: entschluesseln(SEITEN[d].titel).replace(/\s*·\s*HeiBen$/, ''),
+    b: entschluesseln(SEITEN[d].beschreibung), w: SEITEN[d].welt,
+    g: SEITEN[d].gruppe || 'Weitere' }))
+  .sort((a, b) => (REIHENFOLGE.indexOf(a.g) - REIHENFOLGE.indexOf(b.g))
+    || a.t.localeCompare(b.t, 'de'));
+const werkzeugJs = '/* HeiBen Werkzeug-Register — GENERIERT von tools/gen_kopf.js aus\n'
+  + '   tools/seiten.json. Nicht von Hand pflegen. */\n'
+  + 'window.HEIBEN_WERKZEUGE=' + JSON.stringify(werkzeuge) + ';\n'
+  + 'window.HEIBEN_WERKZEUG_GRUPPEN=' + JSON.stringify(REIHENFOLGE) + ';\n';
+if (!PRUEFEN) fs.writeFileSync('heiben-werkzeuge.js', werkzeugJs);
+console.log(`  heiben-werkzeuge.js: ${werkzeuge.length} Werkzeuge in `
+  + `${new Set(werkzeuge.map((w) => w.g)).size} Gruppen`);
+
 /* sitemap.xml und robots.txt folgen derselben Registry: was intern ist, wird nicht
    indexiert; alles andere gehört in die Sitemap. */
 const PRIO = { start: '1.0', welt: '0.9', kompendium: '0.8', wissen: '0.8', werkzeug: '0.7',

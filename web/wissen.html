@@ -89,6 +89,13 @@ a.kt .kd{color:var(--ink2);font-size:.9rem;margin-top:.4rem}
 
   <div class="count" id="count"></div>
   <div class="grid" id="grid"></div>
+  <div id="werkzeugRow">
+    <div class="hb-divi">Rechner &amp; Werkzeuge</div>
+    <p class="hb-fliess" style="margin:.7rem 0 0">Einundzwanzig kleine Werkzeuge, die eine Frage
+      konkret durchrechnen statt sie zu erklären. Alles bleibt lokal auf deinem Gerät.</p>
+    <div data-hb-werkzeuge="alle"></div>
+  </div>
+
   <div id="studioRow">
     <div class="hb-divi">Mehr aus dem HeiBen Studio</div>
     <div class="hb-grid" style="margin-top:.8rem">
@@ -221,5 +228,7 @@ render();
   if(m){var v=decodeURIComponent(m[1].replace(/\+/g," "));document.getElementById("q").value=v;state.q=v.trim().toLowerCase();render();}
 })();
 </script>
+<script src="heiben-werkzeuge.js"></script>
+<script src="hb-werkzeuge.js"></script>
 </body>
 </html>

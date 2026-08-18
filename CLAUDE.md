@@ -15,7 +15,7 @@ Statisches HTML/JS/CSS-**PWA ohne Build-Schritt**, offline-fähig, localStorage.
 
 ## Pflicht-Workflow nach JEDER Änderung unter web/
 1. **Precache + Service-Worker-Version**: `cd web && node ../tools/gen_sw.js` — erzeugt die
-   `PRECACHE`-Liste aus dem Dateibestand UND zählt die Cache-Version hoch (aktuell **-2994**).
+   `PRECACHE`-Liste aus dem Dateibestand UND zählt die Cache-Version hoch (aktuell **-2995**).
    Nie von Hand pflegen. Standalone-Seiten (`typ` in `tools/seiten.json`) bleiben automatisch
    draußen; `vendor/` und Dateien > 150 KB kommen zur Laufzeit in den Cache (der fetch-Handler
    macht stale-while-revalidate). Wer nur die Version braucht, bumpt trotzdem über den Generator.
@@ -59,6 +59,11 @@ Statisches HTML/JS/CSS-**PWA ohne Build-Schritt**, offline-fähig, localStorage.
 - Deep-Links: `#id` (Kompendien-Steckbriefe), `?id=`, `?q=` (wissen.html), `?welt=` (welt-cockpit).
 - Attribut-Namensraum: `data-welt` gehört `heiben-nav.js` (Weltlinks) — für eigene Schalter NIE
   wiederverwenden, sonst fängt die Navigation den Klick ab (in W3 passiert).
+- **Werkzeug-Register (seit v3-W5)**: `web/heiben-werkzeuge.js` wird aus `tools/seiten.json`
+  erzeugt (`typ:"werkzeug"` + `gruppe`); `hb-werkzeuge.js` rendert es in jeden Behälter
+  `<div data-hb-werkzeuge="alle|<welt>|<gruppe>">`. Neues Werkzeug = Eintrag in `seiten.json`,
+  sonst nichts. Client-erzeugte Kacheln tragen **kein** `data-hb-motion` (sie entstehen nach
+  `hb-motion.js` und blieben sonst bis zum Sicherheitsnetz unsichtbar).
 - Daten-Arrays (`*-daten.js`) nur ans Ende erweitern, `id`-Felder stabil. `PFADE` ist `var` (script-scope).
 - Fiktions-Fakten: GmbH i. G., Benkhaouda/Hein, „Heimat leben", Köln.
 
@@ -85,8 +90,10 @@ Statisches HTML/JS/CSS-**PWA ohne Build-Schritt**, offline-fähig, localStorage.
   lebender Styleguide; Marken-DNA unverändert, Bestand layoutneutral.
   V3-W4 fertig: `tools/gen_sw.js` (Precache generiert, 101/101), `mein-heiben` 909 → 75 KB,
   Offline-Test 13/13 Seiten, three.min.js von drei Kopien auf eine (`vendor/three/`).
-  Nächste Welle: **V3-W5 Auffindbarkeit** (Werkzeug-Register in die Welten, Seiten-Index in die
-  Suche; 21 verwaiste Seiten, Suchindex trifft nur 18 von 102 Seiten).
+  V3-W5 fertig: Werkzeug-Register (21 Werkzeuge, 5 Gruppen) in Wissen/Reisen/Immobilien, Suche in
+  der Navigation, Suchindex 18 → 89 Zielseiten; Waisen 22 → 2 (404 + Standalone-Entwurf).
+  Nächste Welle: **V3-W6 Speicher-Vertrag & Farbkanon** (`heiben-speicher.js` mit Register und
+  Export/Import, ~1.050 hart kodierte Weltfarben auf `var(--hb-welt)`).
 - `web/startseite-neu.html` = **Freigabe-Entwurf v2.2** (nicht verlinkt, nicht precached):
   Scrollytelling mit 5 CSS-3D-Objekten (Koffer/Haus/Tür/Glühbirne/Kochtopf), Lebenslinien-Regie
   (ein→pin→aus, globale Lerp-Glättung SY mit Teleport-Snap), Bewegungsprofile je Objekt (MOTION),

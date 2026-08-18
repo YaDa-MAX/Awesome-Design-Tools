@@ -946,3 +946,60 @@ NAECHSTER SCHRITT bei "Weiter": V3-W5 AUFFINDBARKEIT — heiben-werkzeuge.js (Re
 Rechner/Werkzeuge mit Welt und Kurzbeschreibung), gerendert in den Welt-Seiten und in wissen.html;
 Seiten-Index in build-suche-index.js ergaenzen (Suche trifft heute 18 von 102 Seiten); Ziel
 0 verwaiste Seiten.
+
+## REMAKE V3 · WELLE 5: AUFFINDBARKEIT (SW -2995)
+AUSGANGSLAGE: 22 verwaiste Seiten (21 davon Rechner/Werkzeuge), Suchindex traf nur 18 von 102
+Seiten, und die Suchseite selbst war ueber KEINEN Markup-Link erreichbar.
+ERST GEPRUEFT, DANN GEBAUT: suche.html galt in W0 nicht als Waise, jetzt schon — kein zerstoerter
+Link, sondern eine Messwirkung: bis W1 stand der Suche-Injektor INLINE in 25 Seiten, sein
+JS-String a.href="suche.html" wurde vom Audit als Markup-Link gezaehlt. Seit der Auslagerung nach
+hb-suche-nav.js sieht das Audit ihn nicht mehr. Der Link war also nie echt.
+WERKZEUG-REGISTER:
+- tools/seiten.json: die 21 typ="werkzeug"-Eintraege tragen jetzt eine "gruppe" — Geld & Vorsorge (8),
+  Wohnen & Immobilien (4), Beruf & Bildung (3), Unterwegs (1), Ueben & Spielen (5).
+- tools/gen_kopf.js erzeugt daraus web/heiben-werkzeuge.js (dieselbe Registry, die schon Kopf,
+  sitemap und robots speist). Neues Werkzeug = ein Eintrag, sonst nichts.
+- NEU web/hb-werkzeuge.js rendert in jeden Behaelter <div data-hb-werkzeuge="alle|<welt>|<gruppe>">,
+  gebaut ausschliesslich aus den Bausteinen von W3 (.hb-kachel/.hb-raster/.hb-augenbraue).
+- Eingesetzt: wissen.html (alle 21, nach Gruppen), reisen.html und immobilien.html (ihr je eines).
+  Jede Kachel traegt data-hb-welt -> sie faerbt sich selbst in der Farbe ihrer Welt.
+FALLE, DIE ICH DABEI VERMIEDEN HABE: die Kacheln entstehen ERST BEIM RENDERN, also nach dem Start
+von hb-motion.js. Mit data-hb-motion haette der Beobachter sie nie erfasst und sie waeren bis zum
+3-Sekunden-Sicherheitsnetz unsichtbar geblieben. Client-erzeugter Inhalt tritt jetzt statisch auf;
+Regel in CLAUDE.md aufgenommen.
+SUCHE:
+- heiben-nav.js: "Suche" als eigener Punkt zwischen Wissen und Mein HeiBen. Bisher haing die Suche
+  an hb-suche-nav.js, das ein <nav>-Element voraussetzt — das haben nur noch 4 von 102 Seiten, die
+  Suche war also auf 96 Seiten unerreichbar. hb-suche-nav.js bleibt unangetastet (Bestand).
+- build-suche-index.js erzeugt die t="seite"-Eintraege jetzt aus tools/seiten.json statt sie nur
+  fortzuschreiben: 14 -> 89 Seiten (ohne standalone, ohne die 11 internen, ohne 404).
+  Index 348 -> 423 Eintraege. Belegt: "sparziel" -> sparziel.html, "kompendium" -> alle 8,
+  "designsystem" -> designsystem.html; vorher fand die Suche keine davon.
+DREI RESTWAISEN OHNE WERKZEUG-CHARAKTER bekamen ein Zuhause: kulinarik-kochbuch.html (Zeile in
+kulinarik.html), studio-einrichtungstheorie.html (neben "Zum Nachschlagewerk" in studio.html),
+rechtliches.html (Legal-Zeile in impressum.html).
+AUDIT NACHGEZOGEN (dritte Welle in Folge, in der das Messinstrument der Architektur folgen musste):
+Abschnitt 3 zaehlte nur Markup-Links — Navigation und Register erzeugen ihre Wege aber zur Laufzeit.
+Das Audit liest jetzt zusaetzlich die Ziele aus heiben-nav.js und heiben-werkzeuge.js (letzteres nur,
+wenn ueberhaupt ein Behaelter existiert) und weist sie als "zur Laufzeit erzeugte Wege" aus.
+ERGEBNIS: Waisen 22 -> 2, naemlich 404.html (Fehlerseite, gewollt) und startseite-neu.html
+(Standalone-Entwurf, gewollt). Suchindex 18 -> 89 Zielseiten; die verbleibenden 13 sind die
+11 internen Seiten + 404 + Entwurf.
+VERIFIKATION:
+- Browser: wissen.html 21 Kacheln in 5 Gruppen, alle sichtbar, Weltfarbe #b04a31; reisen.html
+  1 Kachel #a97a1d; immobilien.html 1 Kachel #792d29; "Suche" in der Nav auf allen dreien;
+  Stichprobe der Registerziele liefert 200 mit korrekten Titeln. 0 PageErrors.
+- NAV-DELTA GEMESSEN statt behauptet: auf 8 unveraenderten Seiten Nav-Links 7 -> 8, Nav-HOEHE
+  UNVERAENDERT 52,5px, und jedes Element AUSSERHALB der Navigation exakt an derselben Stelle.
+  Der Eingriff bleibt also auf die Navigationszeile begrenzt.
+- Responsiv: 390 / 768 / 1280 px -> Nav 57/57/52 px, Register 1/2/3 Spalten, kein horizontaler
+  Ueberlauf.
+- Sweep ueber alle 102 Seiten: 0 PageErrors, 0 Console-Errors.
+OFFEN/NOTIERT: suche.html traegt data-hb-welt="wissen", der Nav-Punkt "Wissen" bleibt dort also
+aktiv statt "Suche" — stimmig, weil die Suche zur Wissenswelt gehoert; keine Aenderung.
+hb-suche-nav.js ist auf 21 der 25 einbindenden Seiten wirkungslos (kein <nav>), bleibt aber
+eingefroren; Abbau erst, wenn die 4 Restseiten ihre Alt-Nav verlieren.
+NAECHSTER SCHRITT bei "Weiter": V3-W6 SPEICHER-VERTRAG & FARBKANON — heiben-speicher.js (Register
+aller 88 Schluessel, Lese-/Schreibhelfer, Export/Import als JSON, reset je Welt; Schluesselnamen
+bleiben UNVERAENDERT), mein-heiben als echtes Cockpit ueber alle Welten, und die ~1.050 hart
+kodierten Weltfarben auf var(--hb-welt) umstellen.

@@ -24,6 +24,9 @@
   ];
   var EXTRA=[
     {k:"wissen", t:"Wissen",      u:"wissen.html"},
+    /* Die Suche hing bis v3-W5 an hb-suche-nav.js, das ein <nav>-Element voraussetzt —
+       das haben nur noch 4 Seiten. Seitdem steht sie hier, also auf jeder Seite. */
+    {k:"suche",  t:"Suche",       u:"suche.html"},
     {k:"konto",  t:"Mein HeiBen", u:"mein-heiben.html"}
   ];
 

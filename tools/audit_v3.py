@@ -152,11 +152,30 @@ def auffindbarkeit(txt):
                 eingehend[t].add(f)
             elif "+" not in t:
                 kaputt.append((f, t))
+    # Nicht jeder Weg zu einer Seite steht im Markup: die Navigation (heiben-nav.js)
+    # und das Werkzeug-Register (heiben-werkzeuge.js, gerendert von hb-werkzeuge.js)
+    # erzeugen ihre Links zur Laufzeit. Wer das ignoriert, misst falsch.
+    erzeugt = {}
+    if os.path.exists("heiben-nav.js"):
+        js = open("heiben-nav.js", encoding="utf-8").read()
+        for z in re.findall(r'u:\s*"([a-z0-9-]+\.html)"', js):
+            erzeugt.setdefault(z, set()).add("heiben-nav.js")
+    if os.path.exists("heiben-werkzeuge.js") and any(
+            "data-hb-werkzeuge" in t for t in txt.values()):
+        js = open("heiben-werkzeuge.js", encoding="utf-8").read()
+        for z in re.findall(r'"u":"([a-z0-9-]+\.html)"', js):
+            erzeugt.setdefault(z, set()).add("Werkzeug-Register")
+    for z, q in erzeugt.items():
+        if z in seiten:
+            eingehend[z] |= q
+
     waisen = sorted(p for p in seiten if not eingehend[p] and p != "index.html")
     print(f"Kaputte interne Links: {len(kaputt)}")
+    print(f"Zur Laufzeit erzeugte Wege: {len(erzeugt)} Ziele "
+          f"({', '.join(sorted({q for qs in erzeugt.values() for q in qs}))})")
     for f, t in kaputt:
         print(f"  {f} -> {t}")
-    print(f"Verwaiste Seiten (kein eingehender Link im Markup): {len(waisen)}")
+    print(f"Verwaiste Seiten (kein Weg dorthin, weder im Markup noch erzeugt): {len(waisen)}")
     for w in waisen:
         print(f"  {w}")
     if os.path.exists("suche-index.js"):
