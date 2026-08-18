@@ -15,7 +15,7 @@ Statisches HTML/JS/CSS-**PWA ohne Build-Schritt**, offline-fähig, localStorage.
 
 ## Pflicht-Workflow nach JEDER Änderung unter web/
 1. **Precache + Service-Worker-Version**: `cd web && node ../tools/gen_sw.js` — erzeugt die
-   `PRECACHE`-Liste aus dem Dateibestand UND zählt die Cache-Version hoch (aktuell **-2995**).
+   `PRECACHE`-Liste aus dem Dateibestand UND zählt die Cache-Version hoch (aktuell **-2997**).
    Nie von Hand pflegen. Standalone-Seiten (`typ` in `tools/seiten.json`) bleiben automatisch
    draußen; `vendor/` und Dateien > 150 KB kommen zur Laufzeit in den Cache (der fetch-Handler
    macht stale-while-revalidate). Wer nur die Version braucht, bumpt trotzdem über den Generator.
@@ -54,7 +54,12 @@ Statisches HTML/JS/CSS-**PWA ohne Build-Schritt**, offline-fähig, localStorage.
   `'Aus der HeiBen-Welt' not in s`; Kompendien haben **kein** `<footer>` → Anker `<p class="foot"`.
 
 ## Stabile Verträge (nie brechen)
-- localStorage: `heiben-lernpfad`, `heiben-verlauf`, `heiben_results`, `heiben_pflanzen_v1`,
+- localStorage: **88 Schlüssel, Namen unveränderlich** — beschrieben in `web/heiben-speicher.js`
+  (Register Schlüssel → Welt, Präfixregeln für neue, `exportieren`/`importieren`/`zuruecksetzen`).
+  Das Modul BESCHREIBT nur; Seiten schreiben weiter direkt in `localStorage`. Aufgezählt wird der
+  echte Speicher, nie das Register — sonst gehen zur Laufzeit gebildete Schlüssel verloren.
+  Import führt standardmäßig ZUSAMMEN, überschreibt also nichts still.
+  Kernschlüssel: `heiben-lernpfad`, `heiben-verlauf`, `heiben_results`, `heiben_pflanzen_v1`,
   `heiben_ordner_v1` (+ Welt-Speicher der Planer/Konfiguratoren).
 - Deep-Links: `#id` (Kompendien-Steckbriefe), `?id=`, `?q=` (wissen.html), `?welt=` (welt-cockpit).
 - Attribut-Namensraum: `data-welt` gehört `heiben-nav.js` (Weltlinks) — für eigene Schalter NIE
@@ -92,8 +97,11 @@ Statisches HTML/JS/CSS-**PWA ohne Build-Schritt**, offline-fähig, localStorage.
   Offline-Test 13/13 Seiten, three.min.js von drei Kopien auf eine (`vendor/three/`).
   V3-W5 fertig: Werkzeug-Register (21 Werkzeuge, 5 Gruppen) in Wissen/Reisen/Immobilien, Suche in
   der Navigation, Suchindex 18 → 89 Zielseiten; Waisen 22 → 2 (404 + Standalone-Entwurf).
-  Nächste Welle: **V3-W6 Speicher-Vertrag & Farbkanon** (`heiben-speicher.js` mit Register und
-  Export/Import, ~1.050 hart kodierte Weltfarben auf `var(--hb-welt)`).
+  V3-W6 fertig: `heiben-speicher.js` (88 Schlüssel im Register, Export/Import/Reset), Speicher-
+  Abschnitt in `mein-heiben`; Farbkanon geprüft — nur 15 der vermeintlich ~1.050 Vorkommen waren
+  echt ersetzbar, umgestellt.
+  Nächste Welle: **V3-W7 Welt-Balance & Backoffice-Rahmung** (Reisen/Immobilien auf Augenhöhe,
+  die 11 internen Seiten sichtbar als interner Bereich rahmen).
 - `web/startseite-neu.html` = **Freigabe-Entwurf v2.2** (nicht verlinkt, nicht precached):
   Scrollytelling mit 5 CSS-3D-Objekten (Koffer/Haus/Tür/Glühbirne/Kochtopf), Lebenslinien-Regie
   (ein→pin→aus, globale Lerp-Glättung SY mit Teleport-Snap), Bewegungsprofile je Objekt (MOTION),

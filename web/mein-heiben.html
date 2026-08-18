@@ -142,10 +142,26 @@ section{margin-top:1.5rem}
     <div class="tools" id="tools"></div>
   </section>
 
+  <section id="speicherSec">
+    <div class="h2">Dein Stand — alles auf diesem Gerät</div>
+    <p class="hb-fliess" style="margin:.2rem 0 0">HeiBen speichert ausschließlich lokal in deinem
+      Browser. Hier siehst du, was das konkret ist — und du kannst es mitnehmen, zurückspielen
+      oder löschen. Nichts davon verlässt dein Gerät.</p>
+    <div id="speicherUeb" style="margin-top:var(--hb-raum-5)"></div>
+    <div class="hb-reihe" style="margin-top:var(--hb-raum-5)">
+      <button type="button" class="hb-taste" id="spExport">Stand sichern (JSON)</button>
+      <button type="button" class="hb-taste hb-taste--rand" id="spImportBtn">Stand einlesen</button>
+      <input type="file" id="spDatei" accept="application/json,.json" hidden>
+      <button type="button" class="hb-taste hb-taste--leise" id="spReset">Alles zurücksetzen</button>
+    </div>
+    <p class="hb-beischrift" id="spMeldung" style="margin-top:var(--hb-raum-3)" role="status"></p>
+  </section>
+
   <p class="foot">HeiBen GmbH i. G. · „Heimat leben" · alles lokal auf deinem Gerät · <a href="index.html">Zur Startseite</a></p>
 </div>
 
 <script src="heiben-kennzahlen.js"></script>
+<script src="heiben-speicher.js"></script>
 <script src="lernpfade-daten.js"></script>
 <script src="heiben-erfolge.js"></script>
 <script src="heiben-rueckblick.js"></script>
@@ -298,6 +314,52 @@ el("greet").textContent=(h<11?"Guten Morgen":h<18?"Guten Tag":"Guten Abend")+" �
     {u:"zinseszins.html",n:"Zinseszins",d:"Sieh dein Geld wachsen"}
   ];
   el("tools").innerHTML=T.map(function(o){return '<a class="tool" href="'+o.u+'"><span class="tn">'+o.n+'</span><span class="td">'+o.d+'</span></a>';}).join('');
+})();
+</script>
+<script id="speicher-ui">
+/* Speicher-Übersicht und Export/Import (Remake v3, W6). Nutzt HeiBenSpeicher;
+   die Schlüsselnamen selbst bleiben unangetastet. */
+(function(){
+  var S=window.HeiBenSpeicher; if(!S) return;
+  var ueb=document.getElementById('speicherUeb'), meld=document.getElementById('spMeldung');
+  function kb(n){ return n<1024 ? n+' B' : (n/1024).toFixed(1).replace('.',',')+' KB'; }
+  function sagen(t){ if(meld) meld.textContent=t; }
+  function zeichnen(){
+    var liste=S.uebersicht(), gesamt=S.groesse();
+    if(!liste.length){ ueb.innerHTML='<p class="hb-fliess">Noch nichts gespeichert — sobald du '+
+      'ein Werkzeug benutzt oder einen Lernpfad öffnest, steht es hier.</p>'; return; }
+    ueb.innerHTML='<div class="hb-raster" style="--hb-min:190px">'+liste.map(function(w){
+      return '<div class="hb-flaeche hb-flaeche--welt" data-hb-welt="'+w.welt+'">'+
+        '<span class="hb-augenbraue">'+w.name+'</span>'+
+        '<span class="hb-wert" style="margin-top:var(--hb-raum-2)"><b>'+w.anzahl+'</b>'+
+        '<span>'+(w.anzahl===1?'Eintrag':'Einträge')+' · '+kb(w.bytes)+'</span></span></div>';
+    }).join('')+'</div>'+
+    '<p class="hb-beischrift" style="margin-top:var(--hb-raum-3)">Zusammen '+
+      S.schluessel().length+' Einträge, '+kb(gesamt)+'.</p>';
+  }
+  zeichnen();
+  document.getElementById('spExport').addEventListener('click',function(){
+    var n=S.alsDatei(); sagen('Gesichert: '+kb(n)+' als JSON-Datei.');
+  });
+  var datei=document.getElementById('spDatei');
+  document.getElementById('spImportBtn').addEventListener('click',function(){ datei.click(); });
+  datei.addEventListener('change',function(){
+    var f=datei.files&&datei.files[0]; if(!f) return;
+    var r=new FileReader();
+    r.onload=function(){
+      var e=S.importieren(String(r.result));
+      if(e.fehler){ sagen('Nicht eingelesen: '+e.fehler); return; }
+      sagen(e.uebernommen+' von '+e.gelesen+' Einträgen übernommen'+
+        (e.uebersprungen?', '+e.uebersprungen+' übersprungen (schon vorhanden)':'')+'.');
+      zeichnen();
+    };
+    r.readAsText(f); datei.value='';
+  });
+  document.getElementById('spReset').addEventListener('click',function(){
+    if(!window.confirm('Wirklich ALLE lokal gespeicherten HeiBen-Daten löschen? '+
+      'Sichere vorher deinen Stand, sonst ist er weg.')) return;
+    var n=S.zuruecksetzen('alle'); sagen(n+' Einträge gelöscht.'); zeichnen();
+  });
 })();
 </script>
 </body>

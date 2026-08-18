@@ -1,5 +1,5 @@
 # HeiBen Remake — Blaupause v3 · Substanz-Fassung
-Stand: SW `heiben-v20260622-2995` · 102 Seiten · Messgrundlage `tools/audit_v3.py`
+Stand: SW `heiben-v20260622-2997` · 102 Seiten · Messgrundlage `tools/audit_v3.py`
 Auftrag: „Neue Remake-Runde über alles bestehende."
 Verhältnis zu v2: **v3 ist der neue Arbeitsplan**, `REMAKE-KONZEPT.md` (v2) bleibt als Historie
 liegen — die dort getroffenen Struktur- und Geschäftsmodell-Entscheide gelten unverändert weiter.
@@ -101,9 +101,16 @@ laut v2 die **Klammer über alle Welten** — liest aber 5 von 88 Schlüsseln. D
 ### 1.6 Kanon vs. Praxis — die Registry wird kaum benutzt
 
 `heiben-firmierungen.js` ist die kanonische Quelle für Firmierungen, Weltfarben und Steuerlogik —
-eingebunden auf **7 von 101 Seiten**. Die fünf Weltfarben stehen stattdessen **~1.050-mal hart
-kodiert** in ~100 Dateien. Eine Farbkorrektur ist damit heute ein Massen-Suchen-und-Ersetzen statt
-einer Änderung an einer Stelle.
+eingebunden auf **7 von 101 Seiten**. Die fünf Weltfarben stehen daneben **~1.050-mal als Hex-Wert**
+in ~100 Dateien.
+
+> **Korrektur aus v3-W6:** Diese 1.050 sind eine irreführende Zahl. Nachgemessen entfallen sie auf
+> das Designsystem selbst (dort gehören sie hin), auf Verweise von einer Welt auf eine *andere*
+> (dort ist der Hex-Wert richtig) und vor allem auf `#1f1c17`, das in aller Regel **Schriftfarbe**
+> ist und nicht „Studios Weltfarbe". Prüft man nur, wo eine Seite ihre **eigene** Weltfarbe nennt,
+> und schließt JavaScript aus (dort wäre `var()` wertlos) sowie `:root`-Blöcke (dort ist
+> `--hb-welt` nicht definiert, weil es am `<body>` hängt), bleiben **15** Vorkommen. Die sind
+> umgestellt; die übrigen 29 in JS und 14 in `:root` sind dokumentierte Ausnahmen.
 
 ### 1.7 Gewichtung der Welten — das Haus steht schief
 
@@ -244,7 +251,7 @@ Vorführung und Regelwerk: **`web/designsystem.html`**.
 | **V3-W3** | **Designgrundstruktur & Bewegung** (§ 3a) — vorgezogen auf Wunsch. | **fertig** — Token-Ebene, Weltzuweisung, Bausteine v3, Bewegungsgrammatik, `designsystem.html` |
 | **V3-W4** | **E7: Offline & Ladelast.** | **fertig** — `tools/gen_sw.js`, 101/101 precached, `mein-heiben` 909 → 75 KB, Offline-Test 13/13, three.js entdoppelt |
 | **V3-W5** | **E6: Auffindbarkeit.** | **fertig** — Register aus der Registry, Suche in der Navigation, Suchindex 18 → 89 Zielseiten, Waisen 22 → 2 (dokumentiert) |
-| **V3-W6** | **E4 + E5-Rollout: Speicher-Vertrag & Farbkanon.** Die ~1.050 hart kodierten Weltfarben auf `var(--hb-welt)` umstellen; `mein-heiben` als echtes Cockpit mit Export/Import. | Audit § 5/§ 6 · Persistenz- und Export-Test |
+| **V3-W6** | **E4 + E5: Speicher-Vertrag & Farbkanon.** | **fertig** — `heiben-speicher.js` (88 Schlüssel, Export/Import/Reset), Speicher-Abschnitt in `mein-heiben`; Farbkanon **nachgemessen: 15 statt ~1.050** echt ersetzbar (§ 1.6 korrigiert) |
 | **V3-W7** | **Welt-Balance & Backoffice-Rahmung.** Reisen und Immobilien auf Augenhöhe; die 11 internen Seiten sichtbar als interner Bereich rahmen (Entscheid des Users). | Audit § 7 · Brücken-Check |
 | **V3-W8** | **Startseite + Gesamt-QS.** Übernahme `startseite-neu.html` → `index.html`; Abschluss-Sweep. | volles Audit · 0 PE überall · Abschlussprotokoll |
 

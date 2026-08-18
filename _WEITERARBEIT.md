@@ -1003,3 +1003,48 @@ NAECHSTER SCHRITT bei "Weiter": V3-W6 SPEICHER-VERTRAG & FARBKANON — heiben-sp
 aller 88 Schluessel, Lese-/Schreibhelfer, Export/Import als JSON, reset je Welt; Schluesselnamen
 bleiben UNVERAENDERT), mein-heiben als echtes Cockpit ueber alle Welten, und die ~1.050 hart
 kodierten Weltfarben auf var(--hb-welt) umstellen.
+
+## REMAKE V3 · WELLE 6: SPEICHER-VERTRAG & FARBKANON (SW -2997)
+NEU web/heiben-speicher.js (246 Z., 9 KB, precached): der Vertrag ueber alles, was lokal bleibt.
+GRUNDSAETZE, die den Aufbau bestimmt haben:
+- Die 88 Schluesselnamen werden nur BESCHRIEBEN, niemals umbenannt — sie sind stabiler Vertrag.
+  Bestehende Seiten schreiben weiter direkt in localStorage; das Modul zwingt niemanden zu etwas.
+- AUFZAEHLUNG kommt aus dem ECHTEN Speicher, nicht aus dem Register. Sonst gingen zur Laufzeit
+  gebildete Schluessel (heiben-immo-…, heiben-kuli-…) verloren. Das Register ordnet nur zu.
+- Fuer neue Schluessel greifen zuerst Praefixregeln, dann das Register, sonst "sonstige" — ein
+  kuenftiger Schluessel landet also meist ohne Pflege richtig (im Test: heiben-kuli-neuer-… -> kulinarik).
+- IMPORT FUEHRT ZUSAMMEN (Standard): vorhandene Eintraege werden NICHT still ueberschrieben.
+API: welt() · schluessel() · uebersicht() · lesen/schreiben/entfernen · exportieren() · alsDatei()
+· importieren(text,{ersetzen}) · zuruecksetzen(welt|'alle') · groesse().
+REGISTER ZWEIMAL GEBAUT — der erste Wurf war falsch: er ordnete nach JEDEM Vorkommen zu, wodurch
+mein-heiben.html (das gar NICHTS schreibt, nur liest) 21 Schluessel an sich zog. Gegenprobe ergab
+"heiben-lernpfad -> konto" statt "wissen". Neu gebaut nach der Regel BESITZER = WER SCHREIBT
+(setItem oder Konstantendefinition); 11 Zuordnungen korrigiert (lernpfad/karten/results ->
+wissen, kulinarik-favs -> kulinarik, lw-favs -> studio …). Zwei echt weltuebergreifende Schluessel
+per ausdruecklichem Entscheid: heiben-verlauf -> wissen (dort ausgewertet), heiben-app-onboarding
+-> holding. Verteilung jetzt: wissen 25 · kulinarik 15 · holding 13 · konto 13 · wohnen 10 ·
+studio 5 · reisen 4 · immobilien 3.
+MEIN HEIBEN wird zur echten Klammer: neuer Abschnitt "Dein Stand — alles auf diesem Geraet" mit
+Kacheln je Welt (Anzahl + Groesse, in der jeweiligen Weltfarbe), Sichern als JSON, Einlesen per
+Dateiwahl, Zuruecksetzen mit Rueckfrage. Gebaut aus den Bausteinen von W3.
+VERIFIKATION — VOLLSTAENDIGER DURCHLAUF IM BROWSER:
+Stand ueber 6 Welten angelegt (10 Schluessel, 408 B) -> Uebersicht zeigt 6 Kacheln korrekt ->
+Export 595 B, marke/fassung stimmen -> zuruecksetzen('alle') loescht 10, danach 0 -> Import
+10/10 uebernommen, Werte inkl. des dynamischen Schluessels unveraendert -> zweiter Import mit
+geaendertem Bestand: 0 uebernommen, 10 uebersprungen, der lokale Wert BLEIBT (Zusammenfuehren
+greift) -> Muell-JSON und fremdes Paket liefern lesbare deutsche Fehlermeldungen. 0 PageErrors.
+mein-heiben gegen den Vorstand: Werte identisch (14%, "4 von 544 Begriffen …"), Delta ist genau
+der neue Abschnitt (+3 Bedienelemente, +364 Zeichen, +9 KB).
+FARBKANON — ZAHL DER BLAUPAUSE KORRIGIERT: dort stand "~1.050 hart kodierte Weltfarben". Nachgemessen
+ist das irrefuehrend. Die 1.050 enthalten das Designsystem selbst (dort gehoeren sie hin), Verweise
+einer Welt auf eine ANDERE (dort ist der Hex richtig) und vor allem #1f1c17, das meist SCHRIFTFARBE
+ist, nicht "Studios Weltfarbe". Prueft man nur, wo eine Seite ihre EIGENE Weltfarbe nennt: 59.
+Davon liegen 29 in JavaScript (Canvas-/Array-Farben, wo var() wertlos waere), 14 in :root-Bloecken
+(dort ist --hb-welt NICHT definiert, weil es am <body> haengt) und 1 im Markup. SICHER ersetzbar:
+15 — umgestellt auf var(--hb-welt) in 9 Seiten. Fingerabdruck-Vergleich dieser 9 Seiten: 9/9
+IDENTISCH. Die uebrigen sind dokumentierte Ausnahmen, keine offene Schuld.
+LEKTION: Eine grosse Zahl im Konzept ist keine Messung. Vor jedem Massen-Ersetzen zaehlen, was
+davon SEMANTISCH dasselbe meint.
+NAECHSTER SCHRITT bei "Weiter": V3-W7 WELT-BALANCE & BACKOFFICE-RAHMUNG — Reisen und Immobilien
+(je 5 Seiten) auf Augenhoehe bringen, die 11 internen Seiten sichtbar als interner Bereich rahmen
+(User-Entscheid aus der Blaupause), Cockpit-Abdeckung pruefen.
