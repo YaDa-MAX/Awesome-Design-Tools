@@ -896,3 +896,53 @@ REMAKE-KONZEPT-V3.md wurde entsprechend mit Nachtrag korrigiert statt still gela
 NAECHSTER SCHRITT bei "Weiter": V3-W4 OFFLINE & LADELAST — Precache aus dem Dateibestand generieren
 (tools/gen_sw.js), grosse Datenmodule (lebenswissen 649K, kulinarik 519K, tagesdosis 206K) fuer
 Uebersichtszwecke durch generierte Kurzfassungen ersetzen, mein-heiben von 909 KB auf < 120 KB.
+
+## REMAKE V3 · WELLE 4: OFFLINE & LADELAST (SW -2994)
+NEU tools/gen_sw.js — erzeugt die PRECACHE-Liste aus dem Dateibestand und zaehlt die Cache-Version
+hoch. GRUNDSATZ: der Precache sichert den KALTSTART, nicht den ganzen Bestand. Der fetch-Handler
+macht ohnehin stale-while-revalidate, legt also jede abgerufene Datei beim ersten Gebrauch ab.
+Vorab: alle Seiten ausser Standalone (aus tools/seiten.json) + jede referenzierte Datei bis 150 KB
++ Manifest. Draussen: vendor/ und Einzeldateien > 150 KB (10 Dateien, 4.762 KB — u. a.
+swagger-ui-bundle 1.491 KB fuer die interne api.html).
+ERGEBNIS: 62/101 -> 101/101 Seiten precached, 157 Eintraege, 4.372 KB Kaltstart-Huelle.
+MEIN-HEIBEN 909 -> 75 KB (-92%), NACHGEWIESEN OHNE FUNKTIONSVERLUST:
+- tagesdosis-daten.js (207 KB) wurde NUR fuer BANK.length geladen — eine Zahl. TD_BANK.length ist
+  exakt 544 = HEIBEN_KZ.karten; ersetzt durch heiben-kennzahlen.js (264 B), das ohnehin generiert
+  wird und bei jeder Kartencharge automatisch mitwaechst.
+- lebenswissen-daten.js (650 KB) wurde geladen, um AMAP (id -> Artikel) zu bauen — AMAP wird im
+  ganzen Dashboard NIE gelesen (grep: 1 Treffer, die Zuweisung selbst). Ersatzlos entfernt.
+- Gegenprobe mit gesetztem Lernstand: "14%" / "4 von 544 Begriffen gemeistert · 0 Pfad-Artikel
+  gelesen · 4-Tage-Serie" / 32 Bedienelemente / 1.866 Zeichen Text — vorher wie nachher IDENTISCH;
+  Unterressourcen 913 -> 57 KB.
+THREE.JS ENTDOPPELT: three.min.js lag DREIMAL byte-identisch im Repo (Wurzel, vendor/three/,
+assets/) = 1.767 KB. Kanon ist vendor/three/three.min.js; manufaktur-gestalten.html darauf
+umgestellt, die beiden anderen Kopien geloescht (-1.178 KB). THREE r128 laedt vorher wie nachher,
+1 Canvas, 0 PageErrors.
+ECHTER OFFLINE-TEST (SW installieren, dann context.setOffline(true), dann navigieren):
+13/13 Proben erreichbar mit vollem Inhalt — index, wissen, mein-heiben, lebensmittel, auto,
+finanzen, papierkram, lernpfade, zuhause-ordner, begriffskarten, kulinarik, reisen, designsystem.
+Vorher waren genau diese Wissensseiten NICHT precached.
+GEPRUEFT UND VERWORFEN (ehrlich statt kosmetisch):
+- "2.598 KB tote Datenlast" war ein FEHLALARM meiner ersten Heuristik: sie durchsuchte nur das
+  Seiten-Markup, nicht die eingebundenen gemeinsamen Skripte. kulinarik-daten.js wird sehr wohl
+  von hb-kulinarik-core.js benutzt. Nach Einbeziehung der verlinkten Skripte: 0 KB tote Last.
+  LEKTION: Nutzungsanalyse IMMER ueber die gesamte Skript-Huelle einer Seite, nie nur ueber das
+  Markup.
+- wissen.html (378 KB) laedt alle acht Kompendien-Module ZU RECHT: die Volltextsuche baut ein
+  "hay"-Feld aus allen String-Feldern. Ein generierter Index waere mit 334 KB GENAUSO GROSS
+  (gemessen) — kein Gewinn ohne echten invertierten Index oder Nachladen. Nicht angefasst.
+GEFUNDENER FEHLER IM GENERATOR (behoben): (1) manifest.webmanifest stand doppelt in der Liste
+(einmal als <link rel="manifest"> gefunden, einmal fest angehaengt) -> Cache hatte 157 statt 158
+Eintraege; jetzt ueber Set entdoppelt. (2) Der Versions-Bump wurde auf das Teilstueck NACH dem
+PRECACHE-Block angewandt, die Version steht aber am Dateianfang -> griff nie; jetzt auf den
+zusammengesetzten Text. (3) Zwei "fehlende Referenzen" waren JS-Vorlagen aus Inline-Skripten
+("' + M.esc(a.cover) + '") -> Filter auf Anfuehrungszeichen/Klammern.
+NOTIERT, NICHT ANGEFASST: assets/GLTFLoader.js (96 KB) wird von KEINER Seite per src eingebunden —
+wohnen-konfigurator.html traegt den Loader inline. Kandidat fuers Aufraeumen, aber moeglicherweise
+die Quelle der inlinen Kopie; Entscheid dem User ueberlassen.
+PFLICHT-WORKFLOW GEAENDERT: Schritt 1 ist jetzt `cd web && node ../tools/gen_sw.js` statt
+Hand-Bump. Precache und Cache-Version kommen beide aus dem Generator.
+NAECHSTER SCHRITT bei "Weiter": V3-W5 AUFFINDBARKEIT — heiben-werkzeuge.js (Register der 21
+Rechner/Werkzeuge mit Welt und Kurzbeschreibung), gerendert in den Welt-Seiten und in wissen.html;
+Seiten-Index in build-suche-index.js ergaenzen (Suche trifft heute 18 von 102 Seiten); Ziel
+0 verwaiste Seiten.

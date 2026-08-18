@@ -1,5 +1,5 @@
 # HeiBen Remake — Blaupause v3 · Substanz-Fassung
-Stand: SW `heiben-v20260622-2992` · 102 Seiten · Messgrundlage `tools/audit_v3.py`
+Stand: SW `heiben-v20260622-2994` · 102 Seiten · Messgrundlage `tools/audit_v3.py`
 Auftrag: „Neue Remake-Runde über alles bestehende."
 Verhältnis zu v2: **v3 ist der neue Arbeitsplan**, `REMAKE-KONZEPT.md` (v2) bleibt als Historie
 liegen — die dort getroffenen Struktur- und Geschäftsmodell-Entscheide gelten unverändert weiter.
@@ -153,6 +153,7 @@ Neuerfindung der fünf Welten, keine Änderung an den Fiktions-Fakten.
 > „Designgrundstruktur und Aufbau aller Animationen überdenken" hat das aufgehoben — die
 > Grundstruktur ist neu gefasst (§ 3a). Die **Marken-DNA bleibt unverändert**: dieselbe warme
 > Palette, dieselben Schriften, dieselben Weltfarben. Neu ist die Ordnung, nicht der Ausdruck.
+
 Werkzeuge unter `tools/` sind Pflegewerkzeuge (wie `gen_kennzahlen.js`), kein Build.
 
 ---
@@ -241,7 +242,7 @@ Vorführung und Regelwerk: **`web/designsystem.html`**.
 | **V3-W1** | **E2 + E3: Entdoppelung & Bilder.** | **fertig** — HTML 6.204 → 2.901 KB (−53,2 %), Layout-Fingerabdruck 42/42 Seiten unverändert, 0 PE |
 | **V3-W2** | **E1: Kopf-Generator** + `tools/seiten.json`. | **fertig** — Kopf 100/100, Sitemap 18 → 88 URLs, 11 Seiten auf noindex, 100/100 layoutneutral, 0 PE |
 | **V3-W3** | **Designgrundstruktur & Bewegung** (§ 3a) — vorgezogen auf Wunsch. | **fertig** — Token-Ebene, Weltzuweisung, Bausteine v3, Bewegungsgrammatik, `designsystem.html` |
-| **V3-W4** | **E7: Offline & Ladelast.** Precache generiert, Datenmodule geteilt. | Audit § 4: 100/100 precached · `mein-heiben` < 120 KB · Offline-Test |
+| **V3-W4** | **E7: Offline & Ladelast.** | **fertig** — `tools/gen_sw.js`, 101/101 precached, `mein-heiben` 909 → 75 KB, Offline-Test 13/13, three.js entdoppelt |
 | **V3-W5** | **E6: Auffindbarkeit.** Werkzeug-Register in die Welten, Seiten-Index in die Suche. | Audit § 3: 0 Waisen · Suche findet jede Seite |
 | **V3-W6** | **E4 + E5-Rollout: Speicher-Vertrag & Farbkanon.** Die ~1.050 hart kodierten Weltfarben auf `var(--hb-welt)` umstellen; `mein-heiben` als echtes Cockpit mit Export/Import. | Audit § 5/§ 6 · Persistenz- und Export-Test |
 | **V3-W7** | **Welt-Balance & Backoffice-Rahmung.** Reisen und Immobilien auf Augenhöhe; die 11 internen Seiten sichtbar als interner Bereich rahmen (Entscheid des Users). | Audit § 7 · Brücken-Check |

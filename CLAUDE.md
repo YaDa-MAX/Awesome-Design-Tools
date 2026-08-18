@@ -14,9 +14,11 @@ Statisches HTML/JS/CSS-**PWA ohne Build-Schritt**, offline-fähig, localStorage.
 - Nichts „nebenbei" umbauen; stabile Verträge (unten) nie brechen.
 
 ## Pflicht-Workflow nach JEDER Änderung unter web/
-1. Service-Worker-Version bumpen: `web/service-worker.js`, Muster `heiben-v20260622-NNNN`
-   (aktuell **-2992**, nächste -2993). Neue Standalone-Seiten NICHT precachen; neue *gemeinsame*
-   Dateien (CSS/JS) dagegen IMMER in `PRECACHE` aufnehmen, sonst bricht Offline.
+1. **Precache + Service-Worker-Version**: `cd web && node ../tools/gen_sw.js` — erzeugt die
+   `PRECACHE`-Liste aus dem Dateibestand UND zählt die Cache-Version hoch (aktuell **-2994**).
+   Nie von Hand pflegen. Standalone-Seiten (`typ` in `tools/seiten.json`) bleiben automatisch
+   draußen; `vendor/` und Dateien > 150 KB kommen zur Laufzeit in den Cache (der fetch-Handler
+   macht stale-while-revalidate). Wer nur die Version braucht, bumpt trotzdem über den Generator.
 2. `_WEITERARBEIT.md`: alte Versionsnummern ersetzen + neuen Abschnitt anhängen (Guard gegen Doppel).
 3. Nach Datenänderungen (`web/*-daten.js`, Begriffskarten): `cd web && node ../tools/gen_kennzahlen.js`.
 4. **Neue Seite oder geänderter Titel/Beschreibung**: Eintrag in `tools/seiten.json` pflegen, dann
@@ -81,8 +83,10 @@ Statisches HTML/JS/CSS-**PWA ohne Build-Schritt**, offline-fähig, localStorage.
   auf noindex.
   V3-W3 fertig: Designgrundstruktur + Bewegungsgrammatik neu gefasst, `designsystem.html` als
   lebender Styleguide; Marken-DNA unverändert, Bestand layoutneutral.
-  Nächste Welle: **V3-W4 Offline & Ladelast** (Precache generieren, Datenmodule teilen,
-  `mein-heiben` von 909 KB auf < 120 KB).
+  V3-W4 fertig: `tools/gen_sw.js` (Precache generiert, 101/101), `mein-heiben` 909 → 75 KB,
+  Offline-Test 13/13 Seiten, three.min.js von drei Kopien auf eine (`vendor/three/`).
+  Nächste Welle: **V3-W5 Auffindbarkeit** (Werkzeug-Register in die Welten, Seiten-Index in die
+  Suche; 21 verwaiste Seiten, Suchindex trifft nur 18 von 102 Seiten).
 - `web/startseite-neu.html` = **Freigabe-Entwurf v2.2** (nicht verlinkt, nicht precached):
   Scrollytelling mit 5 CSS-3D-Objekten (Koffer/Haus/Tür/Glühbirne/Kochtopf), Lebenslinien-Regie
   (ein→pin→aus, globale Lerp-Glättung SY mit Teleport-Snap), Bewegungsprofile je Objekt (MOTION),

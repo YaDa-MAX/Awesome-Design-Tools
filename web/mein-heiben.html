@@ -145,8 +145,7 @@ section{margin-top:1.5rem}
   <p class="foot">HeiBen GmbH i. G. · „Heimat leben" · alles lokal auf deinem Gerät · <a href="index.html">Zur Startseite</a></p>
 </div>
 
-<script src="tagesdosis-daten.js"></script>
-<script src="lebenswissen-daten.js"></script>
+<script src="heiben-kennzahlen.js"></script>
 <script src="lernpfade-daten.js"></script>
 <script src="heiben-erfolge.js"></script>
 <script src="heiben-rueckblick.js"></script>
@@ -157,16 +156,18 @@ function pad(n){return n<10?"0"+n:""+n;}
 function dstr(d){return d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate());}
 function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
 
-var BANK=(typeof TD_BANK!=="undefined")?TD_BANK:[];
-var ART=(typeof ARTIKEL!=="undefined")?ARTIKEL:[];
+/* Remake v3, W4: Das Dashboard brauchte von tagesdosis-daten.js (207 KB) nur EINE Zahl
+   (die Zahl der Begriffskarten) und von lebenswissen-daten.js (650 KB) gar nichts — die
+   daraus gebaute Artikel-Landkarte wurde nirgends gelesen. Die Zahl kommt jetzt aus
+   heiben-kennzahlen.js (264 B), das ohnehin generiert wird und automatisch mitwaechst. */
+var KZ=(typeof HEIBEN_KZ!=="undefined")?HEIBEN_KZ:{};
 var PF=(typeof PFADE!=="undefined")?PFADE:[];
-var AMAP={}; ART.forEach(function(a){AMAP[a.id]=a;});
 
 /* — Daten lesen — */
 var today=new Date(), TODAY=dstr(today), YEST=dstr(new Date(today.getTime()-86400000));
 // Karten
 var ks=get("heiben_karten_v1",{mastered:{},gewusst:0,bestStreak:0});
-var kMast=ks.mastered?Object.keys(ks.mastered).length:0, kTot=BANK.length||544;
+var kMast=ks.mastered?Object.keys(ks.mastered).length:0, kTot=KZ.karten||544;
 var dueN=0; if(ks.sr){var _now=Date.now(); for(var _id in ks.sr){ if(ks.sr[_id]&&ks.sr[_id].due<=_now)dueN++; }}
 // Tagesdosis
 var td=get("heiben-tagesdosis",{streak:0,best:0,total:0,last:null});
