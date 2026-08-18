@@ -15,10 +15,12 @@ Statisches HTML/JS/CSS-**PWA ohne Build-Schritt**, offline-fähig, localStorage.
 
 ## Pflicht-Workflow nach JEDER Änderung unter web/
 1. Service-Worker-Version bumpen: `web/service-worker.js`, Muster `heiben-v20260622-NNNN`
-   (aktuell **-2990**, nächste -2991). Neue Standalone-Seiten NICHT precachen; neue *gemeinsame*
+   (aktuell **-2991**, nächste -2992). Neue Standalone-Seiten NICHT precachen; neue *gemeinsame*
    Dateien (CSS/JS) dagegen IMMER in `PRECACHE` aufnehmen, sonst bricht Offline.
 2. `_WEITERARBEIT.md`: alte Versionsnummern ersetzen + neuen Abschnitt anhängen (Guard gegen Doppel).
 3. Nach Datenänderungen (`web/*-daten.js`, Begriffskarten): `cd web && node ../tools/gen_kennzahlen.js`.
+4. **Neue Seite oder geänderter Titel/Beschreibung**: Eintrag in `tools/seiten.json` pflegen, dann
+   `cd web && node ../tools/gen_kopf.js` — erzeugt Kopfblock, `sitemap.xml` und `robots.txt` neu.
 
 ## Architektur-Regeln (Remake-Fundament, W1–W7 abgeschlossen)
 - `web/heiben-design.css`: **ausschließlich `.hb-`-Klassen, nie Element-Selektoren** (Kollisionsschutz).
@@ -29,7 +31,12 @@ Statisches HTML/JS/CSS-**PWA ohne Build-Schritt**, offline-fähig, localStorage.
 - `web/heiben-nav.js`: baut `div role="banner"`/`div role="navigation"` — **niemals `header`/`nav`-Elemente**
   (Bestand stylt `nav{}` als Element-Selektor). Einbau je Seite: `<link heiben-design.css>` +
   `<script heiben-nav.js defer>` vor `</head>` + `<body data-hb-welt="reisen|wohnen|immobilien|studio|kulinarik|wissen|konto|holding">`.
-- `index.html` bewusst OHNE hb-nav (eigener Hero-Header, dokumentierte Ausnahme).
+- **Dokumentkopf ist generiert** (seit v3-W2): der Block zwischen `<!-- hb:kopf -->` und
+  `<!-- /hb:kopf -->` gehört `tools/gen_kopf.js` — nie von Hand ändern, sondern `tools/seiten.json`
+  pflegen und neu erzeugen. Der Generator fasst Schriften, Stylesheets und `<style>` NICHT an
+  (deren Reihenfolge entscheidet über das Aussehen) und verschiebt vorhandene Einbindungen nie.
+- `index.html` bewusst OHNE hb-nav (eigener Hero-Header, dokumentierte Ausnahme;
+  in `tools/seiten.json` als `"nav": false` hinterlegt).
 - Alt-Nav-Ablösung: `assert count('<nav>')==1` → Block ersetzen + `script#hb-mobile-js` mit entfernen.
 - Brücken-Boxen „Aus der HeiBen-Welt" (`.hb-box.welt`, `--wf`=Zielfarbe): vor Einbau Guard
   `'Aus der HeiBen-Welt' not in s`; Kompendien haben **kein** `<footer>` → Anker `<p class="foot"`.
@@ -58,7 +65,9 @@ Statisches HTML/JS/CSS-**PWA ohne Build-Schritt**, offline-fähig, localStorage.
   `_WEITERARBEIT.md`. MCP/W8 **gestrichen**.
 - **Remake v3 läuft** (Blaupause `REMAKE-KONZEPT-V3.md`, Messinstrument `tools/audit_v3.py`).
   V3-W1 fertig: Entdoppelung + Bilder als Dateien, HTML 6,2 → 2,9 MB, bewiesen unsichtbar.
-  Nächste Welle: **V3-W2 Kopf-Generator** (`tools/gen_kopf.js` + `tools/seiten.json`).
+  V3-W2 fertig: Kopf-Generator, Dokumentkopf 100/100, Sitemap 18 → 88 URLs, 11 interne Seiten
+  auf noindex. Nächste Welle: **V3-W3 Offline & Ladelast** (Precache generieren,
+  Datenmodule teilen, `mein-heiben` von 909 KB auf < 120 KB).
 - `web/startseite-neu.html` = **Freigabe-Entwurf v2.2** (nicht verlinkt, nicht precached):
   Scrollytelling mit 5 CSS-3D-Objekten (Koffer/Haus/Tür/Glühbirne/Kochtopf), Lebenslinien-Regie
   (ein→pin→aus, globale Lerp-Glättung SY mit Teleport-Snap), Bewegungsprofile je Objekt (MOTION),

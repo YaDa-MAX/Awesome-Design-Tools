@@ -782,3 +782,47 @@ NAECHSTER SCHRITT bei "Weiter": V3-W2 KOPF-GENERATOR — tools/seiten.json (Welt
 je Seite) + tools/gen_kopf.js schreibt einen normierten Kopfblock zwischen <!-- hb:kopf --> Marker:
 description/canonical/og/twitter/theme-color in Weltfarbe/manifest/Favicons/heiben-design.css/
 heiben-nav.js/heiben-legal.js/SW-Registrierung/JSON-LD. Ziel: Audit-Abschnitt 2 auf 101/101.
+
+## REMAKE V3 · WELLE 2: KOPF-GENERATOR (SW -2991)
+NEU tools/seiten.json (Registry: 101 Seiten mit welt/typ/titel/beschreibung, index.html mit "nav":false)
+und tools/gen_kopf.js. Der Generator besitzt AUSSCHLIESSLICH layoutfreie Metadaten und schreibt sie
+zwischen <!-- hb:kopf --> und <!-- /hb:kopf --> direkt hinter <head>: charset, viewport, title,
+description, canonical, robots(noindex fuer intern), theme-color, Favicons, Manifest, App-Meta,
+og/twitter, JSON-LD. Er FASST NICHT AN: Schriften (die Fraunces-Achsen unterscheiden sich je Seite —
+Vereinheitlichung wuerde das Schriftbild aendern!), Stylesheets, <style>-Bloecke, sonstige Skripte.
+Vorhandene Einbindungen werden nie verschoben, fehlende nur ergaenzt (89 Seiten).
+49 BESCHREIBUNGEN NEU GESCHRIEBEN — aus dem echten Einstiegstext der Seite, nicht aus dem Titel
+abgeleitet (105-149 Zeichen). Titel waren auf allen 101 Seiten vorhanden.
+TYPISIERUNG (steuert Sitemap-Prioritaet, noindex und spaeter das Werkzeug-Register in W4):
+weltseite 30 · werkzeug 21 · intern 11 · holding 9 · kompendium 8 · legal 6 · wissen 5 · welt 5 ·
+konto 4 · start 1 · standalone 1 (startseite-neu.html wird komplett ausgelassen).
+SITEMAP + ROBOTS folgen derselben Registry: sitemap.xml 18 -> 88 URLs (alles ausser intern,
+standalone, 404), robots.txt Disallow 7 -> 11 Eintraege; dieselben 11 Seiten tragen jetzt
+<meta name="robots" content="noindex, nofollow">.
+GEFUNDENER FEHLER (behoben): Titel wurden roh aus dem HTML in die Registry uebernommen und dann
+erneut escaped -> "&amp;amp;" auf 8 Seiten. Registry entschluesselt, und gen_kopf.js entschluesselt
+jetzt IMMER vor dem Kodieren (Registry-Text ist Klartext, nicht HTML).
+AUDIT-INSTRUMENT NACHGEZOGEN: audit_v3.py liest jetzt tools/seiten.json und kennt die bewussten
+Ausnahmen; SW-Registrierung wird ueber "serviceWorker" ODER "hb-pwa.js" erkannt (seit W1 extern) —
+sonst meldet das Instrument dauerhaft falsche Luecken.
+ERGEBNIS Audit-Abschnitt 2 (ohne den Standalone-Entwurf): description/og/canonical/theme-color/
+manifest/heiben-design.css/heiben-legal.js/SW-Registrierung je 100/100, heiben-nav.js 99/99 (ohne
+index.html), JSON-LD 89/89 (ohne die 11 internen), noindex 11/11. Vorher: manifest 41, SW-Reg 42,
+heiben-legal.js 29, canonical 0.
+PREIS: HTML 2.901 -> 3.068 KB (+167 KB = ~1,7 KB Kopf je Seite). Bewusst — vollstaendige Metadaten
+statt halber PWA.
+BEABSICHTIGTE SICHTBARE AENDERUNG (die einzige): heiben-legal.js lief bisher auf 29 Seiten, jetzt auf
+100 -> die Hinweisleiste zur lokalen Speicherung erscheint nun auf jeder Seite (einmalig, per
+localStorage heiben-consent quittiert). Ebenso hb-pwa.js 42 -> 100 (Installhinweis, heiben-pwa-dismiss).
+VERIFIKATION (W1-Stand via git archive auf 8181 gegen W2 auf 8180, Leisten per localStorage
+vorquittiert, Messung nach document.fonts.ready + 2 rAF):
+- Layout-Fingerabdruck aller 100 Seiten: 97 exakt identisch. Die 3 Abweichungen (begriffskarten,
+  koeln-quiz, wissensquiz) zeigen dieselbe Abweichung im KONTROLLLAUF vorher-gegen-vorher —
+  Zufallsinhalt (zufaellige Karte, gemischte Antworten), gleiche Position, nur andere Textbreite.
+  -> W2 ist auf 100/100 Seiten layoutneutral.
+- Beabsichtigte Wirkung stichprobenartig belegt: auto/sparziel/wissen vorher ohne Leiste, ohne
+  hb-pwa, ohne description/canonical/manifest — nachher alles vorhanden.
+- 89 JSON-LD-Bloecke, alle valides JSON. Keine doppelten Einbindungen (Mehrfachtreffer bei
+  heiben-nav.js/heiben-legal.js sind Kommentare bzw. sichtbarer Text in unternehmen.html).
+- SWEEP: alle 101 Seiten -> 0 PageErrors, 0 Console-Errors.
+NAECHSTER SCHRITT: siehe folgender Abschnitt (Design-Auftrag des Users).

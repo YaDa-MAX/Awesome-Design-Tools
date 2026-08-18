@@ -1,5 +1,5 @@
 /* HeiBen Service-Worker — Offline-Fähigkeit & App-Shell (v20260615-1323) */
-const CACHE='heiben-v20260622-2990';
+const CACHE='heiben-v20260622-2991';
 const PRECACHE=[
   "index.html",
   "404.html",

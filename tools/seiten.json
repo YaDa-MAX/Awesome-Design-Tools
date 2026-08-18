@@ -1,0 +1,614 @@
+{
+ "_hinweis": "Registry fuer tools/gen_kopf.js. Von Hand pflegen: neue Seite hier eintragen, dann `node ../tools/gen_kopf.js` in web/ laufen lassen.",
+ "_basis": "https://www.heiben.de/",
+ "_typen": "start | welt | weltseite | kompendium | werkzeug | wissen | konto | holding | legal | intern (noindex) | standalone (wird ausgelassen)",
+ "seiten": {
+  "404.html": {
+   "welt": "holding",
+   "typ": "legal",
+   "titel": "Seite nicht gefunden — HeiBen",
+   "beschreibung": "Diese Seite gibt es nicht (mehr). Zurück zur Startseite oder direkt in eine der fünf HeiBen-Welten: Reisen, Wohnen, Immobilien, Studio, Kulinarik."
+  },
+  "agb.html": {
+   "welt": "holding",
+   "typ": "legal",
+   "titel": "AGB — HeiBen Holding GmbH",
+   "beschreibung": "Datenschutzerklärung der HeiBen Holding GmbH gemäß DSGVO."
+  },
+  "anfragenverwaltung.html": {
+   "welt": "holding",
+   "typ": "intern",
+   "titel": "HeiBen — Anfragenverwaltung",
+   "beschreibung": "Interner Bereich: Anfragen aus den Formularen von Reisen, Wohnen und Immobilien sammeln und bearbeiten. Alle Daten bleiben lokal im Browser."
+  },
+  "api.html": {
+   "welt": "holding",
+   "typ": "intern",
+   "titel": "HeiBen · API-Dokumentation",
+   "beschreibung": "Interner Bereich: Dokumentation der HeiBen Platform API — Endpunkte und Datenmodelle der Buchungs- und Angebotsschnittstelle."
+  },
+  "auto.html": {
+   "welt": "wissen",
+   "typ": "kompendium",
+   "titel": "Rund ums Auto · HeiBen",
+   "beschreibung": "Panne, Wartung, Kosten — souverän statt hilflos. Jede Situation im Steckbrief: was Schritt für Schritt zu tun ist und wann die Werkstatt dran ist."
+  },
+  "begriffskarten.html": {
+   "welt": "wissen",
+   "typ": "wissen",
+   "titel": "Begriffskarten · HeiBen",
+   "beschreibung": "Begriff lesen, kurz überlegen, umdrehen: 544 Karten mit Allgemein- und Alltagswissen. Fällige Karten kommen genau dann wieder, wenn es nötig ist."
+  },
+  "bestellverwaltung.html": {
+   "welt": "holding",
+   "typ": "intern",
+   "titel": "HeiBen Wohnen — Bestellverwaltung",
+   "beschreibung": "Einfaches Backoffice: eingegangene Bestellungen des Konfigurators sammeln, sichten und im Status verwalten — bis zur echten Zahlungsanbindung."
+  },
+  "datenschutz.html": {
+   "welt": "holding",
+   "typ": "legal",
+   "titel": "Datenschutzerklärung — HeiBen Holding GmbH",
+   "beschreibung": "Datenschutzerklärung der HeiBen Holding GmbH gemäß DSGVO."
+  },
+  "digital.html": {
+   "welt": "wissen",
+   "typ": "kompendium",
+   "titel": "Sicher im Netz · HeiBen",
+   "beschreibung": "Betrug erkennen, Konten schützen, Familie vorbereiten. Jede Masche im Steckbrief: wie sie läuft, woran du sie erkennst und was sofort zu tun ist."
+  },
+  "erste-wohnung.html": {
+   "welt": "wissen",
+   "typ": "werkzeug",
+   "titel": "Die erste eigene Wohnung · HeiBen",
+   "beschreibung": "Ausziehen kostet zweimal — einmal viel zum Einzug, dann jeden Monat. Trag deine Wunschwohnung ein und sieh, ob sie zu deinem Einkommen passt."
+  },
+  "erstehilfe.html": {
+   "welt": "wissen",
+   "typ": "kompendium",
+   "titel": "Erste Hilfe · HeiBen",
+   "beschreibung": "Ruhig und richtig handeln, vom Pflaster bis zum Notruf. Steckbriefe mit den Schritten, den klassischen Fehlern und dem, was bei Kindern anders läuft."
+  },
+  "familie.html": {
+   "welt": "holding",
+   "typ": "holding",
+   "titel": "HeiBen — Die Familie hinter dem Namen",
+   "beschreibung": "Hinter HeiBen stehen zwei Familien, die sich in Köln gefunden haben: Yakin Benkhaouda und Katharina Hein. Aus Hein + Benkhaouda wird HeiBen — und darin steckt der Satz „Heimat leben“. Die Gründungsgeschichte einer Kölner Unternehmensfamilie."
+  },
+  "finanzcheck.html": {
+   "welt": "wissen",
+   "typ": "werkzeug",
+   "titel": "Finanz-Gesundheitscheck · HeiBen",
+   "beschreibung": "Sieben ehrliche Fragen, ein Score, ein klarer Plan: In zwei Minuten weißt du, wo du stehst und welche drei Schritte am meisten bringen."
+  },
+  "finanzen.html": {
+   "welt": "wissen",
+   "typ": "kompendium",
+   "titel": "Finanz-Grundwissen · HeiBen",
+   "beschreibung": "Von Konto, Notgroschen und Steuern über Vorsorge und Investieren bis zu Eigentum und Wohnen — jeder Begriff im Steckbrief, mit dem typischen Fehler."
+  },
+  "finanzielle-freiheit.html": {
+   "welt": "wissen",
+   "typ": "werkzeug",
+   "titel": "Wann bist du finanziell frei? · HeiBen",
+   "beschreibung": "Wann wirft dein Vermögen genug ab, um die Ausgaben zu decken? Die 4-%-Regel macht daraus eine konkrete Zahl — spiel mit den Reglern."
+  },
+  "gehaltsverhandlung.html": {
+   "welt": "wissen",
+   "typ": "werkzeug",
+   "titel": "Gehaltsverhandlung · HeiBen",
+   "beschreibung": "Jede Erhöhung wird zur neuen Basis für alle künftigen. Hier siehst du, was eine gelungene Verhandlung über das ganze Berufsleben wert ist."
+  },
+  "haushalt.html": {
+   "welt": "wissen",
+   "typ": "kompendium",
+   "titel": "Selbermachen · HeiBen",
+   "beschreibung": "Kleine Reparaturen, Pflege und Vorbeugen für Wohnung und Haus — Schritt für Schritt, mit Sicherheitsregeln und dem Hinweis, wann der Profi dran ist."
+  },
+  "heiben-automation.html": {
+   "welt": "holding",
+   "typ": "intern",
+   "titel": "HeiBen · E-Mail-Automation (Backoffice)",
+   "beschreibung": "Interner Bereich: E-Mail-Strecken, die auf erfasste Ereignisse reagieren. Der Trockenlauf zeigt, welche Mails jetzt ausgelöst würden."
+  },
+  "heiben-wachstum.html": {
+   "welt": "holding",
+   "typ": "intern",
+   "titel": "HeiBen · Wachstum & Conversion (Backoffice)",
+   "beschreibung": "Interner Bereich: clientseitig erfasste Funnel-Ereignisse, ausgewertet und zurückgespielt ins Cashflow-Modell."
+  },
+  "holding-dashboard.html": {
+   "welt": "holding",
+   "typ": "holding",
+   "titel": "HeiBen Holding · Dashboard",
+   "beschreibung": "Aggregierter Blick über alle fünf Welten. Buchung und Fakturierung bleiben je Welt in eigener Firmierung — das Dashboard fasst nur zusammen."
+  },
+  "immobilien-anfrage.html": {
+   "welt": "immobilien",
+   "typ": "weltseite",
+   "titel": "HeiBen Immobilien — Immobilien-Anfrage",
+   "beschreibung": "Schildern Sie Ihr Anliegen rund um Kauf, Verkauf oder Besichtigung — wir melden uns vertraulich."
+  },
+  "immobilien-angebote.html": {
+   "welt": "immobilien",
+   "typ": "weltseite",
+   "titel": "HeiBen Immobilien · Angebote",
+   "beschreibung": "Immobilien-Angebote von HeiBen Immobilien im Rheinland — mit Filter und Finanzierungsrechner."
+  },
+  "immobilien-planner.html": {
+   "welt": "immobilien",
+   "typ": "weltseite",
+   "titel": "HeiBen Immobilien · Objekt- & Besichtigungsplaner",
+   "beschreibung": "Stelle eine Objektauswahl zusammen: Immobilien auf der Karte, Volumen und Provision kalkulieren, Besichtigungen reservieren oder anfragen, Exposés ablegen — als Makler- und Interessentenansicht."
+  },
+  "immobilien.html": {
+   "welt": "immobilien",
+   "typ": "welt",
+   "titel": "HeiBen Immobilien — Bestand & Vermögen in Köln",
+   "beschreibung": "HeiBen Immobilien: die ruhige, vermögensverwaltende Säule der Familie. Eigene Immobilien in Köln, langfristig gehalten und gepflegt — ein Wertspeicher über Generationen."
+  },
+  "immobilienbudget.html": {
+   "welt": "immobilien",
+   "typ": "werkzeug",
+   "titel": "Wie viel Immobilie kannst du dir leisten? · HeiBen",
+   "beschreibung": "Wir rechnen rückwärts: von der monatlich leistbaren Rate zum realistischen Kaufpreis — inklusive der Nebenkosten, die viele übersehen."
+  },
+  "impressum.html": {
+   "welt": "holding",
+   "typ": "legal",
+   "titel": "Impressum — HeiBen Holding GmbH",
+   "beschreibung": "Impressum und Anbieterkennzeichnung der HeiBen Holding GmbH, Köln."
+  },
+  "index.html": {
+   "welt": "holding",
+   "typ": "start",
+   "titel": "HeiBen — Heimat leben. Eine Familie aus fünf Welten.",
+   "beschreibung": "HeiBen ist eine Kölner Unternehmensfamilie: Reisen, Wohnen, Immobilien, Studio und Kulinarik — verbunden durch eine Idee. Heimat ist kein Ort, sondern ein Verb.",
+   "nav": false
+  },
+  "jobwechsel.html": {
+   "welt": "wissen",
+   "typ": "werkzeug",
+   "titel": "Lohnt sich der Jobwechsel? · HeiBen",
+   "beschreibung": "Höheres Brutto heißt nicht mehr Netto. Trag beide Jobs ein und sieh, was nach Pendeln, Steuern und Lebenszeit übrig bleibt. Alles bleibt lokal."
+  },
+  "koeln-quiz.html": {
+   "welt": "holding",
+   "typ": "werkzeug",
+   "titel": "Köln-Heimat-Quiz · HeiBen",
+   "beschreibung": "Dom, Karneval, Kölsch, Klüngel: zwölf Fragen rund um die Stadt am Rhing, jede mit Erklärung. Am Ende sagt das Kölschometer, wo du stehst."
+  },
+  "konsumcheck.html": {
+   "welt": "wissen",
+   "typ": "werkzeug",
+   "titel": "Konsum-Check · HeiBen",
+   "beschreibung": "Was Abos wirklich kosten und was ein einzelner Kauf an Lebenszeit und entgangener Rendite bedeutet — hochgerechnet aufs Jahr und aufs Jahrzehnt."
+  },
+  "konto-verwaltung.html": {
+   "welt": "konto",
+   "typ": "intern",
+   "titel": "Verwaltung — Nutzer & Newsletter | HeiBen",
+   "beschreibung": "Interner Bereich."
+  },
+  "konto.html": {
+   "welt": "konto",
+   "typ": "konto",
+   "titel": "Konto — HeiBen",
+   "beschreibung": "Registrieren, anmelden und HeiBen Plus nutzen: alle Rezepte und Studio-Geschichten in voller Länge."
+  },
+  "kulinarik-app.html": {
+   "welt": "kulinarik",
+   "typ": "weltseite",
+   "titel": "HeiBen Kulinarik-App — Saisonküche, die mitdenkt",
+   "beschreibung": "Die HeiBen Kulinarik-App: saisonale Wochenpläne, Einkaufslisten und Rezept-Sync mit dem Kochbuch. Probemonat gratis."
+  },
+  "kulinarik-export.html": {
+   "welt": "kulinarik",
+   "typ": "intern",
+   "titel": "HeiBen Kulinarik — Kochbuch-Export",
+   "beschreibung": "Interner Bereich: Rezepte auswählen und als A4-PDF drucken — im Format für Fotobuch-Anbieter, passend zum eigenen HeiBen-Kochbuch."
+  },
+  "kulinarik-heute.html": {
+   "welt": "kulinarik",
+   "typ": "weltseite",
+   "titel": "HeiBen Kulinarik · Was koche ich heute?",
+   "beschreibung": "Keine Idee, was kochen? Sag uns Zeit, Lust und Ernährung — HeiBen Kulinarik schlägt dir ein passendes Gericht vor."
+  },
+  "kulinarik-kochbuch.html": {
+   "welt": "kulinarik",
+   "typ": "weltseite",
+   "titel": "Das HeiBen-Kochbuch — Heimat in Rezepten",
+   "beschreibung": "Das HeiBen-Kochbuch: saisonale Heimatküche aus Köln. Als E-Book, gedruckt (Print-on-Demand) oder im Bundle mit der Kulinarik-App."
+  },
+  "kulinarik-mealplanner.html": {
+   "welt": "kulinarik",
+   "typ": "weltseite",
+   "titel": "HeiBen Kulinarik · Mealplanner & Nährwerte",
+   "beschreibung": "Mealplanner der HeiBen Kulinarik-App: Tages- und Wochenbedarf an Energie, Makros und Vitaminen, Mahlzeiten-Tracking und eigene Rezepte."
+  },
+  "kulinarik-planner.html": {
+   "welt": "kulinarik",
+   "typ": "weltseite",
+   "titel": "HeiBen Kulinarik · Menü- & Catering-Planer",
+   "beschreibung": "Stelle Menüs und Catering zusammen: Gerichte wählen, Gäste festlegen, Allergene und Budget im Blick, beauftragen oder anfragen — als Firmen- und Kundenansicht."
+  },
+  "kulinarik-redaktion.html": {
+   "welt": "kulinarik",
+   "typ": "intern",
+   "titel": "HeiBen — Kulinarik-Redaktion",
+   "beschreibung": "Interner Bereich: Rezepte von HeiBen Kulinarik anlegen, bearbeiten und veröffentlichen. Die Arbeit wird lokal im Browser gespeichert."
+  },
+  "kulinarik-rezept.html": {
+   "welt": "kulinarik",
+   "typ": "weltseite",
+   "titel": "HeiBen Kulinarik — Rezept",
+   "beschreibung": "Ein Rezept von HeiBen Kulinarik — mit Herkunft und Geschichte."
+  },
+  "kulinarik-rezepte.html": {
+   "welt": "kulinarik",
+   "typ": "weltseite",
+   "titel": "HeiBen Kulinarik — Rezepte",
+   "beschreibung": "Alle Rezepte von HeiBen Kulinarik — filterbar nach Land, Gang und Art, mit Herkunft und Geschichte zu jedem Gericht."
+  },
+  "kulinarik-rezeptwuerfel.html": {
+   "welt": "kulinarik",
+   "typ": "weltseite",
+   "titel": "Rezept-Würfel — Was der Kühlschrank hergibt | HeiBen Kulinarik",
+   "beschreibung": "Kühlschrank-Bingo: Wählen Sie an, was zuhause ist — der Rezept-Würfel von HeiBen Kulinarik schlägt ein sofort umsetzbares Gericht vor, plus alle weiteren Möglichkeiten."
+  },
+  "kulinarik-wochenplan.html": {
+   "welt": "kulinarik",
+   "typ": "weltseite",
+   "titel": "Wochenplan & Einkaufsliste — HeiBen Kulinarik",
+   "beschreibung": "Planen Sie Ihre Woche mit Rezepten aus 51 Länderküchen — HeiBen Kulinarik erstellt die Einkaufsliste automatisch, skaliert auf Ihre Portionen."
+  },
+  "kulinarik.html": {
+   "welt": "kulinarik",
+   "typ": "welt",
+   "titel": "HeiBen Kulinarik — eine Küche mit Herkunft",
+   "beschreibung": "HeiBen Kulinarik: eine Rezeptküche zwischen Maghreb und Norddeutschland — Gerichte mit Geschichte, ehrlich zubereitet."
+  },
+  "lebensmittel.html": {
+   "welt": "wissen",
+   "typ": "kompendium",
+   "titel": "Lebensmittel-Wissen · HeiBen",
+   "beschreibung": "Richtig lagern, Frische erkennen, Reste retten: wie lange etwas hält, woran man Verderb erkennt — plus die verbreiteten Kühlschrank-Irrtümer."
+  },
+  "lernpfade.html": {
+   "welt": "wissen",
+   "typ": "wissen",
+   "titel": "Lernpfade · HeiBen",
+   "beschreibung": "16 Pfade führen dich in der richtigen Reihenfolge durch ein Thema — vom ersten Schritt bis erledigt. Gelesene Artikel werden automatisch abgehakt."
+  },
+  "manufaktur-bestellungen.html": {
+   "welt": "wohnen",
+   "typ": "weltseite",
+   "titel": "Auftragsverwaltung — intern | HeiBen Manufaktur",
+   "beschreibung": "Interner Bereich."
+  },
+  "manufaktur-galerie.html": {
+   "welt": "wohnen",
+   "typ": "weltseite",
+   "titel": "HeiBen Manufaktur · Design-Galerie",
+   "beschreibung": "Inspiration aus der HeiBen Manufaktur: von der Community geteilte Eigendesigns zum Remixen und Selbstgestalten."
+  },
+  "manufaktur-gestalten.html": {
+   "welt": "wohnen",
+   "typ": "weltseite",
+   "titel": "Selbst gestalten — HeiBen Manufaktur",
+   "beschreibung": "HeiBen Manufaktur: 3D-gedruckte Wohnaccessoires, Geschenke, Architektur-Modelle und personalisiertes Design — Höhenrelief vom Heimatort, Figuren, Koordinaten-Objekte. Online konfiguriert, in Köln gedruckt."
+  },
+  "manufaktur-kalkulation.html": {
+   "welt": "wohnen",
+   "typ": "weltseite",
+   "titel": "Manufaktur-Kalkulation — intern | HeiBen",
+   "beschreibung": "Interner Bereich."
+  },
+  "manufaktur-maschinencode.html": {
+   "welt": "wohnen",
+   "typ": "weltseite",
+   "titel": "Maschinencode-Datenbank — intern | HeiBen",
+   "beschreibung": "Interner Bereich."
+  },
+  "manufaktur.html": {
+   "welt": "wohnen",
+   "typ": "weltseite",
+   "titel": "HeiBen Manufaktur — 3D-Druck-Shop",
+   "beschreibung": "HeiBen Manufaktur: 3D-gedruckte Wohnaccessoires, Geschenke, Architektur-Modelle und personalisiertes Design — Höhenrelief vom Heimatort, Figuren, Koordinaten-Objekte. Online konfiguriert, in Köln gedruckt."
+  },
+  "marke.html": {
+   "welt": "holding",
+   "typ": "holding",
+   "titel": "Markenhandbuch · HeiBen",
+   "beschreibung": "Zwei Familien, ein Haus: Hein und Benkhaouda. Das Markenhandbuch hält fest, wofür HeiBen steht und wie die Marke aussieht."
+  },
+  "mein-abo.html": {
+   "welt": "konto",
+   "typ": "konto",
+   "titel": "HeiBen · Mein Abo & Empfehlungen",
+   "beschreibung": "Abos, Rechnungen, Zahlungsmethode, Guthaben und Erinnerungen — alles an einem Ort in deinem HeiBen-Konto."
+  },
+  "mein-heiben.html": {
+   "welt": "konto",
+   "typ": "konto",
+   "titel": "Mein HeiBen",
+   "beschreibung": "Dein Dashboard über alle fünf Welten: Lernpfade, Verlauf, Werkzeuge und gespeicherte Stände. Alles bleibt lokal auf deinem Gerät."
+  },
+  "mieten-oder-kaufen.html": {
+   "welt": "wissen",
+   "typ": "werkzeug",
+   "titel": "Mieten oder kaufen? · HeiBen",
+   "beschreibung": "Nicht Miete gegen Kauf, sondern: Wo stehst du nach einigen Jahren wirklich? Beide Wege als Vermögen durchgerechnet, mit fairen Annahmen."
+  },
+  "papierkram.html": {
+   "welt": "wissen",
+   "typ": "kompendium",
+   "titel": "Papierkram · HeiBen",
+   "beschreibung": "Was hebe ich wie lange auf, reicht ein Scan, welche Frist läuft mir davon? 31 Dokumente im Steckbrief — vom Kassenbon bis zum Notfallordner."
+  },
+  "partner-demo.html": {
+   "welt": "holding",
+   "typ": "holding",
+   "titel": "White-Label-Demo · HeiBen",
+   "beschreibung": "Die komplette HeiBen-Suite unter Partner-Marke: Ein Partner-Theme ist genau ein :root-Block. Marke wählen und live zusehen."
+  },
+  "pflanzen.html": {
+   "welt": "wissen",
+   "typ": "kompendium",
+   "titel": "Pflanzenwissen · HeiBen",
+   "beschreibung": "Anbau und Gestaltung für Garten, Gewächshaus und Indoor — von der Tomate bis zur Monstera, mit Licht, Wasser, Boden und den häufigsten Fehlern."
+  },
+  "rechtliches.html": {
+   "welt": "holding",
+   "typ": "legal",
+   "titel": "Rechtliches — HeiBen",
+   "beschreibung": "Datenschutzerklärung der HeiBen Holding GmbH gemäß DSGVO."
+  },
+  "reisebudget.html": {
+   "welt": "reisen",
+   "typ": "werkzeug",
+   "titel": "Reisebudget-Planer · HeiBen",
+   "beschreibung": "Die Reise kostet selten nur den Flug. Alle Posten realistisch planen, Kosten pro Person und Tag sehen — und wie lange du dafür sparen musst."
+  },
+  "reisen-anfrage.html": {
+   "welt": "reisen",
+   "typ": "weltseite",
+   "titel": "HeiBen Reisen — Reise-Anfrage",
+   "beschreibung": "Stellen Sie unverbindlich Ihre Reise-Anfrage: Wir hören zu und stellen einen Vorschlag zusammen, der zu Ihnen passt."
+  },
+  "reisen-kuratiert.html": {
+   "welt": "reisen",
+   "typ": "weltseite",
+   "titel": "HeiBen Reisen · Kuratierte Reisen",
+   "beschreibung": "Kuratierte Reisen von HeiBen Reisen — vom Rheinland bis Europa. Finde mit dem Reise-Kompass die passende Auszeit."
+  },
+  "reisen-planer.html": {
+   "welt": "reisen",
+   "typ": "weltseite",
+   "titel": "HeiBen Reisen · Reise-Planer (Köln +100 km)",
+   "beschreibung": "Stelle deine Reise rund um Köln selbst zusammen: Wanderungen, Fahrradreisen, Rundreisen und Übernachtungen mit Karte, Zeitstrahl, Kalkulation, Buchung, Unterlagen, To-do und Angebot."
+  },
+  "reisen.html": {
+   "welt": "reisen",
+   "typ": "welt",
+   "titel": "HeiBen Reisen — Kuratierte Reisen aus Köln",
+   "beschreibung": "HeiBen Reisen: kuratierte Slow-Travel-Reisen im Rheinland, Kulturreisen nach Nordafrika und limitierte Themen-Editionen — geplant von Hotelfach- und Tourismusprofis."
+  },
+  "schaufenster-detail.html": {
+   "welt": "holding",
+   "typ": "holding",
+   "titel": "HeiBen — Unsere Arbeit",
+   "beschreibung": "Ein Eintrag aus unserer Arbeit bei der HeiBen-Familie."
+  },
+  "schaufenster-redaktion.html": {
+   "welt": "holding",
+   "typ": "intern",
+   "titel": "HeiBen — Schaufenster-Redaktion",
+   "beschreibung": "Interner Bereich: Reiserouten, Wohnprojekte und Immobilien als Schaufenster-Einträge anlegen, bearbeiten und veröffentlichen."
+  },
+  "schaufenster.html": {
+   "welt": "holding",
+   "typ": "holding",
+   "titel": "HeiBen — Unsere Arbeit",
+   "beschreibung": "Ein Blick in unsere Arbeit: kuratierte Reiserouten, eingerichtete Wohnprojekte und ausgewählte Immobilien der HeiBen-Familie."
+  },
+  "schuldenfrei.html": {
+   "welt": "wissen",
+   "typ": "werkzeug",
+   "titel": "Schuldenfrei werden · HeiBen",
+   "beschreibung": "Mit der richtigen Reihenfolge bist du schneller und billiger raus. Trag deine Schulden ein und vergleiche die zwei besten Strategien."
+  },
+  "shortcut-speedrun.html": {
+   "welt": "wissen",
+   "typ": "werkzeug",
+   "titel": "Shortcut-Speedrun · HeiBen",
+   "beschreibung": "60 Sekunden, so viele Tastenkürzel wie möglich — die echte Tastenkombination drücken, Tempo entscheidet. Wie weit kommst du?"
+  },
+  "sparziel.html": {
+   "welt": "wissen",
+   "typ": "werkzeug",
+   "titel": "Sparziel-Planer · HeiBen",
+   "beschreibung": "Notgroschen, Führerschein, Eurotrip oder Kaution: Ziel anlegen, Einzahlungen mitschreiben, Fortschritt wachsen sehen. Alles bleibt lokal."
+  },
+  "startseite-neu.html": {
+   "welt": "",
+   "typ": "standalone",
+   "titel": "HeiBen — Heimat leben. Eine Familie aus fünf Welten.",
+   "beschreibung": "Entwurf der neuen HeiBen-Startseite: fünf Welten, fünf Zeichen — Koffer, Haus, Tür, Glühbirne, Kochtopf. Scrollend erzählt."
+  },
+  "steuererklaerung.html": {
+   "welt": "wissen",
+   "typ": "werkzeug",
+   "titel": "Deine erste Steuererklärung · HeiBen",
+   "beschreibung": "Für Berufseinsteiger und Studierende ist die Steuererklärung meist ein Geschenk. Hier siehst du live, wo dein Geld liegt und was dir zusteht."
+  },
+  "strategie.html": {
+   "welt": "holding",
+   "typ": "holding",
+   "titel": "Geschäftsmodell-Review · HeiBen",
+   "beschreibung": "Wer zahlt wofür — heute und morgen? Das Geschäftsmodell ehrlich geprüft: zwei Säulen, vier Wege zu Geschäftskunden, eine klare Empfehlung."
+  },
+  "stromfresser.html": {
+   "welt": "wissen",
+   "typ": "werkzeug",
+   "titel": "Stromfresser-Detektiv · HeiBen",
+   "beschreibung": "Die Stromrechnung aufgeschlüsselt: Geräte mit Wattzahl und täglicher Nutzung eintragen und die heimlichen Kostentreiber finden."
+  },
+  "studio-artikel.html": {
+   "welt": "studio",
+   "typ": "weltseite",
+   "titel": "HeiBen Studio — Beitrag",
+   "beschreibung": "Ein Beitrag aus dem Magazin von HeiBen Studio."
+  },
+  "studio-einrichtungstheorie.html": {
+   "welt": "studio",
+   "typ": "weltseite",
+   "titel": "Einrichten nach Plan — interaktiv | HeiBen Studio",
+   "beschreibung": "Einrichtungslehre zum Mitmachen: welche Möbel in welchen Raum, wie Wege frei bleiben, wie Licht in drei Ebenen wirkt — mit interaktivem 3D-Modell und verschiebbarem Grundriss samt Maßen und Abständen."
+  },
+  "studio-lebenswissen-artikel.html": {
+   "welt": "studio",
+   "typ": "weltseite",
+   "titel": "Lebenswissen — Wegweiser | HeiBen Studio",
+   "beschreibung": "Grundlagen frei lesen, Vertiefung mit Checklisten und Rechner freischalten."
+  },
+  "studio-lebenswissen-bibliothek.html": {
+   "welt": "studio",
+   "typ": "weltseite",
+   "titel": "HeiBen Studio · Lebenswissen-Bibliothek",
+   "beschreibung": "Die Lebenswissen-Bibliothek: durchsuchbares Alltagswissen für jede Lebensphase — von Bildung über Finanzen bis Gesundheit."
+  },
+  "studio-lebenswissen-redaktion.html": {
+   "welt": "studio",
+   "typ": "intern",
+   "titel": "HeiBen Studio · Lebenswissen-Redaktion",
+   "beschreibung": "Redaktions-Arbeitsplatz für das Lebenswissen-Magazin: Beiträge nach Kategorie, Lebensphase und Status filtern, durchsuchen, Entwürfe anlegen und den Veröffentlichungs-Workflow steuern."
+  },
+  "studio-lebenswissen.html": {
+   "welt": "studio",
+   "typ": "weltseite",
+   "titel": "Lebenswissen — Das Nachschlagewerk | HeiBen Studio",
+   "beschreibung": "94 Wegweiser durch alle Lebenslagen: Grundlagen frei, Vertiefungen mit Checklisten und 31 Rechnern für 0,50 € je Artikel oder 14,90 €/Jahr."
+  },
+  "studio-magazin.html": {
+   "welt": "studio",
+   "typ": "weltseite",
+   "titel": "HeiBen Studio — Das Magazin",
+   "beschreibung": "Das Magazin von HeiBen Studio: Geschichten über Kultur, Design, Reisen und Haushaltsmanagement — und immer die Frage, was einen Ort zur Heimat macht."
+  },
+  "studio-redaktion.html": {
+   "welt": "studio",
+   "typ": "intern",
+   "titel": "HeiBen Studio — Redaktion",
+   "beschreibung": "Interner Bereich: Beiträge des HeiBen Studio anlegen, bearbeiten und veröffentlichen. Sichern und Laden als Datei."
+  },
+  "studio.html": {
+   "welt": "studio",
+   "typ": "welt",
+   "titel": "HeiBen Studio — Magazin über Kultur, Design, Reisen & Zuhause",
+   "beschreibung": "HeiBen Studio: ein digital-natives Magazin über Kultur, Design, Reisen und Haushaltsmanagement. Geschichten von Menschen, die sich ein Zuhause gebaut haben."
+  },
+  "studium-ausbildung.html": {
+   "welt": "wissen",
+   "typ": "werkzeug",
+   "titel": "Studium oder Ausbildung? · HeiBen",
+   "beschreibung": "Ausbildung bringt früh Geld, Studium kostet erst Zeit — beide Wege übers Berufsleben durchgerechnet, samt dem Punkt, ab dem das Studium aufholt."
+  },
+  "suche.html": {
+   "welt": "wissen",
+   "typ": "wissen",
+   "titel": "Suche — HeiBen",
+   "beschreibung": "Alles aus einer Hand durchsuchen: 159 Rezepte, Magazin-Geschichten, Schaufenster-Fundstücke und alle Seiten der fünf Häuser."
+  },
+  "tagesdosis.html": {
+   "welt": "wissen",
+   "typ": "wissen",
+   "titel": "Tagesdosis · HeiBen",
+   "beschreibung": "Ein Begriff, eine Frage — jeden Tag. Klein genug für die Kaffeepause, oft genug, dass es bleibt. Komm morgen wieder, dann wächst deine Serie."
+  },
+  "tastentrainer.html": {
+   "welt": "wissen",
+   "typ": "werkzeug",
+   "titel": "Tastenkürzel-Trainer · HeiBen",
+   "beschreibung": "Echte Tastenkombination drücken statt Multiple Choice: So wandern die wichtigsten Shortcuts von der Maus in die Finger."
+  },
+  "unternehmen.html": {
+   "welt": "holding",
+   "typ": "holding",
+   "titel": "Unternehmen — HeiBen Holding",
+   "beschreibung": "Datenschutzerklärung der HeiBen Holding GmbH gemäß DSGVO."
+  },
+  "versicherungscheck.html": {
+   "welt": "wissen",
+   "typ": "werkzeug",
+   "titel": "Versicherungs-Check · HeiBen",
+   "beschreibung": "Viele zahlen für Handy und Brille, aber nicht fürs Existenzielle. Ein paar Fragen zu deiner Situation — und du weißt, was wirklich wichtig ist."
+  },
+  "wahr-oder-falsch.html": {
+   "welt": "wissen",
+   "typ": "werkzeug",
+   "titel": "Wahr oder Falsch · HeiBen",
+   "beschreibung": "Zwölf Aussagen zu Geld, Recht, Job, Wohnen und Digitalem — manche stimmen, manche sind hartnäckige Mythen. Wie leicht bist du zu täuschen?"
+  },
+  "welt-cockpit.html": {
+   "welt": "holding",
+   "typ": "holding",
+   "titel": "HeiBen · Welt-Cockpit",
+   "beschreibung": "Kennzahlen, Anfragen und Angebote je HeiBen-Welt — aufrufbar über ?welt= für Reisen, Wohnen, Immobilien, Studio und Kulinarik."
+  },
+  "widerruf.html": {
+   "welt": "holding",
+   "typ": "legal",
+   "titel": "Widerrufsbelehrung — HeiBen Holding GmbH",
+   "beschreibung": "Datenschutzerklärung der HeiBen Holding GmbH gemäß DSGVO."
+  },
+  "wissen.html": {
+   "welt": "wissen",
+   "typ": "wissen",
+   "titel": "Wissen für Zuhause · HeiBen",
+   "beschreibung": "Acht Kompendien, ein Suchfeld: 370 Steckbriefe von der Tomate bis zur Tilgung. Tippe, was dich beschäftigt — jeder Treffer springt direkt hin."
+  },
+  "wissensquiz.html": {
+   "welt": "wissen",
+   "typ": "werkzeug",
+   "titel": "Lebenswissen-Quiz · HeiBen",
+   "beschreibung": "Kurze Fragen aus Geld, Recht, Job, Wohnen, Gesundheit und Digitalem — mit Erklärung zu jeder Antwort. Gebiet wählen und herausfinden."
+  },
+  "wohnen-anfrage.html": {
+   "welt": "wohnen",
+   "typ": "weltseite",
+   "titel": "HeiBen Wohnen — Interior-Beratung",
+   "beschreibung": "Erzählen Sie uns von Ihrem Raum: Wir melden uns mit ersten Ideen und einem Vorschlag fürs weitere Vorgehen."
+  },
+  "wohnen-konfigurator.html": {
+   "welt": "wohnen",
+   "typ": "weltseite",
+   "titel": "HeiBen Wohnen — 3D-Raumkonfigurator & Shop",
+   "beschreibung": "Raum dreidimensional zusammenstellen, Möbel wählen und vollständig bestellen — mit eingebauter, einfacher Verwaltung für Produkte und Räume."
+  },
+  "wohnen-planer.html": {
+   "welt": "wohnen",
+   "typ": "weltseite",
+   "titel": "HeiBen Wohnen · Einrichtungsplaner",
+   "beschreibung": "Richte deine Räume selbst ein: Möbel und Produkte zusammenstellen, Budget und Marge kalkulieren, bestellen oder anfragen, Datenblätter ablegen — als Firmen- und Kundenansicht."
+  },
+  "wohnen.html": {
+   "welt": "wohnen",
+   "typ": "welt",
+   "titel": "HeiBen Wohnen — Interior & Räume aus Köln",
+   "beschreibung": "HeiBen Wohnen: Innenarchitektur und ein kuratierter Wohn-Shop. Räume, die nach dem ersten Tag schon vertraut wirken — mit einem präzisen Auge für Material und Licht."
+  },
+  "zinseszins.html": {
+   "welt": "wissen",
+   "typ": "werkzeug",
+   "titel": "50 € im Monat ab 20 · HeiBen",
+   "beschreibung": "Der mächtigste Verbündete beim Geld ist die Zeit. Spiel mit den Reglern und sieh, was aus 50 € im Monat ab 20 wird."
+  },
+  "zuhause-ordner.html": {
+   "welt": "konto",
+   "typ": "konto",
+   "titel": "Der HeiBen Zuhause-Ordner — Notfall- & Familienordner zum Anlegen, Abhaken, Ausdrucken",
+   "beschreibung": "Der geführte Notfall- und Familienordner: sieben Register, klare Checklisten, Fortschritt auf deinem Gerät — und ein Druck-Export fürs Papier. Ein Produkt von Mein HeiBen."
+  }
+ }
+}

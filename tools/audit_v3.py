@@ -9,6 +9,7 @@ Aufruf:  cd web && python3 ../tools/audit_v3.py
 """
 import glob
 import hashlib
+import json
 import os
 import re
 import sys
@@ -27,10 +28,11 @@ KOPF_MERKMALE = {
     "manifest": r'rel="manifest"',
 }
 KOPF_SKRIPTE = {
-    "heiben-design.css": "heiben-design.css",
-    "heiben-nav.js": "heiben-nav.js",
-    "heiben-legal.js": "heiben-legal.js",
-    "SW-Registrierung": "serviceWorker",
+    "heiben-design.css": ("heiben-design.css",),
+    "heiben-nav.js": ("heiben-nav.js",),
+    "heiben-legal.js": ("heiben-legal.js",),
+    # Seit v3-W1 liegt die Registrierung in hb-pwa.js statt inline im Markup.
+    "SW-Registrierung": ("serviceWorker", "hb-pwa.js"),
 }
 RE_STYLE = re.compile(r"<style[^>]*>(.*?)</style>", re.S)
 RE_INLINE_JS = re.compile(r"<script(?![^>]*\bsrc=)[^>]*>(.*?)</script>", re.S)
@@ -86,16 +88,52 @@ def gewicht(txt):
     return verschnitt + b64
 
 
+def registry():
+    """tools/seiten.json, falls vorhanden — liefert die bewussten Ausnahmen."""
+    for p in ("../tools/seiten.json", "tools/seiten.json"):
+        if os.path.exists(p):
+            return json.load(open(p, encoding="utf-8")).get("seiten", {})
+    return {}
+
+
 def kopf(txt):
     titel("2. DOKUMENTKOPF (Vollstaendigkeit ueber alle Seiten)")
-    n = len(txt)
+    reg = registry()
+    standalone = {f for f, e in reg.items() if e.get("typ") == "standalone"}
+    intern = {f for f, e in reg.items() if e.get("typ") == "intern"}
+    ohne_nav = {f for f, e in reg.items() if e.get("nav") is False}
+    pflicht = {f: s for f, s in txt.items() if f not in standalone}
+    n = len(pflicht)
+    if standalone:
+        print(f"(ausgenommen: {len(standalone)} Standalone-Entwurf — "
+              f"{', '.join(sorted(standalone))})")
+
+    def zeile(name, treffer, soll, hinweis=""):
+        fehlt = sorted(soll - treffer)
+        stand = "OK" if not fehlt else "LUECKE"
+        print(f"{name:<18}{len(treffer & soll):>4} / {len(soll)}   {stand}"
+              + (f"   {hinweis}" if hinweis else "")
+              + ("" if not fehlt else "   fehlt: " + ", ".join(fehlt[:4])
+                 + (" …" if len(fehlt) > 4 else "")))
+
+    alle = set(pflicht)
     for name, pat in KOPF_MERKMALE.items():
         rx = re.compile(pat, re.I)
-        t = sum(1 for s in txt.values() if rx.search(s))
-        print(f"{name:<18}{t:>4} / {n}   {'OK' if t == n else 'LUECKE'}")
+        treffer = {f for f, s in pflicht.items() if rx.search(s)}
+        soll = alle
+        hinweis = ""
+        if name == "JSON-LD":
+            soll = alle - intern
+            hinweis = f"(ohne {len(intern)} interne Seiten)"
+        zeile(name, treffer, soll, hinweis)
     for name, marker in KOPF_SKRIPTE.items():
-        t = sum(1 for s in txt.values() if marker in s)
-        print(f"{name:<18}{t:>4} / {n}   {'OK' if t == n else 'LUECKE'}")
+        treffer = {f for f, s in pflicht.items() if any(m in s for m in marker)}
+        soll = alle - ohne_nav if name == "heiben-nav.js" else alle
+        hinweis = f"(ohne {', '.join(sorted(ohne_nav))})" if name == "heiben-nav.js" and ohne_nav else ""
+        zeile(name, treffer, soll, hinweis)
+    if intern:
+        noindex = {f for f in intern if re.search(r'name="robots"[^>]*noindex', pflicht.get(f, ""))}
+        zeile("noindex (intern)", noindex, intern)
 
 
 def auffindbarkeit(txt):

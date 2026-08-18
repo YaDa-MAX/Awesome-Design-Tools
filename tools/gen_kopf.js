@@ -1,0 +1,198 @@
+/* HeiBen Kopf-Generator — normiert den Dokumentkopf aller Seiten aus tools/seiten.json.
+   Aufruf:  cd web && node ../tools/gen_kopf.js            (schreibt)
+            cd web && node ../tools/gen_kopf.js --pruefen  (nur Bericht)
+
+   Der Generator besitzt AUSSCHLIESSLICH Metadaten ohne Layout-Wirkung: charset, viewport,
+   title, description, canonical, robots, theme-color, App-Meta, Manifest, Favicons, og/twitter
+   und JSON-LD. Er schreibt sie als einen Block direkt hinter <head> und entfernt die alten
+   Einzelvorkommen. Schriften, Stylesheets, <style>-Bloecke und sonstige Skripte bleiben
+   unberuehrt — deren Reihenfolge entscheidet ueber das Aussehen.
+
+   Zusaetzlich stellt er sicher, dass jede Seite heiben-design.css, heiben-nav.js,
+   heiben-legal.js und hb-pwa.js laedt. Vorhandene Einbindungen werden NICHT verschoben,
+   fehlende am Ende des Kopfes ergaenzt. */
+const fs = require('fs');
+const path = require('path');
+
+const REG = JSON.parse(fs.readFileSync(path.join(__dirname, 'seiten.json'), 'utf8'));
+const BASIS = REG._basis;
+const SEITEN = REG.seiten;
+const PRUEFEN = process.argv.includes('--pruefen');
+
+/* Firmierungen — gespiegelt aus web/heiben-firmierungen.js (dort ist der Kanon). */
+const FIRMA = {
+  reisen: 'HeiBen Reisen GmbH', wohnen: 'HeiBen Wohnen GmbH',
+  immobilien: 'HeiBen Immobilien GmbH', studio: 'HeiBen Studio GmbH',
+  kulinarik: 'HeiBen Kulinarik GmbH',
+  /* Wissen ist Studio-Substanz: Studio ist Absender und Lizenzgeber der Kompendien
+     (REMAKE-KONZEPT.md § 2.2). */
+  wissen: 'HeiBen Studio GmbH',
+};
+const HOLDING = 'HeiBen Holding GmbH';
+const PAPIER = '#f3eee5'; /* Grundton der Marke; bewusst auf allen Seiten gleich */
+
+const PFLICHT = [
+  { datei: 'heiben-design.css', tag: '<link rel="stylesheet" href="heiben-design.css">' },
+  { datei: 'heiben-nav.js', tag: '<script src="heiben-nav.js" defer></script>', optionalWennNavAus: true },
+  { datei: 'heiben-legal.js', tag: '<script src="heiben-legal.js" defer></script>' },
+  { datei: 'hb-pwa.js', tag: '<script id="hb-pwa" src="hb-pwa.js" defer></script>' },
+];
+
+/* Tags, die der Generator besitzt und darum vorher entfernt. */
+const ENTFERNEN = [
+  /<meta[^>]+charset=[^>]*>\s*/gi,
+  /<meta[^>]+name=["']viewport["'][^>]*>\s*/gi,
+  /<title[^>]*>[\s\S]*?<\/title>\s*/gi,
+  /<meta[^>]+name=["']description["'][^>]*>\s*/gi,
+  /<meta[^>]+name=["']robots["'][^>]*>\s*/gi,
+  /<meta[^>]+name=["']theme-color["'][^>]*>\s*/gi,
+  /<meta[^>]+name=["']application-name["'][^>]*>\s*/gi,
+  /<meta[^>]+name=["'](?:apple-)?mobile-web-app-[^"']*["'][^>]*>\s*/gi,
+  /<meta[^>]+name=["']apple-mobile-web-app-[^"']*["'][^>]*>\s*/gi,
+  /<meta[^>]+property=["']og:[^"']*["'][^>]*>\s*/gi,
+  /<meta[^>]+name=["']twitter:[^"']*["'][^>]*>\s*/gi,
+  /<link[^>]+rel=["']canonical["'][^>]*>\s*/gi,
+  /<link[^>]+rel=["']manifest["'][^>]*>\s*/gi,
+  /<link[^>]+rel=["'](?:shortcut )?icon["'][^>]*>\s*/gi,
+  /<link[^>]+rel=["']apple-touch-icon["'][^>]*>\s*/gi,
+  /<script[^>]+type=["']application\/ld\+json["'][\s\S]*?<\/script>\s*/gi,
+  /<!--\s*HeiBen social\/meta\s*-->\s*/gi,
+  /<!-- hb:kopf[\s\S]*?<!-- \/hb:kopf -->\s*/g,
+];
+
+/* Erst entschluesseln, dann kodieren: sonst wird ein in seiten.json bereits als "&amp;"
+   notierter Text zu "&amp;amp;". Der Registry-Text ist Klartext, nicht HTML. */
+const entschluesseln = (s) => String(s)
+  .replace(/&(amp|lt|gt|quot|#39|apos|nbsp);/g, (_, e) => ({
+    amp: '&', lt: '<', gt: '>', quot: '"', '#39': "'", apos: "'", nbsp: ' ' }[e]));
+const esc = (s) => entschluesseln(s).replace(/&/g, '&amp;').replace(/</g, '&lt;')
+  .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+
+function jsonld(datei, e) {
+  if (e.typ === 'intern') return '';
+  const seite = { '@type': 'WebPage', name: e.titel, description: e.beschreibung,
+    url: BASIS + (datei === 'index.html' ? '' : datei), inLanguage: 'de-DE' };
+  const anbieter = FIRMA[e.welt] || HOLDING;
+  if (e.typ === 'start') {
+    return JSON.stringify({ '@context': 'https://schema.org', '@type': 'WebSite',
+      name: 'HeiBen', alternateName: 'HeiBen — Heimat leben', url: BASIS, inLanguage: 'de-DE',
+      publisher: { '@type': 'Organization', name: HOLDING, slogan: 'Heimat leben',
+        address: { '@type': 'PostalAddress', addressLocality: 'Köln', addressCountry: 'DE' } } });
+  }
+  seite.isPartOf = { '@type': 'WebSite', name: 'HeiBen', url: BASIS };
+  seite.publisher = { '@type': 'Organization', name: anbieter };
+  return JSON.stringify(Object.assign({ '@context': 'https://schema.org' }, seite));
+}
+
+function kopfblock(datei, e) {
+  const url = BASIS + (datei === 'index.html' ? '' : datei);
+  const z = [];
+  z.push('<!-- hb:kopf — erzeugt von tools/gen_kopf.js aus tools/seiten.json. Nicht von Hand ändern. -->');
+  z.push('<meta charset="utf-8">');
+  z.push('<meta name="viewport" content="width=device-width, initial-scale=1">');
+  z.push(`<title>${esc(e.titel)}</title>`);
+  z.push(`<meta name="description" content="${esc(e.beschreibung)}">`);
+  z.push(`<link rel="canonical" href="${url}">`);
+  if (e.typ === 'intern') z.push('<meta name="robots" content="noindex, nofollow">');
+  z.push(`<meta name="theme-color" content="${PAPIER}">`);
+  z.push('<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">');
+  z.push('<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">');
+  z.push('<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">');
+  z.push('<link rel="manifest" href="manifest.webmanifest">');
+  z.push('<meta name="application-name" content="HeiBen">');
+  z.push('<meta name="mobile-web-app-capable" content="yes">');
+  z.push('<meta name="apple-mobile-web-app-capable" content="yes">');
+  z.push('<meta name="apple-mobile-web-app-title" content="HeiBen">');
+  z.push('<meta name="apple-mobile-web-app-status-bar-style" content="default">');
+  z.push('<meta property="og:type" content="website">');
+  z.push('<meta property="og:site_name" content="HeiBen">');
+  z.push('<meta property="og:locale" content="de_DE">');
+  z.push(`<meta property="og:url" content="${url}">`);
+  z.push(`<meta property="og:title" content="${esc(e.titel)}">`);
+  z.push(`<meta property="og:description" content="${esc(e.beschreibung)}">`);
+  z.push('<meta property="og:image" content="assets/hero-light.png">');
+  z.push('<meta name="twitter:card" content="summary_large_image">');
+  z.push(`<meta name="twitter:title" content="${esc(e.titel)}">`);
+  z.push(`<meta name="twitter:description" content="${esc(e.beschreibung)}">`);
+  z.push('<meta name="twitter:image" content="assets/hero-light.png">');
+  const ld = jsonld(datei, e);
+  if (ld) z.push(`<script type="application/ld+json">${ld}</script>`);
+  z.push('<!-- /hb:kopf -->');
+  return z.join('\n');
+}
+
+let geschrieben = 0, ergaenzt = 0, uebersprungen = 0;
+const berichte = [];
+
+for (const datei of Object.keys(SEITEN)) {
+  const e = SEITEN[datei];
+  if (e.typ === 'standalone') { uebersprungen++; continue; }
+  if (!fs.existsSync(datei)) { berichte.push(`  FEHLT: ${datei}`); continue; }
+  const alt = fs.readFileSync(datei, 'utf8');
+  const i = alt.indexOf('<head>');
+  const j = alt.indexOf('</head>');
+  if (i < 0 || j < 0) { berichte.push(`  OHNE <head>: ${datei}`); continue; }
+
+  let kopf = alt.slice(i + 6, j);
+  const rest = alt.slice(j);
+  for (const rx of ENTFERNEN) kopf = kopf.replace(rx, '');
+
+  /* Pflichtdateien nur ergaenzen, nie verschieben. */
+  const fehlend = [];
+  for (const p of PFLICHT) {
+    if (p.optionalWennNavAus && e.nav === false) continue;
+    if (!kopf.includes(p.datei) && !rest.includes(p.datei)) fehlend.push(p.tag);
+  }
+  if (fehlend.length) ergaenzt++;
+
+  const neu = alt.slice(0, i + 6) + '\n' + kopfblock(datei, e) + '\n'
+    + kopf.replace(/^\s*\n/, '').replace(/\s*$/, '\n')
+    + (fehlend.length ? fehlend.join('\n') + '\n' : '') + rest;
+
+  if (neu !== alt) {
+    geschrieben++;
+    if (!PRUEFEN) fs.writeFileSync(datei, neu);
+    if (fehlend.length) berichte.push(`  ${datei}: ergänzt ${fehlend.length} ×`
+      + ` (${fehlend.map((t) => (t.match(/(?:href|src)="([^"]+)"/) || [])[1]).join(', ')})`);
+  }
+}
+
+/* sitemap.xml und robots.txt folgen derselben Registry: was intern ist, wird nicht
+   indexiert; alles andere gehört in die Sitemap. */
+const PRIO = { start: '1.0', welt: '0.9', kompendium: '0.8', wissen: '0.8', werkzeug: '0.7',
+  weltseite: '0.7', konto: '0.5', holding: '0.5', legal: '0.3' };
+
+const oeffentlich = Object.keys(SEITEN).filter((d) => {
+  const t = SEITEN[d].typ;
+  return t !== 'intern' && t !== 'standalone' && d !== '404.html' && fs.existsSync(d);
+});
+const sitemap = ['<?xml version="1.0" encoding="UTF-8"?>',
+  '<!-- GENERIERT von tools/gen_kopf.js aus tools/seiten.json. Nicht von Hand pflegen. -->',
+  '<!-- Beim Live-Gang www.heiben.de durch die echte Domain ersetzen (tools/seiten.json → _basis). -->',
+  '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'];
+for (const d of oeffentlich) {
+  const url = BASIS + (d === 'index.html' ? '' : d);
+  sitemap.push(`  <url><loc>${url}</loc><changefreq>monthly</changefreq>`
+    + `<priority>${PRIO[SEITEN[d].typ] || '0.5'}</priority></url>`);
+}
+sitemap.push('</urlset>', '');
+
+const interne = Object.keys(SEITEN).filter((d) => SEITEN[d].typ === 'intern');
+const robots = ['User-agent: *', 'Allow: /', '',
+  '# GENERIERT von tools/gen_kopf.js — interne Bereiche (typ "intern" in tools/seiten.json).',
+  '# Dieselben Seiten tragen <meta name="robots" content="noindex, nofollow">.']
+  .concat(interne.map((d) => 'Disallow: /' + d))
+  .concat(['', '# Beim Live-Gang die echte Domain eintragen:',
+    'Sitemap: ' + BASIS + 'sitemap.xml', '']);
+
+if (!PRUEFEN) {
+  fs.writeFileSync('sitemap.xml', sitemap.join('\n'));
+  fs.writeFileSync('robots.txt', robots.join('\n'));
+}
+console.log(`  sitemap.xml: ${oeffentlich.length} URLs · robots.txt: ${interne.length} Disallow`);
+
+console.log(PRUEFEN ? 'PRÜFLAUF (nichts geschrieben)' : 'GESCHRIEBEN');
+console.log(`  Seiten mit neuem Kopf: ${geschrieben}`);
+console.log(`  davon Pflichtdateien ergänzt: ${ergaenzt}`);
+console.log(`  übersprungen (standalone): ${uebersprungen}`);
+if (berichte.length) console.log(berichte.join('\n'));
