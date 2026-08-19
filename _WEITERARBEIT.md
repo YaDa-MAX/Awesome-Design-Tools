@@ -1100,3 +1100,49 @@ NAECHSTER SCHRITT bei "Weiter": V3-W8 STARTSEITE + GESAMT-QS — startseite-neu.
 FREIGABE des Users; bei Freigabe Uebernahme als index.html (SEO/JSON-LD kommen jetzt aus
 gen_kopf.js, Alt-index als startseite-klassisch.html sichern, seiten.json pflegen), danach
 Abschluss-Sweep und Gesamt-Audit ueber die komplette Sitemap.
+
+## REMAKE V3 · WELLE 8 (TEIL 1): GESAMT-QS (SW -2998, keine Inhaltsaenderung)
+Die Startseiten-Uebernahme ist BEWUSST NICHT erfolgt: in diesem Handover steht die Auflage
+"FREIGABE DES USERS abwarten", und ein "Weiter" beantwortet nicht die Frage, ob index.html ersetzt
+werden soll. Erst QS, Freigabe getrennt eingeholt.
+AUDIT-INSTRUMENT ZUM VIERTEN MAL NACHGEZOGEN: Abschnitt 5 behauptete weiterhin "kein zentrales
+Register" — seit W6 falsch. Er misst jetzt die ABDECKUNG des Registers (88 Eintraege, 87 im Bestand
+gefunden, 0 unregistriert) und ob Export/Import/Zuruecksetzen vorhanden sind; ausserdem, ob
+mein-heiben ueber das Modul liest statt Schluessel einzeln zu nennen. Zusaetzlich Fehlmessung
+behoben: "heiben-stand-" wurde als 89. Schluessel gezaehlt, ist aber das Praefix des
+Export-Dateinamens (89 -> 87 echte Schluessel).
+AUDIT-STAND NACH SIEBEN WELLEN (cd web && python3 ../tools/audit_v3.py):
+1 GEWICHT     HTML 6.204 -> 3.100 KB (O 61 -> 30 KB/Seite), base64 19,3% -> 0%,
+              byte-identische Redundanz 1.874 -> 28 KB (30,2% -> 0,9%)
+2 KOPF        description/og/canonical/theme-color/manifest/design.css/legal.js/SW je 101/101,
+              nav 100/100 (ohne index), JSON-LD 90/90 (ohne intern), noindex 11/11 — alles OK
+3 AUFFINDBAR  0 kaputte Links · Waisen 22 -> 2 (404 + Standalone-Entwurf, beide gewollt) ·
+              Suchindex 348 -> 423 Eintraege auf 18 -> 89 Zielseiten
+4 OFFLINE     precached 62/101 -> 101/102 (ohne Standalone-Entwurf)
+5 SPEICHER    87 Schluessel, Register deckt sie vollstaendig, Export/Import/Reset vorhanden
+6 KANON       Weltfarben-Zaehlung als irrefuehrend entlarvt und in der Blaupause korrigiert
+7 GEWICHTUNG  unveraendert schief (operative Welten 40%) — Inhaltsentscheidung, siehe W7
+8 LADELAST    mein-heiben 909 -> 89 KB · index 450 -> 117 KB · wissen 356 -> 387 KB (Suche braucht
+              die Daten, gemessen und begruendet)
+9 DESIGN      Token-Ebene + Bewegungsgrammatik stehen; --hb-* 99 Rollen in 126 Deklarationen
+QS-PROTOKOLL (headless, 15 Pruefungen, alle bestanden):
+- DEEP-LINKS: #id oeffnet Steckbrief (lebensmittel.html#eier -> "Eier") · ?q=tomate -> 17 Treffer ·
+  ?welt=kulinarik -> 5 Weltchips · ?id=reisen -> Lebenswissen-Artikel geladen.
+  KORREKTUR AM TEST, NICHT AM CODE: der erste Lauf meldete #id als Fehler, weil ich auf ein Element
+  MIT dieser id geprueft hatte. Der Vertrag lautet aber "Steckbrief wird geoeffnet" — die Seite
+  ruft showDetail(hash) und rendert nach #detail. Test berichtigt, Vertrag intakt.
+- PERSISTENZ: Zuhause-Ordner haelt Haken ueber Reload · Speicher-Uebersicht rendert Weltkacheln.
+- REGISTER: 21 Werkzeuge in wissen · 11 interne Bereiche im Holding-Dashboard · Band auf interner Seite.
+- RESPONSIV 390 px: index, wissen, kulinarik, mein-heiben, designsystem, reisen — 0 px Querlauf.
+- OFFLINE (SW installiert, Netz aus): 13/13 Proben mit vollem Inhalt erreichbar.
+- BRUECKEN: 11 Seiten, 0 kaputte Ziele.
+- SWEEP: alle 102 Seiten, 0 PageErrors, 0 Console-Errors.
+OFFEN (bewusst, mit Begruendung):
+1. STARTSEITE: startseite-neu.html v2.2 wartet auf Freigabe. Bei Freigabe ist die Uebernahme
+   heute einfacher als im alten Plan notiert: SEO/JSON-LD/Legal/PWA kommen aus gen_kopf.js, es
+   genuegt Datei tauschen + tools/seiten.json pflegen + gen_kopf.js + gen_sw.js.
+2. WELT-BALANCE Reisen/Immobilien: Inhaltsentscheidung, Vorschlaege in W7 hinterlegt.
+3. inline-JS 1.884 KB (60,8% des HTML), davon 764 KB allein in wohnen-konfigurator.html —
+   die letzte grosse Entdopplungsreserve, aber seitenspezifischer Code, keine Kopie.
+4. assets/GLTFLoader.js (96 KB) von keiner Seite per src eingebunden.
+5. hb-suche-nav.js auf 21 von 25 einbindenden Seiten wirkungslos (kein <nav>).

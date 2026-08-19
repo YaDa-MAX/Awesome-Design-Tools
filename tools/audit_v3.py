@@ -210,15 +210,35 @@ def datenschicht(txt):
     for s in list(txt.values()) + [open(j, encoding="utf-8").read() for j in glob.glob("*.js")]:
         keys |= set(re.findall(r"['\"](heiben[-_][a-z0-9_-]{2,})['\"]", s))
     keys = {k for k in keys if not re.match(r"heiben-v[0-9]{8}", k)}
+    # Kein Schluessel, sondern das Praefix des Export-Dateinamens in heiben-speicher.js.
+    keys = {k for k in keys if not k.endswith("-")}
     strich = sorted(k for k in keys if k.startswith("heiben-"))
     unter = sorted(k for k in keys if k.startswith("heiben_"))
     print(f"Distinkte Schluessel gesamt: {len(keys)}")
     print(f"  Schema 'heiben-...' : {len(strich)}")
     print(f"  Schema 'heiben_..._v1': {len(unter)}")
-    print("  -> zwei konkurrierende Namensschemata, kein zentrales Register")
+    # Seit v3-W6 gibt es ein Register. Gemessen wird, ob es den Bestand abdeckt —
+    # nicht mehr, ob es existiert.
+    if os.path.exists("heiben-speicher.js"):
+        js = open("heiben-speicher.js", encoding="utf-8").read()
+        block = js[js.index("var REGISTER"):js.index("};", js.index("var REGISTER"))]
+        erfasst = set(re.findall(r'"(heiben[-_][a-z0-9_-]+)"', block))
+        fehlt = sorted(keys - erfasst)
+        print(f"  Register (heiben-speicher.js): {len(erfasst)} Schluessel, "
+              f"{len(keys & erfasst)} davon im Bestand gefunden")
+        print(f"  im Bestand, aber nicht im Register: {len(fehlt)}"
+              + (" -> " + ", ".join(fehlt[:6]) if fehlt else " (Praefixregeln fangen neue auf)"))
+        for merkmal, name in (("exportieren", "Export"), ("importieren", "Import"),
+                              ("zuruecksetzen", "Zuruecksetzen")):
+            print(f"  {name:<14}{'vorhanden' if merkmal in js else 'FEHLT'}")
+    else:
+        print("  -> kein zentrales Register")
     if os.path.exists("mein-heiben.html"):
-        d = set(re.findall(r"['\"](heiben[-_][a-z0-9_-]{2,})['\"]", txt["mein-heiben.html"]))
-        print(f"mein-heiben.html liest {len(d)} davon: {', '.join(sorted(d))}")
+        mh = txt["mein-heiben.html"]
+        ueber_modul = "HeiBenSpeicher" in mh
+        d = set(re.findall(r"['\"](heiben[-_][a-z0-9_-]{2,})['\"]", mh))
+        print(f"mein-heiben.html: {'nutzt das Register (alle Welten)' if ueber_modul else 'liest direkt'}"
+              f", {len(d)} Schluessel direkt genannt")
     return keys
 
 

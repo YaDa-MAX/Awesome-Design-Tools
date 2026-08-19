@@ -109,8 +109,12 @@ Statisches HTML/JS/CSS-**PWA ohne Build-Schritt**, offline-fähig, localStorage.
   Holding-Dashboard), Weltseiten-Übersicht für Reisen und Immobilien. **Offen und bewusst nicht
   erfunden**: die inhaltliche Augenhöhe von Reisen (5 Seiten/124 KB) und Immobilien (5/92 KB)
   gegenüber Kulinarik (12/439 KB) — das ist eine Inhaltsentscheidung des Users, keine Umbauarbeit.
-  Nächste Welle: **V3-W8 Startseite + Gesamt-QS** (Übernahme `startseite-neu.html` nach Freigabe,
-  Abschluss-Sweep über die komplette Sitemap).
+  V3-W8 Teil 1 fertig: **Gesamt-QS** — 15/15 Prüfungen bestanden (Deep-Links, Persistenz,
+  Register, Responsiv), Offline 13/13, 11 Brücken ohne kaputte Ziele, Sweep 102/102 ohne
+  PageErrors. Protokoll in `_WEITERARBEIT.md`.
+  **Offen: Übernahme von `startseite-neu.html` als `index.html` — wartet auf die Freigabe des
+  Users.** Bei Freigabe genügt: Datei tauschen, `tools/seiten.json` pflegen, `gen_kopf.js` und
+  `gen_sw.js` laufen lassen (SEO/JSON-LD/Legal/PWA kommen jetzt aus dem Generator).
 - `web/startseite-neu.html` = **Freigabe-Entwurf v2.2** (nicht verlinkt, nicht precached):
   Scrollytelling mit 5 CSS-3D-Objekten (Koffer/Haus/Tür/Glühbirne/Kochtopf), Lebenslinien-Regie
   (ein→pin→aus, globale Lerp-Glättung SY mit Teleport-Snap), Bewegungsprofile je Objekt (MOTION),
