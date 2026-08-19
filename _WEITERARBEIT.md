@@ -1048,3 +1048,55 @@ davon SEMANTISCH dasselbe meint.
 NAECHSTER SCHRITT bei "Weiter": V3-W7 WELT-BALANCE & BACKOFFICE-RAHMUNG — Reisen und Immobilien
 (je 5 Seiten) auf Augenhoehe bringen, die 11 internen Seiten sichtbar als interner Bereich rahmen
 (User-Entscheid aus der Blaupause), Cockpit-Abdeckung pruefen.
+
+## REMAKE V3 · WELLE 7: BACKOFFICE-RAHMUNG & WELT-STRUKTUR (SW -2998)
+BEFUND VORAB: von den 11 internen Seiten kennzeichneten sich VIER gar nicht als intern
+(anfragenverwaltung, bestellverwaltung, kulinarik-export, api nur beilaeufig), die uebrigen taten
+es jede anders ("Redaktion", "Backoffice") im Fliesstext. Kein gemeinsamer Rahmen, kein Einstieg.
+ACHTUNG MESSFALLE: mein erster Test meldete "10 von 11 kennzeichnen sich selbst" — er fand aber die
+META-BESCHREIBUNG aus W2 ("Interner Bereich: …"), nicht sichtbare Rahmung. Erst die Pruefung auf
+den BODY-Text ohne Kopfblock zeigte die echte Lage.
+RAHMUNG (generiert, nicht von Hand):
+- tools/gen_kopf.js erzeugt zusaetzlich web/heiben-bereiche.js mit ZWEI Listen aus derselben
+  Registry: die internen Seiten und die Seiten je Welt.
+- PFLICHT-Mechanismus um BEDINGTE Eintraege erweitert (nurWenn): heiben-bereiche.js und
+  hb-bereiche.js kommen NUR auf interne Seiten und auf Seiten mit passendem Behaelter — nicht auf
+  alle 102.
+- NEU web/hb-bereiche.js: haengt auf internen Seiten ein Band direkt unter die Navigation
+  ("Interner Bereich · Backoffice der HeiBen Holding — nicht Teil des oeffentlichen Auftritts"),
+  rendert die Uebersicht in <div data-hb-intern> und die Weltseiten in
+  <div data-hb-weltseiten="<welt>">. Bandstil in heiben-design.css, nur neue .hb-intern-*-Klassen.
+- holding-dashboard.html bekommt den Abschnitt "Interne Bereiche" mit allen 11 — sie liegen nicht
+  mehr lose in der Sitemap, sondern haben einen Einstieg.
+- Damit ist typ:"intern" in seiten.json der EINZIGE Schalter: Band, noindex, Fehlen in Sitemap und
+  Suche sowie Auftauchen in der Uebersicht folgen automatisch.
+WELT-STRUKTUR: reisen.html und immobilien.html zeigen jetzt ihren eigenen Weltbestand
+(data-hb-weltseiten) — 4 bzw. 4 weitere Seiten.
+WELT-BALANCE — WAS ICH BEWUSST NICHT GETAN HABE: Der Auftrag lautete "Reisen/Immobilien auf
+Augenhoehe". Gemessen fehlt dort SUBSTANZ, nicht Struktur: Kulinarik 12 Seiten/439 KB, Wohnen
+10/1.014 KB, Studio 9/196 KB gegen Reisen 5/124 KB und Immobilien 5/92 KB. Bruecken sind
+vollstaendig und beidseitig (v2 §2.2 erfuellt), Werkzeuge sitzen richtig, das Cockpit deckt alle
+fuenf Welten ab. Was fehlt, sind INHALTE — und neue Seiten fuer eine Fiktion zu erfinden ist eine
+inhaltliche Entscheidung des Auftraggebers, keine Umbauarbeit. Ich habe die Struktur geliefert und
+die Luecke benannt statt sie mit erfundenen Seiten zu kaschieren. Blaupause §1.7a nachgetragen.
+VORSCHLAEGE FUER DEN USER (falls Inhalte gewuenscht):
+- REISEN: reisen-ziele.html (Ziel-Steckbriefe im Kompendien-Muster, speist die Suche),
+  reisen-packliste.html (Werkzeug, Muster wie zuhause-ordner), reisen-rueckblick.html (Kundenreisen
+  als Schaufenster-Eintraege).
+- IMMOBILIEN: immobilien-nebenkosten.html (Werkzeug: Kaufnebenkosten je Bundesland),
+  immobilien-objekt.html (Objekt-Detailseite analog schaufenster-detail),
+  immobilien-vermieten.html (Leitfaden, Bruecke zu papierkram).
+Jede neue Seite braucht nur einen Eintrag in tools/seiten.json — Kopf, Sitemap, Suche, Precache und
+ggf. Werkzeug-Register folgen automatisch.
+VERIFIKATION:
+- Band sichtbar auf 11/11 internen Seiten, jeweils direkt unter der Navigation, 0 PageErrors.
+- KEIN Band auf oeffentlichen Seiten (reisen, wissen, index, holding-dashboard geprueft).
+- holding-dashboard zeigt 11 interne Bereiche; reisen.html 4 Weltseiten + 1 Werkzeug;
+  wissen.html unveraendert 21 Werkzeuge.
+- heiben-design.css wurde erweitert -> Gegenprobe auf 8 unveraenderten Seiten (auto, kulinarik,
+  wohnen, studio, mein-heiben, agb, konto, lernpfade): 8/8 Fingerabdruck IDENTISCH.
+- Sweep ueber alle 102 Seiten: 0 PageErrors, 0 Console-Errors.
+NAECHSTER SCHRITT bei "Weiter": V3-W8 STARTSEITE + GESAMT-QS — startseite-neu.html v2.2 braucht die
+FREIGABE des Users; bei Freigabe Uebernahme als index.html (SEO/JSON-LD kommen jetzt aus
+gen_kopf.js, Alt-index als startseite-klassisch.html sichern, seiten.json pflegen), danach
+Abschluss-Sweep und Gesamt-Audit ueber die komplette Sitemap.

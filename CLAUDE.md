@@ -15,7 +15,7 @@ Statisches HTML/JS/CSS-**PWA ohne Build-Schritt**, offline-fähig, localStorage.
 
 ## Pflicht-Workflow nach JEDER Änderung unter web/
 1. **Precache + Service-Worker-Version**: `cd web && node ../tools/gen_sw.js` — erzeugt die
-   `PRECACHE`-Liste aus dem Dateibestand UND zählt die Cache-Version hoch (aktuell **-2997**).
+   `PRECACHE`-Liste aus dem Dateibestand UND zählt die Cache-Version hoch (aktuell **-2998**).
    Nie von Hand pflegen. Standalone-Seiten (`typ` in `tools/seiten.json`) bleiben automatisch
    draußen; `vendor/` und Dateien > 150 KB kommen zur Laufzeit in den Cache (der fetch-Handler
    macht stale-while-revalidate). Wer nur die Version braucht, bumpt trotzdem über den Generator.
@@ -64,6 +64,11 @@ Statisches HTML/JS/CSS-**PWA ohne Build-Schritt**, offline-fähig, localStorage.
 - Deep-Links: `#id` (Kompendien-Steckbriefe), `?id=`, `?q=` (wissen.html), `?welt=` (welt-cockpit).
 - Attribut-Namensraum: `data-welt` gehört `heiben-nav.js` (Weltlinks) — für eigene Schalter NIE
   wiederverwenden, sonst fängt die Navigation den Klick ab (in W3 passiert).
+- **Interner Bereich (seit v3-W7)**: `typ:"intern"` in `tools/seiten.json` genügt — `gen_kopf.js`
+  hängt `heiben-bereiche.js` + `hb-bereiche.js` an, das Band („Interner Bereich") erscheint
+  automatisch unter der Navigation, die Seite steht auf `noindex`, fehlt in Sitemap und Suche und
+  taucht in der Übersicht auf `holding-dashboard.html` auf. Behälter: `data-hb-intern`,
+  `data-hb-weltseiten="<welt>"`.
 - **Werkzeug-Register (seit v3-W5)**: `web/heiben-werkzeuge.js` wird aus `tools/seiten.json`
   erzeugt (`typ:"werkzeug"` + `gruppe`); `hb-werkzeuge.js` rendert es in jeden Behälter
   `<div data-hb-werkzeuge="alle|<welt>|<gruppe>">`. Neues Werkzeug = Eintrag in `seiten.json`,
@@ -100,8 +105,12 @@ Statisches HTML/JS/CSS-**PWA ohne Build-Schritt**, offline-fähig, localStorage.
   V3-W6 fertig: `heiben-speicher.js` (88 Schlüssel im Register, Export/Import/Reset), Speicher-
   Abschnitt in `mein-heiben`; Farbkanon geprüft — nur 15 der vermeintlich ~1.050 Vorkommen waren
   echt ersetzbar, umgestellt.
-  Nächste Welle: **V3-W7 Welt-Balance & Backoffice-Rahmung** (Reisen/Immobilien auf Augenhöhe,
-  die 11 internen Seiten sichtbar als interner Bereich rahmen).
+  V3-W7 fertig: Backoffice-Rahmung (11/11 Seiten mit einheitlichem Band + Übersicht im
+  Holding-Dashboard), Weltseiten-Übersicht für Reisen und Immobilien. **Offen und bewusst nicht
+  erfunden**: die inhaltliche Augenhöhe von Reisen (5 Seiten/124 KB) und Immobilien (5/92 KB)
+  gegenüber Kulinarik (12/439 KB) — das ist eine Inhaltsentscheidung des Users, keine Umbauarbeit.
+  Nächste Welle: **V3-W8 Startseite + Gesamt-QS** (Übernahme `startseite-neu.html` nach Freigabe,
+  Abschluss-Sweep über die komplette Sitemap).
 - `web/startseite-neu.html` = **Freigabe-Entwurf v2.2** (nicht verlinkt, nicht precached):
   Scrollytelling mit 5 CSS-3D-Objekten (Koffer/Haus/Tür/Glühbirne/Kochtopf), Lebenslinien-Regie
   (ein→pin→aus, globale Lerp-Glättung SY mit Teleport-Snap), Bewegungsprofile je Objekt (MOTION),

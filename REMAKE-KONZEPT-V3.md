@@ -1,5 +1,5 @@
 # HeiBen Remake — Blaupause v3 · Substanz-Fassung
-Stand: SW `heiben-v20260622-2997` · 102 Seiten · Messgrundlage `tools/audit_v3.py`
+Stand: SW `heiben-v20260622-2998` · 102 Seiten · Messgrundlage `tools/audit_v3.py`
 Auftrag: „Neue Remake-Runde über alles bestehende."
 Verhältnis zu v2: **v3 ist der neue Arbeitsplan**, `REMAKE-KONZEPT.md` (v2) bleibt als Historie
 liegen — die dort getroffenen Struktur- und Geschäftsmodell-Entscheide gelten unverändert weiter.
@@ -128,6 +128,24 @@ Reisen und Immobilien — zwei von fünf Geschäftsfeldern — haben je fünf Se
 **11 Backoffice-Seiten** (Redaktionen, Verwaltungen, `api`, `heiben-automation`,
 `heiben-wachstum`), deren Publikum in der Fiktion ungeklärt ist.
 
+### 1.7a Was „Augenhöhe" wirklich verlangt (Nachtrag aus v3-W7)
+
+Gemessen fehlt Reisen und Immobilien **Substanz, nicht Struktur**:
+
+| Welt | Seiten | HTML | Werkzeuge | Brücken |
+|---|---|---|---|---|
+| Kulinarik | 12 | 439 KB | 0 | 1 |
+| Wohnen | 10 | 1.014 KB | 0 | 1 |
+| Studio | 9 | 196 KB | 0 | 0 |
+| **Reisen** | **5** | **124 KB** | 1 | 1 |
+| **Immobilien** | **5** | **92 KB** | 1 | 1 |
+
+Die Brücken sind vollständig und beidseitig (v2 § 2.2 erfüllt), die Werkzeuge sitzen richtig, das
+Cockpit deckt alle fünf Welten ab. Beide Welten haben in W7 zusätzlich eine Übersicht ihrer eigenen
+Seiten bekommen. Was bleibt, ist **fehlender Inhalt** — und den kann eine Umbauwelle nicht
+herbeirefactoren. Neue Seiten für eine Fiktion zu erfinden ist eine inhaltliche Entscheidung; sie
+gehört dem Auftraggeber, nicht dem Umbau. Vorschläge stehen im Handover.
+
 ### 1.8 Ladelast der Einstiegsseiten
 
 | Seite | statische Nutzlast |
@@ -252,7 +270,7 @@ Vorführung und Regelwerk: **`web/designsystem.html`**.
 | **V3-W4** | **E7: Offline & Ladelast.** | **fertig** — `tools/gen_sw.js`, 101/101 precached, `mein-heiben` 909 → 75 KB, Offline-Test 13/13, three.js entdoppelt |
 | **V3-W5** | **E6: Auffindbarkeit.** | **fertig** — Register aus der Registry, Suche in der Navigation, Suchindex 18 → 89 Zielseiten, Waisen 22 → 2 (dokumentiert) |
 | **V3-W6** | **E4 + E5: Speicher-Vertrag & Farbkanon.** | **fertig** — `heiben-speicher.js` (88 Schlüssel, Export/Import/Reset), Speicher-Abschnitt in `mein-heiben`; Farbkanon **nachgemessen: 15 statt ~1.050** echt ersetzbar (§ 1.6 korrigiert) |
-| **V3-W7** | **Welt-Balance & Backoffice-Rahmung.** Reisen und Immobilien auf Augenhöhe; die 11 internen Seiten sichtbar als interner Bereich rahmen (Entscheid des Users). | Audit § 7 · Brücken-Check |
+| **V3-W7** | **Backoffice-Rahmung & Welt-Struktur.** | **teilweise fertig** — Rahmung 11/11 mit einheitlichem Band und Übersicht; Weltseiten-Übersicht für Reisen/Immobilien. Die **inhaltliche** Augenhöhe bleibt offen: sie verlangt neue Seiten, also eine Entscheidung des Users (§ 1.7a) |
 | **V3-W8** | **Startseite + Gesamt-QS.** Übernahme `startseite-neu.html` → `index.html`; Abschluss-Sweep. | volles Audit · 0 PE überall · Abschlussprotokoll |
 
 Pro Welle gilt der Pflicht-Workflow aus CLAUDE.md: SW-Version bumpen, `_WEITERARBEIT.md`

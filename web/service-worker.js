@@ -1,5 +1,5 @@
 /* HeiBen Service-Worker — Offline-Fähigkeit & App-Shell (v20260615-1323) */
-const CACHE='heiben-v20260622-2997';
+const CACHE='heiben-v20260622-2998';
 const PRECACHE=[
   /* GENERIERT von tools/gen_sw.js — nicht von Hand pflegen.
      Kaltstart-Huelle; Grosses und vendor/ kommt zur Laufzeit in den Cache. */
@@ -122,6 +122,7 @@ const PRECACHE=[
   "haushalt-daten.js",
   "hb-anfrage-app.js",
   "hb-anfrage-core.js",
+  "hb-bereiche.js",
   "hb-bestand-redaktion.css",
   "hb-bestand-statisch.css",
   "hb-kulinarik-core.js",
@@ -137,6 +138,7 @@ const PRECACHE=[
   "heiben-ab.js",
   "heiben-analytics.js",
   "heiben-angebot.js",
+  "heiben-bereiche.js",
   "heiben-design.css",
   "heiben-erfolge.js",
   "heiben-firmierungen.js",

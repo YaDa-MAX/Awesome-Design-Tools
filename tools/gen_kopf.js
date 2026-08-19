@@ -36,6 +36,12 @@ const PFLICHT = [
   { datei: 'heiben-nav.js', tag: '<script src="heiben-nav.js" defer></script>', optionalWennNavAus: true },
   { datei: 'heiben-legal.js', tag: '<script src="heiben-legal.js" defer></script>' },
   { datei: 'hb-pwa.js', tag: '<script id="hb-pwa" src="hb-pwa.js" defer></script>' },
+  /* Nur dort, wo es etwas zu tun gibt: auf internen Seiten (Kennzeichnung) und auf
+     Seiten mit einem Behaelter (Uebersichten). Nicht auf allen 102 Seiten. */
+  { datei: 'heiben-bereiche.js', tag: '<script src="heiben-bereiche.js" defer></script>',
+    nurWenn: (e, text) => e.typ === 'intern' || /data-hb-(intern|weltseiten)/.test(text) },
+  { datei: 'hb-bereiche.js', tag: '<script src="hb-bereiche.js" defer></script>',
+    nurWenn: (e, text) => e.typ === 'intern' || /data-hb-(intern|weltseiten)/.test(text) },
 ];
 
 /* Tags, die der Generator besitzt und darum vorher entfernt. */
@@ -141,6 +147,7 @@ for (const datei of Object.keys(SEITEN)) {
   const fehlend = [];
   for (const p of PFLICHT) {
     if (p.optionalWennNavAus && e.nav === false) continue;
+    if (p.nurWenn && !p.nurWenn(e, alt)) continue;
     if (!kopf.includes(p.datei) && !rest.includes(p.datei)) fehlend.push(p.tag);
   }
   if (fehlend.length) ergaenzt++;
@@ -176,6 +183,35 @@ const werkzeugJs = '/* HeiBen Werkzeug-Register — GENERIERT von tools/gen_kopf
 if (!PRUEFEN) fs.writeFileSync('heiben-werkzeuge.js', werkzeugJs);
 console.log(`  heiben-werkzeuge.js: ${werkzeuge.length} Werkzeuge in `
   + `${new Set(werkzeuge.map((w) => w.g)).size} Gruppen`);
+
+/* heiben-bereiche.js — zwei Listen aus derselben Registry (Remake v3, Welle 7):
+   die internen Bereiche (damit sie sich einheitlich als solche zu erkennen geben)
+   und die Seiten je Welt (damit duenn besetzte Welten ihren eigenen Bestand zeigen). */
+const ORDNUNG = ['welt', 'weltseite', 'werkzeug', 'kompendium', 'wissen', 'konto', 'holding'];
+function eintrag(d) {
+  return { u: d, t: entschluesseln(SEITEN[d].titel).replace(/\s*[·—-]\s*HeiBen$/, '')
+    .replace(/^HeiBen\s+/, ''), b: entschluesseln(SEITEN[d].beschreibung), w: SEITEN[d].welt };
+}
+const intern = Object.keys(SEITEN)
+  .filter((d) => SEITEN[d].typ === 'intern' && fs.existsSync(d))
+  .map(eintrag).sort((a, b) => a.t.localeCompare(b.t, 'de'));
+const weltseiten = {};
+for (const d of Object.keys(SEITEN)) {
+  const e = SEITEN[d];
+  if (!ORDNUNG.includes(e.typ) || e.typ === 'intern' || !fs.existsSync(d)) continue;
+  if (!['reisen', 'wohnen', 'immobilien', 'studio', 'kulinarik'].includes(e.welt)) continue;
+  (weltseiten[e.welt] = weltseiten[e.welt] || []).push(
+    Object.assign(eintrag(d), { start: e.typ === 'welt' }));
+}
+Object.keys(weltseiten).forEach((w) => weltseiten[w].sort(
+  (a, b) => (b.start - a.start) || a.t.localeCompare(b.t, 'de')));
+const bereicheJs = '/* HeiBen Bereiche — GENERIERT von tools/gen_kopf.js aus tools/seiten.json.\n'
+  + '   Nicht von Hand pflegen. */\n'
+  + 'window.HEIBEN_INTERN=' + JSON.stringify(intern) + ';\n'
+  + 'window.HEIBEN_WELTSEITEN=' + JSON.stringify(weltseiten) + ';\n';
+if (!PRUEFEN) fs.writeFileSync('heiben-bereiche.js', bereicheJs);
+console.log(`  heiben-bereiche.js: ${intern.length} interne Seiten · `
+  + Object.keys(weltseiten).map((w) => w + ' ' + weltseiten[w].length).join(' · '));
 
 /* sitemap.xml und robots.txt folgen derselben Registry: was intern ist, wird nicht
    indexiert; alles andere gehört in die Sitemap. */

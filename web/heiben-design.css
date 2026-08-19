@@ -385,3 +385,18 @@
 /* ---------- Sichtbarer Fokus, überall gleich ---------- */
 .hb-satz :focus-visible,.hb-flaeche :focus-visible,.hb-kachel:focus-visible,.hb-taste:focus-visible{
   outline:2px solid var(--hb-welt);outline-offset:3px;border-radius:var(--hb-rund-s)}
+
+/* ---------- Interner Bereich (v3-W7) ----------
+   Ein Band, das auf jeder internen Seite gleich aussieht. Kein Element-Selektor,
+   keine Farbe beim Wert genannt. */
+.hb-intern-band{display:flex;flex-wrap:wrap;align-items:baseline;gap:var(--hb-raum-2) var(--hb-raum-4);
+  background:var(--hb-tief);color:var(--hb-text-invers);
+  padding:var(--hb-raum-3) var(--hb-raum-5);
+  font-family:var(--hb-sans);font-size:var(--hb-s-klein);line-height:1.5}
+.hb-intern-band b{font-family:var(--hb-mono);font-size:var(--hb-s-mikro);
+  letter-spacing:var(--hb-sperr-mikro);text-transform:uppercase;color:var(--hb-w-reisen)}
+.hb-intern-band span:not(.hb-intern-punkt){color:#cdc3b2;flex:1 1 22ch;min-width:0}
+.hb-intern-band a{color:var(--hb-text-invers);text-decoration:underline;
+  text-underline-offset:3px;white-space:nowrap}
+.hb-intern-punkt{width:7px;height:7px;border-radius:var(--hb-rund-voll);
+  background:var(--hb-w-reisen);flex:0 0 auto;align-self:center}
