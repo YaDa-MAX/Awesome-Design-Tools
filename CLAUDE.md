@@ -15,7 +15,7 @@ Statisches HTML/JS/CSS-**PWA ohne Build-Schritt**, offline-fähig, localStorage.
 
 ## Pflicht-Workflow nach JEDER Änderung unter web/
 1. **Precache + Service-Worker-Version**: `cd web && node ../tools/gen_sw.js` — erzeugt die
-   `PRECACHE`-Liste aus dem Dateibestand UND zählt die Cache-Version hoch (aktuell **-2998**).
+   `PRECACHE`-Liste aus dem Dateibestand UND zählt die Cache-Version hoch (aktuell **-2999**).
    Nie von Hand pflegen. Standalone-Seiten (`typ` in `tools/seiten.json`) bleiben automatisch
    draußen; `vendor/` und Dateien > 150 KB kommen zur Laufzeit in den Cache (der fetch-Handler
    macht stale-while-revalidate). Wer nur die Version braucht, bumpt trotzdem über den Generator.
@@ -115,7 +115,14 @@ Statisches HTML/JS/CSS-**PWA ohne Build-Schritt**, offline-fähig, localStorage.
   **Offen: Übernahme von `startseite-neu.html` als `index.html` — wartet auf die Freigabe des
   Users.** Bei Freigabe genügt: Datei tauschen, `tools/seiten.json` pflegen, `gen_kopf.js` und
   `gen_sw.js` laufen lassen (SEO/JSON-LD/Legal/PWA kommen jetzt aus dem Generator).
-- `web/startseite-neu.html` = **Freigabe-Entwurf v2.2** (nicht verlinkt, nicht precached):
+- `web/startseite-v3.html` = **aktueller Startseiten-Entwurf „Ein Strich, fünf Welten"**
+  (standalone, nicht verlinkt, nicht precached, noindex): Grund auf Marken-Tinte, eine nie
+  abreißende Linie morpht Weg → Dach → Türbogen → Glühbirne → Topf, fünf Verben in Fraunces
+  (opsz/SOFT/WONK), Maskenaufzug statt Blur-Translate, ein rAF-Takt. Details und die
+  IntersectionObserver-Falle (eigenes `clip-path` senkt die Sichtbarkeitsquote auf 0 →
+  **Block beobachten, Kinder aufziehen**) in `_WEITERARBEIT.md`.
+- `web/startseite-neu.html` = **Vorgänger-Entwurf v2.2, jetzt nur noch Inspiration**
+  (nicht verlinkt, nicht precached):
   Scrollytelling mit 5 CSS-3D-Objekten (Koffer/Haus/Tür/Glühbirne/Kochtopf), Lebenslinien-Regie
   (ein→pin→aus, globale Lerp-Glättung SY mit Teleport-Snap), Bewegungsprofile je Objekt (MOTION),
   bewiesene Dach-Geometrie. **Bei Freigabe**: als neue `index.html` übernehmen — SEO/JSON-LD,

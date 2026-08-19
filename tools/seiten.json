@@ -455,6 +455,12 @@
    "titel": "HeiBen — Heimat leben. Eine Familie aus fünf Welten.",
    "beschreibung": "Entwurf der neuen HeiBen-Startseite: fünf Welten, fünf Zeichen — Koffer, Haus, Tür, Glühbirne, Kochtopf. Scrollend erzählt."
   },
+  "startseite-v3.html": {
+   "welt": "",
+   "typ": "standalone",
+   "titel": "HeiBen — Heimat leben. Eine Familie aus fünf Welten.",
+   "beschreibung": "Neuentwurf der HeiBen-Startseite: ein Strich, der zum Weg, zum Dach, zur Tür, zum Glühfaden und zum Topf wird — fünf Welten einer Kölner Unternehmensfamilie."
+  },
   "steuererklaerung.html": {
    "welt": "wissen",
    "typ": "werkzeug",

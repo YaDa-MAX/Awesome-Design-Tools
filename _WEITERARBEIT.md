@@ -1146,3 +1146,65 @@ OFFEN (bewusst, mit Begruendung):
    die letzte grosse Entdopplungsreserve, aber seitenspezifischer Code, keine Kopie.
 4. assets/GLTFLoader.js (96 KB) von keiner Seite per src eingebunden.
 5. hb-suche-nav.js auf 21 von 25 einbindenden Seiten wirkungslos (kein <nav>).
+
+---
+
+## STARTSEITE V3 — „EIN STRICH, FUENF WELTEN" (SW -2999)
+
+AUFTRAG: „Die gesamte Startseite ist ja unveraendert. Alle Designs und alle Animationen
+vollkommen ueberdenken. Das ist alles bereits mitgebracht worden als inspo."
+Also: startseite-neu.html ist ab jetzt Inspiration, nicht Grundlage. Neue Datei
+`web/startseite-v3.html` (typ: standalone, nicht verlinkt, nicht precached, noindex).
+Die alte Fassung bleibt unangetastet daneben liegen.
+
+WAS BLEIBT (Marken-DNA, bindend):
+- Weltfarben kanonisch: Reisen #a97a1d · Wohnen #4a5c39 · Immobilien #792d29 · Studio #1f1c17
+  · Kulinarik #6b3951. Auf dunklem Grund tritt jede Welt in einer abgeleiteten LICHTFASSUNG auf
+  (--l-*), die Grundfarbe bleibt der Kanon. Studio ist die Tinte selbst — als Licht erscheint sie
+  als Sand #d8cdb7, wie im Bestand.
+- Schriften: Fraunces / Manrope / JetBrains Mono. Keine vierte Schrift.
+- Fiktions-Fakten, Texte und Kennzahlen aus dem Bestand uebernommen (heiben-kennzahlen.js).
+
+WAS NEU IST:
+1. GRUND. Die Seite steht nicht mehr auf warmem Leinen, sondern auf der Marken-Tinte #1f1c17.
+   Der Grund TOENT sich beim Scrollen in die jeweilige Welt (13 % Weltfarbe in Tinte, gelerpt).
+2. LEITMOTIV. Statt fuenf getrennter CSS-3D-Objekte traegt EINE nie abreissende Linie die Seite:
+   Weg (Reisen) -> Dach (Wohnen) -> Tuerbogen (Immobilien) -> Gluehbirne (Studio) -> Topf
+   (Kulinarik). Umgesetzt als offene Polygonzuege in einem 100x100-Feld, per Bogenlaenge auf
+   je 168 Punkte umgetastet und punktweise gelerpt — dadurch morpht jede Form sauber in die
+   naechste. Haltekurve: die Form steht still, solange der Text gelesen wird, und wechselt in
+   den letzten 34 % des Kapitels.
+3. TYPOGRAFIE. Fuenf Verben in Grossformat — aufbrechen · bleiben · ankommen · verstehen ·
+   teilen — aus dem eigenen Bestandstext abgeleitet ("Wege, die sich wie Ankommen anfuehlen",
+   "Raeume, die bleiben duerfen"). Fraunces variabel mit den Achsen opsz/SOFT/WONK.
+4. BEWEGUNGSGRAMMATIK. Neu und schmal: Maskenaufzug (clip-path) statt Blur-Translate,
+   Ouvertuere (gestaffelter Einzug + einmaliges Selbstzeichnen der Linie ueber pathLength),
+   Strich-Morph, Grundtoenung, Zaehler, ruhige Zeigerparallaxe. Alles Sichtbare haengt an
+   EINEM rAF-Takt mit Sperre; Farb- und Formberechnung nur bei Aenderung > 0,0015.
+5. LEITWERK. Fester Index am linken Rand (vertikale Beschriftung, Weltpunkt, Fortschrittsfaden),
+   mobil ersetzt durch ein 2-px-Fortschrittsband unter der Kopfleiste.
+
+GELERNTE FALLE (wichtig fuer kuenftige Bewegungsarbeit):
+Chromium rechnet das EIGENE clip-path eines Elements in die IntersectionObserver-Quote ein.
+Ein Maskenaufzug, der bei inset(0 0 102% 0) startet, meldet damit ewig 0 % und wird nie
+ausgeloest — im ersten Lauf blieben 42 von 42 Bauteilen unsichtbar. Loesung und Regel:
+BEOBACHTET WIRD DER BLOCK, AUFGEZOGEN WERDEN SEINE KINDER. Regie sagt WANN, Vokabel sagt WAS.
+Bei Bewegungsruhe wird gar nicht erst am Scrollen aufgehaengt (alle Bloecke sofort sichtbar).
+
+PRUEFUNG (headless Chromium, tools-Skript im Scratchpad, 25 Pruefungen, alle bestanden):
+- Schriften: Fraunces/Manrope/JetBrains Mono geladen (Achsen-URL greift).
+- Strich: gezeichnet, 5 unterscheidbare Formen ueber den Scrollweg, Weltfarbe und Grundtoenung
+  wandern in je 5 Werten, Leitwerk markiert die richtige Welt, Faden fuellt auf 92 %.
+- Aufzuege: 0 offen nach Durchlauf; Zaehler 5/8/370/16/544 aus heiben-kennzahlen.js.
+- 390 px: scrollWidth 390, kein Element ragt heraus, Fortschrittsband arbeitet.
+- Bewegungsruhe: Dauern 0 ms, kein Zeichnen-Effekt, keine Parallaxe, Inhalt vollstaendig sichtbar.
+- 0 PageErrors, 0 Console-Errors in allen drei Kontexten.
+GEOMETRIE ZUSAETZLICH MIT DEM AUGE GEPRUEFT: die fuenf Endformen wurden gerendert und
+nachgebessert — der Topf woelbte sich zuerst nach OBEN (Bogen im falschen Winkelbereich) und
+war danach kantig (zu wenige Stuetzpunkte); jetzt Ellipsenboden mit 30 Punkten.
+
+OFFEN: Freigabe. Bei „uebernehmen" gilt derselbe kurze Weg wie fuer v2.2 — index.html als
+startseite-klassisch.html sichern, startseite-v3.html als index.html, seiten.json auf
+typ:"start"/welt:"holding"/"nav":false umstellen, gen_kopf.js + gen_sw.js laufen lassen.
+Der Kopfblock fehlt der Entwurfsdatei bewusst (standalone wird uebersprungen) und wird beim
+Wechsel vom Generator gesetzt.
