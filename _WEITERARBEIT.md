@@ -1534,3 +1534,60 @@ Sitemap 89 -> 86) · Querlauf 7 -> 0 Seiten · hb-menue.css 34 -> 1 Seite · hb-
 25 -> 1 Seite · GLTFLoader aus dem Inline-Code in die vorhandene Datei.
 OFFEN UND NUR VOM USER ZU ENTSCHEIDEN: Uebernahme von startseite-v3.html als index.html ·
 Welt-Balance Reisen/Immobilien · die drei nie benutzten Bilddateien.
+
+---
+
+## REMAKE V3 · WELLE 10: DIE STARTSEITE IST UEBERNOMMEN (SW -3008)
+
+FREIGABE: „Genehmigt." — damit endet das Warten aus W8. startseite-v3.html ist ab jetzt
+index.html. Die bisherige Startseite liegt als startseite-klassisch.html daneben.
+
+DER TAUSCH
+- `git mv index.html startseite-klassisch.html` · `git mv startseite-v3.html index.html`.
+- Aus der Datei geflogen: Entwurfs-Plakette (Markup + CSS), `<meta robots noindex>`,
+  die handgeschriebene Beschreibung. Kopf-Metadaten gehoeren ab jetzt gen_kopf.js.
+- Das Weltmenue der Startseite steht jetzt auf z-index 10000: heiben-legal.js setzt die
+  Consent-Leiste auf 9999, sonst laege sie quer im Menue. (Dieselbe Falle wie in W9.)
+- Registry: index.html behaelt typ:"start", welt:"holding", "nav": false — sie bringt
+  Leitwerk, Kopfleiste und Menue selbst mit. Beschreibung an den neuen Text angepasst
+  („Fuenf Unternehmen, ein Zuhause…"), der alte Satz beschrieb eine Seite, die es nicht
+  mehr gibt. startseite-klassisch.html als typ:"standalone" eingetragen.
+
+ZWEI NEUE FELDER IN DER REGISTRY, WEIL DIE STARTSEITE DUNKEL IST
+gen_kopf.js schrieb theme-color fest auf #f3eee5 und og:image fest auf hero-light.png.
+Auf einer Seite in Marken-Tinte ergibt beides eine helle Browserleiste und ein helles
+Vorschaubild. Jetzt darf jeder Eintrag `farbe` und `bild` setzen, Vorgabe bleibt hell.
+Die Startseite nimmt `#1f1c17` und `assets/hero-dark.png`.
+NEBENEFFEKT: hero-dark.png war eine der drei nie referenzierten Bilddateien aus W9 Teil 4 —
+es ist die HeiBen-Wortmarke FUER DUNKLEN GRUND und damit genau das richtige Vorschaubild.
+Aus Totlast wurde ein Bauteil. Zwei Dateien (monogram-dark/-light) bleiben unbenutzt liegen.
+
+WAS SICH AN DER SEITE SELBST GEAENDERT HAT — GEMESSEN
+Alte startseite-v3.html (git-worktree, Port 8181) gegen die neue index.html (8180),
+Bewegungsruhe, Fonts abgeklemmt, Fingerabdruck jedes sichtbaren Elements:
+@1280 172 -> 175 Elemente, 1 abweichend · @390 161 -> 164 Elemente, 1 abweichend.
+Die eine Abweichung ist die verschwundene Entwurfs-Plakette, die drei zusaetzlichen
+Elemente sind die Consent-Leiste aus heiben-legal.js. Nichts sonst hat sich bewegt.
+
+PRUEFUNG
+- 49/49 Startseiten-Pruefungen (Schriften, Globus, Uebergabe, Strich-Morph in 5 Formen,
+  Detailzeichnung, Weltfarbe und Grundtoenung, Leitwerk, Zaehler aus heiben-kennzahlen.js,
+  Menue mit Sperre und Sprung, Kopftext, 390 px ohne Querlauf, Bewegungsruhe vollstaendig)
+  — dazu neu: JSON-LD/Manifest/Canonical vorhanden, Browserleiste #1f1c17, Vorschaubild
+  hero-dark, kein noindex mehr, Pflichtdateien eingebunden, keine fremde Navigation.
+- OFFLINE 13/13 Seiten mit Inhalt, index.html eingeschlossen (SW aktiv, Netz gekappt).
+- Rundlauf 103 Seiten bei 390 px und bei 1280 px: je 0 PageErrors, 0 Querlauf.
+- 31/31 Navigationspruefungen unveraendert.
+- Precache 164 -> 160 Eintraege, 4447 -> 4339 KB. Was herausfiel, war ausschliesslich
+  Zubehoer der alten Startseite: hero-light.png, wordmark-kulinarik.png, hb-menue.css,
+  hb-suche-nav.js — die haengen jetzt an startseite-klassisch.html, und die ist standalone.
+
+STAND
+- Waisen: 3 und alle gewollt — 404.html, startseite-neu.html (Inspiration),
+  startseite-klassisch.html (Archiv).
+- Sitemap 86 URLs, robots 14 Disallow, 14 interne Seiten.
+OFFEN UND NUR VOM USER ZU ENTSCHEIDEN:
+1. Welt-Balance Reisen (5 Seiten) und Immobilien (5) gegenueber Kulinarik (10) und Wohnen (7).
+   Vorschlaege liegen seit W7 bereit.
+2. assets/monogram-dark.png und assets/monogram-light.png — nie referenziertes Markenmaterial.
+   hero-dark.png ist mit dieser Welle in Betrieb gegangen.

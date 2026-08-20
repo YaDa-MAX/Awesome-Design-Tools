@@ -15,14 +15,17 @@ Statisches HTML/JS/CSS-**PWA ohne Build-Schritt**, offline-fähig, localStorage.
 
 ## Pflicht-Workflow nach JEDER Änderung unter web/
 1. **Precache + Service-Worker-Version**: `cd web && node ../tools/gen_sw.js` — erzeugt die
-   `PRECACHE`-Liste aus dem Dateibestand UND zählt die Cache-Version hoch (aktuell **-3007**).
+   `PRECACHE`-Liste aus dem Dateibestand UND zählt die Cache-Version hoch (aktuell **-3008**).
    Nie von Hand pflegen. Standalone-Seiten (`typ` in `tools/seiten.json`) bleiben automatisch
    draußen; `vendor/` und Dateien > 150 KB kommen zur Laufzeit in den Cache (der fetch-Handler
    macht stale-while-revalidate). Wer nur die Version braucht, bumpt trotzdem über den Generator.
 2. `_WEITERARBEIT.md`: alte Versionsnummern ersetzen + neuen Abschnitt anhängen (Guard gegen Doppel).
 3. Nach Datenänderungen (`web/*-daten.js`, Begriffskarten): `cd web && node ../tools/gen_kennzahlen.js`.
 4. **Neue Seite oder geänderter Titel/Beschreibung**: Eintrag in `tools/seiten.json` pflegen, dann
-   `cd web && node ../tools/gen_kopf.js` — erzeugt Kopfblock, `sitemap.xml` und `robots.txt` neu.
+   `cd web && node ../tools/gen_kopf.js` — erzeugt Kopfblock, `sitemap.xml`, `robots.txt`,
+   `heiben-werkzeuge.js`, `heiben-bereiche.js` und `heiben-menue.js` neu. Optionale Felder je
+   Eintrag: `gruppe` (Werkzeuge), `nav:false` (Seite bringt eigene Navigation mit), `farbe`
+   (theme-color, Vorgabe `#f3eee5`), `bild` (Vorschaubild beim Teilen, Vorgabe `hero-light.png`).
 
 ## Architektur-Regeln (Remake-Fundament, W1–W7 abgeschlossen)
 - `web/heiben-design.css`: **ausschließlich `.hb-`-Klassen, nie Element-Selektoren** (Kollisionsschutz).
@@ -52,8 +55,9 @@ Statisches HTML/JS/CSS-**PWA ohne Build-Schritt**, offline-fähig, localStorage.
   `<!-- /hb:kopf -->` gehört `tools/gen_kopf.js` — nie von Hand ändern, sondern `tools/seiten.json`
   pflegen und neu erzeugen. Der Generator fasst Schriften, Stylesheets und `<style>` NICHT an
   (deren Reihenfolge entscheidet über das Aussehen) und verschiebt vorhandene Einbindungen nie.
-- `index.html` bewusst OHNE hb-nav (eigener Hero-Header, dokumentierte Ausnahme;
-  in `tools/seiten.json` als `"nav": false` hinterlegt).
+- `index.html` bewusst OHNE hb-nav (`"nav": false` in `tools/seiten.json`): die Startseite bringt
+  Leitwerk, Kopfleiste und Weltmenü selbst mit, weil sie als einzige Seite auf Marken-Tinte steht
+  und ihre Regie an einem eigenen rAF-Takt hängt.
 - Alt-Nav-Ablösung: `assert count('<nav>')==1` → Block ersetzen + `script#hb-mobile-js` mit entfernen.
 - Brücken-Boxen „Aus der HeiBen-Welt" (`.hb-box.welt`, `--wf`=Zielfarbe): vor Einbau Guard
   `'Aus der HeiBen-Welt' not in s`; Kompendien haben **kein** `<footer>` → Anker `<p class="foot"`.
@@ -120,22 +124,18 @@ Statisches HTML/JS/CSS-**PWA ohne Build-Schritt**, offline-fähig, localStorage.
   **Offen: Übernahme von `startseite-neu.html` als `index.html` — wartet auf die Freigabe des
   Users.** Bei Freigabe genügt: Datei tauschen, `tools/seiten.json` pflegen, `gen_kopf.js` und
   `gen_sw.js` laufen lassen (SEO/JSON-LD/Legal/PWA kommen jetzt aus dem Generator).
-- `web/startseite-v3.html` = **aktueller Startseiten-Entwurf „Ein Strich, fünf Welten"**
-  (standalone, nicht verlinkt, nicht precached, noindex): Grund auf Marken-Tinte, eine nie
-  abreißende Linie morpht Koffer → Haus → Tür → Glühbirne → Topf. Im Kopf steht davor die
-  HeiBen-Marke: ein Globus aus fünf farbigen Strichen, der sich Strich für Strich zeichnet und
-  beim Eintritt in Reisen an den Koffer übergibt. Die Hauptlinie ist eine
-  geschlossene Silhouette; Detailstriche (Griff, Fenster, Faden, Dampf …) blenden nur ein, wenn
-  die Form steht. Je Kapitel vier kurze Zeilen: Weltname groß, Verb kursiv, ein Satz, ein Weg.
-  Maskenaufzug statt Blur-Translate, ein rAF-Takt. Details und die
-  IntersectionObserver-Falle (eigenes `clip-path` senkt die Sichtbarkeitsquote auf 0 →
-  **Block beobachten, Kinder aufziehen**) in `_WEITERARBEIT.md`.
-- `web/startseite-neu.html` = **Vorgänger-Entwurf v2.2, jetzt nur noch Inspiration**
-  (nicht verlinkt, nicht precached):
-  Scrollytelling mit 5 CSS-3D-Objekten (Koffer/Haus/Tür/Glühbirne/Kochtopf), Lebenslinien-Regie
-  (ein→pin→aus, globale Lerp-Glättung SY mit Teleport-Snap), Bewegungsprofile je Objekt (MOTION),
-  bewiesene Dach-Geometrie. **Bei Freigabe**: als neue `index.html` übernehmen — SEO/JSON-LD,
-  `heiben-legal.js`- und PWA-Snippets der alten index übernehmen, Alt-index als
-  `startseite-klassisch.html` sichern, interne Verlinkung prüfen.
+- **Startseite übernommen (v3-W10)**: `index.html` ist „Ein Strich, fünf Welten" — Grund auf
+  Marken-Tinte, im Kopf ein Globus aus fünf farbigen Strichen, der beim Eintritt in Reisen an den
+  Koffer übergibt; danach morpht eine nie abreißende Linie Koffer → Haus → Tür → Glühbirne → Topf.
+  Hauptlinie ist eine geschlossene Silhouette, Detailstriche blenden nur ein, wenn die Form steht.
+  Je Kapitel vier kurze Zeilen: Weltname groß, Verb kursiv, ein Satz, ein Weg. Maskenaufzug statt
+  Blur-Translate, ein rAF-Takt. `"nav": false`, `farbe: #1f1c17`, `bild: assets/hero-dark.png`.
+  Fallen dokumentiert in `_WEITERARBEIT.md` (IntersectionObserver + eigenes `clip-path`;
+  Klassenregel schlägt `hidden`; Änderungssperre muss den Übergang mitführen).
+- `web/startseite-klassisch.html` = **die Startseite bis W10**, archiviert (standalone, nicht
+  verlinkt, nicht precached). Sie ist die einzige Seite, die `hb-menue.css` und `hb-suche-nav.js`
+  noch braucht.
+- `web/startseite-neu.html` = **Vorgänger-Entwurf v2.2, nur noch Inspiration** (standalone):
+  Scrollytelling mit 5 CSS-3D-Objekten, Lebenslinien-Regie, bewiesene Dach-Geometrie.
 - Backlog: Ende von `_WEITERARBEIT.md` (u. a. gen_tagesdosis_daten.py neu schreiben bei nächster
   Kartencharge, Kompendium-Stationen-Autohaken, Behördengänge-Kompendium, Brutto-Netto-Rechner).

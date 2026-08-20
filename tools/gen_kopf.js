@@ -29,7 +29,11 @@ const FIRMA = {
   wissen: 'HeiBen Studio GmbH',
 };
 const HOLDING = 'HeiBen Holding GmbH';
-const PAPIER = '#f3eee5'; /* Grundton der Marke; bewusst auf allen Seiten gleich */
+const PAPIER = '#f3eee5';   /* Grundton der Marke — Vorgabe fuer theme-color */
+const VORSCHAU = 'assets/hero-light.png';   /* Wortmarke auf hellem Grund */
+/* Zwei Felder duerfen je Seite abweichen, weil sie das AUSSEHEN beschreiben und nicht
+   den Inhalt: "farbe" faerbt die Browserleiste, "bild" ist das Vorschaubild beim Teilen.
+   Die dunkle Startseite darf nicht mit heller Browserleiste und hellem Bild auftreten. */
 
 const PFLICHT = [
   { datei: 'heiben-design.css', tag: '<link rel="stylesheet" href="heiben-design.css">' },
@@ -103,7 +107,7 @@ function kopfblock(datei, e) {
   z.push(`<meta name="description" content="${esc(e.beschreibung)}">`);
   z.push(`<link rel="canonical" href="${url}">`);
   if (e.typ === 'intern') z.push('<meta name="robots" content="noindex, nofollow">');
-  z.push(`<meta name="theme-color" content="${PAPIER}">`);
+  z.push(`<meta name="theme-color" content="${e.farbe || PAPIER}">`);
   z.push('<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">');
   z.push('<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">');
   z.push('<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">');
@@ -119,11 +123,11 @@ function kopfblock(datei, e) {
   z.push(`<meta property="og:url" content="${url}">`);
   z.push(`<meta property="og:title" content="${esc(e.titel)}">`);
   z.push(`<meta property="og:description" content="${esc(e.beschreibung)}">`);
-  z.push('<meta property="og:image" content="assets/hero-light.png">');
+  z.push(`<meta property="og:image" content="${e.bild || VORSCHAU}">`);
   z.push('<meta name="twitter:card" content="summary_large_image">');
   z.push(`<meta name="twitter:title" content="${esc(e.titel)}">`);
   z.push(`<meta name="twitter:description" content="${esc(e.beschreibung)}">`);
-  z.push('<meta name="twitter:image" content="assets/hero-light.png">');
+  z.push(`<meta name="twitter:image" content="${e.bild || VORSCHAU}">`);
   const ld = jsonld(datei, e);
   if (ld) z.push(`<script type="application/ld+json">${ld}</script>`);
   z.push('<!-- /hb:kopf -->');

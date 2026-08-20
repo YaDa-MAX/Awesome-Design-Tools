@@ -1,5 +1,5 @@
 /* HeiBen Service-Worker — Offline-Fähigkeit & App-Shell (v20260615-1323) */
-const CACHE='heiben-v20260622-3007';
+const CACHE='heiben-v20260622-3008';
 const PRECACHE=[
   /* GENERIERT von tools/gen_sw.js — nicht von Hand pflegen.
      Kaltstart-Huelle; Grosses und vendor/ kommt zur Laufzeit in den Cache. */
@@ -108,10 +108,8 @@ const PRECACHE=[
   "assets/apple-touch-icon.png",
   "assets/favicon-32.png",
   "assets/favicon.svg",
-  "assets/hero-light.png",
   "assets/wordmark-holding.png",
   "assets/wordmark-immobilien.png",
-  "assets/wordmark-kulinarik.png",
   "assets/wordmark-on-dark.png",
   "assets/wordmark-reisen.png",
   "assets/wordmark-studio.png",
@@ -128,12 +126,10 @@ const PRECACHE=[
   "hb-bestand-statisch.css",
   "hb-kulinarik-core.js",
   "hb-magazin-core.js",
-  "hb-menue.css",
   "hb-motion.css",
   "hb-motion.js",
   "hb-pwa.js",
   "hb-schaufenster-core.js",
-  "hb-suche-nav.js",
   "hb-weltmosaik.css",
   "hb-werkzeuge.js",
   "heiben-ab.js",

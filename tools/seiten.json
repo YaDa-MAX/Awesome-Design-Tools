@@ -1,7 +1,8 @@
 {
  "_hinweis": "Registry fuer tools/gen_kopf.js. Von Hand pflegen: neue Seite hier eintragen, dann `node ../tools/gen_kopf.js` in web/ laufen lassen.",
  "_basis": "https://www.heiben.de/",
- "_typen": "start | welt | weltseite | kompendium | werkzeug | wissen | konto | holding | legal | intern (noindex) | standalone (wird ausgelassen) · werkzeug-Eintraege tragen zusaetzlich 'gruppe' fuer das Register",
+ "_typen": "start | welt | weltseite | kompendium | werkzeug | wissen | konto | holding | legal | intern (noindex) | standalone (wird ausgelassen) · werkzeug-Eintraege tragen zusaetzlich 'gruppe' fuer das Register"
+  ,"_felder": "Pflicht: welt, typ, titel, beschreibung. Optional: gruppe (werkzeug) · nav:false (Seite bringt eigene Navigation mit) · farbe (theme-color, Vorgabe #f3eee5) · bild (Vorschaubild beim Teilen, Vorgabe assets/hero-light.png)",
  "seiten": {
   "404.html": {
    "welt": "holding",
@@ -173,8 +174,10 @@
   "index.html": {
    "welt": "holding",
    "typ": "start",
+   "farbe": "#1f1c17",
+   "bild": "assets/hero-dark.png",
    "titel": "HeiBen — Heimat leben. Eine Familie aus fünf Welten.",
-   "beschreibung": "HeiBen ist eine Kölner Unternehmensfamilie: Reisen, Wohnen, Immobilien, Studio und Kulinarik — verbunden durch eine Idee. Heimat ist kein Ort, sondern ein Verb.",
+   "beschreibung": "Fünf Unternehmen, ein Zuhause: Reisen, Wohnen, Immobilien, Studio und Kulinarik — geführt von einer Kölner Familie. Weil Heimat zu leben eine Lebensweise ist.",
    "nav": false
   },
   "jobwechsel.html": {
@@ -455,11 +458,11 @@
    "titel": "HeiBen — Heimat leben. Eine Familie aus fünf Welten.",
    "beschreibung": "Entwurf der neuen HeiBen-Startseite: fünf Welten, fünf Zeichen — Koffer, Haus, Tür, Glühbirne, Kochtopf. Scrollend erzählt."
   },
-  "startseite-v3.html": {
+  "startseite-klassisch.html": {
    "welt": "",
    "typ": "standalone",
-   "titel": "HeiBen — Heimat leben. Eine Familie aus fünf Welten.",
-   "beschreibung": "Neuentwurf der HeiBen-Startseite: ein Strich, der zum Weg, zum Dach, zur Tür, zum Glühfaden und zum Topf wird — fünf Welten einer Kölner Unternehmensfamilie."
+   "titel": "HeiBen — Startseite (klassische Fassung)",
+   "beschreibung": "Die Startseite bis Remake v3, Welle 10: Hero mit Wortmarke, Weltkacheln und eigenem Menü. Archiviert, nicht verlinkt."
   },
   "steuererklaerung.html": {
    "welt": "wissen",
