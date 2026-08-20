@@ -52,6 +52,11 @@
 .brand-block svg{height:34px;width:auto;display:block;margin-bottom:1.2rem;}
 .wms-lockup{display:flex;justify-content:center;padding:6px 0 2px;}
 .wms-lockup svg{width:min(540px,84vw);height:auto;display:block;}
+
+/* Querlauf bei schmalen Fenstern (Remake v3, Welle 9 — Aufräumen).
+   Ursache jeweils gemessen, nicht geraten. */
+/* Die Unterstrich-Linien im Musterformular sind ein einziges unteilbares „Wort". */
+.muster{overflow-wrap:anywhere}
 </style>
 <link rel="stylesheet" href="heiben-design.css">
 <script src="heiben-nav.js" defer></script>
@@ -101,7 +106,7 @@
 
     <h2 id="formular">4 · Muster-Widerrufsformular</h2>
     <p class="muted">(Wenn du den Vertrag widerrufen willst, fülle dieses Formular aus und sende es zurück.)</p>
-    <div style="border:1px solid var(--rule);border-radius:12px;padding:1.2rem 1.4rem;background:rgba(255,255,255,.5);font-size:.95rem;line-height:1.9;">
+    <div class="muster" style="border:1px solid var(--rule);border-radius:12px;padding:1.2rem 1.4rem;background:rgba(255,255,255,.5);font-size:.95rem;line-height:1.9;">
       An HeiBen Holding GmbH <span class="ph">[i. G.]</span>, <span class="ph">[Anschrift, PLZ Köln]</span>, <span class="ph">[widerruf@heiben.de]</span>:<br><br>
       Hiermit widerrufe(n) ich/wir (*) den von mir/uns (*) abgeschlossenen Vertrag über den Kauf der folgenden Waren (*) / die Erbringung der folgenden Dienstleistung (*):<br>
       __________________________________________________<br><br>

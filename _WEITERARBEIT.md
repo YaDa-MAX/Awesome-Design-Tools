@@ -1391,3 +1391,53 @@ BEFUNDE, NICHT VON MIR VERURSACHT UND NICHT NEBENBEI GEAENDERT
    oder der Titelzusatz gehoert weg. Das ist eine Inhaltsentscheidung, keine Umbauarbeit.
 3. studio-lebenswissen-artikel.html bringt eine eigene alte Menuetaste (#hbBurger aus
    hb-menue.css) mit und zeigt damit zwei Menueknoepfe. Bestand, war schon vor dieser Welle so.
+
+### WELLE 9, TEIL 2: AUFGERAEUMT (SW -3005)
+
+AUFTRAG: „Raeume auch." — die drei Befunde aus Teil 1 abarbeiten.
+
+BEFUND 3 WAR FALSCH, KORRIGIERT STATT „REPARIERT".
+Ich hatte behauptet, studio-lebenswissen-artikel.html zeige zwei Menueknoepfe. Nachgemessen:
+die Seite hat GENAU EINEN (den der Navigation). Die Ids #hbBurger/#hbMobileMenu kommen dort nur
+in einer Druckregel vor; der erzeugende Code liegt in index.html — und die hat bewusst keine
+hb-nav (nav:false) und braucht ihre eigene Taste. Ursache meines Irrtums: ich hatte
+`grep -l ... | head -1` genommen und damit die Zeilen von index.html gelesen, aber der zweiten
+Datei zugeschrieben. Nichts zu reparieren.
+(Was stimmt: hb-menue.css haengt auf 34 Seiten, aber nur index.html erzeugt die Ids dazu. Die
+Datei traegt allerdings auch eine LEBENDE Regel — `.hero.wrap{padding:…}` — also ist sie nicht
+einfach entfernbar. Eigene Aufgabe, hier nicht angefasst.)
+
+BEFUND 2 — REGISTRY-WIDERSPRUCH, BEHOBEN.
+manufaktur-bestellungen / -kalkulation / -maschinencode standen als typ:"weltseite", hiessen im
+Titel aber „— intern". Jetzt typ:"intern", Titel auf die Konvention der uebrigen internen Seiten
+gebracht („HeiBen Manufaktur — Auftragsverwaltung/Kalkulation/Maschinencode-Datenbank").
+Folgen, alle nachgeprueft: Band direkt unter der Leiste (3/3) · noindex,nofollow (3/3) ·
+robots.txt 11 -> 14 Disallow · sitemap.xml 89 -> 86 URLs · interne Seiten 11 -> 14 ·
+Weltmenue Spalte Wohnen 10 -> 7 Eintraege, die drei stehen dort nicht mehr.
+
+BEFUND 1 — QUERLAUF AUF 7 SEITEN, BEHOBEN. Jede Ursache gemessen, keine pauschale Regel.
+MESSFEHLER VORWEG: die erste Diagnose verglich rechte Kanten mit innerWidth — und das war
+bereits mitgewachsen (890 statt 390). Chrome weitet auf schmalen Geraeten den Viewport, wenn der
+Inhalt ueberlaeuft; danach greifen Media Queries an der falschen Breite und Layouts klappen
+wieder auf. Richtig ist der Vergleich mit document.body.clientWidth.
+- kulinarik-export 890 px: die Auswahlliste ist eine Flex-Zeile, deren Titel-span nicht unter
+  seine Min-Content-Breite schrumpfen konnte (min-width:0 gesetzt). Der Rest ist die A4-Vorschau
+  mit echten 794 px — die DARF nicht schrumpfen, sie scrollt jetzt in ihrer Buehne.
+- unternehmen 660 px: breite Kennzahlen-Tabelle ohne Behaelter -> in .u-scroll gefasst.
+- kulinarik-mealplanner 511 px: vier feste Rasterspalten plus Eingabefelder ohne Deckel ->
+  Felder auf width:100%/min-width:0, Raster klappt bei 720 und 520 px.
+- widerruf 478 px: die Unterstrich-Linien im Musterformular sind EIN unteilbares Wort ->
+  overflow-wrap:anywhere auf dem Block.
+- reisen-planer 422 px: Rasterkinder ohne min-width:0 hielten ihre Min-Content-Breite;
+  Tageszeile bricht jetzt um.
+- kulinarik-redaktion 402 px: feste Flex-Kopfzeile -> bricht unter 600 px um.
+- studio-lebenswissen-redaktion 395 px: Werkzeugfelder brachten Eigenbreite mit -> gedeckelt.
+
+PRUEFUNG NACH DEM AUFRAEUMEN
+- 31/31 gezielte Navigationspruefungen (neu: die drei internen Seiten fehlen im Menue).
+- Rundlauf 103 Seiten bei 390 px: 0 PageErrors, QUERLAUF 0 (vorher 7).
+- Rundlauf 103 Seiten bei 1280 px: 0 PageErrors, 0 Querlauf.
+- Die drei umgestellten Seiten einzeln: Band, noindex, Titel, 0 PageErrors.
+UMGEBUNGSHINWEIS: einzelne Seiten brauchen im Sandkasten ~13 s bis „load", weil die
+Google-Fonts-Anfrage ins Leere laeuft (requestfailed nach 15 s). Kein Seitenfehler — unter
+paralleler Last liefen dieselben Seiten in den 30-s-Timeout und wurden einzeln nachgeprueft.

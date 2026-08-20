@@ -81,6 +81,14 @@ h2{font-family:'Fraunces',serif;font-weight:440;font-size:1.3rem;margin:2rem 0 .
 footer{margin-top:3rem;border-top:1px solid var(--rule);padding:1.4rem 0;color:var(--ink-soft);font-size:.8rem;}
 .note{font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--ink-soft);}
 .hide{display:none!important;}
+
+/* Querlauf bei schmalen Fenstern (Remake v3, Welle 9 — Aufräumen).
+   Ursache jeweils gemessen, nicht geraten. */
+/* Vier feste Rasterspalten plus Eingabefelder ohne Deckel: das Namensfeld war 468 px breit. */
+.field{min-width:0}
+.field input,.field select,.field textarea{width:100%;max-width:100%;min-width:0}
+@media (max-width:720px){ .g4,.g3{grid-template-columns:1fr 1fr} }
+@media (max-width:520px){ .g4,.g3,.g2{grid-template-columns:1fr} .field[style*="span"]{grid-column:auto !important} }
 </style>
 <link rel="stylesheet" href="heiben-design.css">
 <script src="heiben-nav.js" defer></script>

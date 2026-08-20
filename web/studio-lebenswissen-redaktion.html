@@ -84,6 +84,12 @@ footer{margin-top:2.5rem;border-top:1px solid var(--rule);padding:1.3rem 0;color
 .full{grid-column:1/-1;}
 .prev h2{font-family:'Fraunces',serif;font-weight:480;}
 .prev ul{padding-left:1.1rem;} .prev li{margin:.2rem 0;}
+
+/* Querlauf bei schmalen Fenstern (Remake v3, Welle 9 — Aufräumen).
+   Ursache jeweils gemessen, nicht geraten. */
+/* Werkzeugleiste: die Felder brachten ihre Eigenbreite mit. */
+.fld{min-width:0}
+.fld input,.fld select,.fld textarea{max-width:100%;min-width:0}
 </style>
 <link rel="stylesheet" href="heiben-design.css">
 <script src="heiben-nav.js" defer></script>

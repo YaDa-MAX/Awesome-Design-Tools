@@ -129,6 +129,12 @@
   .u-phase li:last-child{ border-bottom:none; }
   .u-phase li::before{ content:'→'; position:absolute; left:0; color:var(--terracotta); }
   .u-note{ font-family:'JetBrains Mono',monospace; font-size:.62rem; color:var(--ink-soft); margin-top:1rem; }
+
+/* Querlauf bei schmalen Fenstern (Remake v3, Welle 9 — Aufräumen).
+   Ursache jeweils gemessen, nicht geraten. */
+/* Die Kennzahlen-Tabelle ist breiter als ein Telefon; sie scrollt jetzt in sich
+   statt die ganze Seite zu verschieben. */
+.u-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
 </style>
 <div class="wrap">
 
@@ -219,7 +225,7 @@
     <div class="u-eyebrow">Geschäftsmodelle</div>
     <h2>Was jede Welt verdient</h2>
     <p class="lead">Vier Erlösarten greifen ineinander: wiederkehrende Abos, einmalige Verkäufe, Vermittlungs-Provisionen und Maßanfertigung (Print-on-Demand).</p>
-    <table class="u-table">
+    <div class="u-scroll"><table class="u-table">
       <thead><tr><th>Welt</th><th>Modell</th><th>Erlösart</th><th>Wiederkehr</th><th>Status</th></tr></thead>
       <tbody>
         <tr><td>Studio · Lebenswissen</td><td>Abo + Content/Magazin</td><td>Mitgliedschaft 1,90 €/Mon · 14,90 €/Jahr</td><td>hoch</td><td><span class="u-pill live">aktiv · modelliert</span></td></tr>
@@ -229,7 +235,7 @@
         <tr><td>Immobilien</td><td>Vermittlung</td><td>Makler-/Vermittlungsprovision</td><td>niedrig (hohe Tickets)</td><td><span class="u-pill proto">Prototyp · Funnel</span></td></tr>
         <tr><td>Reisen</td><td>Vermittlung / Kuratierung</td><td>Provision, kuratierte Pakete</td><td>niedrig–mittel</td><td><span class="u-pill konz">konzeptionell</span></td></tr>
       </tbody>
-    </table>
+    </table></div>
     <p class="u-note">„modelliert" = im HeiBen-Cashflow-Modell hinterlegt (Szenarien Konservativ/Basis/Ambitioniert). Zahlen dort, nicht hier erfunden.</p>
   </section>
 
@@ -238,7 +244,7 @@
     <div class="u-eyebrow">Vernetzungen · Synergien</div>
     <h2>Der Wert liegt zwischen den Welten</h2>
     <p class="lead">Eine Marke, ein Konto, eine Plattform — daraus entstehen Cross-Sell-Pfade, die keine Welt allein hätte.</p>
-    <table class="u-table">
+    <div class="u-scroll"><table class="u-table">
       <thead><tr><th>Pfad</th><th>Wie es zusammenspielt</th></tr></thead>
       <tbody>
         <tr><td>Studio → alle</td><td>Lebenswissen liefert Saison-, Reise- und Wohn-Content und ist der günstige Abo-Einstieg, der den Funnel für alle Welten speist.</td></tr>
@@ -247,7 +253,7 @@
         <tr><td>Wohnen ↔ Immobilien</td><td>Einrichtung &amp; Home-Staging zur Immobilienvermittlung; ein Lead nährt den anderen.</td></tr>
         <tr><td>Manufaktur (Querschnitt)</td><td>Produziert physische Produkte für jede Welt; die UGC-Galerie ist Viral- und SEO-Kanal für die ganze Marke.</td></tr>
       </tbody>
-    </table>
+    </table></div>
   </section>
 
   <!-- 4 · Technische Architektur -->

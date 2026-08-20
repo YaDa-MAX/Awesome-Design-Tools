@@ -296,8 +296,8 @@
   },
   "manufaktur-bestellungen.html": {
    "welt": "wohnen",
-   "typ": "weltseite",
-   "titel": "Auftragsverwaltung — intern | HeiBen Manufaktur",
+   "typ": "intern",
+   "titel": "HeiBen Manufaktur — Auftragsverwaltung",
    "beschreibung": "Interner Bereich."
   },
   "manufaktur-galerie.html": {
@@ -314,14 +314,14 @@
   },
   "manufaktur-kalkulation.html": {
    "welt": "wohnen",
-   "typ": "weltseite",
-   "titel": "Manufaktur-Kalkulation — intern | HeiBen",
+   "typ": "intern",
+   "titel": "HeiBen Manufaktur — Kalkulation",
    "beschreibung": "Interner Bereich."
   },
   "manufaktur-maschinencode.html": {
    "welt": "wohnen",
-   "typ": "weltseite",
-   "titel": "Maschinencode-Datenbank — intern | HeiBen",
+   "typ": "intern",
+   "titel": "HeiBen Manufaktur — Maschinencode-Datenbank",
    "beschreibung": "Interner Bereich."
   },
   "manufaktur.html": {

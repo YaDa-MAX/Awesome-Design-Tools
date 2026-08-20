@@ -128,6 +128,14 @@ footer{margin-top:2.5rem;border-top:1px solid var(--rule);padding:1.3rem 0;color
 }
 .kunde .company-only{display:none!important;}
 .kunde .cust-head{display:block;}
+
+/* Querlauf bei schmalen Fenstern (Remake v3, Welle 9 — Aufräumen).
+   Ursache jeweils gemessen, nicht geraten. */
+/* Rasterkinder ohne min-width:0 halten ihre Min-Content-Breite (403 px);
+   die Tageszeile bekommt zusätzlich Umbruch. */
+.layout > *{min-width:0}
+.panel,.pal,.days{min-width:0}
+@media (max-width:560px){ .day .dh{flex-wrap:wrap} }
 </style>
 <link rel="stylesheet" href="heiben-design.css">
 <script src="heiben-nav.js" defer></script>

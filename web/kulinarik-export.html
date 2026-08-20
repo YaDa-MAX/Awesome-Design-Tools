@@ -115,6 +115,17 @@
 .brand-block svg{height:34px;width:auto;display:block;margin-bottom:1.2rem;}
 .wms-lockup{display:flex;justify-content:center;padding:6px 0 2px;}
 .wms-lockup svg{width:min(540px,84vw);height:auto;display:block;}
+
+/* Querlauf bei schmalen Fenstern (Remake v3, Welle 9 — Aufräumen).
+   Ursache jeweils gemessen, nicht geraten. */
+/* Die Auswahlliste ist eine Flex-Zeile; ihr Titel-span konnte nicht unter seine
+   Min-Content-Breite schrumpfen und riss die Spalte auf 858 px auf. */
+.expanel > *{min-width:0}
+.expick label{min-width:0}
+.expick label span{min-width:0;overflow-wrap:anywhere}
+/* Die Vorschau zeigt echte A4-Seiten (794 px). Die dürfen nicht schrumpfen —
+   also scrollt die Bühne in sich, statt die Seite zu verschieben. */
+@media (max-width:900px){ .stage,#stage{overflow-x:auto;min-width:0;-webkit-overflow-scrolling:touch} }
 </style>
 <link rel="stylesheet" href="heiben-design.css">
 <script src="heiben-nav.js" defer></script>

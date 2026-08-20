@@ -11,6 +11,9 @@ Disallow: /heiben-wachstum.html
 Disallow: /konto-verwaltung.html
 Disallow: /kulinarik-export.html
 Disallow: /kulinarik-redaktion.html
+Disallow: /manufaktur-bestellungen.html
+Disallow: /manufaktur-kalkulation.html
+Disallow: /manufaktur-maschinencode.html
 Disallow: /schaufenster-redaktion.html
 Disallow: /studio-lebenswissen-redaktion.html
 Disallow: /studio-redaktion.html

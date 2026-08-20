@@ -108,6 +108,13 @@
 .brand-block svg{height:34px;width:auto;display:block;margin-bottom:1.2rem;}
 .wms-lockup{display:flex;justify-content:center;padding:6px 0 2px;}
 .wms-lockup svg{width:min(540px,84vw);height:auto;display:block;}
+
+/* Querlauf bei schmalen Fenstern (Remake v3, Welle 9 — Aufräumen).
+   Ursache jeweils gemessen, nicht geraten. */
+/* Die Kopfzeile der Redaktion stand als eine feste Flex-Zeile (402 px). */
+@media (max-width:600px){
+  .redbar .wrap{flex-wrap:wrap;height:auto;padding-top:.55rem;padding-bottom:.55rem;gap:.45rem}
+}
 </style>
 <link rel="stylesheet" href="heiben-design.css">
 <script src="heiben-nav.js" defer></script>
