@@ -145,8 +145,10 @@ p{margin:0}
 }
 .buehne svg{width:min(56vh,44vw);height:min(56vh,44vw);overflow:visible;
   will-change:transform;transition:transform 700ms var(--schwung)}
-#strich{fill:none;stroke:var(--wf);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;
+#strich{fill:none;stroke:var(--wf);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;
   transition:stroke var(--lang) linear}
+#details g{opacity:0}
+#details path{fill:none;stroke:var(--wf);stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
 .schein{
   position:absolute;width:min(70vh,58vw);aspect-ratio:1;border-radius:50%;
   right:clamp(-4rem,2vw,2rem);background:radial-gradient(circle,var(--wf),transparent 68%);
@@ -155,7 +157,7 @@ p{margin:0}
 @media (max-width:900px){
   .lauf{padding-left:0}
   .buehne{justify-content:center;padding:0;align-items:flex-start}
-  .buehne svg{width:66vw;height:66vw;margin:10vh 0 0 22vw;opacity:.2}
+  .buehne svg{width:62vw;height:62vw;margin:9vh 0 0 20vw;opacity:.3}
   .schein{opacity:.1}
 }
 
@@ -200,23 +202,22 @@ p{margin:0}
 .manifest em{font-style:normal;color:var(--wf);transition:color var(--lang) linear}
 
 /* --- 8. Kapitel ----------------------------------------------------------- */
-.kap{min-height:104svh;display:flex;flex-direction:column;justify-content:center;
-  gap:clamp(.9rem,1.8vw,1.5rem);padding:6rem var(--rand);max-width:calc(var(--mass) + 8rem)}
+.kap{min-height:100svh;display:flex;flex-direction:column;justify-content:center;
+  gap:clamp(.55rem,1.2vw,1rem);padding:6rem var(--rand);max-width:calc(var(--mass) + 8rem)}
 .kap .zeile{font-family:var(--mono);font-size:.62rem;letter-spacing:.28em;text-transform:uppercase;
   color:var(--zart);display:flex;align-items:center;gap:.6rem}
 .kap .zeile b{color:var(--f);font-weight:600}
-.verb{
-  font-family:var(--serif);font-weight:600;font-size:clamp(3rem,10.5vw,7.6rem);
-  line-height:.84;letter-spacing:-.052em;color:var(--f);
+.kap h2{
+  font-family:var(--serif);font-weight:600;font-size:clamp(2.9rem,9.5vw,7rem);
+  line-height:.86;letter-spacing:-.05em;color:var(--f);
   font-variation-settings:'opsz' 144,'SOFT' 12,'WONK' 1;
 }
-.kap h2{
-  font-family:var(--serif);font-weight:400;font-size:clamp(1.25rem,.95rem + 1.5vw,2rem);
-  line-height:1.22;letter-spacing:-.02em;font-variation-settings:'opsz' 96,'SOFT' 50,'WONK' 0;
-  max-width:24ch;
+.verb{
+  font-family:var(--serif);font-style:italic;font-weight:400;
+  font-size:clamp(1.3rem,1rem + 1.7vw,2.2rem);line-height:1.05;letter-spacing:-.02em;
+  color:var(--leinen);font-variation-settings:'opsz' 96,'SOFT' 60,'WONK' 0;
 }
-.kap h2 em{font-style:italic;color:var(--f)}
-.kap .text{max-width:var(--mass);color:var(--leinen-2)}
+.satz{max-width:34ch;color:var(--leinen-2);font-size:clamp(1.02rem,.98rem + .35vw,1.2rem)}
 .marken{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.2rem}
 .marken span{
   font-family:var(--mono);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;
@@ -306,7 +307,22 @@ p{margin:0}
 
   <div class="buehne" aria-hidden="true">
     <div class="schein" id="schein"></div>
-    <svg viewBox="0 0 100 100" id="svg"><path id="strich" pathLength="1"></path></svg>
+    <svg viewBox="0 0 100 100" id="svg">
+      <path id="strich" pathLength="1"></path>
+      <g id="details">
+        <g data-i="0"><path d="M41 35 V30 a9 5 0 0 1 18 0 V35"/><path d="M19 55 H81"/>
+          <path d="M35 51 h7 v8 h-7 z"/><path d="M58 51 h7 v8 h-7 z"/></g>
+        <g data-i="1"><path d="M43 85 V65 h14 v20"/><path d="M22 58 h13 v13 h-13 z"/>
+          <path d="M28.5 58 v13"/><path d="M22 64.5 h13"/><path d="M70 34 V24 h7 v17"/></g>
+        <g data-i="2"><path d="M33 88 V50 a17 17 0 0 1 34 0 V88"/><path d="M18 88 H82"/>
+          <path d="M63 68 a2.6 2.6 0 1 1 -0.1 0"/></g>
+        <g data-i="3"><path d="M44 55 q3 -11 6 0 q3 11 6 0"/><path d="M42 79 H58"/><path d="M42 84 H58"/>
+          <path d="M26 26 l-7 -6"/><path d="M74 26 l7 -6"/><path d="M50 15 V7"/></g>
+        <g data-i="4"><path d="M11 39 H89"/><path d="M50 39 V32"/><path d="M53.5 29 a3.5 3.5 0 1 1 -0.1 0"/>
+          <path d="M16 50 h-8"/><path d="M84 50 h8"/>
+          <path d="M38 28 q5 -7 0 -14"/><path d="M50 24 q5 -7 0 -14"/><path d="M62 28 q5 -7 0 -14"/></g>
+      </g>
+    </svg>
   </div>
 
   <div class="strom">
@@ -323,74 +339,66 @@ p{margin:0}
         </span>
       </div>
       <h1 class="claim auf" id="o3" style="--d:260ms">Heimat ist kein Ort.<br>Heimat ist ein <b>Verb</b>.</h1>
-      <p class="vorspann auf" id="o4" style="--d:380ms">Fünf Unternehmen, eine Familie: Reisen, Wohnen,
-        Immobilien, ein eigenes Studio und eine Küche mit Herkunft. Ein einziger Strich verbindet sie —
-        scrollen Sie ihn entlang.</p>
+      <p class="vorspann auf" id="o4" style="--d:380ms">Fünf Unternehmen, eine Familie.
+        Ein Strich verbindet sie.</p>
       <div class="wink auf" id="o5" style="--d:500ms">Scrollen<i></i></div>
     </header>
 
     <section class="manifest">
       <p class="auf">Wir haben nicht ein Unternehmen gebaut,</p>
       <p class="auf" style="--d:120ms">sondern fünf, die einander <em>tragen</em>.</p>
-      <p class="auf" style="--d:240ms">Was sie verbindet, ist keine Marke. Es ist eine Haltung.</p>
     </section>
 
     <article class="kap" id="reisen" data-w="reisen" style="--f:var(--l-reisen)">
-      <div class="zeile auf">Welt 01 · <b>HeiBen Reisen</b></div>
-      <div class="verb auf" style="--d:90ms">aufbrechen</div>
-      <h2 class="auf" style="--d:180ms">Wege, die sich wie <em>Ankommen</em> anfühlen.</h2>
-      <p class="text auf" style="--d:250ms">Kuratierte Reisen mit Handschrift statt Katalogware —
-        geplant von Menschen, die jedes Ziel selbst gesehen haben. Vom ersten Einfall bis zur
-        Packliste bleibt eine Ansprechpartnerin.</p>
-      <div class="marken auf" style="--d:320ms"><span>Kuratierte Reisen</span><span>Reise-Planer</span><span>Persönliche Anfrage</span></div>
-      <a class="tuer auf" style="--d:390ms" href="reisen.html">HeiBen Reisen entdecken</a>
+      <div class="zeile auf">Welt 01 · <b>HeiBen</b></div>
+      <h2 class="auf" style="--d:80ms">Reisen</h2>
+      <div class="verb auf" style="--d:150ms">aufbrechen.</div>
+      <p class="satz auf" style="--d:220ms">Kuratiert, mit Handschrift. Kein Katalog.</p>
+      <div class="marken auf" style="--d:290ms"><span>Reiseziele</span><span>Reise-Planer</span><span>Anfrage</span></div>
+      <a class="tuer auf" style="--d:360ms" href="reisen.html">HeiBen Reisen entdecken</a>
     </article>
 
     <article class="kap" id="wohnen" data-w="wohnen" style="--f:var(--l-wohnen)">
-      <div class="zeile auf">Welt 02 · <b>HeiBen Wohnen</b></div>
-      <div class="verb auf" style="--d:90ms">bleiben</div>
-      <h2 class="auf" style="--d:180ms">Räume, die <em>bleiben</em> dürfen.</h2>
-      <p class="text auf" style="--d:250ms">Einrichtung aus der eigenen Manufaktur — entworfen im
-        Konfigurator, geprüft im 2D-Plan und im 3D-Raum, gebaut für Jahrzehnte statt für eine Saison.</p>
-      <div class="marken auf" style="--d:320ms"><span>Manufaktur</span><span>Konfigurator</span><span>2D- &amp; 3D-Planer</span></div>
-      <a class="tuer auf" style="--d:390ms" href="wohnen.html">HeiBen Wohnen entdecken</a>
+      <div class="zeile auf">Welt 02 · <b>HeiBen</b></div>
+      <h2 class="auf" style="--d:80ms">Wohnen</h2>
+      <div class="verb auf" style="--d:150ms">bleiben.</div>
+      <p class="satz auf" style="--d:220ms">Aus eigener Manufaktur. Für Jahrzehnte.</p>
+      <div class="marken auf" style="--d:290ms"><span>Manufaktur</span><span>Konfigurator</span><span>3D-Planer</span></div>
+      <a class="tuer auf" style="--d:360ms" href="wohnen.html">HeiBen Wohnen entdecken</a>
     </article>
 
     <article class="kap" id="immobilien" data-w="immobilien" style="--f:var(--l-immobilien)">
-      <div class="zeile auf">Welt 03 · <b>HeiBen Immobilien</b></div>
-      <div class="verb auf" style="--d:90ms">ankommen</div>
-      <h2 class="auf" style="--d:180ms">Es beginnt mit einer Tür, <em>die sich öffnet</em>.</h2>
-      <p class="text auf" style="--d:250ms">Bestand mit Charakter, ehrlich gerechnet: Angebote,
-        Budget-Planer und Beratung ohne Verkaufsdruck — Schritt für Schritt zur richtigen Entscheidung.</p>
-      <div class="marken auf" style="--d:320ms"><span>Angebote</span><span>Budget-Planer</span><span>Beratung</span></div>
-      <a class="tuer auf" style="--d:390ms" href="immobilien.html">HeiBen Immobilien entdecken</a>
+      <div class="zeile auf">Welt 03 · <b>HeiBen</b></div>
+      <h2 class="auf" style="--d:80ms">Immobilien</h2>
+      <div class="verb auf" style="--d:150ms">ankommen.</div>
+      <p class="satz auf" style="--d:220ms">Bestand mit Charakter, ehrlich gerechnet.</p>
+      <div class="marken auf" style="--d:290ms"><span>Angebote</span><span>Budget-Planer</span><span>Beratung</span></div>
+      <a class="tuer auf" style="--d:360ms" href="immobilien.html">HeiBen Immobilien entdecken</a>
     </article>
 
     <article class="kap" id="studio" data-w="studio" style="--f:var(--l-studio)">
-      <div class="zeile auf">Welt 04 · <b>HeiBen Studio</b></div>
-      <div class="verb auf" style="--d:90ms">verstehen</div>
-      <h2 class="auf" style="--d:180ms">Wissen, das im Alltag <em>trägt</em>.</h2>
-      <p class="text auf" style="--d:250ms">Acht Kompendien, <span id="kzSteck">370</span> Steckbriefe,
-        Lernpfade und eine Suche über alles — frei und werbefrei aus unserer Redaktion.</p>
-      <div class="marken auf" style="--d:320ms"><span>Wissens-Suche</span><span>Lernpfade</span><span>Tagesdosis</span></div>
-      <a class="tuer auf" style="--d:390ms" href="wissen.html">Zum Wissen für Zuhause</a>
+      <div class="zeile auf">Welt 04 · <b>HeiBen</b></div>
+      <h2 class="auf" style="--d:80ms">Studio</h2>
+      <div class="verb auf" style="--d:150ms">verstehen.</div>
+      <p class="satz auf" style="--d:220ms"><span id="kzSteck">370</span> Steckbriefe. Frei und werbefrei.</p>
+      <div class="marken auf" style="--d:290ms"><span>Wissens-Suche</span><span>Lernpfade</span><span>Tagesdosis</span></div>
+      <a class="tuer auf" style="--d:360ms" href="wissen.html">das Wissen entdecken</a>
     </article>
 
     <article class="kap" id="kulinarik" data-w="kulinarik" style="--f:var(--l-kulinarik)">
-      <div class="zeile auf">Welt 05 · <b>HeiBen Kulinarik</b></div>
-      <div class="verb auf" style="--d:90ms">teilen</div>
-      <h2 class="auf" style="--d:180ms">Eine Küche zwischen <em>Maghreb und Norddeutschland</em>.</h2>
-      <p class="text auf" style="--d:250ms">Familienrezepte aus 51 Küchen — bewusst ohne Schweinefleisch,
-        mit Wochenplan, Einkaufsliste und dem Rezept-Würfel für den Blick in den Kühlschrank.</p>
-      <div class="marken auf" style="--d:320ms"><span>Rezepte</span><span>Wochenplan</span><span>Rezept-Würfel</span></div>
-      <a class="tuer auf" style="--d:390ms" href="kulinarik.html">HeiBen Kulinarik entdecken</a>
+      <div class="zeile auf">Welt 05 · <b>HeiBen</b></div>
+      <h2 class="auf" style="--d:80ms">Kulinarik</h2>
+      <div class="verb auf" style="--d:150ms">teilen.</div>
+      <p class="satz auf" style="--d:220ms">51 Küchen, ein Wochenplan.</p>
+      <div class="marken auf" style="--d:290ms"><span>Rezepte</span><span>Wochenplan</span><span>Rezept-Würfel</span></div>
+      <a class="tuer auf" style="--d:360ms" href="kulinarik.html">HeiBen Kulinarik entdecken</a>
     </article>
 
   </div>
 </div>
 
 <section class="zaehlband">
-  <h2 class="auf">Nicht behauptet. <em>Gezählt.</em> Der Stand von heute Nacht.</h2>
+  <h2 class="auf">Nicht behauptet. <em>Gezählt.</em></h2>
   <div class="zahlen">
     <div class="zahl auf"><b data-zahl="5">0</b><small>Welten</small></div>
     <div class="zahl auf" style="--d:70ms"><b data-zahl="8">0</b><small>Kompendien</small></div>
@@ -403,11 +411,11 @@ p{margin:0}
 <section class="finale">
  <div class="karten">
   <a class="karte auf" href="mein-heiben.html" style="--f:var(--l-reisen)"><small>Ihr Zugang</small>
-    <b>Mein HeiBen</b><p>Ein Konto für alle Welten — Werkzeuge, Fortschritt und Ihr persönlicher Überblick.</p></a>
+    <b>Mein HeiBen</b><p>Ein Konto für alle fünf Welten.</p></a>
   <a class="karte auf" style="--d:70ms;--f:var(--l-wohnen)" href="zuhause-ordner.html"><small>Neu</small>
-    <b>Der Zuhause-Ordner</b><p>Der Notfall- und Familienordner: sieben Register, geführt anlegen, abhaken, ausdrucken.</p></a>
+    <b>Der Zuhause-Ordner</b><p>Notfall und Familie: sieben Register, geführt angelegt.</p></a>
   <a class="karte auf" style="--d:140ms;--f:var(--l-kulinarik)" href="unternehmen.html"><small>Die Holding</small>
-    <b>Das Unternehmen</b><p>Wer wir sind, wie die fünf Welten zusammengehören — und warum Köln unser Zuhause ist.</p></a>
+    <b>Das Unternehmen</b><p>Wer wir sind — und warum Köln.</p></a>
  </div>
 </section>
 
@@ -442,29 +450,33 @@ function bogen(cx, cy, rx, ry, von, bis, n){
   return p;
 }
 
-/* Weg (Reisen): eine Route von unten links nach oben rechts. */
-var WEG = (function(){
-  var p = [], i, u;
-  for (i = 0; i <= 48; i++){
-    u = i / 48;
-    p.push([8 + 84 * u, 84 - 62 * u + 13 * Math.sin(u * Math.PI * 2.1)]);
-  }
-  return p;
-})();
+/* Kasten mit runden Ecken — Grundfigur fuer den Koffer. */
+function kasten(x1, y1, x2, y2, r){
+  return [[x1 + r, y1], [x2 - r, y1]]
+    .concat(bogen(x2 - r, y1 + r, r, r, 90, 0, 8)).concat([[x2, y2 - r]])
+    .concat(bogen(x2 - r, y2 - r, r, r, 0, -90, 8)).concat([[x1 + r, y2]])
+    .concat(bogen(x1 + r, y2 - r, r, r, -90, -180, 8)).concat([[x1, y1 + r]])
+    .concat(bogen(x1 + r, y1 + r, r, r, 180, 90, 8));
+}
 
-/* Dach (Wohnen): Giebel mit angesetzten Wänden. */
-var DACH = [[12,92],[12,66],[50,24],[88,66],[88,92]];
+/* Koffer (Reisen) */
+var KOFFER = kasten(19, 35, 81, 79, 6);
 
-/* Tür (Immobilien): Rundbogen im Rahmen. */
-var TUER = [[26,94],[26,50]].concat(bogen(50,50,24,24,180,0,26)).concat([[74,50],[74,94]]);
+/* Haus (Wohnen): Giebel ueber den Waenden, umlaufend. */
+var HAUS = [[14,52],[50,21],[86,52],[86,85],[14,85],[14,52]];
 
-/* Glühfaden (Studio): Kolben mit Hals. */
-var BIRNE = [[42,95],[42,72]].concat(bogen(50,46,24,24,250,-70,44)).concat([[58,72],[58,95]]);
+/* Tuer (Immobilien): Rundbogen im Rahmen, umlaufend. */
+var TUER = [[26,88],[26,48]].concat(bogen(50,48,24,24,180,0,26)).concat([[74,48],[74,88],[26,88]]);
 
-/* Topf (Kulinarik): Korpus mit rundem Boden, oben offen. */
-var TOPF = [[15,26],[17,58]].concat(bogen(50,58,33,22,180,360,30)).concat([[83,58],[85,26]]);
+/* Gluehbirne (Studio): Kolben, Hals, Sockel. */
+var BIRNE = [[42,74]].concat(bogen(50,46,25,25,252,-72,42))
+  .concat([[58,74],[58,88],[42,88],[42,74]]);
 
-var FORMEN = [WEG, DACH, TUER, BIRNE, TOPF];
+/* Topf (Kulinarik): Korpus mit Rundboden, Rand umlaufend. */
+var TOPF = [[16,42],[19,68]].concat(bogen(50,68,31,12,180,360,24))
+  .concat([[81,68],[84,42],[16,42]]);
+
+var FORMEN = [KOFFER, HAUS, TUER, BIRNE, TOPF];
 var FARBEN = ['--l-reisen','--l-wohnen','--l-immobilien','--l-studio','--l-kulinarik'];
 var GRUND  = ['#a97a1d','#4a5c39','#792d29','#1f1c17','#6b3951'];  /* kanonisch, für die Tönung */
 var LICHT  = ['#d2a544','#8fae6c','#c9736a','#d8cdb7','#b47fa1'];  /* Lichtfassung auf dunklem Grund */
@@ -528,6 +540,7 @@ var wurzel = document.documentElement;
 var kaps   = [].slice.call(document.querySelectorAll('.kap'));
 var punkte = [].slice.call(document.querySelectorAll('#wnav li'));
 var lauf   = document.querySelector('.lauf');
+var detail = [].slice.call(document.querySelectorAll('#details g'));
 
 /* ---------- 5. Ouvertüre: gestaffelter Einzug -------------------------- */
 function start(){
@@ -652,6 +665,12 @@ function takt(){
       f1[0] + (f2[0] - f1[0]) * te, f1[1] + (f2[1] - f1[1]) * te, f1[2] + (f2[2] - f1[2]) * te
     ];
     wurzel.style.setProperty('--wf', lerpF(LICHT_RGB[i], LICHT_RGB[i + 1], te));
+
+    /* Details gehoeren zur gesetzten Form: sie treten erst auf, wenn nichts mehr morpht. */
+    for (k = 0; k < detail.length; k++){
+      var nah = 1 - Math.abs(wert - k) * 2.8;
+      detail[k].style.opacity = nah > 0 ? (nah > 1 ? 1 : nah).toFixed(3) : '0';
+    }
     wurzel.style.setProperty('--ton', toenung(mix, 0.13 * (vorlauf)));
   }
 

@@ -1208,3 +1208,29 @@ startseite-klassisch.html sichern, startseite-v3.html als index.html, seiten.jso
 typ:"start"/welt:"holding"/"nav":false umstellen, gen_kopf.js + gen_sw.js laufen lassen.
 Der Kopfblock fehlt der Entwurfsdatei bewusst (standalone wird uebersprungen) und wird beim
 Wechsel vom Generator gesetzt.
+
+### NACHSCHAERFUNG (SW -3000): erkennbar und knapp
+
+RUECKMELDUNG DES USERS: „Besser aber noch nicht wirklich erkennbar. Die Maße an Text dazwischen
+ist auch erschlagend. Catchier und verstaendlicher gestalten."
+
+1. ERKENNBARKEIT. Ein offener Strich liest sich nicht als Gegenstand. Die Hauptlinie ist jetzt
+   eine GESCHLOSSENE SILHOUETTE (Koffer -> Haus -> Tuer -> Gluehbirne -> Topf, umlaufend
+   gezeichnet, Rueckweg zum Startpunkt), Strichstaerke 1,6 -> 2,0. Dazu je Welt eine
+   DETAILZEICHNUNG als eigene SVG-Gruppe: Griff/Band/Schloesser · Tuer/Fenster/Schornstein ·
+   Tuerblatt/Knauf/Schwelle · Faden/Gewinde/Strahlen · Deckel/Henkel/Dampf.
+   REGEL: Details gehoeren zur GESETZTEN Form. Ihre Deckkraft ist 1 - |wert - index| * 2,8 —
+   waehrend des Morphs sind sie weg, sonst wuerden zwei Gegenstaende ineinanderlaufen.
+   Der Morph selbst bleibt unveraendert (Umtastung auf 168 Punkte, punktweiser Lerp).
+   Die Reisen-Form ist vom abstrakten „Weg" zum Koffer gewechselt — erkennbar schlaegt poetisch.
+2. TEXTMASSE. Kapitel von fuenf auf vier kurze Zeilen: Weltname GROSS (Fraunces 600, Weltfarbe),
+   Verb kursiv als Echo, EIN Satz, drei Marken, ein Weg. Der grosse Wortlaut ist jetzt der
+   WELTNAME, nicht mehr das Verb — verstaendlich vor poetisch. Gemessen: 340-360 -> 127-146
+   Zeichen je Kapitel. Manifest 3 -> 2 Zeilen, Ouvertuere-Vorspann 3 -> 1 Zeile,
+   Zaehlband-Ueberschrift halbiert, Finale-Karten auf je einen Halbsatz.
+3. MOBIL. Die Marke steht ueber dem Text statt dahinter (Deckkraft 0,3), kein Uebersprechen mehr.
+
+PRUEFUNG: 29/29 (vier neue: Detail erscheint / Detail weicht beim Morph / Weltnamen gesetzt /
+Kapiteltext knapp). 0 PageErrors, 390 px ohne Querlauf, Bewegungsruhe unveraendert vollstaendig.
+Die fuenf Marken wurden gerendert und einzeln geprueft; der Topfdeckel lag zuerst genau auf dem
+Rand (sah aus wie EIN dicker Strich) und wurde um 3 Einheiten angehoben.
