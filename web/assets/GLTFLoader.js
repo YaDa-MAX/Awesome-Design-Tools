@@ -1,3 +1,5 @@
+/* GLTFLoader r128 (MIT) — three.js, https://threejs.org · Lizenzhinweis aus
+   wohnen-konfigurator.html hierher uebernommen (Remake v3, Welle 9). */
 ( function () {
 
 	class GLTFLoader extends THREE.Loader {

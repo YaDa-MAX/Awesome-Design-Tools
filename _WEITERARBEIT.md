@@ -1483,3 +1483,54 @@ STAND NACH DEM UMBAU
 NEBENBEFUND BESTAETIGT: mit abgeklemmten Google Fonts laufen die Rundlaeufe um ein Vielfaches
 schneller — die 13 s je Seite waren tatsaechlich nur die ins Leere laufende Font-Anfrage des
 Sandkastens, kein Seitenproblem.
+
+### WELLE 9, TEIL 4: RESTLICHE TOTLAST (SW -3007)
+
+Bestandsaufnahme aller nicht-HTML-Dateien unter web/: welche wird von keiner Datei genannt?
+Ergebnis: 6 Dateien, 227 KB. Jede einzeln nachgesehen — und eine davon drehte die Aufgabe um.
+
+1. assets/GLTFLoader.js (94 KB) — NICHT geloescht, sondern IN BETRIEB GENOMMEN.
+   wohnen-konfigurator.html trug denselben Loader INLINE (Zeile 308 ff., „GLTFLoader r128 (MIT)").
+   Zeichenvergleich nach Normalisierung des Leerraums: Block und Datei sind identisch, einziger
+   Unterschied waren die 28 Zeichen des Lizenzkommentars. Also Block raus, <script src> rein.
+   DER LIZENZHINWEIS IST MITGEZOGEN: er steht jetzt im Kopf von assets/GLTFLoader.js. Ihn beim
+   Auslagern zu verlieren waere der eigentliche Fehler gewesen.
+   wohnen-konfigurator.html 765 -> 671 KB · inline-JS im Bestand 1.884 -> 1.801 KB ·
+   die Datei ist jetzt precached und wird einmal statt in jeder Seitenkopie geladen.
+   NACHGEWIESEN, dass es wirklich laeuft (Layoutgleichheit allein beweist das nicht):
+   alt und neu geladen, beide THREE.GLTFLoader === 'function', beide instanziierbar,
+   0 PageErrors; neu haengt an einem <script src>, alt an keinem.
+
+2. hb-suche-nav.js — Einbindung auf 24 von 25 Seiten entfernt.
+   Die erste Anweisung der Datei lautet `var nav=document.querySelector('nav'); if(!nav) return;`.
+   Ein <nav>-Element hat von den 25 einbindenden Seiten nur index.html. Auf den anderen 24 lief
+   das Skript also seit v3-W1 in die Ruecksprungzeile. Die Suche selbst fehlt dort nicht: seit
+   v3-W5 steht sie als Kurzweg in der Navigationsleiste und seit heute zusaetzlich im Weltmenue.
+   BEWEIS: alte Fassung (git-worktree, Port 8181) gegen neue (8180), Bewegungsruhe, Fonts
+   abgeklemmt, Fingerabdruck jedes sichtbaren Elements ueber alle betroffenen Seiten —
+   25/25 IDENTISCH bei 1280 px UND bei 390 px (die 24 plus wohnen-konfigurator).
+
+3. NICHT ANGERUEHRT, weil es keine Aufraeumarbeit, sondern eine Inhaltsentscheidung ist:
+   assets/hero-dark.png (75 KB), assets/monogram-dark.png (25 KB), assets/monogram-light.png
+   (23 KB). Git-Geschichte nachgesehen: diese drei wurden von KEINER Seite je referenziert,
+   auch nicht im urspruenglichen Import — sie standen nur in der handgepflegten Precache-Liste,
+   die der Generator in W4 zurecht fallen liess. Sie kosten zur Laufzeit NULL (nicht precached,
+   nie abgerufen), im Verzeichnis 123 KB. Es ist Markenmaterial (ein Monogramm!), das sich aus
+   Code nicht wiederherstellen laesst — das loescht der User oder niemand.
+   assets/icon-source-1024.png (9 KB) bleibt bewusst: das ist die Vorlage, aus der favicon-192/
+   -512 und maskable-192/-512 stammen. Eine Quelldatei, kein Ballast.
+   assets/rezepte/README.txt (0,7 KB) bleibt: Notiz zum Bilderordner.
+
+PRUEFUNG NACH DEM TEIL
+- 25/25 Seiten unveraendert (Fingerabdruck, beide Breiten).
+- GLTFLoader in alt und neu gleich funktionsfaehig.
+- Rundlauf 103 Seiten bei 390 px: 0 PageErrors, 0 Querlauf.
+- Rundlauf 103 Seiten bei 1280 px: 0 PageErrors, 0 Querlauf.
+- 31/31 Navigationspruefungen.
+
+STAND DER WELLE 9 INSGESAMT
+Navigation neu (Leiste + Weltmenue auf 100 Seiten) · Registry berichtigt (3 Seiten intern,
+Sitemap 89 -> 86) · Querlauf 7 -> 0 Seiten · hb-menue.css 34 -> 1 Seite · hb-suche-nav.js
+25 -> 1 Seite · GLTFLoader aus dem Inline-Code in die vorhandene Datei.
+OFFEN UND NUR VOM USER ZU ENTSCHEIDEN: Uebernahme von startseite-v3.html als index.html ·
+Welt-Balance Reisen/Immobilien · die drei nie benutzten Bilddateien.
