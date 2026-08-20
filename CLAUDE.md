@@ -15,7 +15,7 @@ Statisches HTML/JS/CSS-**PWA ohne Build-Schritt**, offline-fähig, localStorage.
 
 ## Pflicht-Workflow nach JEDER Änderung unter web/
 1. **Precache + Service-Worker-Version**: `cd web && node ../tools/gen_sw.js` — erzeugt die
-   `PRECACHE`-Liste aus dem Dateibestand UND zählt die Cache-Version hoch (aktuell **-3003**).
+   `PRECACHE`-Liste aus dem Dateibestand UND zählt die Cache-Version hoch (aktuell **-3004**).
    Nie von Hand pflegen. Standalone-Seiten (`typ` in `tools/seiten.json`) bleiben automatisch
    draußen; `vendor/` und Dateien > 150 KB kommen zur Laufzeit in den Cache (der fetch-Handler
    macht stale-while-revalidate). Wer nur die Version braucht, bumpt trotzdem über den Generator.
@@ -43,6 +43,11 @@ Statisches HTML/JS/CSS-**PWA ohne Build-Schritt**, offline-fähig, localStorage.
 - `web/heiben-nav.js`: baut `div role="banner"`/`div role="navigation"` — **niemals `header`/`nav`-Elemente**
   (Bestand stylt `nav{}` als Element-Selektor). Einbau je Seite: `<link heiben-design.css>` +
   `<script heiben-nav.js defer>` vor `</head>` + `<body data-hb-welt="reisen|wohnen|immobilien|studio|kulinarik|wissen|konto|holding">`.
+  **Weltmenü (seit v3-W9)**: dieselbe Datei baut zusätzlich ein Vollbild-Menü mit den fünf Welten
+  und deren Unterseiten. Quelle ist `web/heiben-menue.js` (generiert aus `tools/seiten.json`,
+  Pflichtdatei auf jeder Seite mit Navigation). Das Feld entsteht **erst beim ersten Öffnen** —
+  `heiben-menue.js` hängt hinter `heiben-nav.js`, beide `defer`, die Liste gibt es beim Ausführen
+  also noch nicht. Die Weltfarbe der Leiste kommt aus `--hb-welt` (Token-Ebene), nicht aus JS.
 - **Dokumentkopf ist generiert** (seit v3-W2): der Block zwischen `<!-- hb:kopf -->` und
   `<!-- /hb:kopf -->` gehört `tools/gen_kopf.js` — nie von Hand ändern, sondern `tools/seiten.json`
   pflegen und neu erzeugen. Der Generator fasst Schriften, Stylesheets und `<style>` NICHT an

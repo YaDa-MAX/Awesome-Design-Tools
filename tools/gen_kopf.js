@@ -34,6 +34,9 @@ const PAPIER = '#f3eee5'; /* Grundton der Marke; bewusst auf allen Seiten gleich
 const PFLICHT = [
   { datei: 'heiben-design.css', tag: '<link rel="stylesheet" href="heiben-design.css">' },
   { datei: 'heiben-nav.js', tag: '<script src="heiben-nav.js" defer></script>', optionalWennNavAus: true },
+  /* Weltmenue: heiben-nav.js baut das Feld erst beim ersten Oeffnen, liest die Liste
+     also nach dem Laden aller defer-Skripte. Reihenfolge im Kopf ist darum egal. */
+  { datei: 'heiben-menue.js', tag: '<script src="heiben-menue.js" defer></script>', optionalWennNavAus: true },
   { datei: 'heiben-legal.js', tag: '<script src="heiben-legal.js" defer></script>' },
   { datei: 'hb-pwa.js', tag: '<script id="hb-pwa" src="hb-pwa.js" defer></script>' },
   /* Nur dort, wo es etwas zu tun gibt: auf internen Seiten (Kennzeichnung) und auf
@@ -210,6 +213,33 @@ const bereicheJs = '/* HeiBen Bereiche — GENERIERT von tools/gen_kopf.js aus t
   + 'window.HEIBEN_INTERN=' + JSON.stringify(intern) + ';\n'
   + 'window.HEIBEN_WELTSEITEN=' + JSON.stringify(weltseiten) + ';\n';
 if (!PRUEFEN) fs.writeFileSync('heiben-bereiche.js', bereicheJs);
+
+/* heiben-menue.js — dieselbe Liste, aber nur Adresse und Titel. Die Beschreibungen
+   machen in heiben-bereiche.js rund drei Viertel des Umfangs aus; das Menü braucht
+   sie nicht, und diese Datei liegt auf JEDER Seite mit Navigation. */
+const WELTWORT = /^(Reisen|Wohnen|Immobilien|Studio|Kulinarik|Manufaktur|Lebenswissen)\s*[—·|:]\s*/;
+/* Im Menü stehen fünf Spalten nebeneinander; die Spalte sagt schon, welche Welt das ist.
+   Also fällt weg, was der Titel nur zur Wiederholung trägt: der Markenzusatz am Ende,
+   das vorangestellte Weltwort und der Untertitel nach dem Gedankenstrich. Der Hinweis
+   „intern" bleibt stehen — der sagt etwas, was der Leser wissen muss. */
+function kurz(t) {
+  let x = String(t).replace(/\s*[|·—-]\s*HeiBen\b[^|]*$/i, '').trim();
+  x = x.replace(WELTWORT, '').trim();
+  const teil = x.split(' — ');
+  if (teil.length > 1 && !/intern/i.test(teil[1]) && teil[0].length >= 8) x = teil[0].trim();
+  return x || String(t);
+}
+const menue = {};
+Object.keys(weltseiten).forEach((w) => {
+  menue[w] = weltseiten[w].map((e) => ({ u: e.u, t: kurz(e.t) }));
+});
+const menueJs = '/* HeiBen Menü — GENERIERT von tools/gen_kopf.js aus tools/seiten.json.\n'
+  + '   Nicht von Hand pflegen. */\n'
+  + 'window.HEIBEN_MENUE=' + JSON.stringify(menue) + ';\n';
+if (!PRUEFEN) fs.writeFileSync('heiben-menue.js', menueJs);
+console.log(`  heiben-menue.js: `
+  + Object.keys(menue).map((w) => w + ' ' + menue[w].length).join(' · ')
+  + ` (${(menueJs.length / 1024).toFixed(1)} KB)`);
 console.log(`  heiben-bereiche.js: ${intern.length} interne Seiten · `
   + Object.keys(weltseiten).map((w) => w + ' ' + weltseiten[w].length).join(' · '));
 

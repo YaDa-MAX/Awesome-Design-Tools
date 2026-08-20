@@ -1315,3 +1315,79 @@ klickt statt nur zu messen.
 
 PRUEFUNG: 43/43 (neun neue: Menuetaste mobil · oeffnet · fuenf Welten · Hintergrund gesperrt ·
 schliesst und raeumt auf · Sprung in die Welt · Titel · Vorspann · CTA). 0 PageErrors.
+
+---
+
+## REMAKE V3 · WELLE 9: NAVIGATION DER WELTSEITEN (SW -3004)
+
+AUFTRAG: „Nav Auftrag zu eigenen Weltseiten durchfuehren. Ebenso Design ueberarbeiten."
+Also die gemeinsame Navigation auf allen 100 Seiten mit hb-nav — Bauteil UND Gestaltung.
+
+AUSGANGSLAGE: eine helle Leiste mit Marke links, fuenf Weltlinks, Trennstrich, Wissen/Suche/
+Mein HeiBen; unter 860 px klappte ein „☰" dieselben acht Links untereinander auf. Kein Zugang
+zu dem, was eine Welt eigentlich enthaelt — die Unterseiten standen nur in den Fussleisten.
+
+WAS JETZT STEHT
+1. LEISTE (heiben-design.css, nur .hb-Klassen, nur Tokens):
+   - Die Leiste traegt die WELTFARBE als 2-px-Kante. Sie kommt aus der Token-Ebene
+     (--hb-welt ueber data-hb-welt am body), nicht aus JavaScript — kein Hex im Bauteil.
+   - Aktiver Weltlink: Tinte statt Grau, Unterstrich in der Weltfarbe, Punkt mit Hof.
+   - „Mein HeiBen" ist eine umrandete Pille in der Weltfarbe (mono, gesperrt) und damit als
+     Zugang erkennbar, statt als achter Link in einer Reihe zu verschwinden.
+   - Zwei-Strich-Taste statt „☰"; sie dreht sich beim Oeffnen zum Kreuz.
+   - Unter 900 px verschwinden die Kurzwege, unter 420 px auch die Pille.
+2. WELTMENUE (neu): Vollbild auf Marken-Tinte, auf JEDER Breite erreichbar.
+   Fuenf Spalten — Weltname in der Lichtfassung der Weltfarbe, Verb kursiv darunter
+   (aufbrechen · bleiben · ankommen · verstehen · teilen, dieselben wie auf startseite-v3),
+   darunter die UNTERSEITEN DIESER WELT. Die aktuelle Welt ist abgesetzt, die aktuelle Seite
+   fett in Weltfarbe. Im Fuss sechs Wege, die zu keiner Welt gehoeren.
+   Schmal klappt jede Welt zu, die aktuelle bleibt offen — sonst stuenden vierzig Zeilen
+   untereinander. Esc schliesst, der Hintergrund wird gesperrt, der Tabulator bleibt im Feld,
+   der Fokus kehrt zur Taste zurueck.
+3. QUELLE: `web/heiben-menue.js`, generiert von gen_kopf.js aus derselben Registry (2,3 KB) und
+   als Pflichtdatei auf jeder Seite mit Navigation. Bewusst NICHT heiben-bereiche.js verwendet:
+   das traegt die Beschreibungen mit und waere mit 11,4 KB fuenfmal so gross.
+   TITELPUTZ im Generator (`kurz()`): die Spalte sagt schon, welche Welt gemeint ist, also faellt
+   weg, was der Titel nur wiederholt — Markenzusatz am Ende, vorangestelltes Weltwort,
+   Untertitel nach dem Gedankenstrich. „intern" bleibt stehen, das sagt etwas.
+   Beispiele: „Reisen · Kuratierte Reisen" -> „Kuratierte Reisen" · „Rezept-Wuerfel — Was der
+   Kuehlschrank hergibt | HeiBen Kulinarik" -> „Rezept-Wuerfel" · „Lebenswissen — Das
+   Nachschlagewerk | HeiBen Studio" -> „Das Nachschlagewerk".
+
+VERTRAEGE GEHALTEN (alle geprueft, nicht behauptet):
+   div[role=banner] + div[role=navigation], keine header/nav-Elemente · .hb-nav bleibt erstes
+   Kind des body, das Band der internen Seiten sitzt weiter direkt darunter · data-welt gehoert
+   weiterhin dieser Datei · Weltfarben kanonisch.
+   Das Menue haengt am ENDE des body, nicht in .hb-nav — sonst waere hb-bereiche.js das Band
+   in das Menue gerutscht.
+
+FALLEN, DIE ES ZU LOESEN GALT
+- REIHENFOLGE: gen_kopf haengt fehlende Pflichtdateien ans Kopfende, also hinter heiben-nav.js.
+  Beide mit defer, heiben-nav.js laeuft zuerst — window.HEIBEN_MENUE gibt es da noch nicht.
+  Loesung: das Feld wird ERST BEIM ERSTEN OEFFNEN gebaut. Fehlt die Liste, zeigt es die fuenf
+  Welten ohne Unterseiten.
+- Z-INDEX: heiben-legal.js setzt die Consent-Leiste auf 9999. Das Menue stand auf 80 und hatte
+  die Leiste quer im Bild. Jetzt 10000.
+- `.hb-menue{display:flex}` haette wie auf der Startseite das hidden-Attribut geschlagen;
+  `.hb-menue[hidden]{display:none}` steht von Anfang an drin.
+
+PRUEFUNG
+- 30/30 gezielte Pruefungen (Vertraege, aktive Welt, Menue oeffnet/schliesst, Fokus, Sperre,
+  aktuelle Seite markiert, internes Band, schmal: Kurzwege aus, Aufklapper).
+- RUNDLAUF 103 Seiten breit: 0 PageErrors.
+- RUNDLAUF 103 Seiten schmal (390 px): 0 PageErrors einzeln nachgeprueft.
+
+BEFUNDE, NICHT VON MIR VERURSACHT UND NICHT NEBENBEI GEAENDERT
+1. QUERLAUF bei 390 px auf 7 Seiten: kulinarik-export 890 · unternehmen 660 · kulinarik-
+   mealplanner 511 · widerruf 478 · reisen-planer 422 (Leaflet-Kacheln) · kulinarik-redaktion
+   402 · studio-lebenswissen-redaktion 395. Nachgemessen: die Navigation ist auf jeder dieser
+   Seiten exakt 390 px breit, KEIN einziges ueberstehendes Element gehoert ihr. Das ist
+   Seiteninhalt (Tabellen, Werkzeuge, Karten) und eine eigene Aufgabe.
+2. REGISTRY-WIDERSPRUCH: drei Manufaktur-Seiten heissen im Titel „— intern", stehen aber als
+   typ:"weltseite" in tools/seiten.json (manufaktur-bestellungen, manufaktur-kalkulation,
+   manufaktur-maschinencode). Dadurch stehen sie in der Sitemap, tragen kein Band und
+   erscheinen jetzt auch im Weltmenue. Entweder sind sie intern — dann drei Zeilen in
+   seiten.json auf typ:"intern" und neu erzeugen (Sitemap 89 -> 86, interne Seiten 11 -> 14) —
+   oder der Titelzusatz gehoert weg. Das ist eine Inhaltsentscheidung, keine Umbauarbeit.
+3. studio-lebenswissen-artikel.html bringt eine eigene alte Menuetaste (#hbBurger aus
+   hb-menue.css) mit und zeigt damit zwei Menueknoepfe. Bestand, war schon vor dieser Welle so.
