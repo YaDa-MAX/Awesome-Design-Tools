@@ -1591,3 +1591,64 @@ OFFEN UND NUR VOM USER ZU ENTSCHEIDEN:
    Vorschlaege liegen seit W7 bereit.
 2. assets/monogram-dark.png und assets/monogram-light.png — nie referenziertes Markenmaterial.
    hero-dark.png ist mit dieser Welle in Betrieb gegangen.
+
+---
+
+## REMAKE V3 · WELLE 11: WELT-BALANCE (SW -3009)
+
+AUFTRAG: „Leg los mit der Balance." Reisen und Immobilien standen bei je 5 Seiten, Kulinarik
+bei 10. Umgesetzt sind genau die sechs Vorschlaege, die seit W7 hinterlegt waren.
+
+NEU — REISEN (5 -> 8 Seiten)
+- reisen-ziele.html · 12 Ziel-Steckbriefe zwischen Bergischem Land und Schottland. Je Ziel:
+  Anreise ab Koeln, beste Zeit, Dauer, Budget, ein Absatz Text, „warum wir es vorschlagen" —
+  und ausdruecklich „wofuer es nicht taugt". Zwei Filterbaender (Entfernung, Charakter).
+  DEEP-LINK nach dem Kompendien-Vertrag: #id oeffnet den Steckbrief, Schliessen raeumt den
+  Hash wieder ab (history.replaceState, damit der Zurueck-Knopf nicht verstopft).
+- reisen-packliste.html · Werkzeug (Gruppe „Unterwegs"). Grundstock plus Zuschlaege nach Art
+  der Reise, Dauer, Jahreszeit und Begleitung; Haken, eigene Punkte und geloeschte Punkte
+  bleiben in heiben-reise-packliste. Druckstil raeumt Bedienelemente weg.
+- reisen-rueckblick.html · sechs begleitete Reisen mit Stimme der Reisenden UND der Zeile
+  „was wir geaendert haben". Ein Rueckblick ohne die Fehler waere Werbung, keine Auskunft.
+
+NEU — IMMOBILIEN (5 -> 8 Seiten)
+- immobilien-nebenkosten.html · Werkzeug (Gruppe „Wohnen & Immobilien"). Grunderwerbsteuer je
+  Bundesland (16 Saetze als Datenzeile, Stand 2026 und als solcher ausgewiesen), Notar/Grundbuch,
+  Provision, dazu Umzug und Kueche. Zeigt Anteil am Kaufpreis, Gesamtsumme und ob das
+  Eigenkapital die Nebenkosten traegt — der Punkt, an dem Finanzierungen scheitern.
+  Gegengerechnet: 400.000 € in NRW = 46.280 € (11,57 %), in Bayern 34.280 €.
+- immobilien-objekt.html · Steckbrief je Objekt ueber ?id= — Eckdaten, Lage, Merkmale, drei
+  weitere Objekte, Merkzettel (heiben-immo-merk). Unbekannte Kennung zeigt keinen Fehler,
+  sondern den Weg zurueck zu den Angeboten.
+- immobilien-vermieten.html · Leitfaden in neun Schritten mit einer Beispielrechnung, die
+  MINUS ergibt (−995 € im ersten Jahr) und erklaert, warum das der Normalfall ist. Bruecken zu
+  papierkram, steuererklaerung und mieten-oder-kaufen.
+
+EINE ARCHITEKTURSACHE NEBENBEI
+immobilien-angebote.html trug den Objektbestand inline. Die Objektseite braucht dieselben
+Daten — also liegen sie jetzt als web/immobilien-daten.js vor (Konvention *-daten.js: nur ans
+Ende erweitern, id-Felder stabil, weil sie in Deep-Links und im Merkzettel stehen). Die Liste
+wurde auf die Datei umgestellt und um den Link zur Objektseite ergaenzt; die Objekte haben
+Detailfelder bekommen (Baujahr, Etage, Hausgeld, Provision, Bezugsfrei, Text, Lage, Haken).
+
+KEINE VERTRAGSAENDERUNG NOETIG
+Die drei neuen Speicherschluessel greifen in die vorhandenen Praefixregeln aus
+heiben-speicher.js: heiben-reise-packliste -> reisen, heiben-immo-merk und
+heiben-immo-nebenkosten -> immobilien. Nachgerechnet, nicht angenommen.
+Verlinkung ebenfalls automatisch: reisen.html und immobilien.html tragen
+data-hb-weltseiten, die neuen Seiten erscheinen dort nach gen_kopf.js von selbst.
+
+PRUEFUNG
+- 29/29 gezielte Pruefungen der neuen Seiten: Kopf/Navigation/Welt auf allen sechs, Deep-Link
+  #mosel, Filter 6 von 12, Packliste 5 Gruppen / 30 Punkte, Haken ueberlebt den Neuladen,
+  Auswahl aendert die Liste, Speicherschluessel nach Praefixregel, ?id= laedt das Objekt,
+  Quadratmeterpreis 5.143 €, Merkzettel, Leerfall, NRW- und Bayern-Rechnung, 16 Bundeslaender,
+  Angebote aus der Datei, Uebersicht auf beiden Weltseiten, schmal ohne Querlauf.
+- Rundlauf 109 Seiten bei 390 px und 1280 px: je 0 PageErrors, 0 Querlauf.
+- 31/31 Navigationspruefungen, 49/49 Startseiten-Pruefungen, offline 13/13.
+- Sitemap 86 -> 92 URLs · Werkzeuge 21 -> 23 · Suchindex 426 Eintraege (92 Seiten)
+  · Precache 160 -> 167 Eintraege.
+
+STAND DER WELTEN: Reisen 8 · Wohnen 7 · Immobilien 8 · Studio 7 · Kulinarik 10.
+OFFEN UND NUR VOM USER ZU ENTSCHEIDEN: assets/monogram-dark.png und monogram-light.png —
+nie referenziertes Markenmaterial, zur Laufzeit kostenlos.

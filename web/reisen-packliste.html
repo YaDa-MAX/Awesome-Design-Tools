@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<!-- hb:kopf — erzeugt von tools/gen_kopf.js aus tools/seiten.json. Nicht von Hand ändern. -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Packliste · HeiBen Reisen</title>
+<meta name="description" content="Art der Reise, Dauer, Jahreszeit, Begleitung — die Liste stellt sich zusammen. Abhaken bleibt auf dem Gerät, eigene Punkte kommen dazu, ausdrucken geht auch.">
+<link rel="canonical" href="https://www.heiben.de/reisen-packliste.html">
+<meta name="theme-color" content="#f3eee5">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="application-name" content="HeiBen">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="HeiBen">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="HeiBen">
+<meta property="og:locale" content="de_DE">
+<meta property="og:url" content="https://www.heiben.de/reisen-packliste.html">
+<meta property="og:title" content="Packliste · HeiBen Reisen">
+<meta property="og:description" content="Art der Reise, Dauer, Jahreszeit, Begleitung — die Liste stellt sich zusammen. Abhaken bleibt auf dem Gerät, eigene Punkte kommen dazu, ausdrucken geht auch.">
+<meta property="og:image" content="assets/hero-light.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Packliste · HeiBen Reisen">
+<meta name="twitter:description" content="Art der Reise, Dauer, Jahreszeit, Begleitung — die Liste stellt sich zusammen. Abhaken bleibt auf dem Gerät, eigene Punkte kommen dazu, ausdrucken geht auch.">
+<meta name="twitter:image" content="assets/hero-light.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Packliste · HeiBen Reisen","description":"Art der Reise, Dauer, Jahreszeit, Begleitung — die Liste stellt sich zusammen. Abhaken bleibt auf dem Gerät, eigene Punkte kommen dazu, ausdrucken geht auch.","url":"https://www.heiben.de/reisen-packliste.html","inLanguage":"de-DE","isPartOf":{"@type":"WebSite","name":"HeiBen","url":"https://www.heiben.de/"},"publisher":{"@type":"Organization","name":"HeiBen Reisen GmbH"}}</script>
+<!-- /hb:kopf -->
+<style>
+:root{--bg:#f3eee5;--bg-soft:#ebe3d4;--ink:#1f1c17;--ink-soft:#524a3e;--rule:#d8cdb7;
+  --terracotta:#b04a31;--accent:#a97a1d;--accent-d:#8a6115;--gut:#4a5c39;}
+*{box-sizing:border-box;}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Manrope',-apple-system,Segoe UI,sans-serif;line-height:1.55;}
+.wrap{max-width:1000px;margin:0 auto;padding:0 1.5rem 3rem;}
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:1.1rem 0;border-bottom:1px solid var(--rule);}
+.wm{font-family:'Fraunces',serif;font-weight:700;font-size:1.4rem;}.wm .a{color:var(--accent);}
+.wm span{font-weight:400;font-size:.9rem;color:var(--ink-soft);}
+.back{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);text-decoration:none;}
+.back:hover{color:var(--ink);}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:.64rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent-d);margin-top:1.6rem;}
+h1{font-family:'Fraunces',serif;font-weight:340;font-size:clamp(1.9rem,4.6vw,2.8rem);margin:.6rem 0 .3rem;line-height:1.08;}
+h2{font-family:'Fraunces',serif;font-weight:440;font-size:1.25rem;margin:2rem 0 .5rem;}
+.lede{color:var(--ink-soft);max-width:64ch;margin:0;}
+.note{color:var(--ink-soft);font-size:.88rem;max-width:64ch;}
+.steuer{background:#fff;border:1px solid var(--rule);border-radius:18px;padding:1.2rem 1.3rem;margin-top:1.4rem;}
+.reihe{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,180px),1fr));gap:.9rem;}
+.feld{display:flex;flex-direction:column;gap:.25rem;min-width:0;}
+.feld label{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);}
+.feld select,.feld input{border:1px solid var(--rule);background:var(--bg);border-radius:9px;padding:.6rem .7rem;font:inherit;width:100%;max-width:100%;min-width:0;}
+.feld select:focus,.feld input:focus{outline:2px solid var(--accent);outline-offset:1px;}
+.schalter{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.9rem;align-items:center;}
+.fortschritt{margin-top:1.4rem;display:flex;align-items:center;gap:.9rem;flex-wrap:wrap;}
+.balken{flex:1 1 200px;height:8px;background:var(--bg-soft);border-radius:999px;overflow:hidden;min-width:160px;}
+.balken i{display:block;height:100%;width:0;background:var(--gut);border-radius:999px;transition:width .25s ease;}
+.stand{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);}
+.gruppen{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,280px),1fr));gap:14px;margin-top:1rem;}
+.gruppe{background:#fff;border:1px solid var(--rule);border-radius:16px;padding:1rem 1.1rem;}
+.gruppe h3{font-family:'Fraunces',serif;font-weight:500;font-size:1.05rem;margin:0 0 .1rem;}
+.gruppe .wieviel{font-family:'JetBrains Mono',monospace;font-size:.54rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);}
+.gruppe ul{list-style:none;margin:.6rem 0 0;padding:0;}
+.gruppe li{display:flex;align-items:flex-start;gap:.55rem;padding:.3rem 0;border-bottom:1px solid var(--bg-soft);}
+.gruppe li:last-child{border-bottom:0;}
+.gruppe li.ab label{text-decoration:line-through;color:var(--ink-soft);}
+.gruppe input[type=checkbox]{margin-top:.28rem;width:16px;height:16px;accent-color:var(--gut);flex:0 0 auto;}
+.gruppe label{font-size:.92rem;cursor:pointer;flex:1;min-width:0;}
+.gruppe .weg{border:0;background:none;color:var(--ink-soft);cursor:pointer;font-size:.9rem;line-height:1;padding:.2rem .3rem;}
+.gruppe .weg:hover{color:var(--terracotta);}
+.eigen{display:flex;gap:.4rem;margin-top:.7rem;}
+.eigen input{flex:1;min-width:0;border:1px solid var(--rule);background:var(--bg);border-radius:8px;padding:.45rem .6rem;font:inherit;font-size:.88rem;}
+.btn{display:inline-block;border:0;cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;padding:.7rem 1.05rem;border-radius:9px;text-decoration:none;}
+.btn.primary{background:var(--accent);color:#1f1c17;}
+.btn.ghost{background:none;border:1px solid var(--rule);color:var(--ink);}
+.btn.ghost:hover{border-color:var(--accent);color:var(--accent-d);}
+.btn.sm{padding:.45rem .7rem;font-size:.56rem;}
+.kasten{background:var(--bg-soft);border-left:3px solid var(--accent);border-radius:0 12px 12px 0;padding:.9rem 1.1rem;margin-top:1.4rem;}
+.kasten b{font-family:'Fraunces',serif;font-weight:500;}
+.wege{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.2rem;}
+.foot{margin-top:2.6rem;padding-top:1rem;border-top:1px solid var(--rule);font-size:.8rem;color:var(--ink-soft);}
+.foot a{color:var(--ink-soft);}
+@media print{
+  .topbar,.steuer,.wege,.kasten,.back,.gruppe .weg,.eigen,.fortschritt{display:none!important;}
+  body{background:#fff;}
+  .gruppen{grid-template-columns:1fr 1fr;}
+  .gruppe{break-inside:avoid;border-color:#999;}
+}
+</style>
+<link rel="stylesheet" href="heiben-design.css">
+<script src="heiben-nav.js" defer></script>
+<script src="heiben-menue.js" defer></script>
+<script src="heiben-legal.js" defer></script>
+<script id="hb-pwa" src="hb-pwa.js" defer></script>
+</head>
+<body data-hb-welt="reisen">
+<div class="wrap">
+  <div class="topbar">
+    <div class="wm"><span class="a">H</span>ei<span class="a">B</span>en <span>· Reisen</span></div>
+    <a class="back" href="reisen.html">← HeiBen Reisen</a>
+  </div>
+
+  <div class="eyebrow">Werkzeug · Packliste</div>
+  <h1>Packen, ohne nachts aufzuwachen.</h1>
+  <p class="lede">Sagen Sie, wohin und wie lange — die Liste stellt sich zusammen. Abhaken bleibt
+    auf diesem Gerät gespeichert, auch wenn Sie den Browser schließen. Eigene Punkte kommen dazu,
+    Überflüssiges fliegt raus, und ausdrucken lässt sie sich auch.</p>
+
+  <div class="steuer">
+    <div class="reihe">
+      <div class="feld">
+        <label for="art">Art der Reise</label>
+        <select id="art">
+          <option value="stadt">Städtereise</option>
+          <option value="strand">Strand &amp; Meer</option>
+          <option value="berg">Wandern &amp; Berge</option>
+          <option value="auto">Autoreise</option>
+        </select>
+      </div>
+      <div class="feld">
+        <label for="tage">Dauer</label>
+        <select id="tage">
+          <option value="kurz">1 bis 3 Tage</option>
+          <option value="woche" selected>4 bis 8 Tage</option>
+          <option value="lang">länger als 8 Tage</option>
+        </select>
+      </div>
+      <div class="feld">
+        <label for="zeit">Jahreszeit</label>
+        <select id="zeit">
+          <option value="warm">warm</option>
+          <option value="kalt">kalt</option>
+          <option value="wechsel" selected>wechselhaft</option>
+        </select>
+      </div>
+      <div class="feld">
+        <label for="wer">Wer reist mit</label>
+        <select id="wer">
+          <option value="allein">allein oder zu zweit</option>
+          <option value="kind">mit Kind</option>
+          <option value="hund">mit Hund</option>
+        </select>
+      </div>
+    </div>
+    <div class="schalter">
+      <button class="btn primary" id="neu" type="button">Liste aufbauen</button>
+      <button class="btn ghost" id="haken" type="button">Alle Haken lösen</button>
+      <button class="btn ghost" id="drucken" type="button">Drucken</button>
+      <span class="note" style="margin:0;">Die Liste bleibt auf diesem Gerät — kein Konto nötig.</span>
+    </div>
+  </div>
+
+  <div class="fortschritt">
+    <span class="stand" id="stand">—</span>
+    <span class="balken"><i id="balken"></i></span>
+  </div>
+
+  <div class="gruppen" id="gruppen"></div>
+
+  <div class="kasten">
+    <b>Die drei Dinge, die wirklich weh tun, wenn sie fehlen</b>
+    <p class="note" style="margin:.3rem 0 0;">Ausweis oder Pass mit ausreichender Gültigkeit,
+      Medikamente in der Menge für die ganze Reise plus drei Tage, und Ladegeräte. Alles andere
+      kann man unterwegs kaufen — diese drei nicht oder nur mit großem Aufwand.</p>
+  </div>
+
+  <h2>Was wir uns beim Packen angewöhnt haben</h2>
+  <p class="note"><b>Erst legen, dann packen.</b> Alles auf das Bett, dann die Hälfte zurück in
+    den Schrank. Bei Kurztrips reicht fast immer weniger, als man denkt.</p>
+  <p class="note"><b>Ein Set Wechselsachen ins Handgepäck.</b> Kostet nichts und rettet den
+    ersten Tag, wenn der Koffer woanders landet.</p>
+  <p class="note"><b>Dokumente doppelt.</b> Ein Foto von Pass, Impfausweis und Buchungen im
+    Handy — und eines in der Cloud, auf die auch jemand zu Hause zugreifen kann.</p>
+
+  <div class="wege">
+    <a class="btn ghost" href="reisen-ziele.html">Ziele ansehen</a>
+    <a class="btn ghost" href="reisebudget.html">Reisebudget rechnen</a>
+    <a class="btn ghost" href="reisen-planer.html">Route planen</a>
+    <a class="btn ghost" href="zuhause-ordner.html">Zuhause-Ordner</a>
+  </div>
+
+  <p class="foot">HeiBen Reisen · Köln — Ihre Liste bleibt lokal auf diesem Gerät.
+    <a href="reisen.html">HeiBen Reisen</a> · <a href="impressum.html">Impressum</a></p>
+</div>
+
+<script>
+(function(){
+  'use strict';
+  var SCHLUESSEL = 'heiben-reise-packliste';   /* Präfix nach heiben-speicher.js */
+
+  /* Grundstock: gilt immer. Danach kommen Zuschläge je nach Auswahl dazu. */
+  var GRUND = {
+    'Dokumente & Geld': ['Ausweis oder Reisepass', 'Krankenversicherungskarte', 'Buchungen ausgedruckt oder offline',
+      'Bargeld in kleiner Stückelung', 'Karte zum Bezahlen'],
+    'Kleidung': ['Unterwäsche', 'Socken', 'T-Shirts', 'Hose', 'Pullover oder Jacke', 'Schlafsachen'],
+    'Bad': ['Zahnbürste und Zahnpasta', 'Duschgel', 'Deo', 'Bürste oder Kamm', 'Medikamente'],
+    'Technik': ['Handy', 'Ladegerät', 'Kopfhörer', 'Powerbank'],
+    'Unterwegs': ['Wasserflasche', 'Kleiner Rucksack', 'Buch oder Hörbuch']
+  };
+  var ZUSCHLAG = {
+    stadt:  { 'Kleidung': ['Bequeme Schuhe zum Laufen', 'Ein Teil zum Ausgehen'],
+              'Unterwegs': ['Stadtplan offline geladen', 'Tickets für Museen'] },
+    strand: { 'Kleidung': ['Badesachen', 'Strandhandtuch', 'Sonnenhut'],
+              'Bad': ['Sonnencreme', 'After Sun'],
+              'Unterwegs': ['Badeschuhe', 'Wasserdichte Hülle'] },
+    berg:   { 'Kleidung': ['Wanderschuhe eingelaufen', 'Regenjacke', 'Funktionsshirts'],
+              'Unterwegs': ['Wanderkarte oder App offline', 'Blasenpflaster', 'Traubenzucker'],
+              'Bad': ['Sonnencreme LSF 30+'] },
+    auto:   { 'Unterwegs': ['Warnweste je Person', 'Verbandkasten geprüft', 'Ladekabel fürs Auto'],
+              'Dokumente & Geld': ['Führerschein', 'Fahrzeugschein', 'Grüne Versicherungskarte'] }
+  };
+  var ZEIT = {
+    warm:    { 'Kleidung': ['Kurze Hose', 'Sonnenbrille'], 'Bad': ['Mückenschutz'] },
+    kalt:    { 'Kleidung': ['Mütze und Schal', 'Handschuhe', 'Warme Jacke', 'Dicke Socken'] },
+    wechsel: { 'Kleidung': ['Regenjacke', 'Etwas zum Drüberziehen'] }
+  };
+  var WER = {
+    kind: { 'Kind': ['Kuscheltier', 'Wechselsachen doppelt', 'Snacks für unterwegs',
+                     'Spiel für die Fahrt', 'Kindermedikamente', 'Impfausweis'] },
+    hund: { 'Hund': ['Leine und Ersatzleine', 'Futter für die Reise', 'Napf faltbar',
+                     'Heimtierausweis', 'Kotbeutel', 'Handtuch fürs Auto'] },
+    allein: {}
+  };
+  var DAUER = {
+    kurz:  {},
+    woche: { 'Bad': ['Waschmittel für Handwäsche'] },
+    lang:  { 'Bad': ['Waschmittel für Handwäsche', 'Nagelschere'],
+             'Dokumente & Geld': ['Kopie der Dokumente separat'],
+             'Technik': ['Mehrfachstecker'] }
+  };
+
+  var $ = function(id){ return document.getElementById(id); };
+  var zustand = { ab: {}, eigen: {}, weg: {} };
+
+  function laden(){
+    try {
+      var d = JSON.parse(localStorage.getItem(SCHLUESSEL) || 'null');
+      if (!d) return;
+      if (d.wahl) ['art','tage','zeit','wer'].forEach(function(k){ if (d.wahl[k]) $(k).value = d.wahl[k]; });
+      zustand.ab = d.ab || {}; zustand.eigen = d.eigen || {}; zustand.weg = d.weg || {};
+    } catch (e) {}
+  }
+  function sichern(){
+    try {
+      localStorage.setItem(SCHLUESSEL, JSON.stringify({
+        wahl: { art: $('art').value, tage: $('tage').value, zeit: $('zeit').value, wer: $('wer').value },
+        ab: zustand.ab, eigen: zustand.eigen, weg: zustand.weg
+      }));
+    } catch (e) {}
+  }
+
+  function mische(ziel, zusatz){
+    Object.keys(zusatz || {}).forEach(function(g){
+      ziel[g] = (ziel[g] || []).concat(zusatz[g].filter(function(x){ return (ziel[g] || []).indexOf(x) < 0; }));
+    });
+  }
+  function bauen(){
+    var liste = {};
+    Object.keys(GRUND).forEach(function(g){ liste[g] = GRUND[g].slice(); });
+    mische(liste, ZUSCHLAG[$('art').value]);
+    mische(liste, ZEIT[$('zeit').value]);
+    mische(liste, DAUER[$('tage').value]);
+    mische(liste, WER[$('wer').value]);
+    Object.keys(zustand.eigen).forEach(function(g){
+      liste[g] = (liste[g] || []).concat(zustand.eigen[g]);
+    });
+    Object.keys(liste).forEach(function(g){
+      liste[g] = liste[g].filter(function(x){ return !zustand.weg[g + '|' + x]; });
+      if (!liste[g].length) delete liste[g];
+    });
+    return liste;
+  }
+
+  function esc(s){
+    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  function zeichnen(){
+    var liste = bauen(), gesamt = 0, fertig = 0;
+    var html = Object.keys(liste).map(function(g){
+      var punkte = liste[g].map(function(p){
+        var k = g + '|' + p, ab = !!zustand.ab[k];
+        gesamt++; if (ab) fertig++;
+        return '<li class="' + (ab ? 'ab' : '') + '">'
+          + '<input type="checkbox" id="' + esc(k) + '" data-k="' + esc(k) + '"' + (ab ? ' checked' : '') + '>'
+          + '<label for="' + esc(k) + '">' + esc(p) + '</label>'
+          + '<button class="weg" type="button" data-weg="' + esc(k) + '" aria-label="' + esc(p) + ' entfernen">✕</button></li>';
+      }).join('');
+      return '<div class="gruppe"><h3>' + esc(g) + '</h3>'
+        + '<span class="wieviel">' + liste[g].length + ' Punkte</span>'
+        + '<ul>' + punkte + '</ul>'
+        + '<div class="eigen"><input type="text" placeholder="Eigener Punkt" data-eigen="' + esc(g) + '">'
+        + '<button class="btn ghost sm" type="button" data-add="' + esc(g) + '">+</button></div></div>';
+    }).join('');
+    $('gruppen').innerHTML = html;
+    $('stand').textContent = fertig + ' von ' + gesamt + ' gepackt';
+    $('balken').style.width = gesamt ? Math.round(fertig / gesamt * 100) + '%' : '0%';
+    sichern();
+  }
+
+  $('gruppen').addEventListener('change', function(e){
+    var c = e.target.closest('[data-k]');
+    if (!c) return;
+    if (c.checked) zustand.ab[c.dataset.k] = 1; else delete zustand.ab[c.dataset.k];
+    zeichnen();
+  });
+  $('gruppen').addEventListener('click', function(e){
+    var w = e.target.closest('[data-weg]');
+    if (w) {
+      zustand.weg[w.dataset.weg] = 1;
+      var teil = w.dataset.weg.split('|');
+      if (zustand.eigen[teil[0]]) {
+        zustand.eigen[teil[0]] = zustand.eigen[teil[0]].filter(function(x){ return x !== teil[1]; });
+      }
+      zeichnen();
+      return;
+    }
+    var a = e.target.closest('[data-add]');
+    if (a) {
+      var g = a.dataset.add;
+      var feld = $('gruppen').querySelector('[data-eigen="' + g.replace(/"/g, '\\"') + '"]');
+      var wert = (feld && feld.value || '').trim();
+      if (!wert) return;
+      zustand.eigen[g] = (zustand.eigen[g] || []).concat([wert]);
+      delete zustand.weg[g + '|' + wert];
+      zeichnen();
+    }
+  });
+  $('gruppen').addEventListener('keydown', function(e){
+    if (e.key !== 'Enter') return;
+    var feld = e.target.closest('[data-eigen]');
+    if (!feld) return;
+    e.preventDefault();
+    var knopf = $('gruppen').querySelector('[data-add="' + feld.dataset.eigen.replace(/"/g, '\\"') + '"]');
+    if (knopf) knopf.click();
+  });
+
+  ['art','tage','zeit','wer'].forEach(function(id){ $(id).addEventListener('change', zeichnen); });
+  $('neu').addEventListener('click', function(){ zustand.weg = {}; zeichnen(); });
+  $('haken').addEventListener('click', function(){ zustand.ab = {}; zeichnen(); });
+  $('drucken').addEventListener('click', function(){ window.print(); });
+
+  laden();
+  zeichnen();
+})();
+</script>
+</body>
+</html>

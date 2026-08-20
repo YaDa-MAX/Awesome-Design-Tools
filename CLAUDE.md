@@ -15,7 +15,7 @@ Statisches HTML/JS/CSS-**PWA ohne Build-Schritt**, offline-fähig, localStorage.
 
 ## Pflicht-Workflow nach JEDER Änderung unter web/
 1. **Precache + Service-Worker-Version**: `cd web && node ../tools/gen_sw.js` — erzeugt die
-   `PRECACHE`-Liste aus dem Dateibestand UND zählt die Cache-Version hoch (aktuell **-3008**).
+   `PRECACHE`-Liste aus dem Dateibestand UND zählt die Cache-Version hoch (aktuell **-3009**).
    Nie von Hand pflegen. Standalone-Seiten (`typ` in `tools/seiten.json`) bleiben automatisch
    draußen; `vendor/` und Dateien > 150 KB kommen zur Laufzeit in den Cache (der fetch-Handler
    macht stale-while-revalidate). Wer nur die Version braucht, bumpt trotzdem über den Generator.
@@ -115,9 +115,13 @@ Statisches HTML/JS/CSS-**PWA ohne Build-Schritt**, offline-fähig, localStorage.
   Abschnitt in `mein-heiben`; Farbkanon geprüft — nur 15 der vermeintlich ~1.050 Vorkommen waren
   echt ersetzbar, umgestellt.
   V3-W7 fertig: Backoffice-Rahmung (11/11 Seiten mit einheitlichem Band + Übersicht im
-  Holding-Dashboard), Weltseiten-Übersicht für Reisen und Immobilien. **Offen und bewusst nicht
-  erfunden**: die inhaltliche Augenhöhe von Reisen (5 Seiten/124 KB) und Immobilien (5/92 KB)
-  gegenüber Kulinarik (12/439 KB) — das ist eine Inhaltsentscheidung des Users, keine Umbauarbeit.
+  Holding-Dashboard), Weltseiten-Übersicht für Reisen und Immobilien.
+  V3-W11 fertig: **Welt-Balance hergestellt** — Reisen und Immobilien haben jetzt je 8 Seiten
+  (vorher 5/5) gegenüber Kulinarik 10 und Wohnen 7. Neu: `reisen-ziele` (12 Steckbriefe,
+  Deep-Link `#id`), `reisen-packliste` (Werkzeug, `heiben-reise-packliste`),
+  `reisen-rueckblick`, `immobilien-nebenkosten` (Werkzeug, Grunderwerbsteuer je Bundesland),
+  `immobilien-objekt` (`?id=`), `immobilien-vermieten`. Der Objektbestand liegt seither als
+  `web/immobilien-daten.js` vor — Liste und Objektseite teilen sich eine Quelle.
   V3-W8 Teil 1 fertig: **Gesamt-QS** — 15/15 Prüfungen bestanden (Deep-Links, Persistenz,
   Register, Responsiv), Offline 13/13, 11 Brücken ohne kaputte Ziele, Sweep 102/102 ohne
   PageErrors. Protokoll in `_WEITERARBEIT.md`.

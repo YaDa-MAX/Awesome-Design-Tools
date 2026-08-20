@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<!-- hb:kopf — erzeugt von tools/gen_kopf.js aus tools/seiten.json. Nicht von Hand ändern. -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kaufnebenkosten-Rechner · HeiBen</title>
+<meta name="description" content="Grunderwerbsteuer, Notar, Grundbuch und Provision — je Bundesland gerechnet. Zeigt, was die Bank nicht mitfinanziert und was aus Eigenkapital kommen muss.">
+<link rel="canonical" href="https://www.heiben.de/immobilien-nebenkosten.html">
+<meta name="theme-color" content="#f3eee5">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="application-name" content="HeiBen">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="HeiBen">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="HeiBen">
+<meta property="og:locale" content="de_DE">
+<meta property="og:url" content="https://www.heiben.de/immobilien-nebenkosten.html">
+<meta property="og:title" content="Kaufnebenkosten-Rechner · HeiBen">
+<meta property="og:description" content="Grunderwerbsteuer, Notar, Grundbuch und Provision — je Bundesland gerechnet. Zeigt, was die Bank nicht mitfinanziert und was aus Eigenkapital kommen muss.">
+<meta property="og:image" content="assets/hero-light.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Kaufnebenkosten-Rechner · HeiBen">
+<meta name="twitter:description" content="Grunderwerbsteuer, Notar, Grundbuch und Provision — je Bundesland gerechnet. Zeigt, was die Bank nicht mitfinanziert und was aus Eigenkapital kommen muss.">
+<meta name="twitter:image" content="assets/hero-light.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Kaufnebenkosten-Rechner · HeiBen","description":"Grunderwerbsteuer, Notar, Grundbuch und Provision — je Bundesland gerechnet. Zeigt, was die Bank nicht mitfinanziert und was aus Eigenkapital kommen muss.","url":"https://www.heiben.de/immobilien-nebenkosten.html","inLanguage":"de-DE","isPartOf":{"@type":"WebSite","name":"HeiBen","url":"https://www.heiben.de/"},"publisher":{"@type":"Organization","name":"HeiBen Immobilien GmbH"}}</script>
+<!-- /hb:kopf -->
+<style>
+:root{--bg:#f3eee5;--bg-soft:#ebe3d4;--ink:#1f1c17;--ink-soft:#524a3e;--rule:#d8cdb7;
+  --terracotta:#b04a31;--accent:#792d29;--accent-d:#5f2320;--gut:#4a5c39;}
+*{box-sizing:border-box;}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Manrope',-apple-system,Segoe UI,sans-serif;line-height:1.55;}
+.wrap{max-width:960px;margin:0 auto;padding:0 1.5rem 3rem;}
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:1.1rem 0;border-bottom:1px solid var(--rule);}
+.wm{font-family:'Fraunces',serif;font-weight:700;font-size:1.4rem;}.wm .a{color:var(--accent);}
+.wm span{font-weight:400;font-size:.9rem;color:var(--ink-soft);}
+.back{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);text-decoration:none;}
+.back:hover{color:var(--ink);}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:.64rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent-d);margin-top:1.6rem;}
+h1{font-family:'Fraunces',serif;font-weight:340;font-size:clamp(1.9rem,4.6vw,2.8rem);margin:.6rem 0 .3rem;line-height:1.08;}
+h2{font-family:'Fraunces',serif;font-weight:440;font-size:1.25rem;margin:2rem 0 .5rem;}
+.lede{color:var(--ink-soft);max-width:62ch;margin:0;}
+.note{color:var(--ink-soft);font-size:.88rem;max-width:64ch;}
+.rechner{background:#fff;border:1px solid var(--rule);border-radius:18px;padding:1.2rem 1.3rem;margin-top:1.4rem;}
+.reihe{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,190px),1fr));gap:.9rem;}
+.feld{display:flex;flex-direction:column;gap:.25rem;min-width:0;}
+.feld label{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);}
+.feld input,.feld select{border:1px solid var(--rule);background:var(--bg);border-radius:9px;padding:.6rem .7rem;font:inherit;width:100%;max-width:100%;min-width:0;}
+.feld input:focus,.feld select:focus{outline:2px solid var(--accent);outline-offset:1px;}
+.schalter{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.9rem;align-items:center;}
+.haken{display:inline-flex;align-items:center;gap:.45rem;font-size:.88rem;color:var(--ink-soft);}
+.band{display:flex;flex-wrap:wrap;gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:14px;overflow:hidden;margin-top:1.4rem;}
+.z{background:#fff;padding:.9rem 1.1rem;flex:1 1 150px;display:flex;flex-direction:column;gap:.15rem;}
+.z small{font-family:'JetBrains Mono',monospace;font-size:.55rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft);}
+.z b{font-family:'Fraunces',serif;font-weight:520;font-size:1.2rem;font-variant-numeric:tabular-nums;}
+.z.gross{flex:1 1 100%;background:var(--ink);}
+.z.gross small{color:#a89c8a;}
+.z.gross b{color:#f3eee5;font-size:1.9rem;}
+table{width:100%;border-collapse:collapse;margin-top:1rem;font-size:.92rem;}
+th,td{text-align:left;padding:.55rem .4rem;border-bottom:1px solid var(--rule);}
+th{font-family:'JetBrains Mono',monospace;font-size:.56rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);font-weight:400;}
+td.n{text-align:right;font-variant-numeric:tabular-nums;}
+tr.summe td{border-bottom:0;border-top:2px solid var(--ink);font-weight:800;}
+.tabelle-scroll{overflow-x:auto;}
+.btn{display:inline-block;border:0;cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;padding:.7rem 1.05rem;border-radius:9px;text-decoration:none;}
+.btn.primary{background:var(--accent);color:#f3eee5;}
+.btn.ghost{background:none;border:1px solid var(--rule);color:var(--ink);}
+.btn.ghost:hover{border-color:var(--accent);color:var(--accent);}
+.kasten{background:var(--bg-soft);border-left:3px solid var(--accent);border-radius:0 12px 12px 0;padding:.9rem 1.1rem;margin-top:1.2rem;}
+.kasten b{font-family:'Fraunces',serif;font-weight:500;}
+.wege{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.2rem;}
+.foot{margin-top:2.6rem;padding-top:1rem;border-top:1px solid var(--rule);font-size:.8rem;color:var(--ink-soft);}
+.foot a{color:var(--ink-soft);}
+</style>
+<link rel="stylesheet" href="heiben-design.css">
+<script src="heiben-nav.js" defer></script>
+<script src="heiben-menue.js" defer></script>
+<script src="heiben-legal.js" defer></script>
+<script id="hb-pwa" src="hb-pwa.js" defer></script>
+</head>
+<body data-hb-welt="immobilien">
+<div class="wrap">
+  <div class="topbar">
+    <div class="wm"><span class="a">H</span>ei<span class="a">B</span>en <span>· Immobilien</span></div>
+    <a class="back" href="immobilien.html">← HeiBen Immobilien</a>
+  </div>
+
+  <div class="eyebrow">Werkzeug · Kaufnebenkosten</div>
+  <h1>Der Kaufpreis ist nicht der Preis.</h1>
+  <p class="lede">Zwischen Zusage und Schlüssel liegen Grunderwerbsteuer, Notar, Grundbuch und
+    oft eine Provision. Zusammen sind das je nach Bundesland 6 bis 15 Prozent — Geld, das die
+    Bank in der Regel nicht mitfinanziert. Rechnen Sie es aus, bevor Sie bieten.</p>
+
+  <div class="rechner">
+    <div class="reihe">
+      <div class="feld">
+        <label for="preis">Kaufpreis</label>
+        <input id="preis" type="number" min="0" step="1000" value="420000" inputmode="numeric">
+      </div>
+      <div class="feld">
+        <label for="land">Bundesland</label>
+        <select id="land"></select>
+      </div>
+      <div class="feld">
+        <label for="notar">Notar &amp; Grundbuch</label>
+        <select id="notar">
+          <option value="1.5">1,5 % — üblicher Wert</option>
+          <option value="2">2,0 % — mit Grundschuldbestellung</option>
+          <option value="1">1,0 % — schlanker Fall</option>
+        </select>
+      </div>
+      <div class="feld">
+        <label for="makler">Provision (Käuferanteil)</label>
+        <select id="makler">
+          <option value="3.57">3,57 % inkl. MwSt.</option>
+          <option value="0">provisionsfrei</option>
+          <option value="2.38">2,38 % inkl. MwSt.</option>
+          <option value="7.14">7,14 % inkl. MwSt.</option>
+        </select>
+      </div>
+    </div>
+    <div class="reihe" style="margin-top:.9rem;">
+      <div class="feld">
+        <label for="eigen">Eigenkapital</label>
+        <input id="eigen" type="number" min="0" step="1000" value="90000" inputmode="numeric">
+      </div>
+      <div class="feld">
+        <label for="extra">Umzug, Küche, Renovierung</label>
+        <input id="extra" type="number" min="0" step="500" value="15000" inputmode="numeric">
+      </div>
+    </div>
+    <div class="schalter">
+      <button class="btn primary" id="rechnen" type="button">Neu rechnen</button>
+      <button class="btn ghost" id="reset" type="button">Zurücksetzen</button>
+      <label class="haken"><input type="checkbox" id="merken" checked> Eingaben auf diesem Gerät merken</label>
+    </div>
+  </div>
+
+  <div class="band" id="band">
+    <div class="z gross"><small>Nebenkosten gesamt</small><b id="sNeben">—</b></div>
+    <div class="z"><small>Anteil am Kaufpreis</small><b id="sProzent">—</b></div>
+    <div class="z"><small>Kaufpreis + Nebenkosten</small><b id="sGesamt">—</b></div>
+    <div class="z"><small>Eigenkapital deckt</small><b id="sDeckung">—</b></div>
+    <div class="z"><small>Darlehen nötig</small><b id="sDarlehen">—</b></div>
+  </div>
+
+  <h2>Woraus sich das zusammensetzt</h2>
+  <div class="tabelle-scroll">
+    <table>
+      <thead><tr><th>Posten</th><th class="n">Satz</th><th class="n">Betrag</th><th>Wer zahlt, wann</th></tr></thead>
+      <tbody id="posten"></tbody>
+    </table>
+  </div>
+
+  <div class="kasten" id="urteil">
+    <b>Einordnung</b>
+    <p class="note" style="margin:.3rem 0 0;" id="urteilText">—</p>
+  </div>
+
+  <h2>Was Sie dabei wissen sollten</h2>
+  <p class="note"><b>Die Bank finanziert Nebenkosten meist nicht.</b> Sie beleiht den Wert der
+    Immobilie, nicht die Steuer darauf. Faustregel: Nebenkosten und Umzug aus Eigenkapital,
+    der Rest über das Darlehen.</p>
+  <p class="note"><b>Die Grunderwerbsteuer kommt zuerst.</b> Das Finanzamt schickt den Bescheid
+    wenige Wochen nach dem Notartermin, fällig in einem Monat. Ohne die Unbedenklichkeits-
+    bescheinigung gibt es keine Eintragung im Grundbuch.</p>
+  <p class="note"><b>Bewegliches Inventar mindert die Steuer.</b> Einbauküche, Markise, Sauna:
+    Wird der Wert im Kaufvertrag getrennt ausgewiesen, fällt darauf keine Grunderwerbsteuer an.
+    Realistisch bleiben — das Finanzamt prüft.</p>
+  <p class="note"><b>Die Sätze ändern sich.</b> Die hier hinterlegten Werte sind der Stand 2026.
+    Die Länder passen sie gelegentlich an; vor dem Notartermin beim Finanzamt gegenprüfen.</p>
+
+  <div class="wege">
+    <a class="btn ghost" href="immobilienbudget.html">Wie viel Immobilie kann ich mir leisten?</a>
+    <a class="btn ghost" href="immobilien-angebote.html">Zu den Angeboten</a>
+    <a class="btn ghost" href="mieten-oder-kaufen.html">Mieten oder kaufen?</a>
+    <a class="btn ghost" href="papierkram.html">Papierkram nach dem Kauf</a>
+  </div>
+
+  <p class="foot">HeiBen Immobilien · Köln — Orientierung, keine Steuer- oder Rechtsberatung.
+    Alle Eingaben bleiben auf diesem Gerät. <a href="immobilien.html">HeiBen Immobilien</a> ·
+    <a href="impressum.html">Impressum</a></p>
+</div>
+
+<script>
+(function(){
+  'use strict';
+  /* Grunderwerbsteuer je Bundesland, Stand 2026. Die Länder setzen den Satz selbst;
+     deshalb steht er als Datenzeile hier und nicht verstreut im Rechenweg. */
+  var LAENDER = [
+    ['Baden-Württemberg', 5.0], ['Bayern', 3.5], ['Berlin', 6.0], ['Brandenburg', 6.5],
+    ['Bremen', 5.0], ['Hamburg', 5.5], ['Hessen', 6.0], ['Mecklenburg-Vorpommern', 6.0],
+    ['Niedersachsen', 5.0], ['Nordrhein-Westfalen', 6.5], ['Rheinland-Pfalz', 5.0],
+    ['Saarland', 6.5], ['Sachsen', 5.5], ['Sachsen-Anhalt', 5.0],
+    ['Schleswig-Holstein', 6.5], ['Thüringen', 5.0]
+  ];
+  var SCHLUESSEL = 'heiben-immo-nebenkosten';   /* Präfix nach heiben-speicher.js */
+
+  var $ = function(id){ return document.getElementById(id); };
+  var sel = $('land');
+  LAENDER.forEach(function(l, i){
+    var o = document.createElement('option');
+    o.value = String(i);
+    o.textContent = l[0] + ' — ' + l[1].toLocaleString('de-DE', {minimumFractionDigits: 1}) + ' %';
+    sel.appendChild(o);
+  });
+  sel.value = '9';   /* Nordrhein-Westfalen: HeiBen sitzt in Köln */
+
+  function eur(n){ return Math.round(n).toLocaleString('de-DE') + ' €'; }
+  function proz(n){ return n.toLocaleString('de-DE', {minimumFractionDigits: 2, maximumFractionDigits: 2}) + ' %'; }
+
+  function laden(){
+    if (!$('merken').checked) return;
+    try {
+      var d = JSON.parse(localStorage.getItem(SCHLUESSEL) || 'null');
+      if (!d) return;
+      ['preis','eigen','extra'].forEach(function(k){ if (d[k] != null) $(k).value = d[k]; });
+      ['land','notar','makler'].forEach(function(k){ if (d[k] != null) $(k).value = d[k]; });
+    } catch (e) {}
+  }
+  function sichern(){
+    try {
+      if (!$('merken').checked) { localStorage.removeItem(SCHLUESSEL); return; }
+      localStorage.setItem(SCHLUESSEL, JSON.stringify({
+        preis: $('preis').value, eigen: $('eigen').value, extra: $('extra').value,
+        land: $('land').value, notar: $('notar').value, makler: $('makler').value
+      }));
+    } catch (e) {}
+  }
+
+  function rechnen(){
+    var preis  = Math.max(0, +$('preis').value || 0);
+    var land   = LAENDER[+$('land').value] || LAENDER[9];
+    var notarP = +$('notar').value || 0;
+    var maklP  = +$('makler').value || 0;
+    var eigen  = Math.max(0, +$('eigen').value || 0);
+    var extra  = Math.max(0, +$('extra').value || 0);
+
+    var grest = preis * land[1] / 100;
+    var notar = preis * notarP / 100;
+    var makl  = preis * maklP / 100;
+    var neben = grest + notar + makl;
+    var gesamt = preis + neben;
+    var bedarf = neben + extra;
+
+    $('sNeben').textContent   = eur(neben);
+    $('sProzent').textContent = preis ? proz(neben / preis * 100) : '—';
+    $('sGesamt').textContent  = eur(gesamt);
+    $('sDarlehen').textContent = eur(Math.max(0, gesamt + extra - eigen));
+    $('sDeckung').textContent = bedarf
+      ? (eigen >= bedarf ? 'Nebenkosten und Umzug' : proz(Math.min(100, eigen / bedarf * 100)) + ' davon')
+      : '—';
+
+    var zeilen = [
+      ['Grunderwerbsteuer', proz(land[1]), grest, 'Käufer, ~6 Wochen nach dem Notartermin'],
+      ['Notar &amp; Grundbuch', proz(notarP), notar, 'Käufer, mit der Beurkundung'],
+      ['Maklerprovision', proz(maklP), makl, maklP ? 'Käuferanteil, nach Beurkundung' : 'entfällt'],
+      ['Umzug, Küche, Renovierung', '—', extra, 'Käufer, in den ersten Monaten']
+    ];
+    $('posten').innerHTML = zeilen.map(function(z){
+      return '<tr><td>' + z[0] + '</td><td class="n">' + z[1] + '</td><td class="n">'
+        + eur(z[2]) + '</td><td>' + z[3] + '</td></tr>';
+    }).join('') + '<tr class="summe"><td>Zusammen neben dem Kaufpreis</td><td class="n"></td>'
+      + '<td class="n">' + eur(bedarf) + '</td><td></td></tr>';
+
+    var t;
+    if (!preis) {
+      t = 'Tragen Sie einen Kaufpreis ein, dann rechnen wir.';
+    } else if (eigen >= bedarf + preis * 0.1) {
+      t = 'Ihr Eigenkapital trägt die Nebenkosten und mindestens zehn Prozent des Kaufpreises. '
+        + 'Das ist die Ausgangslage, mit der Banken die besseren Zinsen machen.';
+    } else if (eigen >= bedarf) {
+      t = 'Ihr Eigenkapital deckt die Nebenkosten vollständig — der übliche Mindeststand. '
+        + 'Alles darüber senkt Ihre Rate spürbar.';
+    } else {
+      t = 'Ihr Eigenkapital deckt die Nebenkosten noch nicht. Diese ' + eur(bedarf - eigen)
+        + ' finanziert kaum eine Bank mit; sie müssen aus eigener Tasche kommen oder der '
+        + 'Kaufpreis muss niedriger werden.';
+    }
+    $('urteilText').textContent = t;
+    sichern();
+  }
+
+  ['preis','eigen','extra','land','notar','makler'].forEach(function(id){
+    $(id).addEventListener('input', rechnen);
+    $(id).addEventListener('change', rechnen);
+  });
+  $('rechnen').addEventListener('click', rechnen);
+  $('merken').addEventListener('change', function(){ sichern(); });
+  $('reset').addEventListener('click', function(){
+    $('preis').value = 420000; $('eigen').value = 90000; $('extra').value = 15000;
+    $('land').value = '9'; $('notar').value = '1.5'; $('makler').value = '3.57';
+    rechnen();
+  });
+
+  laden();
+  rechnen();
+})();
+</script>
+</body>
+</html>

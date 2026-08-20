@@ -146,6 +146,19 @@
    "titel": "HeiBen Immobilien · Angebote",
    "beschreibung": "Immobilien-Angebote von HeiBen Immobilien im Rheinland — mit Filter und Finanzierungsrechner."
   },
+  "immobilien-nebenkosten.html": {
+   "welt": "immobilien",
+   "typ": "werkzeug",
+   "titel": "Kaufnebenkosten-Rechner · HeiBen",
+   "beschreibung": "Grunderwerbsteuer, Notar, Grundbuch und Provision — je Bundesland gerechnet. Zeigt, was die Bank nicht mitfinanziert und was aus Eigenkapital kommen muss.",
+   "gruppe": "Wohnen & Immobilien"
+  },
+  "immobilien-objekt.html": {
+   "welt": "immobilien",
+   "typ": "weltseite",
+   "titel": "HeiBen Immobilien · Objekt",
+   "beschreibung": "Der ganze Steckbrief zu einem Objekt: Eckdaten, Lage, Merkmale — und was man wissen sollte, bevor man sich verliebt."
+  },
   "immobilien-planner.html": {
    "welt": "immobilien",
    "typ": "weltseite",
@@ -157,6 +170,12 @@
    "typ": "welt",
    "titel": "HeiBen Immobilien — Bestand & Vermögen in Köln",
    "beschreibung": "HeiBen Immobilien: die ruhige, vermögensverwaltende Säule der Familie. Eigene Immobilien in Köln, langfristig gehalten und gepflegt — ein Wertspeicher über Generationen."
+  },
+  "immobilien-vermieten.html": {
+   "welt": "immobilien",
+   "typ": "weltseite",
+   "titel": "HeiBen Immobilien · Vermieten",
+   "beschreibung": "Leitfaden in neun Schritten: von der Rechnung vor dem Inserat über Auswahl und Übergabe bis zur Anlage V — mit einer ehrlichen Beispielrechnung."
   },
   "immobilienbudget.html": {
    "welt": "immobilien",
@@ -389,6 +408,13 @@
    "beschreibung": "Die Reise kostet selten nur den Flug. Alle Posten realistisch planen, Kosten pro Person und Tag sehen — und wie lange du dafür sparen musst.",
    "gruppe": "Unterwegs"
   },
+  "reisen-packliste.html": {
+   "welt": "reisen",
+   "typ": "werkzeug",
+   "titel": "Packliste · HeiBen Reisen",
+   "beschreibung": "Art der Reise, Dauer, Jahreszeit, Begleitung — die Liste stellt sich zusammen. Abhaken bleibt auf dem Gerät, eigene Punkte kommen dazu, ausdrucken geht auch.",
+   "gruppe": "Unterwegs"
+  },
   "reisen-anfrage.html": {
    "welt": "reisen",
    "typ": "weltseite",
@@ -401,11 +427,23 @@
    "titel": "HeiBen Reisen · Kuratierte Reisen",
    "beschreibung": "Kuratierte Reisen von HeiBen Reisen — vom Rheinland bis Europa. Finde mit dem Reise-Kompass die passende Auszeit."
   },
+  "reisen-rueckblick.html": {
+   "welt": "reisen",
+   "typ": "weltseite",
+   "titel": "HeiBen Reisen · Rückblick",
+   "beschreibung": "Sechs Reisen, die wir begleitet haben — mit Stimmen der Reisenden und der Stelle, an der wir etwas gelernt und geändert haben."
+  },
   "reisen-planer.html": {
    "welt": "reisen",
    "typ": "weltseite",
    "titel": "HeiBen Reisen · Reise-Planer (Köln +100 km)",
    "beschreibung": "Stelle deine Reise rund um Köln selbst zusammen: Wanderungen, Fahrradreisen, Rundreisen und Übernachtungen mit Karte, Zeitstrahl, Kalkulation, Buchung, Unterlagen, To-do und Angebot."
+  },
+  "reisen-ziele.html": {
+   "welt": "reisen",
+   "typ": "weltseite",
+   "titel": "HeiBen Reisen · Ziele",
+   "beschreibung": "Zwölf Ziele zwischen Bergischem Land und Schottland: Anreise ab Köln, beste Zeit, Budget — und wofür ein Ort ausdrücklich nicht taugt."
   },
   "reisen.html": {
    "welt": "reisen",
