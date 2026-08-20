@@ -1257,3 +1257,28 @@ sonst waere die Kreuzblende nach dem ersten Bild eingefroren.
 
 PRUEFUNG: 34/34 (fuenf neue: Marke aus 5 Strichen · im Kopf steht die Marke, kein Gegenstand ·
 Marke fertig gezeichnet · Manifest entfernt · Uebergabe vollzogen). 0 PageErrors.
+
+### KORREKTUR (SW -3002): Topf entwirrt, Kopftext entmetaphert
+
+RUECKMELDUNG: „Beim Kochtopf scheinen die Linien durcheinander. Das wording am Start gefaellt
+mir nicht. Verbunden ueber einen Strich ist schlecht."
+
+1. KOCHTOPF. Vier Fehler in der Detailzeichnung, alle behoben:
+   - Der Deckel war ein GERADER Strich 3 Einheiten ueber der Randlinie — zwei Parallelen, die
+     wie ein Doppelstrich lasen. Jetzt eine KUPPEL, die auf dem Rand aufsitzt (Bogen von
+     18,42 nach 82,42).
+   - Der Knauf war ein Kreis NEBEN seinem Stiel (Bogenstart 3,5 Einheiten rechts der Mitte).
+     Jetzt ein zentrierter Kreis auf dem Kuppelscheitel, ohne Stiel.
+   - Die Henkel waren freistehende Stummel mit Abstand zur Wand. Jetzt Ohren, die an der
+     geneigten Wand ansetzen und dort wieder enden (Wandposition ausgerechnet, nicht geraten).
+   - Der Dampf bestand aus drei Halbbogen, die wie Klammern aussahen. Jetzt zwei S-Kringel.
+2. KOPFTEXT. Die Zeile „Ein Strich verbindet sie" beschrieb die Gestaltung statt das
+   Unternehmen — Design-Metapher, kein Kundennutzen. Neu:
+   H1 „Fuenf Unternehmen. Ein Zuhause." · Vorspann „Reisen, Wohnen, Immobilien, Studio und
+   Kulinarik — gefuehrt von einer Koelner Familie."
+   Das hervorgehobene Wort im H1 nimmt jetzt --wf (im Kopf Sand, Holding-Ton) statt fest die
+   Reisen-Farbe.
+MERKE: Detailzeichnungen gehoeren gerendert und angesehen, nicht nur gezaehlt — alle vier
+Fehler waren in den Pruefungen unsichtbar (die Gruppe war ja korrekt eingeblendet).
+
+PRUEFUNG: 34/34, 0 PageErrors. Topf einzeln gerendert und gegengelesen.
