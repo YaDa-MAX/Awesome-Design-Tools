@@ -1441,3 +1441,45 @@ PRUEFUNG NACH DEM AUFRAEUMEN
 UMGEBUNGSHINWEIS: einzelne Seiten brauchen im Sandkasten ~13 s bis „load", weil die
 Google-Fonts-Anfrage ins Leere laeuft (requestfailed nach 15 s). Kein Seitenfehler — unter
 paralleler Last liefen dieselben Seiten in den 30-s-Timeout und wurden einzeln nachgeprueft.
+
+### WELLE 9, TEIL 3: hb-menue.css entwirrt (SW -3006)
+
+AUSGANGSLAGE: hb-menue.css hing an 34 Seiten, aber nur index.html erzeugt die Ids
+(#hbBurger/#hbMobileMenu) und besitzt ein .hero.wrap. Die Datei war damit auf 33 Seiten
+Verdacht auf Totlast — aber eben nur Verdacht: sie traegt neben den Menue-Regeln auch
+`.hero.wrap{padding…}` samt einer !important-Variante unter 780 px. Blind entfernen waere
+genau das „nebenbei umbauen", das hier nicht passieren darf.
+
+GEMESSEN STATT GERATEN — A/B IM SELBEN DOKUMENT
+Je Seite und Breite (1280 und 390 px): Fingerabdruck jedes sichtbaren Elements (Tag, Klasse,
+Position, Groesse, Polsterung, Anzeige, Farben, Schriftgroesse), dann `sheet.disabled = true`
+fuer genau dieses Stylesheet, Reflow, zweiter Fingerabdruck. Unterschied = Wirkung.
+ERGEBNIS: 68 Messungen, 66 OHNE JEDEN UNTERSCHIED. Die zwei mit Wirkung waren index.html
+selbst (dort aendert sich die Navigationshoehe 121,5 -> 148 px breit bzw. 121,5 -> 227 px schmal,
+weil das eigene Menue seine Gestaltung verliert).
+
+MESSFEHLER, DER FAST ZU EINEM FALSCHEN BEFUND GEFUEHRT HAETTE
+Der erste Lauf meldete auf zehn Seiten Abweichungen von 0,5 bis 19 px — alle vertikal, alle an
+Elementen mit den Klassen `hb-rv hb-go`. Das sind die Einblend-Klassen der Bewegungsregie: die
+Seite bewegte sich noch, waehrend ich zweimal gemessen habe. Mit `reducedMotion:'reduce'`
+(die Token-Ebene setzt dann alle Dauern auf 1 ms) blieben null Abweichungen uebrig.
+MERKE: Layout-Vergleiche IMMER in Bewegungsruhe, sonst misst man die Animation.
+
+UMBAU: Einbindung auf 33 Seiten entfernt, index.html behaelt sie.
+BEWEIS VON AUSSEN (nicht nur im Dokument): alte Fassung aus einem git-worktree auf Port 8181,
+neue auf 8180, beide mit Bewegungsruhe und abgeklemmten Google Fonts, Fingerabdruck-Vergleich
+ueber alle 33 Seiten: 33/33 IDENTISCH bei 1280 px UND bei 390 px.
+index.html einzeln nachgeprueft: Burger sichtbar, oeffnet auf Klick, .hero.wrap-Polsterung
+24 px, Stylesheet geladen, 0 PageErrors, kein Querlauf — auf beiden Breiten.
+Der Dateikopf von hb-menue.css erklaert jetzt, wofuer sie da ist und was jemand vorweisen muss,
+der sie wieder irgendwo einbindet.
+
+STAND NACH DEM UMBAU
+- 33 Seiten laden eine Stylesheet-Anfrage weniger; hb-menue.css (2,3 KB) bleibt precached,
+  weil index.html sie braucht.
+- Rundlauf 103 Seiten bei 390 px: 0 PageErrors, 0 Querlauf.
+- Rundlauf 103 Seiten bei 1280 px: 0 PageErrors, 0 Querlauf.
+- 31/31 Navigationspruefungen.
+NEBENBEFUND BESTAETIGT: mit abgeklemmten Google Fonts laufen die Rundlaeufe um ein Vielfaches
+schneller — die 13 s je Seite waren tatsaechlich nur die ins Leere laufende Font-Anfrage des
+Sandkastens, kein Seitenproblem.

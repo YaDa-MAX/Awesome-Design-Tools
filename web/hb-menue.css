@@ -1,5 +1,16 @@
-/* HeiBen — ausgelagert aus 34 Seiten (Remake v3, Welle 1).
-   Inhalt wortgleich uebernommen, nicht ueberarbeitet. */
+/* HeiBen — Menü und Hero-Polsterung der KLASSISCHEN Startseite.
+   Ausgelagert aus 34 Seiten (Remake v3, Welle 1), Inhalt wortgleich uebernommen.
+
+   Seit v3-W9 haengt diese Datei nur noch an index.html — als einzige Seite baut sie
+   #hbBurger/#hbMobileMenu selbst (sie hat bewusst keine hb-nav, siehe tools/seiten.json:
+   "nav": false) und als einzige besitzt sie ein .hero.wrap. Auf den uebrigen 33 Seiten
+   war die Einbindung wirkungslos: A/B-Messung (Stylesheet an/aus, Fingerabdruck jedes
+   sichtbaren Elements) ergab 66 von 68 Messungen ohne den kleinsten Unterschied, die
+   restlichen zwei waren index.html selbst. Nach dem Entfernen: 33/33 Seiten bei 1280 px
+   und bei 390 px Pixel fuer Pixel identisch zur Vorfassung.
+
+   WER SIE WIEDER EINBINDET, braucht dafuer einen Grund: entweder #hbBurger/#hbMobileMenu
+   oder .hero.wrap auf der Seite. Sonst laedt sie tote Regeln mit. */
 /* HeiBen Menü: Burger auf allen Größen + Werkzeuge; mobile Korrekturen */
 #hbBurger{display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;border:1px solid var(--rule,#d8cdb7);background:none;font-size:1.15rem;line-height:1;cursor:pointer;color:var(--ink,#1f1c17);margin-left:10px;}
 #hbBurger:hover{border-color:var(--terracotta,#b04a31);color:var(--terracotta,#b04a31);}
