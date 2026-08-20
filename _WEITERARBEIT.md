@@ -1282,3 +1282,36 @@ MERKE: Detailzeichnungen gehoeren gerendert und angesehen, nicht nur gezaehlt �
 Fehler waren in den Pruefungen unsichtbar (die Gruppe war ja korrekt eingeblendet).
 
 PRUEFUNG: 34/34, 0 PageErrors. Topf einzeln gerendert und gegengelesen.
+
+### KOPFTEXT, MENUE, TOPF ENDGUELTIG (SW -3003)
+
+RUECKMELDUNG: Kopftext vorgegeben („Fuenf Unternehmen. Ein Zuhause." / „Weil Heimat zu leben
+nicht nur ein Gefuehl sondern eine Lebensweise ist." / CTA „Erfahren sie mehr"), Topflinien
+ueberschneiden sich immer noch, Frage nach einem Burger-Menue.
+
+1. KOPF. Text uebernommen (Komma vor „sondern" und Hoeflichkeits-„Sie" gesetzt). Neu eine
+   Handlungsaufforderung `.tat` — gefuellte Pille in --wf mit Tinte-Schrift, damit sie sich
+   von der umrandeten „Mein HeiBen"-Taste in der Leiste abhebt. Ziel: unternehmen.html.
+2. TOPF — die eigentliche Ursache gefunden. Nicht die Details lagen falsch, sondern die
+   SILHOUETTE: sie war oben GESCHLOSSEN (Randlinie von 84,42 zurueck nach 16,42) und die
+   Deckelkuppel lag darueber — zwei Linien fuer EINE Kante. Jetzt ist die Silhouette oben
+   OFFEN (Wand -> Boden -> Wand, Schluss), und der DECKEL schliesst sie, indem er genau die
+   beiden Wandkanten verbindet. Eine durchgehende Kontur, keine Ueberschneidung.
+   REGEL: eine Kante wird von genau einem Pfad gezeichnet. Nach derselben Regel ist bei der
+   TUER die Schwelle entfallen — sie lag exakt auf der Bodenlinie der Silhouette.
+3. MENUE. Antwort auf die Frage: auf der Startseite JA, aber nur schmal (<= 900 px) — am
+   Schreibtisch traegt das Leitwerk die Welten, dort waere ein Burger doppelt. Das Feld zeigt
+   die fuenf Welten mit Farbe und Verb plus Mein HeiBen / Zuhause-Ordner / Unternehmen.
+   Esc schliesst, der Hintergrund wird gesperrt, ein Klick auf einen Weltlink schliesst und
+   springt. Die Kopfleiste steht schmal IMMER (ohne Leitwerk gaebe es sonst gar keinen
+   Zugang) und liegt mit z-index 59 ueber dem Feld, damit die Taste zum X wird.
+   NICHT angefasst: die Navigation der Weltseiten. Die kommt aus `heiben-nav.js` und
+   betrifft 100 Seiten — eigener Auftrag, nicht nebenbei.
+GEFUNDENER FEHLER (haette die ganze Seite lahmgelegt): `.menue{display:flex}` schlaegt das
+`hidden`-Attribut, weil eine Klassenregel spezifischer ist als die UA-Regel `[hidden]`.
+Das unsichtbare Feld lag damit ueber der gesamten Seite und schluckte JEDEN Klick — auf jeder
+Breite. Behoben mit `.menue[hidden]{display:none}`. Aufgefallen ist es nur, weil die Pruefung
+klickt statt nur zu messen.
+
+PRUEFUNG: 43/43 (neun neue: Menuetaste mobil · oeffnet · fuenf Welten · Hintergrund gesperrt ·
+schliesst und raeumt auf · Sprung in die Welt · Titel · Vorspann · CTA). 0 PageErrors.

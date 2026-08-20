@@ -113,7 +113,7 @@ p{margin:0}
 
 /* --- 4. Kopfleiste (erscheint nach der Ouvertüre) ------------------------- */
 .kopf{
-  position:fixed;top:0;left:0;right:0;z-index:55;display:flex;align-items:center;gap:1rem;
+  position:fixed;top:0;left:0;right:0;z-index:59;display:flex;align-items:center;gap:1rem;
   padding:.62rem var(--rand) .62rem calc(var(--leiste) + var(--rand));
   background:color-mix(in srgb,var(--ton) 82%,transparent);
   backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
@@ -134,6 +134,35 @@ p{margin:0}
 .kopf .zugang:hover{background:var(--wf);color:var(--tinte)}
 .fortschritt{position:absolute;left:0;bottom:-1px;height:2px;width:0;background:var(--wf)}
 @media (min-width:901px){.fortschritt{display:none}}
+
+/* --- 4b. Menü: der Zugang zu den Welten, wo das Leitwerk fehlt ----------- */
+.klappe{
+  display:none;width:34px;height:34px;padding:0;border:0;background:none;cursor:pointer;
+  flex-direction:column;justify-content:center;align-items:flex-end;gap:6px;
+}
+.klappe i{display:block;width:22px;height:1.5px;background:var(--leinen);border-radius:2px;
+  transition:transform var(--mittel) var(--schwung),width var(--mittel) var(--schwung)}
+.klappe[aria-expanded="true"] i:first-child{transform:translateY(3.75px) rotate(45deg)}
+.klappe[aria-expanded="true"] i:last-child{transform:translateY(-3.75px) rotate(-45deg)}
+.menue{
+  position:fixed;inset:0;z-index:58;background:var(--ton);
+  display:flex;flex-direction:column;justify-content:center;gap:2rem;
+  padding:5rem var(--rand) 3rem;
+  opacity:0;transition:opacity var(--mittel) var(--schwung);
+}
+.menue[hidden]{display:none}   /* Klassenregel schlaegt sonst das hidden-Attribut */
+.menue.da{opacity:1}
+.mwelten{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:.4rem}
+.mwelten a{display:flex;align-items:baseline;gap:.7rem;padding:.5rem 0;
+  border-bottom:1px solid rgba(216,205,183,.12)}
+.mwelten b{font-family:var(--serif);font-weight:600;font-size:1.9rem;letter-spacing:-.04em;
+  color:var(--f);font-variation-settings:'opsz' 96,'WONK' 1}
+.mwelten em{font-family:var(--serif);font-style:italic;font-size:.95rem;color:var(--zart)}
+.mwege{display:flex;flex-wrap:wrap;gap:.5rem}
+.mwege a{font-family:var(--mono);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;
+  border:1px solid rgba(216,205,183,.24);border-radius:999px;padding:.5rem .9rem;color:var(--leinen-2)}
+.mwege a:hover{border-color:var(--wf);color:var(--wf)}
+@media (max-width:900px){.klappe{display:flex}}
 
 /* --- 5. Lauf: sticky-Bühne hinter dem scrollenden Strom ------------------- */
 .lauf{display:grid;grid-template-columns:1fr;padding-left:var(--leiste)}
@@ -190,6 +219,15 @@ p{margin:0}
 }
 .claim b{font-style:normal;font-weight:600;color:var(--wf)}
 .vorspann{max-width:var(--mass);color:var(--leinen-2)}
+.tat{
+  align-self:flex-start;display:inline-flex;align-items:center;gap:.6rem;
+  background:var(--wf);color:var(--tinte);font-weight:800;font-size:.95rem;
+  padding:.74rem 1.4rem;border-radius:999px;margin-top:.5rem;
+  transition:transform var(--mittel) var(--schwung),box-shadow var(--mittel) var(--schwung),
+             background-color var(--lang) linear;
+}
+.tat::after{content:"→"}
+.tat:hover{transform:translateY(-2px);box-shadow:0 12px 32px -14px var(--wf)}
 .wink{font-family:var(--mono);font-size:.62rem;letter-spacing:.28em;text-transform:uppercase;
   color:var(--zart);display:flex;flex-direction:column;align-items:flex-start;gap:.7rem;margin-top:1.4rem}
 .wink i{display:block;width:1px;height:46px;background:linear-gradient(var(--zart),transparent);
@@ -297,7 +335,24 @@ p{margin:0}
 <div class="kopf" id="kopf">
   <a class="marke" href="#top">HeiBen<span>Heimat leben</span></a>
   <a class="zugang" href="mein-heiben.html">Mein HeiBen</a>
+  <button class="klappe" id="klappe" aria-expanded="false" aria-controls="menue"
+          aria-label="Menü öffnen"><i></i><i></i></button>
   <div class="fortschritt" id="fortschritt" aria-hidden="true"></div>
+</div>
+
+<div class="menue" id="menue" hidden>
+  <ol class="mwelten">
+    <li style="--f:var(--l-reisen)"><a href="#reisen"><b>Reisen</b><em>aufbrechen</em></a></li>
+    <li style="--f:var(--l-wohnen)"><a href="#wohnen"><b>Wohnen</b><em>bleiben</em></a></li>
+    <li style="--f:var(--l-immobilien)"><a href="#immobilien"><b>Immobilien</b><em>ankommen</em></a></li>
+    <li style="--f:var(--l-studio)"><a href="#studio"><b>Studio</b><em>verstehen</em></a></li>
+    <li style="--f:var(--l-kulinarik)"><a href="#kulinarik"><b>Kulinarik</b><em>teilen</em></a></li>
+  </ol>
+  <div class="mwege">
+    <a href="mein-heiben.html">Mein HeiBen</a>
+    <a href="zuhause-ordner.html">Zuhause-Ordner</a>
+    <a href="unternehmen.html">Das Unternehmen</a>
+  </div>
 </div>
 
 <div class="lauf">
@@ -324,13 +379,13 @@ p{margin:0}
           <path d="M35 51 h7 v8 h-7 z"/><path d="M58 51 h7 v8 h-7 z"/></g>
         <g data-i="1"><path d="M43 85 V65 h14 v20"/><path d="M22 58 h13 v13 h-13 z"/>
           <path d="M28.5 58 v13"/><path d="M22 64.5 h13"/><path d="M70 34 V24 h7 v17"/></g>
-        <g data-i="2"><path d="M33 88 V50 a17 17 0 0 1 34 0 V88"/><path d="M18 88 H82"/>
+        <g data-i="2"><path d="M33 88 V50 a17 17 0 0 1 34 0 V88"/>
           <path d="M63 68 a2.6 2.6 0 1 1 -0.1 0"/></g>
         <g data-i="3"><path d="M44 55 q3 -11 6 0 q3 11 6 0"/><path d="M42 79 H58"/><path d="M42 84 H58"/>
           <path d="M26 26 l-7 -6"/><path d="M74 26 l7 -6"/><path d="M50 15 V7"/></g>
-        <g data-i="4"><path d="M18 42 a32 12 0 0 1 64 0"/><path d="M50 23.8 a3.2 3.2 0 1 0 0.1 0"/>
-          <path d="M16.7 46 a7 6 0 0 0 1.8 11"/><path d="M83.3 46 a7 6 0 0 1 -1.8 11"/>
-          <path d="M41 22 q5 -4 0 -8 q-5 -4 0 -8"/><path d="M59 22 q5 -4 0 -8 q-5 -4 0 -8"/></g>
+        <g data-i="4"><path d="M16 42 a34 13 0 0 1 68 0"/><path d="M50 22 a3.5 3.5 0 1 0 0.1 0"/>
+          <path d="M16.5 46 a7 6 0 0 0 1.2 11"/><path d="M83.5 46 a7 6 0 0 1 -1.2 11"/>
+          <path d="M41 19 q5 -4 0 -8 q-5 -4 0 -8"/><path d="M59 19 q5 -4 0 -8 q-5 -4 0 -8"/></g>
       </g>
       </g>
     </svg>
@@ -350,9 +405,10 @@ p{margin:0}
         </span>
       </div>
       <h1 class="claim auf" id="o3" style="--d:260ms">Fünf Unternehmen.<br><b>Ein Zuhause.</b></h1>
-      <p class="vorspann auf" id="o4" style="--d:380ms">Reisen, Wohnen, Immobilien, Studio und
-        Kulinarik — geführt von einer Kölner Familie.</p>
-      <div class="wink auf" id="o5" style="--d:500ms">Scrollen<i></i></div>
+      <p class="vorspann auf" id="o4" style="--d:380ms">Weil Heimat zu leben nicht nur ein Gefühl,
+        sondern eine Lebensweise ist.</p>
+      <a class="tat auf" id="o5" style="--d:470ms" href="unternehmen.html">Erfahren Sie mehr</a>
+      <div class="wink auf" id="o6" style="--d:600ms">Scrollen<i></i></div>
     </header>
 
 
@@ -480,8 +536,7 @@ var BIRNE = [[42,74]].concat(bogen(50,46,25,25,252,-72,42))
   .concat([[58,74],[58,88],[42,88],[42,74]]);
 
 /* Topf (Kulinarik): Korpus mit Rundboden, Rand umlaufend. */
-var TOPF = [[16,42],[19,68]].concat(bogen(50,68,31,12,180,360,24))
-  .concat([[81,68],[84,42],[16,42]]);
+var TOPF = [[16,42],[19,68]].concat(bogen(50,68,31,12,180,360,24)).concat([[81,68],[84,42]]);
 
 var FORMEN = [KOFFER, HAUS, TUER, BIRNE, TOPF];
 var FARBEN = ['--l-reisen','--l-wohnen','--l-immobilien','--l-studio','--l-kulinarik'];
@@ -554,7 +609,7 @@ var gegen  = document.getElementById('gegenstand');
 
 /* ---------- 5. Ouvertüre: gestaffelter Einzug -------------------------- */
 function start(){
-  ['o1','o2','o3','o4','o5'].forEach(function(id){
+  ['o1','o2','o3','o4','o5','o6'].forEach(function(id){
     var el = document.getElementById(id);
     if (el) el.classList.add('da');
   });
@@ -623,6 +678,42 @@ function zaehlen(feld){
   if (s && k.steckbriefe) s.textContent = k.steckbriefe;
 })();
 
+/* ---------- 8b. Menü: öffnen, schließen, aufräumen -------------------- */
+(function(){
+  var knopf = document.getElementById('klappe');
+  var feld  = document.getElementById('menue');
+  if (!knopf || !feld) return;
+
+  function auf(){
+    feld.hidden = false;
+    requestAnimationFrame(function(){ feld.classList.add('da'); });
+    knopf.setAttribute('aria-expanded', 'true');
+    knopf.setAttribute('aria-label', 'Menü schließen');
+    document.body.style.overflow = 'hidden';
+    var erste = feld.querySelector('a');
+    if (erste) erste.focus();
+  }
+  function zu(){
+    feld.classList.remove('da');
+    knopf.setAttribute('aria-expanded', 'false');
+    knopf.setAttribute('aria-label', 'Menü öffnen');
+    document.body.style.overflow = '';
+    var warte = ruhe ? 0 : 320;
+    setTimeout(function(){ if (knopf.getAttribute('aria-expanded') === 'false') feld.hidden = true; }, warte);
+  }
+  knopf.addEventListener('click', function(){
+    knopf.getAttribute('aria-expanded') === 'true' ? zu() : auf();
+  });
+  feld.addEventListener('click', function(e){ if (e.target.closest('a')) zu(); });
+  addEventListener('keydown', function(e){
+    if (e.key === 'Escape' && knopf.getAttribute('aria-expanded') === 'true'){ zu(); knopf.focus(); }
+  });
+  /* Wer am Schreibtisch die Breite ändert, soll nicht in einem offenen Feld hängen. */
+  addEventListener('resize', function(){
+    if (innerWidth > 900 && knopf.getAttribute('aria-expanded') === 'true') zu();
+  });
+})();
+
 /* ---------- 9. Der Takt: Strich, Tönung, Leitwerk --------------------- */
 var letzteForm = -1, letzterWert = -1, letzterUeberg = -1, zeigerX = 0, zeigerY = 0;
 
@@ -687,7 +778,8 @@ function takt(){
   if (!ruhe) svg.style.transform = 'translate3d(' + zeigerX + 'px,' + (zeigerY - g * 8) + 'px,0)';
 
   /* Kopfleiste, Faden, Fortschritt, aktive Welt. */
-  kopf.classList.toggle('da', y > vh * 0.72);
+  /* Ohne Leitwerk (schmal) gibt es sonst gar keinen Zugang zu den Welten. */
+  kopf.classList.toggle('da', y > vh * 0.72 || innerWidth <= 900);
   faden.style.height = (g * 100).toFixed(1) + '%';
   var ganz = document.body.scrollHeight - vh;
   fortsch.style.width = (ganz > 0 ? (window.scrollY / ganz) * 100 : 0).toFixed(1) + '%';
