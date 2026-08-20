@@ -147,6 +147,12 @@ p{margin:0}
   will-change:transform;transition:transform 700ms var(--schwung)}
 #strich{fill:none;stroke:var(--wf);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;
   transition:stroke var(--lang) linear}
+#gegenstand{opacity:0}
+#marke{transform-box:fill-box;transform-origin:center}
+#marke path{fill:none;stroke-width:1.7;stroke-linecap:round;
+  stroke-dasharray:1;stroke-dashoffset:1;
+  transition:stroke-dashoffset 1400ms var(--schwung);transition-delay:var(--d,0ms)}
+#marke.da path{stroke-dashoffset:0}
 #details g{opacity:0}
 #details path{fill:none;stroke:var(--wf);stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
 .schein{
@@ -157,7 +163,8 @@ p{margin:0}
 @media (max-width:900px){
   .lauf{padding-left:0}
   .buehne{justify-content:center;padding:0;align-items:flex-start}
-  .buehne svg{width:62vw;height:62vw;margin:9vh 0 0 20vw;opacity:.3}
+  .buehne svg{width:62vw;height:62vw;margin:7vh 0 0 20vw;opacity:.3}
+  .ouv{padding-top:9.5rem}
   .schein{opacity:.1}
 }
 
@@ -190,16 +197,6 @@ p{margin:0}
 @keyframes sinken{0%{transform:scaleY(.2);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}
   50.1%{transform-origin:bottom}100%{transform:scaleY(.2);transform-origin:bottom}}
 @media (prefers-reduced-motion:reduce){.wink i{animation:none}}
-
-/* --- 7. Manifest ---------------------------------------------------------- */
-.manifest{min-height:86svh;display:flex;flex-direction:column;justify-content:center;
-  gap:clamp(.8rem,2vw,1.4rem);padding:5rem var(--rand);max-width:24ch}
-.manifest p{
-  font-family:var(--serif);font-weight:400;font-size:clamp(1.35rem,.9rem + 2.1vw,2.5rem);
-  line-height:1.2;letter-spacing:-.022em;font-variation-settings:'opsz' 120,'SOFT' 40,'WONK' 1;
-}
-.manifest p:last-child{color:var(--leinen-2)}
-.manifest em{font-style:normal;color:var(--wf);transition:color var(--lang) linear}
 
 /* --- 8. Kapitel ----------------------------------------------------------- */
 .kap{min-height:100svh;display:flex;flex-direction:column;justify-content:center;
@@ -308,6 +305,19 @@ p{margin:0}
   <div class="buehne" aria-hidden="true">
     <div class="schein" id="schein"></div>
     <svg viewBox="0 0 100 100" id="svg">
+      <g id="marke">
+        <path pathLength="1" style="stroke:var(--l-studio);--d:280ms"
+              d="M20 50 a30 30 0 1 0 60 0 a30 30 0 1 0 -60 0"/>
+        <path pathLength="1" style="stroke:var(--l-immobilien);--d:560ms"
+              d="M20 50 a30 9 0 1 0 60 0 a30 9 0 1 0 -60 0"/>
+        <path pathLength="1" style="stroke:var(--l-wohnen);--d:760ms"
+              d="M40 50 a10 30 0 1 0 20 0 a10 30 0 1 0 -20 0"/>
+        <path pathLength="1" style="stroke:var(--l-kulinarik);--d:940ms"
+              d="M28 50 a22 30 0 1 0 44 0 a22 30 0 1 0 -44 0"/>
+        <path pathLength="1" style="stroke:var(--l-reisen);--d:1120ms"
+              d="M23 36 a27 8 0 1 0 54 0 a27 8 0 1 0 -54 0"/>
+      </g>
+      <g id="gegenstand">
       <path id="strich" pathLength="1"></path>
       <g id="details">
         <g data-i="0"><path d="M41 35 V30 a9 5 0 0 1 18 0 V35"/><path d="M19 55 H81"/>
@@ -321,6 +331,7 @@ p{margin:0}
         <g data-i="4"><path d="M11 39 H89"/><path d="M50 39 V32"/><path d="M53.5 29 a3.5 3.5 0 1 1 -0.1 0"/>
           <path d="M16 50 h-8"/><path d="M84 50 h8"/>
           <path d="M38 28 q5 -7 0 -14"/><path d="M50 24 q5 -7 0 -14"/><path d="M62 28 q5 -7 0 -14"/></g>
+      </g>
       </g>
     </svg>
   </div>
@@ -344,10 +355,6 @@ p{margin:0}
       <div class="wink auf" id="o5" style="--d:500ms">Scrollen<i></i></div>
     </header>
 
-    <section class="manifest">
-      <p class="auf">Wir haben nicht ein Unternehmen gebaut,</p>
-      <p class="auf" style="--d:120ms">sondern fünf, die einander <em>tragen</em>.</p>
-    </section>
 
     <article class="kap" id="reisen" data-w="reisen" style="--f:var(--l-reisen)">
       <div class="zeile auf">Welt 01 · <b>HeiBen</b></div>
@@ -523,6 +530,7 @@ function toenung(rgb, anteil){
 }
 var GRUND_RGB = GRUND.map(hex);
 var LICHT_RGB = LICHT.map(hex);
+var SAND_RGB  = hex('#d8cdb7');   /* Ton der Holding, solange keine Welt spricht */
 function lerpF(a, b, t){
   return 'rgb(' + Math.round(a[0] + (b[0]-a[0])*t) + ',' + Math.round(a[1] + (b[1]-a[1])*t)
        + ',' + Math.round(a[2] + (b[2]-a[2])*t) + ')';
@@ -541,6 +549,8 @@ var kaps   = [].slice.call(document.querySelectorAll('.kap'));
 var punkte = [].slice.call(document.querySelectorAll('#wnav li'));
 var lauf   = document.querySelector('.lauf');
 var detail = [].slice.call(document.querySelectorAll('#details g'));
+var marke  = document.getElementById('marke');
+var gegen  = document.getElementById('gegenstand');
 
 /* ---------- 5. Ouvertüre: gestaffelter Einzug -------------------------- */
 function start(){
@@ -552,29 +562,15 @@ function start(){
 }
 requestAnimationFrame(start);
 
-/* Der Strich zeichnet sich einmal selbst — der eine große Auftritt der Seite. */
-if (ruhe){
-  strich.style.strokeDasharray = 'none';
-} else {
-  strich.style.strokeDasharray = '1';
-  strich.style.strokeDashoffset = '1';
-  setTimeout(function(){
-    var t0 = null;
-    requestAnimationFrame(function zeichne(t){
-      if (t0 === null) t0 = t;
-      var u = Math.min(1, (t - t0) / 1700);
-      strich.style.strokeDashoffset = String(Math.pow(1 - u, 3));
-      if (u < 1) requestAnimationFrame(zeichne);
-      else strich.style.strokeDasharray = 'none';
-    });
-  }, 480);
-}
+/* Die HeiBen-Marke zeichnet sich Strich für Strich: fünf Welten, ein Globus. */
+requestAnimationFrame(function(){ marke.classList.add('da'); });
+strich.style.strokeDasharray = 'none';
 
 /* ---------- 6. Maskenaufzug: Regie sagt WANN, Vokabel sagt WAS --------
    Beobachtet wird der BLOCK, nicht das einzelne Bauteil: der Maskenaufzug
    arbeitet mit clip-path, und Chromium rechnet das eigene clip-path in die
    Sichtbarkeitsquote ein — ein maskiertes Element meldet ewig 0 %. */
-var bloecke = [].slice.call(document.querySelectorAll('.manifest,.kap,.zaehlband,.finale'));
+var bloecke = [].slice.call(document.querySelectorAll('.kap,.zaehlband,.finale'));
 
 function zeigen(block){
   [].slice.call(block.querySelectorAll('.auf')).forEach(function(el){ el.classList.add('da'); });
@@ -628,7 +624,7 @@ function zaehlen(feld){
 })();
 
 /* ---------- 9. Der Takt: Strich, Tönung, Leitwerk --------------------- */
-var letzteForm = -1, letzterWert = -1, zeigerX = 0, zeigerY = 0;
+var letzteForm = -1, letzterWert = -1, letzterUeberg = -1, zeigerX = 0, zeigerY = 0;
 
 function stufe(x){ return x <= 0 ? 0 : x >= 1 ? 1 : x * x * (3 - 2 * x); }
 
@@ -651,9 +647,17 @@ function takt(){
   /* Halten, dann wechseln: die Form steht still, solange der Text liest. */
   var te = ruhe ? (t > 0.5 ? 1 : 0) : stufe((t - 0.55) / 0.34);
 
+  /* Übergabe: der Globus tritt ab, sobald der erste Gegenstand übernimmt. */
+  var uebergang = ruhe ? (vorlauf > 0.5 ? 1 : 0) : stufe((vorlauf - 0.34) / 0.5);
+  marke.style.opacity = (1 - uebergang).toFixed(3);
+  marke.style.transform = 'scale(' + (1 - 0.14 * uebergang).toFixed(3) + ')';
+  gegen.style.opacity = uebergang.toFixed(3);
+
   var wert = i + te;
-  if (Math.abs(wert - letzterWert) > 0.0015 || letzteForm < 0){
+  if (Math.abs(wert - letzterWert) > 0.0015 || Math.abs(uebergang - letzterUeberg) > 0.004
+      || letzteForm < 0){
     letzterWert = wert;
+    letzterUeberg = uebergang;
     var A = GLEICH[i], B = GLEICH[i + 1], pts = [], k;
     for (k = 0; k < N; k++){
       pts.push([A[k][0] + (B[k][0] - A[k][0]) * te, A[k][1] + (B[k][1] - A[k][1]) * te]);
@@ -664,7 +668,12 @@ function takt(){
     var f1 = GRUND_RGB[i], f2 = GRUND_RGB[i + 1], mix = [
       f1[0] + (f2[0] - f1[0]) * te, f1[1] + (f2[1] - f1[1]) * te, f1[2] + (f2[2] - f1[2]) * te
     ];
-    wurzel.style.setProperty('--wf', lerpF(LICHT_RGB[i], LICHT_RGB[i + 1], te));
+    var welt = [
+      LICHT_RGB[i][0] + (LICHT_RGB[i+1][0] - LICHT_RGB[i][0]) * te,
+      LICHT_RGB[i][1] + (LICHT_RGB[i+1][1] - LICHT_RGB[i][1]) * te,
+      LICHT_RGB[i][2] + (LICHT_RGB[i+1][2] - LICHT_RGB[i][2]) * te
+    ];
+    wurzel.style.setProperty('--wf', lerpF(SAND_RGB, welt, uebergang));
 
     /* Details gehoeren zur gesetzten Form: sie treten erst auf, wenn nichts mehr morpht. */
     for (k = 0; k < detail.length; k++){

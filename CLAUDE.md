@@ -15,7 +15,7 @@ Statisches HTML/JS/CSS-**PWA ohne Build-Schritt**, offline-fähig, localStorage.
 
 ## Pflicht-Workflow nach JEDER Änderung unter web/
 1. **Precache + Service-Worker-Version**: `cd web && node ../tools/gen_sw.js` — erzeugt die
-   `PRECACHE`-Liste aus dem Dateibestand UND zählt die Cache-Version hoch (aktuell **-3000**).
+   `PRECACHE`-Liste aus dem Dateibestand UND zählt die Cache-Version hoch (aktuell **-3001**).
    Nie von Hand pflegen. Standalone-Seiten (`typ` in `tools/seiten.json`) bleiben automatisch
    draußen; `vendor/` und Dateien > 150 KB kommen zur Laufzeit in den Cache (der fetch-Handler
    macht stale-while-revalidate). Wer nur die Version braucht, bumpt trotzdem über den Generator.
@@ -117,7 +117,9 @@ Statisches HTML/JS/CSS-**PWA ohne Build-Schritt**, offline-fähig, localStorage.
   `gen_sw.js` laufen lassen (SEO/JSON-LD/Legal/PWA kommen jetzt aus dem Generator).
 - `web/startseite-v3.html` = **aktueller Startseiten-Entwurf „Ein Strich, fünf Welten"**
   (standalone, nicht verlinkt, nicht precached, noindex): Grund auf Marken-Tinte, eine nie
-  abreißende Linie morpht Koffer → Haus → Tür → Glühbirne → Topf. Die Hauptlinie ist eine
+  abreißende Linie morpht Koffer → Haus → Tür → Glühbirne → Topf. Im Kopf steht davor die
+  HeiBen-Marke: ein Globus aus fünf farbigen Strichen, der sich Strich für Strich zeichnet und
+  beim Eintritt in Reisen an den Koffer übergibt. Die Hauptlinie ist eine
   geschlossene Silhouette; Detailstriche (Griff, Fenster, Faden, Dampf …) blenden nur ein, wenn
   die Form steht. Je Kapitel vier kurze Zeilen: Weltname groß, Verb kursiv, ein Satz, ein Weg.
   Maskenaufzug statt Blur-Translate, ein rAF-Takt. Details und die

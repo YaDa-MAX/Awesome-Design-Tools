@@ -1234,3 +1234,26 @@ PRUEFUNG: 29/29 (vier neue: Detail erscheint / Detail weicht beim Morph / Weltna
 Kapiteltext knapp). 0 PageErrors, 390 px ohne Querlauf, Bewegungsruhe unveraendert vollstaendig.
 Die fuenf Marken wurden gerendert und einzeln geprueft; der Topfdeckel lag zuerst genau auf dem
 Rand (sah aus wie EIN dicker Strich) und wurde um 3 Einheiten angehoben.
+
+### MARKE STATT MANIFEST (SW -3001)
+
+RUECKMELDUNG: „Der Part mit ‚wir haben nicht Unternehmen fuer sie gebaut…' kann weg. Frisst
+Platz. Aktuell startet es mit dem Koffer. Entweder erst ab Reisen reinanimieren oder zuvor noch
+eine Symbolik fuer HeiBen mit den fuenf Farbstrichen als Netz oder Globus oder so."
+
+1. MANIFEST ERSATZLOS ENTFERNT — Abschnitt und CSS. Der Kopf uebergibt jetzt direkt an Reisen.
+2. HEIBEN-MARKE IM KOPF: ein Globus aus GENAU FUENF Strichen, je einer in einer Weltfarbe —
+   Huelle (Studio-Sand), Aequator (Immobilien), schmaler Meridian (Wohnen), breiter Meridian
+   (Kulinarik), Wendekreis (Reisen). Er zeichnet sich beim Laden Strich fuer Strich
+   (pathLength=1 + gestaffelte stroke-dashoffset-Uebergaenge, 280–1120 ms).
+3. UEBERGABE: die Marke tritt ab, waehrend der erste Gegenstand uebernimmt — Kreuzblende plus
+   14 % Verkleinerung, gesteuert von derselben Vorlauf-Zahl (stufe((vorlauf-0,34)/0,5)).
+   Der Koffer erscheint damit erst kurz vor Reisen, nicht mehr sofort im Kopf.
+4. HOLDING-TON: solange keine Welt spricht, ist --wf Sand; die Weltfarbe wird ueber denselben
+   Uebergang eingemischt. Dadurch traegt der Kopf keine Reisen-Farbe mehr.
+TECHNISCHE NOTIZ: die Farb- und Formberechnung stand hinter einer Aenderungssperre auf `wert`.
+Da im Kopf nur der Uebergang laeuft (wert bleibt 0), musste die Sperre den Uebergang mitfuehren,
+sonst waere die Kreuzblende nach dem ersten Bild eingefroren.
+
+PRUEFUNG: 34/34 (fuenf neue: Marke aus 5 Strichen · im Kopf steht die Marke, kein Gegenstand ·
+Marke fertig gezeichnet · Manifest entfernt · Uebergabe vollzogen). 0 PageErrors.
