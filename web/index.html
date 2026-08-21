@@ -112,10 +112,14 @@ p{margin:0}
   transition:opacity var(--lang) var(--schwung) 250ms,transform var(--lang) var(--schwung) 250ms;
 }
 .leitwerk.da{opacity:1;transform:none}
-.leitwerk .hb{
-  font-family:var(--serif);font-size:1.02rem;font-weight:600;letter-spacing:-.02em;
-  font-variation-settings:'opsz' 40,'WONK' 1;
-}
+.leitwerk .hb{display:block;line-height:0}
+.leitwerk .hb img{width:30px;height:auto;display:block;opacity:.92;
+  transition:opacity var(--mittel) var(--schwung)}
+.leitwerk .hb:hover img{opacity:1}
+/* Kopfleiste und Menü tragen dasselbe Zeichen in der dunklen Fassung. */
+.kopf .marke::before,.menue .marke::before{content:"";flex:0 0 auto;align-self:center;
+  width:1.72em;height:1.28em;margin-right:.15rem;
+  background:url(assets/monogram-dark.png) center/contain no-repeat}
 .wnav{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:.9rem;align-items:center}
 .wnav a{
   display:flex;flex-direction:column;align-items:center;gap:.55rem;
@@ -344,7 +348,7 @@ p{margin:0}
 <body>
 
 <nav class="leitwerk" id="leitwerk" aria-label="Welten">
-  <a class="hb" href="#top" aria-label="Nach oben">HB</a>
+  <a class="hb" href="#top" aria-label="Nach oben"><img src="assets/monogram-dark.png" alt="" width="30" height="22"></a>
   <ol class="wnav" id="wnav">
     <li style="--f:var(--l-reisen)"><a href="#reisen">Reisen</a></li>
     <li style="--f:var(--l-wohnen)"><a href="#wohnen">Wohnen</a></li>

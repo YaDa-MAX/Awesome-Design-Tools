@@ -167,6 +167,13 @@
 .hb-brand{font-family:var(--hb-serif);font-size:1.32rem;color:var(--hb-text);
   text-decoration:none;letter-spacing:-.02em;display:flex;align-items:baseline;gap:.55rem;
   font-variation-settings:'opsz' 48,'WONK' 1;flex:0 0 auto}
+/* Monogramm: dieselbe Marke in zwei Fassungen — hell auf Papier, dunkel auf Tinte.
+   Als Hintergrundbild, damit die Fassung mit dem Grund wechselt; die Wortmarke
+   daneben trägt den Namen, das Zeichen ist Schmuck und darum aria-verborgen. */
+.hb-brand::before{content:"";flex:0 0 auto;align-self:center;
+  width:1.72em;height:1.28em;margin-right:.05rem;
+  background:url(assets/monogram-light.png) center/contain no-repeat}
+.hb-menue .hb-brand::before{background-image:url(assets/monogram-dark.png)}
 .hb-brand small{font-family:var(--hb-mono);font-size:.54rem;letter-spacing:.24em;
   text-transform:uppercase;color:var(--hb-text-zart)}
 .hb-links{display:flex;align-items:center;gap:.15rem 1rem;margin-left:auto}

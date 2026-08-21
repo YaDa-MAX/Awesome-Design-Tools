@@ -37,6 +37,27 @@ for (const seite of seiten) {
   }
 }
 
+/* Zweite Runde: was Stylesheets per url() holen, gehoert ebenso in den Precache.
+   Ohne diesen Schritt fehlte ein Bild, das NUR aus CSS kommt, offline — genau so
+   ist es dem Monogramm in v3-W12 ergangen. Auch Inline-<style> wird gelesen, denn
+   die Startseite haelt ihre Gestaltung im Dokument. */
+const RE_URL = /url\(\s*['"]?([^'")]+)['"]?\s*\)/g;
+const RE_STYLE = /<style[^>]*>([\s\S]*?)<\/style>/g;
+const quellen = [...referenziert].filter((f) => f.endsWith('.css')).map((f) => fs.readFileSync(f, 'utf8'));
+for (const seite of seiten) {
+  const s = fs.readFileSync(seite, 'utf8');
+  let m;
+  while ((m = RE_STYLE.exec(s)) !== null) quellen.push(m[1]);
+}
+for (const css of quellen) {
+  let m;
+  while ((m = RE_URL.exec(css)) !== null) {
+    const ziel = m[1].split('?')[0].split('#')[0];
+    if (!ziel || /^(https?:)?\/\//.test(ziel) || ziel.startsWith('data:')) continue;
+    if (fs.existsSync(ziel)) referenziert.add(ziel);
+  }
+}
+
 const spaeter = [];
 const dateien = [...referenziert].filter((f) => {
   if (f.startsWith('vendor/')) { spaeter.push(f); return false; }

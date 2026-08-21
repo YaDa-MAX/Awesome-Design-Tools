@@ -1652,3 +1652,42 @@ PRUEFUNG
 STAND DER WELTEN: Reisen 8 · Wohnen 7 · Immobilien 8 · Studio 7 · Kulinarik 10.
 OFFEN UND NUR VOM USER ZU ENTSCHEIDEN: assets/monogram-dark.png und monogram-light.png —
 nie referenziertes Markenmaterial, zur Laufzeit kostenlos.
+
+### WELLE 12: DAS MONOGRAMM IN BETRIEB (SW -3011)
+
+AUFTRAG: „Beide Dateien." — die letzten zwei nie referenzierten Bilder.
+GELESEN ALS: in Betrieb nehmen, nicht loeschen. Der Blick auf die Dateien gab den Ausschlag:
+monogram-light.png ist das HB in Tinte und Terrakotta (fuer die hellen Seiten),
+monogram-dark.png dasselbe Zeichen in Leinen und Ocker (fuer die Tinte-Gruende). Ein Paar,
+das genau auf die zwei Gruende passt, die der Auftritt seit W10 hat. Waere „loeschen" gemeint
+gewesen, ist das ein Befehl entfernt — die Dateien liegen unveraendert im Verzeichnis.
+
+WO SIE JETZT STEHEN
+- Gemeinsame Navigation (heiben-design.css): `.hb-brand::before` traegt das Zeichen vor der
+  Wortmarke — als HINTERGRUNDBILD, damit `.hb-menue .hb-brand::before` im dunklen Weltmenue
+  einfach die andere Fassung einsetzt. Dekoration, also kein alt-Text: den Namen sagt die
+  Wortmarke daneben.
+- Startseite: das Leitwerk zeigt statt der Buchstaben „HB" das Zeichen (30 px), Kopfleiste und
+  mobiles Menue tragen es vor der Wortmarke, beide in der dunklen Fassung.
+- Leistenhoehe unveraendert bei 61 px (das Zeichen ist in em bemessen und haengt an der Schrift).
+
+DABEI EINEN ECHTEN FEHLER IM WERKZEUG GEFUNDEN
+gen_sw.js sammelte Referenzen nur aus `<script src>`, `<link href>` und `<img src>` im HTML.
+Was ein Stylesheet per `url()` holt, kannte es nicht — monogram-light.png war nach dem Einbau
+prompt NICHT im Precache und haette offline gefehlt (monogram-dark.png dagegen schon, weil die
+Startseite ihr CSS inline im Dokument haelt). Der Generator liest jetzt in einer zweiten Runde
+alle referenzierten .css-Dateien UND jeden inline-`<style>`-Block auf `url()` ab.
+Ergebnis: 167 -> 169 Eintraege; genau die zwei Monogramme kamen dazu, sonst fehlte nichts —
+die Luecke hat also nur hier zugebissen, war aber eine echte.
+
+PRUEFUNG
+- Zeichen sichtbar und richtig zugeordnet: helle Leiste -> monogram-light, Weltmenue ->
+  monogram-dark, Leitwerk der Startseite -> monogram-dark (514×383 geladen), Kopfleiste ebenso.
+- OFFLINE gegengeprueft (Netz gekappt, SW aktiv): beide Monogramme abrufbar, 13/13 Seiten.
+- Rundlauf 109 Seiten bei 390 px und 1280 px: je 0 PageErrors, 0 Querlauf.
+- 31/31 Navigation · 49/49 Startseite · 29/29 Welt-Balance.
+
+DAMIT IST DIE LISTE DER TOTLAST LEER: alle sechs unreferenzierten Dateien aus W9 sind geklaert —
+GLTFLoader.js ausgelagert und in Betrieb, hero-dark.png als Vorschaubild der Startseite,
+monogram-light/-dark in der Navigation, icon-source-1024.png bleibt als Vorlage der Favicons,
+rezepte/README.txt als Notiz.

@@ -1,5 +1,5 @@
 /* HeiBen Service-Worker — Offline-Fähigkeit & App-Shell (v20260615-1323) */
-const CACHE='heiben-v20260622-3009';
+const CACHE='heiben-v20260622-3011';
 const PRECACHE=[
   /* GENERIERT von tools/gen_sw.js — nicht von Hand pflegen.
      Kaltstart-Huelle; Grosses und vendor/ kommt zur Laufzeit in den Cache. */
@@ -114,6 +114,8 @@ const PRECACHE=[
   "assets/apple-touch-icon.png",
   "assets/favicon-32.png",
   "assets/favicon.svg",
+  "assets/monogram-dark.png",
+  "assets/monogram-light.png",
   "assets/wordmark-holding.png",
   "assets/wordmark-immobilien.png",
   "assets/wordmark-on-dark.png",
