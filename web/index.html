@@ -315,6 +315,11 @@ p{margin:0}
   transition:background-color 900ms linear}
 .zahl b{font-family:var(--mono);font-weight:600;font-size:clamp(1.7rem,1.1rem + 2vw,2.9rem);
   line-height:1;font-variant-numeric:tabular-nums;color:var(--leinen)}
+.wege-band{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.6rem}
+.wege-band a{font-family:var(--mono);font-size:.62rem;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--leinen-2);border:1px solid rgba(216,205,183,.22);border-radius:999px;padding:.5rem .9rem;
+  transition:border-color var(--mittel) var(--schwung),color var(--mittel) var(--schwung)}
+.wege-band a:hover{border-color:var(--wf);color:var(--wf)}
 .zahl small{font-family:var(--mono);font-size:.58rem;letter-spacing:.22em;text-transform:uppercase;
   color:var(--zart)}
 
@@ -433,7 +438,7 @@ p{margin:0}
       <h2 class="auf" style="--d:80ms">Reisen</h2>
       <div class="verb auf" style="--d:150ms">aufbrechen.</div>
       <p class="satz auf" style="--d:220ms">Kuratiert, mit Handschrift. Kein Katalog.</p>
-      <div class="marken auf" style="--d:290ms"><span>Reiseziele</span><span>Reise-Planer</span><span>Anfrage</span></div>
+      <div class="marken auf" style="--d:290ms"><a href="reisen-ziele.html">Reiseziele</a><a href="reisen-planer.html">Reise-Planer</a><a href="reisen-anfrage.html">Anfrage</a></div>
       <a class="tuer auf" style="--d:360ms" href="reisen.html">HeiBen Reisen entdecken</a>
     </article>
 
@@ -442,7 +447,7 @@ p{margin:0}
       <h2 class="auf" style="--d:80ms">Wohnen</h2>
       <div class="verb auf" style="--d:150ms">bleiben.</div>
       <p class="satz auf" style="--d:220ms">Aus eigener Manufaktur. Für Jahrzehnte.</p>
-      <div class="marken auf" style="--d:290ms"><span>Manufaktur</span><span>Konfigurator</span><span>3D-Planer</span></div>
+      <div class="marken auf" style="--d:290ms"><a href="manufaktur.html">Manufaktur</a><a href="wohnen-konfigurator.html">Konfigurator</a><a href="wohnen-planer.html">3D-Planer</a></div>
       <a class="tuer auf" style="--d:360ms" href="wohnen.html">HeiBen Wohnen entdecken</a>
     </article>
 
@@ -451,7 +456,7 @@ p{margin:0}
       <h2 class="auf" style="--d:80ms">Immobilien</h2>
       <div class="verb auf" style="--d:150ms">ankommen.</div>
       <p class="satz auf" style="--d:220ms">Bestand mit Charakter, ehrlich gerechnet.</p>
-      <div class="marken auf" style="--d:290ms"><span>Angebote</span><span>Budget-Planer</span><span>Beratung</span></div>
+      <div class="marken auf" style="--d:290ms"><a href="immobilien-angebote.html">Angebote</a><a href="immobilienbudget.html">Budget-Planer</a><a href="immobilien-anfrage.html">Beratung</a></div>
       <a class="tuer auf" style="--d:360ms" href="immobilien.html">HeiBen Immobilien entdecken</a>
     </article>
 
@@ -460,7 +465,7 @@ p{margin:0}
       <h2 class="auf" style="--d:80ms">Studio</h2>
       <div class="verb auf" style="--d:150ms">verstehen.</div>
       <p class="satz auf" style="--d:220ms"><span id="kzSteck">370</span> Steckbriefe. Frei und werbefrei.</p>
-      <div class="marken auf" style="--d:290ms"><span>Wissens-Suche</span><span>Lernpfade</span><span>Tagesdosis</span></div>
+      <div class="marken auf" style="--d:290ms"><a href="suche.html">Wissens-Suche</a><a href="lernpfade.html">Lernpfade</a><a href="tagesdosis.html">Tagesdosis</a></div>
       <a class="tuer auf" style="--d:360ms" href="wissen.html">das Wissen entdecken</a>
     </article>
 
@@ -469,7 +474,7 @@ p{margin:0}
       <h2 class="auf" style="--d:80ms">Kulinarik</h2>
       <div class="verb auf" style="--d:150ms">teilen.</div>
       <p class="satz auf" style="--d:220ms">51 Küchen, ein Wochenplan.</p>
-      <div class="marken auf" style="--d:290ms"><span>Rezepte</span><span>Wochenplan</span><span>Rezept-Würfel</span></div>
+      <div class="marken auf" style="--d:290ms"><a href="kulinarik-rezepte.html">Rezepte</a><a href="kulinarik-wochenplan.html">Wochenplan</a><a href="kulinarik-rezeptwuerfel.html">Rezept-Würfel</a></div>
       <a class="tuer auf" style="--d:360ms" href="kulinarik.html">HeiBen Kulinarik entdecken</a>
     </article>
 
@@ -484,6 +489,14 @@ p{margin:0}
     <div class="zahl auf" style="--d:140ms"><b data-zahl="370">0</b><small>Steckbriefe</small></div>
     <div class="zahl auf" style="--d:210ms"><b data-zahl="16">0</b><small>Lernpfade</small></div>
     <div class="zahl auf" style="--d:280ms"><b data-zahl="544">0</b><small>Begriffskarten</small></div>
+  </div>
+  <div class="wege-band auf" style="--d:350ms">
+    <a href="wissen.html">Wissen für Zuhause</a>
+    <a href="suche.html">Alles durchsuchen</a>
+    <a href="lernpfade.html">Lernpfade</a>
+    <a href="begriffskarten.html">Begriffskarten</a>
+    <a href="schaufenster.html">Unsere Arbeit</a>
+    <a href="familie.html">Die Familie</a>
   </div>
 </section>
 

@@ -134,6 +134,11 @@
 /* Die Kennzahlen-Tabelle ist breiter als ein Telefon; sie scrollt jetzt in sich
    statt die ganze Seite zu verschieben. */
 .u-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+
+.u-weg{font-family:'JetBrains Mono',monospace;font-size:.64rem;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--ink-soft);text-decoration:none;
+  border:1px solid var(--rule);border-radius:999px;padding:.5rem .9rem;}
+.u-weg:hover{border-color:var(--terracotta,#b04a31);color:var(--ink);}
 </style>
 <div class="wrap">
 
@@ -371,6 +376,20 @@
 })();
 </script>
 </main>
+
+<section class="u-sec" style="border-top:1px solid var(--rule);padding-top:2rem;margin-top:2rem">
+  <div class="eyebrow">Zum Nachlesen</div>
+  <h2>Wie wir arbeiten — nachlesbar.</h2>
+  <p>Was die Holding steuert, was die Marke ausmacht und wie unsere Oberflächen gebaut sind:
+     Diese vier Seiten machen die Arbeit dahinter zugänglich, statt sie zu behaupten.</p>
+  <div class="u-wege" style="display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1rem">
+    <a class="u-weg" href="strategie.html">Strategie der Holding</a>
+    <a class="u-weg" href="marke.html">Die Marke HeiBen</a>
+    <a class="u-weg" href="designsystem.html">Das Design-System</a>
+    <a class="u-weg" href="partner-demo.html">Für Partner</a>
+  </div>
+</section>
+
 
 <footer>
   <div class="wrap">

@@ -1747,3 +1747,52 @@ PRUEFUNG
 - Schmal 390 px: kein Querlauf, Zeichen da, Leiste dunkel — auf allen fuenf.
 - Rundlauf 109 Seiten bei 390 px und 1280 px: je 0 PageErrors, 0 Querlauf.
 - 31/31 Navigation · 49/49 Startseite · 29/29 Welt-Balance · offline 13/13.
+
+---
+
+## REMAKE V3 · WELLE 14: DER LINKGRAPH (SW -3016)
+
+AUFTRAG: „Baue alle Verknuepfungen von Startseite zu Unterseiten und von Unterseiten zu
+entsprechenden."
+
+GEMESSEN, BEVOR GEBAUT WURDE — UND ZWEIMAL, WEIL DIE ERSTE MESSUNG LOG
+Der statische Graph (Links im HTML) sah dramatisch aus: nur 77 von 107 oeffentlichen Seiten
+von index.html erreichbar, 18 ohne eingehenden Link. Das war ein MESSFEHLER: Weltmenue und
+Werkzeug-Register entstehen erst im Browser. Im echten Graphen (Seiten geladen, Menue
+geoeffnet, dann alle a[href] eingesammelt) waren es 102 von 107 — die Lage war viel besser
+als der Text im HTML.
+ECHTE LUECKEN, die dann uebrig blieben:
+1. Die Startseite verlinkte nur 10 Seiten direkt. Die drei Marken je Kapitel („Reiseziele",
+   „Reise-Planer", „Anfrage" …) waren <span> — Beschriftung, kein Weg.
+2. Vier Holding-Seiten (strategie, marke, designsystem, partner-demo) bildeten einen
+   geschlossenen Ring: sie verlinkten nur einander, aus dem erreichbaren Auftritt zeigte
+   nichts hinein.
+3. Von einer Unterseite zu ihren Geschwistern fuehrte der Weg NUR ueber das Weltmenue —
+   man musste es erst oeffnen.
+
+WAS GEBAUT WURDE
+1. STARTSEITE: die 15 Kapitel-Marken sind jetzt echte Links auf die Kernseite der jeweiligen
+   Welt (reisen-ziele, reisen-planer, reisen-anfrage · manufaktur, wohnen-konfigurator,
+   wohnen-planer · immobilien-angebote, immobilienbudget, immobilien-anfrage · suche,
+   lernpfade, tagesdosis · kulinarik-rezepte, kulinarik-wochenplan, kulinarik-rezeptwuerfel).
+   Dazu eine knappe Wege-Zeile im Zaehlband: Wissen, Suche, Lernpfade, Begriffskarten,
+   Schaufenster, Familie. Direkte Ziele der Startseite: 10 -> 28.
+2. NACHBARN (neues Bauteil): `<div data-hb-nachbarn></div>` rendert „Weiter in HeiBen <Welt>" —
+   alle Geschwister der Welt plus Rueckweg zur Weltseite. Quelle ist heiben-menue.js, also
+   dieselbe generierte Liste wie das Weltmenue; gen_kopf.js haengt hb-nachbarn.js automatisch
+   an, sobald der Behaelter im Markup steht. Gesetzt auf 35 Unterseiten der fuenf Welten.
+   Auf dunklem Grund kleidet hb-welt.css dasselbe Bauteil um.
+3. HOLDING-RING: unternehmen.html verlinkt die vier Seiten jetzt in einem eigenen Abschnitt
+   („Wie wir arbeiten — nachlesbar").
+
+ERGEBNIS, NACHGEMESSEN
+- von index.html erreichbar: 102 -> 106 von 107. Die eine Ausnahme ist 404.html — eine
+  Fehlerseite gehoert nicht verlinkt, das ist kein Mangel.
+- ohne eingehenden Link: weiterhin nur 404.html.
+- direkt von der Startseite: 10 -> 28 Seiten.
+- Nachbarn stichprobenhaft: reisen-ziele 7 · kulinarik-rezepte 9 · immobilien-objekt 7 ·
+  wohnen-planer 6 · studio-magazin 6 — jeweils ohne die eigene Seite und mit Rueckweg.
+
+PRUEFUNG: 13/13 gezielt (Nachbarn auf fuenf Seiten, Startseiten-Marken, Wege-Zeile) ·
+Rundlauf 109 Seiten bei 390 px und 1280 px je 0 PageErrors und 0 Querlauf ·
+31/31 Navigation · 49/49 Startseite · 29/29 Welt-Balance · offline 13/13.

@@ -16,7 +16,7 @@ Statisches HTML/JS/CSS-**PWA ohne Build-Schritt**, offline-fähig, localStorage.
 ## Pflicht-Workflow nach JEDER Änderung unter web/
 1. **Precache + Service-Worker-Version**: `cd web && node ../tools/gen_sw.js` — erzeugt die
    `PRECACHE`-Liste aus dem Dateibestand (Referenzen aus HTML **und** `url()` in Stylesheets,
-   inline `<style>` eingeschlossen) UND zählt die Cache-Version hoch (aktuell **-3014**).
+   inline `<style>` eingeschlossen) UND zählt die Cache-Version hoch (aktuell **-3016**).
    Nie von Hand pflegen. Standalone-Seiten (`typ` in `tools/seiten.json`) bleiben automatisch
    draußen; `vendor/` und Dateien > 150 KB kommen zur Laufzeit in den Cache (der fetch-Handler
    macht stale-while-revalidate). Wer nur die Version braucht, bumpt trotzdem über den Generator.
@@ -86,6 +86,10 @@ Statisches HTML/JS/CSS-**PWA ohne Build-Schritt**, offline-fähig, localStorage.
   automatisch unter der Navigation, die Seite steht auf `noindex`, fehlt in Sitemap und Suche und
   taucht in der Übersicht auf `holding-dashboard.html` auf. Behälter: `data-hb-intern`,
   `data-hb-weltseiten="<welt>"`.
+- **Nachbarn (seit v3-W14)**: `<div data-hb-nachbarn></div>` am Fuß einer Weltseite rendert
+  „Weiter in dieser Welt" — alle Geschwister plus Rückweg zur Welt. Quelle ist `heiben-menue.js`,
+  dieselbe Liste wie das Weltmenü; `gen_kopf.js` hängt `hb-nachbarn.js` automatisch an, sobald
+  der Behälter im Markup steht. Neue Seite eintragen genügt.
 - **Werkzeug-Register (seit v3-W5)**: `web/heiben-werkzeuge.js` wird aus `tools/seiten.json`
   erzeugt (`typ:"werkzeug"` + `gruppe`); `hb-werkzeuge.js` rendert es in jeden Behälter
   `<div data-hb-werkzeuge="alle|<welt>|<gruppe>">`. Neues Werkzeug = Eintrag in `seiten.json`,

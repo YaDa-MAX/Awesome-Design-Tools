@@ -212,3 +212,10 @@
   color:var(--hb-tief);
 }
 [data-hb-grund="tief"] .hb-burger i{background:var(--hb-text-invers)}
+
+/* Nachbarn auf dunklem Grund */
+.w-seite .hb-nachbarn{border-top-color:var(--w-linie)}
+.w-seite .hb-nachbarn-titel{color:var(--w-licht)}
+.w-seite .hb-nachbarn-reihe a{border-color:var(--w-linie);color:var(--hb-linie)}
+.w-seite .hb-nachbarn-reihe a:hover{border-color:var(--w-licht);color:var(--hb-text-invers)}
+.w-seite .hb-nachbarn-reihe a.welt{border-color:var(--w-licht);color:var(--hb-text-invers)}

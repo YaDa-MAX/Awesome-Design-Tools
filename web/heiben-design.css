@@ -494,3 +494,26 @@
   text-underline-offset:3px;white-space:nowrap}
 .hb-intern-punkt{width:7px;height:7px;border-radius:var(--hb-rund-voll);
   background:var(--hb-w-reisen);flex:0 0 auto;align-self:center}
+
+/* ---------- Nachbarn: „Weiter in dieser Welt" (hb-nachbarn.js) ----------
+   Steht am Fuß jeder Unterseite und macht die Geschwister erreichbar, ohne
+   dass jemand erst das Weltmenü öffnen muss. Auf dunklem Grund (Weltseiten)
+   kleidet hb-welt.css dasselbe Bauteil um. */
+.hb-nachbarn{border-top:1px solid var(--hb-linie);margin-top:var(--hb-raum-6);
+  padding-top:var(--hb-raum-4)}
+.hb-nachbarn-kopf{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;
+  gap:var(--hb-raum-2) var(--hb-raum-4)}
+.hb-nachbarn-titel{font-family:var(--hb-mono);font-size:var(--hb-s-mikro);
+  letter-spacing:var(--hb-sperr-mikro);text-transform:uppercase;color:var(--hb-welt)}
+.hb-nachbarn-zurueck{font-family:var(--hb-mono);font-size:var(--hb-s-mikro);
+  letter-spacing:var(--hb-sperr-mikro);text-transform:uppercase;color:var(--hb-text-zart);
+  text-decoration:none}
+.hb-nachbarn-zurueck:hover{color:var(--hb-text)}
+.hb-nachbarn-reihe{display:flex;flex-wrap:wrap;gap:var(--hb-raum-2);margin-top:var(--hb-raum-3)}
+.hb-nachbarn-reihe a{font-size:var(--hb-s-klein);color:var(--hb-text-leise);text-decoration:none;
+  border:1px solid var(--hb-linie);border-radius:var(--hb-rund-voll);
+  padding:.42rem .85rem;line-height:1.2;
+  transition:border-color var(--hb-zeit-kurz) var(--hb-ease-standard),
+             color var(--hb-zeit-kurz) var(--hb-ease-standard)}
+.hb-nachbarn-reihe a:hover{border-color:var(--hb-welt);color:var(--hb-text)}
+.hb-nachbarn-reihe a.welt{border-color:var(--hb-welt-linie);color:var(--hb-text);font-weight:700}

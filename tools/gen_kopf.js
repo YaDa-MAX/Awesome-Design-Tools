@@ -47,6 +47,8 @@ const PFLICHT = [
      Seiten mit einem Behaelter (Uebersichten). Nicht auf allen 102 Seiten. */
   { datei: 'heiben-bereiche.js', tag: '<script src="heiben-bereiche.js" defer></script>',
     nurWenn: (e, text) => e.typ === 'intern' || /data-hb-(intern|weltseiten)/.test(text) },
+  { datei: 'hb-nachbarn.js', tag: '<script src="hb-nachbarn.js" defer></script>',
+    nurWenn: (e, text) => /data-hb-nachbarn/.test(text) },
   { datei: 'hb-bereiche.js', tag: '<script src="hb-bereiche.js" defer></script>',
     nurWenn: (e, text) => e.typ === 'intern' || /data-hb-(intern|weltseiten)/.test(text) },
 ];
