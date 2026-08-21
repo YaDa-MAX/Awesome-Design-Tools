@@ -1796,3 +1796,52 @@ ERGEBNIS, NACHGEMESSEN
 PRUEFUNG: 13/13 gezielt (Nachbarn auf fuenf Seiten, Startseiten-Marken, Wege-Zeile) ·
 Rundlauf 109 Seiten bei 390 px und 1280 px je 0 PageErrors und 0 Querlauf ·
 31/31 Navigation · 49/49 Startseite · 29/29 Welt-Balance · offline 13/13.
+
+### WELLE 15: JE WELT EIN EIGENES BAUTEIL (SW -3018)
+
+AUFTRAG: „Weitere passende Designelemente je Welt einbauen."
+
+HALTUNG: Die fuenf Weltseiten teilen seit W13 Grund, Schrift und Bewegung. Was fehlte, war
+das Eigene. Regel fuer diese Welle: EIN Bauteil je Welt, und es muss aus dem MATERIAL der
+Welt kommen und etwas Wahres zeigen — kein Muster, das ueberall haette stehen koennen.
+
+REISEN · das Etappenband (.w-route)
+Eine Reise ist eine Folge von Etappen — der Ablauf einer Buchung auch. Vier Stationen auf
+einer gepunkteten Linie mit Ring-Marken und Tagesangaben: „Sie schreiben uns · Tag 0",
+„Wir schlagen vor · Tag 1–3", „Wir schleifen gemeinsam · Tag 4–10", „Sie reisen · ab Tag X".
+Der Abschnitt sagt damit erstmals, WIE lange etwas dauert.
+
+WOHNEN · die Bemaszung (.w-mass) und das Planraster
+Innenarchitektur beginnt beim Maß. Der Trenner ueber den Leistungskarten ist eine Bemaßungs-
+linie mit Endmarken und der Angabe in der Mitte („Vom ersten Maß bis zum letzten Stueck").
+Hinter dem Haus-Zeichen liegt ein feines Planraster (34 px).
+NACHGEBESSERT: die Endmarken waren zuerst mit box-shadow gebaut und kaum zu sehen; jetzt
+tragen die Pseudo-Elemente die Linie als Hintergrund-Gradient und die Marke als Rahmenkante.
+
+IMMOBILIEN · Eckwinkel und Pruefzeile
+Jede Angebotskarte bekommt die Eckwinkel einer Planzeichnung (oben links, unten rechts).
+Darunter steht in Mono, was vor der Aufnahme geprueft wurde: Grundbuch, Teilungserklaerung,
+Protokolle der letzten drei Jahre, Energieausweis. Vertrauen wird gezeigt, nicht behauptet.
+
+STUDIO · Satzspiegel
+Ein Magazin erkennt man am Satz: Der Vorspann bekommt ein Initial in Fraunces (::first-letter,
+opsz 144, WONK 1), daneben steht eine Randnotiz „Aus der Redaktion" an einer Spaltenlinie.
+
+KULINARIK · die Zutatenzeile (.w-zutaten)
+Ein Rezept listet Zutat und Menge, verbunden durch eine Punktreihe. Genau so steht jetzt da,
+was in dieser Kueche immer im Haus ist — zehn Zeilen von „Olivenoel, gutes · 1 l" bis
+„Butter, gesalzen · immer".
+
+PRUEFUNG
+- Fuenf Bauteile einzeln gerendert und angesehen (nicht nur gezaehlt).
+- Schmal 390 px: alle fuenf sichtbar und im Rahmen (rechte Kante 371 von 390).
+- Bewegungsruhe: alle fuenf sofort da, keine offenen Aufzuege.
+- Rundlauf 109 Seiten bei 390 px und 1280 px: je 0 PageErrors, 0 Querlauf.
+- 31/31 Navigation · 49/49 Startseite · 29/29 Welt-Balance · offline 13/13 ·
+  Linkgraph unveraendert 106/107.
+
+WIEDER EINE PRUEFUNG, DIE AUF DIE UHR SAH
+Die erste Messung meldete das Immobilien-Bauteil als unsichtbar. Nachgesehen: es hat 480 ms
+Verzoegerung und 320 ms Blende, die Probe schaute nach 700 ms. Der Code war richtig, die
+Pruefung falsch — sie wartet jetzt auf die Deckkraft statt auf einen Zeitpunkt. Das ist
+dieselbe Falle wie in W13; sie steht damit zum zweiten Mal im Protokoll.

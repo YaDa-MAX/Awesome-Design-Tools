@@ -219,3 +219,82 @@
 .w-seite .hb-nachbarn-reihe a{border-color:var(--w-linie);color:var(--hb-linie)}
 .w-seite .hb-nachbarn-reihe a:hover{border-color:var(--w-licht);color:var(--hb-text-invers)}
 .w-seite .hb-nachbarn-reihe a.welt{border-color:var(--w-licht);color:var(--hb-text-invers)}
+
+/* ============================================================================
+   WELTZEICHEN IM DETAIL — je Welt EIN eigenes Bauteil.
+   Alle fünf teilen Grund, Schrift und Bewegung; unterschieden werden sie durch
+   ein Element, das aus dem Material der Welt kommt und etwas Wahres zeigt,
+   nicht bloß schmückt. Jedes ist auf seine Welt gescoped.
+   ========================================================================== */
+
+/* --- REISEN: das Etappenband ------------------------------------------------
+   Eine Reise ist eine Folge von Etappen. Der Ablauf einer Buchung auch — also
+   wird er als Route gezeichnet, mit Punkten auf einer Linie. */
+.w-route{list-style:none;margin:1.6rem 0 0;padding:0;display:grid;gap:1.6rem;
+  grid-template-columns:repeat(auto-fit,minmax(min(100%,190px),1fr));position:relative}
+.w-etappe{position:relative;padding-top:1.7rem;min-width:0}
+.w-etappe::before{content:"";position:absolute;left:0;right:0;top:6px;height:1px;
+  background:repeating-linear-gradient(to right,var(--w-licht) 0 6px,transparent 6px 12px);opacity:.5}
+.w-etappe:last-child::before{right:50%}
+.w-etappe::after{content:"";position:absolute;left:0;top:2px;width:9px;height:9px;border-radius:50%;
+  background:var(--w-grund);border:2px solid var(--w-licht)}
+.w-etappe b{display:block;font-family:var(--hb-serif);font-weight:500;font-size:1.08rem;
+  letter-spacing:-.02em;margin-bottom:.2rem;font-variation-settings:'opsz' 60,'WONK' 1}
+.w-etappe span{color:var(--hb-linie);font-size:.93rem}
+.w-etappe em{display:block;font-family:var(--hb-mono);font-style:normal;font-size:var(--hb-s-mikro);
+  letter-spacing:var(--hb-sperr-mikro);text-transform:uppercase;color:var(--w-licht);margin-top:.4rem}
+
+/* --- WOHNEN: die Maßlinie ---------------------------------------------------
+   Innenarchitektur beginnt beim Maß. Der Trenner ist eine Bemaßung, wie sie
+   auf jedem Plan steht — mit Pfeilenden und der Angabe in der Mitte. */
+.w-mass{display:flex;align-items:center;gap:.9rem;margin:1.8rem 0 0;
+  font-family:var(--hb-mono);font-size:var(--hb-s-mikro);letter-spacing:var(--hb-sperr-mikro);
+  text-transform:uppercase;color:var(--w-licht)}
+.w-mass::before,.w-mass::after{content:"";flex:1;height:9px;opacity:.55;
+  background:linear-gradient(var(--w-licht),var(--w-licht)) center/100% 1px no-repeat}
+.w-mass::before{border-left:1px solid var(--w-licht)}
+.w-mass::after{border-right:1px solid var(--w-licht)}
+[data-hb-welt="wohnen"] .w-buehne::before{content:"";position:absolute;inset:6% 8%;
+  background-image:linear-gradient(var(--w-linie) 1px,transparent 1px),
+                   linear-gradient(90deg,var(--w-linie) 1px,transparent 1px);
+  background-size:34px 34px;opacity:.6;border-radius:var(--hb-rund-m)}
+
+/* --- IMMOBILIEN: Eckwinkel und Prüfzeile ------------------------------------
+   Ein Objekt wird geprüft, bevor es angeboten wird. Die Karten bekommen die
+   Eckwinkel einer Planzeichnung, darunter steht, was geprüft wurde. */
+[data-hb-welt="immobilien"] .w-karte{position:relative}
+[data-hb-welt="immobilien"] .w-karte::before,
+[data-hb-welt="immobilien"] .w-karte::after{content:"";position:absolute;width:12px;height:12px;
+  border:1px solid var(--w-licht);opacity:.5;pointer-events:none}
+[data-hb-welt="immobilien"] .w-karte::before{left:.7rem;top:.7rem;border-right:0;border-bottom:0}
+[data-hb-welt="immobilien"] .w-karte::after{right:.7rem;bottom:.7rem;border-left:0;border-top:0}
+.w-pruef{display:flex;flex-wrap:wrap;gap:.5rem 1.6rem;margin-top:1.4rem;
+  font-family:var(--hb-mono);font-size:var(--hb-s-mikro);letter-spacing:var(--hb-sperr-mikro);
+  text-transform:uppercase;color:var(--hb-text-zart)}
+.w-pruef span{display:inline-flex;align-items:center;gap:.45rem}
+.w-pruef span::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--w-licht)}
+
+/* --- STUDIO: Satzspiegel ----------------------------------------------------
+   Ein Magazin erkennt man am Satz: Initial, Spaltenlinie, Randnotiz. */
+[data-hb-welt="studio"] .w-lede::first-letter{
+  font-family:var(--hb-serif);font-weight:500;font-size:3.4em;line-height:.82;
+  float:left;margin:.06em .12em 0 0;color:var(--w-licht);
+  font-variation-settings:'opsz' 144,'WONK' 1}
+.w-randnotiz{border-left:1px solid var(--w-licht);padding-left:1rem;margin-top:1.6rem;
+  max-width:46ch;color:var(--hb-linie);font-size:.94rem}
+.w-randnotiz b{display:block;font-family:var(--hb-mono);font-size:var(--hb-s-mikro);
+  letter-spacing:var(--hb-sperr-mikro);text-transform:uppercase;color:var(--w-licht);
+  margin-bottom:.3rem}
+
+/* --- KULINARIK: die Zutatenzeile --------------------------------------------
+   Ein Rezept listet Zutat und Menge, verbunden durch eine Punktreihe. Genau so
+   steht hier, was in dieser Küche immer im Haus ist. */
+.w-zutaten{list-style:none;margin:1.4rem 0 0;padding:0;max-width:44ch}
+.w-zutaten li{display:flex;align-items:baseline;gap:.5rem;padding:.42rem 0;
+  border-bottom:1px solid var(--w-linie)}
+.w-zutaten li:last-child{border-bottom:0}
+.w-zutaten .was{flex:0 0 auto;color:var(--hb-text-invers)}
+.w-zutaten .fuehrung{flex:1;border-bottom:1px dotted var(--w-licht);opacity:.5;
+  transform:translateY(-.22em)}
+.w-zutaten .menge{flex:0 0 auto;font-family:var(--hb-mono);font-size:.72rem;
+  letter-spacing:.1em;color:var(--w-licht);font-variant-numeric:tabular-nums}

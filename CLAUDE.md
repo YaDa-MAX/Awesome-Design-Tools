@@ -16,7 +16,7 @@ Statisches HTML/JS/CSS-**PWA ohne Build-Schritt**, offline-fähig, localStorage.
 ## Pflicht-Workflow nach JEDER Änderung unter web/
 1. **Precache + Service-Worker-Version**: `cd web && node ../tools/gen_sw.js` — erzeugt die
    `PRECACHE`-Liste aus dem Dateibestand (Referenzen aus HTML **und** `url()` in Stylesheets,
-   inline `<style>` eingeschlossen) UND zählt die Cache-Version hoch (aktuell **-3016**).
+   inline `<style>` eingeschlossen) UND zählt die Cache-Version hoch (aktuell **-3018**).
    Nie von Hand pflegen. Standalone-Seiten (`typ` in `tools/seiten.json`) bleiben automatisch
    draußen; `vendor/` und Dateien > 150 KB kommen zur Laufzeit in den Cache (der fetch-Handler
    macht stale-while-revalidate). Wer nur die Version braucht, bumpt trotzdem über den Generator.
@@ -36,6 +36,11 @@ Statisches HTML/JS/CSS-**PWA ohne Build-Schritt**, offline-fähig, localStorage.
   die Startseite**, nie kopieren. `data-hb-grund="tief"` am `body` schaltet die dunkle Fassung
   der gemeinsamen Navigationsleiste; Bestandsbauteile (`.hb-kachel` …) werden innerhalb von
   `.w-dunkel` neu eingekleidet, nie im Design-System selbst geändert.
+  **Je Welt ein eigenes Bauteil (seit v3-W15)**, gescoped auf `[data-hb-welt="…"]` bzw. nur dort
+  eingebaut: Reisen `.w-route` (Etappenband), Wohnen `.w-mass` (Bemaßung) + Raster hinter dem
+  Zeichen, Immobilien Eckwinkel an `.w-karte` + `.w-pruef`, Studio Initial auf `.w-lede` +
+  `.w-randnotiz`, Kulinarik `.w-zutaten` (Punktführung). Jedes zeigt etwas Wahres aus seiner
+  Welt — kein Dekor.
 - `web/heiben-design.css`: **ausschließlich `.hb-`-Klassen, nie Element-Selektoren** (Kollisionsschutz).
 - **Designgrundstruktur (seit v3-W3)**: `heiben-design.css` hat vier Ebenen — Tokens (Farbe,
   Schrift, Raum, Form, Höhe, **Bewegung**), Weltzuweisung über `[data-hb-welt]`, den unveränderten
