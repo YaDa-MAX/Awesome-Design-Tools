@@ -1691,3 +1691,59 @@ DAMIT IST DIE LISTE DER TOTLAST LEER: alle sechs unreferenzierten Dateien aus W9
 GLTFLoader.js ausgelagert und in Betrieb, hero-dark.png als Vorschaubild der Startseite,
 monogram-light/-dark in der Navigation, icon-source-1024.png bleibt als Vorlage der Favicons,
 rezepte/README.txt als Notiz.
+
+---
+
+## REMAKE V3 · WELLE 13: DIE FUENF WELTSEITEN (SW -3014)
+
+AUFTRAG: „Pruefe das Design der jeweiligen Welten. Gestalte es analog zur Startseite."
+
+BEFUND VORHER: die fuenf Weltseiten (typ "welt") standen auf hellem Leinen, jede mit einem
+eigenen Rumpf, gestaltet ueber die gemeinsame styles.css (die aber 29 Seiten traegt — dort
+etwas zu aendern haette weit mehr getroffen als die fuenf). Inhaltlich derselbe Aufbau:
+Kopf, vier Angebotskarten, ein Argumente- oder Zahlenblock, Abschluss.
+
+WAS JETZT STEHT — DIESELBE SPRACHE WIE DIE STARTSEITE
+- Grund: Marken-Tinte, getoent mit 13 % der Weltfarbe. Studio ist die Tinte selbst und bleibt
+  ungetoent, sonst stuende die Seite ohne Ton da.
+- Kopf: Weltname gross in Fraunces (Lichtfassung der Weltfarbe), das Verb kursiv darunter —
+  aufbrechen · bleiben · ankommen · verstehen · teilen, dieselben fuenf wie auf der Startseite.
+  Daneben das ZEICHEN der Welt: Koffer, Haus, Tuer, Gluehbirne, Topf. Es zeichnet sich beim
+  Laden selbst, erst die Silhouette, dann die Detailstriche.
+- Baender: Angebotskarten als Fugenraster auf Tinte, Argumente mit Ziffer, Zahlenband.
+- Bestand dieser Welt: `data-hb-weltseiten` und `data-hb-werkzeuge` wie gehabt — die
+  Bauteile des Design-Systems werden in `.w-dunkel` fuer den dunklen Grund eingekleidet,
+  das System selbst bleibt unberuehrt (die 100 hellen Seiten aendern sich nicht).
+- Die gemeinsame Leiste bekommt ueber `data-hb-grund="tief"` am body eine dunkle Fassung samt
+  dunklem Monogramm — sonst laege eine helle Kante quer ueber jeder Weltseite.
+- theme-color je Welt in tools/seiten.json (das Feld aus W10), damit die Browserleiste nicht
+  hell ueber einer dunklen Seite steht.
+
+EINE QUELLE FUER DIE ZEICHEN
+Die Geometrie lag nur in index.html. Sie liegt jetzt in `web/heiben-marken.js` (Form als
+Polygonzug, Detailpfade, kanonische Farbe, Lichtfassung, Verb) und wird von BEIDEN Seiten
+benutzt: die Startseite tastet die Formen um und morpht zwischen ihnen, die Weltseite zeichnet
+eine davon. 1.348 Zeichen Geometrie und das Detail-Markup sind aus index.html verschwunden;
+die Startseiten-Pruefung blieb dabei bei 49/49.
+
+KULINARIK: DIE LAENDERKARTE BLEIBT
+Die Karte (51 Laender, eigenes Bauteil mit style#kmapt-style und kmapt-logic) ist unveraendert
+uebernommen und liegt jetzt als HELLES BLATT auf dem dunklen Tisch — Papierunterlage,
+abgerundet, Ueberschrift und Vorspann in den Farben der Weltseite. Das Bauteil selbst wurde
+nicht angefasst.
+
+ZWEI PRUEFUNGEN WAREN VERALTET, NICHT DER CODE
+- „Leiste traegt die Weltfarbe" verglich gegen den festen Hex der Welt. Auf dunklem Grund
+  traegt die Leiste die LICHTFASSUNG. Die Pruefung rechnet den erwarteten Wert jetzt selbst
+  aus, statt eine Farbe zu behaupten.
+- „Menue oeffnet" mass nach starren 420 ms. Die Weltseiten zeichnen beim Laden ihr Zeichen,
+  dadurch startet die Blende spaeter. Die Pruefung wartet jetzt auf den ZUSTAND (Deckkraft
+  ueber 0,95), nicht auf die Uhr.
+
+PRUEFUNG
+- Fuenf Seiten einzeln: Grund getoent, Weltname, Zeichen mit Detailstrichen (4/5/2/6/6),
+  vier Karten, Weltseiten-Uebersicht (6-9 Kacheln), Werkzeuge wo vorhanden, 0 PageErrors.
+- Bewegungsruhe: alles sofort sichtbar, kein Zeichnen-Effekt, Details voll deckend.
+- Schmal 390 px: kein Querlauf, Zeichen da, Leiste dunkel — auf allen fuenf.
+- Rundlauf 109 Seiten bei 390 px und 1280 px: je 0 PageErrors, 0 Querlauf.
+- 31/31 Navigation · 49/49 Startseite · 29/29 Welt-Balance · offline 13/13.

@@ -33,6 +33,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..700,0..100,0..1;1,9..144,300..700,0..100,0..1&family=JetBrains+Mono:wght@400;600&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+<script src="heiben-marken.js"></script>
 <script src="heiben-kennzahlen.js"></script>
 <style>
 /* ==========================================================================
@@ -401,19 +402,7 @@ p{margin:0}
       </g>
       <g id="gegenstand">
       <path id="strich" pathLength="1"></path>
-      <g id="details">
-        <g data-i="0"><path d="M41 35 V30 a9 5 0 0 1 18 0 V35"/><path d="M19 55 H81"/>
-          <path d="M35 51 h7 v8 h-7 z"/><path d="M58 51 h7 v8 h-7 z"/></g>
-        <g data-i="1"><path d="M43 85 V65 h14 v20"/><path d="M22 58 h13 v13 h-13 z"/>
-          <path d="M28.5 58 v13"/><path d="M22 64.5 h13"/><path d="M70 34 V24 h7 v17"/></g>
-        <g data-i="2"><path d="M33 88 V50 a17 17 0 0 1 34 0 V88"/>
-          <path d="M63 68 a2.6 2.6 0 1 1 -0.1 0"/></g>
-        <g data-i="3"><path d="M44 55 q3 -11 6 0 q3 11 6 0"/><path d="M42 79 H58"/><path d="M42 84 H58"/>
-          <path d="M26 26 l-7 -6"/><path d="M74 26 l7 -6"/><path d="M50 15 V7"/></g>
-        <g data-i="4"><path d="M16 42 a34 13 0 0 1 68 0"/><path d="M50 22 a3.5 3.5 0 1 0 0.1 0"/>
-          <path d="M16.5 46 a7 6 0 0 0 1.2 11"/><path d="M83.5 46 a7 6 0 0 1 -1.2 11"/>
-          <path d="M41 19 q5 -4 0 -8 q-5 -4 0 -8"/><path d="M59 19 q5 -4 0 -8 q-5 -4 0 -8"/></g>
-      </g>
+      <g id="details"></g>
       </g>
     </svg>
   </div>
@@ -530,44 +519,13 @@ p{margin:0}
 var ruhe = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 /* ---------- 1. Formen: offene Polygonzüge in einem 100×100-Feld -------- */
-function bogen(cx, cy, rx, ry, von, bis, n){
-  var p = [], i;
-  for (i = 0; i <= n; i++){
-    var a = (von + (bis - von) * (i / n)) * Math.PI / 180;
-    p.push([cx + rx * Math.cos(a), cy - ry * Math.sin(a)]);
-  }
-  return p;
-}
-
-/* Kasten mit runden Ecken — Grundfigur fuer den Koffer. */
-function kasten(x1, y1, x2, y2, r){
-  return [[x1 + r, y1], [x2 - r, y1]]
-    .concat(bogen(x2 - r, y1 + r, r, r, 90, 0, 8)).concat([[x2, y2 - r]])
-    .concat(bogen(x2 - r, y2 - r, r, r, 0, -90, 8)).concat([[x1 + r, y2]])
-    .concat(bogen(x1 + r, y2 - r, r, r, -90, -180, 8)).concat([[x1, y1 + r]])
-    .concat(bogen(x1 + r, y1 + r, r, r, 180, 90, 8));
-}
-
-/* Koffer (Reisen) */
-var KOFFER = kasten(19, 35, 81, 79, 6);
-
-/* Haus (Wohnen): Giebel ueber den Waenden, umlaufend. */
-var HAUS = [[14,52],[50,21],[86,52],[86,85],[14,85],[14,52]];
-
-/* Tuer (Immobilien): Rundbogen im Rahmen, umlaufend. */
-var TUER = [[26,88],[26,48]].concat(bogen(50,48,24,24,180,0,26)).concat([[74,48],[74,88],[26,88]]);
-
-/* Gluehbirne (Studio): Kolben, Hals, Sockel. */
-var BIRNE = [[42,74]].concat(bogen(50,46,25,25,252,-72,42))
-  .concat([[58,74],[58,88],[42,88],[42,74]]);
-
-/* Topf (Kulinarik): Korpus mit Rundboden, Rand umlaufend. */
-var TOPF = [[16,42],[19,68]].concat(bogen(50,68,31,12,180,360,24)).concat([[81,68],[84,42]]);
-
-var FORMEN = [KOFFER, HAUS, TUER, BIRNE, TOPF];
+/* Die fünf Zeichen kommen seit v3-W13 aus heiben-marken.js — dieselbe Quelle
+   nutzen die Weltseiten. Hier bleibt nur, was die Startseite damit TUT. */
+var MARKEN = window.HEIBEN_MARKEN || [];
+var FORMEN = MARKEN.map(function (m) { return m.form; });
 var FARBEN = ['--l-reisen','--l-wohnen','--l-immobilien','--l-studio','--l-kulinarik'];
-var GRUND  = ['#a97a1d','#4a5c39','#792d29','#1f1c17','#6b3951'];  /* kanonisch, für die Tönung */
-var LICHT  = ['#d2a544','#8fae6c','#c9736a','#d8cdb7','#b47fa1'];  /* Lichtfassung auf dunklem Grund */
+var GRUND  = MARKEN.map(function (m) { return m.grund; });   /* kanonisch, für die Tönung */
+var LICHT  = MARKEN.map(function (m) { return m.licht; });   /* Lichtfassung auf dunklem Grund */
 var N = 168;                                                       /* Punkte je Form nach Umtastung */
 
 /* ---------- 2. Umtasten: jede Form auf N gleich lange Abschnitte ------- */
@@ -629,6 +587,21 @@ var wurzel = document.documentElement;
 var kaps   = [].slice.call(document.querySelectorAll('.kap'));
 var punkte = [].slice.call(document.querySelectorAll('#wnav li'));
 var lauf   = document.querySelector('.lauf');
+/* Detailzeichnungen aus heiben-marken.js aufbauen — Markup und Geometrie
+   sollen nicht an zwei Stellen gepflegt werden. */
+(function () {
+  var wurzel = document.getElementById('details');
+  MARKEN.forEach(function (m, i) {
+    var g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+    g.setAttribute('data-i', String(i));
+    m.detail.forEach(function (d) {
+      var pf = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+      pf.setAttribute('d', d);
+      g.appendChild(pf);
+    });
+    wurzel.appendChild(g);
+  });
+})();
 var detail = [].slice.call(document.querySelectorAll('#details g'));
 var marke  = document.getElementById('marke');
 var gegen  = document.getElementById('gegenstand');

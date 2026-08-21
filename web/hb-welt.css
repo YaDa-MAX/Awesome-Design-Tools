@@ -1,0 +1,214 @@
+/* ============================================================================
+   HeiBen — Gestalt der fünf Weltseiten. Remake v3, Welle 13.
+
+   Die Startseite steht auf Marken-Tinte und lässt jede Welt in ihrer eigenen
+   Farbe sprechen. Die Weltseiten führen dasselbe fort: derselbe Grund, dasselbe
+   Zeichen, dieselbe Bewegungsgrammatik — nur bleibt hier eine Welt stehen,
+   statt in die nächste zu morphen.
+
+   REGELN
+   - Nur .w-Klassen und die Tokens aus heiben-design.css. Kein Hex im Bauteil:
+     die Weltfarbe kommt aus --hb-welt (data-hb-welt am body), die Lichtfassung
+     wird daraus abgeleitet (--w-licht).
+   - Fünf Seiten, eine Datei. Was hier steht, gilt für alle fünf gleich.
+   - Die Bauteile des Design-Systems (.hb-kachel, .hb-raster …) werden NICHT
+     verändert, sondern innerhalb von .w-dunkel für den dunklen Grund neu
+     eingekleidet. Die 100 hellen Seiten bleiben davon unberührt.
+   ========================================================================== */
+
+.w-seite{
+  --w-licht:color-mix(in srgb, var(--hb-welt) 62%, var(--hb-papier));
+  --w-grund:color-mix(in srgb, var(--hb-welt) 13%, var(--hb-tief));
+  --w-grund-2:color-mix(in srgb, var(--hb-welt) 20%, var(--hb-tief));
+  --w-linie:rgba(216,205,183,.16);
+  --w-rand:clamp(1.2rem,5vw,4rem);
+  background:var(--w-grund);
+  color:var(--hb-text-invers);
+  font-family:var(--hb-sans);
+  line-height:var(--hb-zeile-weit);
+  min-height:100vh;
+}
+/* Studio ist die Tinte selbst — ohne Aufhellung stünde die Seite ohne Ton da. */
+[data-hb-welt="studio"] .w-seite{
+  --w-licht:var(--hb-linie);
+  --w-grund:var(--hb-tief);
+  --w-grund-2:var(--hb-tief-2);
+}
+.w-seite *{box-sizing:border-box}
+.w-innen{max-width:1180px;margin:0 auto;padding:0 var(--w-rand)}
+
+/* --- Bewegung: derselbe Maskenaufzug wie auf der Startseite ---------------- */
+.w-auf{
+  clip-path:inset(0 0 102% 0);opacity:.001;
+  transform:translateY(var(--hb-weg-klein));
+  transition:clip-path var(--hb-zeit-szene) var(--hb-ease-ein),
+             opacity var(--hb-zeit-mittel) linear,
+             transform var(--hb-zeit-szene) var(--hb-ease-ein);
+  transition-delay:var(--d,0ms);
+}
+.w-auf.da{clip-path:inset(0 0 -18% 0);opacity:1;transform:none}
+
+/* --- Ouvertüre ------------------------------------------------------------ */
+.w-kopf{display:grid;grid-template-columns:1fr;gap:2rem;align-items:center;
+  padding:clamp(2.4rem,7vw,5rem) 0 clamp(2rem,5vw,3.4rem)}
+@media (min-width:900px){.w-kopf{grid-template-columns:1fr 42%;gap:3rem}}
+.w-kopf > *{min-width:0}
+.w-marker{font-family:var(--hb-mono);font-size:var(--hb-s-mikro);
+  letter-spacing:var(--hb-sperr-mikro);text-transform:uppercase;color:var(--hb-text-zart);
+  display:flex;align-items:center;gap:.7rem}
+.w-marker::after{content:"";flex:0 0 clamp(2rem,6vw,5rem);height:1px;background:var(--w-linie)}
+.w-name{font-family:var(--hb-serif);font-weight:600;
+  font-size:clamp(2.8rem,9vw,6.2rem);line-height:.86;letter-spacing:-.05em;
+  color:var(--w-licht);font-variation-settings:'opsz' 144,'SOFT' 12,'WONK' 1;
+  margin:.55rem 0 0}
+.w-verb{font-family:var(--hb-serif);font-style:italic;font-weight:400;
+  font-size:clamp(1.25rem,1rem + 1.6vw,2.1rem);line-height:1.05;letter-spacing:-.02em;
+  color:var(--hb-text-invers);font-variation-settings:'opsz' 96,'SOFT' 60,'WONK' 0;
+  margin:.35rem 0 0}
+.w-lede{color:var(--hb-linie);max-width:52ch;margin:1.1rem 0 0;
+  font-size:clamp(1rem,.96rem + .25vw,1.1rem)}
+.w-tat{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.4rem}
+.w-knopf{display:inline-flex;align-items:center;gap:.55rem;text-decoration:none;
+  font-weight:800;font-size:.95rem;padding:.74rem 1.4rem;border-radius:var(--hb-rund-voll);
+  background:var(--w-licht);color:var(--hb-tief);
+  transition:transform var(--hb-zeit-mittel) var(--hb-ease-standard),
+             box-shadow var(--hb-zeit-mittel) var(--hb-ease-standard)}
+.w-knopf::after{content:"→"}
+.w-knopf:hover{transform:translateY(-2px);box-shadow:0 12px 32px -14px var(--w-licht)}
+.w-knopf--leise{background:none;color:var(--w-licht);border:1px solid var(--w-linie);font-weight:700}
+.w-knopf--leise:hover{border-color:var(--w-licht);box-shadow:none;transform:none}
+.w-buehne{display:flex;justify-content:center;position:relative}
+.w-buehne svg{width:min(46vh,80%);height:auto;overflow:visible}
+.w-buehne .schein{position:absolute;width:78%;aspect-ratio:1;border-radius:50%;
+  background:radial-gradient(circle,var(--w-licht),transparent 68%);opacity:.13;filter:blur(30px)}
+.w-strich{fill:none;stroke:var(--w-licht);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.w-detail path{fill:none;stroke:var(--w-licht);stroke-width:1.5;
+  stroke-linecap:round;stroke-linejoin:round;opacity:.85}
+@media (max-width:899px){
+  .w-buehne{order:-1;padding-top:.6rem}
+  .w-buehne svg{width:56vw}
+}
+
+/* --- Abschnitte ----------------------------------------------------------- */
+.w-band{border-top:1px solid var(--w-linie);padding:clamp(2rem,5vw,3.4rem) 0}
+.w-titel{font-family:var(--hb-serif);font-weight:400;
+  font-size:clamp(1.5rem,1.1rem + 1.8vw,2.4rem);line-height:1.14;letter-spacing:-.02em;
+  color:var(--hb-text-invers);font-variation-settings:'opsz' 96,'SOFT' 40,'WONK' 1;
+  margin:0;max-width:24ch}
+.w-titel em{font-style:italic;color:var(--w-licht)}
+.w-vor{color:var(--hb-linie);max-width:60ch;margin:.7rem 0 0}
+.w-eyebrow{font-family:var(--hb-mono);font-size:var(--hb-s-mikro);
+  letter-spacing:var(--hb-sperr-mikro);text-transform:uppercase;color:var(--w-licht);
+  display:block;margin-bottom:.5rem}
+
+/* Angebot: Kacheln auf Tinte, Fuge statt Rahmen — wie die Bänder der Startseite */
+.w-karten{display:grid;gap:1px;background:var(--w-linie);margin-top:1.6rem;
+  grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));
+  border:1px solid var(--w-linie);border-radius:var(--hb-rund-l);overflow:hidden}
+.w-karte{background:var(--w-grund);padding:1.3rem 1.4rem;display:flex;flex-direction:column;gap:.4rem;
+  transition:background-color var(--hb-zeit-mittel) var(--hb-ease-standard)}
+.w-karte:hover{background:var(--w-grund-2)}
+.w-karte small{font-family:var(--hb-mono);font-size:var(--hb-s-mikro);
+  letter-spacing:var(--hb-sperr-mikro);text-transform:uppercase;color:var(--w-licht)}
+.w-karte h3{font-family:var(--hb-serif);font-weight:500;font-size:1.28rem;line-height:1.16;
+  letter-spacing:-.02em;margin:0;font-variation-settings:'opsz' 72,'WONK' 1;color:var(--hb-text-invers)}
+.w-karte p{margin:0;color:var(--hb-linie);font-size:.95rem}
+
+/* Gründe: schmale Spalten mit Ziffer */
+.w-gruende{display:grid;gap:1.4rem 2rem;margin-top:1.6rem;counter-reset:g;
+  grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr))}
+.w-grund-punkt{min-width:0}
+.w-grund-punkt::before{counter-increment:g;content:counter(g,decimal-leading-zero);
+  font-family:var(--hb-mono);font-size:var(--hb-s-mikro);letter-spacing:.14em;
+  color:var(--w-licht);display:block;margin-bottom:.4rem}
+.w-grund-punkt b{display:block;font-family:var(--hb-serif);font-weight:500;font-size:1.1rem;
+  letter-spacing:-.02em;margin-bottom:.2rem;font-variation-settings:'opsz' 60,'WONK' 1}
+.w-grund-punkt span{color:var(--hb-linie);font-size:.94rem}
+
+/* Zahlenband */
+.w-zahlen{display:grid;gap:1px;background:var(--w-linie);margin-top:1.6rem;
+  grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr));
+  border:1px solid var(--w-linie);border-radius:var(--hb-rund-m);overflow:hidden}
+.w-zahl{background:var(--w-grund);padding:1rem 1.1rem;display:flex;flex-direction:column;gap:.15rem}
+.w-zahl small{font-family:var(--hb-mono);font-size:var(--hb-s-mikro);
+  letter-spacing:var(--hb-sperr-mikro);text-transform:uppercase;color:var(--hb-text-zart)}
+.w-zahl b{font-family:var(--hb-serif);font-weight:520;font-size:1.6rem;line-height:1;
+  font-variant-numeric:tabular-nums;color:var(--hb-text-invers)}
+
+/* Abschluss */
+.w-schluss{display:flex;flex-wrap:wrap;gap:1.4rem 2.4rem;align-items:flex-end;
+  justify-content:space-between}
+.w-schluss > div{min-width:0;flex:1 1 26ch}
+
+/* Andere Welten */
+.w-welten{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.2rem}
+.w-welt-link{display:inline-flex;align-items:center;gap:.5rem;text-decoration:none;
+  font-family:var(--hb-mono);font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--hb-linie);border:1px solid var(--w-linie);border-radius:var(--hb-rund-voll);
+  padding:.5rem .9rem;transition:border-color var(--hb-zeit-kurz) var(--hb-ease-standard),
+                                color var(--hb-zeit-kurz) var(--hb-ease-standard)}
+.w-welt-link i{width:7px;height:7px;border-radius:50%;background:var(--wf);flex:0 0 auto}
+.w-welt-link:hover{color:var(--hb-text-invers);border-color:var(--wf)}
+
+.w-fuss{border-top:1px solid var(--w-linie);margin-top:1rem;padding:1.4rem 0 2.6rem;
+  font-family:var(--hb-mono);font-size:.62rem;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--hb-text-zart);display:flex;flex-wrap:wrap;gap:.5rem 1.2rem}
+.w-fuss a{color:var(--hb-text-zart)}
+.w-fuss a:hover{color:var(--hb-text-invers)}
+
+/* --- Bestandsbauteile für den dunklen Grund einkleiden -------------------- */
+.w-dunkel .hb-kachel{background:var(--w-grund-2);border-color:var(--w-linie);box-shadow:none}
+.w-dunkel .hb-kachel::before{background:var(--w-licht)}
+.w-dunkel .hb-kachel:hover{box-shadow:0 14px 34px -20px #000;transform:translateY(-2px)}
+.w-dunkel .hb-titel-3{color:var(--hb-text-invers)}
+.w-dunkel .hb-fliess{color:var(--hb-linie)}
+.w-dunkel .hb-augenbraue{color:var(--w-licht)}
+.w-dunkel .hb-beischrift{color:var(--hb-text-zart)}
+
+/* --- Brücke in die anderen Welten (Bestandsbauteil .hb-box.welt) ---------- */
+.w-seite .hb-box.welt{background:var(--w-grund-2);border-color:var(--w-linie);color:var(--hb-linie)}
+.w-seite .hb-box.welt b,.w-seite .hb-box.welt strong{color:var(--hb-text-invers)}
+.w-seite .hb-box.welt a{color:var(--w-licht)}
+
+/* --- Kulinarik: die Länderkarte ist ein helles Blatt auf dunklem Tisch ------
+   Das Bauteil bringt seine eigene Gestaltung mit (style#kmapt-style). Auf Tinte
+   braucht es nur neue Textfarben und eine Unterlage, damit die Karte als
+   gedrucktes Blatt liest statt als Loch im Grund. */
+.w-seite .kmapt-section{border-top:1px solid var(--w-linie);padding:clamp(2rem,5vw,3.4rem) 0}
+.w-seite .kmapt-section .wrap{max-width:none;padding:0}
+.w-seite .kmapt-section .eyebrow{font-family:var(--hb-mono);font-size:var(--hb-s-mikro);
+  letter-spacing:var(--hb-sperr-mikro);color:var(--w-licht)}
+.w-seite .kmapt-section h2{font-family:var(--hb-serif);font-weight:400;
+  font-size:clamp(1.5rem,1.1rem + 1.8vw,2.4rem);line-height:1.14;letter-spacing:-.02em;
+  color:var(--hb-text-invers);font-variation-settings:'opsz' 96,'WONK' 1}
+.w-seite .kmapt-section h2 em{font-style:italic;color:var(--w-licht)}
+.w-seite .kmapt-section .intro{color:var(--hb-linie);max-width:60ch}
+.w-seite .kmapt-canvas{background:var(--hb-papier);border-radius:var(--hb-rund-l);
+  padding:clamp(.8rem,2vw,1.6rem);border:1px solid var(--w-linie)}
+
+/* --- Die gemeinsame Leiste auf dunklem Grund -------------------------------
+   Die Weltseiten stehen auf Tinte; eine helle Leiste darüber wäre eine Kante
+   quer durch die Seite. `data-hb-grund="tief"` am body sagt der Navigation,
+   auf welchem Grund sie steht — dieselben Bauteile, andere Fassung. */
+[data-hb-grund="tief"]{background:var(--hb-tief)}
+[data-hb-grund="tief"] .hb-nav{
+  background:color-mix(in srgb, var(--hb-welt) 13%, var(--hb-tief));
+  border-bottom-color:rgba(216,205,183,.16);
+  box-shadow:inset 0 -3px 0 -1px color-mix(in srgb, var(--hb-welt) 62%, var(--hb-papier));
+}
+[data-hb-grund="tief"] .hb-brand{color:var(--hb-text-invers)}
+[data-hb-grund="tief"] .hb-brand::before{background-image:url(assets/monogram-dark.png)}
+[data-hb-grund="tief"] .hb-brand small{color:var(--hb-text-zart)}
+[data-hb-grund="tief"] .hb-links a{color:var(--hb-linie)}
+[data-hb-grund="tief"] .hb-links a:hover,
+[data-hb-grund="tief"] .hb-links a.on{color:var(--hb-text-invers)}
+[data-hb-grund="tief"] .hb-nav-sep{background:rgba(216,205,183,.2)}
+[data-hb-grund="tief"] .hb-konto{
+  color:color-mix(in srgb, var(--hb-welt) 62%, var(--hb-papier));
+  border-color:rgba(216,205,183,.24);
+}
+[data-hb-grund="tief"] .hb-konto:hover{
+  background:color-mix(in srgb, var(--hb-welt) 62%, var(--hb-papier));
+  color:var(--hb-tief);
+}
+[data-hb-grund="tief"] .hb-burger i{background:var(--hb-text-invers)}

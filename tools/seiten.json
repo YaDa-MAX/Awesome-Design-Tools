@@ -168,6 +168,7 @@
   "immobilien.html": {
    "welt": "immobilien",
    "typ": "welt",
+   "farbe": "#2b1e1a",
    "titel": "HeiBen Immobilien — Bestand & Vermögen in Köln",
    "beschreibung": "HeiBen Immobilien: die ruhige, vermögensverwaltende Säule der Familie. Eigene Immobilien in Köln, langfristig gehalten und gepflegt — ein Wertspeicher über Generationen."
   },
@@ -301,6 +302,7 @@
   "kulinarik.html": {
    "welt": "kulinarik",
    "typ": "welt",
+   "farbe": "#291f1e",
    "titel": "HeiBen Kulinarik — eine Küche mit Herkunft",
    "beschreibung": "HeiBen Kulinarik: eine Rezeptküche zwischen Maghreb und Norddeutschland — Gerichte mit Geschichte, ehrlich zubereitet."
   },
@@ -448,6 +450,7 @@
   "reisen.html": {
    "welt": "reisen",
    "typ": "welt",
+   "farbe": "#31281a",
    "titel": "HeiBen Reisen — Kuratierte Reisen aus Köln",
    "beschreibung": "HeiBen Reisen: kuratierte Slow-Travel-Reisen im Rheinland, Kulturreisen nach Nordafrika und limitierte Themen-Editionen — geplant von Hotelfach- und Tourismusprofis."
   },
@@ -573,6 +576,7 @@
   "studio.html": {
    "welt": "studio",
    "typ": "welt",
+   "farbe": "#1f1c17",
    "titel": "HeiBen Studio — Magazin über Kultur, Design, Reisen & Zuhause",
    "beschreibung": "HeiBen Studio: ein digital-natives Magazin über Kultur, Design, Reisen und Haushaltsmanagement. Geschichten von Menschen, die sich ein Zuhause gebaut haben."
   },
@@ -668,6 +672,7 @@
   "wohnen.html": {
    "welt": "wohnen",
    "typ": "welt",
+   "farbe": "#252520",
    "titel": "HeiBen Wohnen — Interior & Räume aus Köln",
    "beschreibung": "HeiBen Wohnen: Innenarchitektur und ein kuratierter Wohn-Shop. Räume, die nach dem ersten Tag schon vertraut wirken — mit einem präzisen Auge für Material und Licht."
   },

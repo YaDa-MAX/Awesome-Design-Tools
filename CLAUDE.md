@@ -16,7 +16,7 @@ Statisches HTML/JS/CSS-**PWA ohne Build-Schritt**, offline-fähig, localStorage.
 ## Pflicht-Workflow nach JEDER Änderung unter web/
 1. **Precache + Service-Worker-Version**: `cd web && node ../tools/gen_sw.js` — erzeugt die
    `PRECACHE`-Liste aus dem Dateibestand (Referenzen aus HTML **und** `url()` in Stylesheets,
-   inline `<style>` eingeschlossen) UND zählt die Cache-Version hoch (aktuell **-3011**).
+   inline `<style>` eingeschlossen) UND zählt die Cache-Version hoch (aktuell **-3014**).
    Nie von Hand pflegen. Standalone-Seiten (`typ` in `tools/seiten.json`) bleiben automatisch
    draußen; `vendor/` und Dateien > 150 KB kommen zur Laufzeit in den Cache (der fetch-Handler
    macht stale-while-revalidate). Wer nur die Version braucht, bumpt trotzdem über den Generator.
@@ -29,6 +29,13 @@ Statisches HTML/JS/CSS-**PWA ohne Build-Schritt**, offline-fähig, localStorage.
    (theme-color, Vorgabe `#f3eee5`), `bild` (Vorschaubild beim Teilen, Vorgabe `hero-light.png`).
 
 ## Architektur-Regeln (Remake-Fundament, W1–W7 abgeschlossen)
+- **Weltseiten (seit v3-W13)**: die fünf `typ:"welt"`-Seiten stehen auf Marken-Tinte wie die
+  Startseite. Gestalt in `web/hb-welt.css` (nur `.w-`-Klassen, Weltfarbe aus `--hb-welt`,
+  Lichtfassung abgeleitet), Regie in `web/hb-welt.js` (zeichnet das Weltzeichen, löst den
+  Maskenaufzug aus). Die fünf Zeichen liegen in `web/heiben-marken.js` — **dieselbe Quelle wie
+  die Startseite**, nie kopieren. `data-hb-grund="tief"` am `body` schaltet die dunkle Fassung
+  der gemeinsamen Navigationsleiste; Bestandsbauteile (`.hb-kachel` …) werden innerhalb von
+  `.w-dunkel` neu eingekleidet, nie im Design-System selbst geändert.
 - `web/heiben-design.css`: **ausschließlich `.hb-`-Klassen, nie Element-Selektoren** (Kollisionsschutz).
 - **Designgrundstruktur (seit v3-W3)**: `heiben-design.css` hat vier Ebenen — Tokens (Farbe,
   Schrift, Raum, Form, Höhe, **Bewegung**), Weltzuweisung über `[data-hb-welt]`, den unveränderten

@@ -7,7 +7,7 @@
 <title>HeiBen Studio — Magazin über Kultur, Design, Reisen &amp; Zuhause</title>
 <meta name="description" content="HeiBen Studio: ein digital-natives Magazin über Kultur, Design, Reisen und Haushaltsmanagement. Geschichten von Menschen, die sich ein Zuhause gebaut haben.">
 <link rel="canonical" href="https://www.heiben.de/studio.html">
-<meta name="theme-color" content="#f3eee5">
+<meta name="theme-color" content="#1f1c17">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
@@ -45,113 +45,89 @@
 .wms-lockup svg{width:min(540px,84vw);height:auto;display:block;}
 </style>
 <link rel="stylesheet" href="heiben-design.css">
+<link rel="stylesheet" href="hb-welt.css">
+<script src="heiben-marken.js" defer></script>
+<script src="hb-welt.js" defer></script>
 <script src="heiben-nav.js" defer></script>
 <script src="heiben-legal.js" defer></script>
 <script src="heiben-menue.js" defer></script>
+<script src="heiben-bereiche.js" defer></script>
+<script src="hb-bereiche.js" defer></script>
 </head>
-<body class="theme-studio" data-hb-welt="studio">
-
-<!-- Alt-Nav entfernt: globale Navigation kommt aus heiben-nav.js (Remake W3) -->
-
-<!-- HERO -->
-<header class="subhero">
-  <div class="wrap">
-    <div class="eyebrow">Welt 04 · Magazin &amp; Content</div>
-    <img class="wm" src="assets/wordmark-studio.png" alt="HeiBen Studio" />
-    <h1>Geschichten vom <em>Zuhausefinden</em>.</h1>
-    <p class="lede">Gut gemachte Lesestücke zu Kultur, Design, Reisen und dem Führen eines Zuhauses — redaktionell verantwortet, regelmäßig neu und kostenlos zu lesen. Die leise Frage dahinter, was einen Ort zur Heimat macht, steht eher zwischen den Zeilen.</p>
-    <div class="actions">
-      <a class="btn btn-accent" href="studio-magazin.html">Das Magazin lesen</a>
-      <a class="btn btn-ghost" href="#saeulen">Die vier Themen</a>
-      <a class="btn btn-ghost" href="#newsletter">Newsletter</a>
-    </div>
-  </div>
-</header>
-
-<!-- HALTUNG -->
-
-
-<!-- SÄULEN -->
-<section class="section" id="saeulen">
-  <div class="wrap">
-    <div class="eyebrow">Vier redaktionelle Säulen</div>
-    <h2>Vier Themen, <em>eine Haltung</em>.</h2>
-    <p class="intro">Jede Säule beleuchtet das Zuhausefinden aus einem anderen Blickwinkel — von der großen kulturellen Frage bis zum gut geführten Alltag.</p>
-    <div class="pillars">
-      <div class="pillar">
-        <div class="n">01</div>
-        <h3>Kultur</h3>
-        <p>Porträts, Essays und Gespräche über Identität, Herkunft und das Ankommen in einer mobilen Welt — die intellektuelle Tiefenlinie des Magazins.</p>
-      </div>
-      <div class="pillar">
-        <div class="n">02</div>
-        <h3>Design</h3>
-        <p>Interior, Architektur und Handwerk mit Werkstattbesuchen. Hier trifft das Magazin direkt auf das Sortiment von HeiBen Wohnen.</p>
-      </div>
-      <div class="pillar">
-        <div class="n">03</div>
-        <h3>Reisen</h3>
-        <p>Reisereportagen und Stadtporträts, die zeigen, wie Heimat überall entstehen kann — und nebenbei die Reisen von HeiBen Reisen erlebbar machen.</p>
-      </div>
-      <div class="pillar">
-        <div class="n">04</div>
-        <h3>Haushaltsmanagement</h3>
-        <p>Die unterschätzte Säule: schön gemachte, alltagstaugliche Inhalte über das Führen eines Zuhauses heute — von Ordnung bis Energie, ohne erhobenen Zeigefinger.</p>
+<body class="theme-studio" data-hb-welt="studio" data-hb-grund="tief">
+<div class="w-seite">
+<div class="w-innen">
+  <header class="w-kopf" data-w-block="kopf">
+    <div>
+      <div class="w-marker w-auf">Welt 04 · Magazin & Content</div>
+      <h1 class="w-name w-auf" style="--d:90ms">Studio</h1>
+      <div class="w-verb w-auf" style="--d:160ms">verstehen.</div>
+      <p class="w-lede w-auf" style="--d:230ms">Gut gemachte Lesestücke zu Kultur, Design, Reisen und dem Führen eines Zuhauses — redaktionell verantwortet, regelmäßig neu und kostenlos zu lesen. Die leise Frage dahinter, was einen Ort zur Heimat macht, steht eher zwischen den Zeilen.</p>
+      <div class="w-tat w-auf" style="--d:300ms">
+        <a class="w-knopf" href="studio-magazin.html">Das Magazin lesen</a>
+        <a class="w-knopf w-knopf--leise" href="studio-lebenswissen.html">Lebenswissen</a>
       </div>
     </div>
-  </div>
-</section>
-
-<!-- KANÄLE -->
-<section class="section">
-  <div class="wrap">
-    <div class="eyebrow">Wo wir erscheinen</div>
-    <h2>Lesen, hören, <em>folgen</em>.</h2>
-    <ul class="flist">
-      <li><strong>Website &amp; Archiv.</strong> Lange, sorgfältig gemachte Beiträge, die mit der Zeit zu einer durchsuchbaren Bibliothek wachsen — <a href="studio-magazin.html" style="color:var(--accent);text-decoration:underline;">zum Magazin</a>.</li>
-      <li><strong>Newsletter.</strong> Einmal pro Woche das Beste aus den vier Säulen, direkt ins Postfach — die wichtigste Verbindung zu unseren Lesern.</li>
-      <li><strong>Social.</strong> Kürzere Formate auf Instagram, TikTok und YouTube als Vorhof zu den langen Geschichten.</li>
-      <li><strong>Podcast.</strong> In unregelmäßiger Folge Gespräche, die in die Tiefe gehen.</li>
-    </ul>
-  </div>
-</section>
-
-<!-- NEWSLETTER CTA -->
-<!-- ===== Wortmarken-Herleitung ===== -->
-
-
-<!-- Lebenswissen-Teaser -->
-<section class="lw-teaser" id="lebenswissen" style="background:var(--bg-soft);padding:72px 0;">
-  <div class="wrap" style="max-width:var(--maxw);margin:0 auto;padding:0 24px;">
-    <div class="eyebrow">Neu im Studio</div>
-    <h2 style="font-family:'Fraunces',serif;font-weight:400;font-size:clamp(1.6rem,4vw,2.3rem);margin:0 0 10px;">Lebenswissen — das Nachschlagewerk <em>für das ganze Leben</em>.</h2>
-    <p style="max-width:62ch;color:var(--ink-soft);line-height:1.65;margin:0 0 18px;">94 Wegweiser von der ersten Wohnung bis zum Erbe: Grundlagen frei, Vertiefungen mit Checklisten und 31 Rechnern für 0,50&nbsp;€ je Artikel — oder alles mit dem Jahres-Pass (14,90&nbsp;€).</p>
-    <p style="display:flex;flex-wrap:wrap;gap:8px;margin:0 0 18px;">
-      <span style="border-left:4px solid #3B5BA5;background:#fff;border:1px solid var(--rule);border-left:4px solid #3B5BA5;padding:6px 10px;font-size:.8rem;">Notgroschen &amp; ETF</span>
-      <span style="background:#fff;border:1px solid var(--rule);border-left:4px solid #A8486B;padding:6px 10px;font-size:.8rem;">Elterngeld richtig rechnen</span>
-      <span style="background:#fff;border:1px solid var(--rule);border-left:4px solid #8A6D3B;padding:6px 10px;font-size:.8rem;">Recht ohne Anwalt bis 5.000&nbsp;€</span>
-    </p>
-    <a href="studio-lebenswissen.html" style="display:inline-block;background:var(--ink);color:#fff;text-decoration:none;padding:12px 20px;font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;">Zum Nachschlagewerk →</a>
-    <a href="studio-einrichtungstheorie.html" style="display:inline-block;margin-left:10px;color:var(--ink);text-decoration:none;padding:12px 20px;border:1px solid #d8cdb7;font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;">Einrichtungstheorie →</a>
-  </div>
-</section>
-<div class="wrap" style="max-width:1100px;margin:0 auto;padding:1.1rem 1.2rem;text-align:center;"><p style="font-family:'JetBrains Mono',monospace;font-size:.64rem;letter-spacing:.12em;text-transform:uppercase;color:#7a7060;margin:0;">Name, Familie und Haltung dahinter — <a href="unternehmen.html" style="color:#b04a31;text-decoration:none;">Über uns</a></p></div>
-<section class="cta-band" id="newsletter">
-  <div class="wrap">
-    <h2>Einmal pro Woche, mit Sorgfalt gemacht.</h2>
-    <p>Abonnieren Sie den HeiBen-Studio-Newsletter und bekommen Sie die schönsten Geschichten über Kultur, Design, Reisen und Zuhause.</p>
-    <form id="nlForm" style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center;max-width:480px;margin:0 auto;">
-      <input id="nlMail" type="email" required placeholder="Ihre E-Mail-Adresse" style="flex:1;min-width:220px;border:0;padding:13px 16px;font:inherit;font-size:.92rem;" />
-      <button class="btn btn-onaccent" type="submit" style="cursor:pointer;border:0;">Abonnieren</button>
-      <p id="nlMsg" style="flex-basis:100%;margin:8px 0 0;font-size:.84rem;display:none;"></p>
-    </form>
-  </div>
-</section>
-
-<!-- CROSS -->
-<section class="cross-slim"><div class="wrap" style="max-width:1100px;margin:0 auto;padding:1.3rem 1.2rem 2.2rem;border-top:1px solid #d8cdb7;"><p style="font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:#7a7060;margin:0;display:flex;flex-wrap:wrap;gap:.35rem .9rem;align-items:baseline;"><span>Weitere Welten:</span><a href="reisen.html" style="color:#b04a31;text-decoration:none;">HeiBen Reisen</a><a href="wohnen.html" style="color:#b04a31;text-decoration:none;">HeiBen Wohnen</a><a href="immobilien.html" style="color:#b04a31;text-decoration:none;">HeiBen Immobilien</a></p></div></section>
-
-<!-- FOOTER -->
+    <div class="w-buehne" data-w-marke></div>
+  </header>
+  <section class="w-band" data-w-block="angebot">
+    <span class="w-eyebrow w-auf">Vier redaktionelle Säulen</span>
+    <h2 class="w-titel w-auf" style="--d:70ms">Vier Themen, <em>eine Haltung</em>.</h2>
+    <p class="w-vor w-auf" style="--d:140ms">Jede Säule beleuchtet das Zuhausefinden aus einem anderen Blickwinkel — von der großen kulturellen Frage bis zum gut geführten Alltag.</p>
+    <div class="w-karten">
+      <article class="w-karte w-auf" style="--d:200ms"><small>Säule 01</small><h3>Kultur</h3><p>Porträts, Essays und Gespräche über Identität, Herkunft und das Ankommen in einer mobilen Welt — die intellektuelle Tiefenlinie des Magazins.</p></article>
+      <article class="w-karte w-auf" style="--d:270ms"><small>Säule 02</small><h3>Design</h3><p>Interior, Architektur und Handwerk mit Werkstattbesuchen. Hier trifft das Magazin direkt auf das Sortiment von HeiBen Wohnen.</p></article>
+      <article class="w-karte w-auf" style="--d:340ms"><small>Säule 03</small><h3>Reisen</h3><p>Reisereportagen und Stadtporträts, die zeigen, wie Heimat überall entstehen kann — und nebenbei die Reisen von HeiBen Reisen erlebbar machen.</p></article>
+      <article class="w-karte w-auf" style="--d:410ms"><small>Säule 04</small><h3>Haushaltsmanagement</h3><p>Die unterschätzte Säule: schön gemachte, alltagstaugliche Inhalte über das Führen eines Zuhauses heute — von Ordnung bis Energie, ohne erhobenen Zeigefinger.</p></article>
+    </div>
+  </section>
+  <section class="w-band" data-w-block="gruende">
+    <span class="w-eyebrow w-auf">Wo wir erscheinen</span>
+    <h2 class="w-titel w-auf" style="--d:70ms">Lesen, hören, <em>folgen</em>.</h2>
+    <div class="w-gruende">
+      <div class="w-grund-punkt w-auf" style="--d:180ms"><b>Website & Archiv.</b><span>Lange, sorgfältig gemachte Beiträge, die mit der Zeit zu einer durchsuchbaren Bibliothek wachsen.</span></div>
+      <div class="w-grund-punkt w-auf" style="--d:250ms"><b>Newsletter.</b><span>Einmal pro Woche das Beste aus den vier Säulen, direkt ins Postfach — die wichtigste Verbindung zu unseren Lesern.</span></div>
+      <div class="w-grund-punkt w-auf" style="--d:320ms"><b>Social.</b><span>Kürzere Formate auf Instagram, TikTok und YouTube als Vorhof zu den langen Geschichten.</span></div>
+      <div class="w-grund-punkt w-auf" style="--d:390ms"><b>Podcast.</b><span>In unregelmäßiger Folge Gespräche, die in die Tiefe gehen.</span></div>
+    </div>
+  </section>
+  <section class="w-band" data-w-block="lebenswissen">
+    <span class="w-eyebrow w-auf">Neu im Studio</span>
+    <h2 class="w-titel w-auf" style="--d:70ms">Lebenswissen — das Nachschlagewerk <em>für das ganze Leben</em>.</h2>
+    <p class="w-vor w-auf" style="--d:140ms">94 Wegweiser von der ersten Wohnung bis zum Erbe: Grundlagen frei, Vertiefungen mit Checklisten und 31 Rechnern.</p>
+    <div class="w-zahlen">
+      <div class="w-zahl w-auf" style="--d:180ms"><small>Wegweiser</small><b>94</b></div>
+      <div class="w-zahl w-auf" style="--d:250ms"><small>Grundlagen</small><b>frei</b></div>
+      <div class="w-zahl w-auf" style="--d:320ms"><small>Vertiefung je Artikel</small><b>0,50 €</b></div>
+      <div class="w-zahl w-auf" style="--d:390ms"><small>Jahres-Pass</small><b>14,90 €</b></div>
+    </div>
+  </section>
+  <section class="w-band w-dunkel" data-w-block="seiten">
+    <span class="w-eyebrow w-auf">Alles aus dieser Welt</span>
+    <h2 class="w-titel w-auf" style="--d:70ms">Was HeiBen Studio <em>umfasst</em>.</h2>
+    <div data-hb-weltseiten="studio" style="margin-top:1.4rem"></div>
+  </section>
+  <section class="w-band" data-w-block="schluss">
+    <div class="w-schluss">
+      <div>
+        <h2 class="w-titel w-auf">Einmal pro Woche, mit Sorgfalt gemacht.</h2>
+        <p class="w-vor w-auf" style="--d:70ms">Der Newsletter bringt das Beste aus den vier Säulen ins Postfach — ohne Werbung, ohne Weiterverkauf Ihrer Adresse.</p>
+      </div>
+      <div class="w-tat w-auf" style="--d:140ms">
+        <a class="w-knopf" href="studio-magazin.html">Zum Magazin</a>
+        <a class="w-knopf w-knopf--leise" href="studio-lebenswissen.html">Lebenswissen ansehen</a>
+      </div>
+    </div>
+    <div class="w-welten">
+      <a class="w-welt-link" href="reisen.html" style="--wf:#a97a1d"><i></i>HeiBen Reisen</a>
+      <a class="w-welt-link" href="wohnen.html" style="--wf:#4a5c39"><i></i>HeiBen Wohnen</a>
+      <a class="w-welt-link" href="immobilien.html" style="--wf:#792d29"><i></i>HeiBen Immobilien</a>
+      <a class="w-welt-link" href="kulinarik.html" style="--wf:#6b3951"><i></i>HeiBen Kulinarik</a>
+      <a class="w-welt-link" href="index.html" style="--wf:#d8cdb7"><i></i>Alle fünf Welten</a>
+    </div>
+  </section>
+</div>
+</div>
 <footer>
   <div class="wrap">
     <div class="top">

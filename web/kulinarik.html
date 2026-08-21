@@ -7,7 +7,7 @@
 <title>HeiBen Kulinarik — eine Küche mit Herkunft</title>
 <meta name="description" content="HeiBen Kulinarik: eine Rezeptküche zwischen Maghreb und Norddeutschland — Gerichte mit Geschichte, ehrlich zubereitet.">
 <link rel="canonical" href="https://www.heiben.de/kulinarik.html">
-<meta name="theme-color" content="#f3eee5">
+<meta name="theme-color" content="#291f1e">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
@@ -65,60 +65,43 @@
 .wms-lockup svg{width:min(540px,84vw);height:auto;display:block;}
 </style>
 <link rel="stylesheet" href="heiben-design.css">
+<link rel="stylesheet" href="hb-welt.css">
+<script src="heiben-marken.js" defer></script>
+<script src="hb-welt.js" defer></script>
 <script src="heiben-nav.js" defer></script>
 <script src="heiben-legal.js" defer></script>
 <script src="heiben-menue.js" defer></script>
+<script src="heiben-bereiche.js" defer></script>
+<script src="hb-bereiche.js" defer></script>
 </head>
-<body class="theme-kulinarik" data-hb-welt="kulinarik">
-
-<!-- Alt-Nav entfernt: globale Navigation kommt aus heiben-nav.js (Remake W4) -->
-
-<header class="subhero">
-  <div class="wrap">
-    <div class="eyebrow">Welt 05 · Kulinarik</div>
-    <h1>Eine Küche mit <em>Herkunft</em>.</h1>
-    <p class="lede">Menüs und Catering, die Sie nach Gästezahl, Gängen und Budget selbst zusammenstellen und beauftragen — Küche zwischen Maghreb und Norddeutschland, ehrlich zubereitet. Dass jedes Gericht eine Herkunft mitbringt, schmeckt man, ohne dass wir es betonen müssen.</p>
-    <div style="margin-top:2rem;">
-      <a class="btn btn-accent" href="kulinarik-rezepte.html">Zu den Rezepten</a>
-      <a class="btn btn-ghost" href="familie.html" style="margin-left:0.6rem;">Woher das kommt</a>
-    </div>
-  </div>
-</header>
-
-<section class="section">
-  <div class="wrap">
-    <div class="eyebrow">Zwei Küchen, ein Tisch</div>
-    <h2>Maghreb trifft <em>Norddeutschland</em>.</h2>
-    <p class="intro">
-      Yakins Wurzeln liegen in Boukadir, Algerien; Katharinas in Norddeutschland. Aus dieser Doppelung schöpft die Welt: maghrebinische Gerichte in ihrer ursprünglichen Form und norddeutsche Klassiker, so herzhaft, wie man sie kennt. Wir kochen, was bei uns zu Hause auf den Tisch kommt — manche Klassiker zeigen wir in einer Fassung, die wir lieber mögen, und sagen dann auch, warum.
-    </p>
-    <div class="pillars">
-      <div class="pillar">
-        <div class="n">01</div>
-        <h3>Herkunft inklusive</h3>
-        <p>Zu jedem Gericht erzählen wir, woher es kommt — die Geschichte isst mit.</p>
-      </div>
-      <div class="pillar">
-        <div class="n">02</div>
-        <h3>Ehrlich zubereitet</h3>
-        <p>Echte Mengen, klare Schritte, nichts beschönigt. So, wie wir es selbst kochen.</p>
-      </div>
-      <div class="pillar">
-        <div class="n">03</div>
-        <h3>Geschmack zuerst</h3>
-        <p>Wo wir einen Klassiker abwandeln, muss die Variante schmecken — nicht bloß ersetzen.</p>
-      </div>
-      <div class="pillar">
-        <div class="n">04</div>
-        <h3>Von Hand kuratiert</h3>
-        <p>Jedes Rezept ist erprobt und ausgewählt, kein automatischer Sammelfeed.</p>
+<body class="theme-kulinarik" data-hb-welt="kulinarik" data-hb-grund="tief">
+<div class="w-seite">
+<div class="w-innen">
+  <header class="w-kopf" data-w-block="kopf">
+    <div>
+      <div class="w-marker w-auf">Welt 05 · Küche & Herkunft</div>
+      <h1 class="w-name w-auf" style="--d:90ms">Kulinarik</h1>
+      <div class="w-verb w-auf" style="--d:160ms">teilen.</div>
+      <p class="w-lede w-auf" style="--d:230ms">Menüs und Catering, die Sie nach Gästezahl, Gängen und Budget selbst zusammenstellen und beauftragen — Küche zwischen Maghreb und Norddeutschland, ehrlich zubereitet. Dass jedes Gericht eine Herkunft mitbringt, schmeckt man.</p>
+      <div class="w-tat w-auf" style="--d:300ms">
+        <a class="w-knopf" href="kulinarik-rezepte.html">Zu den Rezepten</a>
+        <a class="w-knopf w-knopf--leise" href="kulinarik-heute.html">Was koche ich heute?</a>
       </div>
     </div>
-  </div>
-</section>
-
-<!-- ===== Karten-Teaser: Einstieg zur interaktiven Länderkarte ===== -->
-<section class="kmapt-section">
+    <div class="w-buehne" data-w-marke></div>
+  </header>
+  <section class="w-band" data-w-block="angebot">
+    <span class="w-eyebrow w-auf">Zwei Küchen, ein Tisch</span>
+    <h2 class="w-titel w-auf" style="--d:70ms">Maghreb trifft <em>Norddeutschland</em>.</h2>
+    <p class="w-vor w-auf" style="--d:140ms">Yakins Wurzeln liegen in Boukadir, Algerien; Katharinas in Norddeutschland. Aus dieser Doppelung schöpft die Welt — wir kochen, was bei uns zu Hause auf den Tisch kommt.</p>
+    <div class="w-karten">
+      <article class="w-karte w-auf" style="--d:200ms"><small>01</small><h3>Herkunft inklusive</h3><p>Zu jedem Gericht erzählen wir, woher es kommt — die Geschichte isst mit.</p></article>
+      <article class="w-karte w-auf" style="--d:270ms"><small>02</small><h3>Ehrlich zubereitet</h3><p>Echte Mengen, klare Schritte, nichts beschönigt. So, wie wir es selbst kochen.</p></article>
+      <article class="w-karte w-auf" style="--d:340ms"><small>03</small><h3>Geschmack zuerst</h3><p>Wo wir einen Klassiker abwandeln, muss die Variante schmecken — nicht bloß ersetzen.</p></article>
+      <article class="w-karte w-auf" style="--d:410ms"><small>04</small><h3>Von Hand kuratiert</h3><p>Jedes Rezept ist erprobt und ausgewählt, kein automatischer Sammelfeed.</p></article>
+    </div>
+  </section>
+  <section class="kmapt-section">
   <div class="wrap">
     <div class="eyebrow">51 Länderküchen · Europa &amp; Nordafrika</div>
     <h2>Die ganze Reise auf einer <em>Karte</em>.</h2>
@@ -129,21 +112,34 @@
     </div>
   </div>
 </section>
-
-<!-- ===== Wortmarken-Herleitung ===== -->
-
-
-<div class="wrap" style="max-width:1100px;margin:0 auto;padding:1.1rem 1.2rem;text-align:center;"><p style="font-family:'JetBrains Mono',monospace;font-size:.64rem;letter-spacing:.12em;text-transform:uppercase;color:#7a7060;margin:0;">Name, Familie und Haltung dahinter — <a href="unternehmen.html" style="color:#b04a31;text-decoration:none;">Über uns</a></p></div>
-<section class="cta-band" id="kontakt">
-  <div class="wrap">
-    <h2>Hungrig geworden?</h2>
-    <p>Stöbern Sie durch unsere Rezepte — filterbar nach Land, Gang und Art, mit Geschichte und Herkunft zu jedem Gericht.</p>
-    <a class="btn btn-onaccent" href="kulinarik-rezepte.html">Rezepte entdecken</a>
-  </div>
-</section>
-
+  <section class="w-band w-dunkel" data-w-block="seiten">
+    <span class="w-eyebrow w-auf">Alles aus dieser Welt</span>
+    <h2 class="w-titel w-auf" style="--d:70ms">Was HeiBen Kulinarik <em>umfasst</em>.</h2>
+    <div data-hb-weltseiten="kulinarik" style="margin-top:1.4rem"></div>
+  </section>
+  <section class="w-band" data-w-block="schluss">
+    <div class="w-schluss">
+      <div>
+        <h2 class="w-titel w-auf">Hungrig geworden?</h2>
+        <p class="w-vor w-auf" style="--d:70ms">Stöbern Sie durch unsere Rezepte — filterbar nach Land, Gang und Art, mit Geschichte und Herkunft zu jedem Gericht.</p>
+      </div>
+      <div class="w-tat w-auf" style="--d:140ms">
+        <a class="w-knopf" href="kulinarik-rezepte.html">Rezepte entdecken</a>
+        <a class="w-knopf w-knopf--leise" href="kulinarik-planner.html">Menü planen</a>
+      </div>
+    </div>
+    <div class="w-welten">
+      <a class="w-welt-link" href="reisen.html" style="--wf:#a97a1d"><i></i>HeiBen Reisen</a>
+      <a class="w-welt-link" href="wohnen.html" style="--wf:#4a5c39"><i></i>HeiBen Wohnen</a>
+      <a class="w-welt-link" href="immobilien.html" style="--wf:#792d29"><i></i>HeiBen Immobilien</a>
+      <a class="w-welt-link" href="studio.html" style="--wf:#d8cdb7"><i></i>HeiBen Studio</a>
+      <a class="w-welt-link" href="index.html" style="--wf:#d8cdb7"><i></i>Alle fünf Welten</a>
+    </div>
+  </section>
+</div>
 <div style="max-width:1100px;margin:1.4rem auto 0;padding:0 1.1rem"><div class="hb-box welt" style="--wf:#a97a1d"><span class="hb-bt">Aus der HeiBen-Welt</span>Wissen für die Küche: das <a style="color:inherit" href="lebensmittel.html">Lebensmittel-Kompendium</a> — Haltbarkeit, richtige Lagerung, Reste verwerten. 37 Steckbriefe aus dem HeiBen Studio, frei und werbefrei.</div></div>
 
+</div>
 <footer>
   <div class="wrap">
     <div class="top">
