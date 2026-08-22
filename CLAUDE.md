@@ -16,7 +16,7 @@ Statisches HTML/JS/CSS-**PWA ohne Build-Schritt**, offline-fähig, localStorage.
 ## Pflicht-Workflow nach JEDER Änderung unter web/
 1. **Precache + Service-Worker-Version**: `cd web && node ../tools/gen_sw.js` — erzeugt die
    `PRECACHE`-Liste aus dem Dateibestand (Referenzen aus HTML **und** `url()` in Stylesheets,
-   inline `<style>` eingeschlossen) UND zählt die Cache-Version hoch (aktuell **-3018**).
+   inline `<style>` eingeschlossen) UND zählt die Cache-Version hoch (aktuell **-3019**).
    Nie von Hand pflegen. Standalone-Seiten (`typ` in `tools/seiten.json`) bleiben automatisch
    draußen; `vendor/` und Dateien > 150 KB kommen zur Laufzeit in den Cache (der fetch-Handler
    macht stale-while-revalidate). Wer nur die Version braucht, bumpt trotzdem über den Generator.
@@ -153,6 +153,15 @@ Statisches HTML/JS/CSS-**PWA ohne Build-Schritt**, offline-fähig, localStorage.
   Blur-Translate, ein rAF-Takt. `"nav": false`, `farbe: #1f1c17`, `bild: assets/hero-dark.png`.
   Fallen dokumentiert in `_WEITERARBEIT.md` (IntersectionObserver + eigenes `clip-path`;
   Klassenregel schlägt `hidden`; Änderungssperre muss den Übergang mitführen).
+  V3-W16 fertig: **Bildplan für 159 Rezeptseiten** (`BILDPLAN.md`). `tools/gen_bildprompts.py`
+  erzeugt aus `kulinarik-daten.js` je Rezept einen eigenen Prompt (Anker + Gang + Region +
+  echte Hauptzutaten; 159 verschiedene, 841–1115 Zeichen) nach `_dateiliste.csv`,
+  `_prompts.jsonl` und `chargen/charge-01…08.md`. `tools/import_rezeptbilder.py` prüft
+  erzeugte Bilder (Name gegen die Liste, Maße aus dem Dateikopf, 3:2 ± 6 %, ≤ 400 KB),
+  legt sie als `assets/rezepte/<id>.jpg` ab und meldet den Stand. Bilder gehen **nicht**
+  in den Precache — `coverSrc()` bildet den Pfad zur Laufzeit, stale-while-revalidate
+  cacht sie beim ersten Zeigen. Rezept-IDs bleiben unangetastet, auch die 38 verstümmelten
+  (`Tiramisù` → `tiramis`): daran hängen Deep-Links, Merklisten, Suchindex.
 - `web/startseite-klassisch.html` = **die Startseite bis W10**, archiviert (standalone, nicht
   verlinkt, nicht precached). Sie ist die einzige Seite, die `hb-menue.css` und `hb-suche-nav.js`
   noch braucht.

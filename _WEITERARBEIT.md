@@ -1845,3 +1845,112 @@ Die erste Messung meldete das Immobilien-Bauteil als unsichtbar. Nachgesehen: es
 Verzoegerung und 320 ms Blende, die Probe schaute nach 700 ms. Der Code war richtig, die
 Pruefung falsch — sie wartet jetzt auf die Deckkraft statt auf einen Zeitpunkt. Das ist
 dieselbe Falle wie in W13; sie steht damit zum zweiten Mal im Protokoll.
+
+---
+
+### WELLE 16: BILDPLAN FÜR 159 REZEPTSEITEN (SW -3019)
+
+**Auftrag (Teil B):** „Gib mir die Planung für die Fülle aller rezeptseiten mit Bildern
+anhand ki bildgenerator und reimport via Claude. Konzept und Durchführung. Liste und
+prompting sowie reimport Struktur."
+
+**Ausgangslage gemessen:** 159 Rezepte in `web/kulinarik-daten.js`, davon **0 mit Bild**.
+51 Länder, 8 Gänge. Die Kopplung an die Seite war schon da und ist die ganze Schnittstelle:
+
+```js
+// kulinarik-rezepte.html:244 und kulinarik-rezept.html:538
+function coverSrc(rid) { return 'assets/rezepte/' + rid + '.jpg'; }
+```
+
+Datei liegt → Bild erscheint. Datei fehlt → Platzhalter. Keine Codeänderung nötig.
+Die vorhandene `_dateiliste.csv` trug 159 Schablonen-Prompts von 260–310 Zeichen,
+alle derselbe Satz mit ausgetauschtem Namen — für einen Bildgenerator wertlos.
+
+**Geliefert**
+
+| Datei | Was |
+|---|---|
+| `tools/gen_bildprompts.py` | erzeugt Liste, Prompts, Chargen aus den Rezeptdaten |
+| `tools/import_rezeptbilder.py` | prüft und übernimmt Bilder, meldet den Stand |
+| `BILDPLAN.md` | Konzept, Durchführung, Chargen, QS, Aufwand |
+| `web/assets/rezepte/_dateiliste.csv` | 159 Zeilen mit echtem Prompt |
+| `web/assets/rezepte/_prompts.jsonl` | dieselbe Liste maschinenlesbar |
+| `web/assets/rezepte/chargen/charge-01…08.md` | 8 Portionen à 20 zum Abarbeiten |
+
+**Prompt-Bau — vier Teile, drei halten zusammen, einer trennt**
+
+- ANKER (in allen 159 wortgleich): Fensterlicht von links, 50 mm bei f/4, gedeckte warme
+  Palette, ehrlich statt hochglanz, Querformat 3:2, Negativliste
+- GANG (8 Varianten): Kamerawinkel + Gefäß — Suppe von oben in tiefer Schale,
+  Hauptgericht schräg 45°, Gebäck flach von der Seite
+- REGION (12 Varianten): Untergrund + zwei Requisiten — Messingtablett auf Zementfliesen,
+  dunkelgrün gestrichenes Holz, unbehandelte Terrakotta
+- GERICHT (159 Varianten): **2–3 echte Hauptzutaten aus dem Zutatenfeld** plus
+  Serviervorschlag aus `servier`
+
+Der Punkt ist der letzte Teil. Ein Generator, der nur „Šaltibarščiai" liest, malt
+irgendetwas; einer, der „kalte rote Bete, Kefir, Salatgurke" liest, malt das Gericht.
+
+Gemessen: **159 verschiedene Prompts**, keiner doppelt, 841–1115 Zeichen, Median 966
+(vorher: 159 × derselbe Satz).
+
+**Gelernt: Datenlesen über eine Brücke.** `kulinarik-daten.js` ist 532 KB — zu groß für
+argv. Der Generator schreibt eine Wegwerf-Node-Datei, die `global.window={}` setzt, die
+Datendatei evaluiert und JSON auf stdout schreibt; Python liest das und löscht die Datei
+im `finally`.
+
+**Gelernt: deutsche Fälle im Prompt.** Erste Fassung schrieb „hauptgericht aus
+Vereinigtes Königreich". Gang jetzt groß, Satzanfänge groß, Ländertabelle `LAND_FALL`
+für die mit Artikel („aus dem Vereinigten Königreich", „aus der Türkei", „aus den
+Niederlanden"). Ebenso „serviert in/auf X" → tiefe Gefäße bekommen „in", flache „auf".
+
+**Befund, nicht behoben: 38 verstümmelte IDs.** Beim Anlegen der Daten gingen alle
+Sonderzeichen außer Umlauten/ß verloren:
+
+| Rezept | ID und damit Dateiname |
+|---|---|
+| Tiramisù | `tiramis` |
+| Ćevapi | `evapi` |
+| Bœuf bourguignon | `b-uf-bourguignon` |
+| Svíčková na smetaně | `sv-kov-na-smetan` |
+
+Soll wäre `tiramisu`. Ist bleibt `tiramis` — `id`-Felder sind ein stabiler Vertrag,
+an ihnen hängen `kulinarik-rezept.html?id=…`, die Merklisten im localStorage und der
+Suchindex. Alle 159 IDs sind eindeutig, es kollidiert nichts. Die Dateiliste führt die
+ID überall mit, damit niemand einen Namen abtippt.
+
+**Import-Werkzeug — was es prüft, bevor es ablegt**
+
+| Prüfung | Grenze |
+|---|---|
+| Name in der Liste | exakt oder eindeutig zuzuordnen (Akzente, Groß/klein, „ (2)"-Anhängsel) |
+| Dateityp | JPG — die Seite lädt `.jpg` |
+| Breite | ≥ 1200 px |
+| Seitenverhältnis | 3:2 ± 6 % |
+| Größe | ≤ 400 KB abgewiesen, > 300 KB Hinweis |
+
+Maße kommen aus dem Dateikopf (JPEG-SOF, PNG-IHDR, WebP-VP8/VP8L/VP8X) — in dieser
+Umgebung gibt es weder PIL noch ImageMagick noch cwebp. Das Werkzeug rechnet darum
+bewusst **nichts** um: es prüft, meldet und lässt liegen. Umbenennen nur mit
+`--umbenennen`; still umzutaufen fällt erst auf, wenn zwei Rezepte dasselbe Bild tragen.
+
+Standbericht jederzeit ohne Ordner:
+
+```
+$ python3 tools/import_rezeptbilder.py
+Stand: 0/159 Rezeptbilder liegen bereit (0 %)
+  Charge 01:  20 offen — chakhchoukha, chorba-frik-algerische-lammsuppe, … +16
+```
+
+**Precache-Entscheidung:** Die Bilder gehen **nicht** hinein. `gen_sw.js` nimmt nur, was
+aus HTML und CSS referenziert wird; `coverSrc()` bildet den Pfad zur Laufzeit. Sie landen
+über stale-while-revalidate im Cache, sobald sie einmal gezeigt wurden. 159 × 250 KB im
+Precache wären 40 MB beim ersten Aufruf.
+
+**Offen aus demselben Auftrag (Teil A):** Struktur und Design der Weltunterseiten.
+Audit liegt vor: von 47 Weltseiten sind nur **5 auf v3** (die fünf Welteinstiege),
+**18 auf dem alten `styles.css`**, **24 mit eigenem Inline-Design**. 63.190 Zeichen
+Fließtext, Median 1.056. Spitzen: `immobilien-vermieten` 4.946 Zeichen,
+`studio-einrichtungstheorie` 2.937, `kulinarik-mealplanner` 2.122 bei 28 Schaltern und
+34 Feldern; Schalterzahlen bis 68 (`reisen-planer`), 66 (`wohnen-planer`),
+55 (`wohnen-konfigurator`), 54 (`kulinarik-planner`).
