@@ -16,7 +16,7 @@ Statisches HTML/JS/CSS-**PWA ohne Build-Schritt**, offline-fähig, localStorage.
 ## Pflicht-Workflow nach JEDER Änderung unter web/
 1. **Precache + Service-Worker-Version**: `cd web && node ../tools/gen_sw.js` — erzeugt die
    `PRECACHE`-Liste aus dem Dateibestand (Referenzen aus HTML **und** `url()` in Stylesheets,
-   inline `<style>` eingeschlossen) UND zählt die Cache-Version hoch (aktuell **-3020**).
+   inline `<style>` eingeschlossen) UND zählt die Cache-Version hoch (aktuell **-3021**).
    Nie von Hand pflegen. Standalone-Seiten (`typ` in `tools/seiten.json`) bleiben automatisch
    draußen; `vendor/` und Dateien > 150 KB kommen zur Laufzeit in den Cache (der fetch-Handler
    macht stale-while-revalidate). Wer nur die Version braucht, bumpt trotzdem über den Generator.
@@ -174,6 +174,14 @@ Statisches HTML/JS/CSS-**PWA ohne Build-Schritt**, offline-fähig, localStorage.
   übernommenen Kit-Fassungen liegen eingefroren in `tools/weltseiten-kit.json`.
   **Neue Weltunterseite: `umbau_weltseiten.py` laufen lassen** — sie hängt Stylesheet
   und body-Marke an. Gemessen: 0/47 PageErrors, 42/42 vollständig im neuen Stil.
+  V3-W18 fertig: **ein Fuß für alle Seiten**. `web/hb-fuss.js` baut ihn als
+  `div[role="contentinfo"]` — **nie `<footer>`**, denn `styles.css` stylt `footer{}` als
+  Element-Selektor. Gestalt in `web/hb-fuss.css` (nur `.hb-fuss-`-Klassen, 0 Wert-Literale).
+  `gen_kopf.js` hängt beide automatisch an; `data-hb-fuss="aus"` am body schaltet ihn ab
+  (Startseite, Standalone-Archive). Damit: 33 kopierte Fußbereiche weg, **67 Seiten ohne
+  Rechts-Link → 0**, HTML 3.108 → 3.038 KB. Gelernt: **nie annehmen, dass der body ein
+  Block-Container ist** — `404.html` zentriert mit `display:flex`, der angehängte Fuß wurde
+  dort zum Element daneben; `hb-fuss.js` misst `display` und passt sich ein.
 - `web/startseite-klassisch.html` = **die Startseite bis W10**, archiviert (standalone, nicht
   verlinkt, nicht precached). Sie ist die einzige Seite, die `hb-menue.css` und `hb-suche-nav.js`
   noch braucht.

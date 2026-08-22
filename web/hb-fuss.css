@@ -1,0 +1,85 @@
+/* ============================================================================
+   HeiBen — Gestalt des gemeinsamen Fußes. Remake v3, Welle 18.
+   Gebaut von hb-fuss.js. Nur .hb-fuss-Klassen, alle Werte aus der Token-Ebene
+   von heiben-design.css. Kein Hex im Bauteil.
+   ========================================================================== */
+
+.hb-fuss{
+  /* Rollen des Fußes, aus der Token-Ebene abgeleitet statt als Wert genannt.
+     Der Akzent ist das Familien-Ocker — dieselbe Farbe, die HeiBen Reisen
+     trägt, hier aber als Hausfarbe des Fußes, nicht als Weltzuordnung. */
+  --f-akzent:var(--hb-w-reisen);
+  --f-linie:color-mix(in srgb, var(--hb-text-invers) 15%, transparent);
+  --f-text:color-mix(in srgb, var(--hb-text-invers) 82%, transparent);
+  --f-leise:color-mix(in srgb, var(--hb-text-invers) 70%, transparent);
+  --f-zart:color-mix(in srgb, var(--hb-text-invers) 55%, transparent);
+  --f-ph:color-mix(in srgb, var(--hb-text-invers) 38%, transparent);
+  margin-top:var(--hb-raum-10);
+  background:var(--hb-tief);
+  color:var(--hb-text-invers);
+  font-family:var(--hb-sans);
+  font-size:var(--hb-s-basis);
+  line-height:var(--hb-zeile-weit);
+}
+.hb-fuss *{box-sizing:border-box}
+.hb-fuss-innen{
+  max-width:var(--hb-breite);margin:0 auto;
+  padding:var(--hb-raum-9) clamp(1.2rem,5vw,2.5rem) var(--hb-raum-6);
+}
+
+/* --- Drei Spalten: Marke, Welten, Kontakt ---------------------------------- */
+.hb-fuss-oben{display:grid;gap:var(--hb-raum-7);margin-bottom:var(--hb-raum-7)}
+@media (min-width:760px){.hb-fuss-oben{grid-template-columns:2fr 1fr 1fr;gap:var(--hb-raum-8)}}
+.hb-fuss-oben > *{min-width:0}
+
+.hb-fuss-marke{height:34px;width:auto;display:block;margin-bottom:var(--hb-raum-5);
+  fill:var(--hb-text-invers)}
+.hb-fuss-marke .a{fill:var(--hb-akzent)}
+.hb-fuss-block p{margin:0;max-width:34ch;font-size:.95rem;color:var(--f-leise)}
+.hb-fuss-weg{
+  display:inline-flex;align-items:center;margin-top:var(--hb-raum-4);
+  font-family:var(--hb-mono);font-size:var(--hb-s-mikro);
+  letter-spacing:var(--hb-sperr-mikro);text-transform:uppercase;
+  color:var(--f-akzent);text-decoration:none;
+  transition:color var(--hb-zeit-kurz) var(--hb-ease-standard);
+}
+.hb-fuss-weg:hover{color:var(--hb-text-invers)}
+
+.hb-fuss-spalte h4{
+  margin:0 0 var(--hb-raum-5);
+  font-family:var(--hb-mono);font-size:var(--hb-s-mikro);font-weight:500;
+  letter-spacing:var(--hb-sperr-mikro);text-transform:uppercase;
+  color:var(--f-akzent);
+}
+.hb-fuss-spalte ul{list-style:none;margin:0;padding:0}
+.hb-fuss-spalte li{display:flex;align-items:center;gap:.6rem;margin-bottom:var(--hb-raum-3)}
+/* Der Farbpunkt sagt in einer Zeile, welche Welt gemeint ist — dasselbe
+   Zeichen wie .w-welt-link auf den Weltseiten. */
+.hb-fuss-spalte li i{width:7px;height:7px;border-radius:50%;flex:0 0 auto}
+.hb-fuss-spalte a{
+  color:var(--f-text);text-decoration:none;font-size:.95rem;
+  transition:color var(--hb-zeit-kurz) var(--hb-ease-standard);
+}
+.hb-fuss-spalte a:hover{color:var(--f-akzent)}
+.hb-fuss-spalte a.leise{font-size:.85rem;opacity:.85}
+.hb-fuss-recht{flex-wrap:wrap;gap:0;color:var(--f-zart);font-size:.9rem}
+
+/* --- Rechtszeile ---------------------------------------------------------- */
+.hb-fuss-legal{
+  display:flex;flex-wrap:wrap;gap:var(--hb-raum-3) var(--hb-raum-6);
+  justify-content:space-between;
+  border-top:1px solid var(--f-linie);padding-top:var(--hb-raum-5);
+  font-family:var(--hb-mono);font-size:.62rem;letter-spacing:.06em;
+  color:var(--f-zart);line-height:1.9;
+}
+.hb-fuss-legal a{color:var(--f-leise);text-decoration:none}
+.hb-fuss-legal a:hover{color:var(--f-akzent)}
+/* Platzhalter bleiben als Platzhalter erkennbar — die GmbH ist in Gründung. */
+.hb-fuss-legal .ph{color:var(--f-ph)}
+
+/* Auf den dunklen Weltseiten sitzt der Fuß auf gleichem Grund: eine Linie
+   trennt ihn, kein Farbsprung. */
+[data-hb-grund="tief"] .hb-fuss{
+  margin-top:var(--hb-raum-8);
+  background:none;border-top:1px solid var(--f-linie);
+}

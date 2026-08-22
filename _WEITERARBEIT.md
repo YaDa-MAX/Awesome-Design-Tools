@@ -2078,3 +2078,86 @@ aus dem Precache, weil sie niemand mehr referenziert. Die Dateien bleiben liegen
 eigene Welle wert, mit der dokumentierten IntersectionObserver-Falle im Blick.
 Ebenso offen: die Textfülle (`immobilien-vermieten` 4.953 Zeichen,
 `studio-einrichtungstheorie` 2.964) — Struktur, nicht Stil.
+
+---
+
+### WELLE 18: EIN FUSS FÜR ALLE SEITEN (SW -3021)
+
+**Auftrag:** „Eigene Wellen gegen Redundanz starten wie vorgeschlagen."
+
+**Erst gemessen, wo die Redundanz wirklich liegt.** Vier Hypothesen geprüft, drei
+verworfen:
+
+| Vermutung | Befund |
+|---|---|
+| doppeltes Inline-JS | 8 Funktionen auf ≥3 Seiten — **5 KB**, zu klein |
+| doppelter Fließtext | **1 Absatz** auf ≥4 Seiten. Die Inhalte sind echt verschieden |
+| doppeltes Markup | **der Fußbereich**, 33-mal kopiert → diese Welle |
+| doppeltes CSS außerhalb der Welten | 62 Seiten, 295 KB, zweites Kit → Welle 19 |
+
+Dass der Fließtext **nicht** redundant ist, war das wertvollste Nein: es hätte eine
+Welle Textkürzung gerechtfertigt, die nichts gebracht hätte.
+
+**Der Fußbereich lag 33-mal im Markup** — in drei Fassungen, die sich in Leerzeichen
+und zwei fehlenden Links unterschieden, je ~2,15 KB. Gleichzeitig endeten die Seiten auf
+drei verschiedene Arten: `<footer>` (53), `<p class="foot">` (46), gar nichts (10).
+
+**Der eigentliche Befund war kein Redundanz-, sondern ein Rechtsproblem:
+67 von 109 Seiten trugen keinen einzigen Rechts-Link.** Kein Impressum, kein Datenschutz.
+`rechtliches.html` war überhaupt nur aus dem Fuß von `impressum.html` erreichbar.
+
+**Geliefert**
+
+| Datei | Was |
+|---|---|
+| `web/hb-fuss.js` | baut den Fuß, 5,9 KB |
+| `web/hb-fuss.css` | Gestalt, 0 Hex und 0 rgba im Bauteil |
+| `tools/umbau_fuss.py` | entfernt die Kopien, schaltet eigene Abschlüsse ab |
+| `tools/gen_kopf.js` | hängt beide an — neue Seite bekommt den Fuß von allein |
+
+Gebaut wird ein `div[role="contentinfo"]`, **nie ein `<footer>`-Element** — aus demselben
+Grund wie bei `heiben-nav.js`: `styles.css` stylt `footer{}` als Element-Selektor
+(dunkler Grund, eigenes Raster) und würde den neuen Fuß auf 29 Seiten überschreiben.
+
+**Ergebnis**
+
+| | vorher | nachher |
+|---|---|---|
+| Seiten mit gemeinsamem Fuß | 0 | **106** (+3 bewusst abgeschaltet, 0 ohne) |
+| Seiten ohne Rechts-Link | 67 | **0** |
+| kopierte Fußbereiche | 33 | 0 |
+| HTML gesamt | 3.108 KB | **3.038 KB** (zentral 10,4 KB → netto 59 KB weniger) |
+
+Abgeschaltet über `data-hb-fuss="aus"` am body: `index.html` (bringt seinen knappen
+Abschluss selbst mit) und die zwei archivierten Standalone-Startseiten.
+
+**Falle: an den body anhängen setzt einen Block-Container voraus.** `404.html` zentriert
+seinen Inhalt mit `display:flex` — der Fuß wurde dort zum Element **neben** dem Inhalt,
+208 px schmal statt 1.100, und schob die Seite 112 px über den rechten Rand. Gefunden
+vom Überlauf-Test im Sweep, isoliert durch Entfernen des Fußes im laufenden Dokument
+(1392 → 1280 px). `hb-fuss.js` misst jetzt `getComputedStyle(document.body).display`
+und passt sich ein: bei Flex `flex:0 0 100%` plus `flex-wrap:wrap`, bei Grid
+`grid-column:1/-1`. Regel: **nie annehmen, dass der body ein Block ist.**
+
+**Zweite Falle, eigene Nachlässigkeit:** die zwei Zusatzlinks der Welten-Spalte
+(„↳ Das Magazin", „↳ Unsere Arbeit") bekamen einen Weltfarb-Punkt, weil die Prüfung
+`if (weltfarbe && e[2])` auch bei `e[2] === 'leise'` zutrifft — `var(--hb-w-leise)`
+existiert nicht, der Punkt blieb farblos. Auf 64 Seiten gemeldet vom Test „5 Weltpunkte
+erwartet". Ohne die Zählung wäre es niemandem aufgefallen und trotzdem falsch gewesen.
+
+**Nachweis**
+
+| Prüfung | Ergebnis |
+|---|---|
+| PageErrors über alle 109 Seiten | **0 / 109** |
+| Fuß vorhanden, ≥ 120 px hoch, genau 5 Weltpunkte, Impressum + Datenschutz verlinkt, kein waagerechter Überlauf | **109 / 109** |
+| verbliebene große `<footer>` | 1 (`startseite-klassisch.html`, Archiv) |
+| Wert-Literale in `hb-fuss.css` | keine |
+
+**Nächste Front (Welle 19): das zweite Kit.** 62 Nicht-Weltseiten tragen 295 KB
+Inline-CSS. Darin steckt die **Kompendium-Maschinerie** — `.controls`, `.dcard`,
+`.dhead`, `.pc`, `.badges`, `#q`, `#detail` — **8- bis 17-fach wortgleich kopiert**,
+auf den acht Kompendien (`auto`, `digital`, `erstehilfe`, `finanzen`, `haushalt`,
+`lebensmittel`, `papierkram`, `pflanzen`) plus `wissen.html`. 37 KB auf neun Seiten,
+40 KB insgesamt vermeidbar. Methode wie in W17: Kit einfrieren, zentrale Datei,
+Drift an der Handschrift erkennen.

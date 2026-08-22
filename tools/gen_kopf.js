@@ -51,6 +51,12 @@ const PFLICHT = [
     nurWenn: (e, text) => /data-hb-nachbarn/.test(text) },
   { datei: 'hb-bereiche.js', tag: '<script src="hb-bereiche.js" defer></script>',
     nurWenn: (e, text) => e.typ === 'intern' || /data-hb-(intern|weltseiten)/.test(text) },
+  /* Gemeinsamer Fuss (Welle 18). Nicht auf Standalone-Seiten und nicht dort, wo
+     der Abschluss bewusst eigen ist (data-hb-fuss="aus" am body). */
+  { datei: 'hb-fuss.css', tag: '<link rel="stylesheet" href="hb-fuss.css">',
+    nurWenn: (e, text) => e.typ !== 'standalone' && !/data-hb-fuss="aus"/.test(text) },
+  { datei: 'hb-fuss.js', tag: '<script src="hb-fuss.js" defer></script>',
+    nurWenn: (e, text) => e.typ !== 'standalone' && !/data-hb-fuss="aus"/.test(text) },
 ];
 
 /* Tags, die der Generator besitzt und darum vorher entfernt. */
