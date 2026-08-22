@@ -30,19 +30,10 @@
 <meta name="twitter:image" content="assets/hero-light.png">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"HeiBen Manufaktur · Design-Galerie","description":"Inspiration aus der HeiBen Manufaktur: von der Community geteilte Eigendesigns zum Remixen und Selbstgestalten.","url":"https://www.heiben.de/manufaktur-galerie.html","inLanguage":"de-DE","isPartOf":{"@type":"WebSite","name":"HeiBen","url":"https://www.heiben.de/"},"publisher":{"@type":"Organization","name":"HeiBen Wohnen GmbH"}}</script>
 <!-- /hb:kopf -->
+  <link rel="stylesheet" href="hb-weltseite.css">
 <style>
-:root{--bg:#f3eee5;--bg-soft:#ebe3d4;--ink:#1f1c17;--ink-soft:#524a3e;--rule:#d8cdb7;--terracotta:#b04a31;--kuli:#6b3951;--ochre:#a97a1d;--wohnen:#4a5c39;--immo:#792d29;}
-*{box-sizing:border-box;}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:'Manrope',-apple-system,Segoe UI,sans-serif;line-height:1.5;}
-.wrap{max-width:1040px;margin:0 auto;padding:0 1.5rem;}
-.topbar{display:flex;align-items:center;justify-content:space-between;padding:1.1rem 0;border-bottom:1px solid var(--rule);}
-.wm{font-family:'Fraunces',serif;font-weight:700;font-size:1.4rem;}.wm .a{color:var(--terracotta);}
-.back{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);text-decoration:none;}
-.eyebrow{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--terracotta);}
-h1{font-family:'Fraunces',serif;font-weight:340;font-size:clamp(2rem,5vw,3rem);margin:.4rem 0 .4rem;}
-.lede{color:var(--ink-soft);max-width:60ch;}
+:root{--kuli:#6b3951;--ochre:#a97a1d;--wohnen:#4a5c39;--immo:#792d29;}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:18px;margin:2rem 0;}
-.card{background:#fff;border:1px solid var(--rule);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;}
 .tile{aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;position:relative;padding:1rem;text-align:center;}
 .tile .obj{border-radius:8px;box-shadow:0 10px 24px rgba(31,28,23,.22);display:flex;align-items:center;justify-content:center;color:#f3eee5;font-family:'Fraunces',serif;font-weight:340;}
 .tile .tt{position:absolute;top:.6rem;left:.6rem;font-family:'JetBrains Mono',monospace;font-size:.54rem;letter-spacing:.08em;text-transform:uppercase;background:rgba(31,28,23,.55);color:#f3eee5;padding:.15rem .5rem;border-radius:999px;}
@@ -50,11 +41,8 @@ h1{font-family:'Fraunces',serif;font-weight:340;font-size:clamp(2rem,5vw,3rem);m
 .meta b{font-family:'Fraunces',serif;font-weight:480;}
 .meta .sub{font-size:.78rem;color:var(--ink-soft);}
 .acts{display:flex;gap:.4rem;margin-top:auto;padding-top:.6rem;}
-.btn{display:inline-block;border:0;cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;padding:.5rem .8rem;border-radius:8px;text-decoration:none;}
-.btn.primary{background:var(--terracotta);color:#f3eee5;}.btn.ghost{background:none;border:1px solid var(--ink);color:var(--ink);}
+.btn.primary{background:var(--terracotta);color:#f3eee5;}
 .banner{background:var(--ink);color:#f3eee5;border-radius:16px;padding:1.4rem 1.6rem;margin-top:1rem;display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;align-items:center;}
-footer{margin-top:3rem;border-top:1px solid var(--rule);padding:1.4rem 0;color:var(--ink-soft);font-size:.8rem;}
-.note{font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--ink-soft);}
 </style>
 <link rel="stylesheet" href="heiben-design.css">
 <script src="heiben-nav.js" defer></script>
@@ -62,9 +50,9 @@ footer{margin-top:3rem;border-top:1px solid var(--rule);padding:1.4rem 0;color:v
 <script src="heiben-menue.js" defer></script>
 <script src="hb-nachbarn.js" defer></script>
 </head>
-<body data-hb-welt="wohnen">
+<body data-hb-welt="wohnen" data-hb-seite="welt">
 <div class="wrap">
-  <div class="topbar"><div class="wm"><span class="a">H</span>ei<span class="a">B</span>en <span style="font-weight:400;font-size:.9rem;color:var(--ink-soft)">· Galerie</span></div><a class="back" href="manufaktur-gestalten.html">← Selbst gestalten</a></div>
+  <a class="ws-weg" href="manufaktur-gestalten.html">Selbst gestalten</a>
   <div class="eyebrow">Manufaktur · Community</div>
   <h1>Design-Galerie</h1>
   <p class="lede">Von Hand entworfen, hier geteilt: Eigendesigns zum Stöbern und <b>Remixen</b>. Tippe auf „Remixen", öffne das Design im Konfigurator und mach es zu deinem.</p>

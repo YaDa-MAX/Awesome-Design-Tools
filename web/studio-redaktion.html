@@ -34,8 +34,9 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Manrope:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="hb-bestand-redaktion.css">
+  <link rel="stylesheet" href="hb-weltseite.css">
 <style>
-/* ===== Redaktion — internes Werkzeug (seiteneigene Oberfläche) ===== */
+
 .adminbar { background:var(--bg-deep); color:var(--bg); position:sticky; top:0; z-index:100; border-bottom:1px solid rgba(243,238,229,0.12); }
 .adminbar .wrap { display:flex; align-items:center; justify-content:space-between; height:62px; }
 .adminbar .left { display:flex; align-items:center; gap:0.7rem; }
@@ -53,7 +54,6 @@
 .tabs button { font-family:'JetBrains Mono',monospace; font-size:0.7rem; letter-spacing:0.14em; text-transform:uppercase; background:none; border:none; padding:0.9rem 1.1rem; color:var(--ink-soft); cursor:pointer; border-bottom:2px solid transparent; margin-bottom:-1px; }
 .tabs button.active { color:var(--ink); border-bottom-color:var(--ink-accent); }
 
-/* Beitragsliste */
 .list-head { display:flex; justify-content:space-between; align-items:center; margin-bottom:1.2rem; gap:1rem; flex-wrap:wrap; }
 .alist { border-top:1px solid var(--rule); }
 .arow { display:grid; grid-template-columns:auto 1fr auto; gap:1rem; align-items:center; padding:1rem 0; border-bottom:1px solid var(--rule); }
@@ -65,7 +65,6 @@
 .badge-status.pub { background:var(--moss); color:var(--bg); }
 .badge-status.draft { background:var(--bg-soft); color:var(--ink-soft); border:1px solid var(--rule); }
 
-/* kleine Knöpfe */
 .mini { font-family:'JetBrains Mono',monospace; font-size:0.62rem; letter-spacing:0.1em; text-transform:uppercase; padding:0.42rem 0.7rem; border:1px solid var(--ink); background:transparent; color:var(--ink); cursor:pointer; transition:all .2s; }
 .mini:hover { background:var(--ink); color:var(--bg); }
 .mini.solid { background:var(--ink-accent); color:var(--bg); border-color:var(--ink-accent); }
@@ -73,11 +72,9 @@
 .mini.danger { border-color:var(--burgundy); color:var(--burgundy); }
 .mini.danger:hover { background:var(--burgundy); color:var(--bg); }
 
-/* Editor-Layout */
 .editor { display:grid; grid-template-columns:1fr 1fr; gap:2.5rem; align-items:start; }
 @media (max-width:900px){ .editor { grid-template-columns:1fr; } }
 .field { margin-bottom:1.1rem; }
-.field label { display:block; font-family:'JetBrains Mono',monospace; font-size:0.64rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--ink-soft); margin-bottom:0.4rem; }
 .field input[type=text], .field input[type=date], .field textarea, .field select {
   width:100%; font-family:'Manrope',sans-serif; font-size:0.95rem; padding:0.6rem 0.7rem;
   border:1px solid var(--rule); background:#fff; color:var(--ink);
@@ -103,7 +100,6 @@
 .preview-frame .article-title { font-size:1.8rem; }
 .editor-actions { display:flex; gap:0.6rem; margin-top:1.4rem; flex-wrap:wrap; }
 
-/* Sichern & Laden */
 .io-card { border:1px solid var(--rule); padding:1.8rem; margin-bottom:1.2rem; background:var(--bg-soft); }
 .io-card h3 { font-family:'Fraunces',serif; font-weight:500; font-size:1.2rem; margin-bottom:0.4rem; }
 .io-card p { color:var(--ink-soft); font-size:0.94rem; margin-bottom:1rem; max-width:64ch; }
@@ -113,12 +109,7 @@
 </style>
 <link rel="stylesheet" href="hb-motion.css">
 <style id="hb-logo-css">
-.brand{display:flex;align-items:center;text-decoration:none;}
-.brand svg{height:30px;width:auto;display:block;}
 @media(max-width:600px){.brand svg{height:25px;}}
-.brand-block svg{height:34px;width:auto;display:block;margin-bottom:1.2rem;}
-.wms-lockup{display:flex;justify-content:center;padding:6px 0 2px;}
-.wms-lockup svg{width:min(540px,84vw);height:auto;display:block;}
 </style>
 <link rel="stylesheet" href="heiben-design.css">
 <script src="heiben-nav.js" defer></script>
@@ -127,7 +118,7 @@
 <script src="hb-bereiche.js" defer></script>
 <script src="heiben-menue.js" defer></script>
 </head>
-<body data-hb-welt="studio">
+<body data-hb-welt="studio" data-hb-seite="welt">
 
 <div class="adminbar">
   <div class="wrap">
@@ -135,13 +126,14 @@
       <img src="assets/wordmark-on-dark.png" alt="HeiBen" />
       <span class="lbl">Studio · Redaktion</span>
     </div>
-    <a class="back" href="studio-magazin.html" target="_blank" rel="noopener">Magazin ansehen ↗</a>
+    <a class="ws-weg" href="studio-magazin.html" target="_blank" rel="noopener">Magazin ansehen</a>
   </div>
 </div>
 
 <main class="admin">
   <div class="wrap">
     <div class="head">
+<a class="ws-weg" href="studio.html">HeiBen Studio</a>
       <h1>Redaktion</h1>
       <p>Hier legen Sie Beiträge an, bearbeiten und veröffentlichen sie — ganz ohne Programmierkenntnisse. Ihre Arbeit wird automatisch in diesem Browser gespeichert. Über „Sichern &amp; Laden“ sichern Sie alles als Datei oder geben es weiter.</p>
     </div>

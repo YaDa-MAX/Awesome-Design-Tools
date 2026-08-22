@@ -30,29 +30,14 @@
 <meta name="twitter:image" content="assets/hero-light.png">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"HeiBen Reisen · Ziele","description":"Zwölf Ziele zwischen Bergischem Land und Schottland: Anreise ab Köln, beste Zeit, Budget — und wofür ein Ort ausdrücklich nicht taugt.","url":"https://www.heiben.de/reisen-ziele.html","inLanguage":"de-DE","isPartOf":{"@type":"WebSite","name":"HeiBen","url":"https://www.heiben.de/"},"publisher":{"@type":"Organization","name":"HeiBen Reisen GmbH"}}</script>
 <!-- /hb:kopf -->
+  <link rel="stylesheet" href="hb-weltseite.css">
 <style>
-:root{--bg:#f3eee5;--bg-soft:#ebe3d4;--ink:#1f1c17;--ink-soft:#524a3e;--rule:#d8cdb7;
-  --terracotta:#b04a31;--accent:#a97a1d;--accent-d:#8a6115;}
-*{box-sizing:border-box;}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:'Manrope',-apple-system,Segoe UI,sans-serif;line-height:1.55;}
-.wrap{max-width:1060px;margin:0 auto;padding:0 1.5rem 3rem;}
-.topbar{display:flex;align-items:center;justify-content:space-between;padding:1.1rem 0;border-bottom:1px solid var(--rule);}
-.wm{font-family:'Fraunces',serif;font-weight:700;font-size:1.4rem;}.wm .a{color:var(--accent);}
-.wm span{font-weight:400;font-size:.9rem;color:var(--ink-soft);}
-.back{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);text-decoration:none;}
 .back:hover{color:var(--ink);}
-.eyebrow{font-family:'JetBrains Mono',monospace;font-size:.64rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent-d);margin-top:1.6rem;}
-h1{font-family:'Fraunces',serif;font-weight:340;font-size:clamp(1.9rem,4.6vw,2.8rem);margin:.6rem 0 .3rem;line-height:1.08;}
 h1 em{font-style:italic;color:var(--accent-d);}
-h2{font-family:'Fraunces',serif;font-weight:440;font-size:1.25rem;margin:2rem 0 .5rem;}
-.lede{color:var(--ink-soft);max-width:64ch;margin:0;}
 .note{color:var(--ink-soft);font-size:.88rem;max-width:64ch;}
 .filter{display:flex;flex-wrap:wrap;gap:.4rem;margin:1.4rem 0 .2rem;align-items:center;}
 .filter .titel{font-family:'JetBrains Mono',monospace;font-size:.56rem;letter-spacing:.16em;
   text-transform:uppercase;color:var(--ink-soft);margin-right:.3rem;}
-.chip{border:1px solid var(--rule);background:#fff;border-radius:999px;padding:.42rem .9rem;
-  font-size:.82rem;cursor:pointer;font:inherit;font-size:.82rem;}
-.chip.on{background:var(--accent);border-color:var(--accent);color:#1f1c17;font-weight:700;}
 .zahl{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.12em;
   text-transform:uppercase;color:var(--ink-soft);margin:.8rem 0 0;}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,250px),1fr));gap:14px;margin-top:.6rem;}
@@ -80,13 +65,8 @@ h2{font-family:'Fraunces',serif;font-weight:440;font-size:1.25rem;margin:2rem 0 
 .detail .warum{background:var(--bg-soft);border-left:3px solid var(--accent);border-radius:0 12px 12px 0;
   padding:.8rem 1rem;margin-top:1rem;}
 .detail .warum b{font-family:'Fraunces',serif;font-weight:500;}
-.btn{display:inline-block;border:0;cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:.62rem;
-  letter-spacing:.1em;text-transform:uppercase;padding:.7rem 1.05rem;border-radius:9px;text-decoration:none;}
-.btn.primary{background:var(--accent);color:#1f1c17;}
-.btn.ghost{background:none;border:1px solid var(--rule);color:var(--ink);}
 .btn.ghost:hover{border-color:var(--accent);color:var(--accent-d);}
 .wege{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.2rem;}
-.foot{margin-top:2.6rem;padding-top:1rem;border-top:1px solid var(--rule);font-size:.8rem;color:var(--ink-soft);}
 .foot a{color:var(--ink-soft);}
 </style>
 <link rel="stylesheet" href="heiben-design.css">
@@ -96,12 +76,9 @@ h2{font-family:'Fraunces',serif;font-weight:440;font-size:1.25rem;margin:2rem 0 
 <script id="hb-pwa" src="hb-pwa.js" defer></script>
 <script src="hb-nachbarn.js" defer></script>
 </head>
-<body data-hb-welt="reisen">
+<body data-hb-welt="reisen" data-hb-seite="welt">
 <div class="wrap">
-  <div class="topbar">
-    <div class="wm"><span class="a">H</span>ei<span class="a">B</span>en <span>· Reisen</span></div>
-    <a class="back" href="reisen.html">← HeiBen Reisen</a>
-  </div>
+  <a class="ws-weg" href="reisen.html">HeiBen Reisen</a>
 
   <div class="eyebrow">Ziele</div>
   <h1>Zwölf Orte, die wir <em>selbst gesehen haben</em>.</h1>

@@ -30,26 +30,12 @@
 <meta name="twitter:image" content="assets/hero-light.png">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"HeiBen Kulinarik · Was koche ich heute?","description":"Keine Idee, was kochen? Sag uns Zeit, Lust und Ernährung — HeiBen Kulinarik schlägt dir ein passendes Gericht vor.","url":"https://www.heiben.de/kulinarik-heute.html","inLanguage":"de-DE","isPartOf":{"@type":"WebSite","name":"HeiBen","url":"https://www.heiben.de/"},"publisher":{"@type":"Organization","name":"HeiBen Kulinarik GmbH"}}</script>
 <!-- /hb:kopf -->
+  <link rel="stylesheet" href="hb-weltseite.css">
 <style>
-:root{--bg:#f3eee5;--bg-soft:#ebe3d4;--ink:#1f1c17;--ink-soft:#524a3e;--rule:#d8cdb7;--terracotta:#b04a31;--accent:#6b3951;--accent-d:#52283d;}
-*{box-sizing:border-box;}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:'Manrope',-apple-system,Segoe UI,sans-serif;line-height:1.5;}
-.wrap{max-width:920px;margin:0 auto;padding:0 1.5rem;}
-.topbar{display:flex;align-items:center;justify-content:space-between;padding:1.1rem 0;border-bottom:1px solid var(--rule);}
-.wm{font-family:'Fraunces',serif;font-weight:700;font-size:1.4rem;}.wm .a{color:var(--terracotta);}
-.wm span{font-weight:400;font-size:.9rem;color:var(--ink-soft);}
-.back{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);text-decoration:none;}
-.eyebrow{font-family:'JetBrains Mono',monospace;font-size:.64rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);}
-h1{font-family:'Fraunces',serif;font-weight:340;font-size:clamp(2rem,5vw,3rem);margin:1rem 0 .2rem;}
-.lede{color:var(--ink-soft);max-width:58ch;}
 .panel{background:#fff;border:1px solid var(--rule);border-radius:18px;padding:1.2rem 1.3rem;margin-top:1.2rem;}
 .row{display:flex;gap:1rem;flex-wrap:wrap;align-items:flex-end;}
 .field{display:flex;flex-direction:column;gap:4px;}
-.field label{font-size:.74rem;color:var(--ink-soft);}
 .field select{border:1px solid var(--rule);background:var(--bg);border-radius:8px;padding:.55rem .7rem;font:inherit;min-width:150px;}
-.btn{display:inline-block;border:0;cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;padding:.75rem 1.15rem;border-radius:9px;text-decoration:none;margin:.3rem .3rem 0 0;}
-.btn.primary{background:var(--accent);color:#f3eee5;}.btn.ink{background:var(--ink);color:#f3eee5;}
-.btn.ghost{background:none;border:1px solid var(--ink);color:var(--ink);}
 .btn.sm{padding:.5rem .8rem;font-size:.58rem;}
 .result{margin-top:1.2rem;}
 .dish{background:#fff;border:1px solid var(--rule);border-radius:16px;overflow:hidden;}
@@ -64,8 +50,6 @@ h1{font-family:'Fraunces',serif;font-weight:340;font-size:clamp(2rem,5vw,3rem);m
 .alt .note{font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--ink-soft);}
 .alt .pills{display:flex;gap:.4rem;flex-wrap:wrap;margin-top:.4rem;}
 .pill{border:1px solid var(--rule);background:#fff;border-radius:999px;padding:.35rem .8rem;font-size:.78rem;cursor:pointer;}
-footer{margin-top:3rem;border-top:1px solid var(--rule);padding:1.4rem 0;color:var(--ink-soft);font-size:.8rem;}
-.note{font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--ink-soft);}
 </style>
 <link rel="stylesheet" href="heiben-design.css">
 <script src="heiben-nav.js" defer></script>
@@ -73,9 +57,9 @@ footer{margin-top:3rem;border-top:1px solid var(--rule);padding:1.4rem 0;color:v
 <script src="heiben-menue.js" defer></script>
 <script src="hb-nachbarn.js" defer></script>
 </head>
-<body data-hb-welt="kulinarik">
+<body data-hb-welt="kulinarik" data-hb-seite="welt">
 <div class="wrap">
-  <div class="topbar"><div class="wm"><span class="a">H</span>ei<span class="a">B</span>en <span>· Kulinarik</span></div><a class="back" href="kulinarik.html">← HeiBen Kulinarik</a></div>
+  <a class="ws-weg" href="kulinarik.html">HeiBen Kulinarik</a>
   <div class="eyebrow">Kulinarik · Heute kochen</div>
   <h1>Was koche ich <em style="color:var(--accent);font-style:italic;">heute?</em></h1>
   <p class="lede">Drei kurze Fragen — und du hast ein Gericht. Alle Rezepte ohne Schwein, alltagstauglich und in der HeiBen-App mit Mengen, Nährwerten und Einkaufsliste.</p>

@@ -35,6 +35,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Manrope:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="styles.css">
 <link rel="stylesheet" href="hb-motion.css">
+  <link rel="stylesheet" href="hb-weltseite.css">
 <style id="kv-css">
 .kv{max-width:var(--maxw);margin:0 auto;padding:30px 24px 80px;}
 .kv h2{font-family:'Fraunces',serif;font-weight:400;font-size:1.5rem;margin:34px 0 12px;}
@@ -58,12 +59,7 @@
 .kv-emp{background:var(--bg-soft);border:1px dashed var(--rule);padding:12px;font-size:.82rem;color:var(--ink-soft);}
 </style>
 <style id="hb-logo-css">
-.brand{display:flex;align-items:center;text-decoration:none;}
-.brand svg{height:30px;width:auto;display:block;}
 @media(max-width:600px){.brand svg{height:25px;}}
-.brand-block svg{height:34px;width:auto;display:block;margin-bottom:1.2rem;}
-.wms-lockup{display:flex;justify-content:center;padding:6px 0 2px;}
-.wms-lockup svg{width:min(540px,84vw);height:auto;display:block;}
 </style>
 <style id="kalk-css">
 .kalk{max-width:var(--maxw);margin:0 auto;padding:8px 24px 50px;}
@@ -103,11 +99,12 @@ table.kalk-t tr.krit td{background:#f6e7e3;}
 <script src="heiben-bereiche.js" defer></script>
 <script src="hb-bereiche.js" defer></script>
 </head>
-<body data-hb-welt="wohnen">
+<body data-hb-welt="wohnen" data-hb-seite="welt">
 
 <!-- Alt-Nav entfernt: globale Navigation kommt aus heiben-nav.js (Remake W7) -->
   <header class="subhero">
     <div class="wrap">
+<a class="ws-weg" href="manufaktur.html">HeiBen Manufaktur</a>
       <div class="eyebrow">HeiBen · Werkstatt (intern)</div>
       <h1>VK-Kalkulation &amp; <em>Margen</em>.</h1>
       <p class="lede">Annahmen anpassen — Neuprodukt bepreisen — den gesamten Katalog live nachrechnen. Alle Werte bleiben lokal auf diesem Gerät. Spiegelt das Excel-Modell „HeiBen Manufaktur Kalkulation".</p>

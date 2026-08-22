@@ -16,7 +16,7 @@ Statisches HTML/JS/CSS-**PWA ohne Build-Schritt**, offline-fähig, localStorage.
 ## Pflicht-Workflow nach JEDER Änderung unter web/
 1. **Precache + Service-Worker-Version**: `cd web && node ../tools/gen_sw.js` — erzeugt die
    `PRECACHE`-Liste aus dem Dateibestand (Referenzen aus HTML **und** `url()` in Stylesheets,
-   inline `<style>` eingeschlossen) UND zählt die Cache-Version hoch (aktuell **-3019**).
+   inline `<style>` eingeschlossen) UND zählt die Cache-Version hoch (aktuell **-3020**).
    Nie von Hand pflegen. Standalone-Seiten (`typ` in `tools/seiten.json`) bleiben automatisch
    draußen; `vendor/` und Dateien > 150 KB kommen zur Laufzeit in den Cache (der fetch-Handler
    macht stale-while-revalidate). Wer nur die Version braucht, bumpt trotzdem über den Generator.
@@ -162,6 +162,18 @@ Statisches HTML/JS/CSS-**PWA ohne Build-Schritt**, offline-fähig, localStorage.
   in den Precache — `coverSrc()` bildet den Pfad zur Laufzeit, stale-while-revalidate
   cacht sie beim ersten Zeigen. Rezept-IDs bleiben unangetastet, auch die 38 verstümmelten
   (`Tiramisù` → `tiramis`): daran hängen Deep-Links, Merklisten, Suchindex.
+  V3-W17 fertig: **die 42 Weltunterseiten auf dem neuen Stil**. `web/hb-weltseite.css` ist
+  die helle Schwester von `hb-welt.css` — dieselbe Sprache auf Papier, komplett auf
+  `[data-hb-seite="welt"]` am body geschoben, 0 Hex im Bauteil. Die alten Kit-Namen
+  (`--accent`, `--rule`, `--ink` …) zeigen dort auf die Token-Ebene, damit färben sich
+  42 Seiten an einem Ort um. 26 doppelte Wortmarken entfernt (21 zweite Kopfzeilen,
+  4 Hero-Bilder, 1 Werkzeugleiste); an ihre Stelle tritt `.ws-weg`, der Rückweg —
+  **42/42 Seiten, kein totes Ziel**. Inline-CSS 238 → 192 KB. Dichte Werkzeugseiten
+  tragen `data-hb-dichte="werkzeug"` (kleinerer Titel) statt sechs eigener `h1`-Regeln.
+  Umbau über `tools/umbau_weltseiten.py` (wiederholbar, `--pruefen`); die zentral
+  übernommenen Kit-Fassungen liegen eingefroren in `tools/weltseiten-kit.json`.
+  **Neue Weltunterseite: `umbau_weltseiten.py` laufen lassen** — sie hängt Stylesheet
+  und body-Marke an. Gemessen: 0/47 PageErrors, 42/42 vollständig im neuen Stil.
 - `web/startseite-klassisch.html` = **die Startseite bis W10**, archiviert (standalone, nicht
   verlinkt, nicht precached). Sie ist die einzige Seite, die `hb-menue.css` und `hb-suche-nav.js`
   noch braucht.

@@ -1,0 +1,75 @@
+{
+ "_hinweis": "Die wortgleich auf viele Weltunterseiten kopierten CSS-Regeln, die hb-weltseite.css zentral uebernommen hat. Erhoben aus dem Stand vor Remake v3 Welle 17. Eingefroren, damit umbau_weltseiten.py wiederholbar bleibt: nach dem ersten Lauf gibt es die Kopien nicht mehr zu zaehlen.",
+ "basis": "f7a4d4677851f037d420332a10da343e3f940eda",
+ "kit": {
+  ".brand": [
+   "display:flex;align-items:center;text-decoration:none"
+  ],
+  ".brand svg": [
+   "height:30px;width:auto;display:block"
+  ],
+  ".brand-block svg": [
+   "height:34px;width:auto;display:block;margin-bottom:1.2rem"
+  ],
+  ".wms-lockup": [
+   "display:flex;justify-content:center;padding:6px02px"
+  ],
+  ".wms-lockup svg": [
+   "width:min(540px,84vw);height:auto;display:block"
+  ],
+  "*": [
+   "box-sizing:border-box"
+  ],
+  "body": [
+   "margin:0;background:var(--bg);color:var(--ink);font-family:'Manrope',-apple-system,SegoeUI,sans-serif;line-height:1.5",
+   "margin:0;background:var(--bg);color:var(--ink);font-family:'Manrope',-apple-system,SegoeUI,sans-serif;line-height:1.55"
+  ],
+  ".wrap": [
+   "max-width:1040px;margin:0auto;padding:01.5rem"
+  ],
+  ".topbar": [
+   "display:flex;align-items:center;justify-content:space-between;padding:1.1rem0;border-bottom:1pxsolidvar(--rule)"
+  ],
+  ".wm": [
+   "font-family:'Fraunces',serif;font-weight:700;font-size:1.4rem"
+  ],
+  ".wm .a": [
+   "color:var(--terracotta)",
+   "color:var(--accent)"
+  ],
+  ".wm span": [
+   "font-weight:400;font-size:.9rem;color:var(--ink-soft)"
+  ],
+  ".back": [
+   "font-family:'JetBrainsMono',monospace;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);text-decoration:none"
+  ],
+  ".eyebrow": [
+   "font-family:'JetBrainsMono',monospace;font-size:.64rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent-d);margin-top:1.6rem"
+  ],
+  "h1": [
+   "font-family:'Fraunces',serif;font-weight:340;font-size:clamp(1.9rem,4.6vw,2.8rem);margin:.6rem0.3rem;line-height:1.08"
+  ],
+  ".btn": [
+   "display:inline-block;border:0;cursor:pointer;font-family:'JetBrainsMono',monospace;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;padding:.7rem1.05rem;border-radius:9px;text-decoration:none"
+  ],
+  ".btn.primary": [
+   "background:var(--accent);color:#f3eee5"
+  ],
+  ".btn.ink": [
+   "background:var(--ink);color:#f3eee5"
+  ],
+  ".btn.ghost": [
+   "background:none;border:1pxsolidvar(--ink);color:var(--ink)",
+   "background:none;border:1pxsolidvar(--rule);color:var(--ink)"
+  ],
+  "footer": [
+   "margin-top:3rem;border-top:1pxsolidvar(--rule);padding:1.4rem0;color:var(--ink-soft);font-size:.8rem"
+  ],
+  ".note": [
+   "font-family:'JetBrainsMono',monospace;font-size:.6rem;color:var(--ink-soft)"
+  ],
+  ".foot": [
+   "margin-top:2.6rem;padding-top:1rem;border-top:1pxsolidvar(--rule);font-size:.8rem;color:var(--ink-soft)"
+  ]
+ }
+}

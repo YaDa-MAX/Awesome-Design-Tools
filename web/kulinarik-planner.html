@@ -30,25 +30,12 @@
 <meta name="twitter:image" content="assets/hero-light.png">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"HeiBen Kulinarik · Menü- & Catering-Planer","description":"Stelle Menüs und Catering zusammen: Gerichte wählen, Gäste festlegen, Allergene und Budget im Blick, beauftragen oder anfragen — als Firmen- und Kundenansicht.","url":"https://www.heiben.de/kulinarik-planner.html","inLanguage":"de-DE","isPartOf":{"@type":"WebSite","name":"HeiBen","url":"https://www.heiben.de/"},"publisher":{"@type":"Organization","name":"HeiBen Kulinarik GmbH"}}</script>
 <!-- /hb:kopf -->
+  <link rel="stylesheet" href="hb-weltseite.css">
 <style>
-:root{--bg:#f3eee5;--bg-soft:#ebe3d4;--ink:#1f1c17;--ink-soft:#524a3e;--rule:#d8cdb7;--terracotta:#b04a31;--accent:#6b3951;--accent-d:#4f2a3c;}
-*{box-sizing:border-box;}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:'Manrope',-apple-system,Segoe UI,sans-serif;line-height:1.5;}
-.wrap{max-width:1180px;margin:0 auto;padding:0 1.2rem;}
-.topbar{display:flex;align-items:center;justify-content:space-between;padding:1.1rem 0;border-bottom:1px solid var(--rule);}
-.wm{font-family:'Fraunces',serif;font-weight:700;font-size:1.4rem;}.wm .a{color:var(--terracotta);}
-.wm span{font-weight:400;font-size:.9rem;color:var(--ink-soft);}
-.back{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);text-decoration:none;}
-.eyebrow{font-family:'JetBrains Mono',monospace;font-size:.64rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent-d);}
-h1{font-family:'Fraunces',serif;font-weight:340;font-size:clamp(1.6rem,4.2vw,2.4rem);margin:.9rem 0 .2rem;}
-.lede{color:var(--ink-soft);max-width:66ch;}
 .bar{display:flex;gap:.6rem;flex-wrap:wrap;align-items:center;margin:1rem 0;}
 .seg{display:inline-flex;border:1px solid var(--rule);border-radius:10px;overflow:hidden;background:#fff;}
 .seg button{border:0;background:none;padding:.5rem .9rem;font:inherit;font-size:.82rem;cursor:pointer;color:var(--ink-soft);}
-.seg button.on{background:var(--ink);color:#f3eee5;}
-.btn{display:inline-flex;align-items:center;gap:.3rem;border:0;cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;padding:.55rem .8rem;border-radius:8px;text-decoration:none;}
-.btn.ink{background:var(--ink);color:#f3eee5;}.btn.primary{background:var(--accent);color:#f3eee5;}
-.btn.ghost{background:none;border:1px solid var(--ink);color:var(--ink);}.btn.sm{padding:.35rem .6rem;font-size:.54rem;}
+.seg button.on{background:var(--ink);color:#f3eee5;}.btn.sm{padding:.35rem .6rem;font-size:.54rem;}
 .fld{display:flex;flex-direction:column;gap:3px;}
 .fld label{font-size:.62rem;color:var(--ink-soft);font-family:'JetBrains Mono',monospace;letter-spacing:.06em;text-transform:uppercase;}
 .fld input,.fld select{border:1px solid var(--rule);border-radius:8px;padding:.45rem .6rem;font:inherit;}
@@ -57,8 +44,6 @@ h1{font-family:'Fraunces',serif;font-weight:340;font-size:clamp(1.6rem,4.2vw,2.4
 .panel{background:#fff;border:1px solid var(--rule);border-radius:16px;padding:1rem;}
 .panel h2{font-family:'Fraunces',serif;font-weight:480;font-size:1.1rem;margin:0 0 .5rem;}
 .chips{display:flex;gap:.35rem;flex-wrap:wrap;margin-bottom:.6rem;}
-.chip{border:1px solid var(--rule);background:#fff;border-radius:999px;padding:.32rem .7rem;font-size:.72rem;cursor:pointer;}
-.chip.on{background:var(--accent);border-color:var(--accent);color:#f3eee5;font-weight:600;}
 .search{width:100%;border:1px solid var(--rule);border-radius:9px;padding:.55rem .7rem;font:inherit;margin-bottom:.6rem;}
 .pal{display:flex;flex-direction:column;gap:.5rem;max-height:560px;overflow:auto;}
 .pcard{border:1px solid var(--rule);border-radius:11px;padding:.6rem .7rem;cursor:grab;background:#fff;}
@@ -106,9 +91,6 @@ h1{font-family:'Fraunces',serif;font-weight:340;font-size:clamp(1.6rem,4.2vw,2.4
 .pos{display:flex;justify-content:space-between;gap:.6rem;font-size:.85rem;border-bottom:1px dashed var(--rule);padding:.28rem 0;}
 .pos .r{white-space:nowrap;}
 .pos.tot{border-bottom:0;border-top:2px solid var(--ink);font-family:'Fraunces',serif;font-weight:560;font-size:1rem;padding-top:.4rem;}
-.disc{background:var(--bg-soft);border:1px solid var(--rule);border-radius:12px;padding:.7rem 1rem;font-size:.82rem;color:var(--ink-soft);margin:1.4rem 0;}
-footer{margin-top:2.5rem;border-top:1px solid var(--rule);padding:1.3rem 0;color:var(--ink-soft);font-size:.8rem;}
-.note{font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--ink-soft);}
 .modal{position:fixed;inset:0;background:rgba(31,28,23,.6);display:none;align-items:center;justify-content:center;z-index:1000;padding:1rem;}
 .modal.open{display:flex;}
 .modal .box{background:#fff;border-radius:14px;width:min(900px,96vw);max-height:88vh;display:flex;flex-direction:column;overflow:hidden;}
@@ -133,9 +115,9 @@ footer{margin-top:2.5rem;border-top:1px solid var(--rule);padding:1.3rem 0;color
 <script src="heiben-menue.js" defer></script>
 <script src="hb-nachbarn.js" defer></script>
 </head>
-<body data-hb-welt="kulinarik">
+<body data-hb-welt="kulinarik" data-hb-seite="welt" data-hb-dichte="werkzeug">
 <div class="wrap" id="app">
-  <div class="topbar"><div class="wm"><span class="a">H</span>ei<span class="a">B</span>en <span>· Kulinarik</span></div><a class="back" href="kulinarik.html">← HeiBen Kulinarik</a></div>
+  <a class="ws-weg" href="kulinarik.html">HeiBen Kulinarik</a>
   <div class="eyebrow">Menü- & Catering-Planer</div>
   <h1>Dein Menü <em style="color:var(--accent-d);font-style:italic;">selbst zusammenstellen</em></h1>
   <p class="lede">Wähle Gerichte für Empfang, Dinner und Dessert, lege die Gästezahl fest und behalte Allergene, Budget und Marge im Blick. Beauftrage die Manufaktur oder frag per E-Mail an — und übergib alles als Kundenangebot.</p>

@@ -30,30 +30,16 @@
 <meta name="twitter:description" content="Redaktions-Arbeitsplatz für das Lebenswissen-Magazin: Beiträge nach Kategorie, Lebensphase und Status filtern, durchsuchen, Entwürfe anlegen und den Veröffentlichungs-Workflow steuern.">
 <meta name="twitter:image" content="assets/hero-light.png">
 <!-- /hb:kopf -->
+  <link rel="stylesheet" href="hb-weltseite.css">
 <style>
-:root{--bg:#f3eee5;--bg-soft:#ebe3d4;--ink:#1f1c17;--ink-soft:#524a3e;--rule:#d8cdb7;--terracotta:#b04a31;--accent:#1f1c17;
---bildung:#b04a31;--beruf:#6b3951;--finanzen:#9c6f1f;--wohnen:#4a5c39;--familie:#792d29;--gesundheit:#3b6b6b;--recht:#524a3e;--freizeit:#a97a1d;--alter:#5a5148;--digital:#17A2B8;--buero:#8E44AD;}
-*{box-sizing:border-box;}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:'Manrope',-apple-system,Segoe UI,sans-serif;line-height:1.5;}
-.wrap{max-width:1180px;margin:0 auto;padding:0 1.2rem;}
-.topbar{display:flex;align-items:center;justify-content:space-between;padding:1.1rem 0;border-bottom:1px solid var(--rule);}
-.wm{font-family:'Fraunces',serif;font-weight:700;font-size:1.4rem;}.wm .a{color:var(--terracotta);}
-.wm span{font-weight:400;font-size:.9rem;color:var(--ink-soft);}
-.back{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);text-decoration:none;}
-.eyebrow{font-family:'JetBrains Mono',monospace;font-size:.64rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-soft);}
-h1{font-family:'Fraunces',serif;font-weight:340;font-size:clamp(1.6rem,4.2vw,2.4rem);margin:.9rem 0 .2rem;}
-.lede{color:var(--ink-soft);max-width:70ch;}
-.note{font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--ink-soft);}
-.btn{display:inline-flex;align-items:center;gap:.3rem;border:0;cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;padding:.55rem .8rem;border-radius:8px;text-decoration:none;}
-.btn.ink{background:var(--ink);color:#f3eee5;}.btn.primary{background:var(--terracotta);color:#f3eee5;}
-.btn.ghost{background:none;border:1px solid var(--ink);color:var(--ink);}.btn.sm{padding:.35rem .6rem;font-size:.54rem;}
+:root{
+--bildung:#b04a31;--beruf:#6b3951;--finanzen:#9c6f1f;--wohnen:#4a5c39;--familie:#792d29;--gesundheit:#3b6b6b;--recht:#524a3e;--freizeit:#a97a1d;--alter:#5a5148;--digital:#17A2B8;--buero:#8E44AD;}.btn.primary{background:var(--terracotta);color:#f3eee5;}.btn.sm{padding:.35rem .6rem;font-size:.54rem;}
 .toolbar{display:flex;gap:.6rem;flex-wrap:wrap;align-items:flex-end;margin:1rem 0 .4rem;}
 .fld{display:flex;flex-direction:column;gap:3px;}
 .fld label{font-size:.6rem;color:var(--ink-soft);font-family:'JetBrains Mono',monospace;letter-spacing:.06em;text-transform:uppercase;}
 .fld input,.fld select,.fld textarea{border:1px solid var(--rule);border-radius:8px;padding:.45rem .6rem;font:inherit;background:#fff;}
 .search{flex:1;min-width:200px;}
 .chips{display:flex;gap:.35rem;flex-wrap:wrap;margin:.4rem 0;}
-.chip{border:1px solid var(--rule);background:#fff;border-radius:999px;padding:.32rem .7rem;font-size:.72rem;cursor:pointer;}
 .chip.on{background:var(--ink);border-color:var(--ink);color:#f3eee5;font-weight:600;}
 .stats{display:flex;gap:1.2rem;flex-wrap:wrap;margin:.6rem 0;border:1px solid var(--rule);border-radius:12px;background:#fff;padding:.7rem 1rem;}
 .stats .b{font-family:'Fraunces',serif;font-size:1.25rem;font-weight:560;}
@@ -73,8 +59,6 @@ h1{font-family:'Fraunces',serif;font-weight:340;font-size:clamp(1.6rem,4.2vw,2.4
 .acts{display:flex;gap:.25rem;flex-wrap:wrap;justify-content:flex-end;}
 @media(max-width:760px){.acts{justify-content:flex-start;}}
 .iconbtn{border:1px solid var(--rule);background:#fff;border-radius:7px;padding:.25rem .45rem;font-size:.6rem;cursor:pointer;font-family:'JetBrains Mono',monospace;text-decoration:none;color:var(--ink);}
-.disc{background:var(--bg-soft);border:1px solid var(--rule);border-radius:12px;padding:.7rem 1rem;font-size:.82rem;color:var(--ink-soft);margin:1.2rem 0;}
-footer{margin-top:2.5rem;border-top:1px solid var(--rule);padding:1.3rem 0;color:var(--ink-soft);font-size:.8rem;}
 .modal{position:fixed;inset:0;background:rgba(31,28,23,.6);display:none;align-items:center;justify-content:center;z-index:1000;padding:1rem;}
 .modal.open{display:flex;}
 .modal .box{background:#fff;border-radius:14px;width:min(680px,96vw);max-height:88vh;display:flex;flex-direction:column;overflow:hidden;}
@@ -85,9 +69,6 @@ footer{margin-top:2.5rem;border-top:1px solid var(--rule);padding:1.3rem 0;color
 .prev h2{font-family:'Fraunces',serif;font-weight:480;}
 .prev ul{padding-left:1.1rem;} .prev li{margin:.2rem 0;}
 
-/* Querlauf bei schmalen Fenstern (Remake v3, Welle 9 — Aufräumen).
-   Ursache jeweils gemessen, nicht geraten. */
-/* Werkzeugleiste: die Felder brachten ihre Eigenbreite mit. */
 .fld{min-width:0}
 .fld input,.fld select,.fld textarea{max-width:100%;min-width:0}
 </style>
@@ -98,9 +79,9 @@ footer{margin-top:2.5rem;border-top:1px solid var(--rule);padding:1.3rem 0;color
 <script src="hb-bereiche.js" defer></script>
 <script src="heiben-menue.js" defer></script>
 </head>
-<body data-hb-welt="studio">
+<body data-hb-welt="studio" data-hb-seite="welt" data-hb-dichte="werkzeug">
 <div class="wrap">
-  <div class="topbar"><div class="wm"><span class="a">H</span>ei<span class="a">B</span>en <span>· Studio</span></div><a class="back" href="studio-lebenswissen-bibliothek.html">← Lebenswissen</a></div>
+  <a class="ws-weg" href="studio-lebenswissen-bibliothek.html">Lebenswissen</a>
   <div class="eyebrow">Studio · Lebenswissen-Redaktion</div>
   <h1>Redaktions-<em style="color:var(--terracotta);font-style:italic;">Arbeitsplatz</em></h1>
   <p class="lede">Steuere das Lebenswissen-Magazin: filtere Beiträge nach Kategorie, Lebensphase und Status, durchsuche den Bestand, lege Entwürfe an und führe sie durch den Workflow bis zur Veröffentlichung. Status, Notizen und Entwürfe liegen lokal in deinem Browser.</p>

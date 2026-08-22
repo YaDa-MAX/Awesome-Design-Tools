@@ -32,13 +32,10 @@
 <!-- /hb:kopf -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;1,400&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="hb-weltseite.css">
 <style>
-:root{--bg:#f3eee5;--bg2:#ebe3d4;--paper:#fffdf8;--ink:#1f1c17;--ink2:#524a3e;--rule:#d8cdb7;--terra:#b04a31;--ochre:#a97a1d;--moss:#4a5c39;--burg:#792d29;--aub:#6b3951}
+:root{--bg2:#ebe3d4;--paper:#fffdf8;--ink2:#524a3e;--terra:#b04a31;--ochre:#a97a1d;--moss:#4a5c39;--burg:#792d29;--aub:#6b3951}
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg);color:var(--ink);font-family:'Manrope',system-ui,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
-.wrap{max-width:800px;margin:0 auto;padding:1.6rem 1.1rem 5rem}
-.eyebrow{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.32em;text-transform:uppercase;color:var(--aub)}
-h1{font-family:'Fraunces',serif;font-weight:400;font-size:clamp(1.9rem,6vw,3rem);line-height:1.04;letter-spacing:-.02em;margin:.45rem 0 .5rem}
 h1 em{font-style:italic;color:var(--aub)}
 .lead{color:var(--ink2);max-width:62ch;font-size:1.02rem}
 .controls{background:var(--paper);border:1px solid var(--rule);border-radius:16px;padding:1.2rem;margin-top:1.3rem}
@@ -71,8 +68,9 @@ h1 em{font-style:italic;color:var(--aub)}
 <script src="heiben-menue.js" defer></script>
 <script src="hb-nachbarn.js" defer></script>
 </head>
-<body data-hb-welt="immobilien">
+<body data-hb-welt="immobilien" data-hb-seite="welt">
 <div class="wrap">
+<a class="ws-weg" href="immobilien.html">HeiBen Immobilien</a>
   <p class="eyebrow">HeiBen · Immobilien</p>
   <h1>Wie viel <em>Immobilie</em> kannst du dir leisten?</h1>
   <p class="lead">Nicht der Kaufpreis entscheidet, sondern was du monatlich tragen kannst und wie viel Eigenkapital du mitbringst. Wir rechnen rückwärts: von deiner leistbaren Rate zum realistischen Kaufpreis — inklusive der Nebenkosten, die viele vergessen.</p>

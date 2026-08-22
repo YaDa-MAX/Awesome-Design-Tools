@@ -30,30 +30,17 @@
 <meta name="twitter:image" content="assets/hero-light.png">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"HeiBen Kulinarik · Mealplanner & Nährwerte","description":"Mealplanner der HeiBen Kulinarik-App: Tages- und Wochenbedarf an Energie, Makros und Vitaminen, Mahlzeiten-Tracking und eigene Rezepte.","url":"https://www.heiben.de/kulinarik-mealplanner.html","inLanguage":"de-DE","isPartOf":{"@type":"WebSite","name":"HeiBen","url":"https://www.heiben.de/"},"publisher":{"@type":"Organization","name":"HeiBen Kulinarik GmbH"}}</script>
 <!-- /hb:kopf -->
+  <link rel="stylesheet" href="hb-weltseite.css">
 <style>
-:root{--bg:#f3eee5;--bg-soft:#ebe3d4;--ink:#1f1c17;--ink-soft:#524a3e;--rule:#d8cdb7;--terracotta:#b04a31;--kuli:#6b3951;--ochre:#a97a1d;--wohnen:#4a5c39;--immo:#792d29;}
-*{box-sizing:border-box;}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:'Manrope',-apple-system,Segoe UI,sans-serif;line-height:1.5;}
-.wrap{max-width:1000px;margin:0 auto;padding:0 1.5rem;}
-.topbar{display:flex;align-items:center;justify-content:space-between;padding:1.1rem 0;border-bottom:1px solid var(--rule);}
-.wm{font-family:'Fraunces',serif;font-weight:700;font-size:1.4rem;}.wm .a{color:var(--terracotta);}
-.back{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);text-decoration:none;}
-.eyebrow{font-family:'JetBrains Mono',monospace;font-size:.64rem;letter-spacing:.18em;text-transform:uppercase;color:var(--kuli);}
-h1{font-family:'Fraunces',serif;font-weight:340;font-size:clamp(1.8rem,4.5vw,2.6rem);margin:1rem 0 .2rem;}
-h2{font-family:'Fraunces',serif;font-weight:440;font-size:1.3rem;margin:2rem 0 .7rem;}
+:root{--kuli:#6b3951;--ochre:#a97a1d;--wohnen:#4a5c39;--immo:#792d29;}
 .muted{color:var(--ink-soft);font-size:.9rem;}
-.card{background:#fff;border:1px solid var(--rule);border-radius:16px;padding:18px;margin:.8rem 0;}
-.disc{background:var(--bg-soft);border:1px solid var(--rule);border-radius:12px;padding:.8rem 1rem;font-size:.82rem;color:var(--ink-soft);}
 .grid{display:grid;gap:12px;}
 .g4{grid-template-columns:repeat(4,1fr);}.g3{grid-template-columns:repeat(3,1fr);}.g2{grid-template-columns:1fr 1fr;}
 @media(max-width:720px){.g4,.g3,.g2{grid-template-columns:1fr 1fr;}}
 @media(max-width:460px){.g4,.g3,.g2{grid-template-columns:1fr;}}
 .field{display:flex;flex-direction:column;gap:4px;}
-.field label{font-size:.74rem;color:var(--ink-soft);}
 .field input,.field select{border:1px solid var(--rule);background:var(--bg);border-radius:8px;padding:.55rem .6rem;font:inherit;}
-.btn{display:inline-block;border:0;cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;padding:.7rem 1.05rem;border-radius:9px;text-decoration:none;margin:.3rem .3rem 0 0;}
 .btn.primary{background:var(--kuli);color:#f3eee5;}.btn.terra{background:var(--terracotta);color:#f3eee5;}.btn.dark{background:var(--ink);color:#f3eee5;}
-.btn.ghost{background:none;border:1px solid var(--ink);color:var(--ink);}
 .btn.sm{padding:.4rem .7rem;font-size:.58rem;}
 .bmi{display:flex;gap:1.6rem;flex-wrap:wrap;align-items:flex-end;}
 .bmi .b{font-family:'Fraunces',serif;font-size:2.2rem;font-weight:560;color:var(--kuli);}
@@ -72,19 +59,13 @@ h2{font-family:'Fraunces',serif;font-weight:440;font-size:1.3rem;margin:2rem 0 .
 .week .col{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;justify-content:flex-end;}
 .week .bar{width:60%;background:linear-gradient(180deg,var(--terracotta),var(--kuli));border-radius:5px 5px 0 0;}
 .week .d{font-family:'JetBrains Mono',monospace;font-size:.54rem;color:var(--ink-soft);}
-.tag{font-family:'JetBrains Mono',monospace;font-size:.56rem;letter-spacing:.06em;text-transform:uppercase;padding:.15rem .5rem;border-radius:999px;background:var(--bg-soft);color:var(--ink-soft);}
 .lock-note{background:#1f1c17;color:#f3eee5;border-radius:14px;padding:1rem 1.2rem;margin:.8rem 0;display:flex;gap:1rem;align-items:center;flex-wrap:wrap;justify-content:space-between;}
 .addpanel{border:1px dashed var(--rule);border-radius:12px;padding:14px;margin-top:.6rem;}
 .tabs{display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:.6rem;}
 .tab{border:1px solid var(--rule);background:var(--bg);border-radius:8px;padding:.4rem .7rem;font-size:.74rem;cursor:pointer;}
 .tab.on{background:var(--ink);color:#fff;border-color:var(--ink);}
-footer{margin-top:3rem;border-top:1px solid var(--rule);padding:1.4rem 0;color:var(--ink-soft);font-size:.8rem;}
-.note{font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--ink-soft);}
 .hide{display:none!important;}
 
-/* Querlauf bei schmalen Fenstern (Remake v3, Welle 9 — Aufräumen).
-   Ursache jeweils gemessen, nicht geraten. */
-/* Vier feste Rasterspalten plus Eingabefelder ohne Deckel: das Namensfeld war 468 px breit. */
 .field{min-width:0}
 .field input,.field select,.field textarea{width:100%;max-width:100%;min-width:0}
 @media (max-width:720px){ .g4,.g3{grid-template-columns:1fr 1fr} }
@@ -96,9 +77,9 @@ footer{margin-top:3rem;border-top:1px solid var(--rule);padding:1.4rem 0;color:v
 <script src="heiben-menue.js" defer></script>
 <script src="hb-nachbarn.js" defer></script>
 </head>
-<body data-hb-welt="kulinarik">
+<body data-hb-welt="kulinarik" data-hb-seite="welt" data-hb-dichte="werkzeug">
 <div class="wrap">
-  <div class="topbar"><div class="wm"><span class="a">H</span>ei<span class="a">B</span>en <span style="font-weight:400;font-size:.9rem;color:var(--ink-soft)">· Mealplanner</span></div><a class="back" href="kulinarik-app.html">← App</a></div>
+  <a class="ws-weg" href="kulinarik-app.html">App</a>
   <div class="eyebrow">Kulinarik-App · Ernährung</div>
   <h1>Mealplanner &amp; Nährwerte</h1>
   <p class="disc">Hinweis: Dieser Planer liefert <b>allgemeine Orientierungswerte</b> (Referenzmengen nach DGE/EU) und ersetzt keine ärztliche oder ernährungstherapeutische Beratung. Bei besonderen Bedürfnissen, Erkrankungen, Schwangerschaft oder Beschwerden sprich bitte mit Fachpersonal.</p>

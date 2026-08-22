@@ -30,18 +30,9 @@
 <meta name="twitter:image" content="assets/hero-light.png">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Das HeiBen-Kochbuch — Heimat in Rezepten","description":"Das HeiBen-Kochbuch: saisonale Heimatküche aus Köln. Als E-Book, gedruckt (Print-on-Demand) oder im Bundle mit der Kulinarik-App.","url":"https://www.heiben.de/kulinarik-kochbuch.html","inLanguage":"de-DE","isPartOf":{"@type":"WebSite","name":"HeiBen","url":"https://www.heiben.de/"},"publisher":{"@type":"Organization","name":"HeiBen Kulinarik GmbH"}}</script>
 <!-- /hb:kopf -->
+  <link rel="stylesheet" href="hb-weltseite.css">
 <style>
-:root{--bg:#f3eee5;--bg-soft:#ebe3d4;--ink:#1f1c17;--ink-soft:#524a3e;--rule:#d8cdb7;--terracotta:#b04a31;--kuli:#6b3951;--ochre:#a97a1d;--wohnen:#4a5c39;}
-*{box-sizing:border-box;}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:'Manrope',-apple-system,Segoe UI,sans-serif;line-height:1.55;}
-.wrap{max-width:1040px;margin:0 auto;padding:0 1.5rem;}
-.topbar{display:flex;align-items:center;justify-content:space-between;padding:1.1rem 0;border-bottom:1px solid var(--rule);}
-.wm{font-family:'Fraunces',serif;font-weight:700;font-size:1.4rem;}.wm .a{color:var(--terracotta);}
-.back{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);text-decoration:none;}
-.eyebrow{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;color:var(--kuli);}
-h1{font-family:'Fraunces',serif;font-weight:340;font-size:clamp(2rem,5.4vw,3.4rem);line-height:1.04;letter-spacing:-.02em;margin:.4rem 0 .6rem;}
-h2{font-family:'Fraunces',serif;font-weight:440;font-size:1.5rem;margin:2.4rem 0 .8rem;}
-.lede{font-size:1.14rem;color:var(--ink-soft);max-width:56ch;}
+:root{--kuli:#6b3951;--ochre:#a97a1d;--wohnen:#4a5c39;}
 .hero{display:grid;grid-template-columns:1.1fr .9fr;gap:2rem;align-items:center;padding:2.4rem 0 1rem;}
 @media(max-width:760px){.hero{grid-template-columns:1fr;}}
 .cover{aspect-ratio:3/4;border-radius:14px;background:linear-gradient(150deg,var(--hb-welt),#792d29 60%,#1f1c17);position:relative;overflow:hidden;box-shadow:0 24px 60px rgba(31,28,23,.28);}
@@ -54,15 +45,12 @@ h2{font-family:'Fraunces',serif;font-weight:440;font-size:1.5rem;margin:2.4rem 0
 .fmt.best{border-color:var(--kuli);box-shadow:0 0 0 2px rgba(107,57,81,.12);}
 .fmt .p{font-family:'Fraunces',serif;font-size:1.8rem;font-weight:560;margin:.2rem 0;}
 .fmt .save{color:var(--wohnen);font-size:.82rem;font-weight:600;}
-.btn{display:inline-block;border:0;cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;padding:.8rem 1.1rem;border-radius:10px;text-decoration:none;margin-top:auto;}
-.btn.primary{background:var(--kuli);color:#f3eee5;}.btn.terra{background:var(--terracotta);color:#f3eee5;}.btn.ghost{background:none;border:1px solid var(--ink);color:var(--ink);}
+.btn.primary{background:var(--kuli);color:#f3eee5;}.btn.terra{background:var(--terracotta);color:#f3eee5;}
 .sample{background:#fff;border:1px solid var(--rule);border-radius:14px;padding:18px;}
 .sample h3{font-family:'Fraunces',serif;font-weight:480;margin:.2rem 0;}
 .toc{columns:2;gap:2rem;}@media(max-width:600px){.toc{columns:1;}}
 .toc li{margin:.3rem 0;}
 .upsell{background:var(--ink);color:#f3eee5;border-radius:18px;padding:2rem;margin-top:1.4rem;}
-footer{margin-top:3rem;border-top:1px solid var(--rule);padding:1.4rem 0;color:var(--ink-soft);font-size:.82rem;}
-.note{font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--ink-soft);}
 </style>
 <link rel="stylesheet" href="heiben-design.css">
 <script src="heiben-nav.js" defer></script>
@@ -70,9 +58,9 @@ footer{margin-top:3rem;border-top:1px solid var(--rule);padding:1.4rem 0;color:v
 <script src="heiben-menue.js" defer></script>
 <script src="hb-nachbarn.js" defer></script>
 </head>
-<body data-hb-welt="kulinarik">
+<body data-hb-welt="kulinarik" data-hb-seite="welt">
 <div class="wrap">
-  <div class="topbar"><div class="wm"><span class="a">H</span>ei<span class="a">B</span>en <span style="font-weight:400;font-size:.9rem;color:var(--ink-soft)">· Kochbuch</span></div><a class="back" href="kulinarik.html">← Kulinarik</a></div>
+  <a class="ws-weg" href="kulinarik.html">Kulinarik</a>
 
   <section class="hero">
     <div>

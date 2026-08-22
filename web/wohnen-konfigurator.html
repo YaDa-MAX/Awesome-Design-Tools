@@ -33,22 +33,22 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Manrope:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="hb-weltseite.css">
 <style>
-  /* ===== Markentokens — Akzent = Moos (HeiBen Wohnen) ===== */
+  
   :root{
-    --bg:#f3eee5; --bg-soft:#ebe3d4; --bg-deep:#1f1c17;
-    --ink:#1f1c17; --ink-soft:#524a3e; --rule:#d8cdb7;
-    --accent:#4a5c39; --accent-2:#5e7349; --terracotta:#b04a31; --ochre:#a97a1d;
+      --bg-deep:#1f1c17;
+      
+     --accent-2:#5e7349;  --ochre:#a97a1d;
     --panel:#fbf8f2;
     --catalog-w:264px; --inspector-w:340px; --topbar-h:60px;
   }
   *{box-sizing:border-box;margin:0;padding:0;}
   html,body{height:100%;}
-  body{font-family:'Manrope',sans-serif;color:var(--ink);background:var(--bg);overflow:hidden;line-height:1.5;}
   button{font-family:inherit;cursor:pointer;}
   .mono{font-family:'JetBrains Mono',monospace;}
 
-  /* ===== Topbar ===== */
+  
   .topbar{height:var(--topbar-h);display:flex;align-items:center;justify-content:space-between;padding:0 1.1rem;border-bottom:1px solid var(--rule);background:rgba(243,238,229,0.92);backdrop-filter:blur(8px);position:relative;z-index:30;gap:0.6rem;}
   .topbar .brand{display:flex;align-items:center;gap:0.5rem;text-decoration:none;color:inherit;}
   .topbar .brand img.mono-logo{height:26px;}
@@ -61,12 +61,12 @@
   .tb-btn.admin:hover{background:var(--accent);color:var(--bg);}
   @media (max-width:720px){ .topbar .brand .div{display:none;} .tb-btn{padding:0.45rem 0.55rem;font-size:0.58rem;} }
 
-  /* ===== App-Raster ===== */
+  
   .app{display:grid;grid-template-columns:var(--catalog-w) 1fr var(--inspector-w);height:calc(100vh - var(--topbar-h));}
   .panel{background:var(--panel);overflow-y:auto;}
   .panel-h{font-family:'JetBrains Mono',monospace;font-size:0.64rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--ink-soft);padding:1rem 1.1rem 0.55rem;}
 
-  /* Katalog (links) */
+  
   .catalog{border-right:1px solid var(--rule);}
   .room-switch{display:flex;flex-wrap:wrap;gap:0.4rem;padding:0 1.1rem 0.8rem;}
   .room-switch button{font-family:'JetBrains Mono',monospace;font-size:0.58rem;letter-spacing:0.08em;text-transform:uppercase;padding:0.45rem 0.6rem;border:1px solid var(--rule);background:transparent;color:var(--ink-soft);}
@@ -78,7 +78,7 @@
   .cat-item .pr{font-family:'JetBrains Mono',monospace;font-size:0.64rem;color:var(--accent);}
   .cat-item .sw{width:100%;height:40px;border-radius:3px;margin-bottom:0.5rem;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.9);font-size:1.3rem;}
 
-  /* Viewport (Mitte) */
+  
   .viewport{position:relative;background:linear-gradient(180deg,#efe8db 0%,#e4dac6 100%);}
   #canvas3d{width:100%;height:100%;display:block;}
   .vp-hint{position:absolute;left:50%;top:1rem;transform:translateX(-50%);font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.06em;color:var(--ink-soft);background:rgba(251,248,242,0.85);padding:0.5rem 0.9rem;border:1px solid var(--rule);text-align:center;pointer-events:none;max-width:90%;}
@@ -89,7 +89,7 @@
   .vp-loading .ring{width:34px;height:34px;border:3px solid var(--rule);border-top-color:var(--accent);border-radius:50%;animation:spin 0.9s linear infinite;}
   @keyframes spin{to{transform:rotate(360deg);}}
 
-  /* Inspector + Warenkorb (rechts) */
+  
   .inspector{border-left:1px solid var(--rule);display:flex;flex-direction:column;}
   .insp-body{padding:0 1.1rem 1rem;}
   .empty-hint{color:var(--ink-soft);font-size:0.84rem;padding:0.4rem 0 1rem;}
@@ -108,7 +108,7 @@
   .row-btns .danger{color:var(--terracotta);border-color:var(--terracotta);}
   .row-btns .danger:hover{background:var(--terracotta);color:var(--bg);}
 
-  /* Warenkorb mit Mengen */
+  
   .cart{margin-top:auto;border-top:1px solid var(--rule);background:var(--bg-soft);}
   .cart-head{display:flex;justify-content:space-between;align-items:baseline;padding:0.9rem 1.1rem 0.4rem;}
   .cart-head .h{font-family:'JetBrains Mono',monospace;font-size:0.64rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--ink-soft);}
@@ -134,7 +134,7 @@
   .checkout-btn:hover{background:var(--ink);}
   .checkout-btn:disabled{opacity:0.4;cursor:not-allowed;}
 
-  /* Mobile-Reiter */
+  
   .mobile-tabs{display:none;}
   @media (max-width:900px){
     .app{grid-template-columns:1fr;}
@@ -146,7 +146,7 @@
     .mobile-tabs button.active{color:var(--accent);box-shadow:inset 0 2px 0 var(--accent);}
   }
 
-  /* ===== Overlays (Kasse + Verwaltung teilen das Grundgerüst) ===== */
+  
   .overlay{position:fixed;inset:0;z-index:100;background:rgba(31,28,23,0.55);display:none;align-items:flex-start;justify-content:center;padding:3vh 1rem;overflow-y:auto;}
   .overlay.open{display:flex;}
   .modal{background:var(--bg);max-width:680px;width:100%;border-top:5px solid var(--accent);box-shadow:0 30px 70px rgba(0,0,0,0.4);}
@@ -168,17 +168,16 @@
   .btn-link{background:none;border:1px solid var(--rule);padding:0.8rem 1.3rem;font-family:'JetBrains Mono',monospace;font-size:0.62rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink);text-decoration:none;display:inline-block;}
   .btn-link:hover{border-color:var(--accent);color:var(--accent);}
 
-  /* Stepper im Checkout */
+  
   .stepper{display:flex;gap:0.4rem;align-items:center;font-family:'JetBrains Mono',monospace;font-size:0.58rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-soft);padding:0 1.5rem 0.2rem;}
   .stepper .s{padding:0.3rem 0.55rem;border:1px solid var(--rule);}
   .stepper .s.active{background:var(--accent);color:var(--bg);border-color:var(--accent);}
   .stepper .s.done{border-color:var(--accent);color:var(--accent);}
   .stepper .arr{opacity:0.5;}
 
-  /* Formulare */
+  
   .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.8rem;}
   .form-grid .full{grid-column:1 / -1;}
-  .field label{display:block;font-family:'JetBrains Mono',monospace;font-size:0.56rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:0.3rem;}
   .field input,.field select,.field textarea{width:100%;padding:0.55rem;border:1px solid var(--rule);background:var(--panel);font-family:inherit;font-size:0.9rem;color:var(--ink);}
   .field input[type=color]{padding:0.2rem;height:38px;}
   .field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--accent);}
@@ -200,7 +199,7 @@
   .confirm p{color:var(--ink-soft);max-width:46ch;margin:0 auto 0.8rem;font-size:0.92rem;}
   .confirm .actions{display:flex;gap:0.6rem;justify-content:center;flex-wrap:wrap;margin-top:0.6rem;}
 
-  /* Verwaltung: Produktliste */
+  
   .admin-tabs{display:flex;gap:0.4rem;padding:0 1.5rem;margin-top:0.4rem;}
   .admin-tabs button{font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase;padding:0.55rem 0.8rem;border:1px solid var(--rule);border-bottom:none;background:var(--bg-soft);color:var(--ink-soft);}
   .admin-tabs button.active{background:var(--accent);color:var(--bg);border-color:var(--accent);}
@@ -223,12 +222,7 @@
 </style>
 <link rel="stylesheet" href="hb-motion.css">
 <style id="hb-logo-css">
-.brand{display:flex;align-items:center;text-decoration:none;}
-.brand svg{height:30px;width:auto;display:block;}
 @media(max-width:600px){.brand svg{height:25px;}}
-.brand-block svg{height:34px;width:auto;display:block;margin-bottom:1.2rem;}
-.wms-lockup{display:flex;justify-content:center;padding:6px 0 2px;}
-.wms-lockup svg{width:min(540px,84vw);height:auto;display:block;}
 </style>
 <link rel="stylesheet" href="heiben-design.css">
 <script src="heiben-nav.js" defer></script>
@@ -236,11 +230,11 @@
 <script src="heiben-menue.js" defer></script>
 <script src="hb-nachbarn.js" defer></script>
 </head>
-<body data-hb-welt="wohnen">
+<body data-hb-welt="wohnen" data-hb-seite="welt">
 
 <!-- ===== Topbar ===== -->
 <div class="topbar">
-  <a class="brand" href="wohnen.html"><svg viewBox="168.5 10 465.6 178" role="img" aria-label="HeiBen" xmlns="http://www.w3.org/2000/svg"><text x="400" y="150" text-anchor="middle" font-family="Fraunces,serif" font-weight="560" font-size="150" letter-spacing="-4"><tspan fill="#b04a31">H</tspan><tspan fill="#1f1c17">ei</tspan><tspan fill="#b04a31">B</tspan><tspan fill="#1f1c17">en</tspan></text></svg></a>
+  <a class="ws-weg" href="wohnen.html">HeiBen Wohnen</a>
   <div class="right">
     <button class="tb-btn admin" id="adminOpen">⚙ Verwaltung</button>
     <a class="tb-btn" href="bestellverwaltung.html">Bestellungen</a>

@@ -30,29 +30,16 @@
 <meta name="twitter:image" content="assets/hero-light.png">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"HeiBen Kulinarik-App — Saisonküche, die mitdenkt","description":"Die HeiBen Kulinarik-App: saisonale Wochenpläne, Einkaufslisten und Rezept-Sync mit dem Kochbuch. Probemonat gratis.","url":"https://www.heiben.de/kulinarik-app.html","inLanguage":"de-DE","isPartOf":{"@type":"WebSite","name":"HeiBen","url":"https://www.heiben.de/"},"publisher":{"@type":"Organization","name":"HeiBen Kulinarik GmbH"}}</script>
 <!-- /hb:kopf -->
+  <link rel="stylesheet" href="hb-weltseite.css">
 <style>
-:root{--bg:#f3eee5;--bg-soft:#ebe3d4;--ink:#1f1c17;--ink-soft:#524a3e;--rule:#d8cdb7;--terracotta:#b04a31;--kuli:#6b3951;--ochre:#a97a1d;--wohnen:#4a5c39;}
-*{box-sizing:border-box;}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:'Manrope',-apple-system,Segoe UI,sans-serif;line-height:1.55;}
+:root{--kuli:#6b3951;--ochre:#a97a1d;--wohnen:#4a5c39;}
 a{color:inherit;}
-.wrap{max-width:1040px;margin:0 auto;padding:0 1.5rem;}
-.topbar{display:flex;align-items:center;justify-content:space-between;padding:1.1rem 0;border-bottom:1px solid var(--rule);}
-.wm{font-family:'Fraunces',serif;font-weight:700;font-size:1.4rem;}
-.wm .a{color:var(--terracotta);}
-.back{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);text-decoration:none;}
-.eyebrow{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;color:var(--kuli);}
-h1{font-family:'Fraunces',serif;font-weight:340;font-size:clamp(2rem,5vw,3rem);line-height:1.06;letter-spacing:-.02em;margin:.4rem 0 .6rem;}
-h2{font-family:'Fraunces',serif;font-weight:420;font-size:1.5rem;margin:2.4rem 0 .8rem;}
-.lede{font-size:1.12rem;color:var(--ink-soft);max-width:60ch;}
 .hero{padding:2.6rem 0 1.4rem;}
-.btn{display:inline-block;border:0;cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;padding:.85rem 1.3rem;border-radius:10px;text-decoration:none;}
 .btn.primary{background:var(--kuli);color:#f3eee5;}
 .btn.terra{background:var(--terracotta);color:#f3eee5;}
-.btn.ghost{background:none;border:1px solid var(--ink);color:var(--ink);}
 .row{display:flex;gap:.7rem;flex-wrap:wrap;align-items:center;}
 .grid{display:grid;gap:16px;}
 .cards{grid-template-columns:repeat(auto-fill,minmax(240px,1fr));}
-.card{background:#fff;border:1px solid var(--rule);border-radius:16px;padding:18px;}
 .card h3{font-family:'Fraunces',serif;font-weight:480;font-size:1.1rem;margin:0 0 4px;}
 .muted{color:var(--ink-soft);font-size:.9rem;}
 .kpi{display:flex;gap:1.4rem;flex-wrap:wrap;margin:.4rem 0 0;}
@@ -67,13 +54,10 @@ h2{font-family:'Fraunces',serif;font-weight:420;font-size:1.5rem;margin:2.4rem 0
 .plan .p{font-family:'Fraunces',serif;font-size:1.7rem;font-weight:560;}
 .plan .save{color:var(--wohnen);font-size:.82rem;font-weight:600;}
 .field{display:flex;flex-direction:column;gap:4px;margin:.5rem 0;}
-.field label{font-size:.78rem;color:var(--ink-soft);}
 .field select,.field input{border:1px solid var(--rule);background:var(--bg);border-radius:8px;padding:.6rem .7rem;font:inherit;}
 .chk{display:flex;gap:10px;align-items:center;padding:.5rem 0;border-bottom:1px dotted var(--rule);}
 .chk input{width:18px;height:18px;accent-color:var(--kuli);}
 .list li{padding:.35rem 0;border-bottom:1px dotted var(--rule);display:flex;justify-content:space-between;}
-footer{margin-top:3rem;border-top:1px solid var(--rule);padding:1.6rem 0;color:var(--ink-soft);font-size:.82rem;}
-.note{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.06em;color:var(--ink-soft);}
 .hide{display:none!important;}
 </style>
 <link rel="stylesheet" href="heiben-design.css">
@@ -82,12 +66,9 @@ footer{margin-top:3rem;border-top:1px solid var(--rule);padding:1.6rem 0;color:v
 <script src="heiben-menue.js" defer></script>
 <script src="hb-nachbarn.js" defer></script>
 </head>
-<body data-hb-welt="kulinarik">
+<body data-hb-welt="kulinarik" data-hb-seite="welt">
 <div class="wrap">
-  <div class="topbar">
-    <div class="wm"><span class="a">H</span>ei<span class="a">B</span>en <span style="font-weight:400;font-size:.9rem;color:var(--ink-soft)">· Kulinarik-App</span></div>
-    <a class="back" href="kulinarik.html">← Kulinarik</a>
-  </div>
+  <a class="ws-weg" href="kulinarik.html">Kulinarik</a>
 
   <section class="hero">
     <div class="eyebrow">Online-Tool · Abo</div>

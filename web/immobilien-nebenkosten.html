@@ -30,21 +30,11 @@
 <meta name="twitter:image" content="assets/hero-light.png">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Kaufnebenkosten-Rechner · HeiBen","description":"Grunderwerbsteuer, Notar, Grundbuch und Provision — je Bundesland gerechnet. Zeigt, was die Bank nicht mitfinanziert und was aus Eigenkapital kommen muss.","url":"https://www.heiben.de/immobilien-nebenkosten.html","inLanguage":"de-DE","isPartOf":{"@type":"WebSite","name":"HeiBen","url":"https://www.heiben.de/"},"publisher":{"@type":"Organization","name":"HeiBen Immobilien GmbH"}}</script>
 <!-- /hb:kopf -->
+  <link rel="stylesheet" href="hb-weltseite.css">
 <style>
-:root{--bg:#f3eee5;--bg-soft:#ebe3d4;--ink:#1f1c17;--ink-soft:#524a3e;--rule:#d8cdb7;
-  --terracotta:#b04a31;--accent:#792d29;--accent-d:#5f2320;--gut:#4a5c39;}
-*{box-sizing:border-box;}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:'Manrope',-apple-system,Segoe UI,sans-serif;line-height:1.55;}
-.wrap{max-width:960px;margin:0 auto;padding:0 1.5rem 3rem;}
-.topbar{display:flex;align-items:center;justify-content:space-between;padding:1.1rem 0;border-bottom:1px solid var(--rule);}
-.wm{font-family:'Fraunces',serif;font-weight:700;font-size:1.4rem;}.wm .a{color:var(--accent);}
-.wm span{font-weight:400;font-size:.9rem;color:var(--ink-soft);}
-.back{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);text-decoration:none;}
+:root{
+  --gut:#4a5c39;}
 .back:hover{color:var(--ink);}
-.eyebrow{font-family:'JetBrains Mono',monospace;font-size:.64rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent-d);margin-top:1.6rem;}
-h1{font-family:'Fraunces',serif;font-weight:340;font-size:clamp(1.9rem,4.6vw,2.8rem);margin:.6rem 0 .3rem;line-height:1.08;}
-h2{font-family:'Fraunces',serif;font-weight:440;font-size:1.25rem;margin:2rem 0 .5rem;}
-.lede{color:var(--ink-soft);max-width:62ch;margin:0;}
 .note{color:var(--ink-soft);font-size:.88rem;max-width:64ch;}
 .rechner{background:#fff;border:1px solid var(--rule);border-radius:18px;padding:1.2rem 1.3rem;margin-top:1.4rem;}
 .reihe{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,190px),1fr));gap:.9rem;}
@@ -67,14 +57,10 @@ th{font-family:'JetBrains Mono',monospace;font-size:.56rem;letter-spacing:.14em;
 td.n{text-align:right;font-variant-numeric:tabular-nums;}
 tr.summe td{border-bottom:0;border-top:2px solid var(--ink);font-weight:800;}
 .tabelle-scroll{overflow-x:auto;}
-.btn{display:inline-block;border:0;cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;padding:.7rem 1.05rem;border-radius:9px;text-decoration:none;}
-.btn.primary{background:var(--accent);color:#f3eee5;}
-.btn.ghost{background:none;border:1px solid var(--rule);color:var(--ink);}
 .btn.ghost:hover{border-color:var(--accent);color:var(--accent);}
 .kasten{background:var(--bg-soft);border-left:3px solid var(--accent);border-radius:0 12px 12px 0;padding:.9rem 1.1rem;margin-top:1.2rem;}
 .kasten b{font-family:'Fraunces',serif;font-weight:500;}
 .wege{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.2rem;}
-.foot{margin-top:2.6rem;padding-top:1rem;border-top:1px solid var(--rule);font-size:.8rem;color:var(--ink-soft);}
 .foot a{color:var(--ink-soft);}
 </style>
 <link rel="stylesheet" href="heiben-design.css">
@@ -84,12 +70,9 @@ tr.summe td{border-bottom:0;border-top:2px solid var(--ink);font-weight:800;}
 <script id="hb-pwa" src="hb-pwa.js" defer></script>
 <script src="hb-nachbarn.js" defer></script>
 </head>
-<body data-hb-welt="immobilien">
+<body data-hb-welt="immobilien" data-hb-seite="welt">
 <div class="wrap">
-  <div class="topbar">
-    <div class="wm"><span class="a">H</span>ei<span class="a">B</span>en <span>· Immobilien</span></div>
-    <a class="back" href="immobilien.html">← HeiBen Immobilien</a>
-  </div>
+  <a class="ws-weg" href="immobilien.html">HeiBen Immobilien</a>
 
   <div class="eyebrow">Werkzeug · Kaufnebenkosten</div>
   <h1>Der Kaufpreis ist nicht der Preis.</h1>

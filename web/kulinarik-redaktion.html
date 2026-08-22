@@ -34,6 +34,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Manrope:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="hb-weltseite.css">
 <style>
 /* ===== Kulinarik-Redaktion — internes Werkzeug, Oberfläche wie die übrigen Redaktionen ===== */
 .redbar { background:var(--bg-deep); color:var(--bg); position:sticky; top:0; z-index:100; border-bottom:1px solid rgba(243,238,229,0.12); }
@@ -102,16 +103,8 @@
 </style>
 <link rel="stylesheet" href="hb-motion.css">
 <style id="hb-logo-css">
-.brand{display:flex;align-items:center;text-decoration:none;}
-.brand svg{height:30px;width:auto;display:block;}
 @media(max-width:600px){.brand svg{height:25px;}}
-.brand-block svg{height:34px;width:auto;display:block;margin-bottom:1.2rem;}
-.wms-lockup{display:flex;justify-content:center;padding:6px 0 2px;}
-.wms-lockup svg{width:min(540px,84vw);height:auto;display:block;}
 
-/* Querlauf bei schmalen Fenstern (Remake v3, Welle 9 — Aufräumen).
-   Ursache jeweils gemessen, nicht geraten. */
-/* Die Kopfzeile der Redaktion stand als eine feste Flex-Zeile (402 px). */
 @media (max-width:600px){
   .redbar .wrap{flex-wrap:wrap;height:auto;padding-top:.55rem;padding-bottom:.55rem;gap:.45rem}
 }
@@ -123,7 +116,7 @@
 <script src="hb-bereiche.js" defer></script>
 <script src="heiben-menue.js" defer></script>
 </head>
-<body class="theme-kulinarik" data-hb-welt="kulinarik">
+<body class="theme-kulinarik" data-hb-welt="kulinarik" data-hb-seite="welt">
 
 <div class="redbar">
   <div class="wrap">
@@ -139,6 +132,7 @@
 <main class="red">
   <div class="wrap">
     <div class="head">
+<a class="ws-weg" href="kulinarik.html">HeiBen Kulinarik</a>
       <h1>Rezepte</h1>
       <p>Hier pflegen Sie die Rezepte von HeiBen Kulinarik — anlegen, bearbeiten, veröffentlichen. Die Welt kocht ohne Schweinefleisch — das muss aber nicht auf jeder Seite stehen. Nur wenn ein Klassiker im Original mit Schwein zubereitet wird, tragen Sie unter „Unsere Abwandlung“ ein, womit Sie es ersetzen und warum das schmeckt. Ihre Arbeit wird automatisch in diesem Browser gespeichert.</p>
     </div>

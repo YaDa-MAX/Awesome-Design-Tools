@@ -1954,3 +1954,127 @@ Fließtext, Median 1.056. Spitzen: `immobilien-vermieten` 4.946 Zeichen,
 `studio-einrichtungstheorie` 2.937, `kulinarik-mealplanner` 2.122 bei 28 Schaltern und
 34 Feldern; Schalterzahlen bis 68 (`reisen-planer`), 66 (`wohnen-planer`),
 55 (`wohnen-konfigurator`), 54 (`kulinarik-planner`).
+
+---
+
+### WELLE 17: DIE 42 WELTUNTERSEITEN AUF DEN NEUEN STIL (SW -3020)
+
+**Auftrag:** „Bringe alles auf neuen Style. Nächste Welle."
+
+**Ausgangslage gemessen.** 47 Weltseiten: nur die **5 Welteinstiege** standen auf v3
+(`hb-welt.css`), **5 auf dem alten `styles.css`**, **37 mit eigenem Inline-Design**
+zwischen 2 und 16 KB. 64.054 Zeichen Fließtext.
+
+Der Blick in die 37 Inline-Blöcke zeigte kein Design, sondern **ein kopiertes Kit**:
+`:root`, `body`, `.wrap`, `.topbar`, `.wm`, `.back`, `.eyebrow`, `h1`, `.lede`, `.btn`,
+`.chip`, `.field`, `.card`, `.note`, `footer` — auf 20 bis 26 Seiten wortgleich. Damit war
+der Hebel klar: nicht 37 Seiten einzeln neu gestalten, sondern das Kit einmal zentral
+und in der neuen Sprache neu schreiben.
+
+**Der sichtbarste Befund: 21 Seiten trugen zwei Kopfzeilen.** Die gemeinsame Navigation
+aus `heiben-nav.js` UND eine eigene `.topbar` mit Wortmarke und Zurück-Link darunter.
+Dazu vier Seiten mit einem Wortmarken-Bild im Hero und eine Werkzeugleiste mit einer
+dritten Wortmarke — **26 doppelte Markenzeichen** auf 42 Seiten.
+
+**Geliefert**
+
+| Datei | Was |
+|---|---|
+| `web/hb-weltseite.css` | die helle Schwester von `hb-welt.css`: Weltunterseiten-Gestalt auf Papier, 12,3 KB |
+| `tools/umbau_weltseiten.py` | baut die Seiten um, wiederholbar, mit Trockenlauf |
+| `tools/weltseiten-kit.json` | die eingefrorenen Kit-Fassungen samt Basis-Commit |
+
+`hb-weltseite.css` ist vollständig auf `[data-hb-seite="welt"]` am body geschoben. Die
+Klassennamen aus dem alten Kit bleiben — so blieb das Markup unangetastet —, der Scope
+hält sie von den übrigen 65 Seiten fern. `heiben-design.css` und seine `.hb-`-Regel sind
+unberührt. **Kein Hex im Bauteil:** 0 Hex-Werte in der Datei, alles kommt aus `--hb-welt`
+und der Token-Ebene.
+
+**Der eine Trick, der 42 Seiten auf einmal umfärbt.** Die Seiten sind voll von
+`var(--accent)`, `var(--rule)`, `var(--ink-soft)`. Statt tausend Vorkommen zu ersetzen,
+bekommen die alten Namen am body neue Herkunft:
+
+```css
+body[data-hb-seite="welt"]{
+  --accent:var(--hb-welt);  --accent-d:var(--ws-welt-tief);
+  --bg:var(--hb-grund);     --ink:var(--hb-text);  --rule:var(--hb-linie);
+}
+```
+
+Ein Ort, 42 Seiten. Die Hex-Werte in den `:root`-Blöcken der Seiten sind entfallen —
+der body gewinnt für alles darunter.
+
+**Was zentral wurde**
+
+| Schritt | Zahl |
+|---|---|
+| Seiten umgebaut | 42 / 42 |
+| doppelte Kopfzeilen entfernt | 21 |
+| doppelte Wortmarken zusätzlich (Hero-Bild, Werkzeugleiste) | 5 |
+| Rückwege `.ws-weg` | **42 / 42**, kein totes Ziel |
+| Seiten als `data-hb-dichte="werkzeug"` | 6 |
+| Inline-CSS | 238 KB → **192 KB**, zentral 12,3 KB dafür → netto 34 KB weniger |
+
+**Drift statt Eigenheit.** Nach dem ersten Durchgang setzten noch 16 Seiten `h1` selbst,
+19 `.lede`, 13 `.btn`. Der Blick darauf: **überall dieselbe Handschrift mit anderer
+Nachkommastelle** — Fraunces 340 mit anderem `clamp`, `color:var(--ink-soft)` mit
+`max-width` zwischen 56ch und 70ch, derselbe Mono-Versalien-Knopf mit anderem `display`.
+Kein eigenes Design, sondern dieselbe Kopie nach Jahren Nachbearbeitung. Der Umbau
+erkennt sie jetzt an der Handschrift (`DRIFT` in `umbau_weltseiten.py`), nicht am
+Wortlaut. Danach: `h1`, `.eyebrow`, `.lede`, `.wrap`, `.chip` auf **0** eigenen Fassungen.
+
+Genau **eine** echte Absicht steckte in der Drift: Planer und Redaktionen hatten ihre
+Überschrift bewusst kleiner gesetzt (`clamp(1.6rem,4.2vw,2.4rem)`), weil ein 3,6-rem-Titel
+über 40 Schaltern alles erschlägt. Die steht jetzt als Rolle da — `data-hb-dichte="werkzeug"`
+auf sechs Seiten — statt sechsmal als Wert.
+
+**Zwei Fallen, beide vom Messen gefangen, nicht vom Nachdenken**
+
+1. *Das Regex-Muster fraß die halbe Seite.* `<div class="topbar">.*?</a>\s*</div>` sieht
+   sicher aus. Trägt die Leiste ZWEI Rückweg-Links, passt es beim ersten `</a>` nicht,
+   läuft weiter und findet ein `</a></div>` weit unten im Text. Auf
+   `studio-einrichtungstheorie` verschwanden so **2.784 Zeichen**, auf
+   `studio-lebenswissen-bibliothek` 432. Gefunden hat es der PageError-Sweep (die
+   gelöschten Blöcke nahmen Elemente mit, an denen Skripte hingen), bestätigt ein
+   Textlängen-Vergleich gegen HEAD über alle 42 Seiten. **Ersetzt durch Klammerzählung**
+   über `<div>`/`</div>`. Regel: HTML-Blöcke nie mit `.*?` abgrenzen.
+2. *Die Einfügung landete im JavaScript-String.* Der Rückweg auf `kulinarik-rezept.html`
+   wurde vor das erste `<h1` gesetzt — und das stand in einer Skript-Zeichenkette
+   (`'<h1>' + K.esc(r.name) + '</h1>' +`). Ergebnis: `SyntaxError: Unexpected token '<'`.
+   Die Seite baut ihren Rückweg selbst; richtig war, ihn dort umzubenennen. Danach
+   Prüfung über alle 42 Seiten, ob eine `.ws-weg`-Einfügung in `<script>`/`<style>` liegt.
+   Auch `studio-artikel` traf es anders: der Anker war die erste `.eyebrow` — und die
+   stand in einem `display:none`-Abschnitt. Gefunden vom Sichtbarkeits-Test.
+
+**Nicht idempotent — und warum das eine Datei nötig machte.** Der erste Entwurf erhob das
+Kit zur Laufzeit („welche Regel steht wortgleich auf ≥ 6 Seiten"). Nach dem ersten Lauf
+gibt es die Kopien nicht mehr zu zählen, die Schwelle wird nie wieder erreicht, ein zweiter
+Lauf tut nichts. Aufgefallen beim Nacharbeiten der zwei beschädigten Seiten: dieselbe
+Datei, plötzlich 0 statt 6 entfernte Regeln. Das Kit liegt seither in
+`tools/weltseiten-kit.json` samt Basis-Commit.
+
+**Nachweis**
+
+| Prüfung | Ergebnis |
+|---|---|
+| PageErrors über alle 47 Weltseiten | **0 / 47** |
+| Seiten mit vollständigem neuen Stil (Grund, `--accent` = Weltfarbe, Rückweg sichtbar, keine zweite Kopfzeile, Fraunces-Titel, kein waagerechter Überlauf) | **42 / 42** |
+| Textverlust gegen HEAD (> 40 Zeichen) | keine Seite |
+| tote Rückweg-Ziele | keine |
+| Hex-Werte in `hb-weltseite.css` | keine |
+
+**Was bewusst stehen blieb.** 10 Seiten setzen `.note` weiter selbst — und das zu Recht:
+die Klasse trägt dort **zwei Bedeutungen**. Im Kit ist sie das Mono-Kapitälchen, auf
+sieben Seiten ein normal großer Fließtext-Hinweis. Der Namenskonflikt ist echt, das
+Umbenennen wäre eine eigene Welle. Ebenso stehen `footer` (7), `body` (6, in
+`@media`-Blöcken), `.btn` (4), `.disc` (4) noch lokal — geprüft, echte Abweichungen.
+
+Die vier Wortmarken-Bilder `assets/wordmark-{reisen,wohnen,immobilien,studio}.png` fielen
+aus dem Precache, weil sie niemand mehr referenziert. Die Dateien bleiben liegen:
+`startseite-klassisch.html` (Archiv, standalone) braucht sie noch.
+
+**Offen:** Bewegung. 17 der 42 Seiten binden `hb-motion.js` ein, **keine** setzt
+`data-hb-regie="ansage"` — alle laufen also auf dem eingefrorenen Bestandspfad. Eine
+eigene Welle wert, mit der dokumentierten IntersectionObserver-Falle im Blick.
+Ebenso offen: die Textfülle (`immobilien-vermieten` 4.953 Zeichen,
+`studio-einrichtungstheorie` 2.964) — Struktur, nicht Stil.

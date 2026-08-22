@@ -33,22 +33,14 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Manrope:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="hb-weltseite.css">
 <style>
-:root{--bg:#f3eee5;--bg-soft:#ebe3d4;--ink:#1f1c17;--ink-soft:#524a3e;--rule:#d8cdb7;--terracotta:#b04a31;--moss:#4a5c39;--accent:#4a5c39;}
+:root{--moss:#4a5c39;}
 *{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
-body{background:var(--bg);color:var(--ink);font-family:'Manrope',-apple-system,Segoe UI,sans-serif;line-height:1.62;overflow-x:hidden;
-  background-image:radial-gradient(at 88% 2%,rgba(75,93,58,0.07) 0,transparent 52%),radial-gradient(at 6% 98%,rgba(176,74,49,0.04) 0,transparent 55%);background-attachment:fixed;}
-.wrap{max-width:1040px;margin:0 auto;padding:0 1.5rem;}
 a{color:inherit;}
-.topbar{display:flex;align-items:center;justify-content:space-between;padding:1.1rem 0;border-bottom:1px solid var(--rule);}
-.wm{font-family:'Fraunces',serif;font-weight:700;font-size:1.4rem;}.wm .a{color:var(--terracotta);}.wm span{font-weight:400;font-size:.9rem;color:var(--ink-soft);}
-.back{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);text-decoration:none;}
 .back:hover{color:var(--moss);}
-.eyebrow{font-family:'JetBrains Mono',monospace;font-size:.64rem;letter-spacing:.18em;text-transform:uppercase;color:var(--moss);margin-top:1.6rem;}
-h1{font-family:'Fraunces',serif;font-weight:340;font-size:clamp(2rem,5.4vw,3.1rem);margin:.6rem 0 .4rem;line-height:1.08;}
 h1 em{font-style:italic;color:var(--moss);}
-.lede{color:var(--ink-soft);max-width:64ch;font-size:1.05rem;}
 .meta{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.08em;color:var(--ink-soft);margin-top:.8rem;text-transform:uppercase;}
 section.theory{margin:2.6rem 0;}
 .theory .num{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.14em;color:var(--moss);text-transform:uppercase;}
@@ -126,8 +118,6 @@ li.opt{opacity:.82;}li.opt em{font-style:normal;font-family:'JetBrains Mono',mon
 .recap li{color:#e7ddc9;font-size:.92rem;padding-left:1.1rem;position:relative;}
 .recap li::before{content:'→';position:absolute;left:0;color:var(--moss);}
 .recap a.btn{display:inline-block;margin-top:.9rem;background:var(--terracotta);color:#f3eee5;text-decoration:none;font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;padding:.7rem 1.1rem;border-radius:9px;}
-footer{margin-top:2.4rem;border-top:1px solid var(--rule);padding:1.4rem 0;color:var(--ink-soft);font-size:.8rem;}
-.note{font-family:'JetBrains Mono',monospace;font-size:.62rem;color:var(--ink-soft);}
 </style>
 <link rel="stylesheet" href="heiben-design.css">
 <script src="heiben-nav.js" defer></script>
@@ -135,12 +125,10 @@ footer{margin-top:2.4rem;border-top:1px solid var(--rule);padding:1.4rem 0;color
 <script src="heiben-menue.js" defer></script>
 <script src="hb-nachbarn.js" defer></script>
 </head>
-<body data-hb-welt="studio">
+<body data-hb-welt="studio" data-hb-seite="welt">
 <div class="wrap">
-  <div class="topbar">
-    <div class="wm"><span class="a">H</span>ei<span class="a">B</span>en <span>· Studio</span></div>
-    <span style="display:flex;gap:1rem;align-items:center;"><a class="back" href="wohnen-planer.html">Wohnen-Planer ↗</a><a class="back" href="studio-lebenswissen-bibliothek.html">← Bibliothek</a></span>
-  </div>
+  <a class="ws-weg" href="wohnen-planer.html">Wohnen-Planer</a>
+  <a class="ws-weg" href="studio-lebenswissen-bibliothek.html">Bibliothek</a>
 
   <div class="eyebrow">Lebenswissen · Wohnen · Interaktiv</div>
   <h1>Einrichten nach Plan:<br><em>Räume, Wege, Licht</em></h1>

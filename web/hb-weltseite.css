@@ -1,0 +1,255 @@
+/* ============================================================================
+   HeiBen — Gestalt der Weltunterseiten. Remake v3, Welle 17.
+
+   hb-welt.css kleidet die fünf Welteinstiege auf Marken-Tinte. Diese Datei ist
+   die helle Schwester für die 42 Arbeitsseiten darunter: dieselbe Sprache —
+   Weltfarbe, Fraunces, Mono-Kapitälchen, Haarlinie —, aber auf Papier, weil
+   hier gearbeitet, gerechnet und geplant wird und nicht erzählt.
+
+   REGELN
+   - Alles ist auf [data-hb-seite="welt"] am body geschoben. Die Klassennamen
+     (.wrap, .card, .btn …) stammen aus dem alten Kit, das auf diesen Seiten
+     kopiert lag; sie bleiben, damit das Markup unangetastet bleibt. Der Scope
+     hält sie von den übrigen 60 Seiten fern — heiben-design.css und seine
+     .hb-Regel bleiben unberührt.
+   - Kein Hex im Bauteil. Farbe kommt aus --hb-welt (data-hb-welt am body),
+     Maße und Zeiten aus der Token-Ebene von heiben-design.css.
+   - Diese Datei wird VOR dem <style>-Block der Seite eingebunden. Was eine
+     Seite selbst mitbringt, gewinnt also weiter — Spezialisierung überlebt.
+   ========================================================================== */
+
+body[data-hb-seite="welt"]{
+  /* Die Lichtfassung der Weltfarbe: dunkel genug für Text auf Papier. */
+  --ws-welt-tief:color-mix(in srgb, var(--hb-welt) 82%, var(--hb-tief));
+  --ws-welt-zart:color-mix(in srgb, var(--hb-welt) 8%, var(--hb-papier));
+  --ws-welt-linie:color-mix(in srgb, var(--hb-welt) 30%, var(--hb-linie));
+  --ws-rand:clamp(1.2rem,5vw,2.5rem);
+
+  margin:0;
+  background:var(--hb-grund);
+  color:var(--hb-text);
+  font-family:var(--hb-sans);
+  font-size:var(--hb-s-basis);
+  line-height:var(--hb-zeile-weit);
+}
+/* Studio ist die Tinte selbst — als Akzent auf Papier zu stumpf. */
+body[data-hb-seite="welt"][data-hb-welt="studio"]{
+  --ws-welt-tief:var(--hb-akzent-tief);
+  --ws-welt-linie:color-mix(in srgb, var(--hb-akzent) 26%, var(--hb-linie));
+}
+
+body[data-hb-seite="welt"] *{box-sizing:border-box}
+
+/* --- Die alten Kit-Variablen zeigen jetzt auf die Token-Ebene --------------
+   Die Seiten sind voller var(--accent), var(--rule), var(--ink). Statt sie
+   einzeln zu ersetzen, bekommen die Namen neue Herkunft. Ein Ort, 42 Seiten. */
+body[data-hb-seite="welt"]{
+  --bg:var(--hb-grund);            --bg-soft:var(--hb-grund-2);
+  --ink:var(--hb-text);            --ink-soft:var(--hb-text-leise);
+  --rule:var(--hb-linie);          --terracotta:var(--hb-akzent);
+  --accent:var(--hb-welt);         --accent-d:var(--ws-welt-tief);
+}
+
+/* --- Satzspiegel ---------------------------------------------------------- */
+body[data-hb-seite="welt"] .wrap{
+  max-width:var(--hb-breite);margin:0 auto;padding:0 var(--ws-rand);
+}
+
+/* --- Der Rückweg. Ersetzt die zweite Kopfzeile ----------------------------
+   Die gemeinsame Navigation trägt Wortmarke, Welt und Menü bereits. Was hier
+   fehlte, war nur der Weg zurück in die eigene Welt — mehr nicht. */
+body[data-hb-seite="welt"] .ws-weg{
+  display:inline-flex;align-items:center;gap:.55rem;
+  margin:clamp(1.4rem,4vw,2.2rem) 0 0;
+  font-family:var(--hb-mono);font-size:var(--hb-s-mikro);
+  letter-spacing:var(--hb-sperr-mikro);text-transform:uppercase;
+  color:var(--hb-text-zart);text-decoration:none;
+  transition:color var(--hb-zeit-kurz) var(--hb-ease-standard);
+}
+body[data-hb-seite="welt"] .ws-weg::before{
+  content:"";width:clamp(1.1rem,3vw,2rem);height:1px;background:var(--ws-welt-linie);
+  transition:width var(--hb-zeit-kurz) var(--hb-ease-standard);
+}
+body[data-hb-seite="welt"] .ws-weg:hover{color:var(--ws-welt-tief)}
+body[data-hb-seite="welt"] .ws-weg:hover::before{width:clamp(1.8rem,4vw,3rem)}
+
+/* --- Ouvertüre: Kapitälchen, Titel, Vorspann ------------------------------ */
+body[data-hb-seite="welt"] .eyebrow{
+  display:flex;align-items:center;gap:.7rem;
+  margin:1.6rem 0 0;
+  font-family:var(--hb-mono);font-size:var(--hb-s-mikro);
+  letter-spacing:var(--hb-sperr-mikro);text-transform:uppercase;
+  color:var(--ws-welt-tief);
+}
+body[data-hb-seite="welt"] .eyebrow::after{
+  content:"";flex:0 0 clamp(1.6rem,5vw,3.4rem);height:1px;background:var(--ws-welt-linie);
+}
+body[data-hb-seite="welt"] h1{
+  font-family:var(--hb-serif);font-weight:400;
+  font-size:var(--hb-s-h1);line-height:var(--hb-zeile-eng);
+  letter-spacing:var(--hb-sperr-eng);
+  margin:.5rem 0 0;max-width:22ch;
+}
+body[data-hb-seite="welt"] h1 em{font-style:italic;color:var(--ws-welt-tief)}
+body[data-hb-seite="welt"] h2{
+  font-family:var(--hb-serif);font-weight:400;
+  font-size:var(--hb-s-h2);line-height:var(--hb-zeile-mittel);
+  margin:var(--hb-raum-7) 0 var(--hb-raum-2);
+}
+body[data-hb-seite="welt"] h2 em{font-style:italic;color:var(--ws-welt-tief)}
+body[data-hb-seite="welt"] h3{
+  font-family:var(--hb-serif);font-weight:500;
+  font-size:var(--hb-s-h3);line-height:var(--hb-zeile-mittel);
+  margin:var(--hb-raum-5) 0 var(--hb-raum-1);
+}
+body[data-hb-seite="welt"] .lede{
+  color:var(--hb-text-leise);font-size:var(--hb-s-lead);
+  line-height:1.5;max-width:56ch;margin:var(--hb-raum-4) 0 0;
+}
+body[data-hb-seite="welt"] .note{
+  font-family:var(--hb-mono);font-size:var(--hb-s-mikro);
+  letter-spacing:.08em;color:var(--hb-text-zart);
+}
+
+/* --- Handlung: ein Knopf, drei Gewichte ----------------------------------- */
+body[data-hb-seite="welt"] .btn{
+  display:inline-flex;align-items:center;gap:.5rem;
+  border:1px solid transparent;cursor:pointer;text-decoration:none;
+  font-family:var(--hb-mono);font-size:var(--hb-s-mikro);font-weight:700;
+  letter-spacing:.12em;text-transform:uppercase;
+  padding:.78rem 1.25rem;border-radius:var(--hb-rund-voll);
+  margin:var(--hb-raum-2) var(--hb-raum-2) 0 0;
+  background:var(--hb-papier);color:var(--hb-text);border-color:var(--hb-linie);
+  transition:background var(--hb-zeit-kurz) var(--hb-ease-standard),
+             color var(--hb-zeit-kurz) var(--hb-ease-standard),
+             border-color var(--hb-zeit-kurz) var(--hb-ease-standard),
+             transform var(--hb-zeit-kurz) var(--hb-ease-standard);
+}
+body[data-hb-seite="welt"] .btn:hover{transform:translateY(-1px)}
+body[data-hb-seite="welt"] .btn.primary{
+  background:var(--hb-welt);color:var(--hb-text-invers);border-color:var(--hb-welt);
+}
+body[data-hb-seite="welt"] .btn.primary:hover{background:var(--ws-welt-tief);border-color:var(--ws-welt-tief)}
+body[data-hb-seite="welt"] .btn.ink{
+  background:var(--hb-text);color:var(--hb-text-invers);border-color:var(--hb-text);
+}
+body[data-hb-seite="welt"] .btn.ghost{
+  background:none;color:var(--hb-text);border-color:var(--hb-linie-stark);
+}
+body[data-hb-seite="welt"] .btn.ghost:hover{border-color:var(--hb-welt);color:var(--ws-welt-tief)}
+body[data-hb-seite="welt"] .btn.sm{padding:.5rem .85rem;font-size:.56rem;letter-spacing:.1em}
+body[data-hb-seite="welt"] .btn:disabled{opacity:.45;cursor:not-allowed;transform:none}
+
+/* --- Marke: ein Wort, kein zweiter Kopf ------------------------------------ */
+body[data-hb-seite="welt"] .chips{display:flex;gap:var(--hb-raum-2);flex-wrap:wrap;margin:var(--hb-raum-4) 0}
+body[data-hb-seite="welt"] .chip{
+  border:1px solid var(--hb-linie);background:var(--hb-papier);
+  border-radius:var(--hb-rund-voll);padding:.42rem .9rem;
+  font-size:var(--hb-s-klein);color:var(--hb-text-leise);cursor:pointer;
+  transition:border-color var(--hb-zeit-kurz) var(--hb-ease-standard),
+             background var(--hb-zeit-kurz) var(--hb-ease-standard),
+             color var(--hb-zeit-kurz) var(--hb-ease-standard);
+}
+body[data-hb-seite="welt"] .chip:hover{border-color:var(--ws-welt-linie)}
+body[data-hb-seite="welt"] .chip.on{
+  background:var(--hb-welt);border-color:var(--hb-welt);
+  color:var(--hb-text-invers);font-weight:600;
+}
+body[data-hb-seite="welt"] .tags{display:flex;gap:var(--hb-raum-1);flex-wrap:wrap}
+body[data-hb-seite="welt"] .tag{
+  font-family:var(--hb-mono);font-size:.54rem;letter-spacing:.06em;text-transform:uppercase;
+  background:var(--ws-welt-zart);color:var(--ws-welt-tief);
+  border:1px solid var(--ws-welt-linie);
+  padding:.14rem .5rem;border-radius:var(--hb-rund-voll);
+}
+
+/* --- Feld: was man ausfüllt ----------------------------------------------- */
+body[data-hb-seite="welt"] .field{display:flex;flex-direction:column;gap:var(--hb-raum-1)}
+body[data-hb-seite="welt"] .field label{
+  font-family:var(--hb-mono);font-size:var(--hb-s-mikro);
+  letter-spacing:.1em;text-transform:uppercase;color:var(--hb-text-zart);
+}
+body[data-hb-seite="welt"] .field input,
+body[data-hb-seite="welt"] .field select,
+body[data-hb-seite="welt"] .field textarea{
+  border:1px solid var(--hb-linie);background:var(--hb-papier);
+  border-radius:var(--hb-rund-s);padding:.6rem .75rem;font:inherit;
+  color:var(--hb-text);
+  transition:border-color var(--hb-zeit-kurz) var(--hb-ease-standard),
+             box-shadow var(--hb-zeit-kurz) var(--hb-ease-standard);
+}
+body[data-hb-seite="welt"] .field input:focus,
+body[data-hb-seite="welt"] .field select:focus,
+body[data-hb-seite="welt"] .field textarea:focus{
+  outline:none;border-color:var(--hb-welt);
+  box-shadow:0 0 0 3px color-mix(in srgb, var(--hb-welt) 16%, transparent);
+}
+
+/* --- Karte: die erhobene Fläche ------------------------------------------- */
+body[data-hb-seite="welt"] .grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+  gap:var(--hb-raum-4);margin-top:var(--hb-raum-5);
+}
+body[data-hb-seite="welt"] .card{
+  position:relative;background:var(--hb-papier);
+  border:1px solid var(--hb-linie);border-radius:var(--hb-rund-l);
+  overflow:hidden;display:flex;flex-direction:column;
+  box-shadow:var(--hb-hoehe-1);
+  transition:box-shadow var(--hb-zeit-mittel) var(--hb-ease-standard),
+             transform var(--hb-zeit-mittel) var(--hb-ease-standard),
+             border-color var(--hb-zeit-mittel) var(--hb-ease-standard);
+}
+/* Die Weltfarbe als Kante oben — dasselbe Zeichen wie .hb-kachel im System. */
+body[data-hb-seite="welt"] .card::before{
+  content:"";position:absolute;inset:0 0 auto;height:2px;
+  background:var(--hb-welt);opacity:0;
+  transition:opacity var(--hb-zeit-mittel) var(--hb-ease-standard);
+}
+body[data-hb-seite="welt"] .card:hover{
+  box-shadow:var(--hb-hoehe-2);transform:translateY(-2px);
+  border-color:var(--ws-welt-linie);
+}
+body[data-hb-seite="welt"] .card:hover::before{opacity:1}
+body[data-hb-seite="welt"] .card h3{margin:0}
+body[data-hb-seite="welt"] .card .meta{font-size:var(--hb-s-klein);color:var(--hb-text-leise)}
+body[data-hb-seite="welt"] .price{
+  font-family:var(--hb-serif);font-weight:560;color:var(--ws-welt-tief);
+}
+
+/* --- Hinweiskasten -------------------------------------------------------- */
+body[data-hb-seite="welt"] .disc{
+  background:var(--ws-welt-zart);border:1px solid var(--ws-welt-linie);
+  border-radius:var(--hb-rund-m);padding:.85rem 1.1rem;
+  font-size:var(--hb-s-klein);color:var(--hb-text-leise);
+}
+
+/* --- Fuß ------------------------------------------------------------------ */
+body[data-hb-seite="welt"] .foot,
+body[data-hb-seite="welt"] footer{
+  margin-top:var(--hb-raum-9);border-top:1px solid var(--hb-linie);
+  padding:var(--hb-raum-5) 0 var(--hb-raum-7);
+  font-size:var(--hb-s-klein);color:var(--hb-text-zart);
+}
+body[data-hb-seite="welt"] .foot a,
+body[data-hb-seite="welt"] footer a{color:var(--hb-text-leise)}
+body[data-hb-seite="welt"] .foot a:hover,
+body[data-hb-seite="welt"] footer a:hover{color:var(--ws-welt-tief)}
+
+/* --- Wortmarke im Fuß -----------------------------------------------------
+   .brand-block steht auf 21 dieser Seiten im Fußbereich; die Regel lag dort
+   kopiert. Reine Maßangabe, darum unverändert übernommen. Das früher
+   mitkopierte .wms-lockup stand auf KEINER Seite im Markup und ist entfallen. */
+body[data-hb-seite="welt"] .brand{display:flex;align-items:center;text-decoration:none}
+body[data-hb-seite="welt"] .brand svg{height:30px;width:auto;display:block}
+body[data-hb-seite="welt"] .brand-block svg{
+  height:34px;width:auto;display:block;margin-bottom:1.2rem;
+}
+
+/* --- Dichte: Werkzeugseiten tragen kleinere Titel -------------------------
+   Planer und Redaktionen setzten ihre Überschrift von Hand kleiner
+   (clamp(1.6rem,4.2vw,2.4rem) statt der vollen Skala). Die Absicht stimmt —
+   auf einer Seite mit 40 Schaltern erschlägt ein 3,6-rem-Titel alles. Sie
+   steht jetzt einmal als Rolle da statt sechsmal als Wert. */
+body[data-hb-seite="welt"][data-hb-dichte="werkzeug"] h1{font-size:var(--hb-s-h2);max-width:26ch}
+body[data-hb-seite="welt"][data-hb-dichte="werkzeug"] h2{font-size:var(--hb-s-h3);margin-top:var(--hb-raum-6)}
+body[data-hb-seite="welt"][data-hb-dichte="werkzeug"] .lede{font-size:var(--hb-s-gross);max-width:66ch}
