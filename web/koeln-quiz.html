@@ -32,16 +32,10 @@
 <!-- /hb:kopf -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;1,400&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="hb-werkzeug.css">
 <style>
-:root{--bg:#f3eee5;--bg2:#ebe3d4;--paper:#fffdf8;--ink:#1f1c17;--ink2:#524a3e;--rule:#d8cdb7;--terra:#b04a31;--ochre:#a97a1d;--moss:#4a5c39;--burg:#792d29;--aub:#6b3951;--good:#6f8f4e;--bad:#b04a31}
-*{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg);color:var(--ink);font-family:'Manrope',system-ui,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
-.wrap{max-width:680px;margin:0 auto;padding:1.6rem 1.1rem 5rem}
-.eyebrow{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.32em;text-transform:uppercase;color:var(--terra)}
+:root{--bad:#b04a31}
 .dom{display:block;margin:.6rem 0 .1rem}
-h1{font-family:'Fraunces',serif;font-weight:400;font-size:clamp(2rem,6.5vw,3.1rem);line-height:1.02;letter-spacing:-.02em;margin:.2rem 0 .5rem}
-h1 em{font-style:italic;color:var(--terra)}
-.lead{color:var(--ink2);max-width:60ch;font-size:1.02rem}
 .prog{display:flex;justify-content:space-between;align-items:center;font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink2);margin:1.4rem 0 .5rem}
 .prog #pscore{color:var(--terra)}
 .qbox h3{font-family:'Fraunces',serif;font-weight:500;font-size:1.35rem;line-height:1.25;margin-bottom:.9rem}
@@ -63,9 +57,7 @@ h1 em{font-style:italic;color:var(--terra)}
 .keyhint b{color:var(--terra);font-weight:600}
 @media (hover:hover) and (pointer:fine){.keyhint{display:block}}
 .opts button:focus-visible,.next:focus-visible,.again button:focus-visible{outline:2px solid var(--ochre);outline-offset:2px}
-.result{background:var(--ink);color:var(--bg);border-radius:18px;padding:1.6rem 1.3rem;margin-top:.6rem;text-align:center;display:none}
 .result.show{display:block}
-.result .eyebrow{color:var(--ochre)}
 .ring{margin:.6rem auto .2rem;display:block}
 .band{font-family:'Fraunces',serif;font-style:italic;font-size:1.55rem;margin-top:.3rem;line-height:1.15}
 .rsub{color:#cdbfa8;font-size:.95rem;margin-top:.4rem;max-width:46ch;margin-left:auto;margin-right:auto}
@@ -75,7 +67,6 @@ h1 em{font-style:italic;color:var(--terra)}
 .again button.pri{background:var(--ochre);color:var(--ink);border-color:var(--ochre)}
 .xlink{text-align:center;margin-top:1.3rem}
 .xlink a{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink2);text-decoration:none;border-bottom:1px solid var(--rule)}
-.foot{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink2);text-align:center;margin-top:1.8rem}
 </style>
 <link rel="stylesheet" href="heiben-design.css">
 <script src="heiben-nav.js" defer></script>
@@ -85,7 +76,7 @@ h1 em{font-style:italic;color:var(--terra)}
 <link rel="stylesheet" href="hb-fuss.css">
 <script src="hb-fuss.js" defer></script>
 </head>
-<body data-hb-welt="holding">
+<body data-hb-welt="holding" data-hb-seite="werkzeug" data-hb-mass="eng">
 <div class="wrap">
   <p class="eyebrow">HeiBen · Heimat leben</p>
   <svg class="dom" width="58" height="46" viewBox="0 0 58 46" aria-hidden="true">

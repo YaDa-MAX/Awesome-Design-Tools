@@ -34,11 +34,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Manrope:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <style>
-/* ============================================================
-   HeiBen — Gemeinsames Designsystem (alle Seiten laden diese Datei)
-   Eine einzige Quelle für Farben, Schrift, Navigation, Footer.
-   Seiten-spezifische Blöcke sind klar überschrieben.
-   ============================================================ */
 
 :root {
   --bg:#f3eee5; --bg-soft:#ebe3d4; --bg-deep:#1f1c17;
@@ -60,15 +55,12 @@ body {
 .wrap { max-width:var(--maxw); margin:0 auto; padding:0 2rem; }
 a { color:inherit; }
 
-/* ===== NAV (identisch auf allen Seiten) ===== */
 nav {
   position:sticky; top:0; z-index:100;
   background:rgba(243,238,229,0.82); backdrop-filter:blur(10px);
   border-bottom:1px solid var(--rule);
 }
 nav .wrap { display:flex; align-items:center; justify-content:space-between; height:68px; }
-nav .brand { display:flex; align-items:center; gap:0.6rem; text-decoration:none; }
-nav .brand img { height:26px; width:auto; display:block; }
 nav .links { display:flex; gap:2rem; list-style:none; }
 nav .links a {
   font-family:'JetBrains Mono',monospace; font-size:0.72rem; letter-spacing:0.15em;
@@ -82,7 +74,6 @@ nav .cta {
 nav .cta:hover { background:var(--ink); color:var(--bg); }
 @media (max-width:780px){ nav .links { display:none; } }
 
-/* ===== BUTTONS ===== */
 .btn {
   font-family:'JetBrains Mono',monospace; font-size:0.72rem; letter-spacing:0.15em; text-transform:uppercase;
   padding:0.9rem 1.6rem; text-decoration:none; transition:all .25s; display:inline-block;
@@ -92,19 +83,16 @@ nav .cta:hover { background:var(--ink); color:var(--bg); }
 .btn-ghost { border:1px solid var(--ink); }
 .btn-ghost:hover { background:var(--ink); color:var(--bg); }
 
-/* ===== Staggered Load Reveal ===== */
 .reveal { opacity:0; transform:translateY(22px); animation:rise .9s cubic-bezier(.5,0,.2,1) forwards; }
 .reveal.d1 { animation-delay:.05s; } .reveal.d2 { animation-delay:.18s; }
 .reveal.d3 { animation-delay:.31s; } .reveal.d4 { animation-delay:.44s; } .reveal.d5 { animation-delay:.57s; }
 @keyframes rise { to { opacity:1; transform:none; } }
 
-/* ===== Generische Sektionsköpfe (wiederverwendbar) ===== */
 .sec-head { margin-bottom:3rem; }
 .sec-head .eyebrow { font-family:'JetBrains Mono',monospace; font-size:0.7rem; letter-spacing:0.3em; text-transform:uppercase; color:var(--terracotta); margin-bottom:1rem; }
 .sec-head h2 { font-family:'Fraunces',serif; font-weight:400; font-size:clamp(1.9rem,4.5vw,3rem); line-height:1.05; letter-spacing:-0.02em; max-width:24ch; }
 .sec-head h2 em { font-style:italic; color:var(--terracotta); }
 
-/* ===== HOMEPAGE: HERO ===== */
 .hero { padding:6rem 0 4rem; position:relative; }
 .hero .eyebrow {
   font-family:'JetBrains Mono',monospace; font-size:0.72rem; letter-spacing:0.3em;
@@ -119,7 +107,6 @@ nav .cta:hover { background:var(--ink); color:var(--bg); }
 .hero p.lede { font-size:1.2rem; color:var(--ink-soft); max-width:52ch; margin-bottom:2.5rem; }
 .hero .actions { display:flex; gap:1rem; flex-wrap:wrap; }
 
-/* ===== HOMEPAGE: IDEA STRIP ===== */
 .idea { background:var(--bg-deep); color:var(--bg); padding:5.5rem 0; position:relative; overflow:hidden; }
 .idea::before {
   content:'Hei·Ben'; position:absolute; right:-1rem; bottom:-3rem;
@@ -131,7 +118,6 @@ nav .cta:hover { background:var(--ink); color:var(--bg); }
 .idea h2 em { font-style:italic; color:var(--ochre); }
 .idea p { color:rgba(243,238,229,0.82); max-width:58ch; margin-top:1.5rem; position:relative; font-size:1.05rem; }
 
-/* ===== HOMEPAGE: HÄUSER ===== */
 .haeuser { padding:6rem 0; }
 .haus-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:1.5rem; }
 @media (max-width:820px){ .haus-grid { grid-template-columns:1fr; } }
@@ -158,7 +144,6 @@ nav .cta:hover { background:var(--ink); color:var(--bg); }
 .haus .more .arrow { transition:transform .25s; }
 .haus:hover .more .arrow { transform:translateX(5px); }
 
-/* ===== HOMEPAGE: KÖLN BAND ===== */
 .koeln { padding:5.5rem 0; border-top:1px solid var(--rule); }
 .koeln .grid { display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:center; }
 @media (max-width:820px){ .koeln .grid { grid-template-columns:1fr; gap:2rem; } }
@@ -171,12 +156,9 @@ nav .cta:hover { background:var(--ink); color:var(--bg); }
 .koeln .fact .k { font-family:'Fraunces',serif; font-style:italic; font-size:1.8rem; color:var(--terracotta); line-height:1; }
 .koeln .fact .v { font-size:0.88rem; color:var(--ink-soft); margin-top:0.4rem; }
 
-/* ===== FOOTER (identisch auf allen Seiten) ===== */
 footer { background:var(--bg-deep); color:var(--bg); padding:5rem 0 2.5rem; }
 footer .top { display:grid; grid-template-columns:2fr 1fr 1fr; gap:3rem; margin-bottom:3rem; }
 @media (max-width:820px){ footer .top { grid-template-columns:1fr; gap:2rem; } }
-footer .brand-block img { height:30px; margin-bottom:1.2rem; }
-footer .brand-block p { color:rgba(243,238,229,0.7); max-width:34ch; font-size:0.95rem; }
 footer h4 { font-family:'JetBrains Mono',monospace; font-size:0.68rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--ochre); margin-bottom:1.2rem; }
 footer ul { list-style:none; }
 footer ul li { margin-bottom:0.7rem; }
@@ -191,13 +173,8 @@ footer .legal {
 footer .legal a { color:rgba(243,238,229,0.7); text-decoration:none; }
 footer .legal a:hover { color:var(--ochre); }
 
-/* Platzhalter sichtbar markieren, damit sie vor Veröffentlichung ersetzt werden */
 .ph { color:var(--ochre); }
 
-/* ============================================================
-   RECHTLICHE PFLICHTSEITEN (Impressum / Datenschutz)
-   Ruhige, gut lesbare Lesetypografie — bewusst zurückhaltend.
-   ============================================================ */
 .legalhero { padding:5rem 0 2.5rem; border-bottom:1px solid var(--rule); }
 .legalhero .eyebrow { font-family:'JetBrains Mono',monospace; font-size:0.72rem; letter-spacing:0.3em; text-transform:uppercase; color:var(--terracotta); margin-bottom:1.2rem; }
 .legalhero h1 { font-family:'Fraunces',serif; font-weight:300; font-size:clamp(2.2rem,6vw,3.6rem); letter-spacing:-0.03em; line-height:1; }
@@ -223,7 +200,6 @@ footer .legal a:hover { color:var(--ochre); }
 .legal-body ul.plain li::before { content:'→'; position:absolute; left:0; color:var(--terracotta); }
 .legal-body .anchor-jump { font-size:0.85rem; }
 
-/* Inhaltsverzeichnis der Rechtsseite */
 .legal-toc {
   background:var(--bg-soft); padding:1.6rem 1.8rem; margin:0 0 2.5rem;
 }
@@ -235,7 +211,6 @@ footer .legal a:hover { color:var(--ochre); }
 .legal-toc a::before { content:counter(toc,decimal-leading-zero) "  "; font-family:'JetBrains Mono',monospace; font-size:0.72rem; color:var(--terracotta); }
 .legal-toc a:hover { color:var(--terracotta); }
 
-/* dezenter interner Hinweisstreifen (vor Veröffentlichung entfernen) */
 .draft-note {
   background:#792d29; color:#f3eee5; font-family:'JetBrains Mono',monospace;
   font-size:0.7rem; letter-spacing:0.08em; line-height:1.6; padding:0.8rem 0;
@@ -245,12 +220,7 @@ footer .legal a:hover { color:var(--ochre); }
 
 [id]{ scroll-margin-top:84px; }
 
-/* ============================================================
-   TOCHTER-UNTERSEITEN — gemeinsame Bausteine.
-   Die Akzentfarbe steuert eine einzige Variable --accent,
-   die pro Seite über eine body-Klasse gesetzt wird.
-   ============================================================ */
-:root { --accent:var(--terracotta); }                 /* Fallback (Holding) */
+:root { --accent:var(--terracotta); }                 
 body.theme-reisen     { --accent:var(--ochre); }
 body.theme-wohnen     { --accent:var(--moss); }
 body.theme-immobilien { --accent:var(--burgundy); }
@@ -259,7 +229,6 @@ body.theme-studio     { --accent:var(--ink-accent); }
 .btn-accent { background:var(--accent); color:var(--bg); }
 .btn-accent:hover { background:var(--ink); }
 
-/* --- Unterseiten-Hero --- */
 .subhero { padding:5rem 0 3.5rem; border-bottom:1px solid var(--rule); }
 .subhero .eyebrow { font-family:'JetBrains Mono',monospace; font-size:0.72rem; letter-spacing:0.28em; text-transform:uppercase; color:var(--accent); margin-bottom:1.6rem; }
 .subhero .wm { height:46px; width:auto; display:block; margin-bottom:1.8rem; }
@@ -268,14 +237,12 @@ body.theme-studio     { --accent:var(--ink-accent); }
 .subhero p.lede { font-size:1.2rem; color:var(--ink-soft); max-width:54ch; margin-bottom:2.2rem; }
 .subhero .actions { display:flex; gap:1rem; flex-wrap:wrap; }
 
-/* --- generische Inhaltssektion --- */
 .section { padding:5rem 0; border-top:1px solid var(--rule); }
 .section .eyebrow { font-family:'JetBrains Mono',monospace; font-size:0.7rem; letter-spacing:0.3em; text-transform:uppercase; color:var(--accent); margin-bottom:1rem; }
 .section h2 { font-family:'Fraunces',serif; font-weight:400; font-size:clamp(1.7rem,4vw,2.6rem); line-height:1.1; letter-spacing:-0.02em; max-width:24ch; margin-bottom:1.2rem; }
 .section h2 em { font-style:italic; color:var(--accent); }
 .section p.intro { font-size:1.08rem; color:var(--ink-soft); max-width:62ch; margin-bottom:1rem; }
 
-/* --- Angebots-Karten --- */
 .offer-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:1.4rem; margin-top:2.5rem; }
 @media (max-width:820px){ .offer-grid { grid-template-columns:1fr; } }
 .offer { background:var(--bg-soft); padding:2.2rem; border-top:3px solid var(--accent); }
@@ -283,7 +250,6 @@ body.theme-studio     { --accent:var(--ink-accent); }
 .offer h3 { font-family:'Fraunces',serif; font-weight:500; font-size:1.3rem; margin-bottom:0.6rem; }
 .offer p { font-size:0.96rem; color:var(--ink-soft); }
 
-/* --- dunkles Band mit Akzent --- */
 .darkband { background:var(--bg-deep); color:var(--bg); padding:5rem 0; position:relative; overflow:hidden; }
 .darkband .eyebrow { font-family:'JetBrains Mono',monospace; font-size:0.7rem; letter-spacing:0.3em; text-transform:uppercase; color:var(--accent); margin-bottom:1.2rem; }
 .darkband h2 { font-family:'Fraunces',serif; font-weight:300; font-size:clamp(1.7rem,4vw,2.8rem); line-height:1.15; color:var(--bg); max-width:24ch; }
@@ -291,20 +257,17 @@ body.theme-studio     { --accent:var(--ink-accent); }
 .darkband p { color:rgba(243,238,229,0.82); max-width:58ch; margin-top:1.5rem; font-size:1.04rem; }
 .darkband .quote { font-family:'Fraunces',serif; font-style:italic; font-weight:300; font-size:clamp(1.4rem,3vw,2rem); line-height:1.3; color:var(--accent); border-left:3px solid var(--accent); padding:0.6rem 0 0.6rem 1.8rem; margin:2rem 0 0; max-width:46ch; }
 
-/* --- Merkmalsliste --- */
 .flist { list-style:none; margin-top:1.4rem; max-width:62ch; }
 .flist li { padding:0.7rem 0 0.7rem 1.8rem; border-bottom:1px dashed var(--rule); position:relative; color:var(--ink-soft); }
 .flist li::before { content:'→'; position:absolute; left:0; color:var(--accent); }
 .flist li:last-child { border-bottom:none; }
 .flist li strong { color:var(--ink); font-weight:600; }
 
-/* --- Teaser-Panel (z. B. Shop in Vorbereitung) --- */
 .teaser { border:2px dashed var(--accent); padding:2.6rem; margin-top:2.5rem; }
 .teaser .badge { display:inline-block; font-family:'JetBrains Mono',monospace; font-size:0.62rem; letter-spacing:0.2em; text-transform:uppercase; background:var(--accent); color:var(--bg); padding:0.32rem 0.7rem; margin-bottom:1.1rem; }
 .teaser h3 { font-family:'Fraunces',serif; font-weight:500; font-size:1.6rem; margin-bottom:0.6rem; }
 .teaser p { color:var(--ink-soft); max-width:60ch; margin-bottom:0.7rem; }
 
-/* --- Säulen (Studio) --- */
 .pillars { display:grid; grid-template-columns:repeat(2,1fr); gap:1.2rem; margin-top:2.5rem; }
 @media (max-width:820px){ .pillars { grid-template-columns:1fr; } }
 .pillar { padding:1.8rem; border-left:3px solid var(--accent); background:var(--bg-soft); }
@@ -312,20 +275,18 @@ body.theme-studio     { --accent:var(--ink-accent); }
 .pillar h3 { font-family:'Fraunces',serif; font-weight:500; font-size:1.2rem; margin:0.4rem 0 0.4rem; }
 .pillar p { font-size:0.93rem; color:var(--ink-soft); }
 
-/* --- Kennzahlen-Reihe --- */
 .statrow { display:grid; grid-template-columns:repeat(4,1fr); gap:1.5rem; margin-top:2.5rem; }
 @media (max-width:680px){ .statrow { grid-template-columns:1fr 1fr; } }
 .statrow .s { border-top:1px solid var(--rule); padding-top:1rem; }
 .statrow .s .k { font-family:'Fraunces',serif; font-style:italic; font-size:1.8rem; color:var(--accent); line-height:1; }
 .statrow .s .v { font-size:0.85rem; color:var(--ink-soft); margin-top:0.4rem; }
 
-/* --- Querverweise zu den Schwester-Häusern --- */
 .cross { padding:4.5rem 0; border-top:1px solid var(--rule); }
 .cross .eyebrow { font-family:'JetBrains Mono',monospace; font-size:0.7rem; letter-spacing:0.3em; text-transform:uppercase; color:var(--ink-soft); margin-bottom:1rem; }
 .cross h2 { font-family:'Fraunces',serif; font-weight:400; font-size:1.7rem; letter-spacing:-0.01em; }
 .cross-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; margin-top:1.8rem; }
 @media (max-width:820px){ .cross-grid { grid-template-columns:1fr; } }
-/* Variante für vier Häuser auf einer Holding-Seite (z. B. Familie) */
+
 .cross-grid.quad { grid-template-columns:repeat(4,1fr); }
 @media (max-width:980px){ .cross-grid.quad { grid-template-columns:repeat(2,1fr); } }
 @media (max-width:560px){ .cross-grid.quad { grid-template-columns:1fr; } }
@@ -340,32 +301,23 @@ body.theme-studio     { --accent:var(--ink-accent); }
 .cross-card .r { font-family:'JetBrains Mono',monospace; font-size:0.62rem; letter-spacing:0.16em; text-transform:uppercase; color:var(--ink-soft); margin-top:0.3rem; }
 .cross-card .ar { font-family:'JetBrains Mono',monospace; font-size:0.66rem; letter-spacing:0.14em; text-transform:uppercase; margin-top:1rem; display:inline-block; }
 
-/* --- Kontakt-Aufruf-Band --- */
 .cta-band { background:var(--accent); color:var(--bg); padding:4.5rem 0; }
 .cta-band h2 { font-family:'Fraunces',serif; font-weight:300; font-size:clamp(1.7rem,4vw,2.6rem); color:var(--bg); max-width:22ch; margin-bottom:1rem; }
 .cta-band p { color:rgba(243,238,229,0.92); max-width:50ch; margin-bottom:1.8rem; }
 .cta-band .btn-onaccent { background:var(--bg); color:var(--ink); }
 .cta-band .btn-onaccent:hover { background:var(--bg-deep); color:var(--bg); }
 
-/* ============================================================
-   STUDIO MAGAZIN — Übersicht, Artikel & Kategorien.
-   Datengetrieben: eine Artikelvorlage rendert beliebig viele
-   Beiträge. Kategoriefarben spiegeln die Palette der Häuser.
-   ============================================================ */
-
-/* Kategorie-Akzente (Label-Farbe + Karten-Oberkante) */
 .cat { font-family:'JetBrains Mono',monospace; font-size:0.66rem; letter-spacing:0.18em; text-transform:uppercase; }
 .cat.kultur   { color:var(--terracotta); }
 .cat.design   { color:var(--moss); }
 .cat.reisen   { color:var(--ochre); }
 .cat.haushalt { color:var(--burgundy); }
-/* Artikelseite nimmt die Kategoriefarbe als Akzent auf */
+
 body.cat-kultur   { --accent:var(--terracotta); }
 body.cat-design   { --accent:var(--moss); }
 body.cat-reisen   { --accent:var(--ochre); }
 body.cat-haushalt { --accent:var(--burgundy); }
 
-/* ---- Übersicht: Filterleiste ---- */
 .mag-filter { display:flex; gap:0.6rem; flex-wrap:wrap; margin:2.2rem 0 0.5rem; }
 .mag-filter button {
   font-family:'JetBrains Mono',monospace; font-size:0.66rem; letter-spacing:0.16em; text-transform:uppercase;
@@ -375,7 +327,6 @@ body.cat-haushalt { --accent:var(--burgundy); }
 .mag-filter button:hover { border-color:var(--ink); color:var(--ink); }
 .mag-filter button.active { background:var(--ink); color:var(--bg); border-color:var(--ink); }
 
-/* ---- Übersicht: Aufmacher (neuester Beitrag, groß) ---- */
 .mag-lead {
   display:grid; grid-template-columns:1.05fr 0.95fr; gap:2.5rem; align-items:center;
   background:var(--bg-soft); border-top:4px solid var(--ink-accent); margin-top:2.5rem; text-decoration:none; color:inherit;
@@ -390,7 +341,6 @@ body.cat-haushalt { --accent:var(--burgundy); }
 .mag-lead .meta { font-family:'JetBrains Mono',monospace; font-size:0.62rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--ink-soft); margin-top:1.4rem; }
 @media (max-width:760px){ .mag-lead { grid-template-columns:1fr; } .mag-lead .cover{ min-height:200px; } .mag-lead .body{ padding:2rem; } }
 
-/* ---- Übersicht: Karten-Raster ---- */
 .mag-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.6rem; margin-top:1.6rem; }
 @media (max-width:900px){ .mag-grid { grid-template-columns:repeat(2,1fr); } }
 @media (max-width:600px){ .mag-grid { grid-template-columns:1fr; } }
@@ -408,7 +358,6 @@ body.cat-haushalt { --accent:var(--burgundy); }
 .mag-card .meta { font-family:'JetBrains Mono',monospace; font-size:0.6rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--ink-soft); margin-top:1.3rem; }
 .mag-empty { padding:3rem 0; color:var(--ink-soft); }
 
-/* ---- Artikelseite ---- */
 .article-wrap { max-width:760px; margin:0 auto; padding:0 2rem; }
 .article-head { padding:3rem 0 0; }
 .article-back { font-family:'JetBrains Mono',monospace; font-size:0.68rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--ink-soft); text-decoration:none; display:inline-block; margin-bottom:2rem; }
@@ -432,15 +381,9 @@ body.cat-haushalt { --accent:var(--burgundy); }
 .article-foot { border-top:1px solid var(--rule); margin-top:2.5rem; padding:2rem 0 0; }
 .article-foot .by { color:var(--ink-soft); font-size:0.95rem; }
 
-/* ============================================================
-   ANFRAGE-ASSISTENT — geführte Formulare (Reisen/Wohnen/Immobilien)
-   Datengetrieben aus anfrage-core.js; nimmt die Akzentfarbe der
-   jeweiligen Einheit über die bestehende body.theme-…-Klasse auf.
-   ============================================================ */
 .anfrage { padding:3.5rem 0 5rem; }
 .anfrage-wrap { max-width:720px; margin:0 auto; padding:0 2rem; }
 
-/* Fortschritt */
 .steps-bar { display:flex; gap:0.5rem; margin-bottom:2.5rem; }
 .steps-bar .seg { flex:1; height:4px; background:var(--rule); position:relative; overflow:hidden; }
 .steps-bar .seg.done { background:var(--accent); }
@@ -451,7 +394,6 @@ body.cat-haushalt { --accent:var(--burgundy); }
 .step-title em { font-style:italic; color:var(--accent); }
 .step-intro { color:var(--ink-soft); font-size:1.05rem; margin-bottom:2rem; max-width:54ch; }
 
-/* Felder */
 .fld { margin-bottom:1.5rem; }
 .fld > label { display:block; font-family:'JetBrains Mono',monospace; font-size:0.66rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--ink-soft); margin-bottom:0.5rem; }
 .fld .req { color:var(--accent); }
@@ -464,7 +406,6 @@ body.cat-haushalt { --accent:var(--burgundy); }
 .fld-row { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
 @media (max-width:520px){ .fld-row { grid-template-columns:1fr; } }
 
-/* Auswahl als Chips (große, fingerfreundliche Schaltflächen) */
 .choices { display:flex; flex-wrap:wrap; gap:0.6rem; }
 .choices button {
   font-family:'Manrope',sans-serif; font-size:0.95rem; padding:0.7rem 1.1rem;
@@ -473,7 +414,6 @@ body.cat-haushalt { --accent:var(--burgundy); }
 .choices button:hover { border-color:var(--ink); }
 .choices button.sel { background:var(--accent); color:var(--bg); border-color:var(--accent); }
 
-/* Navigation des Assistenten */
 .anfrage-nav { display:flex; justify-content:space-between; align-items:center; margin-top:2.5rem; gap:1rem; }
 .anfrage-nav .spacer { flex:1; }
 .btn-step {
@@ -486,7 +426,6 @@ body.cat-haushalt { --accent:var(--burgundy); }
 .btn-step:disabled { opacity:0.4; cursor:not-allowed; }
 .field-error { color:var(--burgundy); font-size:0.85rem; margin-top:0.4rem; }
 
-/* Zusammenfassung vor dem Absenden */
 .summary { background:var(--bg-soft); padding:1.8rem; margin-bottom:1.5rem; }
 .summary h3 { font-family:'Fraunces',serif; font-weight:500; font-size:1.2rem; margin-bottom:1rem; }
 .summary .srow { display:flex; justify-content:space-between; gap:1rem; padding:0.5rem 0; border-bottom:1px dashed var(--rule); font-size:0.95rem; }
@@ -494,7 +433,6 @@ body.cat-haushalt { --accent:var(--burgundy); }
 .summary .srow .lbl { color:var(--ink-soft); }
 .summary .srow .val { text-align:right; }
 
-/* Abschluss-Bildschirm */
 .done-card { text-align:center; padding:2rem 0; }
 .done-card .mark { width:64px; height:64px; border-radius:50%; background:var(--accent); color:var(--bg); display:flex; align-items:center; justify-content:center; font-size:2rem; margin:0 auto 1.5rem; }
 .done-card h2 { font-family:'Fraunces',serif; font-weight:400; font-size:clamp(1.8rem,4vw,2.6rem); margin-bottom:0.8rem; }
@@ -511,13 +449,6 @@ body.cat-haushalt { --accent:var(--burgundy); }
 .done-actions a:hover { background:var(--ink); color:var(--bg); }
 .done-note { font-size:0.85rem; color:var(--ink-soft); margin-top:1.5rem; }
 
-/* ============================================================
-   SCHAUFENSTER — "Unsere Arbeit" (Reisen-Routen / Wohn-Projekte / Objekte)
-   Datengetrieben aus schaufenster-core.js. Übersicht, Detail und Redaktions-
-   Vorschau teilen dieselben Bausteine. Akzent kommt über body.theme-…
-   ============================================================ */
-
-/* ---- Haus-Chip & Objekt-Status (gemeinsam) ---- */
 .haus-chip { font-family:'JetBrains Mono',monospace; font-size:0.6rem; letter-spacing:0.14em; text-transform:uppercase; padding:0.3rem 0.6rem; border:1px solid currentColor; display:inline-block; }
 .haus-chip.reisen { color:var(--ochre); } .haus-chip.wohnen { color:var(--moss); } .haus-chip.immobilien { color:var(--burgundy); }
 .obj-badge { font-family:'JetBrains Mono',monospace; font-size:0.58rem; letter-spacing:0.12em; text-transform:uppercase; padding:0.28rem 0.6rem; color:var(--bg); display:inline-block; }
@@ -525,19 +456,16 @@ body.cat-haushalt { --accent:var(--burgundy); }
 .obj-badge.reserviert { background:var(--ochre); color:var(--ink); }
 .obj-badge.verkauft { background:var(--ink-soft); }
 
-/* ---- Fakten-Liste (Kerndaten) ---- */
 dl.facts { display:grid; grid-template-columns:1fr 1fr; gap:0.1rem 1.5rem; margin:0; }
 @media (max-width:520px){ dl.facts { grid-template-columns:1fr; } }
 dl.facts .fact { display:flex; justify-content:space-between; gap:1rem; padding:0.55rem 0; border-bottom:1px dashed var(--rule); }
 dl.facts dt { font-family:'JetBrains Mono',monospace; font-size:0.66rem; letter-spacing:0.08em; text-transform:uppercase; color:var(--ink-soft); }
 dl.facts dd { margin:0; text-align:right; font-weight:500; }
 
-/* ---- Höhepunkte ---- */
 ul.highlights { list-style:none; padding:0; margin:0; }
 ul.highlights li { position:relative; padding-left:1.4rem; margin-bottom:0.6rem; color:var(--ink); }
 ul.highlights li::before { content:'—'; position:absolute; left:0; color:var(--accent); }
 
-/* ---- Übersicht ---- */
 .schau { padding:0 0 5rem; }
 .schau-filter { display:flex; gap:0.4rem; flex-wrap:wrap; max-width:1100px; margin:0 auto 2.2rem; padding:0 2rem; }
 .schau-filter button { font-family:'JetBrains Mono',monospace; font-size:0.66rem; letter-spacing:0.12em; text-transform:uppercase; padding:0.55rem 1rem; border:1px solid var(--rule); background:transparent; color:var(--ink-soft); cursor:pointer; transition:all .2s; }
@@ -558,7 +486,6 @@ ul.highlights li::before { content:'—'; position:absolute; left:0; color:var(-
 .schau-card .teaser { color:var(--ink-soft); font-size:0.92rem; line-height:1.55; flex:1; border:none; padding:0; margin:0; max-width:none; }
 .schau-card .cardfacts { margin-top:0.9rem; padding-top:0.8rem; border-top:1px solid var(--rule); font-family:'JetBrains Mono',monospace; font-size:0.68rem; letter-spacing:0.04em; color:var(--ink-soft); display:flex; flex-wrap:wrap; gap:0.3rem 0.9rem; }
 
-/* ---- Detailseite ---- */
 .schau-detail { max-width:820px; margin:0 auto; padding:2.5rem 2rem 0; }
 .schau-detail .back { font-family:'JetBrains Mono',monospace; font-size:0.7rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--ink-soft); text-decoration:none; }
 .schau-detail .back:hover { color:var(--accent); }
@@ -580,7 +507,7 @@ ul.highlights li::before { content:'—'; position:absolute; left:0; color:var(-
 
 </style>
 <style>
-/* ===== Schaufenster-Redaktion — internes Werkzeug, Oberfläche wie die Magazin-Redaktion ===== */
+
 .redbar { background:var(--bg-deep); color:var(--bg); position:sticky; top:0; z-index:100; border-bottom:1px solid rgba(243,238,229,0.12); }
 .redbar .wrap { display:flex; align-items:center; justify-content:space-between; height:62px; }
 .redbar .left { display:flex; align-items:center; gap:0.7rem; }
@@ -597,7 +524,6 @@ ul.highlights li::before { content:'—'; position:absolute; left:0; color:var(-
 .tabs button { font-family:'JetBrains Mono',monospace; font-size:0.68rem; letter-spacing:0.12em; text-transform:uppercase; padding:0.8rem 1.1rem; border:none; border-bottom:2px solid transparent; background:transparent; color:var(--ink-soft); cursor:pointer; }
 .tabs button.active { color:var(--ink); border-bottom-color:var(--accent); }
 
-/* Liste */
 .r-toolbar { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem; margin-bottom:1rem; }
 .r-count { font-family:'JetBrains Mono',monospace; font-size:0.72rem; letter-spacing:0.08em; color:var(--ink-soft); }
 .r-filter { display:flex; gap:0.3rem; }
@@ -620,7 +546,6 @@ ul.highlights li::before { content:'—'; position:absolute; left:0; color:var(-
 .mini.go { border-color:var(--moss); color:var(--moss); }
 .mini.go:hover { background:var(--moss); color:var(--bg); }
 
-/* Editor */
 .editor-grid { display:grid; grid-template-columns:1fr 1fr; gap:2.5rem; }
 @media (max-width:900px){ .editor-grid { grid-template-columns:1fr; } }
 .ed-label { font-family:'JetBrains Mono',monospace; font-size:0.66rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--ink-soft); margin-bottom:0.5rem; display:block; }
@@ -639,7 +564,6 @@ ul.highlights li::before { content:'—'; position:absolute; left:0; color:var(-
 .btn-primary { font-family:'JetBrains Mono',monospace; font-size:0.7rem; letter-spacing:0.12em; text-transform:uppercase; padding:0.85rem 1.4rem; background:var(--accent); color:var(--bg); border:none; cursor:pointer; }
 .btn-ghost2 { font-family:'JetBrains Mono',monospace; font-size:0.7rem; letter-spacing:0.12em; text-transform:uppercase; padding:0.85rem 1.4rem; background:transparent; color:var(--ink); border:1px solid var(--ink); cursor:pointer; }
 
-/* Vorschau */
 .pv-wrap { position:sticky; top:90px; }
 .pv-label { font-family:'JetBrains Mono',monospace; font-size:0.66rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--ink-soft); margin-bottom:1rem; }
 .pv { border:1px solid var(--rule); padding:1.6rem; background:#fff; max-height:75vh; overflow:auto; }
@@ -649,7 +573,6 @@ ul.highlights li::before { content:'—'; position:absolute; left:0; color:var(-
 .pv .desc p { margin-bottom:0.8rem; line-height:1.7; }
 .pv .hl-title, .pv .desc-title { font-family:'JetBrains Mono',monospace; font-size:0.66rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--ink-soft); margin:1.3rem 0 0.7rem; }
 
-/* Sichern & Laden */
 .io-row { display:flex; gap:0.6rem; flex-wrap:wrap; margin-top:1rem; }
 .note { font-size:0.85rem; color:var(--ink-soft); margin-top:1.6rem; border-top:1px solid var(--rule); padding-top:1rem; }
 .toast { position:fixed; left:50%; bottom:2rem; transform:translateX(-50%); background:var(--ink); color:var(--bg); font-family:'JetBrains Mono',monospace; font-size:0.72rem; letter-spacing:0.08em; padding:0.8rem 1.3rem; opacity:0; transition:opacity .25s; pointer-events:none; z-index:200; }
@@ -657,12 +580,7 @@ ul.highlights li::before { content:'—'; position:absolute; left:0; color:var(-
 </style>
 <link rel="stylesheet" href="hb-motion.css">
 <style id="hb-logo-css">
-.brand{display:flex;align-items:center;text-decoration:none;}
-.brand svg{height:30px;width:auto;display:block;}
 @media(max-width:600px){.brand svg{height:25px;}}
-.brand-block svg{height:34px;width:auto;display:block;margin-bottom:1.2rem;}
-.wms-lockup{display:flex;justify-content:center;padding:6px 0 2px;}
-.wms-lockup svg{width:min(540px,84vw);height:auto;display:block;}
 </style>
 <link rel="stylesheet" href="heiben-design.css">
 <script src="heiben-nav.js" defer></script>

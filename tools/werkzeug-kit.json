@@ -1,0 +1,121 @@
+{
+ "_hinweis": "Wortgleich auf >=6 der Werkzeug-/Wissensseiten kopierte CSS-Regeln, die hb-werkzeug.css zentral uebernommen hat, plus die Zuordnung der neun gewachsenen .wrap-Breiten auf drei Rollen. Eingefroren vor Welle 20. Werkzeuge INNERHALB der fuenf Welten stehen nicht in dieser Liste — sie tragen seit Welle 17 data-hb-seite=\"welt\" und hb-weltseite.css.",
+ "basis": "818c20b0a057dc2a8029ae9ac390dfe76b44d3d8",
+ "seiten": [
+  "begriffskarten.html",
+  "erste-wohnung.html",
+  "finanzcheck.html",
+  "finanzielle-freiheit.html",
+  "gehaltsverhandlung.html",
+  "jobwechsel.html",
+  "koeln-quiz.html",
+  "konsumcheck.html",
+  "lernpfade.html",
+  "mieten-oder-kaufen.html",
+  "schuldenfrei.html",
+  "shortcut-speedrun.html",
+  "sparziel.html",
+  "steuererklaerung.html",
+  "stromfresser.html",
+  "studium-ausbildung.html",
+  "suche.html",
+  "tagesdosis.html",
+  "tastentrainer.html",
+  "versicherungscheck.html",
+  "wahr-oder-falsch.html",
+  "wissensquiz.html",
+  "zinseszins.html"
+ ],
+ "kit": {
+  ":root": [
+   "--bg:#f3eee5;--bg2:#ebe3d4;--paper:#fffdf8;--ink:#1f1c17;--ink2:#524a3e;--rule:#d8cdb7;--terra:#b04a31;--ochre:#a97a1d;--moss:#4a5c39;--burg:#792d29;--aub:#6b3951"
+  ],
+  "*": [
+   "box-sizing:border-box;margin:0;padding:0"
+  ],
+  "body": [
+   "background:var(--bg);color:var(--ink);font-family:'Manrope',system-ui,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased"
+  ],
+  ".eyebrow": [
+   "font-family:'JetBrainsMono',monospace;font-size:.66rem;letter-spacing:.32em;text-transform:uppercase;color:var(--terra)"
+  ],
+  "h1": [
+   "font-family:'Fraunces',serif;font-weight:400;font-size:clamp(2rem,6.5vw,3.2rem);line-height:1.02;letter-spacing:-.02em;margin:.45rem0.5rem"
+  ],
+  "h1 em": [
+   "font-style:italic;color:var(--terra)"
+  ],
+  ".lead": [
+   "color:var(--ink2);max-width:60ch;font-size:1.02rem"
+  ],
+  ".foot": [
+   "font-family:'JetBrainsMono',monospace;font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink2);text-align:center;margin-top:2rem"
+  ],
+  ".card": [
+   "background:var(--paper);border:1pxsolidvar(--rule);border-radius:16px;padding:1.1rem1.15rem;margin-top:1.1rem"
+  ],
+  ".field input:focus": [
+   "outline:none;border-color:var(--terra);background:#fff"
+  ],
+  ".result .eyebrow": [
+   "color:var(--ochre)"
+  ],
+  ".chart-card": [
+   "background:var(--paper);border:1pxsolidvar(--rule);border-radius:16px;padding:1.05rem1.1rem1.2rem;margin-top:1.1rem"
+  ],
+  ".chart-card h4": [
+   "font-family:'JetBrainsMono',monospace;font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--terra);margin-bottom:.3rem"
+  ],
+  "canvas": [
+   "width:100%;height:auto;display:block;margin-top:.3rem"
+  ]
+ },
+ "breiten_vorher": {
+  "begriffskarten.html": 680,
+  "erste-wohnung.html": 840,
+  "finanzcheck.html": 760,
+  "finanzielle-freiheit.html": 820,
+  "gehaltsverhandlung.html": 820,
+  "jobwechsel.html": 940,
+  "koeln-quiz.html": 680,
+  "konsumcheck.html": 760,
+  "lernpfade.html": 780,
+  "mieten-oder-kaufen.html": 820,
+  "schuldenfrei.html": 840,
+  "shortcut-speedrun.html": 720,
+  "sparziel.html": 760,
+  "steuererklaerung.html": 760,
+  "stromfresser.html": 780,
+  "studium-ausbildung.html": 900,
+  "tagesdosis.html": 680,
+  "tastentrainer.html": 760,
+  "versicherungscheck.html": 780,
+  "wahr-oder-falsch.html": 680,
+  "wissensquiz.html": 720,
+  "zinseszins.html": 820
+ },
+ "mass": {
+  "begriffskarten.html": "eng",
+  "erste-wohnung.html": "weit",
+  "finanzcheck.html": "normal",
+  "finanzielle-freiheit.html": "normal",
+  "gehaltsverhandlung.html": "normal",
+  "jobwechsel.html": "weit",
+  "koeln-quiz.html": "eng",
+  "konsumcheck.html": "normal",
+  "lernpfade.html": "normal",
+  "mieten-oder-kaufen.html": "normal",
+  "schuldenfrei.html": "weit",
+  "shortcut-speedrun.html": "eng",
+  "sparziel.html": "normal",
+  "steuererklaerung.html": "normal",
+  "stromfresser.html": "normal",
+  "studium-ausbildung.html": "weit",
+  "tagesdosis.html": "eng",
+  "tastentrainer.html": "normal",
+  "versicherungscheck.html": "normal",
+  "wahr-oder-falsch.html": "eng",
+  "wissensquiz.html": "eng",
+  "zinseszins.html": "normal"
+ }
+}

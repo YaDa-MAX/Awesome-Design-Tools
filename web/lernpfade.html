@@ -32,16 +32,10 @@
 <!-- /hb:kopf -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;1,400&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="hb-werkzeug.css">
 <style>
-:root{--bg:#f3eee5;--bg2:#ebe3d4;--paper:#fffdf8;--ink:#1f1c17;--ink2:#524a3e;--rule:#d8cdb7;--terra:#b04a31;--ochre:#a97a1d;--moss:#4a5c39;--burg:#792d29;--aub:#6b3951;--good:#6f8f4e;
+:root{
 --bildung:#4a5c39;--beruf:#6b3951;--finanzen:#b04a31;--wohnen:#a97a1d;--familie:#792d29;--gesundheit:#4a5c39;--recht:#6b3951;--digital:#b04a31;--buero:#524a3e;--freizeit:#a97a1d;--alter:#792d29}
-*{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg);color:var(--ink);font-family:'Manrope',system-ui,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
-.wrap{max-width:780px;margin:0 auto;padding:1.6rem 1.1rem 5rem}
-.eyebrow{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.32em;text-transform:uppercase;color:var(--aub)}
-h1{font-family:'Fraunces',serif;font-weight:400;font-size:clamp(1.9rem,6vw,3rem);line-height:1.04;letter-spacing:-.02em;margin:.45rem 0 .5rem}
-h1 em{font-style:italic;color:var(--aub)}
-.lead{color:var(--ink2);max-width:60ch;font-size:1.02rem}
 .summary{display:flex;gap:.7rem;flex-wrap:wrap;margin:1.3rem 0 .4rem}
 .summary .s{flex:1 1 0;min-width:130px;background:var(--ink);color:var(--bg);border-radius:14px;padding:.8rem .9rem}
 .summary .l{font-family:'JetBrains Mono',monospace;font-size:.54rem;letter-spacing:.1em;text-transform:uppercase;color:#cdbfa8}
@@ -79,7 +73,6 @@ h1 em{font-style:italic;color:var(--aub)}
 .verdict{margin:.2rem .5rem 0;background:rgba(111,143,78,.13);border:1px solid rgba(111,143,78,.4);border-radius:12px;padding:.8rem .9rem;font-size:.92rem;color:#3c4a2c}
 .verdict b{color:var(--moss)}
 .reset{display:inline-block;margin:.5rem .5rem 0;font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink2);background:none;border:none;cursor:pointer;text-decoration:underline}
-.foot{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink2);text-align:center;margin-top:2.4rem}
 .foot a{color:var(--aub)}
 </style>
 <link rel="stylesheet" href="heiben-design.css">
@@ -90,7 +83,7 @@ h1 em{font-style:italic;color:var(--aub)}
 <link rel="stylesheet" href="hb-fuss.css">
 <script src="hb-fuss.js" defer></script>
 </head>
-<body data-hb-welt="wissen">
+<body data-hb-welt="wissen" data-hb-seite="werkzeug">
 <div class="wrap">
   <p class="eyebrow">HeiBen · Lebenswissen</p>
   <h1>Lern<em>pfade</em></h1>

@@ -235,15 +235,10 @@ body[data-hb-seite="welt"] footer a{color:var(--hb-text-leise)}
 body[data-hb-seite="welt"] .foot a:hover,
 body[data-hb-seite="welt"] footer a:hover{color:var(--ws-welt-tief)}
 
-/* --- Wortmarke im Fuß -----------------------------------------------------
-   .brand-block steht auf 21 dieser Seiten im Fußbereich; die Regel lag dort
-   kopiert. Reine Maßangabe, darum unverändert übernommen. Das früher
-   mitkopierte .wms-lockup stand auf KEINER Seite im Markup und ist entfallen. */
-body[data-hb-seite="welt"] .brand{display:flex;align-items:center;text-decoration:none}
-body[data-hb-seite="welt"] .brand svg{height:30px;width:auto;display:block}
-body[data-hb-seite="welt"] .brand-block svg{
-  height:34px;width:auto;display:block;margin-bottom:1.2rem;
-}
+/* Die Wortmarken-Regeln standen hier bis Welle 18. Sie beschrieben den
+   kopierten Fußbereich; seit der gemeinsame Fuß (hb-fuss.js) ihn abgelöst hat,
+   gibt es .brand und .brand-block auf keiner Weltseite mehr im Markup.
+   Entfernt in Welle 20 zusammen mit den 109 übrigen toten Regeln. */
 
 /* --- Dichte: Werkzeugseiten tragen kleinere Titel -------------------------
    Planer und Redaktionen setzten ihre Überschrift von Hand kleiner

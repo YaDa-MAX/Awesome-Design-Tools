@@ -16,7 +16,7 @@ Statisches HTML/JS/CSS-**PWA ohne Build-Schritt**, offline-fähig, localStorage.
 ## Pflicht-Workflow nach JEDER Änderung unter web/
 1. **Precache + Service-Worker-Version**: `cd web && node ../tools/gen_sw.js` — erzeugt die
    `PRECACHE`-Liste aus dem Dateibestand (Referenzen aus HTML **und** `url()` in Stylesheets,
-   inline `<style>` eingeschlossen) UND zählt die Cache-Version hoch (aktuell **-3022**).
+   inline `<style>` eingeschlossen) UND zählt die Cache-Version hoch (aktuell **-3023**).
    Nie von Hand pflegen. Standalone-Seiten (`typ` in `tools/seiten.json`) bleiben automatisch
    draußen; `vendor/` und Dateien > 150 KB kommen zur Laufzeit in den Cache (der fetch-Handler
    macht stale-while-revalidate). Wer nur die Version braucht, bumpt trotzdem über den Generator.
@@ -188,6 +188,18 @@ Statisches HTML/JS/CSS-**PWA ohne Build-Schritt**, offline-fähig, localStorage.
   `[data-hb-seite="kompendium"]`; Umbau über `tools/umbau_kompendien.py` (Kit eingefroren
   in `tools/kompendium-kit.json`). Inline-CSS 45 → 10 KB, netto 26 KB weniger,
   0 Fließtextverlust, 0/109 PageErrors. **Neues Kompendium: Skript laufen lassen.**
+  V3-W20 fertig: **Werkzeuge, Wissen und totes CSS**. 23 Rechner-/Wissensseiten zentral in
+  `web/hb-werkzeug.css` (`[data-hb-seite="werkzeug"]`), Umbau über
+  `tools/umbau_werkzeuge.py`, Kit in `tools/werkzeug-kit.json`. Der Satzspiegel war
+  22-mal dieselbe Regel mit **neun** verschiedenen `max-width` (680–940 px) — jetzt drei
+  Rollen: `data-hb-mass="eng|normal|weit"` → 700/780/900 px. Inline-CSS 90 → 64 KB.
+  `tools/totes_css.py` entfernte 109 Regeln (7 KB) für Markup, das es nicht mehr gibt —
+  Nachwirkung von W18. **Achtung: `typ:"werkzeug"` trifft auch Werkzeuge INNERHALB der
+  Welten; die tragen `data-hb-seite="welt"` und gehören nicht in diese Gruppe.**
+  Danach im ganzen Bestand nur noch 4 Selektoren ≥6× wortgleich, 0 KB vermeidbar —
+  **die Entdoppelung des CSS ist abgeschlossen**. Sweeps brauchen einen nebenläufigen
+  Server: `python3 -m http.server` bricht auf `kulinarik-rezepte.html` (159 fehlende
+  Bilder) Verbindungen ab und erzeugt Phantom-Fehler.
 - `web/startseite-klassisch.html` = **die Startseite bis W10**, archiviert (standalone, nicht
   verlinkt, nicht precached). Sie ist die einzige Seite, die `hb-menue.css` und `hb-suche-nav.js`
   noch braucht.

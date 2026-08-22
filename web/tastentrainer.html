@@ -32,15 +32,9 @@
 <!-- /hb:kopf -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;1,400&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="hb-werkzeug.css">
 <style>
-:root{--bg:#f3eee5;--bg2:#ebe3d4;--paper:#fffdf8;--ink:#1f1c17;--ink2:#524a3e;--rule:#d8cdb7;--terra:#b04a31;--ochre:#a97a1d;--moss:#4a5c39;--burg:#792d29;--aub:#6b3951;--good:#9ec27f;--bad:#e7a48f}
-*{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg);color:var(--ink);font-family:'Manrope',system-ui,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
-.wrap{max-width:760px;margin:0 auto;padding:1.6rem 1.1rem 5rem}
-.eyebrow{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.32em;text-transform:uppercase;color:var(--terra)}
-h1{font-family:'Fraunces',serif;font-weight:400;font-size:clamp(2rem,6.5vw,3.2rem);line-height:1.02;letter-spacing:-.02em;margin:.45rem 0 .5rem}
-h1 em{font-style:italic;color:var(--terra)}
-.lead{color:var(--ink2);max-width:60ch;font-size:1.02rem}
+:root{--bad:#e7a48f}
 .bar{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.1rem;align-items:center}
 .seg{display:inline-flex;border:1px solid var(--rule);border-radius:999px;overflow:hidden;background:var(--paper)}
 .seg button{border:0;background:transparent;font:inherit;font-weight:600;font-size:.82rem;padding:.42rem .8rem;cursor:pointer;color:var(--ink2)}
@@ -49,7 +43,6 @@ h1 em{font-style:italic;color:var(--terra)}
 .os button{border:1px solid var(--rule);background:var(--paper);border-radius:8px;padding:.3rem .55rem;cursor:pointer;font:inherit;font-size:.62rem;color:var(--ink2)}
 .os button.on{background:var(--moss);color:#fff;border-color:var(--moss)}
 .result{position:sticky;top:.6rem;z-index:5;background:var(--ink);color:var(--bg);border-radius:18px;padding:1.2rem 1.3rem 1.3rem;margin-top:1.2rem}
-.result .eyebrow{color:var(--ochre)}
 .stats{display:flex;gap:1.4rem;align-items:baseline;margin-top:.3rem;flex-wrap:wrap}
 .stat .v{font-family:'Fraunces',serif;font-weight:500;font-size:clamp(2.4rem,11vw,3.4rem);line-height:1}
 .stat .l{font-family:'JetBrains Mono',monospace;font-size:.54rem;letter-spacing:.1em;text-transform:uppercase;color:#cdbfa8}
@@ -57,7 +50,6 @@ h1 em{font-style:italic;color:var(--terra)}
 .acc{margin-top:.7rem}
 .acctrack{background:rgba(255,255,255,.12);border-radius:6px;height:10px;overflow:hidden}
 .accfill{height:100%;border-radius:6px;background:var(--good);transition:width .4s}
-.card{background:var(--paper);border:1px solid var(--rule);border-radius:16px;padding:1.6rem 1.2rem;margin-top:1.2rem;text-align:center}
 .card .ask{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ink2)}
 .card .action{font-family:'Fraunces',serif;font-size:clamp(1.7rem,7vw,2.5rem);margin:.3rem 0 .2rem}
 .card .hint{font-size:.86rem;color:var(--ink2)}
@@ -70,7 +62,6 @@ h1 em{font-style:italic;color:var(--terra)}
 @keyframes fok{0%{background:#eaf3e0}100%{background:var(--paper)}}
 @keyframes fno{0%,60%{background:#f7e6e0}100%{background:var(--paper)}}
 .tip{font-size:.82rem;color:var(--ink2);margin-top:1rem;border-left:3px solid var(--ochre);padding-left:.7rem}
-.foot{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink2);text-align:center;margin-top:2rem}
 </style>
 <link rel="stylesheet" href="heiben-design.css">
 <script src="heiben-nav.js" defer></script>
@@ -80,7 +71,7 @@ h1 em{font-style:italic;color:var(--terra)}
 <link rel="stylesheet" href="hb-fuss.css">
 <script src="hb-fuss.js" defer></script>
 </head>
-<body data-hb-welt="wissen">
+<body data-hb-welt="wissen" data-hb-seite="werkzeug">
 <div class="wrap">
   <p class="eyebrow">HeiBen · Büro &amp; Software</p>
   <h1>Tastenkürzel, <em>im Gefühl</em></h1>

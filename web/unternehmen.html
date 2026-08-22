@@ -45,12 +45,7 @@
 <link rel="stylesheet" href="hb-bestand-statisch.css">
 <link rel="stylesheet" href="hb-motion.css">
 <style id="hb-logo-css">
-.brand{display:flex;align-items:center;text-decoration:none;}
-.brand svg{height:30px;width:auto;display:block;}
 @media(max-width:600px){.brand svg{height:25px;}}
-.brand-block svg{height:34px;width:auto;display:block;margin-bottom:1.2rem;}
-.wms-lockup{display:flex;justify-content:center;padding:6px 0 2px;}
-.wms-lockup svg{width:min(540px,84vw);height:auto;display:block;}
 </style>
 <link rel="stylesheet" href="heiben-design.css">
 <script src="heiben-nav.js" defer></script>
@@ -80,7 +75,7 @@
   .u-eyebrow{ font-family:'JetBrains Mono',monospace; font-size:0.7rem; letter-spacing:0.28em; text-transform:uppercase; color:var(--terracotta); margin-bottom:.6rem; }
   .u-sec h2{ font-family:'Fraunces',serif; font-weight:340; font-size:clamp(1.5rem,3.5vw,2.2rem); letter-spacing:-.02em; margin-bottom:.4rem; }
   .u-sec p.lead{ color:var(--ink-soft); max-width:64ch; }
-  /* Organigramm */
+  
   .u-org{ display:grid; grid-template-columns:1.3fr .9fr; gap:1.6rem; align-items:start; margin-top:1.4rem; }
   @media(max-width:860px){ .u-org{ grid-template-columns:1fr; } }
   .u-stage{ background:#fff; border:1px solid var(--rule); border-radius:20px; padding:.6rem; }
@@ -100,7 +95,7 @@
   .u-legend{ display:flex; flex-wrap:wrap; gap:.5rem 1rem; margin-top:.8rem; font-size:.72rem; color:var(--ink-soft); }
   .u-legend span{ display:inline-flex; align-items:center; gap:.35rem; }
   .u-dot{ width:11px; height:11px; border-radius:50%; display:inline-block; }
-  /* Modell-Matrix */
+  
   .u-table{ width:100%; border-collapse:collapse; margin-top:1.2rem; font-size:.88rem; }
   .u-table th,.u-table td{ text-align:left; padding:.6rem .5rem; border-bottom:1px solid var(--rule); vertical-align:top; }
   .u-table th{ font-family:'JetBrains Mono',monospace; font-size:.6rem; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-soft); }
@@ -109,7 +104,7 @@
   .u-pill.live{ background:#e7eede; color:var(--moss); }
   .u-pill.proto{ background:#f6e8c9; color:#8a5a12; }
   .u-pill.konz{ background:#efe0de; color:var(--burgundy); }
-  /* Schichten */
+  
   .u-layer{ border:1px solid var(--rule); border-radius:16px; padding:1rem 1.2rem; margin:.7rem 0; background:#fff; }
   .u-layer .u-lh{ display:flex; align-items:baseline; gap:.7rem; margin-bottom:.6rem; }
   .u-layer .u-num{ font-family:'JetBrains Mono',monospace; font-size:.62rem; color:var(--terracotta); letter-spacing:.1em; }
@@ -119,7 +114,7 @@
   .u-chip b{ display:block; font-size:.82rem; }
   .u-chip span{ font-family:'JetBrains Mono',monospace; font-size:.56rem; color:var(--ink-soft); text-transform:uppercase; letter-spacing:.05em; }
   .u-flow{ text-align:center; color:var(--ink-soft); font-family:'JetBrains Mono',monospace; font-size:.7rem; letter-spacing:.1em; }
-  /* Roadmap */
+  
   .u-road{ display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; margin-top:1.2rem; }
   @media(max-width:760px){ .u-road{ grid-template-columns:1fr; } }
   .u-phase{ border:1px solid var(--rule); border-radius:16px; padding:1.1rem; background:#fff; }
@@ -131,10 +126,6 @@
   .u-phase li::before{ content:'→'; position:absolute; left:0; color:var(--terracotta); }
   .u-note{ font-family:'JetBrains Mono',monospace; font-size:.62rem; color:var(--ink-soft); margin-top:1rem; }
 
-/* Querlauf bei schmalen Fenstern (Remake v3, Welle 9 — Aufräumen).
-   Ursache jeweils gemessen, nicht geraten. */
-/* Die Kennzahlen-Tabelle ist breiter als ein Telefon; sie scrollt jetzt in sich
-   statt die ganze Seite zu verschieben. */
 .u-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
 
 .u-weg{font-family:'JetBrains Mono',monospace;font-size:.64rem;letter-spacing:.13em;

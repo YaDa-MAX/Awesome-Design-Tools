@@ -2223,3 +2223,100 @@ und Legal. Wiederkehrend darin: `:root`, `body`, `*`, `h1`, `h1 em`, `.eyebrow`,
 `.foot`, `.result .eyebrow`. Dazu **totes CSS**: `.wms-lockup` und `.wms-lockup svg` stehen
 noch auf 17 Seiten im Stylesheet und auf **keiner** im Markup — in W17 nur für die
 Weltseiten entfernt.
+
+---
+
+### WELLE 20: WERKZEUGE, WISSEN UND TOTES CSS (SW -3023)
+
+**Dritte und letzte Front gegen das kopierte Kit.** Nach den Weltseiten (W17), dem Fuß
+(W18) und den Kompendien (W19) blieben 53 Seiten mit 250 KB Inline-CSS. Zwei Befunde
+darin, beide erledigt.
+
+#### Teil 1 — die 23 Werkzeug- und Wissensseiten
+
+19 Rechner, Quiz und Trainer plus `begriffskarten`, `lernpfade`, `suche`, `tagesdosis`
+trugen dieselbe Grundlage im eigenen `<style>` — und dieselben Rechner-Bauteile:
+
+| Bauteil | auf … Seiten | davon wortgleich |
+|---|---|---|
+| `.result` (das dunkle Ergebnisfeld) | 14 | 4 — neun Fassungen |
+| `.wrap` | 22 | 5 — **neun verschiedene max-width** |
+| `.lead`, `.foot`, `h1`, `.eyebrow` | 22–24 | je 16–18 |
+| `.card`, `.chart-card`, `canvas`, `.field input` | 8–11 | je 4–8 |
+
+**Der Satzspiegel war der klarste Fall von Drift:** 22-mal dieselbe Regel mit
+`max-width` zwischen **680 und 940 px** — neun Werte, keiner begründet. Sie sind jetzt
+**drei Rollen** (`data-hb-mass="eng|normal|weit"` → 700 / 780 / 900 px). Das ist eine
+**bewusst sichtbare Änderung**: keine Seite verschiebt sich um mehr als 60 px, aber
+mehrere verschieben sich. Die Zuordnung steht in `tools/werkzeug-kit.json` samt der
+alten Breite je Seite.
+
+Beim Ergebnisfeld dagegen war nicht alles Drift: drei Seiten heften es fest
+(`position:sticky`). Kleben ist eine Absicht, ein Abstand nicht — die Drift-Erkennung
+lässt `position:sticky` stehen und nimmt nur die neun Fassungen mit, die sich allein im
+`margin-top` unterschieden.
+
+| | vorher | nachher |
+|---|---|---|
+| Inline-CSS der 23 Seiten | 90 KB | **64 KB** |
+| zentral dafür | — | 5,8 KB (`hb-werkzeug.css`) |
+| netto | | **20 KB weniger** |
+| Fließtext | 13.970 Zeichen | 13.970 (Δ 0) |
+
+#### Teil 2 — totes CSS, von Welle 18 hinterlassen
+
+W18 hat den kopierten Fußbereich von 33 Seiten entfernt. Die Regeln dafür blieben stehen:
+`.brand-block svg` stand danach auf **22 Seiten im Stylesheet und auf einer im Markup**,
+`.wms-lockup` auf 22 zu 2. `tools/totes_css.py` prüft je Seite und Klasse, ob sie im
+Markup steht **oder von einem Skript erzeugt wird**, und entfernt nur Regeln, deren
+sämtliche Selektorteile tot sind: **109 Regeln, 7 KB**. Auch in `hb-weltseite.css` fielen
+die drei Wortmarken-Regeln, die ich in W17 selbst dorthin gestellt hatte.
+
+#### Zwei Fallen, beide im Trockenlauf gefangen
+
+1. **Vier Ziele waren gar nicht meine.** `typ:"werkzeug"` trifft auch die Werkzeuge
+   *innerhalb* der Welten — `immobilienbudget`, `reisebudget`, `reisen-packliste`,
+   `immobilien-nebenkosten`. Die tragen seit W17 `data-hb-seite="welt"`. Der Umbau hätte
+   dort Kit-Regeln entfernt, die `hb-werkzeug.css` nicht ersetzen kann, weil sein Scope
+   nicht greift — Seiten ohne Gestalt. Im `--pruefen`-Lauf an der Zeile
+   „`immobilienbudget.html  css eingehängt · 3 Kit + 4 Drift entfernt`" **ohne**
+   „body markiert" erkannt: wo die Rolle schon gesetzt ist, gehört die Seite jemand
+   anderem. Kit neu erhoben, jetzt 23 statt 27 Seiten, plus eine Sicherung, die vor dem
+   Lauf prüft, ob ein Ziel bereits eine Seitenrolle trägt.
+2. **Das Aufräumen hätte 40 Seiten angefasst, um an 0 Regeln nichts zu ändern.**
+   `totes_css.py` normalisiert Leerzeilen — dadurch wich die Datei vom Original ab, auch
+   wenn nichts zu entfernen war. Jetzt wird nur geschrieben, wenn wirklich eine Regel fiel.
+
+#### Nachweis
+
+| Prüfung | Ergebnis |
+|---|---|
+| PageErrors über alle 109 Seiten | **0 / 109** |
+| Werkzeugseiten mit richtiger Rolle, Satzspiegel, Fraunces-Titel, Mono-Kapitälchen, Ergebnisfeld auf Tinte, Karte auf Papier, gemeinsamem Fuß, ohne Überlauf | **23 / 23** |
+| Fließtextverlust | keiner |
+| Wert-Literale in `hb-werkzeug.css` | keine |
+
+**Messfehler statt Seitenfehler:** Der erste Sweep meldete `kulinarik-rezepte.html` mit
+PageError und ohne Fuß. Ursache war der einfädige `python3 -m http.server`: die Seite
+fordert 159 Rezeptbilder an, die es noch nicht gibt, der Server bricht die Verbindung ab
+und `hb-fuss.js` kam nicht mehr an. Mit nebenläufigem Server: 0 Fehler, Fuß vorhanden,
+5 Weltpunkte. **Sweeps laufen ab jetzt gegen einen ThreadingHTTPServer.**
+
+#### Stand der Entdoppelung nach W17–W20
+
+| Welle | Gruppe | Ergebnis |
+|---|---|---|
+| W17 | 42 Weltunterseiten | Inline-CSS 238 → 192 KB |
+| W18 | Fußbereich, 33 Kopien | HTML 3.108 → 3.038 KB, 67 Seiten ohne Rechts-Link → 0 |
+| W19 | 9 Kompendien | 45 → 10 KB |
+| W20 | 23 Werkzeug-/Wissensseiten + totes CSS | 90 → 64 KB, 109 tote Regeln |
+
+**Im ganzen Bestand sind jetzt noch 4 Selektoren ≥ 6-fach wortgleich — 0 KB vermeidbar.**
+Die verbliebenen 418 KB Inline-CSS verteilen sich auf 2.670 verschiedene Selektoren; das
+ist seitenspezifische Gestalt, keine Kopie mehr. **Die Welle gegen die Redundanz im CSS
+ist damit abgeschlossen.**
+
+**Was als Nächstes lohnt** (keine Redundanz mehr, andere Baustellen):
+Bewegung — 17 der 42 Weltunterseiten binden `hb-motion.js` ein, **keine** setzt
+`data-hb-regie="ansage"`. Und `.note` trägt auf 10 Seiten zwei Bedeutungen
+(Mono-Kapitälchen vs. Fließtext-Hinweis) — ein echter Namenskonflikt.

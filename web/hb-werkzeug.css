@@ -1,0 +1,124 @@
+/* ============================================================================
+   HeiBen — Gestalt der Werkzeug- und Wissensseiten. Remake v3, Welle 20.
+
+   27 Seiten — 19 Rechner, 4 Wissensseiten, dazu Quiz und Trainer — trugen
+   dieselbe Grundlage im eigenen <style>: Grund, Satzspiegel, Kapitälchen,
+   Überschrift, Vorspann, Abbinder. Dazu die Rechner-Bauteile: das dunkle
+   Ergebnisfeld, die Eingabekarte, das Diagrammfeld.
+
+   REGELN
+   - Alles auf [data-hb-seite="werkzeug"] am body. Klassennamen aus dem
+     kopierten Kit, damit das Markup unberührt bleibt.
+   - Kein Wert im Bauteil. Farbe, Maß und Zeit aus heiben-design.css.
+   - Wird VOR dem <style>-Block der Seite eingebunden: echte Eigenheiten
+     einer Seite gewinnen weiter.
+   ========================================================================== */
+
+body[data-hb-seite="werkzeug"]{
+  --w-akzent:var(--hb-akzent);      /* Terrakotta: Überschrift, Fokus */
+  --w-leise:var(--hb-w-reisen);     /* Ocker: Beschriftung im Ergebnisfeld */
+  --w-mass:780px;                   /* Vorgabe, siehe data-hb-mass */
+  --w-auf-tief:color-mix(in srgb, var(--hb-text-invers) 88%, var(--hb-tief));
+
+  margin:0;
+  background:var(--hb-grund);
+  color:var(--hb-text);
+  font-family:var(--hb-sans);
+  line-height:var(--hb-zeile-weit);
+
+  /* Alte Kit-Namen zeigen auf die Token-Ebene — ein Ort, 27 Seiten. */
+  --bg:var(--hb-grund);      --bg2:var(--hb-grund-2);   --paper:var(--hb-papier);
+  --ink:var(--hb-text);      --ink2:var(--hb-text-leise);
+  --rule:var(--hb-linie);    --terra:var(--hb-akzent);  --ochre:var(--hb-w-reisen);
+  --moss:var(--hb-w-wohnen); --burg:var(--hb-w-immobilien); --aub:var(--hb-w-kulinarik);
+  --good:var(--hb-gut);
+}
+body[data-hb-seite="werkzeug"] *{box-sizing:border-box;margin:0;padding:0}
+
+/* --- Satzspiegel: drei Rollen statt neun Zufallszahlen --------------------
+   Die 22 Seiten trugen dieselbe .wrap-Regel mit max-width zwischen 680 und
+   940 px — neun verschiedene Werte, keiner davon begründet. Ein Quiz ist
+   schmal, eine Tabelle breit; mehr Unterscheidung braucht es nicht. */
+body[data-hb-seite="werkzeug"] .wrap{
+  max-width:var(--w-mass);margin:0 auto;
+  padding:var(--hb-raum-5) clamp(1rem,4vw,1.4rem) var(--hb-raum-9);
+}
+body[data-hb-seite="werkzeug"][data-hb-mass="eng"]{--w-mass:700px}
+body[data-hb-seite="werkzeug"][data-hb-mass="weit"]{--w-mass:900px}
+
+/* --- Kopf ----------------------------------------------------------------- */
+body[data-hb-seite="werkzeug"] .eyebrow{
+  font-family:var(--hb-mono);font-size:var(--hb-s-mikro);
+  letter-spacing:var(--hb-sperr-mikro);text-transform:uppercase;color:var(--w-akzent);
+}
+body[data-hb-seite="werkzeug"] h1{
+  font-family:var(--hb-serif);font-weight:400;font-size:var(--hb-s-h1);
+  line-height:var(--hb-zeile-eng);letter-spacing:var(--hb-sperr-eng);
+  margin:var(--hb-raum-2) 0 var(--hb-raum-2);
+}
+body[data-hb-seite="werkzeug"] h1 em{font-style:italic;color:var(--w-akzent)}
+body[data-hb-seite="werkzeug"] .lead{
+  color:var(--hb-text-leise);max-width:60ch;font-size:var(--hb-s-gross);
+}
+body[data-hb-seite="werkzeug"] .foot{
+  font-family:var(--hb-mono);font-size:.58rem;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--hb-text-leise);
+}
+body[data-hb-seite="werkzeug"] .foot a{color:var(--hb-w-kulinarik)}
+
+/* --- Das Ergebnisfeld: die Antwort steht auf Tinte ------------------------
+   Das Zeichen aller HeiBen-Rechner. 14 Seiten trugen es, in neun Fassungen,
+   die sich nur im margin-top unterschieden. Wer es festheften will, sagt das
+   weiter selbst — Kleben ist eine Absicht, ein Abstand nicht. */
+body[data-hb-seite="werkzeug"] .result{
+  background:var(--hb-text);color:var(--hb-text-invers);
+  border-radius:var(--hb-rund-l);
+  padding:var(--hb-raum-5) var(--hb-raum-5) var(--hb-raum-5);
+  margin-top:var(--hb-raum-5);
+}
+body[data-hb-seite="werkzeug"] .result .eyebrow{color:var(--w-leise)}
+body[data-hb-seite="werkzeug"] .verdict{
+  font-size:.96rem;color:var(--w-auf-tief);margin-top:var(--hb-raum-3);
+}
+body[data-hb-seite="werkzeug"] .verdict b{color:var(--w-leise)}
+
+/* --- Eingabe -------------------------------------------------------------- */
+body[data-hb-seite="werkzeug"] .card{
+  background:var(--hb-papier);border:1px solid var(--hb-linie);
+  border-radius:var(--hb-rund-l);padding:var(--hb-raum-4) var(--hb-raum-4);
+  margin-top:var(--hb-raum-4);box-shadow:var(--hb-hoehe-1);
+}
+body[data-hb-seite="werkzeug"] .card h3{
+  font-family:var(--hb-serif);font-weight:500;font-size:var(--hb-s-gross);
+  margin-bottom:var(--hb-raum-2);
+}
+body[data-hb-seite="werkzeug"] .field label{
+  display:block;font-family:var(--hb-mono);font-size:.58rem;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--hb-text-zart);
+  margin-bottom:.25rem;
+}
+body[data-hb-seite="werkzeug"] .field input,
+body[data-hb-seite="werkzeug"] .field select{
+  width:100%;padding:.55rem .65rem;border:1px solid var(--hb-linie);
+  border-radius:var(--hb-rund-s);background:var(--hb-grund);
+  font:inherit;color:var(--hb-text);
+  transition:border-color var(--hb-zeit-kurz) var(--hb-ease-standard),
+             background var(--hb-zeit-kurz) var(--hb-ease-standard);
+}
+body[data-hb-seite="werkzeug"] .field input:focus,
+body[data-hb-seite="werkzeug"] .field select:focus{
+  outline:none;border-color:var(--w-akzent);background:var(--hb-papier);
+}
+
+/* --- Diagramm ------------------------------------------------------------- */
+body[data-hb-seite="werkzeug"] .chart-card{
+  background:var(--hb-papier);border:1px solid var(--hb-linie);
+  border-radius:var(--hb-rund-l);padding:var(--hb-raum-4);margin-top:var(--hb-raum-4);
+}
+body[data-hb-seite="werkzeug"] .chart-card h4{
+  font-family:var(--hb-mono);font-size:var(--hb-s-mikro);letter-spacing:.14em;
+  text-transform:uppercase;color:var(--hb-text-zart);margin-bottom:var(--hb-raum-2);
+}
+body[data-hb-seite="werkzeug"] canvas{
+  width:100%;height:auto;display:block;margin-top:.3rem;
+}

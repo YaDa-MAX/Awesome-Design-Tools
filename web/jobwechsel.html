@@ -32,15 +32,8 @@
 <!-- /hb:kopf -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;1,400&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="hb-werkzeug.css">
 <style>
-:root{--bg:#f3eee5;--bg2:#ebe3d4;--paper:#fffdf8;--ink:#1f1c17;--ink2:#524a3e;--rule:#d8cdb7;--terra:#b04a31;--ochre:#a97a1d;--moss:#4a5c39;--burg:#792d29;--aub:#6b3951}
-*{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg);color:var(--ink);font-family:'Manrope',system-ui,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
-.wrap{max-width:940px;margin:0 auto;padding:1.6rem 1.1rem 5rem}
-.eyebrow{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.32em;text-transform:uppercase;color:var(--terra)}
-h1{font-family:'Fraunces',serif;font-weight:400;font-size:clamp(2rem,6.5vw,3.3rem);line-height:1.02;letter-spacing:-.02em;margin:.45rem 0 .5rem}
-h1 em{font-style:italic;color:var(--terra)}
-.lead{color:var(--ink2);max-width:62ch;font-size:1.02rem}
 .grid2{display:grid;gap:1rem;margin-top:1.4rem}
 @media(min-width:760px){.grid2{grid-template-columns:1fr 1fr}}
 .job{background:var(--paper);border:1px solid var(--rule);border-radius:16px;padding:1.15rem 1.15rem 1.3rem}
@@ -50,14 +43,11 @@ h1 em{font-style:italic;color:var(--terra)}
 .field{margin-top:.7rem}
 .field label{display:block;font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink2);margin-bottom:.22rem}
 .field input{width:100%;padding:.5rem .6rem;border:1px solid var(--rule);border-radius:9px;background:var(--bg);color:var(--ink);font:inherit;font-weight:600}
-.field input:focus{outline:none;border-color:var(--terra);background:#fff}
 .frow{display:grid;grid-template-columns:1fr 1fr;gap:.6rem}
 .assum{background:var(--bg2);border:1px solid var(--rule);border-radius:14px;padding:1rem 1.1rem;margin-top:1rem}
 .assum .ah{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink2);margin-bottom:.7rem}
 .arow{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
 @media(min-width:560px){.arow{grid-template-columns:1fr 1fr 1fr}}
-.result{margin-top:1.6rem;background:var(--ink);color:var(--bg);border-radius:18px;padding:1.4rem 1.3rem 1.5rem}
-.result .eyebrow{color:var(--ochre)}
 .verdict{font-family:'Fraunces',serif;font-weight:400;font-size:clamp(1.35rem,4vw,1.95rem);line-height:1.2;margin:.5rem 0 .2rem}
 .verdict b{color:var(--ochre);font-weight:500}
 .verdict .good{color:#9ec27f}.verdict .bad{color:#e7a48f}
@@ -82,7 +72,6 @@ tr:last-child td{border-bottom:none}
 tr.tot td{font-weight:800;background:var(--bg2)}
 .pos{color:var(--moss)}.neg{color:var(--burg)}
 .note{font-size:.82rem;color:var(--ink2);margin-top:1rem;max-width:64ch}
-.foot{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink2);text-align:center;margin-top:2rem}
 </style>
 <link rel="stylesheet" href="heiben-design.css">
 <script src="heiben-nav.js" defer></script>
@@ -92,7 +81,7 @@ tr.tot td{font-weight:800;background:var(--bg2)}
 <link rel="stylesheet" href="hb-fuss.css">
 <script src="hb-fuss.js" defer></script>
 </head>
-<body data-hb-welt="wissen">
+<body data-hb-welt="wissen" data-hb-seite="werkzeug" data-hb-mass="weit">
 <div class="wrap">
   <p class="eyebrow">HeiBen · Entscheidungshilfe</p>
   <h1>Lohnt sich der <em>Jobwechsel</em> wirklich?</h1>
