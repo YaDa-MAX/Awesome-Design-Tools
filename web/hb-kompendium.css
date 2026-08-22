@@ -1,0 +1,186 @@
+/* ============================================================================
+   HeiBen — Gestalt der Kompendien. Remake v3, Welle 19.
+
+   Acht Kompendien und der Wissens-Hub trugen dieselbe Maschinerie neunmal im
+   eigenen <style>: Filterleiste, Steckbriefkarte, Marken, Trefferzähler,
+   Leermeldung. 40 Selektoren wortgleich auf mindestens sechs der neun Seiten.
+   Hier stehen sie einmal.
+
+   REGELN
+   - Alles auf [data-hb-seite="kompendium"] am body. Die Klassennamen stammen
+     aus dem kopierten Kit und bleiben, damit das Markup unberührt bleibt.
+   - Kein Wert im Bauteil: Farbe aus --hb-welt (auf diesen Seiten Terrakotta),
+     Maße und Zeiten aus der Token-Ebene von heiben-design.css.
+   - Wird VOR dem <style>-Block der Seite eingebunden: was eine Seite eigenes
+     mitbringt, gewinnt weiter.
+   ========================================================================== */
+
+body[data-hb-seite="kompendium"]{
+  /* Rollen dieses Bauteils. Der zweite Akzent ist das Familien-Ocker; es
+     trägt hier die Beschriftungen, damit sie neben dem Terrakotta der
+     Überschriften zurücktreten. */
+  --k-akzent:var(--hb-welt);
+  --k-leise:var(--hb-w-reisen);
+  --k-ziel:var(--hb-w-kulinarik);
+  --k-mass:900px;                 /* Lesebreite dieser Nachschlagewerke */
+  --k-schleier:color-mix(in srgb, var(--hb-grund) 94%, transparent);
+
+  margin:0;
+  background:var(--hb-grund);
+  color:var(--hb-text);
+  font-family:var(--hb-sans);
+  line-height:var(--hb-zeile-weit);
+  -webkit-font-smoothing:antialiased;
+
+  /* Die alten Kit-Namen zeigen auf die Token-Ebene — ein Ort, neun Seiten. */
+  --bg:var(--hb-grund);      --bg2:var(--hb-grund-2);   --paper:var(--hb-papier);
+  --ink:var(--hb-text);      --ink2:var(--hb-text-leise);
+  --rule:var(--hb-linie);    --terra:var(--hb-akzent);  --ochre:var(--hb-w-reisen);
+  --moss:var(--hb-w-wohnen); --burg:var(--hb-w-immobilien); --aub:var(--hb-w-kulinarik);
+  --good:var(--hb-gut);
+}
+body[data-hb-seite="kompendium"] *{box-sizing:border-box;margin:0;padding:0}
+
+/* --- Kopf ----------------------------------------------------------------- */
+body[data-hb-seite="kompendium"] .wrap{
+  max-width:var(--k-mass);margin:0 auto;
+  padding:var(--hb-raum-5) clamp(1rem,4vw,1.6rem) var(--hb-raum-9);
+}
+body[data-hb-seite="kompendium"] .eyebrow{
+  font-family:var(--hb-mono);font-size:var(--hb-s-mikro);
+  letter-spacing:var(--hb-sperr-mikro);text-transform:uppercase;color:var(--k-akzent);
+}
+body[data-hb-seite="kompendium"] .leaf{display:inline-block;vertical-align:-6px;margin-right:.2rem}
+body[data-hb-seite="kompendium"] h1{
+  font-family:var(--hb-serif);font-weight:400;font-size:var(--hb-s-h1);
+  line-height:var(--hb-zeile-eng);letter-spacing:var(--hb-sperr-eng);
+  margin:var(--hb-raum-2) 0 var(--hb-raum-2);
+}
+body[data-hb-seite="kompendium"] h1 em{font-style:italic;color:var(--k-akzent)}
+body[data-hb-seite="kompendium"] .lead{
+  color:var(--hb-text-leise);max-width:64ch;font-size:var(--hb-s-gross);
+}
+
+/* --- Filterleiste: bleibt beim Blättern stehen ---------------------------- */
+body[data-hb-seite="kompendium"] .controls{
+  position:sticky;top:0;z-index:var(--hb-z-erhoben);
+  background:var(--k-schleier);backdrop-filter:blur(6px);
+  padding:var(--hb-raum-3) 0 var(--hb-raum-2);margin-top:var(--hb-raum-5);
+  border-bottom:1px solid var(--hb-linie);
+}
+body[data-hb-seite="kompendium"] .row{
+  display:flex;flex-wrap:wrap;gap:var(--hb-raum-2);align-items:center;
+  margin-bottom:var(--hb-raum-2);
+}
+body[data-hb-seite="kompendium"] .row .lbl{
+  font-family:var(--hb-mono);font-size:.55rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--k-leise);width:100%;margin-bottom:.1rem;
+}
+body[data-hb-seite="kompendium"] .chip{
+  border:1px solid var(--hb-linie);background:var(--hb-papier);
+  border-radius:var(--hb-rund-voll);padding:.36rem .85rem;
+  font:inherit;font-size:var(--hb-s-klein);font-weight:600;
+  color:var(--hb-text);cursor:pointer;
+  transition:background var(--hb-zeit-kurz) var(--hb-ease-standard),
+             border-color var(--hb-zeit-kurz) var(--hb-ease-standard),
+             color var(--hb-zeit-kurz) var(--hb-ease-standard);
+}
+body[data-hb-seite="kompendium"] .chip:hover{border-color:var(--k-akzent)}
+body[data-hb-seite="kompendium"] .chip.on{
+  background:var(--hb-text);color:var(--hb-text-invers);border-color:var(--hb-text);
+}
+body[data-hb-seite="kompendium"] .chip:focus-visible,
+body[data-hb-seite="kompendium"] #q:focus-visible,
+body[data-hb-seite="kompendium"] .close:focus-visible,
+body[data-hb-seite="kompendium"] .pc:focus-visible{
+  outline:2px solid var(--k-leise);outline-offset:2px;
+}
+body[data-hb-seite="kompendium"] #q{
+  flex:1;min-width:160px;border:1px solid var(--hb-linie);background:var(--hb-papier);
+  border-radius:var(--hb-rund-m);padding:.55rem .8rem;font:inherit;color:var(--hb-text);
+}
+body[data-hb-seite="kompendium"] .count{
+  font-family:var(--hb-mono);font-size:var(--hb-s-mikro);letter-spacing:.1em;
+  text-transform:uppercase;color:var(--hb-text-leise);
+  margin:var(--hb-raum-3) 0 var(--hb-raum-2);
+}
+
+/* --- Steckbrief ----------------------------------------------------------- */
+body[data-hb-seite="kompendium"] #detail{margin:var(--hb-raum-1) 0 var(--hb-raum-4)}
+body[data-hb-seite="kompendium"] .dcard{
+  background:var(--hb-papier);border:1px solid var(--hb-linie);
+  border-radius:var(--hb-rund-l);padding:var(--hb-raum-5) var(--hb-raum-5);
+  box-shadow:var(--hb-hoehe-1);
+}
+body[data-hb-seite="kompendium"] .dhead{
+  display:flex;justify-content:space-between;align-items:flex-start;
+  gap:var(--hb-raum-4);flex-wrap:wrap;
+}
+body[data-hb-seite="kompendium"] .dhead h2{
+  font-family:var(--hb-serif);font-weight:500;font-size:var(--hb-s-h3);
+  line-height:var(--hb-zeile-mittel);
+}
+body[data-hb-seite="kompendium"] .dhead .sub{color:var(--hb-text-leise);font-size:.92rem}
+body[data-hb-seite="kompendium"] .close{
+  border:0;background:var(--hb-grund-2);border-radius:var(--hb-rund-s);
+  padding:.35rem .7rem;font:inherit;font-weight:700;cursor:pointer;
+  color:var(--hb-text-leise);
+}
+body[data-hb-seite="kompendium"] .close:hover{color:var(--hb-text)}
+
+body[data-hb-seite="kompendium"] .badges{
+  display:flex;flex-wrap:wrap;gap:var(--hb-raum-2);margin:var(--hb-raum-3) 0 .2rem;
+}
+body[data-hb-seite="kompendium"] .b{
+  font-family:var(--hb-mono);font-size:.56rem;letter-spacing:.08em;
+  text-transform:uppercase;border-radius:var(--hb-rund-voll);
+  padding:.2rem .55rem;border:1px solid var(--hb-linie);
+}
+body[data-hb-seite="kompendium"] .b.kat{background:var(--hb-grund-2);color:var(--hb-text-leise)}
+
+body[data-hb-seite="kompendium"] .sec{
+  font-family:var(--hb-mono);font-size:.58rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--k-leise);
+}
+body[data-hb-seite="kompendium"] .stext{font-size:.95rem;margin-top:.3rem}
+body[data-hb-seite="kompendium"] .box .bt,
+body[data-hb-seite="kompendium"] .tip .bt{
+  font-family:var(--hb-mono);font-size:.56rem;letter-spacing:.12em;
+  text-transform:uppercase;display:block;margin-bottom:.2rem;
+}
+body[data-hb-seite="kompendium"] .tip{
+  border:1px dashed var(--k-leise);border-radius:var(--hb-rund-m);
+  padding:.75rem .95rem;margin-top:var(--hb-raum-2);font-size:.95rem;font-weight:600;
+}
+
+/* --- Trefferliste --------------------------------------------------------- */
+body[data-hb-seite="kompendium"] .pc{
+  text-align:left;background:var(--hb-papier);border:1px solid var(--hb-linie);
+  border-radius:var(--hb-rund-m);padding:.9rem 1rem;cursor:pointer;
+  transition:border-color var(--hb-zeit-kurz) var(--hb-ease-standard),
+             transform var(--hb-zeit-kurz) var(--hb-ease-standard),
+             box-shadow var(--hb-zeit-kurz) var(--hb-ease-standard);
+}
+body[data-hb-seite="kompendium"] .pc:hover{
+  border-color:var(--k-akzent);transform:translateY(-1px);box-shadow:var(--hb-hoehe-1);
+}
+body[data-hb-seite="kompendium"] .pc .n{
+  font-family:var(--hb-serif);font-size:1.08rem;line-height:1.18;
+}
+body[data-hb-seite="kompendium"] .pc .meta{
+  display:flex;flex-wrap:wrap;gap:.15rem .35rem;margin-top:var(--hb-raum-2);
+  font-family:var(--hb-mono);font-size:.6rem;letter-spacing:.06em;
+  color:var(--hb-text-zart);
+}
+body[data-hb-seite="kompendium"] .empty{
+  display:none;background:var(--hb-papier);border:1px dashed var(--hb-linie);
+  border-radius:var(--hb-rund-m);padding:var(--hb-raum-4);text-align:center;
+  color:var(--hb-text-leise);
+}
+
+/* --- Fuß der Seite (der eigene Abbinder, nicht der gemeinsame Fuß) -------- */
+body[data-hb-seite="kompendium"] .foot{
+  font-family:var(--hb-mono);font-size:.58rem;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--hb-text-leise);
+}
+body[data-hb-seite="kompendium"] .foot a{color:var(--k-ziel)}

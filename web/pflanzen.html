@@ -32,35 +32,12 @@
 <!-- /hb:kopf -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;1,400&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="hb-kompendium.css">
 <style>
-:root{--bg:#f3eee5;--bg2:#ebe3d4;--paper:#fffdf8;--ink:#1f1c17;--ink2:#524a3e;--rule:#d8cdb7;--terra:#b04a31;--ochre:#a97a1d;--moss:#4a5c39;--burg:#792d29;--aub:#6b3951;--good:#6f8f4e;--goodl:#9ec27f;--bad:#e7a48f}
-*{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg);color:var(--ink);font-family:'Manrope',system-ui,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
-.wrap{max-width:900px;margin:0 auto;padding:1.8rem 1.1rem 5rem}
-.eyebrow{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.32em;text-transform:uppercase;color:var(--terra)}
-.leaf{display:inline-block;vertical-align:-6px;margin-right:.2rem}
-h1{font-family:'Fraunces',serif;font-weight:400;font-size:clamp(2rem,6.5vw,3.1rem);line-height:1.02;letter-spacing:-.02em;margin:.3rem 0 .5rem}
-h1 em{font-style:italic;color:var(--terra)}
-.lead{color:var(--ink2);max-width:64ch;font-size:1.02rem}
-.controls{position:sticky;top:0;background:rgba(243,238,229,.94);backdrop-filter:blur(6px);z-index:5;padding:.9rem 0 .7rem;margin-top:1.3rem;border-bottom:1px solid var(--rule)}
-.row{display:flex;flex-wrap:wrap;gap:.4rem;align-items:center;margin-bottom:.5rem}
-.row .lbl{font-family:'JetBrains Mono',monospace;font-size:.55rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ochre);width:100%;margin-bottom:.1rem}
-.chip{border:1px solid var(--rule);background:var(--paper);border-radius:999px;padding:.34rem .8rem;font:inherit;font-size:.82rem;font-weight:600;cursor:pointer;color:var(--ink)}
-.chip.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
-.chip:focus-visible,#q:focus-visible{outline:2px solid var(--ochre);outline-offset:2px}
-#q{flex:1;min-width:160px;border:1px solid var(--rule);background:var(--paper);border-radius:11px;padding:.5rem .8rem;font:inherit}
-.count{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink2);margin:.9rem 0 .5rem}
-#detail{margin:.4rem 0 1.2rem}
-.dcard{background:var(--paper);border:1px solid var(--rule);border-radius:18px;padding:1.3rem 1.35rem}
-.dhead{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;flex-wrap:wrap}
-.dhead h2{font-family:'Fraunces',serif;font-weight:500;font-size:1.7rem;line-height:1.1}
+:root{--goodl:#9ec27f;--bad:#e7a48f}
 .dhead .lat{font-style:italic;color:var(--ink2);font-size:.95rem}
-.close{border:0;background:var(--bg2);border-radius:9px;padding:.35rem .7rem;font:inherit;font-weight:700;cursor:pointer;color:var(--ink2)}
-.badges{display:flex;flex-wrap:wrap;gap:.4rem;margin:.6rem 0 .2rem}
-.b{font-family:'JetBrains Mono',monospace;font-size:.56rem;letter-spacing:.08em;text-transform:uppercase;border-radius:999px;padding:.24rem .6rem}
 .b.env{background:var(--moss);color:#fffdf8}
 .b.zw{background:var(--aub);color:#fffdf8}
-.b.kat{background:var(--bg2);color:var(--ink2)}
 .b.warn{background:var(--burg);color:#fffdf8}
 .b.diff{border:1px solid var(--rule);color:var(--ink2)}
 .facts{margin-top:1rem;display:grid;grid-template-columns:130px 1fr;gap:.05rem .9rem}
@@ -71,8 +48,6 @@ h1 em{font-style:italic;color:var(--terra)}
 @media(max-width:560px){.facts{grid-template-columns:1fr}.facts dt{border-top:1px solid var(--rule);padding-top:.5rem}.facts dd{border-top:0;padding-top:.15rem}}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:.7rem}
 .pc{position:relative;text-align:left;background:var(--paper);border:1px solid var(--rule);border-radius:14px;padding:.85rem .95rem;cursor:pointer;font:inherit;color:var(--ink);transition:.12s}
-.pc:hover{border-color:var(--terra);transform:translateY(-1px)}
-.pc:focus-visible{outline:2px solid var(--ochre);outline-offset:2px}
 .pc .n{font-family:'Fraunces',serif;font-size:1.2rem;line-height:1.1;padding-right:1.5rem}
 .star{position:absolute;top:.4rem;right:.45rem;border:0;background:none;cursor:pointer;font-size:1.1rem;line-height:1;color:var(--rule);padding:.15rem .25rem}
 .star.on{color:var(--ochre)}
@@ -84,8 +59,6 @@ h1 em{font-style:italic;color:var(--terra)}
 .pc .dot{font-family:'JetBrains Mono',monospace;font-size:.54rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink2)}
 .pc .warn{color:var(--burg)}
 .empty{color:var(--ink2);text-align:center;padding:2rem 1rem}
-.foot{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink2);text-align:center;margin-top:2.4rem}
-.foot a{color:var(--aub)}
 a{color:var(--terra)}
 </style>
 <link rel="stylesheet" href="heiben-design.css">
@@ -96,7 +69,7 @@ a{color:var(--terra)}
 <link rel="stylesheet" href="hb-fuss.css">
 <script src="hb-fuss.js" defer></script>
 </head>
-<body data-hb-welt="wissen">
+<body data-hb-welt="wissen" data-hb-seite="kompendium">
 <div class="wrap">
   <p class="eyebrow">HeiBen · Heimat leben</p>
   <h1><svg class="leaf" width="34" height="34" viewBox="0 0 32 32" aria-hidden="true"><path d="M27 5C13 5 6 12 6 24c0 1 0 2 .3 3 1-6 5-11 12-14-5 4-8 8-9 15 12 1 21-6 21-19 0-2 0-3-3.3-4z" fill="none" stroke="#4a5c39" stroke-width="2" stroke-linejoin="round"/></svg>Pflanzen<em>wissen</em></h1>
