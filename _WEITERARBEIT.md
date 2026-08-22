@@ -2161,3 +2161,65 @@ auf den acht Kompendien (`auto`, `digital`, `erstehilfe`, `finanzen`, `haushalt`
 `lebensmittel`, `papierkram`, `pflanzen`) plus `wissen.html`. 37 KB auf neun Seiten,
 40 KB insgesamt vermeidbar. Methode wie in W17: Kit einfrieren, zentrale Datei,
 Drift an der Handschrift erkennen.
+
+---
+
+### WELLE 19: DIE KOMPENDIEN AUF EINE GESTALT (SW -3022)
+
+**Zweite Front derselben Welle gegen Redundanz.** Nach dem Fuß (W18) das zweite kopierte
+Kit: die acht Kompendien (`auto`, `digital`, `erstehilfe`, `finanzen`, `haushalt`,
+`lebensmittel`, `papierkram`, `pflanzen`) und der Wissens-Hub `wissen.html` trugen
+dieselbe Maschinerie **neunmal** im eigenen `<style>` — Filterleiste, Steckbriefkarte,
+Marken, Trefferzähler, Leermeldung.
+
+Gemessen vor dem Umbau: 136 verschiedene Selektoren auf neun Seiten, davon
+**40 wortgleich auf mindestens sechs** — 44 KB Inline-CSS, davon 26 KB reine Kopie.
+
+**Geliefert**
+
+| Datei | Was |
+|---|---|
+| `web/hb-kompendium.css` | die gemeinsame Gestalt, 8,5 KB, 0 Wert-Literale |
+| `tools/umbau_kompendien.py` | baut die neun Seiten um, wiederholbar, `--pruefen` |
+| `tools/kompendium-kit.json` | die eingefrorenen Kit-Fassungen samt Basis-Commit |
+
+Alles auf `[data-hb-seite="kompendium"]` am body — dieselbe Bauweise wie
+`hb-weltseite.css` in W17. Die alten Kit-Namen (`--terra`, `--ochre`, `--rule`, `--paper`)
+zeigen dort auf die Token-Ebene, damit die verbliebenen seiteneigenen Regeln mitfärben.
+Das Werkzeug teilt sich `bloecke()` und `kanon()` mit `umbau_weltseiten.py`, damit beide
+CSS gleich zerlegen.
+
+| | vorher | nachher |
+|---|---|---|
+| Inline-CSS auf den neun Seiten | 45 KB | **10 KB** |
+| zentral dafür | — | 8,5 KB |
+| netto | | **26 KB weniger** |
+| Fließtext | 6.019 Zeichen | 6.019 (Δ 0) |
+
+**Nachweis**
+
+| Prüfung | Ergebnis |
+|---|---|
+| PageErrors über alle 109 Seiten | **0 / 109** |
+| Kompendien mit gerenderten Steckbriefen, geöffneter Karte, formatiertem Suchfeld, Lesebreite 900 px, kein Überlauf | **9 / 9** |
+| Fließtextverlust | keiner |
+
+**Prüfung, die sich selbst irrte:** Der erste Lauf meldete `wissen.html` als „keine Treffer
+gerendert". Die Seite ist aber der Hub, nicht das Kompendium — sie zeigt acht `.kt`-Kacheln
+statt `.pc`-Steckbriefe. Nachgemessen: 8 Kacheln, 9 Filtermarken, Suchfeld, alles formatiert,
+0 PageErrors. Der Test hatte das Falsche erwartet, nicht die Seite das Falsche getan.
+
+**Stand der Entdoppelung nach W17–W19**
+
+| Gruppe | Inline-CSS |
+|---|---|
+| 42 Weltunterseiten (W17) | 238 → 192 KB |
+| Fußbereich, 33 Kopien (W18) | HTML 3.108 → 3.038 KB |
+| 9 Kompendien (W19) | 45 → 10 KB |
+
+**Nächste Front (Welle 20).** 53 Seiten mit 250 KB Inline-CSS bleiben, **21 KB davon noch
+≥6-fach wortgleich**. Schwerpunkt: die **19 Werkzeugseiten** (Rechner) plus Holding, Konto
+und Legal. Wiederkehrend darin: `:root`, `body`, `*`, `h1`, `h1 em`, `.eyebrow`, `.lead`,
+`.foot`, `.result .eyebrow`. Dazu **totes CSS**: `.wms-lockup` und `.wms-lockup svg` stehen
+noch auf 17 Seiten im Stylesheet und auf **keiner** im Markup — in W17 nur für die
+Weltseiten entfernt.

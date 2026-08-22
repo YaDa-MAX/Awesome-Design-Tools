@@ -16,7 +16,7 @@ Statisches HTML/JS/CSS-**PWA ohne Build-Schritt**, offline-fähig, localStorage.
 ## Pflicht-Workflow nach JEDER Änderung unter web/
 1. **Precache + Service-Worker-Version**: `cd web && node ../tools/gen_sw.js` — erzeugt die
    `PRECACHE`-Liste aus dem Dateibestand (Referenzen aus HTML **und** `url()` in Stylesheets,
-   inline `<style>` eingeschlossen) UND zählt die Cache-Version hoch (aktuell **-3021**).
+   inline `<style>` eingeschlossen) UND zählt die Cache-Version hoch (aktuell **-3022**).
    Nie von Hand pflegen. Standalone-Seiten (`typ` in `tools/seiten.json`) bleiben automatisch
    draußen; `vendor/` und Dateien > 150 KB kommen zur Laufzeit in den Cache (der fetch-Handler
    macht stale-while-revalidate). Wer nur die Version braucht, bumpt trotzdem über den Generator.
@@ -182,6 +182,12 @@ Statisches HTML/JS/CSS-**PWA ohne Build-Schritt**, offline-fähig, localStorage.
   Rechts-Link → 0**, HTML 3.108 → 3.038 KB. Gelernt: **nie annehmen, dass der body ein
   Block-Container ist** — `404.html` zentriert mit `display:flex`, der angehängte Fuß wurde
   dort zum Element daneben; `hb-fuss.js` misst `display` und passt sich ein.
+  V3-W19 fertig: **die Kompendien auf eine Gestalt**. Acht Kompendien + `wissen.html`
+  trugen dieselbe Filter-/Steckbrief-Maschinerie neunmal inline (40 Selektoren wortgleich
+  auf ≥6 Seiten). Jetzt zentral in `web/hb-kompendium.css`, geschoben auf
+  `[data-hb-seite="kompendium"]`; Umbau über `tools/umbau_kompendien.py` (Kit eingefroren
+  in `tools/kompendium-kit.json`). Inline-CSS 45 → 10 KB, netto 26 KB weniger,
+  0 Fließtextverlust, 0/109 PageErrors. **Neues Kompendium: Skript laufen lassen.**
 - `web/startseite-klassisch.html` = **die Startseite bis W10**, archiviert (standalone, nicht
   verlinkt, nicht precached). Sie ist die einzige Seite, die `hb-menue.css` und `hb-suche-nav.js`
   noch braucht.
