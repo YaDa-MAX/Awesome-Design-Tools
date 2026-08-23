@@ -77,14 +77,16 @@ h1 em{font-style:italic;color:var(--accent-d);}
 <script src="hb-nachbarn.js" defer></script>
 <link rel="stylesheet" href="hb-fuss.css">
 <script src="hb-fuss.js" defer></script>
+<link rel="stylesheet" href="hb-motion.css">
+<script src="hb-motion.js" defer></script>
 </head>
-<body data-hb-welt="reisen" data-hb-seite="welt">
+<body data-hb-welt="reisen" data-hb-seite="welt" data-hb-regie="ansage">
 <div class="wrap">
-  <a class="ws-weg" href="reisen.html">HeiBen Reisen</a>
+  <a class="ws-weg" data-hb-motion="ein" data-hb-stufe="0" href="reisen.html">HeiBen Reisen</a>
 
-  <div class="eyebrow">Ziele</div>
-  <h1>Zwölf Orte, die wir <em>selbst gesehen haben</em>.</h1>
-  <p class="lede">Kein Katalog, kein Ranking. Zu jedem Ziel steht hier, wie man hinkommt, wann es
+  <div class="eyebrow data-hb-motion="auf" data-hb-stufe="1"">Ziele</div>
+  <h1 data-hb-motion="auf" data-hb-stufe="2">Zwölf Orte, die wir <em>selbst gesehen haben</em>.</h1>
+  <p class="lede data-hb-motion="auf" data-hb-stufe="3"">Kein Katalog, kein Ranking. Zu jedem Ziel steht hier, wie man hinkommt, wann es
     sich lohnt, was es kostet — und wofür es sich nicht eignet. Wer nach einer Reise sucht,
     findet hier den Anfang; den Rest planen wir gemeinsam.</p>
 

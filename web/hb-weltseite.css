@@ -110,6 +110,15 @@ body[data-hb-seite="welt"] .note{
   font-family:var(--hb-mono);font-size:var(--hb-s-mikro);
   letter-spacing:.08em;color:var(--hb-text-zart);
 }
+/* .note heisst im Kit „Mono-Kapitälchen" — für ein Kürzel, ein Datum, eine
+   Einheit. An sechs Stellen steht darin aber ein ganzer Absatz; 175 Zeichen in
+   0,62 rem Mono liest niemand. Der Zusatz gibt diesen Stellen Fließtext, ohne
+   die Bedeutung der Klasse für die übrigen 43 Vorkommen zu ändern. */
+body[data-hb-seite="welt"] .note.note-lang{
+  font-family:var(--hb-sans);font-size:var(--hb-s-klein);
+  letter-spacing:normal;text-transform:none;
+  color:var(--hb-text-leise);max-width:64ch;line-height:var(--hb-zeile-weit);
+}
 
 /* --- Handlung: ein Knopf, drei Gewichte ----------------------------------- */
 body[data-hb-seite="welt"] .btn{

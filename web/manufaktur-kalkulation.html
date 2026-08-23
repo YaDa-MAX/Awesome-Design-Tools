@@ -100,16 +100,17 @@ table.kalk-t tr.krit td{background:#f6e7e3;}
 <script src="hb-bereiche.js" defer></script>
 <link rel="stylesheet" href="hb-fuss.css">
 <script src="hb-fuss.js" defer></script>
+<script src="hb-motion.js" defer></script>
 </head>
-<body data-hb-welt="wohnen" data-hb-seite="welt">
+<body data-hb-welt="wohnen" data-hb-seite="welt" data-hb-regie="ansage">
 
 <!-- Alt-Nav entfernt: globale Navigation kommt aus heiben-nav.js (Remake W7) -->
   <header class="subhero">
     <div class="wrap">
-<a class="ws-weg" href="manufaktur.html">HeiBen Manufaktur</a>
-      <div class="eyebrow">HeiBen · Werkstatt (intern)</div>
-      <h1>VK-Kalkulation &amp; <em>Margen</em>.</h1>
-      <p class="lede">Annahmen anpassen — Neuprodukt bepreisen — den gesamten Katalog live nachrechnen. Alle Werte bleiben lokal auf diesem Gerät. Spiegelt das Excel-Modell „HeiBen Manufaktur Kalkulation".</p>
+<a class="ws-weg" data-hb-motion="ein" data-hb-stufe="0" href="manufaktur.html">HeiBen Manufaktur</a>
+      <div class="eyebrow data-hb-motion="auf" data-hb-stufe="1"">HeiBen · Werkstatt (intern)</div>
+      <h1 data-hb-motion="auf" data-hb-stufe="2">VK-Kalkulation &amp; <em>Margen</em>.</h1>
+      <p class="lede data-hb-motion="auf" data-hb-stufe="3"">Annahmen anpassen — Neuprodukt bepreisen — den gesamten Katalog live nachrechnen. Alle Werte bleiben lokal auf diesem Gerät. Spiegelt das Excel-Modell „HeiBen Manufaktur Kalkulation".</p>
     </div>
   </header>
   <section aria-label="Kalkulation"><div class="kalk" id="kalkRoot"></div></section>

@@ -16,7 +16,7 @@ Statisches HTML/JS/CSS-**PWA ohne Build-Schritt**, offline-fähig, localStorage.
 ## Pflicht-Workflow nach JEDER Änderung unter web/
 1. **Precache + Service-Worker-Version**: `cd web && node ../tools/gen_sw.js` — erzeugt die
    `PRECACHE`-Liste aus dem Dateibestand (Referenzen aus HTML **und** `url()` in Stylesheets,
-   inline `<style>` eingeschlossen) UND zählt die Cache-Version hoch (aktuell **-3023**).
+   inline `<style>` eingeschlossen) UND zählt die Cache-Version hoch (aktuell **-3024**).
    Nie von Hand pflegen. Standalone-Seiten (`typ` in `tools/seiten.json`) bleiben automatisch
    draußen; `vendor/` und Dateien > 150 KB kommen zur Laufzeit in den Cache (der fetch-Handler
    macht stale-while-revalidate). Wer nur die Version braucht, bumpt trotzdem über den Generator.
@@ -200,6 +200,18 @@ Statisches HTML/JS/CSS-**PWA ohne Build-Schritt**, offline-fähig, localStorage.
   **die Entdoppelung des CSS ist abgeschlossen**. Sweeps brauchen einen nebenläufigen
   Server: `python3 -m http.server` bricht auf `kulinarik-rezepte.html` (159 fehlende
   Bilder) Verbindungen ab und erzeugt Phantom-Fehler.
+  V3-W21 fertig: **Bewegung angesagt**. Die 42 Weltunterseiten sagen ihren Kopf jetzt im
+  Markup an (`.ws-weg` ein/0, `.eyebrow` auf/1, `h1` auf/2, `.lede` auf/3) — vorher hatte
+  **keine** ein `data-hb-motion`. Wichtig: `data-hb-regie="ansage"` kommt **nur** auf die
+  25 Seiten, die `hb-motion.js` bisher gar nicht luden; die 17 mit Bestandspfad behalten
+  ihn (dort hängen 86 real bewegte Elemente). Seiten, deren Kopf erst im Skript entsteht
+  (`kulinarik-rezept.html`), werden übersprungen — client-erzeugtes Markup darf **nie**
+  `data-hb-motion` tragen. `gen_kopf.js` hängt `hb-motion.css`+`.js` automatisch an,
+  sobald eine Ansage im Markup steht: **Stylesheet ohne Skript = unsichtbarer Inhalt.**
+  Gemessen 42/42 sichtbar, normal wie unter `prefers-reduced-motion`.
+  Ausserdem: `.note` trug vier Bedeutungen; die sechs Stellen mit ≥100 Zeichen Fließtext
+  im Mono-Kapitälchen bekamen `.note.note-lang`. **Achtung `\bnote\b` trifft auch in
+  `mg-note`** — Klassen als Token vergleichen, nicht als Teilzeichenkette.
 - `web/startseite-klassisch.html` = **die Startseite bis W10**, archiviert (standalone, nicht
   verlinkt, nicht precached). Sie ist die einzige Seite, die `hb-menue.css` und `hb-suche-nav.js`
   noch braucht.

@@ -110,13 +110,15 @@
 <script src="hb-nachbarn.js" defer></script>
 <link rel="stylesheet" href="hb-fuss.css">
 <script src="hb-fuss.js" defer></script>
+<link rel="stylesheet" href="hb-motion.css">
+<script src="hb-motion.js" defer></script>
 </head>
-<body data-hb-welt="immobilien" data-hb-seite="welt" data-hb-dichte="werkzeug">
+<body data-hb-welt="immobilien" data-hb-seite="welt" data-hb-dichte="werkzeug" data-hb-regie="ansage">
 <div class="wrap" id="app">
-  <a class="ws-weg" href="immobilien.html">HeiBen Immobilien</a>
-  <div class="eyebrow">Objekt- & Besichtigungsplaner</div>
-  <h1>Deine Objektauswahl <em style="color:var(--accent-d);font-style:italic;">selbst zusammenstellen</em></h1>
-  <p class="lede">Stelle Immobilien zu Listen zusammen, sieh sie auf der Karte, kalkuliere Volumen und Provision, reserviere Besichtigungen oder frag an und lege Exposés ab — und übergib alles als Mappe für Interessent:innen.</p>
+  <a class="ws-weg" data-hb-motion="ein" data-hb-stufe="0" href="immobilien.html">HeiBen Immobilien</a>
+  <div class="eyebrow data-hb-motion="auf" data-hb-stufe="1"">Objekt- & Besichtigungsplaner</div>
+  <h1 data-hb-motion="auf" data-hb-stufe="2">Deine Objektauswahl <em style="color:var(--accent-d);font-style:italic;">selbst zusammenstellen</em></h1>
+  <p class="lede data-hb-motion="auf" data-hb-stufe="3"">Stelle Immobilien zu Listen zusammen, sieh sie auf der Karte, kalkuliere Volumen und Provision, reserviere Besichtigungen oder frag an und lege Exposés ab — und übergib alles als Mappe für Interessent:innen.</p>
 
   <div id="map"></div>
   <div class="maphint">Karte © OpenStreetMap-Mitwirkende · Marker je Objektart (bordeaux Wohnung, grün Haus, ocker Gewerbe, petrol Grundstück); ausgewählte Objekte erscheinen nummeriert in Listenfarbe.</div>

@@ -93,15 +93,16 @@
 <script src="hb-bereiche.js" defer></script>
 <link rel="stylesheet" href="hb-fuss.css">
 <script src="hb-fuss.js" defer></script>
+<script src="hb-motion.js" defer></script>
 </head>
-<body data-hb-welt="wohnen" data-hb-seite="welt">
+<body data-hb-welt="wohnen" data-hb-seite="welt" data-hb-regie="ansage">
 
 <!-- Alt-Nav entfernt: globale Navigation kommt aus heiben-nav.js (Remake W7) -->
   <header class="subhero"><div class="wrap">
-<a class="ws-weg" href="manufaktur.html">HeiBen Manufaktur</a>
-    <div class="eyebrow">HeiBen · Werkstatt (intern)</div>
-    <h1>Maschinencode-<em>Datenbank</em>.</h1>
-    <p class="lede">Effizient: hinterlegt ist je Artikel das <b>Fertigungsrezept</b> (Geometrie + Slicing-Profil), nicht der große G-code. Maschinencode &amp; STL entstehen daraus on demand — reproduzierbar, klein in der Ablage. Personalisierbare Artikel erzeugen ihren Code aus Rezept + Eingabe.</p>
+<a class="ws-weg" data-hb-motion="ein" data-hb-stufe="0" href="manufaktur.html">HeiBen Manufaktur</a>
+    <div class="eyebrow data-hb-motion="auf" data-hb-stufe="1"">HeiBen · Werkstatt (intern)</div>
+    <h1 data-hb-motion="auf" data-hb-stufe="2">Maschinencode-<em>Datenbank</em>.</h1>
+    <p class="lede data-hb-motion="auf" data-hb-stufe="3"">Effizient: hinterlegt ist je Artikel das <b>Fertigungsrezept</b> (Geometrie + Slicing-Profil), nicht der große G-code. Maschinencode &amp; STL entstehen daraus on demand — reproduzierbar, klein in der Ablage. Personalisierbare Artikel erzeugen ihren Code aus Rezept + Eingabe.</p>
   </div></header>
   <section aria-label="Maschinencode"><div class="mc" id="mcRoot"></div></section>
 <script src="heiben-konto.js"></script>

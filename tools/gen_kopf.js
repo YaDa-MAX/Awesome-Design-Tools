@@ -53,6 +53,13 @@ const PFLICHT = [
     nurWenn: (e, text) => e.typ === 'intern' || /data-hb-(intern|weltseiten)/.test(text) },
   /* Gemeinsamer Fuss (Welle 18). Nicht auf Standalone-Seiten und nicht dort, wo
      der Abschluss bewusst eigen ist (data-hb-fuss="aus" am body). */
+  /* Bewegung (Welle 21). Zwingend, sobald eine Seite etwas ansagt: das
+     Stylesheet setzt angesagte Elemente auf opacity:0, sichtbar macht sie
+     erst das Skript. Stylesheet ohne Skript hiesse unsichtbarer Inhalt. */
+  { datei: 'hb-motion.css', tag: '<link rel="stylesheet" href="hb-motion.css">',
+    nurWenn: (e, text) => /data-hb-(motion|regie)/.test(text) },
+  { datei: 'hb-motion.js', tag: '<script src="hb-motion.js" defer></script>',
+    nurWenn: (e, text) => /data-hb-(motion|regie)/.test(text) },
   { datei: 'hb-fuss.css', tag: '<link rel="stylesheet" href="hb-fuss.css">',
     nurWenn: (e, text) => e.typ !== 'standalone' && !/data-hb-fuss="aus"/.test(text) },
   { datei: 'hb-fuss.js', tag: '<script src="hb-fuss.js" defer></script>',

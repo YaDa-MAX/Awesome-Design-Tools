@@ -67,15 +67,17 @@ a{color:inherit;}
 <script src="hb-nachbarn.js" defer></script>
 <link rel="stylesheet" href="hb-fuss.css">
 <script src="hb-fuss.js" defer></script>
+<link rel="stylesheet" href="hb-motion.css">
+<script src="hb-motion.js" defer></script>
 </head>
-<body data-hb-welt="kulinarik" data-hb-seite="welt">
+<body data-hb-welt="kulinarik" data-hb-seite="welt" data-hb-regie="ansage">
 <div class="wrap">
-  <a class="ws-weg" href="kulinarik.html">Kulinarik</a>
+  <a class="ws-weg" data-hb-motion="ein" data-hb-stufe="0" href="kulinarik.html">Kulinarik</a>
 
   <section class="hero">
-    <div class="eyebrow">Online-Tool · Abo</div>
-    <h1>Saisonküche, die mitdenkt.</h1>
-    <p class="lede">Dein Wochenplan aus saisonalen Zutaten, die Einkaufsliste entsteht automatisch — und alle Rezepte sind mit dem HeiBen-Kochbuch synchronisiert. <b id="statusLine"></b></p>
+    <div class="eyebrow data-hb-motion="auf" data-hb-stufe="1"">Online-Tool · Abo</div>
+    <h1 data-hb-motion="auf" data-hb-stufe="2">Saisonküche, die mitdenkt.</h1>
+    <p class="lede data-hb-motion="auf" data-hb-stufe="3"">Dein Wochenplan aus saisonalen Zutaten, die Einkaufsliste entsteht automatisch — und alle Rezepte sind mit dem HeiBen-Kochbuch synchronisiert. <b id="statusLine"></b></p>
     <div class="row" style="margin-top:1.2rem;">
       <button class="btn primary" id="ctaTrial">Probemonat gratis starten</button>
       <a class="btn ghost" href="#abo">Pläne ansehen</a>

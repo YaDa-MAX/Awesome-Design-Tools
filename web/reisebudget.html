@@ -72,12 +72,14 @@ tr.tot td{font-weight:800;background:var(--bg2)}
 <script src="hb-nachbarn.js" defer></script>
 <link rel="stylesheet" href="hb-fuss.css">
 <script src="hb-fuss.js" defer></script>
+<link rel="stylesheet" href="hb-motion.css">
+<script src="hb-motion.js" defer></script>
 </head>
-<body data-hb-welt="reisen" data-hb-seite="welt">
+<body data-hb-welt="reisen" data-hb-seite="welt" data-hb-regie="ansage">
 <div class="wrap">
-<a class="ws-weg" href="reisen.html">HeiBen Reisen</a>
-  <p class="eyebrow">HeiBen · Reisen</p>
-  <h1>Dein <em>Reisebudget</em>, ehrlich geplant</h1>
+<a class="ws-weg" data-hb-motion="ein" data-hb-stufe="0" href="reisen.html">HeiBen Reisen</a>
+  <p class="eyebrow data-hb-motion="auf" data-hb-stufe="1"">HeiBen · Reisen</p>
+  <h1 data-hb-motion="auf" data-hb-stufe="2">Dein <em>Reisebudget</em>, ehrlich geplant</h1>
   <p class="lead">Die Reise kostet selten nur den Flug. Plane alle Posten realistisch, sieh die Kosten pro Person und pro Tag — und wie lange du dafür sparen musst. Alles bleibt lokal in diesem Gerät.</p>
 
   <div class="card">

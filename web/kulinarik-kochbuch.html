@@ -59,16 +59,18 @@
 <script src="hb-nachbarn.js" defer></script>
 <link rel="stylesheet" href="hb-fuss.css">
 <script src="hb-fuss.js" defer></script>
+<link rel="stylesheet" href="hb-motion.css">
+<script src="hb-motion.js" defer></script>
 </head>
-<body data-hb-welt="kulinarik" data-hb-seite="welt">
+<body data-hb-welt="kulinarik" data-hb-seite="welt" data-hb-regie="ansage">
 <div class="wrap">
-  <a class="ws-weg" href="kulinarik.html">Kulinarik</a>
+  <a class="ws-weg" data-hb-motion="ein" data-hb-stufe="0" href="kulinarik.html">Kulinarik</a>
 
   <section class="hero">
     <div>
-      <div class="eyebrow">Kulinarik · Buch</div>
-      <h1>Heimat in Rezepten.</h1>
-      <p class="lede">Saisonale Küche einer Kölner Familie — ehrlich, alltagstauglich, ohne Schwein. 60 Rezepte vom Sonntagseintopf bis zur Festtafel, mit Geschichten dazu.</p>
+      <div class="eyebrow data-hb-motion="auf" data-hb-stufe="1"">Kulinarik · Buch</div>
+      <h1 data-hb-motion="auf" data-hb-stufe="2">Heimat in Rezepten.</h1>
+      <p class="lede data-hb-motion="auf" data-hb-stufe="3"">Saisonale Küche einer Kölner Familie — ehrlich, alltagstauglich, ohne Schwein. 60 Rezepte vom Sonntagseintopf bis zur Festtafel, mit Geschichten dazu.</p>
       <div class="formats">
         <div class="fmt"><div class="eyebrow">E-Book</div><div class="p" id="pEbook"></div><p class="muted" style="font-size:.86rem;">PDF + EPUB, sofort verfügbar.</p><button class="btn ghost" id="buyEbook">In den Warenkorb</button></div>
         <div class="fmt best"><div class="eyebrow">Print · on demand</div><div class="p" id="pPrint"></div><p class="muted" style="font-size:.86rem;">Klimaneutral gedruckt &amp; gebunden, Lieferung 5–7 Tage.</p><button class="btn primary" id="buyPrint">In den Warenkorb</button></div>

@@ -94,15 +94,16 @@
 <script src="hb-bereiche.js" defer></script>
 <link rel="stylesheet" href="hb-fuss.css">
 <script src="hb-fuss.js" defer></script>
+<script src="hb-motion.js" defer></script>
 </head>
-<body data-hb-welt="wohnen" data-hb-seite="welt">
+<body data-hb-welt="wohnen" data-hb-seite="welt" data-hb-regie="ansage">
 
 <!-- Alt-Nav entfernt: globale Navigation kommt aus heiben-nav.js (Remake W7) -->
   <header class="subhero"><div class="wrap">
-<a class="ws-weg" href="manufaktur.html">HeiBen Manufaktur</a>
-    <div class="eyebrow">HeiBen Manufaktur · Werkstatt (intern)</div>
-    <h1>Auftrags<em>verwaltung</em>.</h1>
-    <p class="lede">Eingegangene Bestellungen mit Status — und je Position direkt der Maschinencode: Standardartikel und personalisierte Artikel aus dem Rezept, Kunden-Eigendesigns aus den gespeicherten Parametern, komplexe Teile als CAD/STL-Verweis.</p>
+<a class="ws-weg" data-hb-motion="ein" data-hb-stufe="0" href="manufaktur.html">HeiBen Manufaktur</a>
+    <div class="eyebrow data-hb-motion="auf" data-hb-stufe="1"">HeiBen Manufaktur · Werkstatt (intern)</div>
+    <h1 data-hb-motion="auf" data-hb-stufe="2">Auftrags<em>verwaltung</em>.</h1>
+    <p class="lede data-hb-motion="auf" data-hb-stufe="3"">Eingegangene Bestellungen mit Status — und je Position direkt der Maschinencode: Standardartikel und personalisierte Artikel aus dem Rezept, Kunden-Eigendesigns aus den gespeicherten Parametern, komplexe Teile als CAD/STL-Verweis.</p>
   </div></header>
   <section aria-label="Auftraege"><div class="bv" id="bvRoot"></div></section>
 <script src="heiben-konto.js"></script>

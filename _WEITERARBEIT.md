@@ -2320,3 +2320,98 @@ ist damit abgeschlossen.**
 Bewegung — 17 der 42 Weltunterseiten binden `hb-motion.js` ein, **keine** setzt
 `data-hb-regie="ansage"`. Und `.note` trägt auf 10 Seiten zwei Bedeutungen
 (Mono-Kapitälchen vs. Fließtext-Hinweis) — ein echter Namenskonflikt.
+
+---
+
+### WELLE 21: BEWEGUNG ANSAGEN, `.note` ENTWIRREN (SW -3024)
+
+Zwei Befunde aus dem Protokoll von W17 und W19 abgearbeitet.
+
+#### Teil 1 — Bewegung war Zufall
+
+**Vorher gemessen:** Von 109 Seiten luden 38 `hb-motion.js`, **eine einzige**
+(`designsystem.html`) sagte ihre Bewegung im Markup an. Die übrigen 37 liefen auf dem
+eingefrorenen **Bestandspfad**, der rät: jedes `<section>`, jedes `<footer>`, die ersten
+zwölf Kinder von allem mit `grid` im Klassennamen.
+
+Auf den 42 Weltunterseiten hiess das: **17 mit Bewegung, 25 ohne** — und kein einziges
+`data-hb-motion`. Im Browser gezählt, was der Bestandspfad dort wirklich einfängt:
+**86 Elemente auf 17 Seiten, davon 60 Rasterkinder.**
+
+Das war die entscheidende Messung. Der naheliegende Weg — überall
+`data-hb-regie="ansage"` setzen und den Bestandspfad abschalten — hätte diesen 17 Seiten
+**Bewegung weggenommen**, die sie heute haben. Der Umbau macht darum zwei verschiedene
+Dinge, je nach Ausgangslage:
+
+| Ausgangslage | was geschieht |
+|---|---|
+| **17 Seiten mit `hb-motion.js`** | Kopf wird angesagt, Bestandspfad **bleibt unberührt** — `hb-motion.js` überspringt angesagte Elemente im Bestandspfad ohnehin |
+| **25 Seiten ohne** | Kopf wird angesagt **plus `data-hb-regie="ansage"`** — sonst begänne der Bestandspfad plötzlich Raster zu bewegen, die nie bewegt wurden |
+
+Angesagt wird der Seitenkopf, auf allen Seiten gleich und in dieser Folge:
+
+```
+.ws-weg   → ein   Stufe 0        (der Rückweg blendet nur ein)
+.eyebrow  → auf   Stufe 1
+h1        → auf   Stufe 2
+.lede     → auf   Stufe 3        bei --hb-stufe 70 ms: 0 / 70 / 140 / 210 ms
+```
+
+**41 von 42 Seiten angesagt.** Die 42., `kulinarik-rezept.html`, hat 318 Zeichen
+statisches Markup im `<body>` — ihr Kopf entsteht komplett im Skript. Sie wird
+übersprungen, und das ist richtig: was ein Skript nach `hb-motion.js` baut, darf **kein**
+`data-hb-motion` tragen, sonst wartet es auf einen Beobachter, den es nicht mehr gibt.
+
+**`gen_kopf.js` hängt `hb-motion.css` und `hb-motion.js` jetzt automatisch an, sobald
+eine Seite `data-hb-motion` oder `data-hb-regie` trägt.** Das ist keine Bequemlichkeit,
+sondern eine Sicherung: das Stylesheet setzt angesagte Elemente auf `opacity:0`, sichtbar
+macht sie erst das Skript. **Stylesheet ohne Skript hiesse unsichtbarer Inhalt.**
+Nachgeprüft über den ganzen Bestand: keine solche Kombination. (`konto.html` und
+`konto-verwaltung.html` laden das Stylesheet ohne Skript, tragen aber keine Ansage — dort
+greift keine `opacity:0`-Regel.)
+
+**Nachweis — in beiden Bewegungsmodi gemessen:**
+
+| Lauf | Ergebnis |
+|---|---|
+| Normal (1,4 s Wartezeit, alles im Bild muss `opacity ≥ .9` haben) | **42 / 42** |
+| `prefers-reduced-motion: reduce` | **42 / 42** |
+| PageErrors über alle 109 Seiten | **0 / 109** |
+
+Die Bewegungsruhe wird wie vorgesehen in der Token-Ebene beantwortet: die Dauern und Wege
+gehen auf null, der Inhalt bleibt sichtbar und an seinem Platz. Kein Ausstieg, keine
+Sonderbehandlung.
+
+#### Teil 2 — `.note` trug vier Bedeutungen
+
+Aufgefallen in W17, jetzt vermessen: 41 Seiten nutzen `.note` im Markup, 21 setzen die
+Klasse selbst — in **vier** verschiedenen Bedeutungen:
+
+| Bedeutung | Seiten |
+|---|---|
+| Mono-Kapitälchen, 0,6 rem | 5 (+ alle, die die zentrale Fassung erben) |
+| Fließtext-Hinweis, 0,88 rem | 8 |
+| abgesetzter Kasten mit Farbkante | 3 |
+| Abbinder mit Trennlinie | 4 |
+
+**Kein Rückschritt aus W17:** die kopierte Kit-Fassung war schon immer Mono-Kapitälchen.
+Der Konstruktionsfehler ist älter als die Zentralisierung.
+
+Wo er wirklich weh tut, war schnell gezählt: unter den 49 Vorkommen ohne eigene Regel
+stehen **sechs mit 100 Zeichen und mehr** — 175 Zeichen in 0,62-rem-Mono liest niemand.
+`hb-weltseite.css` bekommt darum `.note.note-lang` als Fließtext-Zusatz; die Bedeutung
+der Klasse für die übrigen 43 Vorkommen bleibt unangetastet.
+
+**Falle beim Setzen:** `\bnote\b` trifft auch **innerhalb** von `mg-note` und
+`lock-note` — ein Bindestrich ist eine Wortgrenze. Zwei der sechs Treffer waren
+Fehlgriffe auf seiteneigene Klassen, die längst richtig gesetzt sind (`.mg-note` ist
+0,74-rem-Fließtext, `.lock-note` ein dunkler Kasten). Zurückgenommen; **vier echte
+Stellen** umgestellt, im Browser bestätigt: 12,48 px Manrope statt 9,92 px JetBrains Mono.
+
+#### Was offenbleibt
+
+Die vier verbliebenen Bedeutungen von `.note` stehen weiter nebeneinander. Sie
+auseinanderzuziehen hiesse, auf 21 Seiten Markup umzubenennen — eine eigene Welle, und
+eine mit wenig Ertrag: jede dieser Seiten ist für sich stimmig, der Konflikt tut nur
+weh, wo eine Seite die Klasse **ohne** eigene Regel benutzt. Genau diese sechs Stellen
+sind jetzt versorgt.
