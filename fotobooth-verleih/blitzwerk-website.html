@@ -1,0 +1,894 @@
+<title>BLITZWERK Fotobooth</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,400..900&family=IBM+Plex+Mono:wght@400;500;600&family=Instrument+Sans:wght@400..700&display=swap">
+
+<style>
+/* ============================================================
+   BLITZWERK — Dunkelkammer-Palette, bewusst einthemig.
+   Jede Farbe explizit gesetzt, damit die Seite auf jedem
+   Host-Grund (hell wie dunkel) identisch trägt.
+   ============================================================ */
+.bw {
+  --ground:      #141920;
+  --ground-deep: #0E1218;
+  --surface:     #1B222C;
+  --surface-hi:  #232C38;
+  --line:        #2C3742;
+  --line-soft:   #222B35;
+  --ink:         #EEF1F5;
+  --ink-mid:     #B4C0CE;
+  --ink-mute:    #8093A6;
+  --amber:       #F0A43C;
+  --amber-deep:  #C67A1E;
+  --amber-wash:  rgba(240,164,60,.12);
+
+  --display: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --body:    "Instrument Sans", "Segoe UI", system-ui, sans-serif;
+  --mono:    "IBM Plex Mono", ui-monospace, "SFMono-Regular", monospace;
+
+  --pad: clamp(20px, 5vw, 64px);
+  --max: 1240px;
+
+  background: var(--ground);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+body { background: #141920; margin: 0; }
+
+.bw *, .bw *::before, .bw *::after { box-sizing: border-box; }
+.bw p, .bw h1, .bw h2, .bw h3, .bw h4, .bw ul, .bw ol, .bw figure { margin: 0; }
+.bw ul, .bw ol { padding: 0; list-style: none; }
+.bw a { color: inherit; text-decoration: none; }
+.bw :focus-visible { outline: 2px solid var(--amber); outline-offset: 3px; border-radius: 2px; }
+
+/* ---------- Typo-Skala ---------- */
+.bw h1, .bw h2, .bw h3, .bw .display {
+  font-family: var(--display);
+  font-variation-settings: "wdth" 112;
+  text-wrap: balance;
+  letter-spacing: -.022em;
+  line-height: 1.02;
+  font-weight: 800;
+}
+.bw h1 { font-size: clamp(2.5rem, 6.4vw, 4.6rem); }
+.bw h2 { font-size: clamp(1.85rem, 3.9vw, 2.9rem); }
+.bw h3 { font-size: clamp(1.12rem, 1.7vw, 1.32rem); letter-spacing: -.014em; font-weight: 700; }
+
+.bw .eyebrow {
+  font-family: var(--mono);
+  font-size: .705rem;
+  letter-spacing: .17em;
+  text-transform: uppercase;
+  color: var(--amber);
+  font-weight: 500;
+}
+.bw .lede { font-size: clamp(1.05rem, 1.55vw, 1.24rem); color: var(--ink-mid); max-width: 62ch; }
+.bw .muted { color: var(--ink-mute); }
+.bw .num { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+
+/* ---------- Grundraster ---------- */
+.bw .wrap { max-width: var(--max); margin-inline: auto; padding-inline: var(--pad); }
+.bw section { padding-block: clamp(64px, 8vw, 116px); border-top: 1px solid var(--line-soft); }
+.bw .stack { display: flex; flex-direction: column; }
+.bw .g-16 { gap: 16px; } .bw .g-24 { gap: 24px; } .bw .g-40 { gap: 40px; } .bw .g-56 { gap: 56px; }
+
+/* ---------- Fotostreifen-Motiv (Strukturelement, kein Ornament) ---------- */
+.bw .strip {
+  display: grid; gap: 5px; padding: 5px 5px 34px;
+  background: #F2EFE8;
+  border-radius: 3px;
+  position: relative;
+  box-shadow: 0 26px 60px -18px rgba(0,0,0,.72), 0 2px 0 rgba(255,255,255,.06) inset;
+}
+.bw .strip::after {
+  content: "BLITZWERK  ·  #unserabend";
+  position: absolute; left: 0; right: 0; bottom: 10px;
+  text-align: center;
+  font-family: var(--mono); font-size: .565rem; letter-spacing: .13em;
+  color: #6C6459;
+}
+.bw .frame {
+  aspect-ratio: 4 / 3;
+  border-radius: 1px;
+  position: relative;
+  overflow: hidden;
+  background: #171C24;
+}
+.bw .frame::before {
+  content: ""; position: absolute; inset: 0;
+  background:
+    radial-gradient(72% 96% at 32% 24%, rgba(240,164,60,.92), rgba(240,164,60,0) 62%),
+    radial-gradient(78% 88% at 76% 82%, rgba(61,79,160,.85), rgba(61,79,160,0) 66%),
+    linear-gradient(148deg, #2A3442, #121820);
+}
+.bw .frame::after {
+  content: ""; position: absolute; inset: 0;
+  opacity: .3; mix-blend-mode: overlay;
+  background-image:
+    repeating-linear-gradient(0deg, rgba(255,255,255,.16) 0 1px, transparent 1px 3px);
+}
+.bw .frame .fno {
+  position: absolute; right: 5px; bottom: 4px; z-index: 2;
+  font-family: var(--mono); font-size: .5rem; letter-spacing: .1em;
+  color: rgba(255,255,255,.72);
+}
+
+/* ---------- Navigation ---------- */
+.bw .nav {
+  position: sticky; top: 0; z-index: 50;
+  background: rgba(20,25,32,.86);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--line-soft);
+}
+.bw .nav-in {
+  max-width: var(--max); margin-inline: auto; padding: 14px var(--pad);
+  display: flex; align-items: center; gap: 32px;
+}
+.bw .logo {
+  font-family: var(--display); font-weight: 900;
+  font-variation-settings: "wdth" 118;
+  letter-spacing: .015em; font-size: 1.06rem;
+  display: flex; align-items: center; gap: 9px;
+}
+.bw .logo-mark {
+  width: 12px; height: 20px; border-radius: 1px;
+  background: linear-gradient(180deg, var(--amber) 0 25%, var(--ink) 25% 50%, var(--amber) 50% 75%, var(--ink) 75% 100%);
+}
+.bw .nav-links { display: flex; gap: 26px; margin-left: auto; font-size: .875rem; color: var(--ink-mid); }
+.bw .nav-links a:hover { color: var(--ink); }
+@media (max-width: 860px) { .bw .nav-links { display: none; } }
+
+/* ---------- Buttons ---------- */
+.bw .btn {
+  display: inline-flex; align-items: center; gap: 9px;
+  padding: 13px 22px; border-radius: 2px;
+  font-family: var(--display); font-weight: 700; font-size: .9rem;
+  font-variation-settings: "wdth" 108;
+  letter-spacing: .005em;
+  border: 1px solid transparent; cursor: pointer;
+  transition: transform .18s ease, background-color .18s ease, border-color .18s ease;
+}
+.bw .btn-primary { background: var(--amber); color: #16110A; }
+.bw .btn-primary:hover { background: #FFB755; transform: translateY(-1px); }
+.bw .btn-ghost { border-color: var(--line); color: var(--ink); background: transparent; }
+.bw .btn-ghost:hover { border-color: var(--ink-mute); transform: translateY(-1px); }
+.bw .btn-sm { padding: 10px 17px; font-size: .82rem; }
+
+/* ---------- Hero ---------- */
+.bw .hero { border-top: 0; padding-block: clamp(52px, 7.5vw, 104px) clamp(56px, 7vw, 96px); position: relative; overflow: hidden; }
+.bw .hero-glow {
+  position: absolute; inset: -30% -10% auto -20%; height: 620px; pointer-events: none;
+  background: radial-gradient(52% 60% at 26% 34%, rgba(240,164,60,.13), rgba(240,164,60,0) 70%);
+}
+.bw .hero-grid {
+  position: relative;
+  display: grid; grid-template-columns: minmax(0,1.32fr) minmax(0,1fr);
+  gap: clamp(36px, 5vw, 76px); align-items: center;
+}
+@media (max-width: 940px) { .bw .hero-grid { grid-template-columns: 1fr; } }
+.bw .hero h1 .hl { color: var(--amber); }
+.bw .hero-cta { display: flex; flex-wrap: wrap; gap: 12px; }
+.bw .hero-note { font-family: var(--mono); font-size: .74rem; color: var(--ink-mute); letter-spacing: .04em; }
+
+/* ---------- Booth-Screen (Hero-Visual) ---------- */
+.bw .booth {
+  background: linear-gradient(168deg, var(--surface-hi), var(--ground-deep));
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 18px;
+  display: grid; gap: 16px;
+  box-shadow: 0 34px 74px -26px rgba(0,0,0,.8);
+}
+.bw .booth-bar { display: flex; align-items: center; gap: 8px; font-family: var(--mono); font-size: .64rem; letter-spacing: .12em; color: var(--ink-mute); }
+.bw .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--amber); }
+.bw .booth-screen {
+  position: relative; aspect-ratio: 4 / 3; border-radius: 4px; overflow: hidden;
+  background: radial-gradient(120% 120% at 50% 0%, #26313F, #10151C);
+  display: grid; place-items: center;
+  border: 1px solid var(--line);
+}
+.bw .count {
+  font-family: var(--display); font-weight: 900; font-variation-settings: "wdth" 120;
+  font-size: clamp(3.4rem, 9vw, 5.6rem); color: var(--ink); line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+.bw .count.is-cue { font-size: clamp(1.1rem, 2.6vw, 1.5rem); letter-spacing: .16em; color: var(--amber); }
+.bw .flash {
+  position: absolute; inset: 0; background: #FFF; opacity: 0; pointer-events: none;
+}
+.bw .flash.fire { animation: bw-flash 620ms ease-out; }
+@keyframes bw-flash { 0% { opacity: 0; } 8% { opacity: .96; } 100% { opacity: 0; } }
+.bw .booth-strip { width: 132px; }
+.bw .booth-out { display: grid; grid-template-columns: 132px 1fr; gap: 18px; align-items: end; }
+/* Unbelichtete Felder bleiben schwach sichtbar — der Streifen ist immer ein Streifen. */
+.bw .booth-strip .frame { opacity: .14; transform: translateY(-6px); transition: opacity .32s ease, transform .32s ease; }
+.bw .booth-strip .frame.on { opacity: 1; transform: none; }
+.bw .booth-meta { display: grid; gap: 9px; font-family: var(--mono); font-size: .68rem; color: var(--ink-mute); }
+.bw .booth-meta b { color: var(--ink); font-weight: 500; }
+.bw .booth-meta .row { display: flex; justify-content: space-between; gap: 12px; border-bottom: 1px dashed var(--line); padding-bottom: 7px; }
+@media (prefers-reduced-motion: reduce) {
+  .bw .flash.fire { animation: none; }
+  .bw .booth-strip .frame { opacity: 1; transform: none; transition: none; }
+}
+
+/* ---------- Versprechen-Band ---------- */
+.bw .promise { background: var(--surface); border-top: 1px solid var(--line-soft); border-bottom: 1px solid var(--line-soft); padding-block: 26px; }
+.bw .promise-in { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; }
+@media (max-width: 900px) { .bw .promise-in { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 500px) { .bw .promise-in { grid-template-columns: 1fr; } }
+.bw .promise-item { display: grid; gap: 4px; }
+.bw .promise-item .k { font-family: var(--mono); font-size: .68rem; letter-spacing: .12em; text-transform: uppercase; color: var(--amber); }
+.bw .promise-item .v { font-size: .9rem; color: var(--ink-mid); }
+
+/* ---------- Karten ---------- */
+.bw .cards-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+@media (max-width: 940px) { .bw .cards-3 { grid-template-columns: 1fr; } }
+.bw .card {
+  background: var(--surface); border: 1px solid var(--line);
+  border-radius: 4px; padding: 28px;
+  display: grid; gap: 14px; align-content: start;
+  transition: border-color .2s ease, transform .2s ease;
+}
+.bw .card:hover { border-color: #3A4756; transform: translateY(-2px); }
+.bw .card .idx { font-family: var(--mono); font-size: .7rem; color: var(--amber); letter-spacing: .12em; }
+.bw .card p { font-size: .935rem; color: var(--ink-mid); }
+.bw .card .detail { font-size: .82rem; color: var(--ink-mute); border-top: 1px solid var(--line); padding-top: 12px; }
+
+/* ---------- Pakete ---------- */
+.bw .pack { position: relative; display: grid; gap: 18px; align-content: start;
+  background: var(--surface); border: 1px solid var(--line); border-radius: 4px; padding: 30px 26px; }
+.bw .pack.featured { border-color: var(--amber-deep); background: linear-gradient(178deg, rgba(240,164,60,.07), var(--surface) 46%); }
+.bw .pack .tag {
+  position: absolute; top: -1px; right: 22px; transform: translateY(-50%);
+  background: var(--amber); color: #16110A; font-family: var(--mono); font-size: .6rem;
+  letter-spacing: .13em; padding: 4px 9px; border-radius: 2px; text-transform: uppercase;
+}
+.bw .pack .pname { font-family: var(--display); font-weight: 800; font-variation-settings: "wdth" 116; font-size: 1.28rem; letter-spacing: -.01em; }
+.bw .pack .price { font-family: var(--mono); font-size: 2.05rem; font-weight: 500; color: var(--ink); font-variant-numeric: tabular-nums; line-height: 1; }
+.bw .pack .price small { font-size: .7rem; color: var(--ink-mute); letter-spacing: .06em; display: block; margin-top: 7px; font-weight: 400; }
+.bw .pack ul { display: grid; gap: 9px; font-size: .89rem; color: var(--ink-mid); }
+.bw .pack li { display: grid; grid-template-columns: 15px 1fr; gap: 9px; align-items: start; }
+.bw .pack li::before { content: "—"; color: var(--amber); font-family: var(--mono); font-size: .8rem; line-height: 1.5; }
+.bw .pack .who { font-size: .82rem; color: var(--ink-mute); border-top: 1px solid var(--line); padding-top: 13px; }
+
+/* ---------- Mietliste ---------- */
+.bw .sortiment { display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+  border: 1px solid var(--line); border-radius: 4px; overflow: hidden; }
+@media (max-width: 900px) { .bw .sortiment { grid-template-columns: 1fr; } }
+.bw .sort-col { background: var(--surface); border-right: 1px solid var(--line); }
+.bw .sort-col:last-child { border-right: 0; }
+@media (max-width: 900px) { .bw .sort-col { border-right: 0; border-bottom: 1px solid var(--line); }
+  .bw .sort-col:last-child { border-bottom: 0; } }
+.bw .sort-head { padding: 15px 22px; border-bottom: 1px solid var(--line); background: var(--surface-hi);
+  display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+.bw .sort-head .t { font-family: var(--display); font-weight: 800; font-variation-settings: "wdth" 114;
+  font-size: .96rem; letter-spacing: -.005em; }
+.bw .sort-head .u { font-family: var(--mono); font-size: .6rem; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--ink-mute); }
+.bw .sort-row { display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 16px;
+  padding: 12px 22px; border-bottom: 1px dashed var(--line); align-items: baseline; }
+.bw .sort-row:last-child { border-bottom: 0; }
+.bw .sort-row .n { font-size: .89rem; color: var(--ink); display: block; }
+.bw .sort-row .d { font-size: .76rem; color: var(--ink-mute); display: block; margin-top: 1px; }
+.bw .sort-row .p { font-family: var(--mono); font-size: .88rem; color: var(--amber);
+  font-variant-numeric: tabular-nums; white-space: nowrap; }
+.bw .bundle { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+@media (max-width: 900px) { .bw .bundle { grid-template-columns: 1fr; } }
+.bw .bundle-card { background: var(--surface); border: 1px solid var(--line); border-radius: 4px;
+  padding: 24px; display: grid; gap: 12px; align-content: start; }
+.bw .bundle-card.featured { border-color: var(--amber-deep);
+  background: linear-gradient(178deg, rgba(240,164,60,.07), var(--surface) 46%); }
+.bw .bundle-card .bn { font-family: var(--display); font-weight: 800; font-variation-settings: "wdth" 114; font-size: 1.1rem; }
+.bw .bundle-card .bc { font-size: .86rem; color: var(--ink-mid); }
+.bw .bundle-card .bp { display: flex; align-items: baseline; gap: 10px; font-family: var(--mono); font-variant-numeric: tabular-nums; }
+.bw .bundle-card .bp .now { font-size: 1.6rem; color: var(--ink); }
+.bw .bundle-card .bp .was { font-size: .84rem; color: var(--ink-mute); text-decoration: line-through; }
+.bw .bundle-card .bs { font-family: var(--mono); font-size: .68rem; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--amber); border-top: 1px solid var(--line); padding-top: 11px; }
+
+/* ---------- Ablauf ---------- */
+.bw .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border: 1px solid var(--line); border-radius: 4px; overflow: hidden; }
+@media (max-width: 860px) { .bw .steps { grid-template-columns: 1fr; } }
+.bw .step { padding: 30px 26px; border-right: 1px solid var(--line); display: grid; gap: 11px; align-content: start; background: var(--surface); }
+.bw .step:last-child { border-right: 0; }
+@media (max-width: 860px) { .bw .step { border-right: 0; border-bottom: 1px solid var(--line); } .bw .step:last-child { border-bottom: 0; } }
+.bw .step .no { font-family: var(--mono); font-size: .72rem; color: var(--amber); letter-spacing: .14em; }
+.bw .step p { font-size: .9rem; color: var(--ink-mid); }
+.bw .step .when { font-family: var(--mono); font-size: .7rem; color: var(--ink-mute); letter-spacing: .05em; }
+
+/* ---------- Vergleichstabelle ---------- */
+.bw .tbl-scroll { overflow-x: auto; border: 1px solid var(--line); border-radius: 4px; }
+.bw table { border-collapse: collapse; width: 100%; min-width: 780px; font-size: .87rem; }
+.bw th, .bw td { text-align: left; padding: 14px 16px; border-bottom: 1px solid var(--line-soft); vertical-align: top; }
+.bw thead th {
+  background: var(--surface-hi); color: var(--ink);
+  font-family: var(--mono); font-size: .68rem; letter-spacing: .1em; text-transform: uppercase; font-weight: 500;
+  position: sticky; top: 0;
+}
+.bw tbody th { font-weight: 500; color: var(--ink); background: var(--surface); width: 190px; }
+.bw td { color: var(--ink-mute); background: var(--ground); }
+.bw td.own { color: var(--ink); background: rgba(240,164,60,.07); border-left: 1px solid var(--amber-deep); border-right: 1px solid var(--amber-deep); }
+.bw tbody tr:last-child th, .bw tbody tr:last-child td { border-bottom: 0; }
+.bw thead th.own { background: var(--amber); color: #16110A; }
+
+/* ---------- B2B-Modul ---------- */
+.bw .split { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,.86fr); gap: clamp(32px, 5vw, 68px); align-items: center; }
+@media (max-width: 940px) { .bw .split { grid-template-columns: 1fr; } }
+.bw .report {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 4px; overflow: hidden;
+}
+.bw .report-head { padding: 16px 20px; border-bottom: 1px solid var(--line); display: flex; justify-content: space-between; align-items: center; gap: 14px;
+  font-family: var(--mono); font-size: .68rem; letter-spacing: .1em; color: var(--ink-mute); text-transform: uppercase; }
+.bw .report-body { display: grid; grid-template-columns: 1fr 1fr; }
+.bw .kpi { padding: 20px; border-right: 1px solid var(--line-soft); border-bottom: 1px solid var(--line-soft); display: grid; gap: 5px; }
+.bw .kpi:nth-child(2n) { border-right: 0; }
+.bw .kpi:nth-last-child(-n+2) { border-bottom: 0; }
+.bw .kpi .kl { font-family: var(--mono); font-size: .64rem; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-mute); }
+.bw .kpi .kv { font-family: var(--mono); font-size: 1.62rem; color: var(--ink); font-variant-numeric: tabular-nums; line-height: 1.1; }
+.bw .kpi .kv.acc { color: var(--amber); }
+.bw .kpi .kn { font-size: .75rem; color: var(--ink-mute); }
+.bw .bullets { display: grid; gap: 15px; }
+.bw .bullets li { display: grid; grid-template-columns: 22px 1fr; gap: 12px; font-size: .95rem; color: var(--ink-mid); }
+.bw .bullets .b-no { font-family: var(--mono); font-size: .72rem; color: var(--amber); padding-top: 4px; }
+.bw .bullets b { color: var(--ink); font-weight: 600; }
+
+/* ---------- Abschluss-CTA ---------- */
+.bw .close { background: var(--surface); border-radius: 5px; padding: clamp(32px, 5vw, 60px); border: 1px solid var(--line); }
+.bw .form-row { display: grid; grid-template-columns: repeat(3, 1fr) auto; gap: 12px; }
+@media (max-width: 820px) { .bw .form-row { grid-template-columns: 1fr; } }
+.bw input, .bw select {
+  background: var(--ground); border: 1px solid var(--line); color: var(--ink);
+  padding: 13px 14px; border-radius: 2px; font-family: var(--body); font-size: .92rem; width: 100%;
+}
+.bw input::placeholder { color: var(--ink-mute); }
+.bw .legal { font-size: .76rem; color: var(--ink-mute); max-width: 60ch; }
+
+/* ---------- Footer ---------- */
+.bw footer { border-top: 1px solid var(--line-soft); padding-block: 40px 52px; }
+.bw .foot { display: flex; flex-wrap: wrap; gap: 22px; justify-content: space-between; align-items: center;
+  font-family: var(--mono); font-size: .72rem; color: var(--ink-mute); letter-spacing: .05em; }
+.bw .concept-note {
+  margin-top: 22px; padding: 14px 16px; border: 1px dashed var(--line);
+  border-radius: 3px; font-size: .76rem; color: var(--ink-mute); max-width: 78ch;
+}
+</style>
+
+<div class="bw">
+
+  <nav class="nav">
+    <div class="nav-in">
+      <a class="logo" href="#top"><span class="logo-mark" aria-hidden="true"></span>BLITZWERK</a>
+      <div class="nav-links">
+        <a href="#usp">Warum wir</a>
+        <a href="#pakete">Pakete</a>
+        <a href="#sortiment">Sortiment</a>
+        <a href="#ablauf">Ablauf</a>
+        <a href="#b2b">Für Firmen</a>
+        <a href="#vergleich">Vergleich</a>
+      </div>
+      <a class="btn btn-primary btn-sm" href="#termin">Termin prüfen</a>
+    </div>
+  </nav>
+
+  <!-- ============ HERO ============ -->
+  <header class="hero" id="top">
+    <div class="hero-glow" aria-hidden="true"></div>
+    <div class="wrap hero-grid">
+      <div class="stack g-24">
+        <span class="eyebrow">Fotostation · Licht · Deko · Verbrauchsmaterial</span>
+        <h1>Vier Dienstleister<br>für einen Abend?<br><span class="hl">Einer reicht.</span></h1>
+        <p class="lede">
+          BLITZWERK bringt die Fotostation — und gleich das Ambientelicht, die Leuchtbuchstaben,
+          die Musik und das Gästebuch dazu. Ein Ansprechpartner, ein Aufbau, eine Rechnung.
+          Aufgebaut von der Person, mit der ihr auch telefoniert habt.
+        </p>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="#termin">Termin prüfen</a>
+          <a class="btn btn-ghost" href="#sortiment">Sortiment &amp; Preise</a>
+        </div>
+        <p class="hero-note">Ab 590&nbsp;€ netto · Aufbau inklusive · Galerie in 48&nbsp;h</p>
+      </div>
+
+      <!-- Booth-Screen: das charakteristischste Objekt des Fachs, live -->
+      <div class="booth" role="img" aria-label="Simulation des Booth-Bildschirms: Countdown, Blitz und ein gedruckter Fotostreifen mit vier gebrandeten Aufnahmen.">
+        <div class="booth-bar"><span class="dot" aria-hidden="true"></span> BOOTH 02 · BEREIT</div>
+        <div class="booth-screen">
+          <div class="count" id="bwCount">3</div>
+          <div class="flash" id="bwFlash" aria-hidden="true"></div>
+        </div>
+        <div class="booth-out">
+          <div class="strip booth-strip" id="bwStrip" aria-hidden="true">
+            <div class="frame"><span class="fno">01</span></div>
+            <div class="frame"><span class="fno">02</span></div>
+            <div class="frame"><span class="fno">03</span></div>
+            <div class="frame"><span class="fno">04</span></div>
+          </div>
+          <div class="booth-meta">
+            <div class="row"><span>Layout</span><b>Kunden-CD</b></div>
+            <div class="row"><span>Druck</span><b>10 s / Streifen</b></div>
+            <div class="row"><span>Galerie</span><b>Live</b></div>
+            <div class="row"><span>Opt-in</span><b>dokumentiert</b></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============ BETRIEBSVERSPRECHEN ============ -->
+  <div class="promise">
+    <div class="wrap promise-in">
+      <div class="promise-item"><span class="k">Ein Ansprechpartner</span><span class="v">Der, der am Abend auch aufbaut.</span></div>
+      <div class="promise-item"><span class="k">Antwort in 24 h</span><span class="v">Verbindlich zugesagt oder klar abgesagt.</span></div>
+      <div class="promise-item"><span class="k">Galerie 48 h</span><span class="v">Vertraglich zugesagt, sonst 20 % zurück.</span></div>
+      <div class="promise-item"><span class="k">Festpreis</span><span class="v">Aufbau, Abbau, Anfahrt bis 50 km inklusive.</span></div>
+    </div>
+  </div>
+
+  <!-- ============ USP ============ -->
+  <section id="usp">
+    <div class="wrap stack g-56">
+      <div class="stack g-16">
+        <span class="eyebrow">Der Unterschied</span>
+        <h2>Die Fotobox ist das eine.<br>Der ganze Abend ist das andere.</h2>
+        <p class="lede">
+          Wer eine Feier plant, sucht sonst getrennt nach Fotobox, Ambientelicht, Leuchtbuchstaben
+          und Ballon-Deko. Vier Angebote, vier Anzahlungen, vier Lieferzeitfenster, vier mögliche
+          Fehlerquellen am selben Abend. Wir liefern alles davon in einem Aufbau — und deshalb
+          günstiger, als die vier zusammen kosten würden.
+        </p>
+      </div>
+
+      <div class="cards-3">
+        <article class="card">
+          <span class="idx">BEWEIS 01</span>
+          <h3>Ein Anruf statt vier</h3>
+          <p>
+            Fotostation, Licht, Buchstaben, Musik, Deko und Verbrauchsmaterial kommen aus einer
+            Hand, in einem Fahrzeug, zu einem Termin. Ihr spart rund sechs Stunden Koordination —
+            und die Sorge, dass um 17 Uhr einer der vier nicht auftaucht.
+          </p>
+          <p class="detail">Ein Angebot, eine Anzahlung, eine Rechnung · Bündelpreise bis 15 % unter Einzelbuchung</p>
+        </article>
+
+        <article class="card">
+          <span class="idx">BEWEIS 02</span>
+          <h3>Der Chef baut selbst auf</h3>
+          <p>
+            Kein wechselndes Aushilfspersonal, das euer Gespräch nicht kennt. Wer das Angebot
+            geschrieben hat, steht am Abend auch am Aufbau. Das ist der eine Vorteil, den ein
+            großer Anbieter nicht nachbauen kann.
+          </p>
+          <p class="detail">Gilt für jeden Auftrag ab 890 € · Aufbau beginnt 90 Minuten vor eurem Start</p>
+        </article>
+
+        <article class="card">
+          <span class="idx">BEWEIS 03</span>
+          <h3>Nachweis für Firmenkunden</h3>
+          <p>
+            Für Messen und Firmenevents: alles im Firmendesign, freiwilliges Doppel-Opt-in für
+            Kontaktdaten, Auswertung binnen 72 Stunden. Damit lässt sich der Posten intern
+            begründen, statt ihn zu verteidigen.
+          </p>
+          <p class="detail">Export als CSV oder direkt in HubSpot, Brevo, Mailchimp · nur im Paket MARKE</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PAKETE ============ -->
+  <section id="pakete">
+    <div class="wrap stack g-56">
+      <div class="stack g-16">
+        <span class="eyebrow">Grundpakete</span>
+        <h2>Drei Pakete. Keine Überraschungen<br>auf der Rechnung.</h2>
+        <p class="lede">Alle Preise netto, zzgl. USt. Aufbau, Abbau und Anfahrt bis 50&nbsp;km sind enthalten.</p>
+      </div>
+
+      <div class="cards-3">
+        <article class="pack">
+          <div class="pname">KLEIN</div>
+          <div class="price">590 €<small>4 STUNDEN · SELBSTBEDIENUNG</small></div>
+          <ul>
+            <li>Station mit Ringlicht &amp; Touch-Bedienung</li>
+            <li>Unbegrenzte digitale Aufnahmen</li>
+            <li>Private Online-Galerie, 90 Tage</li>
+            <li>Lieferung, Aufbau, Einweisung</li>
+            <li>Requisiten-Koffer &amp; ein Hintergrund</li>
+          </ul>
+          <p class="who">Für Geburtstage und kleine Feiern, bei denen kein Druck gebraucht wird.</p>
+        </article>
+
+        <article class="pack featured">
+          <span class="tag">Meistgebucht</span>
+          <div class="pname">KLASSIK</div>
+          <div class="price">890 €<small>5 STUNDEN · BETREUT</small></div>
+          <ul>
+            <li>Alles aus KLEIN</li>
+            <li>Unbegrenzter Sofortdruck vor Ort</li>
+            <li>Print-Layout in eurem Design</li>
+            <li>Betreuung durch den Inhaber</li>
+            <li>Hintergrund nach Wahl</li>
+          </ul>
+          <p class="who">Für Hochzeiten und Firmenfeiern — der Streifen in der Hand ist der halbe Effekt.</p>
+        </article>
+
+        <article class="pack">
+          <div class="pname">MARKE</div>
+          <div class="price">1.790 €<small>8 STUNDEN · FIRMENKUNDEN</small></div>
+          <ul>
+            <li>Alles aus KLASSIK</li>
+            <li>Vollverkleidung im Firmendesign</li>
+            <li>Kontaktdaten mit Doppel-Opt-in</li>
+            <li>Datenexport ins CRM</li>
+            <li>Auswertung binnen 72 h</li>
+            <li>Zweite Person für den Standbetrieb</li>
+          </ul>
+          <p class="who">Für Messen, Roadshows und Produktlaunches, die sich rechtfertigen müssen.</p>
+        </article>
+      </div>
+
+      <p class="muted" style="font-size:.86rem">
+        Zusatzstunde <span class="num">90 €</span> ·
+        Anfahrt über 50 km <span class="num">0,79 €/km</span> ·
+        zweite Station am selben Ort <span class="num">−15 %</span>
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ SORTIMENT ============ -->
+  <section id="sortiment">
+    <div class="wrap stack g-56">
+      <div class="stack g-16">
+        <span class="eyebrow">Sortiment</span>
+        <h2>Was sonst noch mitfährt.</h2>
+        <p class="lede">
+          Alles hier kommt im selben Fahrzeug, im selben Aufbau, auf derselben Rechnung.
+          Deshalb kostet es zusammen weniger als einzeln bei vier Anbietern — und deshalb
+          steht am Abend nur ein Transporter vor der Tür.
+        </p>
+      </div>
+
+      <div class="sortiment">
+        <div class="sort-col">
+          <div class="sort-head"><span class="t">Zum Mieten</span><span class="u">Preis je Event</span></div>
+          <div class="sort-row">
+            <span><span class="n">Ambientelicht, 8 Akku-Spots</span><span class="d">Raum in Wunschfarbe, keine Kabel im Weg</span></span>
+            <span class="p">179 €</span>
+          </div>
+          <div class="sort-row">
+            <span><span class="n">Leuchtbuchstaben, 1 m hoch</span><span class="d">„LOVE“, eure Initialen oder Firmenkürzel</span></span>
+            <span class="p">149 €</span>
+          </div>
+          <div class="sort-row">
+            <span><span class="n">Kaltnebel für den ersten Tanz</span><span class="d">Bodennebel, ohne Rauchmelder-Alarm</span></span>
+            <span class="p">149 €</span>
+          </div>
+          <div class="sort-row">
+            <span><span class="n">Musikanlage für bis zu 80 Gäste</span><span class="d">Sektempfang, Trauung, kleine Feier</span></span>
+            <span class="p">129 €</span>
+          </div>
+          <div class="sort-row">
+            <span><span class="n">Blumen- und Pampaswand</span><span class="d">Hintergrund für Foto und Sektempfang</span></span>
+            <span class="p">119 €</span>
+          </div>
+          <div class="sort-row">
+            <span><span class="n">Stehtische mit Husse, 6 Stück</span><span class="d">Sektempfang, Messestand</span></span>
+            <span class="p">90 €</span>
+          </div>
+          <div class="sort-row">
+            <span><span class="n">Popcorn- und Zuckerwattemaschine</span><span class="d">Kinderfeste, Sommerfeste, Firmenfeiern</span></span>
+            <span class="p">89 €</span>
+          </div>
+        </div>
+
+        <div class="sort-col">
+          <div class="sort-head"><span class="t">Zum Verbrauchen</span><span class="u">Einmalig</span></div>
+          <div class="sort-row">
+            <span><span class="n">Ballon-Girlande, 3 m, aufgebaut</span><span class="d">Farben nach Wunsch, wir kleben sie selbst</span></span>
+            <span class="p">129 €</span>
+          </div>
+          <div class="sort-row">
+            <span><span class="n">Trockeneis, 10 kg</span><span class="d">Reicht für rund 20 Minuten Bodennebel</span></span>
+            <span class="p">89 €</span>
+          </div>
+          <div class="sort-row">
+            <span><span class="n">Popcorn und Zuckerwatte, 100 Portionen</span><span class="d">Inklusive Tüten und Stäbchen</span></span>
+            <span class="p">79 €</span>
+          </div>
+          <div class="sort-row">
+            <span><span class="n">Zusatz-Druckmedien, 400 Streifen</span><span class="d">Wenn wirklich alle mitmachen</span></span>
+            <span class="p">59 €</span>
+          </div>
+          <div class="sort-row">
+            <span><span class="n">Konfettikanonen, 4 Stück</span><span class="d">Für den Auszug oder den ersten Tanz</span></span>
+            <span class="p">49 €</span>
+          </div>
+          <div class="sort-row">
+            <span><span class="n">Wunderkerzen, 50 Stück mit Ständer</span><span class="d">Lange Brenndauer, für drinnen geeignet</span></span>
+            <span class="p">45 €</span>
+          </div>
+          <div class="sort-row">
+            <span><span class="n">Gästebuch, fertig geklebt</span><span class="d">Wir kleben die Streifen den Abend über ein</span></span>
+            <span class="p">39 €</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="stack g-24">
+        <h3 style="font-size:1.1rem">Zusammen gebucht ist es günstiger</h3>
+        <div class="bundle">
+          <article class="bundle-card">
+            <span class="bn">Lichtpaket</span>
+            <span class="bc">Ambientelicht + Leuchtbuchstaben</span>
+            <span class="bp"><span class="now">279 €</span><span class="was">328 €</span></span>
+            <span class="bs">Spart 49 €</span>
+          </article>
+          <article class="bundle-card featured">
+            <span class="bn">Rundum</span>
+            <span class="bc">KLASSIK + Lichtpaket + Gästebuch</span>
+            <span class="bp"><span class="now">1.090 €</span><span class="was">1.257 €</span></span>
+            <span class="bs">Spart 167 € · meistgebucht</span>
+          </article>
+          <article class="bundle-card">
+            <span class="bn">Firmenfeier</span>
+            <span class="bc">MARKE + Licht + Musik + Stehtische</span>
+            <span class="bp"><span class="now">1.890 €</span><span class="was">2.188 €</span></span>
+            <span class="bs">Spart 298 €</span>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ABLAUF (echte Reihenfolge, deshalb nummeriert) ============ -->
+  <section id="ablauf">
+    <div class="wrap stack g-56">
+      <div class="stack g-16">
+        <span class="eyebrow">Ablauf</span>
+        <h2>Von der Anfrage bis zur Galerie<br>sind es drei Schritte.</h2>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <span class="no">SCHRITT 1</span>
+          <h3>Termin prüfen</h3>
+          <p>Datum, Ort und Paket eintragen. Ihr bekommt binnen 24 Stunden eine verbindliche Zusage oder eine Absage — nie ein „melden uns dann“.</p>
+          <span class="when">24 Stunden</span>
+        </div>
+        <div class="step">
+          <span class="no">SCHRITT 2</span>
+          <h3>Layout abstimmen</h3>
+          <p>Wir schicken einen Entwurf für Streifen, Startbildschirm und Galerie. Ihr korrigiert, so oft ihr wollt, bis eine Woche vor dem Event.</p>
+          <span class="when">48 Stunden bis zum ersten Entwurf</span>
+        </div>
+        <div class="step">
+          <span class="no">SCHRITT 3</span>
+          <h3>Event &amp; Galerie</h3>
+          <p>Wir bauen 90 Minuten vorher auf und sind da, bis das Licht ausgeht. Galerie nach 48 Stunden — bei Firmenkunden zusätzlich die Auswertung nach 72.</p>
+          <span class="when">48 Stunden bis zur Galerie</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ B2B ============ -->
+  <section id="b2b">
+    <div class="wrap split">
+      <div class="stack g-24">
+        <span class="eyebrow">Für Marken</span>
+        <h2>Der Beleg, den euer<br>Marketing braucht.</h2>
+        <p class="lede">
+          Ein Messestand kostet fünfstellig und wird am Ende mit „lief gut“ bewertet.
+          Ein BLITZWERK-Booth liefert die Zahlen dazu — und zwar die, nach denen intern
+          tatsächlich gefragt wird.
+        </p>
+        <ul class="bullets">
+          <li><span class="b-no">01</span><span><b>Opt-in statt Visitenkartenschale.</b> Der Gast will sein Foto — dafür gibt er freiwillig eine Adresse frei. Das ist die ehrlichste Form der Einwilligung, die es auf einer Messe gibt.</span></li>
+          <li><span class="b-no">02</span><span><b>Sauber dokumentiert.</b> Auftragsverarbeitungsvertrag, Zweckbindung, Doppelbestätigung, Löschfrist nach 90 Tagen. Eure Rechtsabteilung bekommt eine Akte, keinen Anruf.</span></li>
+          <li><span class="b-no">03</span><span><b>Vergleichbar über Events hinweg.</b> Wir rechnen jeden Einsatz auf Kosten je Kontakt herunter. Ab dem zweiten Event wisst ihr, welches Format bei euch funktioniert.</span></li>
+        </ul>
+      </div>
+
+      <figure class="report">
+        <figcaption class="report-head"><span>Post-Event-Report</span><span>Beispielformat</span></figcaption>
+        <div class="report-body">
+          <div class="kpi"><span class="kl">Sessions</span><span class="kv">412</span><span class="kn">Gruppen am Booth</span></div>
+          <div class="kpi"><span class="kl">Streifen gedruckt</span><span class="kv">826</span><span class="kn">2,0 je Session</span></div>
+          <div class="kpi"><span class="kl">Opt-ins</span><span class="kv acc">168</span><span class="kn">40,8 % der Sessions</span></div>
+          <div class="kpi"><span class="kl">Kosten je Kontakt</span><span class="kv acc">10,65 €</span><span class="kn">Paketpreis ÷ Opt-ins</span></div>
+        </div>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ============ VERGLEICH ============ -->
+  <section id="vergleich">
+    <div class="wrap stack g-40">
+      <div class="stack g-16">
+        <span class="eyebrow">Einordnung</span>
+        <h2>Wo wir stehen — und wo nicht.</h2>
+        <p class="lede">Wir sind nicht die günstigste Lösung. Wir sind die, bei der am Ende jemand nachrechnen kann.</p>
+      </div>
+
+      <div class="tbl-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Kriterium</th>
+              <th scope="col">Mietbox ohne Personal</th>
+              <th scope="col">Klassischer Verleih</th>
+              <th scope="col" class="own">BLITZWERK</th>
+              <th scope="col">Eventagentur</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Preisrahmen</th>
+              <td class="num">250–450 €</td>
+              <td class="num">600–900 €</td>
+              <td class="own num">590–1.790 €</td>
+              <td class="num">ab 3.500 €</td>
+            </tr>
+            <tr>
+              <th scope="row">Umfang</th>
+              <td>Nur die Box</td>
+              <td>Nur die Box</td>
+              <td class="own">Box, Licht, Buchstaben, Musik, Deko, Verbrauch</td>
+              <td>Alles, individuell geplant</td>
+            </tr>
+            <tr>
+              <th scope="row">Anzahl Ansprechpartner</th>
+              <td class="num">1 je Gewerk</td>
+              <td class="num">1 je Gewerk</td>
+              <td class="own num">1 für alles</td>
+              <td class="num">1 Projektleitung</td>
+            </tr>
+            <tr>
+              <th scope="row">Betreuung vor Ort</th>
+              <td>Keine</td>
+              <td>Gegen Aufpreis</td>
+              <td class="own">Ab KLASSIK durch den Inhaber</td>
+              <td>Projektteam</td>
+            </tr>
+            <tr>
+              <th scope="row">Datenübergabe</th>
+              <td>USB-Stick</td>
+              <td>Download-Link</td>
+              <td class="own">Galerie + CRM-Export mit Opt-in</td>
+              <td>Verhandlungssache</td>
+            </tr>
+            <tr>
+              <th scope="row">Wirkungsnachweis</th>
+              <td>—</td>
+              <td>—</td>
+              <td class="own">Auswertung nach 72 h, Kosten je Kontakt</td>
+              <td>Abschlusspräsentation</td>
+            </tr>
+            <tr>
+              <th scope="row">Ausfallabsicherung</th>
+              <td>Keine</td>
+              <td>Selten geregelt</td>
+              <td class="own">Ersatzkamera im Fahrzeug, Regelung im Vertrag</td>
+              <td>Vertraglich</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TERMIN ============ -->
+  <section id="termin">
+    <div class="wrap">
+      <div class="close stack g-24">
+        <span class="eyebrow">Verfügbarkeit</span>
+        <h2>Ist euer Datum noch frei?</h2>
+        <p class="lede">Antwort binnen 24 Stunden — verbindlich zugesagt oder klar abgesagt.</p>
+        <form class="form-row" onsubmit="return false;">
+          <label class="visually-hidden" for="bwDate" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Datum</label>
+          <input id="bwDate" type="date" aria-label="Datum des Events">
+          <label class="visually-hidden" for="bwPlz" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Postleitzahl</label>
+          <input id="bwPlz" type="text" placeholder="PLZ des Veranstaltungsorts" aria-label="Postleitzahl">
+          <label class="visually-hidden" for="bwPack" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Paket</label>
+          <select id="bwPack" aria-label="Paket">
+            <option>Rundum — 1.090 €</option>
+            <option>KLASSIK — 890 €</option>
+            <option>KLEIN — 590 €</option>
+            <option>MARKE — 1.790 €</option>
+            <option>Weiß ich noch nicht</option>
+          </select>
+          <button class="btn btn-primary" type="submit">Prüfen</button>
+        </form>
+        <p class="legal">
+          Wir speichern eure Anfrage, um sie zu beantworten, und löschen sie nach 12 Monaten,
+          wenn keine Buchung zustande kommt. Keine Newsletter-Anmeldung, kein Weiterverkauf.
+        </p>
+      </div>
+
+      <p class="concept-note">
+        Konzeptentwurf. BLITZWERK ist eine fiktive Gründungsidee — Preise, Leistungsversprechen und
+        Auswertungszahlen sind kalkulierte Planwerte aus dem zugehörigen Gründungskonzept, keine
+        Ergebnisse durchgeführter Events. Das Sortiment baut sich nach dem Konzept über die ersten
+        drei Jahre auf; nicht jedes Modul ist ab dem ersten Tag verfügbar.
+      </p>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap foot">
+      <span class="logo" style="font-size:.92rem"><span class="logo-mark" aria-hidden="true"></span>BLITZWERK</span>
+      <span>FOTOBOOTH ALS MARKETINGKANAL</span>
+      <span>IMPRESSUM · DATENSCHUTZ · AGB</span>
+    </div>
+  </footer>
+</div>
+
+<script>
+(function () {
+  var countEl = document.getElementById('bwCount');
+  var flashEl = document.getElementById('bwFlash');
+  var stripEl = document.getElementById('bwStrip');
+  if (!countEl || !flashEl || !stripEl) return;
+
+  var frames = Array.prototype.slice.call(stripEl.querySelectorAll('.frame'));
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  if (reduced.matches) {
+    countEl.textContent = 'BEREIT';
+    countEl.classList.add('is-cue');
+    frames.forEach(function (f) { f.classList.add('on'); });
+    return;
+  }
+
+  var shot = 0;
+  var timers = [];
+  function at(ms, fn) { timers.push(setTimeout(fn, ms)); }
+
+  function cycle() {
+    timers.forEach(clearTimeout);
+    timers = [];
+    shot = 0;
+    frames.forEach(function (f) { f.classList.remove('on'); });
+    countEl.classList.remove('is-cue');
+
+    // vier Aufnahmen, je 1,9 s: 3 - 2 - 1 - Blitz
+    for (var i = 0; i < 4; i++) {
+      (function (i) {
+        var base = i * 1900;
+        at(base,        function () { countEl.textContent = '3'; });
+        at(base + 480,  function () { countEl.textContent = '2'; });
+        at(base + 960,  function () { countEl.textContent = '1'; });
+        at(base + 1440, function () {
+          flashEl.classList.remove('fire');
+          void flashEl.offsetWidth;
+          flashEl.classList.add('fire');
+          if (frames[shot]) frames[shot].classList.add('on');
+          shot++;
+        });
+      })(i);
+    }
+    at(7600, function () {
+      countEl.classList.add('is-cue');
+      countEl.textContent = 'FERTIG';
+    });
+    at(11200, cycle);
+  }
+
+  // Nur laufen lassen, solange der Booth sichtbar ist.
+  var running = false;
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting && !running) { running = true; cycle(); }
+      else if (!e.isIntersecting && running) {
+        running = false;
+        timers.forEach(clearTimeout);
+        timers = [];
+      }
+    });
+  }, { threshold: 0.25 });
+  io.observe(stripEl.closest('.booth'));
+})();
+</script>

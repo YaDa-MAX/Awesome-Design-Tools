@@ -1,0 +1,1574 @@
+<title>BLITZWERK Gründungskonzept</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,400..900&family=IBM+Plex+Mono:wght@400;500;600&family=Instrument+Sans:wght@400..700&display=swap">
+
+<style>
+/* ============================================================
+   Vollständige Hell-Palette auf blankem :root.
+   Dunkel wird ausschließlich auf Token-Ebene neu definiert —
+   einmal für die OS-Einstellung, einmal für den Theme-Schalter.
+   ============================================================ */
+:root {
+  color-scheme: light;
+  --bg:        #F1F3F5;
+  --surface:   #FFFFFF;
+  --surface-2: #E9EDF1;
+  --ink:       #151B22;
+  --ink-mid:   #414F5C;
+  --ink-mute:  #6B7A89;
+  --line:      #DCE1E6;
+  --line-soft: #E7EBEF;
+  --accent:    #B26A12;
+  --accent-ink:#8A5210;
+  --accent-soft: rgba(178,106,18,.10);
+  --pos:       #0B8A63;
+  --neg:       #B03A2E;
+  --s1:        #C2761A;
+  --s2:        #3D4FA0;
+  --s3:        #0B8A63;
+  --grid:      #E2E7EB;
+  --shadow:    0 1px 2px rgba(21,27,34,.05), 0 8px 24px -14px rgba(21,27,34,.16);
+
+  --display: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --body:    "Instrument Sans", "Segoe UI", system-ui, sans-serif;
+  --mono:    "IBM Plex Mono", ui-monospace, "SFMono-Regular", monospace;
+  --max: 1080px;
+  --pad: clamp(18px, 4.5vw, 52px);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --bg:        #10151B;
+    --surface:   #171D24;
+    --surface-2: #1E262F;
+    --ink:       #EDF1F5;
+    --ink-mid:   #B3C0CD;
+    --ink-mute:  #8496A6;
+    --line:      #28323C;
+    --line-soft: #202932;
+    --accent:    #F0A43C;
+    --accent-ink:#F0A43C;
+    --accent-soft: rgba(240,164,60,.13);
+    --pos:       #1FA275;
+    --neg:       #E06A5A;
+    --s1:        #C58026;
+    --s2:        #6C80DC;
+    --s3:        #1FA275;
+    --grid:      #232C36;
+    --shadow:    0 1px 2px rgba(0,0,0,.4), 0 12px 30px -16px rgba(0,0,0,.7);
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg:        #10151B;
+  --surface:   #171D24;
+  --surface-2: #1E262F;
+  --ink:       #EDF1F5;
+  --ink-mid:   #B3C0CD;
+  --ink-mute:  #8496A6;
+  --line:      #28323C;
+  --line-soft: #202932;
+  --accent:    #F0A43C;
+  --accent-ink:#F0A43C;
+  --accent-soft: rgba(240,164,60,.13);
+  --pos:       #1FA275;
+  --neg:       #E06A5A;
+  --s1:        #C58026;
+  --s2:        #6C80DC;
+  --s3:        #1FA275;
+  --grid:      #232C36;
+  --shadow:    0 1px 2px rgba(0,0,0,.4), 0 12px 30px -16px rgba(0,0,0,.7);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 16.5px;
+  line-height: 1.62;
+  -webkit-font-smoothing: antialiased;
+}
+p, h1, h2, h3, h4, ul, ol, figure, table { margin: 0; }
+ul, ol { padding: 0; list-style: none; }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+
+h1, h2, h3, .display {
+  font-family: var(--display);
+  font-variation-settings: "wdth" 110;
+  letter-spacing: -.02em; line-height: 1.06;
+  text-wrap: balance; font-weight: 800;
+}
+h1 { font-size: clamp(2.15rem, 5vw, 3.5rem); }
+h2 { font-size: clamp(1.55rem, 3vw, 2.15rem); }
+h3 { font-size: clamp(1.02rem, 1.5vw, 1.16rem); font-weight: 700; letter-spacing: -.01em; }
+
+.eyebrow {
+  font-family: var(--mono); font-size: .68rem; font-weight: 500;
+  letter-spacing: .17em; text-transform: uppercase; color: var(--accent-ink);
+}
+.lede { font-size: clamp(1rem, 1.4vw, 1.14rem); color: var(--ink-mid); max-width: 66ch; }
+.body-text { color: var(--ink-mid); max-width: 68ch; }
+.body-text + .body-text { margin-top: .9em; }
+.body-text b, .lede b { color: var(--ink); font-weight: 600; }
+.mute { color: var(--ink-mute); }
+.num { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+.small { font-size: .84rem; }
+.xs { font-size: .76rem; }
+
+.wrap { max-width: var(--max); margin-inline: auto; padding-inline: var(--pad); }
+.stack { display: flex; flex-direction: column; }
+.g8{gap:8px}.g12{gap:12px}.g16{gap:16px}.g24{gap:24px}.g32{gap:32px}.g44{gap:44px}
+
+/* ---------- Kopf ---------- */
+.topbar {
+  position: sticky; top: 0; z-index: 40;
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--line);
+}
+.topbar-in { max-width: var(--max); margin-inline: auto; padding: 11px var(--pad);
+  display: flex; align-items: center; gap: 20px; }
+.brand { display: flex; align-items: center; gap: 9px;
+  font-family: var(--display); font-weight: 900; font-variation-settings: "wdth" 118;
+  font-size: .95rem; letter-spacing: .01em; }
+.brand-mark { width: 10px; height: 18px; border-radius: 1px;
+  background: linear-gradient(180deg, var(--accent) 0 25%, var(--ink) 25% 50%, var(--accent) 50% 75%, var(--ink) 75% 100%); }
+.toc { display: flex; gap: 18px; margin-left: auto; overflow-x: auto;
+  font-family: var(--mono); font-size: .7rem; letter-spacing: .06em; color: var(--ink-mute);
+  text-transform: uppercase; scrollbar-width: none; }
+.toc::-webkit-scrollbar { display: none; }
+.toc a { text-decoration: none; white-space: nowrap; padding-block: 3px; border-bottom: 1px solid transparent; }
+.toc a:hover { color: var(--ink); border-bottom-color: var(--accent); }
+
+/* ---------- Deckblatt ---------- */
+.cover { padding-block: clamp(48px, 7vw, 92px) clamp(36px, 5vw, 60px); }
+.cover-grid { display: grid; grid-template-columns: minmax(0,1.5fr) minmax(0,1fr);
+  gap: clamp(28px, 5vw, 60px); align-items: end; }
+@media (max-width: 880px) { .cover-grid { grid-template-columns: 1fr; align-items: start; } }
+.facts { display: grid; gap: 0; border: 1px solid var(--line); border-radius: 4px;
+  background: var(--surface); box-shadow: var(--shadow); overflow: hidden; }
+.fact { display: flex; justify-content: space-between; gap: 16px; align-items: baseline;
+  padding: 12px 16px; border-bottom: 1px solid var(--line-soft); font-size: .86rem; }
+.fact:last-child { border-bottom: 0; }
+.fact .fl { color: var(--ink-mute); font-family: var(--mono); font-size: .68rem;
+  letter-spacing: .09em; text-transform: uppercase; }
+.fact .fv { font-family: var(--mono); font-variant-numeric: tabular-nums; color: var(--ink); font-weight: 500; }
+
+/* ---------- Kapitel ---------- */
+section.ch { padding-block: clamp(46px, 6vw, 76px); border-top: 1px solid var(--line); }
+.ch-head { display: grid; gap: 14px; margin-bottom: 34px; }
+.ch-no { font-family: var(--mono); font-size: .68rem; letter-spacing: .17em;
+  color: var(--accent-ink); text-transform: uppercase; }
+
+/* ---------- Karten ---------- */
+.grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 18px; }
+.grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 18px; }
+@media (max-width: 880px) { .grid-3 { grid-template-columns: 1fr; } .grid-2 { grid-template-columns: 1fr; } }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 4px;
+  padding: 22px; display: grid; gap: 11px; align-content: start; box-shadow: var(--shadow); }
+.card h3 { font-size: 1.04rem; }
+.card p { font-size: .9rem; color: var(--ink-mid); }
+.card .tagline { font-family: var(--mono); font-size: .66rem; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--accent-ink); }
+.card .foot { border-top: 1px solid var(--line-soft); padding-top: 10px; font-size: .8rem; color: var(--ink-mute); }
+
+/* ---------- Kennzahlkacheln ---------- */
+.tiles { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 14px; }
+@media (max-width: 900px) { .tiles { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+@media (max-width: 460px) { .tiles { grid-template-columns: 1fr; } }
+.tile { background: var(--surface); border: 1px solid var(--line); border-radius: 4px;
+  padding: 18px; display: grid; gap: 5px; box-shadow: var(--shadow); }
+.tile .tl { font-family: var(--mono); font-size: .64rem; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--ink-mute); }
+.tile .tv { font-family: var(--mono); font-size: 1.68rem; font-weight: 500;
+  font-variant-numeric: tabular-nums; line-height: 1.12; color: var(--ink); }
+.tile .tv.acc { color: var(--accent-ink); }
+.tile .tn { font-size: .78rem; color: var(--ink-mute); }
+
+/* ---------- Tabellen ---------- */
+.tbl { overflow-x: auto; border: 1px solid var(--line); border-radius: 4px;
+  background: var(--surface); box-shadow: var(--shadow); }
+table { border-collapse: collapse; width: 100%; min-width: 640px; font-size: .875rem; }
+caption { text-align: left; padding: 15px 18px 0; font-family: var(--mono); font-size: .68rem;
+  letter-spacing: .1em; text-transform: uppercase; color: var(--ink-mute); }
+th, td { text-align: left; padding: 11px 16px; border-bottom: 1px solid var(--line-soft); vertical-align: top; }
+thead th { font-family: var(--mono); font-size: .66rem; letter-spacing: .1em; text-transform: uppercase;
+  font-weight: 500; color: var(--ink-mute); background: var(--surface-2); border-bottom: 1px solid var(--line); }
+tbody th { font-weight: 500; color: var(--ink); }
+td { color: var(--ink-mid); }
+td.n, th.n { text-align: right; font-family: var(--mono); font-variant-numeric: tabular-nums; }
+tbody tr:last-child > * { border-bottom: 0; }
+tr.total > * { background: var(--surface-2); color: var(--ink); font-weight: 600; border-top: 1px solid var(--line); }
+tr.total td.n { font-weight: 600; }
+tr.rule > * { border-top: 1px solid var(--line); }
+/* Die hervorgehobene Spalte muss auch in Summenzeilen durchlaufen. */
+.hl-col, td.hl-col, th.hl-col { background: var(--accent-soft); color: var(--ink); }
+td.pos, .pos { color: var(--pos); }
+td.neg, .neg { color: var(--neg); }
+.tbl.compact table { min-width: 480px; }
+
+/* ---------- Diagramme ---------- */
+figure.chart { background: var(--surface); border: 1px solid var(--line); border-radius: 4px;
+  padding: 20px 20px 16px; box-shadow: var(--shadow); position: relative; }
+figure.chart figcaption { display: grid; gap: 4px; margin-bottom: 16px; }
+figure.chart .c-title { font-family: var(--display); font-weight: 700; font-size: 1rem;
+  font-variation-settings: "wdth" 108; letter-spacing: -.01em; color: var(--ink); }
+figure.chart .c-sub { font-size: .8rem; color: var(--ink-mute); }
+.legend { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 12px;
+  font-family: var(--mono); font-size: .7rem; color: var(--ink-mid); letter-spacing: .04em; }
+.legend span { display: inline-flex; align-items: center; gap: 7px; }
+.swatch { width: 11px; height: 11px; border-radius: 2px; flex: none; }
+.chart svg { display: block; width: 100%; height: auto; overflow: visible; }
+.tip {
+  position: absolute; pointer-events: none; opacity: 0; transition: opacity .12s ease;
+  background: var(--ink); color: var(--bg); border-radius: 3px; padding: 7px 10px;
+  font-family: var(--mono); font-size: .68rem; line-height: 1.5; white-space: nowrap;
+  transform: translate(-50%, -128%); z-index: 5; box-shadow: 0 6px 18px -8px rgba(0,0,0,.5);
+}
+.tip.on { opacity: 1; }
+.tip b { font-weight: 600; }
+
+/* ---------- Listen ---------- */
+.numlist { display: grid; gap: 14px; }
+.numlist li { display: grid; grid-template-columns: 26px 1fr; gap: 13px; align-items: start; }
+.numlist .li-no { font-family: var(--mono); font-size: .72rem; color: var(--accent-ink); padding-top: 4px; }
+.numlist p { color: var(--ink-mid); font-size: .93rem; }
+.numlist b { color: var(--ink); font-weight: 600; }
+
+.checklist { display: grid; gap: 9px; font-size: .9rem; color: var(--ink-mid); }
+.checklist li { display: grid; grid-template-columns: 16px 1fr; gap: 10px; align-items: start; }
+.checklist li::before { content: "—"; color: var(--accent-ink); font-family: var(--mono); font-size: .78rem; line-height: 1.6; }
+.checklist.no li::before { content: "×"; color: var(--neg); }
+.checklist b { color: var(--ink); font-weight: 600; }
+
+/* ---------- Merksatz ---------- */
+.pull { border-left: 3px solid var(--accent); padding: 4px 0 4px 20px;
+  font-family: var(--display); font-weight: 700; font-variation-settings: "wdth" 106;
+  font-size: clamp(1.12rem, 2vw, 1.42rem); line-height: 1.32; letter-spacing: -.015em;
+  color: var(--ink); text-wrap: balance; max-width: 46ch; }
+
+/* ---------- Zeitplan über fünf Jahre ---------- */
+.phases { display: grid; grid-template-columns: repeat(5, minmax(0,1fr)); gap: 0;
+  border: 1px solid var(--line); border-radius: 4px; overflow: hidden; background: var(--surface); box-shadow: var(--shadow); }
+@media (max-width: 1000px) { .phases { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+@media (max-width: 520px) { .phases { grid-template-columns: 1fr; } }
+.phase { padding: 20px 16px; border-right: 1px solid var(--line-soft); display: grid; gap: 9px; align-content: start; }
+.phase:last-child { border-right: 0; }
+.phase .pm { font-family: var(--mono); font-size: .64rem; letter-spacing: .11em; color: var(--accent-ink); text-transform: uppercase; }
+.phase h3 { font-size: .95rem; }
+.phase ul { display: grid; gap: 6px; font-size: .82rem; color: var(--ink-mid); }
+.phase li::before { content: "· "; color: var(--ink-mute); }
+.phase .badge { font-family: var(--mono); font-size: .62rem; letter-spacing: .08em;
+  border: 1px solid var(--line); border-radius: 2px; padding: 3px 7px; justify-self: start;
+  color: var(--ink-mute); text-transform: uppercase; }
+.phase .badge.full { border-color: var(--accent); color: var(--accent-ink); }
+
+footer.doc { border-top: 1px solid var(--line); padding-block: 34px 56px; }
+.disclaimer { background: var(--surface-2); border: 1px dashed var(--line);
+  border-radius: 4px; padding: 16px 18px; font-size: .8rem; color: var(--ink-mute); max-width: 78ch; }
+</style>
+
+<div class="topbar">
+  <div class="topbar-in">
+    <span class="brand"><span class="brand-mark" aria-hidden="true"></span>BLITZWERK</span>
+    <nav class="toc" aria-label="Kapitel">
+      <a href="#idee">Idee</a>
+      <a href="#usp">USP</a>
+      <a href="#sortiment">Sortiment</a>
+      <a href="#hebel">Hebel</a>
+      <a href="#preise">Preise</a>
+      <a href="#start">Startkapital</a>
+      <a href="#db">Deckungsbeitrag</a>
+      <a href="#module">Module</a>
+      <a href="#fix">Fixkosten</a>
+      <a href="#be">Break-even</a>
+      <a href="#plan">5 Jahre</a>
+      <a href="#ausstieg">Ausstieg</a>
+      <a href="#risiken">Risiken</a>
+      <a href="#fahrplan">Fahrplan</a>
+    </nav>
+  </div>
+</div>
+
+<!-- ============ DECKBLATT ============ -->
+<header class="cover">
+  <div class="wrap cover-grid">
+    <div class="stack g24">
+      <span class="eyebrow">Gründungskonzept · Fotobooth &amp; Partyausstattung</span>
+      <h1>Klein anfangen.<br>Aus dem Umsatz<br>wachsen.</h1>
+      <p class="lede">
+        BLITZWERK startet als Nebenerwerb mit <b>10.000 € Startkapital</b>, einer Fotostation und
+        einem Sortiment, das sich Stück für Stück selbst finanziert. Jede weitere Anschaffung wird
+        aus dem laufenden Geschäft bezahlt — nie aus neuem Kapital. Nach fünf Jahren steht ein
+        Vollzeitbetrieb mit vier Stationen.
+      </p>
+    </div>
+    <div class="facts">
+      <div class="fact"><span class="fl">Rechtsform</span><span class="fv">Einzelunternehmen</span></div>
+      <div class="fact"><span class="fl">Startkapital</span><span class="fv">10.000 €</span></div>
+      <div class="fact"><span class="fl">davon Eigenkapital</span><span class="fv">6.000 €</span></div>
+      <div class="fact"><span class="fl">Break-even Jahr 1</span><span class="fv">9 Events</span></div>
+      <div class="fact"><span class="fl">Plan Jahr 1</span><span class="fv">22 Events</span></div>
+      <div class="fact"><span class="fl">Vollzeit ab</span><span class="fv">Jahr 3</span></div>
+      <div class="fact"><span class="fl">Gründervergütung Jahr 5</span><span class="fv">69.080 €</span></div>
+    </div>
+  </div>
+</header>
+
+<!-- ============ 01 IDEE ============ -->
+<section class="ch" id="idee">
+  <div class="wrap">
+    <div class="ch-head">
+      <span class="ch-no">Kapitel 01 — Firmenidee</span>
+      <h2>Eine Fahrt, ein Aufbau, mehrere Erlösquellen</h2>
+      <p class="lede">
+        BLITZWERK stellt gebrandete Fotostationen auf Feiern und Firmenevents — und bringt beim
+        selben Termin gleich die Ausstattung mit, die ohnehin gebraucht wird: Licht, Leuchtbuchstaben,
+        Musik, Deko, Verbrauchsartikel.
+      </p>
+    </div>
+
+    <div class="stack g32">
+      <div class="grid-3">
+        <article class="card">
+          <span class="tagline">Der Kern</span>
+          <h3>Die Fotostation zieht den Auftrag</h3>
+          <p>
+            Sie ist der Grund, aus dem angefragt wird, und der Posten, über den der Preis verhandelt
+            wird. Sie hat den höchsten Beratungsaufwand — und den größten Anteil am Vertrauen.
+          </p>
+          <p class="foot">70–80 % des Auftragswerts in den ersten beiden Jahren</p>
+        </article>
+
+        <article class="card">
+          <span class="tagline">Der Aufbau</span>
+          <h3>Das Sortiment trägt die Marge</h3>
+          <p>
+            Uplights, Leuchtbuchstaben, Blumenwand, Musikanlage, Ballon-Girlanden, Gästebücher.
+            Alles fährt im selben Auto mit, wird im selben Gespräch verkauft und im selben Aufbau
+            aufgestellt.
+          </p>
+          <p class="foot">Deckungsbeitragsmarge des Sortiments: 81 % — höher als die der Station</p>
+        </article>
+
+        <article class="card">
+          <span class="tagline">Das Tempo</span>
+          <h3>Jede Anschaffung zahlt sich selbst</h3>
+          <p>
+            Kein Modul kommt ins Sortiment, das sich nicht in unter acht Einsätzen amortisiert.
+            Damit wächst der Betrieb aus dem Cashflow — ohne zweite Kreditrunde und ohne
+            Investorengespräch.
+          </p>
+          <p class="foot">19.430 € Reinvestition in fünf Jahren, vollständig selbst finanziert</p>
+        </article>
+      </div>
+
+      <p class="pull">Der Engpass ist nicht das Gerät. Der Engpass ist der Samstag — und jeder Samstag soll so viel tragen wie möglich.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 02 USP ============ -->
+<section class="ch" id="usp">
+  <div class="wrap">
+    <div class="ch-head">
+      <span class="ch-no">Kapitel 02 — Alleinstellungsmerkmal</span>
+      <h2>Warum bei uns und nicht bei drei anderen</h2>
+      <p class="lede">
+        Im Nebenerwerb ist der USP nicht Größe und nicht Preis. Er liegt darin, dem Kunden eine
+        Arbeit abzunehmen, die er sonst selbst erledigen müsste — nämlich vier Dienstleister zu
+        koordinieren.
+      </p>
+    </div>
+
+    <div class="stack g44">
+      <p class="pull">
+        Ein Ansprechpartner, ein Termin, eine Rechnung — für Fotostation, Licht, Deko und
+        Verbrauchsmaterial. Und am Abend steht die Person da, mit der auch telefoniert wurde.
+      </p>
+
+      <div class="grid-3">
+        <article class="card">
+          <span class="tagline">Beweis 01</span>
+          <h3>Ein Anruf statt vier</h3>
+          <p>
+            Wer eine Hochzeit plant, sucht sonst getrennt nach Fotobox, Ambientelicht,
+            Leuchtbuchstaben und Ballon-Deko. Vier Angebote, vier Anzahlungen, vier Lieferzeitfenster,
+            vier mögliche Fehlerquellen am selben Abend.
+          </p>
+          <p class="foot">Ersparnis für den Kunden: rund sechs Stunden Koordination</p>
+        </article>
+
+        <article class="card">
+          <span class="tagline">Beweis 02</span>
+          <h3>Der Chef baut selbst auf</h3>
+          <p>
+            Kein wechselndes Aushilfspersonal, das das Gespräch nicht kennt. In den ersten zwei
+            Jahren steht der Inhaber bei jedem Event selbst am Aufbau. Das ist der einzige Vorteil,
+            den ein großer Anbieter strukturell nicht kopieren kann.
+          </p>
+          <p class="foot">Ab Jahr 3 gilt es weiter für alle Aufträge über 1.500 €</p>
+        </article>
+
+        <article class="card">
+          <span class="tagline">Beweis 03</span>
+          <h3>Nachweis für Firmenkunden</h3>
+          <p>
+            Für Messen und Firmenevents: gebrandete Ausspielung, freiwilliges Doppel-Opt-in für
+            Kontaktdaten, Auswertung binnen 72 Stunden. Damit lässt sich der Posten intern begründen —
+            das kann im Umkreis sonst niemand.
+          </p>
+          <p class="foot">Trägt ab Jahr 3 rund ein Drittel des Umsatzes</p>
+        </article>
+      </div>
+
+      <div class="grid-2">
+        <div class="stack g12">
+          <h3>Was der USP ausdrücklich nicht ist</h3>
+          <ul class="checklist no">
+            <li><b>Nicht der günstigste Preis.</b> Ab Jahr 3 liegt die langfristige Preisuntergrenze eines Durchschnittsauftrags bei rund 1.000 € — variable Kosten von 305 € plus 692 € Fixkostenanteil (42.900 € ÷ 62 Events). Darunter wird der Unternehmerlohn nicht mehr verdient.</li>
+            <li><b>Nicht die größte Auswahl.</b> Sieben Zusatzmodule, nicht siebzig. Jedes zusätzliche Modul bindet Kapital, das im Nebenerwerb nicht da ist.</li>
+            <li><b>Nicht die beste Technik.</b> Für den Gast nicht unterscheidbar, für den Preis nicht relevant.</li>
+          </ul>
+        </div>
+        <div class="stack g12">
+          <h3>Was mit der Zeit verteidigbar wird</h3>
+          <p class="body-text">
+            Kopierbar in wenigen Monaten: Technik, Preisliste, Sortiment. Nicht kopierbar ist das,
+            was sich ansammelt — <b>Bewertungen, Empfehlungen von Locations und Fotografen, und ab
+            etwa 60 ausgewerteten Events belastbare Vergleichszahlen für Firmenkunden.</b>
+          </p>
+          <p class="body-text">
+            Deshalb ist die wichtigste Kennzahl des ersten Jahres nicht der Gewinn, sondern die Zahl
+            der Bewertungen: <b>Ziel 18 aus 22 Events.</b>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 03 SORTIMENT ============ -->
+<section class="ch" id="sortiment">
+  <div class="wrap">
+    <div class="ch-head">
+      <span class="ch-no">Kapitel 03 — Das Sortiment</span>
+      <h2>Was mitfährt — und was bewusst nicht</h2>
+      <p class="lede">
+        Jedes Modul muss fünf Bedingungen erfüllen. Die Liste ist keine Meinung, sie ist der Filter,
+        der verhindert, dass im Nebenerwerb Kapital in Regalware wandert.
+      </p>
+    </div>
+
+    <div class="stack g32">
+      <ul class="numlist">
+        <li><span class="li-no">01</span><p><b>Fährt im selben Fahrzeug mit.</b> Kein zweiter Weg, kein zweiter Termin, keine zusätzliche Fahrtkostenposition.</p></li>
+        <li><span class="li-no">02</span><p><b>Wird im selben Gespräch verkauft.</b> Kein eigener Vertriebsaufwand — das Modul kommt als Frage im Angebot vor, nicht als eigene Kampagne.</p></li>
+        <li><span class="li-no">03</span><p><b>Amortisiert in unter acht Einsätzen.</b> Bei 22 Events im ersten Jahr heißt das: Es verdient sich in derselben Saison zurück, in der es gekauft wurde.</p></li>
+        <li><span class="li-no">04</span><p><b>Braucht keine Sondererlaubnis.</b> Kein Starkstrom, keine Pyrotechnik nach Sprengstoffgesetz, keine Schankerlaubnis, kein Sachkundenachweis, keine wiederkehrende Prüfpflicht.</p></li>
+        <li><span class="li-no">05</span><p><b>Ist wartungsarm oder Verbrauch mit über 60 % Marge.</b> Alles dazwischen bindet Zeit, die neben dem Hauptjob nicht existiert.</p></li>
+      </ul>
+
+      <div class="tbl">
+        <table>
+          <caption>Verleihmodule — Preise netto</caption>
+          <thead>
+            <tr>
+              <th scope="col">Modul</th>
+              <th scope="col">Wofür</th>
+              <th scope="col" class="n">Anschaffung</th>
+              <th scope="col" class="n">Mietpreis</th>
+              <th scope="col" class="n">Var. Kosten</th>
+              <th scope="col" class="n hl-col">DB</th>
+              <th scope="col" class="n">Ab Jahr</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Uplights, 8 Akku-Spots</th>
+              <td>Raumbeleuchtung in Wunschfarbe, ohne Kabel</td>
+              <td class="n">640 €</td><td class="n">179 €</td><td class="n">12 €</td><td class="n hl-col">167 €</td><td class="n">1</td>
+            </tr>
+            <tr>
+              <th scope="row">Leuchtbuchstaben, 1 m</th>
+              <td>„LOVE“, Initialen, Firmenkürzel</td>
+              <td class="n">700 €</td><td class="n">149 €</td><td class="n">14 €</td><td class="n hl-col">135 €</td><td class="n">1</td>
+            </tr>
+            <tr>
+              <th scope="row">Blumen- und Pampaswand</th>
+              <td>Hintergrund für Foto und Sektempfang</td>
+              <td class="n">480 €</td><td class="n">119 €</td><td class="n">18 €</td><td class="n hl-col">101 €</td><td class="n">2</td>
+            </tr>
+            <tr>
+              <th scope="row">Musikanlage, klein</th>
+              <td>Sektempfang, Trauung, Feiern bis 80 Gäste</td>
+              <td class="n">750 €</td><td class="n">129 €</td><td class="n">11 €</td><td class="n hl-col">118 €</td><td class="n">2</td>
+            </tr>
+            <tr>
+              <th scope="row">Kaltnebelmaschine</th>
+              <td>Bodennebel für den ersten Tanz</td>
+              <td class="n">600 €</td><td class="n">149 €</td><td class="n">21 €</td><td class="n hl-col">128 €</td><td class="n">3</td>
+            </tr>
+            <tr>
+              <th scope="row">Popcorn- und Zuckerwattemaschine</th>
+              <td>Kinderfeiern, Firmenfeste, Sommerfeste</td>
+              <td class="n">420 €</td><td class="n">89 €</td><td class="n">16 €</td><td class="n hl-col">73 €</td><td class="n">3</td>
+            </tr>
+            <tr>
+              <th scope="row">Stehtische mit Husse, 6 Stück</th>
+              <td>Sektempfang, Messestand</td>
+              <td class="n">540 €</td><td class="n">90 €</td><td class="n">14 €</td><td class="n hl-col">76 €</td><td class="n">3</td>
+            </tr>
+            <tr class="total">
+              <th scope="row">Sortiment vollständig</th>
+              <td>—</td>
+              <td class="n">4.130 €</td><td class="n">904 €</td><td class="n">106 €</td><td class="n hl-col">798 €</td><td class="n">—</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="tbl">
+        <table>
+          <caption>Verbrauchsartikel — Preise netto</caption>
+          <thead>
+            <tr>
+              <th scope="col">Artikel</th>
+              <th scope="col" class="n">Verkaufspreis</th>
+              <th scope="col" class="n">Einkauf inkl. Arbeit</th>
+              <th scope="col" class="n hl-col">DB</th>
+              <th scope="col" class="n">Marge</th>
+              <th scope="col" class="n">Anhaftung</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">Fotostreifen-Gästebuch, fertig geklebt</th><td class="n">39 €</td><td class="n">11 €</td><td class="n hl-col">28 €</td><td class="n">71,8 %</td><td class="n">45 %</td></tr>
+            <tr><th scope="row">Ballon-Girlande, 3 m, aufgebaut</th><td class="n">129 €</td><td class="n">53 €</td><td class="n hl-col">76 €</td><td class="n">58,9 %</td><td class="n">22 %</td></tr>
+            <tr><th scope="row">Wunderkerzen-Set, 50 Stück mit Ständer</th><td class="n">45 €</td><td class="n">14 €</td><td class="n hl-col">31 €</td><td class="n">68,9 %</td><td class="n">30 %</td></tr>
+            <tr><th scope="row">Konfettikanonen, 4 Stück</th><td class="n">49 €</td><td class="n">16 €</td><td class="n hl-col">33 €</td><td class="n">67,3 %</td><td class="n">25 %</td></tr>
+            <tr><th scope="row">Zusatz-Druckmedien, 400 Streifen</th><td class="n">59 €</td><td class="n">14 €</td><td class="n hl-col">45 €</td><td class="n">76,3 %</td><td class="n">18 %</td></tr>
+            <tr><th scope="row">Trockeneis, 10 kg</th><td class="n">89 €</td><td class="n">34 €</td><td class="n hl-col">55 €</td><td class="n">61,8 %</td><td class="n">nur mit Nebel</td></tr>
+            <tr><th scope="row">Popcorn und Zuckerwatte, 100 Portionen</th><td class="n">79 €</td><td class="n">22 €</td><td class="n hl-col">57 €</td><td class="n">72,2 %</td><td class="n">nur mit Maschine</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="small mute">
+        „Anhaftung“ ist der Anteil der Aufträge, bei denen der Artikel mitgebucht wird — Zielwert
+        ab Jahr 3, wenn das Sortiment vollständig ist und im Angebot standardmäßig angeboten wird.
+      </p>
+
+      <div class="grid-2">
+        <div class="stack g12">
+          <h3>Bewusst nicht im Sortiment</h3>
+          <ul class="checklist no">
+            <li><b>Hüpfburgen.</b> Prüfpflicht, Aufsichtspflicht, Windrisiko, halber Transporter Volumen.</li>
+            <li><b>Zelte und Pavillons.</b> Zweite Person zwingend, Sturmhaftung, zwei Stunden Aufbau.</li>
+            <li><b>Getränke- und Cocktailbar.</b> Schankerlaubnis, Lebensmittelrecht, Kühlkette.</li>
+            <li><b>Feuerwerk und Bühnenpyrotechnik.</b> Befähigungsschein nach Sprengstoffgesetz.</li>
+            <li><b>DJ-Dienstleistung.</b> Kein Verleih, sondern Personengeschäft — es skaliert nicht und blockiert denselben Samstag.</li>
+            <li><b>Große Tontechnik.</b> Starkstrom, Versammlungsstättenverordnung, Sachkundenachweis.</li>
+          </ul>
+        </div>
+        <div class="stack g12">
+          <h3>Warum die Absagen wichtiger sind als die Zusagen</h3>
+          <p class="body-text">
+            Jede dieser sechs Positionen wird regelmäßig angefragt und wäre kurzfristig Umsatz. Alle
+            sechs verletzen mindestens eine der fünf Bedingungen — meistens die vierte oder die
+            zweite Person beim Aufbau.
+          </p>
+          <p class="body-text">
+            Im Nebenerwerb ist der begrenzende Faktor nicht die Nachfrage, sondern <b>die eigene Zeit
+            am Samstag und das Kapital, das nicht doppelt ausgegeben werden kann.</b> Ein Sortiment
+            wird nicht dadurch stark, dass viel drin ist, sondern dadurch, dass nichts drin ist,
+            was den Aufbau verlängert.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 04 HEBEL ============ -->
+<section class="ch" id="hebel">
+  <div class="wrap">
+    <div class="ch-head">
+      <span class="ch-no">Kapitel 04 — Der betriebswirtschaftliche Hebel</span>
+      <h2>Warum das Sortiment mehr bringt als mehr Kunden</h2>
+      <p class="lede">
+        Ein zusätzlicher Kunde kostet Marketing, ein Angebot, eine Anfahrt und einen freien Samstag.
+        Ein zusätzliches Modul beim bestehenden Kunden kostet nichts davon.
+      </p>
+    </div>
+
+    <div class="stack g32">
+      <div class="tbl compact">
+        <table>
+          <caption>Ein Auftrag, zweimal gerechnet</caption>
+          <thead>
+            <tr>
+              <th scope="col">Position</th>
+              <th scope="col" class="n">Nur Fotostation</th>
+              <th scope="col" class="n hl-col">Als Bündel „Rundum“</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">Paket KLASSIK, 5 h betreut</th><td class="n">890 €</td><td class="n hl-col">890 €</td></tr>
+            <tr><th scope="row">Uplights, 8 Spots</th><td class="n">—</td><td class="n hl-col">179 €</td></tr>
+            <tr><th scope="row">Leuchtbuchstaben</th><td class="n">—</td><td class="n hl-col">149 €</td></tr>
+            <tr><th scope="row">Fotostreifen-Gästebuch</th><td class="n">—</td><td class="n hl-col">39 €</td></tr>
+            <tr><th scope="row">Summe der Einzelpreise</th><td class="n">890 €</td><td class="n hl-col">1.257 €</td></tr>
+            <tr><th scope="row">Bündelrabatt</th><td class="n">—</td><td class="n hl-col">−167 €</td></tr>
+            <tr class="rule"><th scope="row">Rechnungsbetrag</th><td class="n">890 €</td><td class="n hl-col">1.090 €</td></tr>
+            <tr><th scope="row">Variable Kosten</th><td class="n">−141 €</td><td class="n hl-col">−178 €</td></tr>
+            <tr class="total"><th scope="row">Deckungsbeitrag</th><td class="n">749 €</td><td class="n hl-col">912 €</td></tr>
+            <tr><th scope="row">Zusätzliche Anfahrt</th><td class="n">—</td><td class="n hl-col">0 km</td></tr>
+            <tr><th scope="row">Zusätzliche Aufbauzeit</th><td class="n">—</td><td class="n hl-col">35 Minuten</td></tr>
+            <tr><th scope="row">Zusätzlicher belegter Samstag</th><td class="n">—</td><td class="n hl-col">keiner</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="tiles">
+        <div class="tile"><span class="tl">Mehr-Deckungsbeitrag</span><span class="tv acc">+163 €</span><span class="tn">auf demselben Termin</span></div>
+        <div class="tile"><span class="tl">Steigerung</span><span class="tv">+21,8 %</span><span class="tn">ohne einen neuen Kunden</span></div>
+        <div class="tile"><span class="tl">Zeitaufwand dafür</span><span class="tv">35 Min.</span><span class="tn">= 279 € je Zusatzstunde</span></div>
+        <div class="tile"><span class="tl">Marge des Sortiments</span><span class="tv">81 %</span><span class="tn">gegenüber 84 % der Station</span></div>
+      </div>
+
+      <div class="grid-2">
+        <div class="stack g12">
+          <h3>Die Rechnung dahinter</h3>
+          <p class="body-text">
+            Um 163 € mehr Deckungsbeitrag über neue Kunden zu erzielen, bräuchte es bei einem
+            Paket-Deckungsbeitrag von 749 € etwa <b>ein Fünftel eines zusätzlichen Auftrags</b> —
+            mitsamt Anfrage, Angebot, Anzahlung, Anfahrt und einem freien Samstag, den es im Mai
+            und Juni ohnehin nicht gibt.
+          </p>
+          <p class="body-text">
+            Über das Sortiment kostet derselbe Betrag <b>35 Minuten längeren Aufbau</b>. Umgerechnet
+            279 € je zusätzlich eingesetzter Stunde — mehr als jedes Paket je Stunde bringt.
+          </p>
+        </div>
+        <div class="stack g12">
+          <h3>Warum das gerade im Nebenerwerb zählt</h3>
+          <p class="body-text">
+            Wer neben einem Hauptjob gründet, hat kein Mengenproblem, sondern ein Zeitproblem.
+            22 Events im ersten Jahr sind nicht deshalb 22, weil die Nachfrage bei 22 endet,
+            sondern weil mehr neben 40 Wochenstunden nicht geht.
+          </p>
+          <p class="body-text">
+            <b>Unter dieser Bedingung ist der Umsatz je Termin die einzige Stellschraube, die
+            wirklich frei ist.</b> Genau daran arbeitet das Sortiment — und deshalb steht es in
+            diesem Konzept vor dem Wachstum der Eventzahl.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 05 PREISE ============ -->
+<section class="ch" id="preise">
+  <div class="wrap">
+    <div class="ch-head">
+      <span class="ch-no">Kapitel 05 — Preismodell</span>
+      <h2>Drei Pakete, drei Bündel</h2>
+      <p class="lede">
+        Die Paketpreise starten bewusst unter dem späteren Niveau: Ohne Bewertungen und ohne
+        Referenzen ist ein höherer Preis nicht durchsetzbar. Die Anhebung erfolgt in Jahr 2 und 3
+        über den Preis, nicht über neue Leistungen.
+      </p>
+    </div>
+
+    <div class="stack g24">
+      <div class="tbl">
+        <table>
+          <caption>Grundpakete Jahr 1 — Preise netto</caption>
+          <thead>
+            <tr>
+              <th scope="col">Paket</th>
+              <th scope="col" class="n">Preis</th>
+              <th scope="col">Dauer</th>
+              <th scope="col">Enthalten</th>
+              <th scope="col">Funktion</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">KLEIN</th><td class="n">590 €</td><td>4 h, Selbstbedienung</td>
+              <td>Digitale Aufnahmen, private Galerie 90 Tage, Aufbau und Einweisung</td>
+              <td>Preisanker · füllt Sonntage und Randtermine</td>
+            </tr>
+            <tr>
+              <th scope="row">KLASSIK</th><td class="n">890 €</td><td>5 h, betreut</td>
+              <td>Sofortdruck unbegrenzt, Layout im Kundendesign, Betreuung durch den Inhaber</td>
+              <td>Mengengeschäft · trägt die Samstage</td>
+            </tr>
+            <tr>
+              <th scope="row" class="hl-col">MARKE</th><td class="n hl-col">1.790 €</td><td class="hl-col">8 h, Firmenkunden</td>
+              <td class="hl-col">Vollverkleidung im Firmendesign, Doppel-Opt-in, Datenexport, Auswertung in 72 h</td>
+              <td class="hl-col">Margenträger · liegt meist Dienstag bis Donnerstag</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="tbl compact">
+        <table>
+          <caption>Bündel — der Regelweg im Angebot</caption>
+          <thead>
+            <tr>
+              <th scope="col">Bündel</th><th scope="col">Inhalt</th>
+              <th scope="col" class="n">Einzeln</th><th scope="col" class="n">Bündelpreis</th><th scope="col" class="n">Vorteil</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">Lichtpaket</th><td>Uplights + Leuchtbuchstaben</td><td class="n">328 €</td><td class="n">279 €</td><td class="n">−15 %</td></tr>
+            <tr><th scope="row">Rundum</th><td>KLASSIK + Lichtpaket + Gästebuch</td><td class="n">1.257 €</td><td class="n">1.090 €</td><td class="n">−13 %</td></tr>
+            <tr><th scope="row">Firmenfeier</th><td>MARKE + Uplights + Musikanlage + Stehtische</td><td class="n">2.188 €</td><td class="n">1.890 €</td><td class="n">−14 %</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="small mute">
+        Zusatzstunde 90 € · Anfahrt über 50 km 0,79 €/km · zweite Station am selben Ort −15 %.
+        Jedes Angebot enthält von vorn herein die Bündelvariante als Empfehlung und das Grundpaket
+        als Alternative — nicht umgekehrt. Das ist der gesamte Vertriebsaufwand für das Sortiment.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 06 STARTKAPITAL ============ -->
+<section class="ch" id="start">
+  <div class="wrap">
+    <div class="ch-head">
+      <span class="ch-no">Kapitel 06 — Startkapital</span>
+      <h2>10.000 €, davon 6.000 € eigene Mittel</h2>
+      <p class="lede">
+        Eine gebrauchte Fotostation, eine Ersatzkamera, das Nötigste an Software und Recht — mehr
+        nicht. Die ersten beiden Zusatzmodule kommen im laufenden Jahr aus dem Cashflow, nicht aus
+        dem Startkapital.
+      </p>
+    </div>
+
+    <div class="grid-2">
+      <div class="tbl compact">
+        <table>
+          <caption>Kapitalbedarf</caption>
+          <tbody>
+            <tr><th scope="row">Fotostation, teils gebraucht beschafft</th><td class="n">3.400 €</td></tr>
+            <tr><th scope="row">Ersatzkamera, gebraucht</th><td class="n">450 €</td></tr>
+            <tr><th scope="row">Requisiten und zwei Hintergründe</th><td class="n">600 €</td></tr>
+            <tr><th scope="row">Software und Lizenz, erstes Jahr</th><td class="n">350 €</td></tr>
+            <tr><th scope="row">Website, Marke, erste Bilder</th><td class="n">900 €</td></tr>
+            <tr><th scope="row">Gewerbe, Versicherung, Datenschutzvorlagen</th><td class="n">750 €</td></tr>
+            <tr><th scope="row">Erstbestand Verbrauchsmaterial</th><td class="n">900 €</td></tr>
+            <tr><th scope="row">Markteinführung</th><td class="n">1.100 €</td></tr>
+            <tr><th scope="row">Liquiditätsreserve</th><td class="n">1.550 €</td></tr>
+            <tr class="total"><th scope="row">Summe</th><td class="n">10.000 €</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="stack g16">
+        <div class="tbl compact">
+          <table>
+            <caption>Finanzierung</caption>
+            <tbody>
+              <tr><th scope="row">Eigenkapital</th><td class="n">6.000 €</td><td class="n mute">60 %</td></tr>
+              <tr><th scope="row">Mikrokredit, 7,9 % p. a., 4 Jahre</th><td class="n">4.000 €</td><td class="n mute">40 %</td></tr>
+              <tr class="total"><th scope="row">Summe</th><td class="n">10.000 €</td><td class="n">100 %</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="stack g12">
+          <h3>Das maximale Verlustrisiko</h3>
+          <p class="body-text">
+            Der schlimmste Fall ist rechenbar und klein: <b>6.000 € eigene Mittel plus die Restschuld
+            des Mikrokredits.</b> Die Gewinnschwelle liegt bei neun Events — bei zehn Events statt
+            der geplanten 22 steht immer noch ein Plus von rund 1.100 €.
+          </p>
+          <p class="body-text">
+            Genau das ist der Sinn der kleinen Skalierung: <b>Das Scheitern muss billig sein.</b>
+            Ein Start mit 30.000 € und drei Stationen wäre schneller — und im Fall des Scheiterns
+            eine private Insolvenz statt eines verlorenen Jahres.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 07 DECKUNGSBEITRAG PAKETE ============ -->
+<section class="ch" id="db">
+  <div class="wrap">
+    <div class="ch-head">
+      <span class="ch-no">Kapitel 07 — Deckungsbeitrag der Pakete</span>
+      <h2>Was eine Stunde eigener Arbeit einbringt</h2>
+      <p class="lede">
+        Im ersten Jahr arbeitet der Inhaber selbst. Sein Lohn steckt deshalb nicht in den variablen
+        Kosten, sondern in der Frage, die für jeden Nebenerwerbsgründer die wichtigste ist:
+        <b>Was bleibt je Stunde, die ich reinstecke?</b>
+      </p>
+    </div>
+
+    <div class="stack g32">
+      <div class="tbl">
+        <table>
+          <caption>Deckungsbeitrag je Event, Jahr 1 — Inhaber arbeitet selbst</caption>
+          <thead>
+            <tr>
+              <th scope="col">Position</th>
+              <th scope="col" class="n">KLEIN</th>
+              <th scope="col" class="n">KLASSIK</th>
+              <th scope="col" class="n hl-col">MARKE</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">Nettoerlös</th><td class="n">590</td><td class="n">890</td><td class="n hl-col">1.790</td></tr>
+            <tr><th scope="row">Druckmaterial</th><td class="n">−14</td><td class="n">−62</td><td class="n hl-col">−95</td></tr>
+            <tr><th scope="row">Fahrtkosten (0,32 €/km, Ø 90 km)</th><td class="n">−29</td><td class="n">−29</td><td class="n hl-col">−38</td></tr>
+            <tr><th scope="row">Cloud, SMS, Galerie</th><td class="n">−6</td><td class="n">−10</td><td class="n hl-col">−24</td></tr>
+            <tr><th scope="row">Zahlungsgebühren (1,8 %)</th><td class="n">−11</td><td class="n">−16</td><td class="n hl-col">−32</td></tr>
+            <tr><th scope="row">Verschleiß, Reinigung</th><td class="n">−18</td><td class="n">−24</td><td class="n hl-col">−32</td></tr>
+            <tr><th scope="row">Aushilfe (Jahr 1: keine)</th><td class="n">0</td><td class="n">0</td><td class="n hl-col">0</td></tr>
+            <tr class="total"><th scope="row">Variable Kosten</th><td class="n">−78</td><td class="n">−141</td><td class="n hl-col">−221</td></tr>
+            <tr class="total"><th scope="row">Deckungsbeitrag</th><td class="n">512</td><td class="n">749</td><td class="n hl-col">1.569</td></tr>
+            <tr><th scope="row">DB-Marge</th><td class="n">86,8 %</td><td class="n">84,2 %</td><td class="n hl-col">87,7 %</td></tr>
+            <tr><th scope="row">Eigene Stunden inkl. Auf- und Abbau</th><td class="n">6</td><td class="n">8</td><td class="n hl-col">12</td></tr>
+            <tr class="total"><th scope="row">DB je eigener Arbeitsstunde</th><td class="n">85 €</td><td class="n">94 €</td><td class="n hl-col">131 €</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="grid-2">
+        <div class="stack g12">
+          <h3>Die Zahl, an der alles hängt</h3>
+          <p class="body-text">
+            85 bis 131 € Deckungsbeitrag je eigener Arbeitsstunde — davon gehen noch anteilig
+            Fixkosten und Steuern ab. Nach Fixkostendeckung bleiben im ersten Jahr <b>rund 40 € je
+            Stunde vor Steuern</b>, bezogen auf alle 278 investierten Stunden inklusive Verwaltung,
+            Angebotsschreiben und Materialpflege.
+          </p>
+          <p class="body-text">
+            Das ist der ehrliche Vergleichsmaßstab gegen Überstunden im Hauptjob — und der Grund,
+            warum sich der Nebenerwerb ab dem ersten Jahr trägt.
+          </p>
+        </div>
+        <div class="stack g12">
+          <h3>Wie sich das über die Jahre verschiebt</h3>
+          <p class="body-text">
+            Ab Jahr 2 übernehmen Aushilfen einen wachsenden Teil der Betreuung: 20 % im zweiten,
+            45 % im dritten, 65 % im vierten, 80 % im fünften Jahr. Damit wandert Personal von der
+            „unbezahlten eigenen Zeit“ in die variablen Kosten.
+          </p>
+          <p class="body-text">
+            Die Folge steht in der Planung: <b>Die Deckungsbeitragsmarge der Pakete sinkt von 85 %
+            auf 72 % — und das ist beabsichtigt.</b> Sie ist der Preis dafür, dass der Inhaber ab
+            Jahr 3 nicht mehr an jedem Samstag gebunden ist.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 08 MODULE ============ -->
+<section class="ch" id="module">
+  <div class="wrap">
+    <div class="ch-head">
+      <span class="ch-no">Kapitel 08 — Amortisation der Zusatzmodule</span>
+      <h2>Jedes Modul verdient sich in einer Saison zurück</h2>
+      <p class="lede">
+        Anschaffungspreis geteilt durch Deckungsbeitrag je Einsatz. Die Regel „unter acht Einsätze“
+        ist keine Vorsicht, sondern eine Liquiditätsbedingung: Was länger braucht, blockiert Geld,
+        das für das nächste Modul fehlt.
+      </p>
+    </div>
+
+    <div class="stack g32">
+      <figure class="chart" id="figAmo">
+        <figcaption>
+          <span class="c-title">Einsätze bis zur Amortisation</span>
+          <span class="c-sub">Anschaffungspreis ÷ Deckungsbeitrag je Vermietung. Bei 22 Events im ersten Jahr liegt die Grenze bei acht Einsätzen.</span>
+        </figcaption>
+        <div id="chartAmo"></div>
+        <div class="tip" id="tipAmo"></div>
+      </figure>
+
+      <div class="grid-3">
+        <article class="card">
+          <span class="tagline">Reihenfolge</span>
+          <h3>Zuerst das Licht</h3>
+          <p>
+            Uplights amortisieren nach vier Einsätzen und werden von jedem zweiten Hochzeitspaar
+            gewollt, sobald man sie zeigt. Deshalb stehen sie an erster Stelle — sie finanzieren
+            die Leuchtbuchstaben noch in derselben Saison.
+          </p>
+          <p class="foot">Anschaffung Monat 5, refinanziert bis Monat 8</p>
+        </article>
+        <article class="card">
+          <span class="tagline">Bedingung</span>
+          <h3>Nur aus dem Cashflow</h3>
+          <p>
+            Kein Modul wird auf Kredit gekauft und keines vor der Saison, in der es eingesetzt wird.
+            Gekauft wird erst, wenn die erste Anfrage danach da war — nicht auf Verdacht.
+          </p>
+          <p class="foot">Regel: erst drei Anfragen, dann Anschaffung</p>
+        </article>
+        <article class="card">
+          <span class="tagline">Ausnahme</span>
+          <h3>Die Musikanlage</h3>
+          <p>
+            Sieben Einsätze bis zur Amortisation — der schlechteste Wert im Sortiment. Sie kommt
+            trotzdem, weil sie den Sektempfang abdeckt und damit den Auftrag zeitlich verlängert:
+            im Schnitt zwei Zusatzstunden zu 90 €.
+          </p>
+          <p class="foot">Rechnet sich über die Verlängerung, nicht über die Miete</p>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 09 FIXKOSTEN ============ -->
+<section class="ch" id="fix">
+  <div class="wrap">
+    <div class="ch-head">
+      <span class="ch-no">Kapitel 09 — Fixkosten</span>
+      <h2>Was der Betrieb kostet, bevor gearbeitet wird</h2>
+      <p class="lede">
+        In den ersten beiden Jahren steht kein kalkulatorischer Unternehmerlohn in der Rechnung —
+        der Lebensunterhalt kommt aus dem Hauptjob. Ab Jahr 3 wird er angesetzt, und zwar in voller
+        Höhe. Erst dann ist das Ergebnis mit einem normalen Unternehmen vergleichbar.
+      </p>
+    </div>
+
+    <div class="tbl">
+      <table>
+        <caption>Jährliche Fixkosten in €</caption>
+        <thead>
+          <tr>
+            <th scope="col">Position</th>
+            <th scope="col" class="n">Jahr 1</th><th scope="col" class="n">Jahr 2</th>
+            <th scope="col" class="n">Jahr 3</th><th scope="col" class="n">Jahr 4</th><th scope="col" class="n">Jahr 5</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><th scope="row">Lager</th><td class="n">0</td><td class="n">1.080</td><td class="n">1.800</td><td class="n">2.400</td><td class="n">3.600</td></tr>
+          <tr><th scope="row">Versicherungen</th><td class="n">620</td><td class="n">780</td><td class="n">950</td><td class="n">1.200</td><td class="n">1.500</td></tr>
+          <tr><th scope="row">Software und Lizenzen</th><td class="n">420</td><td class="n">620</td><td class="n">900</td><td class="n">1.200</td><td class="n">1.600</td></tr>
+          <tr><th scope="row">Web, Hosting, Domain</th><td class="n">180</td><td class="n">240</td><td class="n">300</td><td class="n">400</td><td class="n">500</td></tr>
+          <tr><th scope="row">Marketing</th><td class="n">2.400</td><td class="n">4.200</td><td class="n">7.200</td><td class="n">10.000</td><td class="n">14.000</td></tr>
+          <tr><th scope="row">Büro, Telefon</th><td class="n">360</td><td class="n">480</td><td class="n">660</td><td class="n">800</td><td class="n">1.000</td></tr>
+          <tr><th scope="row">Steuerberatung</th><td class="n">600</td><td class="n">900</td><td class="n">1.500</td><td class="n">1.800</td><td class="n">2.200</td></tr>
+          <tr><th scope="row">Fahrzeug, fixer Anteil</th><td class="n">0</td><td class="n">0</td><td class="n">3.600</td><td class="n">4.200</td><td class="n">5.400</td></tr>
+          <tr><th scope="row">Abschreibungen</th><td class="n">1.810</td><td class="n">2.850</td><td class="n">4.100</td><td class="n">5.600</td><td class="n">7.400</td></tr>
+          <tr><th scope="row">Zinsen</th><td class="n">270</td><td class="n">190</td><td class="n">90</td><td class="n">0</td><td class="n">0</td></tr>
+          <tr><th scope="row">Aushilfe Disposition</th><td class="n">0</td><td class="n">0</td><td class="n">0</td><td class="n">5.400</td><td class="n">16.800</td></tr>
+          <tr><th scope="row">Kalkulatorischer Unternehmerlohn</th><td class="n">0</td><td class="n">0</td><td class="n hl-col">21.000</td><td class="n hl-col">30.000</td><td class="n hl-col">42.000</td></tr>
+          <tr><th scope="row">Sonstiges</th><td class="n">400</td><td class="n">560</td><td class="n">800</td><td class="n">1.400</td><td class="n">2.000</td></tr>
+          <tr class="total"><th scope="row">Fixkosten gesamt</th><td class="n">7.060</td><td class="n">11.900</td><td class="n">42.900</td><td class="n">64.400</td><td class="n">98.000</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="small mute" style="margin-top:12px">
+      Bis Jahr 2 wird das private Fahrzeug kilometergenau abgerechnet — die Fahrtkosten stehen
+      deshalb vollständig in den variablen Kosten. Ab Jahr 3 kommt ein betrieblicher Transporter
+      hinzu; sein fixer Anteil steht hier, der Kilometersatz in den variablen Kosten sinkt entsprechend.
+    </p>
+  </div>
+</section>
+
+<!-- ============ 10 BREAK-EVEN ============ -->
+<section class="ch" id="be">
+  <div class="wrap">
+    <div class="ch-head">
+      <span class="ch-no">Kapitel 10 — Break-even Jahr 1</span>
+      <h2>Neun Events, dann trägt sich das Ganze</h2>
+      <p class="lede">
+        Gewinnschwelle = Fixkosten ÷ Deckungsbeitrag je Event = 7.060 € ÷ 820 € = 8,6 →
+        <b>9 Events</b> oder <b>8.712 € Umsatz</b>. Geplant sind 22.
+      </p>
+    </div>
+
+    <div class="stack g32">
+      <div class="tiles">
+        <div class="tile"><span class="tl">Gewinnschwelle</span><span class="tv acc">9</span><span class="tn">Events im ersten Jahr</span></div>
+        <div class="tile"><span class="tl">Break-even-Umsatz</span><span class="tv">8.712 €</span><span class="tn">bei Ø 968 € je Auftrag</span></div>
+        <div class="tile"><span class="tl">Planmenge</span><span class="tv">22</span><span class="tn">rund zwei Termine im Monat</span></div>
+        <div class="tile"><span class="tl">Sicherheitskoeffizient</span><span class="tv">59,1 %</span><span class="tn">Rückgang bis zum Verlust</span></div>
+      </div>
+
+      <figure class="chart" id="figBe">
+        <figcaption>
+          <span class="c-title">Gewinnschwelle im ersten Jahr</span>
+          <span class="c-sub">Erlös gegen Gesamtkosten. Fixkosten 7.060 €, variable Kosten 148 € je Event, Erlös 968 € je Event inklusive Zusatzsortiment.</span>
+        </figcaption>
+        <div id="chartBe"></div>
+        <div class="tip" id="tipBe"></div>
+        <div class="legend" id="legBe"></div>
+      </figure>
+
+      <div class="grid-2">
+        <div class="stack g12">
+          <h3>Warum die Schwelle so tief liegt</h3>
+          <p class="body-text">
+            Drei Gründe, und alle drei folgen aus der kleinen Skalierung: <b>kein Lager, kein
+            Unternehmerlohn, kein festes Personal.</b> Übrig bleiben Versicherung, Software,
+            Marketing und Abschreibung — zusammen gut 7.000 €.
+          </p>
+          <p class="body-text">
+            Ein Sicherheitskoeffizient von 59 % bedeutet: Der Plan darf um fast zwei Drittel
+            verfehlt werden, bevor das Jahr rote Zahlen schreibt.
+          </p>
+        </div>
+        <div class="stack g12">
+          <h3>Was das für den Hauptjob bedeutet</h3>
+          <p class="body-text">
+            Solange der Lebensunterhalt aus der Anstellung kommt, ist das Unternehmen selbst bei
+            einem sehr schlechten Jahr nicht existenzbedrohend. Das ist der entscheidende
+            Unterschied zum Start in die volle Selbstständigkeit — <b>dort wäre dieselbe
+            Fixkostenstruktur um den Unternehmerlohn schwerer und die Schwelle läge bei 35 Events.</b>
+          </p>
+          <p class="body-text">
+            Genau deshalb liegt der Wechsel in die Vollzeit in diesem Konzept in Jahr 3 und nicht
+            am Anfang.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 11 FÜNF-JAHRES-PLAN ============ -->
+<section class="ch" id="plan">
+  <div class="wrap">
+    <div class="ch-head">
+      <span class="ch-no">Kapitel 11 — Fünf-Jahres-Plan</span>
+      <h2>Von 22 auf 118 Events</h2>
+      <p class="lede">
+        Das Wachstum kommt aus drei Quellen, in dieser Reihenfolge: erst mehr Umsatz je Termin
+        über das Sortiment, dann höhere Paketpreise, zuletzt mehr Termine über zusätzliche
+        Stationen und Aushilfen.
+      </p>
+    </div>
+
+    <div class="stack g32">
+      <div class="tbl">
+        <table>
+          <caption>Planrechnung, alle Beträge netto in €</caption>
+          <thead>
+            <tr>
+              <th scope="col">Position</th>
+              <th scope="col" class="n">Jahr 1</th><th scope="col" class="n">Jahr 2</th>
+              <th scope="col" class="n">Jahr 3</th><th scope="col" class="n">Jahr 4</th><th scope="col" class="n">Jahr 5</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">Stationen</th><td class="n">1</td><td class="n">2</td><td class="n">2</td><td class="n">3</td><td class="n">4</td></tr>
+            <tr><th scope="row">Events</th><td class="n">22</td><td class="n">38</td><td class="n">62</td><td class="n">88</td><td class="n">118</td></tr>
+            <tr><th scope="row">Betreuung durch Aushilfen</th><td class="n">0 %</td><td class="n">20 %</td><td class="n">45 %</td><td class="n">65 %</td><td class="n">80 %</td></tr>
+            <tr class="rule"><th scope="row">Ø Paketpreis</th><td class="n">890</td><td class="n">990</td><td class="n">1.045</td><td class="n">1.095</td><td class="n">1.150</td></tr>
+            <tr><th scope="row">Ø Zusatzsortiment je Event</th><td class="n">78</td><td class="n">135</td><td class="n">245</td><td class="n">285</td><td class="n">300</td></tr>
+            <tr><th scope="row">Ø Umsatz je Event</th><td class="n">968</td><td class="n">1.125</td><td class="n">1.290</td><td class="n">1.380</td><td class="n">1.450</td></tr>
+            <tr class="rule"><th scope="row">Umsatzerlöse</th><td class="n">21.296</td><td class="n">42.750</td><td class="n">79.980</td><td class="n">121.440</td><td class="n">171.100</td></tr>
+            <tr><th scope="row">Variable Kosten</th><td class="n">−3.256</td><td class="n">−8.930</td><td class="n">−18.910</td><td class="n">−31.680</td><td class="n">−46.020</td></tr>
+            <tr class="total"><th scope="row">Deckungsbeitrag</th><td class="n">18.040</td><td class="n">33.820</td><td class="n">61.070</td><td class="n">89.760</td><td class="n">125.080</td></tr>
+            <tr><th scope="row">Fixkosten</th><td class="n">−7.060</td><td class="n">−11.900</td><td class="n">−42.900</td><td class="n">−64.400</td><td class="n">−98.000</td></tr>
+            <tr class="total"><th scope="row">Betriebsergebnis</th><td class="n pos">10.980</td><td class="n pos">21.920</td><td class="n pos">18.170</td><td class="n pos">25.360</td><td class="n pos">27.080</td></tr>
+            <tr><th scope="row">darin enthaltener Unternehmerlohn</th><td class="n">0</td><td class="n">0</td><td class="n">21.000</td><td class="n">30.000</td><td class="n">42.000</td></tr>
+            <tr class="total"><th scope="row">Gründervergütung gesamt</th><td class="n hl-col">10.980</td><td class="n hl-col">21.920</td><td class="n hl-col">39.170</td><td class="n hl-col">55.360</td><td class="n hl-col">69.080</td></tr>
+            <tr class="rule"><th scope="row">Gewinnschwelle</th><td class="n">9</td><td class="n">14</td><td class="n">44</td><td class="n">64</td><td class="n">93</td></tr>
+            <tr><th scope="row">Reinvestition aus Cashflow</th><td class="n">1.340</td><td class="n">4.830</td><td class="n">1.560</td><td class="n">5.100</td><td class="n">6.600</td></tr>
+            <tr><th scope="row">Status</th><td>nebenberuflich</td><td>nebenberuflich</td><td>Vollzeit ab Q2</td><td>Vollzeit</td><td>Vollzeit + Teilzeitkraft</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <figure class="chart" id="figPlan">
+        <figcaption>
+          <span class="c-title">Umsatz und Gründervergütung über fünf Jahre</span>
+          <span class="c-sub">Gründervergütung = kalkulatorischer Unternehmerlohn plus Betriebsergebnis. Sie ist die einzige Zahl, die über alle fünf Jahre hinweg vergleichbar bleibt.</span>
+        </figcaption>
+        <div id="chartPlan"></div>
+        <div class="tip" id="tipPlan"></div>
+        <div class="legend" id="legPlan"></div>
+      </figure>
+
+      <div class="tiles">
+        <div class="tile"><span class="tl">Amortisation Startkapital</span><span class="tv acc">10 Monate</span><span class="tn">in der ersten Saison zurückverdient</span></div>
+        <div class="tile"><span class="tl">Reinvestition 5 Jahre</span><span class="tv">19.430 €</span><span class="tn">vollständig aus dem Cashflow</span></div>
+        <div class="tile"><span class="tl">Zusätzliches Fremdkapital</span><span class="tv">0 €</span><span class="tn">nach dem Mikrokredit im Jahr 1</span></div>
+        <div class="tile"><span class="tl">Sortimentsanteil am Umsatz</span><span class="tv">8 → 21 %</span><span class="tn">Jahr 1 gegenüber Jahr 5</span></div>
+      </div>
+
+      <p class="small mute">
+        Zur Einordnung des Betriebsergebnisses: In den Jahren 1 und 2 ist es hoch, weil kein
+        Unternehmerlohn abgezogen wird — es ist Nebenverdienst, kein Unternehmensgewinn. Ab Jahr 3
+        sinkt es scheinbar, obwohl die Gründervergütung von 21.920 € auf 39.170 € steigt. Wer nur
+        auf die Ergebniszeile schaut, liest den Plan falsch.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 12 AUSSTIEG ============ -->
+<section class="ch" id="ausstieg">
+  <div class="wrap">
+    <div class="ch-head">
+      <span class="ch-no">Kapitel 12 — Der Wechsel in die Vollzeit</span>
+      <h2>Eine Regel statt eines Bauchgefühls</h2>
+    </div>
+
+    <div class="grid-2">
+      <div class="stack g16">
+        <p class="pull">Gekündigt wird erst, wenn die Gründervergütung des Vorjahres 60 % des Nettogehalts erreicht und der Auftragsbestand für die kommende Saison zwei Drittel des Vorjahres deckt.</p>
+        <p class="body-text">
+          Beide Bedingungen zusammen, nicht einzeln. Die erste sichert den Lebensunterhalt, die
+          zweite verhindert, dass der Wechsel auf ein gutes, aber zufälliges Jahr gestützt wird.
+        </p>
+        <p class="body-text">
+          Nach diesem Plan wird die Regel im Frühjahr des dritten Jahres erfüllt: 21.920 €
+          Gründervergütung aus Jahr 2, erzielt an Wochenenden, plus ein Auftragsbestand, der
+          durch die Vorlaufzeit von vier bis sechs Monaten im Februar schon weitgehend feststeht.
+        </p>
+      </div>
+      <div class="stack g16">
+        <h3>Warum nicht früher</h3>
+        <ul class="checklist">
+          <li><b>Die Saison ist ungleich verteilt.</b> Mai bis September und Dezember tragen rund 70 % der Nachfrage. Ein Vollzeitbetrieb muss auch Februar und November überstehen — das geht erst mit Firmenkunden im Bestand.</li>
+          <li><b>Der Unternehmerlohn verdoppelt die Fixkosten.</b> Die Gewinnschwelle springt von 14 auf 44 Events. Diese Menge muss vorher bewiesen sein, nicht erhofft.</li>
+          <li><b>Das Sortiment braucht zwei Saisons.</b> Erst wenn Uplights, Buchstaben, Wand und Musikanlage im Bestand sind, liegt der Umsatz je Termin hoch genug, um mit vertretbarer Eventzahl Vollzeit zu tragen.</li>
+        </ul>
+        <h3>Warum nicht später</h3>
+        <p class="body-text">
+          Ab etwa 45 Events im Jahr kollidiert der Betrieb mit dem Hauptjob: Freitagnachmittage,
+          Materialbeschaffung und Angebotsbearbeitung lassen sich nicht mehr in den Abend schieben.
+          <b>Jahr 3 ist nicht nur möglich, es ist die Obergrenze des Nebenerwerbs.</b>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 13 RISIKEN ============ -->
+<section class="ch" id="risiken">
+  <div class="wrap">
+    <div class="ch-head">
+      <span class="ch-no">Kapitel 13 — Risiken</span>
+      <h2>Was schiefgehen kann — und was dagegen steht</h2>
+    </div>
+
+    <div class="tbl">
+      <table>
+        <thead>
+          <tr><th scope="col">Risiko</th><th scope="col">Wirkung</th><th scope="col">Gegenmaßnahme</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Terminkollision mit dem Hauptjob</th>
+            <td>Ein zugesagter Samstag lässt sich nicht absagen, ohne die Bewertung zu verlieren</td>
+            <td>Urlaubstage für die Hochzeitssaison früh blocken; ab dem 15. Event des Jahres eine eingearbeitete Aushilfe als Vertretung, bezahlt aus dem Deckungsbeitrag des Termins</td>
+          </tr>
+          <tr>
+            <th scope="row">Saisonalität</th>
+            <td>Mai bis September und Dezember tragen rund 70 % der Nachfrage</td>
+            <td>Firmenkunden liegen gegenläufig (Februar–April, September–November); Winterpreis für Firmenfeiern zu 85 % des Listenpreises</td>
+          </tr>
+          <tr>
+            <th scope="row">Technikausfall bei nur einer Station</th>
+            <td>Im ersten Jahr gibt es keine zweite Station — ein Defekt kostet den ganzen Termin</td>
+            <td>Ersatzkamera von Beginn an im Fahrzeug (450 € im Startkapital eingeplant); ab Jahr 2 ist die zweite Station gleichzeitig die Ersatzstation</td>
+          </tr>
+          <tr>
+            <th scope="row">Kapital im falschen Modul gebunden</th>
+            <td>Ein Modul, das nicht nachgefragt wird, blockiert 500–750 € für eine ganze Saison</td>
+            <td>Regel „erst drei Anfragen, dann Anschaffung“; Kaufzeitpunkt immer innerhalb der Saison, nie davor; Amortisationsgrenze acht Einsätze</td>
+          </tr>
+          <tr>
+            <th scope="row">Preisdruck durch Billiganbieter</th>
+            <td>Fotostationen allein sind vergleichbar und werden über den Preis verhandelt</td>
+            <td>Nicht über die Station konkurrieren, sondern über das Bündel: Der Vergleichspreis für vier Einzeldienstleister liegt immer höher als das Bündel</td>
+          </tr>
+          <tr>
+            <th scope="row">Datenschutz bei Firmenkunden</th>
+            <td>Ein Fehler bei der Kontaktdatenerhebung beschädigt genau das margenstärkste Paket</td>
+            <td>Auftragsverarbeitungsvertrag als Standard, Doppel-Opt-in, Löschfrist 90 Tage im Vertrag, einmalige externe Prüfung vor dem ersten MARKE-Event</td>
+          </tr>
+          <tr>
+            <th scope="row">Abhängigkeit von einer Person</th>
+            <td>Der gesamte Betrieb hängt bis Jahr 3 am Inhaber</td>
+            <td>Ab Jahr 2 zwei eingearbeitete Aushilfen; Aufbau, Layout und Übergabe ab dem ersten Event schriftlich dokumentiert — das ist die Voraussetzung für Jahr 4, nicht dessen Folge</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 14 FAHRPLAN ============ -->
+<section class="ch" id="fahrplan">
+  <div class="wrap">
+    <div class="ch-head">
+      <span class="ch-no">Kapitel 14 — Fahrplan</span>
+      <h2>Fünf Jahre in fünf Schritten</h2>
+    </div>
+
+    <div class="stack g24">
+      <div class="phases">
+        <div class="phase">
+          <span class="pm">Jahr 1</span>
+          <h3>Beweisen</h3>
+          <span class="badge">Nebenerwerb</span>
+          <ul>
+            <li>Gewerbe, Versicherung, eine Station</li>
+            <li>22 Events, davon 3 zum Selbstkostenpreis für Bildmaterial</li>
+            <li>Uplights ab Monat 5, Leuchtbuchstaben ab Monat 8</li>
+            <li>Ziel: 18 Bewertungen</li>
+          </ul>
+        </div>
+        <div class="phase">
+          <span class="pm">Jahr 2</span>
+          <h3>Verbreitern</h3>
+          <span class="badge">Nebenerwerb</span>
+          <ul>
+            <li>Zweite Station als Ersatz und Doppelbelegung</li>
+            <li>Blumenwand und Musikanlage</li>
+            <li>Zwei Aushilfen eingearbeitet</li>
+            <li>Erste fünf Firmenkunden</li>
+          </ul>
+        </div>
+        <div class="phase">
+          <span class="pm">Jahr 3</span>
+          <h3>Wechseln</h3>
+          <span class="badge full">Vollzeit ab Q2</span>
+          <ul>
+            <li>Kündigung nach der Regel aus Kapitel 12</li>
+            <li>Transporter, Lager, Sortiment vollständig</li>
+            <li>62 Events, ein Drittel Firmenkunden</li>
+            <li>Auswertung für Firmenkunden im Regelbetrieb</li>
+          </ul>
+        </div>
+        <div class="phase">
+          <span class="pm">Jahr 4</span>
+          <h3>Entlasten</h3>
+          <span class="badge full">Vollzeit</span>
+          <ul>
+            <li>Dritte Station, zweites Lichtset</li>
+            <li>Aushilfe für Disposition und Angebote</li>
+            <li>65 % der Betreuung abgegeben</li>
+            <li>Rahmenvereinbarungen mit zwei Locations</li>
+          </ul>
+        </div>
+        <div class="phase">
+          <span class="pm">Jahr 5</span>
+          <h3>Verstetigen</h3>
+          <span class="badge full">Vollzeit + Teilzeit</span>
+          <ul>
+            <li>Vierte Station, eigener Anhänger</li>
+            <li>Teilzeitkraft fest angestellt</li>
+            <li>118 Events, 171.100 € Umsatz</li>
+            <li>Prüfung: zweiter Standort oder Sortimentstiefe</li>
+          </ul>
+        </div>
+      </div>
+
+      <p class="pull">Fünf Jahre, kein zusätzliches Fremdkapital, kein Investor — nur jedes Jahr ein Modul mehr, das sich in derselben Saison bezahlt macht.</p>
+    </div>
+  </div>
+</section>
+
+<footer class="doc">
+  <div class="wrap stack g16">
+    <p class="disclaimer">
+      <b>Annahmen und Grenzen.</b> BLITZWERK ist eine Gründungsidee; sämtliche Zahlen sind
+      kalkulierte Planwerte, keine Ist-Daten. Alle Beträge sind netto; Anschaffungspreise
+      entsprechen dem gebrauchten beziehungsweise günstigen Neupreis im deutschen Markt,
+      Aushilfslöhne 15 € je Stunde zuzüglich Abgaben. Die Umsatzgrenze der Kleinunternehmerregelung
+      wird bereits im ersten Jahr überschritten — es wird von Beginn an mit Umsatzsteuer gerechnet.
+      Einkommen- und Gewerbesteuer sowie die Tilgung des Mikrokredits sind in der Ergebnisrechnung
+      nicht enthalten, der kalkulatorische Unternehmerlohn ab Jahr 3 dagegen schon. Vor der Gründung
+      zu prüfen: Nachfrage und Wettbewerbsdichte im eigenen Umkreis, Nebentätigkeitsregelung im
+      Arbeitsvertrag sowie die tatsächlich erreichbaren Anhaftungsquoten des Sortiments — sie tragen
+      ab Jahr 3 rund ein Fünftel des Umsatzes.
+    </p>
+    <p class="xs mute">BLITZWERK · Gründungskonzept &amp; Kalkulation · Stand August 2026</p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  "use strict";
+  var css = getComputedStyle(document.documentElement);
+  function tok(n) { return css.getPropertyValue(n).trim(); }
+  function readTokens() {
+    css = getComputedStyle(document.documentElement);
+    return {
+      s1: tok('--s1'), s2: tok('--s2'), s3: tok('--s3'),
+      grid: tok('--grid'), ink: tok('--ink'), mid: tok('--ink-mid'),
+      mute: tok('--ink-mute'), surface: tok('--surface'), accent: tok('--accent')
+    };
+  }
+  var eur = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 });
+  var NS = 'http://www.w3.org/2000/svg';
+  function el(name, attrs) {
+    var n = document.createElementNS(NS, name);
+    for (var k in attrs) { if (attrs[k] !== null && attrs[k] !== undefined) n.setAttribute(k, attrs[k]); }
+    return n;
+  }
+  function txt(x, y, s, attrs) {
+    var t = el('text', attrs || {});
+    t.setAttribute('x', x); t.setAttribute('y', y);
+    t.textContent = s;
+    return t;
+  }
+  var MONO = '"IBM Plex Mono", ui-monospace, monospace';
+
+  // Balken sind an der Grundlinie verankert: nur die Datenkante wird gerundet.
+  function vBar(x, y, w, h, fill) {
+    var r = Math.min(4, h);
+    return el('path', {
+      d: 'M' + x + ',' + (y + h) + ' V' + (y + r) +
+         ' a' + r + ',' + r + ' 0 0 1 ' + r + ',' + -r +
+         ' H' + (x + w - r) + ' a' + r + ',' + r + ' 0 0 1 ' + r + ',' + r +
+         ' V' + (y + h) + ' Z',
+      fill: fill
+    });
+  }
+  function hBar(x, y, w, h, fill) {
+    var r = Math.min(4, w);
+    return el('path', {
+      d: 'M' + x + ',' + y + ' H' + (x + w - r) +
+         ' a' + r + ',' + r + ' 0 0 1 ' + r + ',' + r +
+         ' V' + (y + h - r) + ' a' + r + ',' + r + ' 0 0 1 ' + -r + ',' + r +
+         ' H' + x + ' Z',
+      fill: fill
+    });
+  }
+  function axisEuro(v) { return v === 0 ? '0 €' : (v / 1000) + 'k €'; }
+
+  function makeTip(tipEl, figEl) {
+    return {
+      show: function (px, py, html) {
+        var fr = figEl.getBoundingClientRect();
+        tipEl.innerHTML = html;
+        tipEl.style.left = (px - fr.left) + 'px';
+        tipEl.style.top = (py - fr.top) + 'px';
+        tipEl.classList.add('on');
+      },
+      hide: function () { tipEl.classList.remove('on'); }
+    };
+  }
+
+  /* ---------- 1) Amortisation der Zusatzmodule — eine Reihe, direkt beschriftet ---------- */
+  function drawAmo(T) {
+    var host = document.getElementById('chartAmo');
+    var tip = makeTip(document.getElementById('tipAmo'), document.getElementById('figAmo'));
+    host.innerHTML = '';
+    var data = [
+      { k: 'Uplights, 8 Spots',      n: 4, buy: 640, db: 167 },
+      { k: 'Blumen-/Pampaswand',     n: 5, buy: 480, db: 101 },
+      { k: 'Kaltnebelmaschine',      n: 5, buy: 600, db: 128 },
+      { k: 'Leuchtbuchstaben',       n: 6, buy: 700, db: 135 },
+      { k: 'Popcorn / Zuckerwatte',  n: 6, buy: 420, db: 73 },
+      { k: 'Musikanlage, klein',     n: 7, buy: 750, db: 118 },
+      { k: 'Stehtische, 6 Stück',    n: 8, buy: 540, db: 76 }
+    ];
+    var W = 720, L = 178, R = 58, Tp = 26, B = 44;
+    var rowH = 34, ph = data.length * rowH, H = Tp + ph + B;
+    var pw = W - L - R, max = 10;
+
+    var svg = el('svg', { viewBox: '0 0 ' + W + ' ' + H, role: 'img',
+      'aria-label': 'Balkendiagramm: Einsätze bis zur Amortisation je Modul — Uplights 4, Blumenwand 5, Kaltnebel 5, Leuchtbuchstaben 6, Popcorn und Zuckerwatte 6, Musikanlage 7, Stehtische 8.' });
+
+    [0, 2, 4, 6, 8, 10].forEach(function (g) {
+      var x = L + (g / max) * pw;
+      svg.appendChild(el('line', { x1: x, x2: x, y1: Tp - 8, y2: Tp + ph, stroke: T.grid, 'stroke-width': 1 }));
+      svg.appendChild(txt(x, Tp + ph + 20, g, { 'text-anchor': 'middle', fill: T.mute, 'font-family': MONO, 'font-size': 11 }));
+    });
+    svg.appendChild(txt(L + pw / 2, Tp + ph + 38, 'EINSÄTZE BIS ZUR AMORTISATION',
+      { 'text-anchor': 'middle', fill: T.mute, 'font-family': MONO, 'font-size': 10, 'letter-spacing': '.13em' }));
+
+    // Grenze der Aufnahmeregel
+    var xg = L + (8 / max) * pw;
+    svg.appendChild(el('line', { x1: xg, x2: xg, y1: Tp - 16, y2: Tp + ph, stroke: T.accent, 'stroke-width': 1.5, 'stroke-dasharray': '4 4' }));
+    svg.appendChild(txt(xg, Tp - 22, 'Aufnahmegrenze', { 'text-anchor': 'middle', fill: T.accent, 'font-family': MONO, 'font-size': 10, 'letter-spacing': '.06em' }));
+
+    data.forEach(function (d, i) {
+      var y = Tp + i * rowH + 5, bh = rowH - 12;
+      var w = (d.n / max) * pw;
+      var mark = hBar(L, y, w, bh, T.s1);
+      mark.style.cursor = 'pointer';
+      svg.appendChild(mark);
+      svg.appendChild(txt(L - 12, y + bh / 2 + 4, d.k, { 'text-anchor': 'end', fill: T.mid, 'font-family': MONO, 'font-size': 11 }));
+      svg.appendChild(txt(L + w + 9, y + bh / 2 + 4, d.n + '×',
+        { fill: T.ink, 'font-family': MONO, 'font-size': 12, 'font-weight': 600 }));
+      mark.addEventListener('mouseenter', function () {
+        var r = mark.getBoundingClientRect();
+        tip.show(r.left + r.width / 2, r.top,
+          '<b>' + d.k + '</b><br>Anschaffung ' + eur.format(d.buy) +
+          '<br>DB je Einsatz ' + eur.format(d.db) +
+          '<br>= <b>' + d.n + ' Einsätze</b>');
+      });
+      mark.addEventListener('mouseleave', tip.hide);
+    });
+    svg.appendChild(el('line', { x1: L, x2: L, y1: Tp - 8, y2: Tp + ph, stroke: T.grid, 'stroke-width': 1 }));
+    host.appendChild(svg);
+  }
+
+  /* ---------- 2) Break-even Jahr 1 ---------- */
+  function drawBe(T) {
+    var host = document.getElementById('chartBe');
+    var fig = document.getElementById('figBe');
+    var tip = makeTip(document.getElementById('tipBe'), fig);
+    host.innerHTML = '';
+    var FIX = 7060, VAR = 148, PRICE = 968, BEP = FIX / (PRICE - VAR);
+    var W = 720, H = 340, L = 62, R = 78, Tp = 18, B = 46;
+    var pw = W - L - R, ph = H - Tp - B, xMax = 30, yMax = 30000;
+    var X = function (n) { return L + (n / xMax) * pw; };
+    var Y = function (v) { return Tp + ph - (v / yMax) * ph; };
+
+    var svg = el('svg', { viewBox: '0 0 ' + W + ' ' + H, role: 'img',
+      'aria-label': 'Liniendiagramm der Gewinnschwelle im ersten Jahr: Erlös- und Gesamtkostengerade schneiden sich bei 9 Events und rund 8.712 Euro Umsatz; geplant sind 22 Events.' });
+
+    svg.appendChild(el('path', {
+      d: 'M' + X(BEP) + ',' + Y(FIX + VAR * BEP) + ' L' + X(xMax) + ',' + Y(PRICE * xMax) +
+         ' L' + X(xMax) + ',' + Y(FIX + VAR * xMax) + ' Z', fill: T.s3, opacity: .1 }));
+
+    [0, 7500, 15000, 22500, 30000].forEach(function (g) {
+      svg.appendChild(el('line', { x1: L, x2: L + pw, y1: Y(g), y2: Y(g), stroke: T.grid, 'stroke-width': 1 }));
+      svg.appendChild(txt(L - 10, Y(g) + 4, axisEuro(g), { 'text-anchor': 'end', fill: T.mute, 'font-family': MONO, 'font-size': 11 }));
+    });
+    [0, 10, 20, 30].forEach(function (n) {
+      svg.appendChild(txt(X(n), Tp + ph + 22, n, { 'text-anchor': 'middle', fill: T.mute, 'font-family': MONO, 'font-size': 11 }));
+    });
+    svg.appendChild(txt(L + pw / 2, Tp + ph + 40, 'EVENTS IM ERSTEN JAHR',
+      { 'text-anchor': 'middle', fill: T.mute, 'font-family': MONO, 'font-size': 10, 'letter-spacing': '.13em' }));
+
+    svg.appendChild(el('line', { x1: X(0), y1: Y(FIX), x2: X(xMax), y2: Y(FIX + VAR * xMax),
+      stroke: T.s2, 'stroke-width': 2, 'stroke-linecap': 'round' }));
+    svg.appendChild(el('line', { x1: X(0), y1: Y(0), x2: X(xMax), y2: Y(PRICE * xMax),
+      stroke: T.s1, 'stroke-width': 2, 'stroke-linecap': 'round' }));
+    svg.appendChild(txt(X(xMax) + 8, Y(PRICE * xMax) + 4, 'Erlös', { fill: T.s1, 'font-family': MONO, 'font-size': 11 }));
+    svg.appendChild(txt(X(xMax) + 8, Y(FIX + VAR * xMax) + 4, 'Kosten', { fill: T.s2, 'font-family': MONO, 'font-size': 11 }));
+
+    svg.appendChild(el('line', { x1: X(BEP), y1: Y(0), x2: X(BEP), y2: Y(PRICE * BEP),
+      stroke: T.accent, 'stroke-width': 1.5, 'stroke-dasharray': '4 4' }));
+    svg.appendChild(el('circle', { cx: X(BEP), cy: Y(PRICE * BEP), r: 5.5, fill: T.accent,
+      stroke: T.surface, 'stroke-width': 2 }));
+    svg.appendChild(txt(X(BEP) + 12, Y(PRICE * BEP) - 12, '9 Events · 8.712 €',
+      { fill: T.ink, 'font-family': MONO, 'font-size': 12, 'font-weight': 600 }));
+
+    svg.appendChild(el('line', { x1: X(22), y1: Tp + 24, x2: X(22), y2: Y(0), stroke: T.mute, 'stroke-width': 1, 'stroke-dasharray': '2 5', opacity: .6 }));
+    svg.appendChild(txt(X(22), Tp + 16, 'Plan 22', { 'text-anchor': 'middle', fill: T.mute, 'font-family': MONO, 'font-size': 10, 'letter-spacing': '.1em' }));
+
+    var cross = el('line', { x1: 0, y1: Tp, x2: 0, y2: Tp + ph, stroke: T.mute, 'stroke-width': 1, opacity: 0 });
+    svg.appendChild(cross);
+    var hit = el('rect', { x: L, y: Tp, width: pw, height: ph, fill: 'transparent' });
+    hit.style.cursor = 'crosshair';
+    svg.appendChild(hit);
+    hit.addEventListener('mousemove', function (e) {
+      var r = hit.getBoundingClientRect();
+      var n = Math.round(((e.clientX - r.left) / r.width) * xMax);
+      n = Math.max(0, Math.min(xMax, n));
+      var px = X(n);
+      cross.setAttribute('x1', px); cross.setAttribute('x2', px); cross.setAttribute('opacity', .45);
+      var res = PRICE * n - (FIX + VAR * n);
+      tip.show(r.left + (n / xMax) * r.width, r.top + 30,
+        '<b>' + n + ' Events</b><br>Erlös ' + eur.format(PRICE * n) +
+        '<br>Kosten ' + eur.format(FIX + VAR * n) +
+        '<br>Ergebnis <b>' + (res >= 0 ? '+' : '') + eur.format(res) + '</b>');
+    });
+    hit.addEventListener('mouseleave', function () { cross.setAttribute('opacity', 0); tip.hide(); });
+    host.appendChild(svg);
+
+    // Die Gewinnschwelle ist direkt am Diagramm beschriftet und braucht keinen
+    // Legendenpunkt — ihr Bernstein läge zu nah am Erlös-Bernstein.
+    document.getElementById('legBe').innerHTML =
+      '<span><i class="swatch" style="background:' + T.s1 + '"></i>Erlöse (968 € je Event)</span>' +
+      '<span><i class="swatch" style="background:' + T.s2 + '"></i>Gesamtkosten (7.060 € fix + 148 € je Event)</span>' +
+      '<span><i class="swatch" style="background:' + T.s3 + ';opacity:.35"></i>Gewinnzone</span>';
+  }
+
+  /* ---------- 3) Fünf-Jahres-Plan ---------- */
+  function drawPlan(T) {
+    var host = document.getElementById('chartPlan');
+    var tip = makeTip(document.getElementById('tipPlan'), document.getElementById('figPlan'));
+    host.innerHTML = '';
+    var years = [
+      { y: 'Jahr 1', ev: 22,  u: 21296,  g: 10980, st: 'nebenberuflich' },
+      { y: 'Jahr 2', ev: 38,  u: 42750,  g: 21920, st: 'nebenberuflich' },
+      { y: 'Jahr 3', ev: 62,  u: 79980,  g: 39170, st: 'Vollzeit ab Q2' },
+      { y: 'Jahr 4', ev: 88,  u: 121440, g: 55360, st: 'Vollzeit' },
+      { y: 'Jahr 5', ev: 118, u: 171100, g: 69080, st: 'Vollzeit + Teilzeit' }
+    ];
+    var series = [
+      { key: 'u', name: 'Umsatz',            c: T.s1 },
+      { key: 'g', name: 'Gründervergütung',  c: T.s2 }
+    ];
+    var W = 720, H = 330, L = 62, R = 20, Tp = 26, B = 56;
+    var pw = W - L - R, ph = H - Tp - B, yMax = 180000;
+    var Y = function (v) { return Tp + ph - (v / yMax) * ph; };
+
+    var svg = el('svg', { viewBox: '0 0 ' + W + ' ' + H, role: 'img',
+      'aria-label': 'Gruppiertes Balkendiagramm: Umsatz und Gründervergütung für die Jahre 1 bis 5. Umsatz steigt von 21.296 auf 171.100 Euro, die Gründervergütung von 10.980 auf 69.080 Euro.' });
+
+    [0, 60000, 120000, 180000].forEach(function (g) {
+      svg.appendChild(el('line', { x1: L, x2: L + pw, y1: Y(g), y2: Y(g), stroke: T.grid, 'stroke-width': 1 }));
+      svg.appendChild(txt(L - 10, Y(g) + 4, axisEuro(g), { 'text-anchor': 'end', fill: T.mute, 'font-family': MONO, 'font-size': 11 }));
+    });
+
+    var slot = pw / years.length, groupW = Math.min(84, slot - 34);
+    var bw = (groupW - 2) / 2; // 2px Flächenlücke zwischen benachbarten Balken
+
+    years.forEach(function (yr, gi) {
+      var gx = L + slot * gi + (slot - groupW) / 2;
+      series.forEach(function (s, si) {
+        var v = yr[s.key];
+        var x = gx + si * (bw + 2);
+        var y = Y(v), h = Tp + ph - y;
+        var mark = vBar(x, y, bw, h, s.c);
+        mark.style.cursor = 'pointer';
+        svg.appendChild(mark);
+        svg.appendChild(txt(x + bw / 2, y - 8, Math.round(v / 1000) + 'k',
+          { 'text-anchor': 'middle', fill: T.mid, 'font-family': MONO, 'font-size': 10.5 }));
+        mark.addEventListener('mouseenter', function () {
+          var r = mark.getBoundingClientRect();
+          tip.show(r.left + r.width / 2, r.top,
+            '<b>' + yr.y + ' · ' + s.name + '</b><br>' + eur.format(v) +
+            '<br>' + yr.ev + ' Events · ' + yr.st);
+        });
+        mark.addEventListener('mouseleave', tip.hide);
+      });
+      svg.appendChild(txt(gx + groupW / 2, Tp + ph + 24, yr.y,
+        { 'text-anchor': 'middle', fill: T.ink, 'font-family': MONO, 'font-size': 11.5, 'letter-spacing': '.05em' }));
+      svg.appendChild(txt(gx + groupW / 2, Tp + ph + 41, yr.ev + ' Events',
+        { 'text-anchor': 'middle', fill: T.mute, 'font-family': MONO, 'font-size': 10 }));
+    });
+    svg.appendChild(el('line', { x1: L, x2: L + pw, y1: Tp + ph, y2: Tp + ph, stroke: T.grid, 'stroke-width': 1 }));
+    host.appendChild(svg);
+
+    document.getElementById('legPlan').innerHTML = series.map(function (s) {
+      return '<span><i class="swatch" style="background:' + s.c + '"></i>' + s.name + '</span>';
+    }).join('');
+  }
+
+  function renderAll() {
+    var T = readTokens();
+    drawAmo(T); drawBe(T); drawPlan(T);
+  }
+  renderAll();
+
+  var mq = window.matchMedia('(prefers-color-scheme: dark)');
+  if (mq.addEventListener) mq.addEventListener('change', renderAll);
+  new MutationObserver(renderAll).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+
+  var rt;
+  window.addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(renderAll, 180); });
+})();
+</script>
