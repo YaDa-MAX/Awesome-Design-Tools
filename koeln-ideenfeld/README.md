@@ -11,24 +11,56 @@ Betriebskonzept aus dieser Liste.
 | `visiograf-betriebskonzept.html` | Betriebskonzept VISIOGRAF — Drohnen-Dachbefundung als Nebenerwerb ohne Personal. 14 Kapitel mit drei Diagrammen und einer Schnittmengen-Grafik |
 | `visiograf-website.html` | Landingpage als Scroll-Erzählung in drei Akten — Warum, Wie, Was. Danach Prinzipien, Befundblatt, Leistungskatalog, Zielgruppen, Ablauf und Anfrageformular |
 
-## Dramaturgie der Website
+## Dramaturgie der Website — goldener Kreis nach Simon Sinek
 
-Die Seite folgt der Reihenfolge Warum → Wie → Was, und **ein einziges Objekt trägt die
-Erzählung: das Dach.** Beim Scrollen kippt es über eine 3D-Rotation aus der Straßenansicht
-(78°, man sieht fast nichts) in die Draufsicht (0°). Der Drohnenaufstieg ist damit nicht
-Dekoration, sondern das Wertversprechen als Bewegung — eine mitlaufende Höhenanzeige zählt
-0 → 28 m.
+Die Seite folgt Warum → Wie → Was, die Akte sind sichtbar als `01 — Warum`, `02 — Wie`,
+`03 — Was` beschriftet, und eine mitlaufende Kapitelleiste zeigt den Stand an.
+
+**Das Warum ist ein Glaubenssatz, keine Problemschilderung** — das ist der Unterschied,
+auf den es bei Sinek ankommt: *„Wir glauben, dass niemand über ein Gebäude entscheiden
+sollte, das er nicht gesehen hat."* Wie und Was folgen daraus, nicht umgekehrt.
+
+**Ein einziges Objekt trägt die Erzählung: das Gebäude.**
 
 | Akt | Inhalt | Bewegung |
 |---|---|---|
-| I — Warum | Vom Boden sehen Sie die Traufe, den Rest schätzen Sie | Dach steigt auf, Bodendunst verschwindet, Rasterpapier blendet ein |
-| II — Wie | Fundstellen, nicht einsehbare Flächen, die Grenze der Aussage | Nadeln erscheinen einzeln, Hinweislinien zeichnen sich, Schraffur und Grenzlinie folgen |
+| I — Warum | Vom Boden sehen Sie die Traufe, den Rest schätzen Sie | Dach kippt per 3D-Rotation aus der Straßenansicht (78°) in die Draufsicht (0°); Höhenanzeige zählt 0 → 28 m, Bodendunst löst sich, Rasterpapier blendet ein |
+| II — Wie | Sichtbare Fundstellen, nicht einsehbare Flächen, dann das Wärmebild von Dach **und** Fassade | Nadeln erscheinen einzeln; ein Scan fährt quer über das Dach und legt die Thermalschicht frei; Überblendung zur Fassade, Scan von oben nach unten; Wärmebrücken werden mit gemessenem ΔT beschriftet |
 | III — Was | Befundblatt, Leistungen, Preise, Anfrage | Ruhige Einblendungen beim Hereinscrollen |
 
+### Thermografie-Darstellung
+
+Falschfarben in einer Ironbow-Rampe (`#16224E → #3B1E6E → #A32A72 → #E85A2A → #F4A93B →
+#FFF0B8`); der Markenakzent liegt genau in der Mitte dieser Rampe. Harte Rechtecke werden
+per `filter: blur(7px)` zu einem plausiblen Wärmefeld verschliffen und auf die
+Gebäudekontur beschnitten. Die Thermalfarben sind **absolut, nicht themenabhängig** — ein
+Wärmebild sieht in Hell und Dunkel gleich aus.
+
+Dargestellte Wärmebrücken, fachlich korrekt von außen betrachtet (**warm = Wärme entweicht**):
+
+| Fläche | Befund | ΔT |
+|---|---|---|
+| Dach | Gaubenanschluss | +4,8 K |
+| Dach | Firstanschluss | +3,1 K |
+| Dach | Sparrenfeld ungedämmt | +5,6 K |
+| Fassade | Rollladenkästen | +6,2 K |
+| Fassade | auskragende Balkonplatte | +7,4 K |
+| Fassade | Geschossdecken-Auflager | +3,9 K |
+
+Eine Temperaturskala erklärt die Farbkodierung, und jeder Befund ist zusätzlich beschriftet —
+die Farbe trägt nie allein die Information. Das gemessene ΔT bleibt innerhalb der
+Abgrenzung: eine Messung ist Dokumentation, die Bewertung macht der Energieberater.
+
 Die Bühne ist ein Dreizeilen-Raster — Aussage oben, Objekt in der Mitte, Fußzeile unten —
-damit Text und Dach nicht um dieselbe Fläche kämpfen. Bei `prefers-reduced-motion: reduce`
-fällt die Seite in eine statische Flex-Spalte mit korrekter Lesereihenfolge; alle Aussagen,
-Nadeln und Anzeigen stehen dann im Endzustand da.
+damit Text und Zeichnung nicht um dieselbe Fläche kämpfen. Bei
+`prefers-reduced-motion: reduce` fällt die Seite in eine statische Flex-Spalte mit korrekter
+Lesereihenfolge; Dach und Fassade stehen dann untereinander, alle Befunde im Endzustand.
+
+**Offener Punkt:** Die Thermografie ist im Betriebskonzept für das zweite Geschäftsjahr
+eingeplant (4.200 € aus dem Cashflow). Auf der Website trägt sie bereits das gesamte
+Kapitel „Wie". Entweder wird die Wärmebildkamera ins erste Jahr vorgezogen — dann ist die
+Fünf-Jahres-Rechnung anzupassen — oder die Seite bewirbt sie weiterhin mit dem Hinweis
+„ab Frühjahr 2027", der in der Preisliste steht.
 
 ## Zum Namen
 
