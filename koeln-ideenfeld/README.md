@@ -9,7 +9,26 @@ Betriebskonzept aus dieser Liste.
 |---|---|
 | `koelner-marktluecken.html` | 48 Geschäftsideen in zehn Feldern, gewichtet nach Nachfrage-Härte. Je Idee: Begründung, Köln-Bezug, Einstiegshürde und ein Prüftest. Filterbar, mit Kurzliste der sieben aussichtsreichsten |
 | `visiograf-betriebskonzept.html` | Betriebskonzept VISIOGRAF — Drohnen-Dachbefundung als Nebenerwerb ohne Personal. 14 Kapitel mit drei Diagrammen und einer Schnittmengen-Grafik |
-| `visiograf-website.html` | Landingpage: Hero mit gezeichnetem Befundblatt, Leistungskatalog mit Preisen, Zielgruppen, Ablauf, Negativliste und Anfrageformular |
+| `visiograf-website.html` | Landingpage als Scroll-Erzählung in drei Akten — Warum, Wie, Was. Danach Prinzipien, Befundblatt, Leistungskatalog, Zielgruppen, Ablauf und Anfrageformular |
+
+## Dramaturgie der Website
+
+Die Seite folgt der Reihenfolge Warum → Wie → Was, und **ein einziges Objekt trägt die
+Erzählung: das Dach.** Beim Scrollen kippt es über eine 3D-Rotation aus der Straßenansicht
+(78°, man sieht fast nichts) in die Draufsicht (0°). Der Drohnenaufstieg ist damit nicht
+Dekoration, sondern das Wertversprechen als Bewegung — eine mitlaufende Höhenanzeige zählt
+0 → 28 m.
+
+| Akt | Inhalt | Bewegung |
+|---|---|---|
+| I — Warum | Vom Boden sehen Sie die Traufe, den Rest schätzen Sie | Dach steigt auf, Bodendunst verschwindet, Rasterpapier blendet ein |
+| II — Wie | Fundstellen, nicht einsehbare Flächen, die Grenze der Aussage | Nadeln erscheinen einzeln, Hinweislinien zeichnen sich, Schraffur und Grenzlinie folgen |
+| III — Was | Befundblatt, Leistungen, Preise, Anfrage | Ruhige Einblendungen beim Hereinscrollen |
+
+Die Bühne ist ein Dreizeilen-Raster — Aussage oben, Objekt in der Mitte, Fußzeile unten —
+damit Text und Dach nicht um dieselbe Fläche kämpfen. Bei `prefers-reduced-motion: reduce`
+fällt die Seite in eine statische Flex-Spalte mit korrekter Lesereihenfolge; alle Aussagen,
+Nadeln und Anzeigen stehen dann im Endzustand da.
 
 ## Zum Namen
 
