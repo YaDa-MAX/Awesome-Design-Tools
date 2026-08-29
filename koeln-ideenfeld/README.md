@@ -56,11 +56,11 @@ damit Text und Zeichnung nicht um dieselbe Fläche kämpfen. Bei
 `prefers-reduced-motion: reduce` fällt die Seite in eine statische Flex-Spalte mit korrekter
 Lesereihenfolge; Dach und Fassade stehen dann untereinander, alle Befunde im Endzustand.
 
-**Offener Punkt:** Die Thermografie ist im Betriebskonzept für das zweite Geschäftsjahr
-eingeplant (4.200 € aus dem Cashflow). Auf der Website trägt sie bereits das gesamte
-Kapitel „Wie". Entweder wird die Wärmebildkamera ins erste Jahr vorgezogen — dann ist die
-Fünf-Jahres-Rechnung anzupassen — oder die Seite bewirbt sie weiterhin mit dem Hinweis
-„ab Frühjahr 2027", der in der Preisliste steht.
+**Entschieden:** Die Thermografie war ursprünglich für das zweite Geschäftsjahr geplant,
+trägt auf der Website aber das gesamte Kapitel „Wie". Sie ist deshalb ins erste Jahr
+vorgezogen und die Fünf-Jahres-Rechnung entsprechend neu aufgestellt worden — siehe
+[Thermografie ab Jahr 1](#thermografie-ab-jahr-1). Die Verfügbarkeitshinweise sind aus der
+Preisliste entfernt; dort stehen jetzt die echten Saisongrenzen.
 
 ## Zum Namen
 
@@ -92,29 +92,62 @@ zyklisch oder Nische (13).
 ## VISIOGRAF — Eckdaten
 
 Drohnen-Dokumentation von Dächern, Fassaden und Photovoltaikanlagen für Sachverständige,
-Hausverwaltungen und Handwerksbetriebe. Ein Mensch, ein Gerät, keine Mitarbeiter.
+Hausverwaltungen und Handwerksbetriebe. Ein Mensch, zwei Geräte, keine Mitarbeiter.
 
 | Kennzahl | Wert |
 |---|---|
-| Startkapital | 4.100 €, vollständig Eigenkapital |
-| Fremdkapital über fünf Jahre | 0 € |
-| Gewinnschwelle Jahr 1 | 11 Aufträge |
-| Plan Jahr 1 | 26 Aufträge, 10.166 € Umsatz, 5.655 € Ergebnis |
-| Zielzustand ab Jahr 3 | 62 Aufträge, 5,8 h je Woche |
-| Ergebnis Jahr 5 | 22.194 € bei 298 eigenen Arbeitsstunden |
-| Ertrag je eigener Stunde | 32 € (J1) → 74 € (J5) |
-| Gewerbesteuer | fällt im ganzen Zeitraum nicht an (Freibetrag) |
+| Startkapital | 11.600 € (8.000 € Eigenkapital, 3.600 € Mikrokredit) |
+| Gewinnschwelle Jahr 1 | 20 Aufträge |
+| Plan Jahr 1 | 28 Aufträge, 11.704 € Umsatz, 3.268 € Ergebnis |
+| Zielzustand ab Jahr 4 | 72 Aufträge, 6,5 h je Woche |
+| Ergebnis Jahr 5 | 26.168 € bei 335 eigenen Arbeitsstunden |
+| Ertrag je eigener Stunde | 15 € (J1) → 78 € (J5) |
+| Amortisation Startkapital | rund 16 Monate |
 
 **Die tragende Abgrenzung:** VISIOGRAF erstellt Dokumentation, keine Gutachten — keine
-Schadensursache, keine Schadenhöhe, keine Standsicherheit. Das senkt die Haftung, macht
-den Einstieg ohne Sachverständigenqualifikation möglich und verkürzt jeden Auftrag von
-Stunden auf neunzig Minuten Schreibtischarbeit.
+Schadensursache, keine Schadenhöhe, keine Standsicherheit. Ein gemessenes ΔT ist eine
+Tatsache; was daraus folgt, entscheidet der Sachverständige oder Energieberater. Das senkt
+die Haftung, macht den Einstieg ohne Sachverständigenqualifikation möglich und verkürzt
+jeden Auftrag von Stunden auf neunzig Minuten Schreibtischarbeit.
 
 **Der Engpass** ist nicht die Nachfrage, sondern die Schnittmenge aus fliegbarem Wetter
-(≈ 230 Tage), freier Zeit neben dem Hauptjob (≈ 110 Tage) und einem terminlich verfügbaren
-Kunden — rund 70 nutzbare Termintage im Jahr. Daraus folgt der bewusste Mengendeckel bei
-62 Aufträgen; Wachstum danach nur über Preis, Produktmix, Bündelung und Automatisierung
+(≈ 230 Tage), freier Zeit neben dem Hauptjob (≈ 130 Tage) und einem terminlich verfügbaren
+Kunden — rund 85 nutzbare Termintage im Jahr. Daraus folgt der bewusste Mengendeckel bei
+72 Aufträgen; Wachstum danach nur über Preis, Produktmix, Bündelung und Automatisierung
 der Berichtserstellung.
+
+### Thermografie ab Jahr 1
+
+Ursprünglich war die Wärmebildtechnik für das zweite Geschäftsjahr geplant. Sie ist
+vorgezogen worden — eine Drohne mit Doppelsensor ersetzt beide Anschaffungen des alten
+Plans.
+
+| | visueller Einstieg | Thermografie ab Jahr 1 |
+|---|---|---|
+| Startkapital | 4.100 € | 11.600 € |
+| Ergebnis Jahr 1 | 5.655 € | 3.268 € |
+| Ertrag je Stunde Jahr 1 | 32 € | 15 € |
+| Ergebnis Jahr 5 | 22.194 € | 26.168 € |
+| Kumuliert 5 Jahre | 79.772 € | **89.780 €** |
+| Mengendeckel | 62 Aufträge | 72 Aufträge |
+
+Netto sind nur rund **3.300 € mehr Kapital** gebunden, weil die Investition des zweiten
+Jahres entfällt. Der Gewinn über fünf Jahre beträgt rund **10.000 €**, bezahlt mit einem
+schwachen ersten Jahr.
+
+Zwei Gründe, warum es trotzdem aufgeht:
+
+- **Gegenläufige Saisons.** Gebäudethermografie braucht Kälte und Dunkelheit
+  (Oktober–März), Photovoltaik-Modulprüfung braucht Einstrahlung ≥ 600 W/m²
+  (April–September). Zusammen füllen sie das Jahr, statt sich zu drängeln.
+- **Frühe Morgen statt Samstage.** Gebäudewärmebilder entstehen zwischen 6:30 und 8:00 Uhr,
+  vor dem Hauptjob. Diese Termine kosten keinen Samstag — deshalb steigt der Kapazitätsdeckel
+  von 62 auf 72 Aufträge.
+
+Nicht durchgerechnet, aber prüfenswert: im ersten Jahr eine Thermaldrohne tageweise mieten
+(grob 200 € je Einsatztag) und erst kaufen, wenn die Nachfrage belegt ist. Das hielte das
+Startkapital bei rund 6.000 € und das erste Jahr stark, kostet aber Flexibilität in der
+knappen kalten Saison.
 
 ## Design-Systeme
 
