@@ -1,0 +1,1409 @@
+<title>NADIR Dachbefund</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400..700&family=Public+Sans:wght@400;500;600&family=Roboto+Mono:wght@400;500&display=swap">
+
+<style>
+/* ============================================================
+   Vollständige Hell-Palette auf blankem :root.
+   Ein einziger Akzent (Luftfahrtkarten-Magenta) — alle Diagramme
+   sind einreihig, deshalb wird keine kategoriale Palette gebraucht.
+   Dunkel nur auf Token-Ebene neu gesetzt.
+   ============================================================ */
+:root {
+  color-scheme: light;
+  --bg:        #EEF0EF;
+  --surface:   #FAFBFA;
+  --surface-2: #E3E7E5;
+  --ink:       #15191B;
+  --ink-mid:   #3D474B;
+  --ink-mute:  #6B787D;
+  --line:      #D6DBD9;
+  --line-soft: #E4E8E6;
+  --accent:    #A32A72;
+  --accent-ink:#8C2462;
+  --accent-soft: rgba(163,42,114,.10);
+  --grid:      #DDE2E0;
+  --pos:       #14705A;
+  --neg:       #A83A2C;
+  --shadow: 0 1px 2px rgba(21,25,27,.05), 0 10px 26px -16px rgba(21,25,27,.24);
+
+  --display: "Familjen Grotesk", "Helvetica Neue", Arial, sans-serif;
+  --body:    "Public Sans", "Segoe UI", system-ui, sans-serif;
+  --mono:    "Roboto Mono", ui-monospace, "SFMono-Regular", monospace;
+  --max: 1080px;
+  --pad: clamp(18px, 4.5vw, 52px);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --bg:        #101315;
+    --surface:   #161A1C;
+    --surface-2: #1E2427;
+    --ink:       #ECEFEE;
+    --ink-mid:   #B2BDBF;
+    --ink-mute:  #83908F;
+    --line:      #293134;
+    --line-soft: #20272A;
+    --accent:    #C4569A;
+    --accent-ink:#C4569A;
+    --accent-soft: rgba(196,86,154,.14);
+    --grid:      #232B2E;
+    --pos:       #3FA98B;
+    --neg:       #DE7461;
+    --shadow: 0 1px 2px rgba(0,0,0,.42), 0 14px 32px -18px rgba(0,0,0,.78);
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg:        #101315;
+  --surface:   #161A1C;
+  --surface-2: #1E2427;
+  --ink:       #ECEFEE;
+  --ink-mid:   #B2BDBF;
+  --ink-mute:  #83908F;
+  --line:      #293134;
+  --line-soft: #20272A;
+  --accent:    #C4569A;
+  --accent-ink:#C4569A;
+  --accent-soft: rgba(196,86,154,.14);
+  --grid:      #232B2E;
+  --pos:       #3FA98B;
+  --neg:       #DE7461;
+  --shadow: 0 1px 2px rgba(0,0,0,.42), 0 14px 32px -18px rgba(0,0,0,.78);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink);
+  font-family: var(--body); font-size: 16.5px; line-height: 1.62; -webkit-font-smoothing: antialiased; }
+p, h1, h2, h3, h4, ul, ol, figure, table { margin: 0; }
+ul, ol { padding: 0; list-style: none; }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+
+h1, h2, h3 { font-family: var(--display); font-weight: 700;
+  letter-spacing: -.021em; line-height: 1.05; text-wrap: balance; }
+h1 { font-size: clamp(2.1rem, 5vw, 3.5rem); }
+h2 { font-size: clamp(1.5rem, 2.9vw, 2.1rem); }
+h3 { font-size: 1.05rem; letter-spacing: -.012em; }
+
+.label { font-family: var(--mono); font-size: .67rem; letter-spacing: .16em;
+  text-transform: uppercase; color: var(--accent-ink); font-weight: 500; }
+.lede { font-size: clamp(1rem, 1.4vw, 1.14rem); color: var(--ink-mid); max-width: 66ch; }
+.body-text { color: var(--ink-mid); max-width: 68ch; }
+.body-text + .body-text { margin-top: .9em; }
+.body-text b, .lede b { color: var(--ink); font-weight: 600; }
+.mute { color: var(--ink-mute); }
+.num { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+.small { font-size: .87rem; }
+.xs { font-size: .78rem; }
+
+.wrap { max-width: var(--max); margin-inline: auto; padding-inline: var(--pad); }
+.stack { display: flex; flex-direction: column; }
+.g8{gap:8px}.g12{gap:12px}.g16{gap:16px}.g24{gap:24px}.g32{gap:32px}.g44{gap:44px}
+
+/* ---------- Kopf ---------- */
+.topbar { position: sticky; top: 0; z-index: 40;
+  background: color-mix(in srgb, var(--bg) 90%, transparent);
+  backdrop-filter: blur(11px); border-bottom: 1px solid var(--line); }
+.topbar-in { max-width: var(--max); margin-inline: auto; padding: 11px var(--pad);
+  display: flex; align-items: center; gap: 20px; }
+.brand { display: flex; align-items: center; gap: 10px; font-family: var(--display);
+  font-weight: 700; font-size: 1rem; letter-spacing: .04em; }
+.brand-mark { width: 15px; height: 15px; flex: none; position: relative; }
+.brand-mark::before, .brand-mark::after { content: ""; position: absolute; background: var(--accent); }
+.brand-mark::before { left: 6.5px; top: 0; width: 2px; height: 15px; }
+.brand-mark::after { left: 0; top: 6.5px; width: 15px; height: 2px; }
+.toc { display: flex; gap: 17px; margin-left: auto; overflow-x: auto;
+  font-family: var(--mono); font-size: .69rem; letter-spacing: .05em; color: var(--ink-mute);
+  text-transform: uppercase; scrollbar-width: none; }
+.toc::-webkit-scrollbar { display: none; }
+.toc a { text-decoration: none; white-space: nowrap; padding-block: 3px; border-bottom: 1px solid transparent; }
+.toc a:hover { color: var(--ink); border-bottom-color: var(--accent); }
+
+/* ---------- Deckblatt ---------- */
+.cover { padding-block: clamp(44px, 7vw, 88px) clamp(32px, 4vw, 54px); }
+.cover-grid { display: grid; grid-template-columns: minmax(0,1.5fr) minmax(0,1fr);
+  gap: clamp(28px, 5vw, 56px); align-items: end; }
+@media (max-width: 880px) { .cover-grid { grid-template-columns: 1fr; align-items: start; } }
+.facts { display: grid; border: 1px solid var(--line); border-radius: 3px;
+  background: var(--surface); box-shadow: var(--shadow); overflow: hidden; }
+.fact { display: flex; justify-content: space-between; gap: 16px; align-items: baseline;
+  padding: 12px 16px; border-bottom: 1px solid var(--line-soft); font-size: .86rem; }
+.fact:last-child { border-bottom: 0; }
+.fact .fl { color: var(--ink-mute); font-family: var(--mono); font-size: .67rem;
+  letter-spacing: .09em; text-transform: uppercase; }
+.fact .fv { font-family: var(--mono); font-variant-numeric: tabular-nums; color: var(--ink); font-weight: 500; }
+
+/* ---------- Kapitel ---------- */
+section.ch { padding-block: clamp(44px, 6vw, 74px); border-top: 1px solid var(--line); }
+.ch-head { display: grid; gap: 13px; margin-bottom: 32px; }
+.ch-no { font-family: var(--mono); font-size: .67rem; letter-spacing: .16em;
+  color: var(--accent-ink); text-transform: uppercase; }
+
+/* ---------- Karten ---------- */
+.grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 18px; }
+.grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 18px; }
+@media (max-width: 880px) { .grid-3, .grid-2 { grid-template-columns: 1fr; } }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 3px;
+  padding: 22px; display: grid; gap: 11px; align-content: start; box-shadow: var(--shadow); }
+.card h3 { font-size: 1.03rem; }
+.card p { font-size: .9rem; color: var(--ink-mid); }
+.card .tagline { font-family: var(--mono); font-size: .65rem; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--accent-ink); }
+.card .foot { border-top: 1px solid var(--line-soft); padding-top: 10px; font-size: .8rem; color: var(--ink-mute); }
+
+/* ---------- Kacheln ---------- */
+.tiles { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 14px; }
+@media (max-width: 900px) { .tiles { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+@media (max-width: 460px) { .tiles { grid-template-columns: 1fr; } }
+.tile { background: var(--surface); border: 1px solid var(--line); border-radius: 3px;
+  padding: 18px; display: grid; gap: 5px; box-shadow: var(--shadow); }
+.tile .tl { font-family: var(--mono); font-size: .63rem; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--ink-mute); }
+.tile .tv { font-family: var(--mono); font-size: 1.62rem; font-weight: 500;
+  font-variant-numeric: tabular-nums; line-height: 1.12; color: var(--ink); }
+.tile .tv.acc { color: var(--accent-ink); }
+.tile .tn { font-size: .77rem; color: var(--ink-mute); }
+
+/* ---------- Tabellen ---------- */
+.tbl { overflow-x: auto; border: 1px solid var(--line); border-radius: 3px;
+  background: var(--surface); box-shadow: var(--shadow); }
+table { border-collapse: collapse; width: 100%; min-width: 640px; font-size: .87rem; }
+caption { text-align: left; padding: 15px 18px 0; font-family: var(--mono); font-size: .67rem;
+  letter-spacing: .1em; text-transform: uppercase; color: var(--ink-mute); }
+th, td { text-align: left; padding: 11px 15px; border-bottom: 1px solid var(--line-soft); vertical-align: top; }
+thead th { font-family: var(--mono); font-size: .65rem; letter-spacing: .1em; text-transform: uppercase;
+  font-weight: 500; color: var(--ink-mute); background: var(--surface-2); border-bottom: 1px solid var(--line); }
+tbody th { font-weight: 500; color: var(--ink); }
+td { color: var(--ink-mid); }
+td.n, th.n { text-align: right; font-family: var(--mono); font-variant-numeric: tabular-nums; }
+tbody tr:last-child > * { border-bottom: 0; }
+tr.total > * { background: var(--surface-2); color: var(--ink); font-weight: 600; border-top: 1px solid var(--line); }
+tr.rule > * { border-top: 1px solid var(--line); }
+.hl-col, td.hl-col, th.hl-col { background: var(--accent-soft); color: var(--ink); }
+td.pos, .pos { color: var(--pos); }
+td.neg, .neg { color: var(--neg); }
+.tbl.compact table { min-width: 460px; }
+
+/* ---------- Diagramme ---------- */
+figure.chart { background: var(--surface); border: 1px solid var(--line); border-radius: 3px;
+  padding: 20px 20px 16px; box-shadow: var(--shadow); position: relative; }
+figure.chart figcaption { display: grid; gap: 4px; margin-bottom: 16px; }
+figure.chart .c-title { font-family: var(--display); font-weight: 700; font-size: 1rem;
+  letter-spacing: -.012em; color: var(--ink); }
+figure.chart .c-sub { font-size: .8rem; color: var(--ink-mute); }
+.chart svg { display: block; width: 100%; height: auto; overflow: visible; }
+.tip { position: absolute; pointer-events: none; opacity: 0; transition: opacity .12s ease;
+  background: var(--ink); color: var(--bg); border-radius: 2px; padding: 7px 10px;
+  font-family: var(--mono); font-size: .68rem; line-height: 1.5; white-space: nowrap;
+  transform: translate(-50%, -128%); z-index: 5; box-shadow: 0 6px 18px -8px rgba(0,0,0,.5); }
+.tip.on { opacity: 1; }
+.tip b { font-weight: 500; }
+
+/* ---------- Listen ---------- */
+.numlist { display: grid; gap: 14px; }
+.numlist li { display: grid; grid-template-columns: 26px 1fr; gap: 13px; align-items: start; }
+.numlist .li-no { font-family: var(--mono); font-size: .71rem; color: var(--accent-ink); padding-top: 4px; }
+.numlist p { color: var(--ink-mid); font-size: .93rem; }
+.numlist b { color: var(--ink); font-weight: 600; }
+.checklist { display: grid; gap: 9px; font-size: .9rem; color: var(--ink-mid); }
+.checklist li { display: grid; grid-template-columns: 16px 1fr; gap: 10px; align-items: start; }
+.checklist li::before { content: "—"; color: var(--accent-ink); font-family: var(--mono); font-size: .78rem; line-height: 1.6; }
+.checklist.no li::before { content: "×"; color: var(--neg); }
+.checklist b { color: var(--ink); font-weight: 600; }
+
+/* Schnittmengen-Grafik — Farben über Klassen, weil var() in
+   SVG-Präsentationsattributen nicht zuverlässig aufgelöst wird. */
+.venn { display: block; width: 100%; height: auto; }
+.venn circle { fill: var(--accent); fill-opacity: .13; stroke: var(--accent); stroke-width: 1.5; }
+.venn text { font-family: var(--mono); }
+.venn .v-name { font-size: 12px; font-weight: 500; fill: var(--ink); }
+.venn .v-sub  { font-size: 11px; fill: var(--ink-mute); }
+.venn .v-big  { font-size: 22px; font-weight: 500; fill: var(--accent); }
+.venn .v-cap  { font-size: 10px; letter-spacing: 1px; fill: var(--ink-mid); }
+
+.pull { border-left: 3px solid var(--accent); padding: 4px 0 4px 20px;
+  font-family: var(--display); font-weight: 700; font-size: clamp(1.1rem, 2vw, 1.4rem);
+  line-height: 1.3; letter-spacing: -.017em; color: var(--ink); text-wrap: balance; max-width: 48ch; }
+
+/* ---------- Zeitplan ---------- */
+.phases { display: grid; grid-template-columns: repeat(4, minmax(0,1fr));
+  border: 1px solid var(--line); border-radius: 3px; overflow: hidden;
+  background: var(--surface); box-shadow: var(--shadow); }
+@media (max-width: 900px) { .phases { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+@media (max-width: 520px) { .phases { grid-template-columns: 1fr; } }
+.phase { padding: 20px 17px; border-right: 1px solid var(--line-soft); display: grid; gap: 9px; align-content: start; }
+.phase:last-child { border-right: 0; }
+.phase .pm { font-family: var(--mono); font-size: .64rem; letter-spacing: .11em;
+  color: var(--accent-ink); text-transform: uppercase; }
+.phase h3 { font-size: .96rem; }
+.phase ul { display: grid; gap: 6px; font-size: .82rem; color: var(--ink-mid); }
+.phase li::before { content: "· "; color: var(--ink-mute); }
+
+footer.doc { border-top: 1px solid var(--line); padding-block: 32px 56px; }
+.disc { background: var(--surface-2); border: 1px dashed var(--line); border-radius: 3px;
+  padding: 16px 18px; font-size: .82rem; color: var(--ink-mute); max-width: 80ch; }
+</style>
+
+<div class="topbar">
+  <div class="topbar-in">
+    <span class="brand"><span class="brand-mark" aria-hidden="true"></span>NADIR</span>
+    <nav class="toc" aria-label="Kapitel">
+      <a href="#produkt">Produkt</a>
+      <a href="#abgrenzung">Abgrenzung</a>
+      <a href="#kunden">Kunden</a>
+      <a href="#preise">Preise</a>
+      <a href="#dbstunde">DB je Stunde</a>
+      <a href="#recht">Recht</a>
+      <a href="#start">Start</a>
+      <a href="#engpass">Engpass</a>
+      <a href="#zeit">Zeit</a>
+      <a href="#plan">5 Jahre</a>
+      <a href="#deckel">Deckel</a>
+      <a href="#steuer">Steuern</a>
+      <a href="#risiken">Risiken</a>
+      <a href="#jahr1">Jahr 1</a>
+    </nav>
+  </div>
+</div>
+
+<!-- ============ DECKBLATT ============ -->
+<header class="cover">
+  <div class="wrap cover-grid">
+    <div class="stack g24">
+      <span class="label">Betriebskonzept · Nebenerwerb ohne Personal</span>
+      <h1>Dachbefund<br>aus der Luft.<br>Allein, nebenbei,<br>mit Deckel.</h1>
+      <p class="lede">
+        NADIR dokumentiert Dächer, Fassaden und Photovoltaikanlagen per Drohne — für
+        Sachverständige, Hausverwaltungen und Handwerksbetriebe im Kölner Raum.
+        Ein Mensch, ein Gerät, kein Mitarbeiter, keine Expansion. <b>Die Obergrenze ist
+        hier keine Niederlage, sondern die Konstruktionsvorgabe.</b>
+      </p>
+    </div>
+    <div class="facts">
+      <div class="fact"><span class="fl">Rechtsform</span><span class="fv">Einzelunternehmen</span></div>
+      <div class="fact"><span class="fl">Startkapital</span><span class="fv">4.100 €</span></div>
+      <div class="fact"><span class="fl">Fremdkapital</span><span class="fv">0 €</span></div>
+      <div class="fact"><span class="fl">Break-even Jahr 1</span><span class="fv">11 Aufträge</span></div>
+      <div class="fact"><span class="fl">Zielzustand</span><span class="fv">62 Aufträge</span></div>
+      <div class="fact"><span class="fl">Zeitaufwand dann</span><span class="fv">5,8 h / Woche</span></div>
+      <div class="fact"><span class="fl">Ergebnis Jahr 5</span><span class="fv">22.194 €</span></div>
+    </div>
+  </div>
+</header>
+
+<!-- ============ 01 PRODUKT ============ -->
+<section class="ch" id="produkt">
+  <div class="wrap">
+    <div class="ch-head">
+      <span class="ch-no">01 / 14 — Das Produkt</span>
+      <h2>Verkauft wird der Bericht, nicht der Flug</h2>
+      <p class="lede">
+        Niemand kauft eine Drohnenstunde. Gekauft wird ein Dokument, das in eine Akte passt:
+        vollständig, datiert, nachvollziehbar, ohne dass jemand aufs Dach musste.
+      </p>
+    </div>
+
+    <div class="stack g32">
+      <div class="grid-3">
+        <article class="card">
+          <span class="tagline">Was drin ist</span>
+          <h3>Ein PDF, das für sich spricht</h3>
+          <p>
+            Übersichtsaufnahme mit Nordpfeil, Detailaufnahmen jeder auffälligen Stelle,
+            Kartierung der Fundstellen auf dem Übersichtsbild, Aufnahmedatum, Wetterlage,
+            Flughöhe. Auf Wunsch als begehbares 360-Grad-Panorama.
+          </p>
+          <p class="foot">Lieferung in fünf Werktagen, gegen Aufpreis in 48 Stunden</p>
+        </article>
+        <article class="card">
+          <span class="tagline">Warum das reicht</span>
+          <h3>Der Kunde bewertet selbst</h3>
+          <p>
+            Sachverständige, Regulierer und Dachdecker können ein Schadensbild lesen. Was ihnen
+            fehlt, ist der Blick von oben — nicht die Meinung dazu. Genau diese Trennung macht
+            das Geschäft als Nebenerwerb überhaupt möglich.
+          </p>
+          <p class="foot">Siehe Kapitel 02 — daran hängt das gesamte Haftungsrisiko</p>
+        </article>
+        <article class="card">
+          <span class="tagline">Warum es nebenbei geht</span>
+          <h3>90 Minuten draußen, 90 drinnen</h3>
+          <p>
+            Der Termin vor Ort dauert eine gute Stunde. Der Bericht entsteht abends am
+            Schreibtisch. Kein Lager, kein Personal, kein Fahrzeugpark, keine Bereitschaft
+            rund um die Uhr.
+          </p>
+          <p class="foot">Ein voll ausgelastetes Jahr sind 5,8 Stunden in der Woche</p>
+        </article>
+      </div>
+
+      <p class="pull">Der Wettbewerbsvorteil ist nicht die Drohne. Es ist der fertige Befund am Dienstagabend, wenn der Sachverständige ihn Mittwoch früh braucht.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 02 ABGRENZUNG ============ -->
+<section class="ch" id="abgrenzung">
+  <div class="wrap">
+    <div class="ch-head">
+      <span class="ch-no">02 / 14 — Die tragende Abgrenzung</span>
+      <h2>Dokumentation, nicht Gutachten</h2>
+      <p class="lede">
+        Dieser eine Satz entscheidet, ob das Geschäft im Nebenerwerb funktioniert oder nicht.
+        Er senkt die Haftung, er macht den Einstieg ohne Sachverständigenqualifikation möglich,
+        und er verkürzt jeden Auftrag um Stunden.
+      </p>
+    </div>
+
+    <div class="grid-2">
+      <div class="stack g16">
+        <h3>Was NADIR liefert</h3>
+        <ul class="checklist">
+          <li><b>Bildbefund.</b> Was am Objekt zu sehen ist, vollständig und in nachvollziehbarer Auflösung.</li>
+          <li><b>Kartierung.</b> Wo genau am Objekt sich die Fundstelle befindet.</li>
+          <li><b>Aufnahmeprotokoll.</b> Datum, Uhrzeit, Wetter, Flughöhe, Gerät, Fernpilot.</li>
+          <li><b>Vollständigkeitserklärung.</b> Welche Flächen erfasst wurden und welche nicht einsehbar waren.</li>
+        </ul>
+        <h3>Was NADIR ausdrücklich nicht liefert</h3>
+        <ul class="checklist no">
+          <li><b>Keine Schadensursache.</b> Ob der Riss vom Hagel oder vom Alter kommt, steht nicht im Bericht.</li>
+          <li><b>Keine Schadenhöhe.</b> Keine Kostenschätzung, keine Mengenermittlung.</li>
+          <li><b>Keine Eintrittspflicht.</b> Keine Aussage darüber, ob der Versicherer zahlen muss.</li>
+          <li><b>Keine Standsicherheit.</b> Keine statische Bewertung, egal wie offensichtlich der Fall wirkt.</li>
+        </ul>
+      </div>
+      <div class="stack g16">
+        <h3>Warum das der ganze Trick ist</h3>
+        <p class="body-text">
+          Wer bewertet, haftet für die Bewertung. Ein falsches „Dach ist in Ordnung“ kann
+          fünfstellig werden, und keine Vermögensschadenhaftpflicht ersetzt eine Qualifikation,
+          die man nicht hat. <b>Wer dagegen nur dokumentiert, haftet für Vollständigkeit und
+          Sorgfalt der Aufnahme — und das ist beherrschbar.</b>
+        </p>
+        <p class="body-text">
+          Der Nebeneffekt ist ökonomisch mindestens so wichtig: Ein Gutachten kostet vier bis
+          acht Stunden Schreibtischarbeit. Ein Befundbericht kostet neunzig Minuten, weil die
+          Struktur immer dieselbe ist und die Bewertung entfällt. <b>Das ist der Unterschied
+          zwischen einem Nebenerwerb und einem zweiten Vollzeitjob.</b>
+        </p>
+        <p class="body-text">
+          Der Satz gehört deshalb an drei Stellen: in die AGB, auf jede Angebotsseite und
+          als Kopfzeile in jeden einzelnen Bericht. Nicht als Kleingedrucktes — als Merkmal.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 03 KUNDEN ============ -->
+<section class="ch" id="kunden">
+  <div class="wrap">
+    <div class="ch-head">
+      <span class="ch-no">03 / 14 — Kunden</span>
+      <h2>Nicht die Versicherer. Ihre Zulieferer.</h2>
+      <p class="lede">
+        Große Versicherer arbeiten mit Rahmenvertragspartnern — dort kommt ein Einzelner nicht
+        hinein und sollte es auch nicht wollen. Das Geld liegt eine Ebene darunter.
+      </p>
+    </div>
+
+    <div class="stack g24">
+      <div class="tbl">
+        <table>
+          <caption>Kundengruppen, nach Eignung für den Nebenerwerb sortiert</caption>
+          <thead>
+            <tr>
+              <th scope="col">Gruppe</th><th scope="col">Was sie brauchen</th>
+              <th scope="col">Termindruck</th><th scope="col">Wiederkauf</th><th scope="col">Bewertung</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="rule">
+              <th scope="row" class="hl-col">Freie Bausachverständige</th>
+              <td class="hl-col">Bilder vom Dach, ohne selbst zu fliegen oder ein Gerüst zu stellen</td>
+              <td class="hl-col">1–2 Wochen</td><td class="hl-col">hoch</td>
+              <td class="hl-col">Bester Erstkanal: wenige Ansprechpartner, verstehen die Abgrenzung sofort</td>
+            </tr>
+            <tr>
+              <th scope="row">Hausverwaltungen</th>
+              <td>Zustandsdoku vieler Objekte, Beweissicherung vor Bauarbeiten</td>
+              <td>gering</td><td>hoch</td>
+              <td>Lassen sich bündeln — mehrere Objekte an einem Termin</td>
+            </tr>
+            <tr>
+              <th scope="row">Dachdecker und Zimmereien</th>
+              <td>Erstbesichtigung ohne Gerüst und ohne Leiterrisiko</td>
+              <td>mittel</td><td>mittel</td>
+              <td>Zahlen gern, weil die Alternative ein halber Arbeitstag ist</td>
+            </tr>
+            <tr>
+              <th scope="row">Architekten und Energieberater</th>
+              <td>Bestandsaufnahme vor Sanierungsplanung</td>
+              <td>gering</td><td>mittel</td>
+              <td>Planbar, oft Monate im Voraus terminierbar</td>
+            </tr>
+            <tr>
+              <th scope="row">Eigentümergemeinschaften</th>
+              <td>Neutrale Doku im Streitfall mit Bauträger oder Nachbarn</td>
+              <td>mittel</td><td>gering</td>
+              <td>Hohe Zahlungsbereitschaft, aber Einzelgeschäft</td>
+            </tr>
+            <tr>
+              <th scope="row">Private Eigentümer im Schadensfall</th>
+              <td>Belege für die eigene Schadenmeldung</td>
+              <td>hoch</td><td>gering</td>
+              <td>Teuerste Akquise, schlechteste Termine — bewusst nachrangig</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="grid-2">
+        <div class="stack g12">
+          <h3>Der gesamte Vertrieb, ernsthaft</h3>
+          <p class="body-text">
+            Dreißig freie Sachverständige im Umkreis von dreißig Kilometern persönlich anschreiben,
+            mit einem echten Musterbericht als Anhang. Nicht mit einem Angebot — mit einem
+            fertigen Beispiel, an dem sie sehen, was sie bekommen.
+          </p>
+          <p class="body-text">
+            <b>Wenn fünf davon einmal im Quartal buchen, ist das erste Jahr voll.</b> Mehr
+            Vertriebsaktivität wäre im Nebenerwerb schädlich: Aufträge, die man nicht bedienen
+            kann, kosten Ruf.
+          </p>
+        </div>
+        <div class="stack g12">
+          <h3>Warum Bündelung wichtiger ist als Neukunden</h3>
+          <p class="body-text">
+            Drei Objekte einer Hausverwaltung an einem Samstag: Anfahrt einmal statt dreimal,
+            Aufbau einmal statt dreimal. Aus <span class="num">8,0</span> Stunden werden
+            <span class="num">6,7</span> — bei gleichem Deckungsbeitrag von
+            <span class="num">801 €</span>. Der Stundenertrag steigt von
+            <span class="num">100 €</span> auf <span class="num">120 €</span>.
+          </p>
+          <p class="body-text">
+            <b>Der eigentliche Gewinn ist aber ein anderer: drei Aufträge verbrauchen ein
+            Wetterfenster statt drei.</b> Warum das die knappste Ressource überhaupt ist,
+            steht in Kapitel 08.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 04 PREISE ============ -->
+<section class="ch" id="preise">
+  <div class="wrap">
+    <div class="ch-head">
+      <span class="ch-no">04 / 14 — Leistungen und Preise</span>
+      <h2>Fünf Produkte, feste Preise</h2>
+      <p class="lede">
+        Keine Angebote nach Aufwand. Ein Anruf, eine Zahl, ein Termin — sonst frisst die
+        Angebotsschreiberei den Feierabend, den das Geschäft eigentlich finanzieren soll.
+      </p>
+    </div>
+
+    <div class="stack g24">
+      <div class="tbl">
+        <table>
+          <caption>Leistungskatalog Jahr 1 — Preise netto</caption>
+          <thead>
+            <tr>
+              <th scope="col">Leistung</th><th scope="col">Inhalt</th>
+              <th scope="col" class="n">Preis</th><th scope="col" class="n">Vor Ort</th>
+              <th scope="col" class="n">Büro</th><th scope="col" class="n">Ab Jahr</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Dachbefund kompakt</th>
+              <td>Übersicht plus Detailaufnahmen, Fundstellen kartiert, PDF-Bericht</td>
+              <td class="n">290 €</td><td class="n">1,0 h</td><td class="n">1,0 h</td><td class="n">1</td>
+            </tr>
+            <tr>
+              <th scope="row">Dachbefund vollständig</th>
+              <td>Zusätzlich 360-Grad-Panorama, Einzelbildkartierung, Vollständigkeitsplan</td>
+              <td class="n">450 €</td><td class="n">1,5 h</td><td class="n">1,5 h</td><td class="n">1</td>
+            </tr>
+            <tr>
+              <th scope="row">Beweissicherung vor Bauarbeiten</th>
+              <td>Auftragsobjekt und angrenzende Objekte, lückenlos datiert</td>
+              <td class="n">590 €</td><td class="n">1,5 h</td><td class="n">2,0 h</td><td class="n">1</td>
+            </tr>
+            <tr>
+              <th scope="row" class="hl-col">Photovoltaik-Thermografie</th>
+              <td class="hl-col">Modulweise Wärmebildaufnahme, auffällige Module kartiert</td>
+              <td class="n hl-col">390 €</td><td class="n hl-col">0,75 h</td><td class="n hl-col">1,25 h</td><td class="n hl-col">2</td>
+            </tr>
+            <tr>
+              <th scope="row" class="hl-col">Dachthermografie</th>
+              <td class="hl-col">Wärmebild der Dachfläche, Feuchte- und Wärmebrückenverdacht markiert</td>
+              <td class="n hl-col">490 €</td><td class="n hl-col">1,0 h</td><td class="n hl-col">1,5 h</td><td class="n hl-col">2</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="small mute">
+        Zuschläge: Zweitobjekt am selben Standort <span class="num">+40 %</span> vom Grundpreis ·
+        Lieferung in 48 Stunden <span class="num">+25 %</span> ·
+        Flugfreigabe in der Kontrollzone <span class="num">+90 €</span> ·
+        Anfahrt bis 25 km inklusive, darüber <span class="num">0,80 €/km</span>.
+        Preise steigen planmäßig jährlich um <span class="num">5 %</span>.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 05 DB JE STUNDE ============ -->
+<section class="ch" id="dbstunde">
+  <div class="wrap">
+    <div class="ch-head">
+      <span class="ch-no">05 / 14 — Die Steuerungsgröße</span>
+      <h2>Deckungsbeitrag je eigener Arbeitsstunde</h2>
+      <p class="lede">
+        Wer allein arbeitet und die Menge nicht erhöhen kann, hat genau eine sinnvolle Kennzahl:
+        was eine Stunde der eigenen Lebenszeit einbringt. Umsatz ist hier eine Nebengröße.
+      </p>
+    </div>
+
+    <div class="stack g32">
+      <div class="tbl">
+        <table>
+          <caption>Deckungsbeitragsrechnung je Auftrag, Jahr-1-Preise</caption>
+          <thead>
+            <tr>
+              <th scope="col">Position</th>
+              <th scope="col" class="n">Kompakt</th><th scope="col" class="n">Vollständig</th>
+              <th scope="col" class="n">Beweissicherung</th><th scope="col" class="n">PV-Thermo</th>
+              <th scope="col" class="n hl-col">Dachthermo</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">Nettoerlös</th><td class="n">290</td><td class="n">450</td><td class="n">590</td><td class="n">390</td><td class="n hl-col">490</td></tr>
+            <tr><th scope="row">Fahrtkosten (0,30 €/km)</th><td class="n">−8</td><td class="n">−8</td><td class="n">−8</td><td class="n">−8</td><td class="n hl-col">−8</td></tr>
+            <tr><th scope="row">Cloudspeicher und Auslieferung</th><td class="n">−3</td><td class="n">−5</td><td class="n">−7</td><td class="n">−4</td><td class="n hl-col">−5</td></tr>
+            <tr><th scope="row">Verschleiß Akkus und Propeller</th><td class="n">−8</td><td class="n">−9</td><td class="n">−9</td><td class="n">−7</td><td class="n hl-col">−8</td></tr>
+            <tr><th scope="row">Zahlungsgebühren (1,5 %)</th><td class="n">−4</td><td class="n">−5</td><td class="n">−8</td><td class="n">−6</td><td class="n hl-col">−7</td></tr>
+            <tr class="total"><th scope="row">Variable Kosten</th><td class="n">−23</td><td class="n">−27</td><td class="n">−32</td><td class="n">−25</td><td class="n hl-col">−28</td></tr>
+            <tr class="total"><th scope="row">Deckungsbeitrag</th><td class="n">267</td><td class="n">423</td><td class="n">558</td><td class="n">365</td><td class="n hl-col">462</td></tr>
+            <tr><th scope="row">Eigene Stunden inkl. Fahrt</th><td class="n">2,67</td><td class="n">3,67</td><td class="n">4,17</td><td class="n">2,67</td><td class="n hl-col">3,17</td></tr>
+            <tr class="total"><th scope="row">DB je eigener Stunde</th><td class="n">100 €</td><td class="n">115 €</td><td class="n">134 €</td><td class="n">137 €</td><td class="n hl-col">146 €</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <figure class="chart" id="figDbh">
+        <figcaption>
+          <span class="c-title">Was eine Stunde eigener Arbeit einbringt</span>
+          <span class="c-sub">Deckungsbeitrag geteilt durch die gesamte gebundene Zeit — Anfahrt, Flug und Berichterstellung zusammen.</span>
+        </figcaption>
+        <div id="chartDbh"></div>
+        <div class="tip" id="tipDbh"></div>
+      </figure>
+
+      <div class="grid-2">
+        <div class="stack g12">
+          <h3>Die Marge sagt hier nichts aus</h3>
+          <p class="body-text">
+            Die Deckungsbeitragsmarge liegt bei über 90 % — das ist keine Sensation, sondern die
+            Natur des Geschäfts. <b>Es gibt fast keine variablen Kosten, weil das Produkt aus Zeit
+            besteht.</b> Wer diese Marge für ein Qualitätsmerkmal hält, steuert das Unternehmen
+            an der falschen Zahl.
+          </p>
+          <p class="body-text">
+            Die einzig belastbare Größe ist die letzte Zeile der Tabelle. Sie beantwortet die
+            Frage, um die es bei einem Nebenerwerb wirklich geht: Lohnt sich der Samstag?
+          </p>
+        </div>
+        <div class="stack g12">
+          <h3>Was daraus für den Alltag folgt</h3>
+          <ul class="checklist">
+            <li><b>Thermografie hat Vorrang.</b> 137 bis 146 € je Stunde gegenüber 100 € beim Kompaktbefund — deshalb steht die Wärmebildkamera ganz oben auf der Investitionsliste.</li>
+            <li><b>Der Kompaktbefund ist der Türöffner, nicht das Ziel.</b> Er füllt Lücken und gewinnt Erstkunden, aber ein Samstag voller Kompaktbefunde ist ein schlecht genutzter Samstag.</li>
+            <li><b>Jeder Auftrag unter 90 € je Stunde wird abgelehnt.</b> Diese Grenze schriftlich festzuhalten ist wichtiger, als sie klingt — im Nebenerwerb sagt man sonst aus Höflichkeit zu.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 06 RECHT ============ -->
+<section class="ch" id="recht">
+  <div class="wrap">
+    <div class="ch-head">
+      <span class="ch-no">06 / 14 — Rechtlicher Rahmen</span>
+      <h2>Was vor dem ersten Flug erledigt sein muss</h2>
+      <p class="lede">
+        Drohnenbetrieb ist EU-weit einheitlich geregelt und richtet sich nach dem Risiko des
+        Betriebs, nicht nach dem Zweck. Eine gesonderte Erlaubnis „für gewerbliche Zwecke“
+        gibt es seit der EU-Verordnung nicht mehr — die alte Vorstellung hält sich hartnäckig.
+      </p>
+    </div>
+
+    <div class="stack g24">
+      <ul class="numlist">
+        <li><span class="li-no">01</span><p><b>Betreiberregistrierung.</b> Registrierung beim Luftfahrt-Bundesamt, Vergabe einer Betreibernummer, die sichtbar an der Drohne angebracht wird. Jährlich zu verlängern.</p></li>
+        <li><span class="li-no">02</span><p><b>Fernpilotenkompetenz.</b> Für den Betrieb in bewohntem Gebiet in der offenen Kategorie ist das EU-Fernpilotenzeugnis der Unterkategorie A2 der praktikable Weg. Der kleine Online-Nachweis für A1 und A3 reicht für Dachbefunde in der Stadt in aller Regel nicht aus.</p></li>
+        <li><span class="li-no">03</span><p><b>Haftpflichtversicherung.</b> Für Drohnen gesetzlich vorgeschrieben, und zwar in einer Ausgestaltung, die den gewerblichen Betrieb ausdrücklich einschließt. Eine private Police deckt Aufträge nicht.</p></li>
+        <li><span class="li-no">04</span><p><b>Vermögensschadenhaftpflicht.</b> Nicht vorgeschrieben, aber unverzichtbar: Sie greift, wenn jemand auf Basis des Berichts eine Fehlentscheidung trifft. Zusammen mit der Abgrenzung aus Kapitel 02 ist das die eigentliche Risikovorsorge.</p></li>
+        <li><span class="li-no">05</span><p><b>Luftraum und geografische Gebiete.</b> Teile des Kölner Stadtgebiets liegen in der Kontrollzone des Flughafens Köln/Bonn; dort ist eine Flugfreigabe der Flugsicherung erforderlich. Dazu kommen Schutzgebiete, Bahnanlagen, Bundeswasserstraße und Sperrbereiche um Behörden und Kliniken. <b>Vor jedem Auftrag prüfen, nicht vor Ort feststellen.</b></p></li>
+        <li><span class="li-no">06</span><p><b>Zustimmung des Grundstückseigentümers.</b> Der Auftraggeber gibt sie ohnehin. Das Problem sind die Nachbargrundstücke, über die der Anflug führt oder in die die Kamera blickt.</p></li>
+        <li><span class="li-no">07</span><p><b>Datenschutz.</b> Flugplanung mit definierter Blickrichtung, Unkenntlichmachung fremder Bereiche, dokumentiertes Löschkonzept, Auftragsverarbeitungsvertrag mit gewerblichen Auftraggebern.</p></li>
+        <li><span class="li-no">08</span><p><b>Nebentätigkeit.</b> Der eigene Arbeitsvertrag regelt, ob eine Nebentätigkeit anzeige- oder genehmigungspflichtig ist. Das ist vor allem anderen zu klären.</p></li>
+      </ul>
+
+      <div class="grid-2">
+        <div class="card">
+          <span class="tagline">Kostenvorteil</span>
+          <h3>Die Auflagen sind die Eintrittsbarriere</h3>
+          <p>
+            Registrierung, Zeugnis, zwei Versicherungen, Freigabeverfahren und Datenschutzkonzept
+            kosten zusammen unter 1.000 € und ein paar Wochenenden. Genau deshalb ist der Markt
+            dünn: Es ist zu viel Aufwand für ein Hobby und zu wenig Umsatz für einen Konzern.
+          </p>
+          <p class="foot">Wer den Freigabeprozess in der Kontrollzone beherrscht, kann ihn bepreisen</p>
+        </div>
+        <div class="card">
+          <span class="tagline">Wichtiger Hinweis</span>
+          <h3>Diese Übersicht ersetzt keine Prüfung</h3>
+          <p>
+            Luftrecht ändert sich, Übergangsfristen laufen aus, Klassenkennzeichnungen von Geräten
+            werden angepasst. Der aktuelle Stand gehört vor der Anschaffung beim Luftfahrt-Bundesamt
+            und der Flugsicherung geprüft — und nicht in einem Konzeptpapier nachgelesen.
+          </p>
+          <p class="foot">Auch die Gerätewahl hängt daran: Die Klasse der Drohne entscheidet über die zulässigen Abstände</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 07 START ============ -->
+<section class="ch" id="start">
+  <div class="wrap">
+    <div class="ch-head">
+      <span class="ch-no">07 / 14 — Startkapital</span>
+      <h2>4.100 € aus eigener Tasche</h2>
+      <p class="lede">
+        Kein Kredit, keine Förderung, kein Gespräch mit der Bank. Bei dieser Größenordnung wäre
+        die Antragsbearbeitung teurer als die Zinsersparnis — und ein Kredit im Nebenerwerb
+        erzeugt einen Druck, den das Modell nicht braucht.
+      </p>
+    </div>
+
+    <div class="grid-2">
+      <div class="tbl compact">
+        <table>
+          <caption>Kapitalbedarf</caption>
+          <tbody>
+            <tr><th scope="row">Drohne mit Kamera, Klasse C1</th><td class="n">1.450 €</td></tr>
+            <tr><th scope="row">Zusatzakkus, Ladehub, Ersatzpropeller</th><td class="n">350 €</td></tr>
+            <tr><th scope="row">EU-Fernpilotenzeugnis A2</th><td class="n">250 €</td></tr>
+            <tr><th scope="row">Betreiberregistrierung</th><td class="n">30 €</td></tr>
+            <tr><th scope="row">Drohnen-Haftpflicht, erstes Jahr</th><td class="n">250 €</td></tr>
+            <tr><th scope="row">Vermögensschadenhaftpflicht, erstes Jahr</th><td class="n">400 €</td></tr>
+            <tr><th scope="row">Berichtssoftware und Cloudspeicher</th><td class="n">200 €</td></tr>
+            <tr><th scope="row">Website und Musterbericht</th><td class="n">400 €</td></tr>
+            <tr><th scope="row">Gewerbeanmeldung</th><td class="n">30 €</td></tr>
+            <tr><th scope="row">Warnweste, Landematte, Absperrung, Maßstab</th><td class="n">200 €</td></tr>
+            <tr><th scope="row">Liquiditätsreserve</th><td class="n">540 €</td></tr>
+            <tr class="total"><th scope="row">Summe, vollständig Eigenkapital</th><td class="n">4.100 €</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="stack g16">
+        <div class="stack g12">
+          <h3>Die einzige größere Investition kommt später</h3>
+          <p class="body-text">
+            Im zweiten Jahr kommt eine Drohne mit Wärmebildkamera dazu, rund
+            <b>4.200 €</b> — bezahlt aus dem Ergebnis des ersten Jahres, nicht aus neuem Kapital.
+            Sie amortisiert sich nach etwa <b>elf Thermografie-Aufträgen</b>, also innerhalb der
+            ersten Saison, in der sie eingesetzt wird.
+          </p>
+          <p class="body-text">
+            Die erste Drohne wird damit zum Ersatzgerät. Ab diesem Zeitpunkt kostet ein
+            Technikausfall keinen Termin mehr — bis dahin schon, und das ist ein bewusst
+            in Kauf genommenes Risiko des ersten Jahres.
+          </p>
+        </div>
+        <div class="tiles" style="grid-template-columns:repeat(2,minmax(0,1fr))">
+          <div class="tile"><span class="tl">Maximaler Verlust</span><span class="tv acc">4.100 €</span><span class="tn">plus Restwert der Ausrüstung</span></div>
+          <div class="tile"><span class="tl">Gewinnschwelle</span><span class="tv">11</span><span class="tn">Aufträge im ersten Jahr</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 08 ENGPASS ============ -->
+<section class="ch" id="engpass">
+  <div class="wrap">
+    <div class="ch-head">
+      <span class="ch-no">08 / 14 — Der Engpass</span>
+      <h2>Nicht die Nachfrage. Die Schnittmenge.</h2>
+      <p class="lede">
+        Ein Flugtermin braucht drei Bedingungen gleichzeitig: fliegbares Wetter, freie Zeit
+        neben dem Hauptjob, und einen Kunden, der genau dann kann. Jede Bedingung für sich ist
+        harmlos. Ihre Schnittmenge ist der ganze Betrieb.
+      </p>
+    </div>
+
+    <div class="stack g32">
+      <div class="grid-2" style="align-items:center">
+        <figure class="chart" style="box-shadow:none;background:transparent;border:0;padding:0">
+          <svg class="venn" viewBox="0 0 440 392" role="img" aria-label="Drei überlappende Kreise: fliegbares Wetter mit rund 230 Tagen, freie Zeit neben dem Hauptjob mit rund 110 Tagen, und ein terminlich verfügbarer Kunde. Nur ihre Schnittmenge ergibt rund 70 nutzbare Termintage im Jahr.">
+            <circle cx="220" cy="148" r="92"/>
+            <circle cx="266" cy="228" r="92"/>
+            <circle cx="174" cy="228" r="92"/>
+            <text class="v-name" x="220" y="24" text-anchor="middle">Wetter fliegbar</text>
+            <text class="v-sub"  x="220" y="40" text-anchor="middle">≈ 230 Tage</text>
+            <text class="v-name" x="372" y="350" text-anchor="middle">Hauptjob frei</text>
+            <text class="v-sub"  x="372" y="366" text-anchor="middle">≈ 110 Tage</text>
+            <text class="v-name" x="72"  y="350" text-anchor="middle">Kunde verfügbar</text>
+            <text class="v-sub"  x="72"  y="366" text-anchor="middle">terminlich gebunden</text>
+            <text class="v-big"  x="220" y="207" text-anchor="middle">≈ 70</text>
+            <text class="v-cap"  x="220" y="225" text-anchor="middle">TERMINTAGE</text>
+          </svg>
+        </figure>
+
+        <div class="stack g16">
+          <h3>Was die Zahlen bedeuten</h3>
+          <p class="body-text">
+            Rund 230 Tage im Jahr sind fliegbar — Regen, Sturm über zehn Meter je Sekunde und
+            dichter Nebel fallen aus. <b>Rund 110 Tage lässt der Hauptjob Zeit</b>: Samstage
+            plus etwa zwanzig Nachmittage aus Gleitzeit oder Urlaub. Der Kunde muss zusätzlich
+            Zugang zum Grundstück ermöglichen.
+          </p>
+          <p class="body-text">
+            Übrig bleiben etwa <b>70 nutzbare Termintage</b>. Auf ihnen liegen im Zielzustand
+            62 Aufträge, verteilt auf ungefähr 50 Einsatztage — der Rest ist Puffer für
+            Wetterverschiebungen, und dieser Puffer wird gebraucht.
+          </p>
+          <p class="body-text">
+            <b>Rund 30 % aller geplanten Termine müssen mindestens einmal verschoben werden.</b>
+            Wer das nicht von vornherein einkalkuliert und dem Kunden ansagt, verbrennt Vertrauen.
+          </p>
+        </div>
+      </div>
+
+      <div class="grid-3">
+        <article class="card">
+          <span class="tagline">Regel 01</span>
+          <h3>Nie unter fünf Tagen zusagen</h3>
+          <p>
+            Jeder Termin wird mit mindestens fünf Tagen Vorlauf und einem vereinbarten
+            Ausweichtermin bestätigt. Das kostet ein paar Express-Aufträge und rettet den
+            gesamten Ruf.
+          </p>
+        </article>
+        <article class="card">
+          <span class="tagline">Regel 02</span>
+          <h3>Kein Erstregulierer sein</h3>
+          <p>
+            Nach einem Sturm will der Versicherer binnen 48 Stunden Bilder — und zwar
+            werktags. Diese Aufträge kann ein Nebenerwerbler nicht bedienen. Deshalb ist die
+            Zielgruppe der Sachverständige mit ein bis zwei Wochen Frist, nicht die Erstaufnahme.
+          </p>
+        </article>
+        <article class="card">
+          <span class="tagline">Regel 03</span>
+          <h3>Grundlast vor Schadensfall</h3>
+          <p>
+            Beweissicherung, Zustandsdoku und Thermografie sind Wochen im Voraus planbar. Sie
+            bilden die Grundlast. Schadensfälle kommen obendrauf, wenn es passt — nie umgekehrt.
+          </p>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 09 ZEIT ============ -->
+<section class="ch" id="zeit">
+  <div class="wrap">
+    <div class="ch-head">
+      <span class="ch-no">09 / 14 — Wo die Zeit hingeht</span>
+      <h2>Die Flugzeit ist der kleinste Posten</h2>
+      <p class="lede">
+        303 Stunden im Zielzustand, aufgeteilt auf fünf Tätigkeiten. Wer den Stundenertrag
+        heben will, muss wissen, welche davon sich verkürzen lässt.
+      </p>
+    </div>
+
+    <div class="stack g32">
+      <figure class="chart" id="figZeit">
+        <figcaption>
+          <span class="c-title">Jahresarbeitszeit im Zielzustand</span>
+          <span class="c-sub">62 Aufträge, 303 Stunden, entspricht 5,8 Stunden je Woche über das ganze Jahr gerechnet.</span>
+        </figcaption>
+        <div id="chartZeit"></div>
+        <div class="tip" id="tipZeit"></div>
+      </figure>
+
+      <div class="grid-2">
+        <div class="stack g12">
+          <h3>Die unbequeme Erkenntnis</h3>
+          <p class="body-text">
+            <b>Bericht und Auswertung kosten mehr Zeit als der Aufenthalt vor Ort.</b> Wer sich
+            eine bessere Drohne kauft, um schneller zu fliegen, optimiert den falschen Posten.
+            Wer sich zwei Wochenenden hinsetzt und die Berichtsvorlage so baut, dass Bilder
+            halbautomatisch einsortiert werden, gewinnt jedes Jahr zwanzig Stunden.
+          </p>
+          <p class="body-text">
+            Zwanzig Stunden sind bei 63 € Deckungsbeitrag je Stunde rund 1.260 € — für eine
+            einmalige Investition von zwei Wochenenden.
+          </p>
+        </div>
+        <div class="stack g12">
+          <h3>Die drei Hebel, in dieser Reihenfolge</h3>
+          <ul class="checklist">
+            <li><b>Berichtsvorlage automatisieren.</b> Größter Posten, einmalige Arbeit, wirkt dauerhaft.</li>
+            <li><b>Aufträge bündeln.</b> Senkt die Fahrtzeit und spart Wetterfenster — der doppelte Gewinn aus Kapitel 03.</li>
+            <li><b>Akquise beenden, sobald voll.</b> 55 Stunden Akquise sind im Zielzustand zu viel. Ab einem stabilen Kundenstamm sinkt der Posten auf 20 Stunden, und die Differenz wandert entweder in mehr Aufträge oder in freie Zeit.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 10 PLAN ============ -->
+<section class="ch" id="plan">
+  <div class="wrap">
+    <div class="ch-head">
+      <span class="ch-no">10 / 14 — Fünf-Jahres-Rechnung</span>
+      <h2>Ab Jahr 3 wächst nur noch der Stundensatz</h2>
+      <p class="lede">
+        Die Auftragszahl steigt bis Jahr 3 und bleibt dann konstant. Was danach noch wächst,
+        wächst über Preis und Produktmix — nicht über Menge und schon gar nicht über Personal.
+      </p>
+    </div>
+
+    <div class="stack g32">
+      <div class="tbl">
+        <table>
+          <caption>Planrechnung, alle Beträge netto in €</caption>
+          <thead>
+            <tr>
+              <th scope="col">Position</th>
+              <th scope="col" class="n">Jahr 1</th><th scope="col" class="n">Jahr 2</th>
+              <th scope="col" class="n">Jahr 3</th><th scope="col" class="n">Jahr 4</th><th scope="col" class="n">Jahr 5</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">Aufträge</th><td class="n">26</td><td class="n">48</td><td class="n">62</td><td class="n">62</td><td class="n">62</td></tr>
+            <tr><th scope="row">Ø Nettopreis je Auftrag</th><td class="n">391</td><td class="n">413</td><td class="n">453</td><td class="n">483</td><td class="n">516</td></tr>
+            <tr class="rule"><th scope="row">Umsatzerlöse</th><td class="n">10.166</td><td class="n">19.824</td><td class="n">28.086</td><td class="n">29.946</td><td class="n">31.992</td></tr>
+            <tr><th scope="row">Variable Kosten</th><td class="n">−676</td><td class="n">−1.248</td><td class="n">−1.674</td><td class="n">−1.736</td><td class="n">−1.798</td></tr>
+            <tr class="total"><th scope="row">Deckungsbeitrag</th><td class="n">9.490</td><td class="n">18.576</td><td class="n">26.412</td><td class="n">28.210</td><td class="n">30.194</td></tr>
+            <tr><th scope="row">Fixkosten</th><td class="n">−3.835</td><td class="n">−6.165</td><td class="n">−7.410</td><td class="n">−7.700</td><td class="n">−8.000</td></tr>
+            <tr class="total"><th scope="row">Ergebnis vor Steuern</th><td class="n pos">5.655</td><td class="n pos">12.411</td><td class="n pos">19.002</td><td class="n pos">20.510</td><td class="n pos">22.194</td></tr>
+            <tr class="rule"><th scope="row">Eigene Arbeitsstunden</th><td class="n">175</td><td class="n">251</td><td class="n">303</td><td class="n">300</td><td class="n">298</td></tr>
+            <tr><th scope="row">Stunden je Woche</th><td class="n">3,4</td><td class="n">4,8</td><td class="n">5,8</td><td class="n">5,8</td><td class="n">5,7</td></tr>
+            <tr class="total"><th scope="row">Ergebnis je eigener Stunde</th><td class="n hl-col">32 €</td><td class="n hl-col">49 €</td><td class="n hl-col">63 €</td><td class="n hl-col">68 €</td><td class="n hl-col">74 €</td></tr>
+            <tr class="rule"><th scope="row">Gewinnschwelle</th><td class="n">11</td><td class="n">16</td><td class="n">18</td><td class="n">17</td><td class="n">17</td></tr>
+            <tr><th scope="row">Investition aus Cashflow</th><td class="n">—</td><td class="n">4.200</td><td class="n">—</td><td class="n">1.700</td><td class="n">—</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <figure class="chart" id="figPlan">
+        <figcaption>
+          <span class="c-title">Ergebnis je eigener Arbeitsstunde</span>
+          <span class="c-sub">Die Wochenstunden bleiben ab Jahr 3 konstant. Was danach steigt, ist ausschließlich der Ertrag je Stunde.</span>
+        </figcaption>
+        <div id="chartPlan"></div>
+        <div class="tip" id="tipPlan"></div>
+      </figure>
+
+      <div class="tiles">
+        <div class="tile"><span class="tl">Amortisation Startkapital</span><span class="tv acc">10 Monate</span><span class="tn">im ersten Jahr zurückverdient</span></div>
+        <div class="tile"><span class="tl">Zusätzliches Fremdkapital</span><span class="tv">0 €</span><span class="tn">über alle fünf Jahre</span></div>
+        <div class="tile"><span class="tl">Mitarbeiter</span><span class="tv">0</span><span class="tn">geplant und beabsichtigt</span></div>
+        <div class="tile"><span class="tl">Stundenertrag J1 → J5</span><span class="tv">32 → 74 €</span><span class="tn">bei fast gleicher Stundenzahl</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 11 DECKEL ============ -->
+<section class="ch" id="deckel">
+  <div class="wrap">
+    <div class="ch-head">
+      <span class="ch-no">11 / 14 — Der Deckel</span>
+      <h2>Warum bei 62 Aufträgen Schluss ist</h2>
+    </div>
+
+    <div class="grid-2">
+      <div class="stack g16">
+        <p class="pull">62 Aufträge sind nicht die Grenze der Nachfrage. Sie sind die Grenze dessen, was neben einem Hauptjob dauerhaft geht, ohne dass etwas anderes darunter leidet.</p>
+        <p class="body-text">
+          Rechnerisch wären mehr möglich: 190 effektiv nutzbare Feldstunden reichten für
+          rund 95 Aufträge. Diese Rechnung stimmt aber nur, wenn Wetter, Hauptjob und
+          Kundentermin beliebig kombinierbar wären. <b>Sind sie nicht — und die Schnittmenge
+          ist der Engpass, nicht die Summe.</b>
+        </p>
+        <p class="body-text">
+          Oberhalb von etwa siebzig Aufträgen kippt das Modell: Man beginnt, Urlaubstage für
+          Termine zu verbrauchen, die Antwortzeit auf Anfragen steigt, und verschobene Termine
+          stapeln sich, weil kein Puffer mehr da ist. <b>Der Ruf leidet genau dann, wenn die
+          Auslastung am höchsten ist.</b>
+        </p>
+      </div>
+      <div class="stack g16">
+        <h3>Wachstum ohne Mitarbeiter — die fünf zulässigen Wege</h3>
+        <ul class="numlist">
+          <li><span class="li-no">01</span><p><b>Preis.</b> Fünf Prozent im Jahr, angekündigt, ohne Verhandlung. Bestandskunden akzeptieren das bei guter Leistung — und wer geht, war ohnehin der falsche Kunde.</p></li>
+          <li><span class="li-no">02</span><p><b>Mix.</b> Thermografieaufträge bringen 137 bis 146 € je Stunde statt 100 €. Jeder Kompaktbefund, der durch einen Thermografieauftrag ersetzt wird, ist ein gewonnener Nachmittag.</p></li>
+          <li><span class="li-no">03</span><p><b>Bündelung.</b> Mehrere Objekte eines Auftraggebers an einem Termin. Spart Fahrtzeit und, wichtiger, Wetterfenster.</p></li>
+          <li><span class="li-no">04</span><p><b>Bürozeit automatisieren.</b> Der größte Zeitposten ist der Bericht. Vorlagen und halbautomatische Bildkartierung geben zwanzig Stunden im Jahr zurück.</p></li>
+          <li><span class="li-no">05</span><p><b>Nein sagen.</b> Aufträge unter 90 € Deckungsbeitrag je Stunde werden abgelehnt. Das ist kein Luxus, sondern die Voraussetzung dafür, dass die anderen vier Wege wirken.</p></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 12 STEUERN ============ -->
+<section class="ch" id="steuer">
+  <div class="wrap">
+    <div class="ch-head">
+      <span class="ch-no">12 / 14 — Steuern und Formales</span>
+      <h2>Was am Ende wirklich übrig bleibt</h2>
+      <p class="lede">
+        Nebeneinkünfte werden auf das Gehalt aus dem Hauptjob draufgerechnet und mit dem
+        persönlichen Grenzsteuersatz versteuert. Wer das weglässt, rechnet sich das
+        Ergebnis um fast die Hälfte schön.
+      </p>
+    </div>
+
+    <div class="stack g24">
+      <div class="grid-3">
+        <article class="card">
+          <span class="tagline">Umsatzsteuer</span>
+          <h3>Bewusst nicht Kleinunternehmer</h3>
+          <p>
+            Der Umsatz läge im ersten Jahr unter der Kleinunternehmergrenze. Trotzdem lohnt der
+            Verzicht darauf: Fast alle Kunden sind Unternehmer, denen die Umsatzsteuer gleichgültig
+            ist — und der Vorsteuerabzug auf Drohne, Versicherung und später die Wärmebildkamera
+            ist bares Geld.
+          </p>
+          <p class="foot">Vorteil grob 420 € im ersten, rund 800 € im zweiten Jahr</p>
+        </article>
+        <article class="card">
+          <span class="tagline">Gewerbesteuer</span>
+          <h3>Fällt im ganzen Zeitraum nicht an</h3>
+          <p>
+            Der Freibetrag für Einzelunternehmen liegt bei 24.500 € Gewerbeertrag. Das Ergebnis
+            erreicht ihn selbst im fünften Jahr mit 22.194 € nicht. <b>Das ist kein Zufall,
+            sondern eine angenehme Nebenwirkung des Deckels.</b>
+          </p>
+          <p class="foot">Bei Überschreiten wäre in Köln der Hebesatz zu prüfen</p>
+        </article>
+        <article class="card">
+          <span class="tagline">Einkommensteuer</span>
+          <h3>Der Grenzsteuersatz frisst mit</h3>
+          <p>
+            Bei einem angenommenen Grenzsteuersatz von 42 % bleiben von 19.002 € im dritten Jahr
+            <b>gut 11.000 € netto</b>. Bezogen auf 303 Stunden sind das rund
+            <b>36 € netto je Arbeitsstunde.</b>
+          </p>
+          <p class="foot">Der Satz hängt vom Gehalt im Hauptjob ab und ist individuell zu prüfen</p>
+        </article>
+      </div>
+
+      <div class="stack g12">
+        <h3>Der Vergleich, um den es eigentlich geht</h3>
+        <p class="body-text">
+          36 € netto je Stunde stehen gegen die Alternative, dieselbe Zeit als Überstunden im
+          Hauptjob zu arbeiten. Bei einem Bruttostundenlohn von 30 € und demselben Grenzsteuersatz
+          bleiben davon rund 17 € netto. <b>Der Nebenerwerb bringt gut das Doppelte</b> — und
+          baut zusätzlich einen Kundenstamm und eine Ausrüstung auf, die einen Restwert haben.
+        </p>
+        <p class="body-text">
+          Dagegen steht ehrlich: unbezahlte Einarbeitung im ersten Jahr, Terminverschiebungen bei
+          Regen, und die Tatsache, dass Samstagvormittage nicht mehr frei sind. <b>Bei 32 € je
+          Stunde im ersten Jahr ist das noch kein überzeugendes Geschäft. Es wird eines ab Jahr 2.</b>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 13 RISIKEN ============ -->
+<section class="ch" id="risiken">
+  <div class="wrap">
+    <div class="ch-head">
+      <span class="ch-no">13 / 14 — Risiken</span>
+      <h2>Was schiefgehen kann — und was dagegen steht</h2>
+    </div>
+
+    <div class="tbl">
+      <table>
+        <thead>
+          <tr><th scope="col">Risiko</th><th scope="col">Wirkung</th><th scope="col">Gegenmaßnahme</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Wetter</th>
+            <td>Rund 30 % der geplanten Termine müssen verschoben werden — bei starrer Zusage kostet das Kunden</td>
+            <td>Nie unter fünf Tagen Vorlauf zusagen, Ausweichtermin immer mitvereinbaren, Verschiebungswahrscheinlichkeit von Anfang an offen kommunizieren</td>
+          </tr>
+          <tr>
+            <th scope="row">Nachfragespitzen liegen werktags</th>
+            <td>Nach Sturm braucht der Erstregulierer binnen 48 Stunden Bilder — genau dann ist der Hauptjob im Weg</td>
+            <td>Bewusst nicht als Erstaufnahme positionieren; Sachverständige mit Ein- bis Zweiwochenfrist als Zielgruppe; planbare Grundlast vor Schadensfällen</td>
+          </tr>
+          <tr>
+            <th scope="row">Haftung für Fehlbefunde</th>
+            <td>Eine Fehlentscheidung auf Basis des Berichts kann fünfstellig werden</td>
+            <td>Konsequente Abgrenzung Dokumentation gegen Gutachten in AGB, Angebot und Berichtskopf; Vermögensschadenhaftpflicht ab dem ersten Auftrag</td>
+          </tr>
+          <tr>
+            <th scope="row">Luftraum und Genehmigungen</th>
+            <td>Ein Auftrag im Sperrbereich oder in der Kontrollzone ohne Freigabe ist nicht durchführbar oder rechtswidrig</td>
+            <td>Luftraumprüfung vor der Angebotsabgabe, nicht vor Ort; Freigabeverfahren beherrschen und als Zusatzleistung bepreisen; eigene Karte geprüfter Gebiete führen</td>
+          </tr>
+          <tr>
+            <th scope="row">Datenschutz</th>
+            <td>Aufnahmen von Nachbargrundstücken oder Personen können Ansprüche auslösen</td>
+            <td>Flugplanung mit definierter Blickrichtung, Unkenntlichmachung, dokumentiertes Löschkonzept, Auftragsverarbeitungsvertrag</td>
+          </tr>
+          <tr>
+            <th scope="row">Technikausfall im ersten Jahr</th>
+            <td>Nur ein Gerät — ein Defekt kostet den Termin und bei knappem Wetterfenster die Woche</td>
+            <td>Zusatzakkus und Ersatzpropeller von Beginn an; ab Jahr 2 ist die erste Drohne das Ersatzgerät</td>
+          </tr>
+          <tr>
+            <th scope="row">Konflikt mit dem Hauptjob</th>
+            <td>Nebentätigkeitsklausel, Urlaubsplanung, Erreichbarkeit</td>
+            <td>Arbeitsvertrag vor der Gewerbeanmeldung prüfen, Nebentätigkeit gegebenenfalls anzeigen, Termine ausschließlich außerhalb der Arbeitszeit</td>
+          </tr>
+          <tr>
+            <th scope="row">Sachverständige fliegen selbst</th>
+            <td>Der Kunde wird zum Wettbewerber</td>
+            <td>Das passiert und ist nicht zu verhindern. Der Unterschied ist Verfügbarkeit und Berichtsqualität — wer nebenbei fliegt, macht es selten gut und noch seltener regelmäßig</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 14 JAHR 1 ============ -->
+<section class="ch" id="jahr1">
+  <div class="wrap">
+    <div class="ch-head">
+      <span class="ch-no">14 / 14 — Die ersten zwölf Monate</span>
+      <h2>Was wann passiert</h2>
+    </div>
+
+    <div class="stack g24">
+      <div class="phases">
+        <div class="phase">
+          <span class="pm">Monat 1–2</span>
+          <h3>Zulassung</h3>
+          <ul>
+            <li>Arbeitsvertrag auf Nebentätigkeit prüfen</li>
+            <li>Fernpilotenzeugnis A2 erwerben</li>
+            <li>Betreiberregistrierung, Gewerbeanmeldung</li>
+            <li>Beide Versicherungen abschließen</li>
+          </ul>
+        </div>
+        <div class="phase">
+          <span class="pm">Monat 3–4</span>
+          <h3>Handwerk</h3>
+          <ul>
+            <li>Drohne beschaffen, 20 Übungsflüge</li>
+            <li>Berichtsvorlage bauen und dreimal überarbeiten</li>
+            <li>Drei Objekte kostenlos dokumentieren — Bekannte, Verein, eigenes Haus</li>
+            <li>Musterbericht fertigstellen</li>
+          </ul>
+        </div>
+        <div class="phase">
+          <span class="pm">Monat 5–7</span>
+          <h3>Erste Kunden</h3>
+          <ul>
+            <li>30 Sachverständige persönlich anschreiben, Musterbericht im Anhang</li>
+            <li>10 Hausverwaltungen und 10 Dachdecker anrufen</li>
+            <li>Website mit drei echten Beispielen online</li>
+            <li>Ziel: 8 bezahlte Aufträge</li>
+          </ul>
+        </div>
+        <div class="phase">
+          <span class="pm">Monat 8–12</span>
+          <h3>Rhythmus finden</h3>
+          <ul>
+            <li>Feste Termin-Slots etablieren und kommunizieren</li>
+            <li>Erste Bündelaufträge einer Hausverwaltung</li>
+            <li>Ziel: 26 Aufträge im ersten Jahr</li>
+            <li>Entscheidung über die Wärmebildkamera für Jahr 2</li>
+          </ul>
+        </div>
+      </div>
+
+      <p class="pull">Die Wärmebildkamera wird erst gekauft, wenn drei Kunden ausdrücklich danach gefragt haben. Nicht auf Verdacht.</p>
+    </div>
+  </div>
+</section>
+
+<footer class="doc">
+  <div class="wrap">
+    <p class="disc">
+      <b>Annahmen und Grenzen.</b> NADIR ist eine Gründungsidee; sämtliche Zahlen sind kalkulierte
+      Planwerte, keine Ist-Daten. Alle Beträge sind netto. Die Angaben zum Luftrecht sind Orientierung
+      und kein Ersatz für die Prüfung des aktuellen Stands beim Luftfahrt-Bundesamt und der
+      Flugsicherung — Regeln, Übergangsfristen und Geräteklassen ändern sich, und die Gerätewahl
+      hängt unmittelbar daran. Steuerliche Aussagen sind vereinfacht und ersetzen keine Beratung;
+      der Grenzsteuersatz hängt vom Einkommen aus dem Hauptjob ab. Die Wetterannahme von rund 230
+      fliegbaren Tagen und die Verschiebungsquote von 30 % sind Schätzungen, keine Messungen — sie
+      gehören im ersten Jahr durch eigene Aufzeichnung ersetzt, weil an ihnen die gesamte
+      Kapazitätsrechnung hängt. Vor dem Start zu prüfen: Nebentätigkeitsregelung im Arbeitsvertrag,
+      tatsächliche Wettbewerbsdichte im Umkreis und die Zahlungsbereitschaft der Sachverständigen
+      vor Ort.
+    </p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  "use strict";
+  var css = getComputedStyle(document.documentElement);
+  function tok(n) { return css.getPropertyValue(n).trim(); }
+  function readTokens() {
+    css = getComputedStyle(document.documentElement);
+    return {
+      accent: tok('--accent'), grid: tok('--grid'), ink: tok('--ink'),
+      mid: tok('--ink-mid'), mute: tok('--ink-mute'), surface: tok('--surface')
+    };
+  }
+  var eur = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 });
+  var NS = 'http://www.w3.org/2000/svg';
+  function el(name, attrs) {
+    var n = document.createElementNS(NS, name);
+    for (var k in attrs) { if (attrs[k] != null) n.setAttribute(k, attrs[k]); }
+    return n;
+  }
+  function txt(x, y, s, attrs) {
+    var t = el('text', attrs || {});
+    t.setAttribute('x', x); t.setAttribute('y', y); t.textContent = s;
+    return t;
+  }
+  var MONO = '"Roboto Mono", ui-monospace, monospace';
+
+  // Balken sind an der Grundlinie verankert: nur die Datenkante wird gerundet.
+  function vBar(x, y, w, h, fill) {
+    var r = Math.min(4, h);
+    return el('path', { fill: fill,
+      d: 'M' + x + ',' + (y + h) + ' V' + (y + r) + ' a' + r + ',' + r + ' 0 0 1 ' + r + ',' + -r +
+         ' H' + (x + w - r) + ' a' + r + ',' + r + ' 0 0 1 ' + r + ',' + r + ' V' + (y + h) + ' Z' });
+  }
+  function hBar(x, y, w, h, fill) {
+    var r = Math.min(4, w);
+    return el('path', { fill: fill,
+      d: 'M' + x + ',' + y + ' H' + (x + w - r) + ' a' + r + ',' + r + ' 0 0 1 ' + r + ',' + r +
+         ' V' + (y + h - r) + ' a' + r + ',' + r + ' 0 0 1 ' + -r + ',' + r + ' H' + x + ' Z' });
+  }
+  function makeTip(tipEl, figEl) {
+    return {
+      show: function (px, py, html) {
+        var fr = figEl.getBoundingClientRect();
+        tipEl.innerHTML = html;
+        tipEl.style.left = (px - fr.left) + 'px';
+        tipEl.style.top = (py - fr.top) + 'px';
+        tipEl.classList.add('on');
+      },
+      hide: function () { tipEl.classList.remove('on'); }
+    };
+  }
+
+  /* ---------- 1) DB je eigener Stunde ---------- */
+  function drawDbh(T) {
+    var host = document.getElementById('chartDbh');
+    var tip = makeTip(document.getElementById('tipDbh'), document.getElementById('figDbh'));
+    host.innerHTML = '';
+    var data = [
+      { k: 'Dachbefund kompakt',    v: 100, db: 267, h: 2.67, p: 290 },
+      { k: 'Dachbefund vollständig',v: 115, db: 423, h: 3.67, p: 450 },
+      { k: 'Beweissicherung',       v: 134, db: 558, h: 4.17, p: 590 },
+      { k: 'PV-Thermografie',       v: 137, db: 365, h: 2.67, p: 390 },
+      { k: 'Dachthermografie',      v: 146, db: 462, h: 3.17, p: 490 }
+    ];
+    var W = 720, L = 62, R = 106, Tp = 30, B = 52;
+    var pw = W - L - R, ph = 250, H = Tp + ph + B, max = 160;
+
+    var svg = el('svg', { viewBox: '0 0 ' + W + ' ' + H, role: 'img',
+      'aria-label': 'Balkendiagramm des Deckungsbeitrags je eigener Arbeitsstunde: Dachbefund kompakt 100 Euro, vollständig 115, Beweissicherung 134, Photovoltaik-Thermografie 137, Dachthermografie 146 Euro.' });
+
+    [0, 40, 80, 120, 160].forEach(function (g) {
+      var y = Tp + ph - (g / max) * ph;
+      svg.appendChild(el('line', { x1: L, x2: L + pw, y1: y, y2: y, stroke: T.grid, 'stroke-width': 1 }));
+      svg.appendChild(txt(L - 10, y + 4, g === 0 ? '0 €' : g + ' €',
+        { 'text-anchor': 'end', fill: T.mute, 'font-family': MONO, 'font-size': 11 }));
+    });
+
+    var slot = pw / data.length, bw = Math.min(78, slot - 34);
+    data.forEach(function (d, i) {
+      var x = L + slot * i + (slot - bw) / 2;
+      var h = (d.v / max) * ph, y = Tp + ph - h;
+      var mark = vBar(x, y, bw, h, T.accent);
+      mark.style.cursor = 'pointer';
+      svg.appendChild(mark);
+      svg.appendChild(txt(x + bw / 2, y - 9, d.v + ' €',
+        { 'text-anchor': 'middle', fill: T.ink, 'font-family': MONO, 'font-size': 12.5, 'font-weight': 500 }));
+      var words = d.k.split(' ');
+      svg.appendChild(txt(x + bw / 2, Tp + ph + 21, words[0],
+        { 'text-anchor': 'middle', fill: T.mid, 'font-family': MONO, 'font-size': 10.5 }));
+      if (words[1]) svg.appendChild(txt(x + bw / 2, Tp + ph + 35, words.slice(1).join(' '),
+        { 'text-anchor': 'middle', fill: T.mute, 'font-family': MONO, 'font-size': 10 }));
+      mark.addEventListener('mouseenter', function () {
+        var r = mark.getBoundingClientRect();
+        tip.show(r.left + r.width / 2, r.top,
+          '<b>' + d.k + '</b><br>Preis ' + eur.format(d.p) + '<br>DB ' + eur.format(d.db) +
+          ' · ' + d.h.toString().replace('.', ',') + ' h<br>= <b>' + d.v + ' € je Stunde</b>');
+      });
+      mark.addEventListener('mouseleave', tip.hide);
+    });
+
+    // Annahmegrenze zuletzt zeichnen, damit sie über den Balken liegt;
+    // die Beschriftung steht rechts außerhalb der Plotfläche.
+    var yg = Tp + ph - (90 / max) * ph;
+    svg.appendChild(el('line', { x1: L, x2: L + pw + 8, y1: yg, y2: yg,
+      stroke: T.accent, 'stroke-width': 1.5, 'stroke-dasharray': '5 4' }));
+    svg.appendChild(txt(L + pw + 16, yg - 2, 'Annahmegrenze',
+      { fill: T.accent, 'font-family': MONO, 'font-size': 10, 'letter-spacing': '.04em' }));
+    svg.appendChild(txt(L + pw + 16, yg + 12, '90 € / Stunde',
+      { fill: T.mute, 'font-family': MONO, 'font-size': 10, 'letter-spacing': '.04em' }));
+
+    svg.appendChild(el('line', { x1: L, x2: L + pw, y1: Tp + ph, y2: Tp + ph, stroke: T.grid, 'stroke-width': 1 }));
+    host.appendChild(svg);
+  }
+
+  /* ---------- 2) Zeitverteilung ---------- */
+  function drawZeit(T) {
+    var host = document.getElementById('chartZeit');
+    var tip = makeTip(document.getElementById('tipZeit'), document.getElementById('figZeit'));
+    host.innerHTML = '';
+    var data = [
+      { k: 'Bericht und Auswertung', v: 84, n: 'je Auftrag 1,36 h' },
+      { k: 'Vor Ort', v: 78, n: 'je Auftrag 1,25 h' },
+      { k: 'Akquise und Angebote', v: 55, n: 'sinkt bei stabilem Kundenstamm' },
+      { k: 'Verwaltung und Behörden', v: 45, n: 'inkl. Fortbildung und Freigaben' },
+      { k: 'Fahrt', v: 41, n: 'je Auftrag 0,67 h' }
+    ];
+    var W = 720, L = 196, R = 62, Tp = 12, B = 44;
+    var rowH = 38, ph = data.length * rowH, H = Tp + ph + B;
+    var pw = W - L - R, max = 100;
+
+    var svg = el('svg', { viewBox: '0 0 ' + W + ' ' + H, role: 'img',
+      'aria-label': 'Balkendiagramm der Jahresarbeitszeit: Bericht und Auswertung 84 Stunden, vor Ort 78, Akquise 55, Verwaltung 45, Fahrt 41 Stunden.' });
+
+    [0, 25, 50, 75, 100].forEach(function (g) {
+      var x = L + (g / max) * pw;
+      svg.appendChild(el('line', { x1: x, x2: x, y1: Tp, y2: Tp + ph, stroke: T.grid, 'stroke-width': 1 }));
+      svg.appendChild(txt(x, Tp + ph + 20, g, { 'text-anchor': 'middle', fill: T.mute, 'font-family': MONO, 'font-size': 11 }));
+    });
+    svg.appendChild(txt(L + pw / 2, Tp + ph + 37, 'STUNDEN IM JAHR',
+      { 'text-anchor': 'middle', fill: T.mute, 'font-family': MONO, 'font-size': 10, 'letter-spacing': '.13em' }));
+
+    data.forEach(function (d, i) {
+      var y = Tp + i * rowH + 6, bh = rowH - 16;
+      var w = (d.v / max) * pw;
+      var mark = hBar(L, y, w, bh, T.accent);
+      mark.style.cursor = 'pointer';
+      svg.appendChild(mark);
+      svg.appendChild(txt(L - 12, y + bh / 2 + 4, d.k,
+        { 'text-anchor': 'end', fill: T.mid, 'font-family': MONO, 'font-size': 11 }));
+      svg.appendChild(txt(L + w + 9, y + bh / 2 + 4, d.v + ' h',
+        { fill: T.ink, 'font-family': MONO, 'font-size': 12, 'font-weight': 500 }));
+      mark.addEventListener('mouseenter', function () {
+        var r = mark.getBoundingClientRect();
+        tip.show(r.left + r.width / 2, r.top,
+          '<b>' + d.k + '</b><br>' + d.v + ' Stunden im Jahr<br>' +
+          Math.round(d.v / 303 * 100) + ' % der Gesamtzeit<br>' + d.n);
+      });
+      mark.addEventListener('mouseleave', tip.hide);
+    });
+    svg.appendChild(el('line', { x1: L, x2: L, y1: Tp, y2: Tp + ph, stroke: T.grid, 'stroke-width': 1 }));
+    host.appendChild(svg);
+  }
+
+  /* ---------- 3) Ergebnis je eigener Stunde über fünf Jahre ---------- */
+  function drawPlan(T) {
+    var host = document.getElementById('chartPlan');
+    var tip = makeTip(document.getElementById('tipPlan'), document.getElementById('figPlan'));
+    host.innerHTML = '';
+    var years = [
+      { y: 'Jahr 1', v: 32, a: 26, h: 175, wk: '3,4', erg: 5655 },
+      { y: 'Jahr 2', v: 49, a: 48, h: 251, wk: '4,8', erg: 12411 },
+      { y: 'Jahr 3', v: 63, a: 62, h: 303, wk: '5,8', erg: 19002 },
+      { y: 'Jahr 4', v: 68, a: 62, h: 300, wk: '5,8', erg: 20510 },
+      { y: 'Jahr 5', v: 74, a: 62, h: 298, wk: '5,7', erg: 22194 }
+    ];
+    var W = 720, L = 62, R = 22, Tp = 34, B = 62;
+    var pw = W - L - R, ph = 236, H = Tp + ph + B, max = 80;
+
+    var svg = el('svg', { viewBox: '0 0 ' + W + ' ' + H, role: 'img',
+      'aria-label': 'Balkendiagramm des Ergebnisses je eigener Arbeitsstunde über fünf Jahre: 32, 49, 63, 68 und 74 Euro. Ab Jahr 3 bleibt die Auftragszahl bei 62 konstant.' });
+
+    [0, 20, 40, 60, 80].forEach(function (g) {
+      var y = Tp + ph - (g / max) * ph;
+      svg.appendChild(el('line', { x1: L, x2: L + pw, y1: y, y2: y, stroke: T.grid, 'stroke-width': 1 }));
+      svg.appendChild(txt(L - 10, y + 4, g === 0 ? '0 €' : g + ' €',
+        { 'text-anchor': 'end', fill: T.mute, 'font-family': MONO, 'font-size': 11 }));
+    });
+
+    var slot = pw / years.length, bw = Math.min(70, slot - 40);
+
+    // Phasengrenze zwischen Jahr 3 und Jahr 4 — ab hier wächst nur noch der Stundensatz
+    var xSplit = L + slot * 3;
+    svg.appendChild(el('line', { x1: xSplit, x2: xSplit, y1: Tp - 20, y2: Tp + ph,
+      stroke: T.mute, 'stroke-width': 1, 'stroke-dasharray': '3 4' }));
+    svg.appendChild(txt(xSplit - 8, Tp - 22, 'Mengendeckel erreicht — ab hier nur Preis und Mix',
+      { 'text-anchor': 'end', fill: T.mute, 'font-family': MONO, 'font-size': 10, 'letter-spacing': '.04em' }));
+
+    years.forEach(function (yr, i) {
+      var x = L + slot * i + (slot - bw) / 2;
+      var h = (yr.v / max) * ph, y = Tp + ph - h;
+      var mark = vBar(x, y, bw, h, T.accent);
+      mark.style.cursor = 'pointer';
+      svg.appendChild(mark);
+      svg.appendChild(txt(x + bw / 2, y - 9, yr.v + ' €',
+        { 'text-anchor': 'middle', fill: T.ink, 'font-family': MONO, 'font-size': 12.5, 'font-weight': 500 }));
+      svg.appendChild(txt(x + bw / 2, Tp + ph + 22, yr.y,
+        { 'text-anchor': 'middle', fill: T.ink, 'font-family': MONO, 'font-size': 11.5 }));
+      svg.appendChild(txt(x + bw / 2, Tp + ph + 38, yr.a + ' Aufträge',
+        { 'text-anchor': 'middle', fill: T.mute, 'font-family': MONO, 'font-size': 10 }));
+      svg.appendChild(txt(x + bw / 2, Tp + ph + 52, yr.wk + ' h/Woche',
+        { 'text-anchor': 'middle', fill: T.mute, 'font-family': MONO, 'font-size': 10 }));
+      mark.addEventListener('mouseenter', function () {
+        var r = mark.getBoundingClientRect();
+        tip.show(r.left + r.width / 2, r.top,
+          '<b>' + yr.y + '</b><br>Ergebnis ' + eur.format(yr.erg) +
+          '<br>' + yr.h + ' Stunden · ' + yr.a + ' Aufträge<br>= <b>' + yr.v + ' € je Stunde</b>');
+      });
+      mark.addEventListener('mouseleave', tip.hide);
+    });
+    svg.appendChild(el('line', { x1: L, x2: L + pw, y1: Tp + ph, y2: Tp + ph, stroke: T.grid, 'stroke-width': 1 }));
+    host.appendChild(svg);
+  }
+
+  function renderAll() {
+    var T = readTokens();
+    drawDbh(T); drawZeit(T); drawPlan(T);
+  }
+  renderAll();
+
+  var mq = window.matchMedia('(prefers-color-scheme: dark)');
+  if (mq.addEventListener) mq.addEventListener('change', renderAll);
+  new MutationObserver(renderAll).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+
+  var rt;
+  window.addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(renderAll, 180); });
+})();
+</script>
