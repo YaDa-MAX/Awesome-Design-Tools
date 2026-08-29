@@ -1,4 +1,4 @@
-<title>NADIR Dachbefund</title>
+<title>VISIOGRAF Dachbefund</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400..700&family=Public+Sans:wght@400;500;600&family=Roboto+Mono:wght@400;500&display=swap">
@@ -110,10 +110,9 @@ h3 { font-size: 1.05rem; letter-spacing: -.012em; }
   display: flex; align-items: center; gap: 20px; }
 .brand { display: flex; align-items: center; gap: 10px; font-family: var(--display);
   font-weight: 700; font-size: 1rem; letter-spacing: .04em; }
-.brand-mark { width: 15px; height: 15px; flex: none; position: relative; }
-.brand-mark::before, .brand-mark::after { content: ""; position: absolute; background: var(--accent); }
-.brand-mark::before { left: 6.5px; top: 0; width: 2px; height: 15px; }
-.brand-mark::after { left: 0; top: 6.5px; width: 15px; height: 2px; }
+/* Passermarke — das Ziel, das bei Drohnenvermessung am Boden liegt. */
+.brand-mark { width: 15px; height: 15px; flex: none; border-radius: 2px;
+  background: conic-gradient(var(--accent) 0 25%, var(--ink) 0 50%, var(--accent) 0 75%, var(--ink) 0); }
 .toc { display: flex; gap: 17px; margin-left: auto; overflow-x: auto;
   font-family: var(--mono); font-size: .69rem; letter-spacing: .05em; color: var(--ink-mute);
   text-transform: uppercase; scrollbar-width: none; }
@@ -248,7 +247,7 @@ footer.doc { border-top: 1px solid var(--line); padding-block: 32px 56px; }
 
 <div class="topbar">
   <div class="topbar-in">
-    <span class="brand"><span class="brand-mark" aria-hidden="true"></span>NADIR</span>
+    <span class="brand"><span class="brand-mark" aria-hidden="true"></span>VISIOGRAF</span>
     <nav class="toc" aria-label="Kapitel">
       <a href="#produkt">Produkt</a>
       <a href="#abgrenzung">Abgrenzung</a>
@@ -275,7 +274,7 @@ footer.doc { border-top: 1px solid var(--line); padding-block: 32px 56px; }
       <span class="label">Betriebskonzept · Nebenerwerb ohne Personal</span>
       <h1>Dachbefund<br>aus der Luft.<br>Allein, nebenbei,<br>mit Deckel.</h1>
       <p class="lede">
-        NADIR dokumentiert Dächer, Fassaden und Photovoltaikanlagen per Drohne — für
+        VISIOGRAF dokumentiert Dächer, Fassaden und Photovoltaikanlagen per Drohne — für
         Sachverständige, Hausverwaltungen und Handwerksbetriebe im Kölner Raum.
         Ein Mensch, ein Gerät, kein Mitarbeiter, keine Expansion. <b>Die Obergrenze ist
         hier keine Niederlage, sondern die Konstruktionsvorgabe.</b>
@@ -359,14 +358,14 @@ footer.doc { border-top: 1px solid var(--line); padding-block: 32px 56px; }
 
     <div class="grid-2">
       <div class="stack g16">
-        <h3>Was NADIR liefert</h3>
+        <h3>Was VISIOGRAF liefert</h3>
         <ul class="checklist">
           <li><b>Bildbefund.</b> Was am Objekt zu sehen ist, vollständig und in nachvollziehbarer Auflösung.</li>
           <li><b>Kartierung.</b> Wo genau am Objekt sich die Fundstelle befindet.</li>
           <li><b>Aufnahmeprotokoll.</b> Datum, Uhrzeit, Wetter, Flughöhe, Gerät, Fernpilot.</li>
           <li><b>Vollständigkeitserklärung.</b> Welche Flächen erfasst wurden und welche nicht einsehbar waren.</li>
         </ul>
-        <h3>Was NADIR ausdrücklich nicht liefert</h3>
+        <h3>Was VISIOGRAF ausdrücklich nicht liefert</h3>
         <ul class="checklist no">
           <li><b>Keine Schadensursache.</b> Ob der Riss vom Hagel oder vom Alter kommt, steht nicht im Bericht.</li>
           <li><b>Keine Schadenhöhe.</b> Keine Kostenschätzung, keine Mengenermittlung.</li>
@@ -1155,7 +1154,7 @@ footer.doc { border-top: 1px solid var(--line); padding-block: 32px 56px; }
 <footer class="doc">
   <div class="wrap">
     <p class="disc">
-      <b>Annahmen und Grenzen.</b> NADIR ist eine Gründungsidee; sämtliche Zahlen sind kalkulierte
+      <b>Annahmen und Grenzen.</b> VISIOGRAF ist eine Gründungsidee; sämtliche Zahlen sind kalkulierte
       Planwerte, keine Ist-Daten. Alle Beträge sind netto. Die Angaben zum Luftrecht sind Orientierung
       und kein Ersatz für die Prüfung des aktuellen Stands beim Luftfahrt-Bundesamt und der
       Flugsicherung — Regeln, Übergangsfristen und Geräteklassen ändern sich, und die Gerätewahl

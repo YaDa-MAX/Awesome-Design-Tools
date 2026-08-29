@@ -1,0 +1,680 @@
+<title>VISIOGRAF Dachbefund</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400..700&family=Public+Sans:wght@400;500;600&family=Roboto+Mono:wght@400;500&display=swap">
+
+<style>
+/* ============================================================
+   VISIOGRAF — dieselbe Markenbasis wie das Betriebskonzept:
+   Kartenpapier, ein Akzent in Luftfahrtkarten-Magenta.
+   Vollständige Hell-Palette auf blankem :root, Dunkel nur
+   auf Token-Ebene neu gesetzt (Media-Query und Theme-Schalter).
+   ============================================================ */
+:root {
+  color-scheme: light;
+  --bg:        #EEF0EF;
+  --surface:   #FAFBFA;
+  --surface-2: #E3E7E5;
+  --ink:       #15191B;
+  --ink-mid:   #3D474B;
+  --ink-mute:  #6B787D;
+  --line:      #D6DBD9;
+  --line-soft: #E4E8E6;
+  --accent:    #A32A72;
+  --accent-ink:#8C2462;
+  --accent-soft: rgba(163,42,114,.09);
+  --accent-on: #FFFFFF;
+  --grid:      #DFE4E2;
+  --shadow: 0 1px 2px rgba(21,25,27,.05), 0 12px 30px -18px rgba(21,25,27,.26);
+
+  --display: "Familjen Grotesk", "Helvetica Neue", Arial, sans-serif;
+  --body:    "Public Sans", "Segoe UI", system-ui, sans-serif;
+  --mono:    "Roboto Mono", ui-monospace, "SFMono-Regular", monospace;
+  --max: 1180px;
+  --pad: clamp(18px, 5vw, 56px);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --bg:        #101315;
+    --surface:   #161A1C;
+    --surface-2: #1E2427;
+    --ink:       #ECEFEE;
+    --ink-mid:   #B2BDBF;
+    --ink-mute:  #83908F;
+    --line:      #293134;
+    --line-soft: #20272A;
+    --accent:    #C4569A;
+    --accent-ink:#C4569A;
+    --accent-soft: rgba(196,86,154,.13);
+    --accent-on: #14171A;
+    --grid:      #232B2E;
+    --shadow: 0 1px 2px rgba(0,0,0,.42), 0 16px 36px -20px rgba(0,0,0,.8);
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg:        #101315;
+  --surface:   #161A1C;
+  --surface-2: #1E2427;
+  --ink:       #ECEFEE;
+  --ink-mid:   #B2BDBF;
+  --ink-mute:  #83908F;
+  --line:      #293134;
+  --line-soft: #20272A;
+  --accent:    #C4569A;
+  --accent-ink:#C4569A;
+  --accent-soft: rgba(196,86,154,.13);
+  --accent-on: #14171A;
+  --grid:      #232B2E;
+  --shadow: 0 1px 2px rgba(0,0,0,.42), 0 16px 36px -20px rgba(0,0,0,.8);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink);
+  font-family: var(--body); font-size: 17px; line-height: 1.62; -webkit-font-smoothing: antialiased; }
+p, h1, h2, h3, h4, ul, ol, figure, table { margin: 0; }
+ul, ol { padding: 0; list-style: none; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+
+h1, h2, h3 { font-family: var(--display); font-weight: 700;
+  letter-spacing: -.022em; line-height: 1.04; text-wrap: balance; }
+h1 { font-size: clamp(2.2rem, 5.4vw, 3.9rem); }
+h2 { font-size: clamp(1.55rem, 3vw, 2.2rem); }
+h3 { font-size: 1.06rem; letter-spacing: -.013em; }
+
+.label { font-family: var(--mono); font-size: .67rem; letter-spacing: .16em;
+  text-transform: uppercase; color: var(--accent-ink); font-weight: 500; }
+.lede { font-size: clamp(1.02rem, 1.45vw, 1.18rem); color: var(--ink-mid); max-width: 62ch; }
+.lede b { color: var(--ink); font-weight: 600; }
+.mute { color: var(--ink-mute); }
+.num { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+.small { font-size: .88rem; }
+
+.wrap { max-width: var(--max); margin-inline: auto; padding-inline: var(--pad); }
+.stack { display: flex; flex-direction: column; }
+.g10{gap:10px}.g16{gap:16px}.g24{gap:24px}.g32{gap:32px}.g48{gap:48px}
+section { padding-block: clamp(52px, 7vw, 96px); border-top: 1px solid var(--line); }
+
+/* ---------- Passermarke: das Ziel, das bei Drohnenvermessung am Boden liegt ---------- */
+.target { width: 16px; height: 16px; flex: none; border-radius: 2px;
+  background: conic-gradient(var(--accent) 0 25%, var(--ink) 0 50%, var(--accent) 0 75%, var(--ink) 0); }
+.target.sm { width: 12px; height: 12px; }
+
+/* ---------- Navigation ---------- */
+.nav { position: sticky; top: 0; z-index: 50;
+  background: color-mix(in srgb, var(--bg) 90%, transparent);
+  backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
+.nav-in { max-width: var(--max); margin-inline: auto; padding: 13px var(--pad);
+  display: flex; align-items: center; gap: 30px; }
+.logo { display: flex; align-items: center; gap: 10px;
+  font-family: var(--display); font-weight: 700; font-size: 1.05rem; letter-spacing: .035em; }
+.nav-links { display: flex; gap: 26px; margin-left: auto; font-size: .9rem; color: var(--ink-mid); }
+.nav-links a:hover { color: var(--ink); }
+@media (max-width: 900px) { .nav-links { display: none; } }
+
+.btn { display: inline-flex; align-items: center; gap: 9px; padding: 12px 20px;
+  border-radius: 2px; font-family: var(--display); font-weight: 600; font-size: .92rem;
+  border: 1px solid transparent; cursor: pointer;
+  transition: transform .16s ease, background-color .16s ease, border-color .16s ease; }
+.btn-primary { background: var(--accent); color: var(--accent-on); }
+.btn-primary:hover { transform: translateY(-1px); filter: brightness(1.08); }
+.btn-ghost { border-color: var(--line); color: var(--ink); background: var(--surface); }
+.btn-ghost:hover { border-color: var(--ink-mute); transform: translateY(-1px); }
+.btn-sm { padding: 9px 15px; font-size: .84rem; }
+
+/* ---------- Hero ---------- */
+.hero { border-top: 0; padding-block: clamp(44px, 6vw, 84px) clamp(48px, 6vw, 84px); }
+.hero-grid { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1.02fr);
+  gap: clamp(32px, 5vw, 68px); align-items: center; }
+@media (max-width: 980px) { .hero-grid { grid-template-columns: 1fr; } }
+.hero-cta { display: flex; flex-wrap: wrap; gap: 12px; }
+.hero-note { font-family: var(--mono); font-size: .76rem; color: var(--ink-mute); letter-spacing: .03em; }
+
+/* ---------- Befundblatt (Hero-Visual: das Produkt, gezeichnet) ---------- */
+.sheet { background: var(--surface); border: 1px solid var(--line); border-radius: 3px;
+  box-shadow: var(--shadow); overflow: hidden; }
+.sheet-head { display: flex; justify-content: space-between; align-items: center; gap: 14px;
+  padding: 13px 18px; border-bottom: 1px solid var(--line);
+  font-family: var(--mono); font-size: .66rem; letter-spacing: .11em;
+  text-transform: uppercase; color: var(--ink-mute); }
+.sheet-head b { color: var(--ink); font-weight: 500; }
+.sheet-body { padding: 6px 10px 0; }
+.plan { display: block; width: 100%; height: auto; }
+.plan .grid-l   { stroke: var(--grid); stroke-width: 1; }
+.plan .roof     { fill: var(--surface-2); stroke: var(--ink-mid); stroke-width: 1.6; }
+.plan .roof-in  { fill: none; stroke: var(--ink-mute); stroke-width: 1.1; }
+.plan .roof-el  { fill: var(--surface); stroke: var(--ink-mid); stroke-width: 1.3; }
+.plan .lead     { stroke: var(--accent); stroke-width: 1; stroke-dasharray: 3 3; }
+.plan .pin      { fill: var(--accent); }
+.plan .pin-ring { fill: none; stroke: var(--surface); stroke-width: 2; }
+.plan .pin-no   { fill: var(--accent-on); font-family: var(--mono); font-size: 12px; font-weight: 500; }
+.plan .anno     { fill: var(--ink-mute); font-family: var(--mono); font-size: 10.5px; }
+.plan .anno-k   { fill: var(--ink-mid); font-family: var(--mono); font-size: 11px; }
+.plan .bar      { stroke: var(--ink-mid); stroke-width: 1.4; }
+.plan .arrow    { fill: var(--ink-mid); }
+.sheet-meta { display: grid; grid-template-columns: repeat(4, minmax(0,1fr));
+  border-top: 1px solid var(--line); }
+@media (max-width: 520px) { .sheet-meta { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+.sheet-meta div { padding: 12px 14px; border-right: 1px solid var(--line-soft); display: grid; gap: 3px; }
+.sheet-meta div:last-child { border-right: 0; }
+.sheet-meta .mk { font-family: var(--mono); font-size: .6rem; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--ink-mute); }
+.sheet-meta .mv { font-family: var(--mono); font-size: .85rem; color: var(--ink); font-variant-numeric: tabular-nums; }
+
+/* ---------- Versprechen-Band ---------- */
+.band { background: var(--surface); border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line); padding-block: 26px; }
+.band-in { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 24px; }
+@media (max-width: 900px) { .band-in { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+@media (max-width: 500px) { .band-in { grid-template-columns: 1fr; } }
+.band-item { display: grid; gap: 5px; }
+.band-item .k { font-family: var(--mono); font-size: .67rem; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--accent-ink); }
+.band-item .v { font-size: .91rem; color: var(--ink-mid); }
+
+/* ---------- Karten ---------- */
+.cards-3 { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 18px; }
+.cards-2 { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 18px; }
+@media (max-width: 900px) { .cards-3, .cards-2 { grid-template-columns: 1fr; } }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 3px;
+  padding: 24px; display: grid; gap: 11px; align-content: start; box-shadow: var(--shadow);
+  transition: border-color .18s ease, transform .18s ease; }
+.card:hover { border-color: var(--ink-mute); transform: translateY(-2px); }
+.card .idx { font-family: var(--mono); font-size: .66rem; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--accent-ink); }
+.card p { font-size: .93rem; color: var(--ink-mid); }
+.card .foot { border-top: 1px solid var(--line-soft); padding-top: 11px; font-size: .82rem; color: var(--ink-mute); }
+
+/* ---------- Preisliste ---------- */
+.prices { border: 1px solid var(--line); border-radius: 3px; background: var(--surface);
+  box-shadow: var(--shadow); overflow: hidden; }
+.price-row { display: grid; grid-template-columns: minmax(0,1fr) 132px;
+  gap: 20px; padding: 18px 24px; border-bottom: 1px solid var(--line-soft); align-items: start; }
+.price-row:last-child { border-bottom: 0; }
+@media (max-width: 640px) { .price-row { grid-template-columns: 1fr; gap: 8px; } }
+.price-row .pn { font-family: var(--display); font-weight: 700; font-size: 1.04rem; display: flex;
+  align-items: center; gap: 10px; flex-wrap: wrap; }
+.price-row .pd { font-size: .89rem; color: var(--ink-mid); margin-top: 5px; }
+.price-row .pt { font-family: var(--mono); font-size: .74rem; color: var(--ink-mute); margin-top: 7px; }
+.price-row .pp { font-family: var(--mono); font-size: 1.35rem; color: var(--ink);
+  font-variant-numeric: tabular-nums; text-align: right; white-space: nowrap; }
+@media (max-width: 640px) { .price-row .pp { text-align: left; } }
+.price-row .pp small { display: block; font-size: .62rem; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--ink-mute); margin-top: 4px; }
+.chip { font-family: var(--mono); font-size: .6rem; letter-spacing: .09em; text-transform: uppercase;
+  padding: 3px 8px; border-radius: 2px; border: 1px solid var(--accent); color: var(--accent-ink);
+  background: var(--accent-soft); white-space: nowrap; }
+
+/* ---------- Ablauf ---------- */
+.steps { display: grid; grid-template-columns: repeat(4, minmax(0,1fr));
+  border: 1px solid var(--line); border-radius: 3px; overflow: hidden;
+  background: var(--surface); box-shadow: var(--shadow); }
+@media (max-width: 900px) { .steps { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+@media (max-width: 520px) { .steps { grid-template-columns: 1fr; } }
+.step { padding: 24px 20px; border-right: 1px solid var(--line-soft); display: grid; gap: 9px; align-content: start; }
+.step:last-child { border-right: 0; }
+.step .no { font-family: var(--mono); font-size: .67rem; letter-spacing: .12em; color: var(--accent-ink); }
+.step p { font-size: .89rem; color: var(--ink-mid); }
+.step .when { font-family: var(--mono); font-size: .72rem; color: var(--ink-mute); }
+
+/* ---------- Negativliste ---------- */
+.nolist { display: grid; gap: 0; border: 1px solid var(--line); border-radius: 3px;
+  background: var(--surface); overflow: hidden; box-shadow: var(--shadow); }
+.no-row { display: grid; grid-template-columns: 30px minmax(0,1fr) minmax(0,1.25fr); gap: 18px;
+  padding: 17px 24px; border-bottom: 1px solid var(--line-soft); align-items: start; }
+.no-row:last-child { border-bottom: 0; }
+@media (max-width: 760px) { .no-row { grid-template-columns: 26px 1fr; } .no-row .nr { grid-column: 2; } }
+.no-row .nx { font-family: var(--mono); font-size: .95rem; color: var(--accent-ink); line-height: 1.4; }
+.no-row .nt { font-family: var(--display); font-weight: 700; font-size: .99rem; }
+.no-row .nr { font-size: .89rem; color: var(--ink-mid); }
+
+/* ---------- Anfrage ---------- */
+.form-card { background: var(--surface); border: 1px solid var(--line); border-radius: 3px;
+  padding: clamp(26px, 4vw, 44px); box-shadow: var(--shadow); }
+.form-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 14px; }
+@media (max-width: 700px) { .form-grid { grid-template-columns: 1fr; } }
+.field { display: grid; gap: 6px; }
+.field.wide { grid-column: 1 / -1; }
+.field label { font-family: var(--mono); font-size: .64rem; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--ink-mute); }
+.field input, .field select, .field textarea {
+  background: var(--bg); border: 1px solid var(--line); color: var(--ink);
+  padding: 12px 13px; border-radius: 2px; font-family: var(--body); font-size: .94rem; width: 100%; }
+.field input::placeholder, .field textarea::placeholder { color: var(--ink-mute); }
+.field textarea { resize: vertical; min-height: 84px; }
+.legal { font-size: .78rem; color: var(--ink-mute); max-width: 62ch; }
+
+/* ---------- Footer ---------- */
+footer { border-top: 1px solid var(--line); padding-block: 36px 56px; }
+.foot { display: flex; flex-wrap: wrap; gap: 20px; justify-content: space-between; align-items: center;
+  font-family: var(--mono); font-size: .74rem; color: var(--ink-mute); letter-spacing: .04em; }
+.concept { margin-top: 24px; padding: 15px 17px; border: 1px dashed var(--line);
+  border-radius: 3px; font-size: .79rem; color: var(--ink-mute); max-width: 82ch; }
+</style>
+
+<nav class="nav">
+  <div class="nav-in">
+    <a class="logo" href="#top"><span class="target" aria-hidden="true"></span>VISIOGRAF</a>
+    <div class="nav-links">
+      <a href="#bericht">Der Bericht</a>
+      <a href="#preise">Leistungen</a>
+      <a href="#fuerwen">Für wen</a>
+      <a href="#ablauf">Ablauf</a>
+      <a href="#grenzen">Grenzen</a>
+    </div>
+    <a class="btn btn-primary btn-sm" href="#anfrage">Befund anfragen</a>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<header class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div class="stack g24">
+      <span class="label">Dachbefundung aus der Luft · Köln und Umkreis</span>
+      <h1>Das ganze Dach.<br>Ohne Gerüst.<br>In fünf Werktagen.</h1>
+      <p class="lede">
+        VISIOGRAF dokumentiert Dächer, Fassaden und Photovoltaikanlagen aus der Luft — für
+        Sachverständige, Hausverwaltungen und Handwerksbetriebe. Sie bekommen einen Befundbericht
+        mit kartierten Fundstellen, datiert und vollständig. <b>Die Bewertung bleibt bei Ihnen.</b>
+      </p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="#anfrage">Befund anfragen</a>
+        <a class="btn btn-ghost" href="#preise">Leistungen &amp; Preise</a>
+      </div>
+      <p class="hero-note">Ab 290 € netto · Anfahrt bis 25 km inklusive · auf Wunsch in 48 Stunden</p>
+    </div>
+
+    <!-- Das Produkt, gezeichnet: ein Befundblatt -->
+    <figure class="sheet">
+      <figcaption class="sheet-head"><span>Befundblatt · Beispiel</span><span><b>4 Fundstellen</b></span></figcaption>
+      <div class="sheet-body">
+        <svg class="plan" viewBox="0 0 520 384" role="img" aria-label="Schematische Aufsicht eines Satteldachs mit First, Gaube und Schornstein. Vier nummerierte Fundstellen sind markiert: Gaubenanschluss, Kaminkopf, Firstziegel und Traufe. Dazu Nordpfeil und Maßstabsbalken.">
+          <defs>
+            <pattern id="vgGrid" width="26" height="26" patternUnits="userSpaceOnUse">
+              <path class="grid-l" d="M26 0 L0 0 0 26" fill="none"/>
+            </pattern>
+          </defs>
+          <rect x="0" y="0" width="520" height="384" fill="url(#vgGrid)"/>
+
+          <!-- Dachfläche: Rechteck = Traufkanten oben und unten, Giebel links und rechts -->
+          <rect class="roof" x="66" y="62" width="388" height="248"/>
+          <!-- First: die einzige Querlinie, damit sie als First lesbar bleibt -->
+          <line class="roof-in" x1="66" y1="186" x2="454" y2="186"/>
+          <text class="anno" x="74" y="180">FIRST</text>
+
+          <!-- Gaube auf der oberen Dachfläche -->
+          <rect class="roof-el" x="132" y="110" width="76" height="48"/>
+          <line class="roof-in" x1="132" y1="134" x2="208" y2="134"/>
+          <!-- Schornstein -->
+          <rect class="roof-el" x="336" y="104" width="38" height="38"/>
+
+          <!-- 1 Gaubenanschluss: direkt an der Traufkante der Gaube -->
+          <line class="lead" x1="170" y1="158" x2="170" y2="166"/>
+          <circle class="pin" cx="170" cy="180" r="14"/><circle class="pin-ring" cx="170" cy="180" r="14"/>
+          <text class="pin-no" x="170" y="185" text-anchor="middle">1</text>
+
+          <!-- 2 Kaminkopf: unmittelbar am Schornstein -->
+          <line class="lead" x1="355" y1="142" x2="355" y2="152"/>
+          <circle class="pin" cx="355" cy="166" r="14"/><circle class="pin-ring" cx="355" cy="166" r="14"/>
+          <text class="pin-no" x="355" y="171" text-anchor="middle">2</text>
+
+          <!-- 3 Firstziegel: auf dem First -->
+          <circle class="pin" cx="256" cy="186" r="14"/><circle class="pin-ring" cx="256" cy="186" r="14"/>
+          <text class="pin-no" x="256" y="191" text-anchor="middle">3</text>
+
+          <!-- 4 Traufe: auf der unteren Traufkante -->
+          <circle class="pin" cx="418" cy="310" r="14"/><circle class="pin-ring" cx="418" cy="310" r="14"/>
+          <text class="pin-no" x="418" y="315" text-anchor="middle">4</text>
+
+          <!-- Beschriftung der Fundstellen -->
+          <text class="anno-k" x="66" y="346">1 Gaubenanschluss</text>
+          <text class="anno-k" x="196" y="346">2 Kaminkopf</text>
+          <text class="anno-k" x="300" y="346">3 Firstziegel</text>
+          <text class="anno-k" x="404" y="346">4 Traufe</text>
+
+          <!-- Nordpfeil -->
+          <path class="arrow" d="M474 34 L480 52 L474 48 L468 52 Z"/>
+          <text class="anno" x="474" y="68" text-anchor="middle">N</text>
+
+          <!-- Maßstabsbalken -->
+          <line class="bar" x1="66" y1="370" x2="144" y2="370"/>
+          <line class="bar" x1="66" y1="364" x2="66" y2="376"/>
+          <line class="bar" x1="144" y1="364" x2="144" y2="376"/>
+          <text class="anno" x="152" y="374">5 m</text>
+        </svg>
+      </div>
+      <div class="sheet-meta">
+        <div><span class="mk">Aufnahme</span><span class="mv">14.09., 10:42</span></div>
+        <div><span class="mk">Flughöhe</span><span class="mv">28 m</span></div>
+        <div><span class="mk">Wind</span><span class="mv">3 m/s</span></div>
+        <div><span class="mk">Erfasst</span><span class="mv">100 %</span></div>
+      </div>
+    </figure>
+  </div>
+</header>
+
+<!-- ============ VERSPRECHEN ============ -->
+<div class="band">
+  <div class="wrap band-in">
+    <div class="band-item"><span class="k">Dokumentation</span><span class="v">Bildbefund und Kartierung. Keine Ursachenbewertung.</span></div>
+    <div class="band-item"><span class="k">Fünf Werktage</span><span class="v">Bericht nach dem Termin, auf Wunsch in 48 Stunden.</span></div>
+    <div class="band-item"><span class="k">Vollständigkeitsplan</span><span class="v">Wir zeigen auch, was nicht einsehbar war.</span></div>
+    <div class="band-item"><span class="k">Kein Gerüst</span><span class="v">Keine Leiter, keine Absturzsicherung, kein Arbeitstag.</span></div>
+  </div>
+</div>
+
+<!-- ============ DER BERICHT ============ -->
+<section id="bericht">
+  <div class="wrap stack g48">
+    <div class="stack g16">
+      <span class="label">Der Bericht</span>
+      <h2>Ein Dokument, das für sich spricht.</h2>
+      <p class="lede">
+        Sie bekommen kein Ordner voller Bilder, sondern ein PDF mit fester Struktur — dieselbe
+        bei jedem Auftrag, damit Sie sich nie neu hineindenken müssen.
+      </p>
+    </div>
+
+    <div class="cards-3">
+      <article class="card">
+        <span class="idx">Enthalten 01</span>
+        <h3>Kartierte Fundstellen</h3>
+        <p>
+          Übersichtsaufnahme mit Nordpfeil und Maßstab, jede auffällige Stelle nummeriert und
+          auf der Fläche verortet. Zu jeder Nummer die Detailaufnahme in voller Auflösung.
+        </p>
+        <p class="foot">Auf Wunsch zusätzlich als begehbares 360-Grad-Panorama</p>
+      </article>
+      <article class="card">
+        <span class="idx">Enthalten 02</span>
+        <h3>Aufnahmeprotokoll</h3>
+        <p>
+          Datum, Uhrzeit, Wetterlage, Windgeschwindigkeit, Flughöhe, Gerät und Fernpilot.
+          Alles, was eine Aufnahme später nachvollziehbar und verwertbar macht.
+        </p>
+        <p class="foot">Wichtig, wenn der Bericht in ein Verfahren geht</p>
+      </article>
+      <article class="card">
+        <span class="idx">Enthalten 03</span>
+        <h3>Vollständigkeitsplan</h3>
+        <p>
+          Welche Flächen erfasst wurden — und welche nicht, mit Grund. Verdeckt durch Bewuchs,
+          Nachbarbebauung, Sperrbereich. Was fehlt, steht drin.
+        </p>
+        <p class="foot">Der Teil, den andere weglassen und den Sie später brauchen</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PREISE ============ -->
+<section id="preise">
+  <div class="wrap stack g32">
+    <div class="stack g16">
+      <span class="label">Leistungen</span>
+      <h2>Feste Preise. Kein Angebot nach Aufwand.</h2>
+      <p class="lede">
+        Ein Anruf, eine Zahl, ein Termin. Alle Preise netto zzgl. Umsatzsteuer, Anfahrt bis
+        25&nbsp;km ist enthalten.
+      </p>
+    </div>
+
+    <div class="prices">
+      <div class="price-row">
+        <div>
+          <div class="pn">Dachbefund kompakt</div>
+          <p class="pd">Übersichts- und Detailaufnahmen, Fundstellen kartiert, PDF-Bericht mit Aufnahmeprotokoll.</p>
+          <p class="pt">rund 1 Stunde vor Ort</p>
+        </div>
+        <div class="pp">290 €<small>je Objekt</small></div>
+      </div>
+      <div class="price-row">
+        <div>
+          <div class="pn">Dachbefund vollständig</div>
+          <p class="pd">Zusätzlich begehbares 360-Grad-Panorama, Einzelbildkartierung und Vollständigkeitsplan.</p>
+          <p class="pt">rund 1,5 Stunden vor Ort</p>
+        </div>
+        <div class="pp">450 €<small>je Objekt</small></div>
+      </div>
+      <div class="price-row">
+        <div>
+          <div class="pn">Beweissicherung vor Bauarbeiten</div>
+          <p class="pd">Auftragsobjekt und angrenzende Gebäude, lückenlos datiert — der Zustand vor dem ersten Bagger.</p>
+          <p class="pt">rund 1,5 Stunden vor Ort · inkl. Nachbarobjekte</p>
+        </div>
+        <div class="pp">590 €<small>je Standort</small></div>
+      </div>
+      <div class="price-row">
+        <div>
+          <div class="pn">Photovoltaik-Thermografie <span class="chip">ab Frühjahr 2027</span></div>
+          <p class="pd">Modulweise Wärmebildaufnahme im Betrieb, auffällige Module einzeln kartiert.</p>
+          <p class="pt">rund 45 Minuten vor Ort</p>
+        </div>
+        <div class="pp">390 €<small>bis 60 Module</small></div>
+      </div>
+      <div class="price-row">
+        <div>
+          <div class="pn">Dachthermografie <span class="chip">ab Frühjahr 2027</span></div>
+          <p class="pd">Wärmebild der Dachfläche, Verdachtsflächen für Feuchte und Wärmebrücken markiert.</p>
+          <p class="pt">rund 1 Stunde vor Ort · witterungsabhängig</p>
+        </div>
+        <div class="pp">490 €<small>je Objekt</small></div>
+      </div>
+    </div>
+
+    <p class="small mute">
+      Zuschläge: Zweitobjekt am selben Standort <span class="num">+40 %</span> ·
+      Lieferung in 48 Stunden <span class="num">+25 %</span> ·
+      Flugfreigabe in der Kontrollzone <span class="num">+90 €</span> ·
+      Anfahrt über 25 km <span class="num">0,80 €/km</span>
+    </p>
+  </div>
+</section>
+
+<!-- ============ FÜR WEN ============ -->
+<section id="fuerwen">
+  <div class="wrap stack g48">
+    <div class="stack g16">
+      <span class="label">Für wen</span>
+      <h2>Für alle, die aufs Dach müssten<br>und keine Zeit dafür haben.</h2>
+    </div>
+
+    <div class="cards-3">
+      <article class="card">
+        <span class="idx">Sachverständige</span>
+        <h3>Bilder, ohne selbst zu fliegen</h3>
+        <p>
+          Sie bewerten, wir liefern die Grundlage. Kein Gerüst, kein Hubsteiger, keine eigene
+          Drohnenzulassung — und ein Berichtsformat, das sich unverändert in Ihr Gutachten
+          übernehmen lässt.
+        </p>
+        <p class="foot">Ihre übliche Frist von ein bis zwei Wochen halten wir zuverlässig ein</p>
+      </article>
+      <article class="card">
+        <span class="idx">Hausverwaltungen</span>
+        <h3>Mehrere Objekte, ein Termin</h3>
+        <p>
+          Zustandsdokumentation und Beweissicherung für den ganzen Bestand. Objekte in
+          derselben Gegend fassen wir zu einem Termin zusammen — das senkt den Preis
+          und den Abstimmungsaufwand.
+        </p>
+        <p class="foot">Ab drei Objekten am selben Tag mit Mengenpreis</p>
+      </article>
+      <article class="card">
+        <span class="idx">Dachdecker &amp; Zimmereien</span>
+        <h3>Erstbesichtigung ohne halben Tag</h3>
+        <p>
+          Bevor Sie ein Gerüst kalkulieren, wissen Sie, was oben los ist. Wir liefern die
+          Aufnahmen, Sie schreiben das Angebot — und Ihre Leute stehen erst auf dem Dach,
+          wenn der Auftrag steht.
+        </p>
+        <p class="foot">Für Sie meist günstiger als eine eigene Anfahrt</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ABLAUF ============ -->
+<section id="ablauf">
+  <div class="wrap stack g32">
+    <div class="stack g16">
+      <span class="label">Ablauf</span>
+      <h2>Vier Schritte, einer davon<br>hängt vom Wetter ab.</h2>
+    </div>
+
+    <div class="steps">
+      <div class="step">
+        <span class="no">Schritt 1</span>
+        <h3>Anfrage mit Adresse</h3>
+        <p>Wir brauchen die Objektadresse, um den Luftraum zu prüfen — Teile Kölns liegen in der Kontrollzone des Flughafens.</p>
+        <span class="when">Antwort am selben Werktag</span>
+      </div>
+      <div class="step">
+        <span class="no">Schritt 2</span>
+        <h3>Termin und Ausweichtermin</h3>
+        <p>Wir vereinbaren beides zusammen. Rund jeder dritte Termin muss wetterbedingt verschoben werden — das sagen wir vorher, nicht hinterher.</p>
+        <span class="when">Mindestens fünf Tage Vorlauf</span>
+      </div>
+      <div class="step">
+        <span class="no">Schritt 3</span>
+        <h3>Aufnahme vor Ort</h3>
+        <p>45 bis 90 Minuten, je nach Leistung. Zugang zum Grundstück genügt, im Gebäude müssen wir nicht sein.</p>
+        <span class="when">Sie müssen nicht dabei sein</span>
+      </div>
+      <div class="step">
+        <span class="no">Schritt 4</span>
+        <h3>Bericht per Mail</h3>
+        <p>PDF mit kartierten Fundstellen, Detailaufnahmen und Aufnahmeprotokoll. Rohdaten auf Anfrage.</p>
+        <span class="when">Fünf Werktage, express 48 Stunden</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ GRENZEN ============ -->
+<section id="grenzen">
+  <div class="wrap stack g32">
+    <div class="stack g16">
+      <span class="label">Grenzen</span>
+      <h2>Was wir ausdrücklich nicht machen.</h2>
+      <p class="lede">
+        Wir dokumentieren, wir bewerten nicht. Das ist keine Einschränkung aus Vorsicht,
+        sondern die Aufgabenteilung, die Ihren Befund verwertbar hält — und uns schnell genug,
+        um in fünf Tagen zu liefern.
+      </p>
+    </div>
+
+    <div class="nolist">
+      <div class="no-row">
+        <span class="nx">✕</span>
+        <span class="nt">Keine Schadensursache</span>
+        <span class="nr">Ob der Riss vom Hagel kommt oder vom Alter, steht nicht im Bericht. Diese Frage beantwortet Ihr Sachverständiger — und er tut es besser, wenn er unvoreingenommene Aufnahmen bekommt.</span>
+      </div>
+      <div class="no-row">
+        <span class="nx">✕</span>
+        <span class="nt">Keine Schadenhöhe</span>
+        <span class="nr">Keine Kostenschätzung, keine Mengenermittlung, keine Sanierungsempfehlung. Wir liefern die Fläche und den Zustand, nicht die Rechnung.</span>
+      </div>
+      <div class="no-row">
+        <span class="nx">✕</span>
+        <span class="nt">Keine Aussage zur Eintrittspflicht</span>
+        <span class="nr">Ob eine Versicherung zahlt, ist eine Vertragsfrage. Der Bericht enthält Tatsachen, aus denen sich diese Frage beantworten lässt — aber nicht die Antwort selbst.</span>
+      </div>
+      <div class="no-row">
+        <span class="nx">✕</span>
+        <span class="nt">Keine Standsicherheit</span>
+        <span class="nr">Statik beurteilt ein Tragwerksplaner, und zwar am Objekt. Auch wenn ein Fall auf dem Bild eindeutig aussieht, steht dazu nichts im Befund.</span>
+      </div>
+      <div class="no-row">
+        <span class="nx">✕</span>
+        <span class="nt">Keine Innenaufnahmen, keine Personen</span>
+        <span class="nr">Wir fliegen mit definierter Blickrichtung. Nachbargrundstücke und erkennbare Personen werden unkenntlich gemacht, Rohdaten nach 90 Tagen gelöscht.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ANFRAGE ============ -->
+<section id="anfrage">
+  <div class="wrap stack g24">
+    <div class="form-card stack g24">
+      <div class="stack g16">
+        <span class="label">Anfrage</span>
+        <h2>Befund anfragen</h2>
+        <p class="lede">
+          Antwort am selben Werktag. Die Adresse brauchen wir, um vor dem Angebot den
+          Luftraum und mögliche Sperrbereiche zu prüfen.
+        </p>
+      </div>
+
+      <form class="form-grid" onsubmit="return false;">
+        <div class="field">
+          <label for="vgName">Name</label>
+          <input id="vgName" type="text" placeholder="Vor- und Nachname">
+        </div>
+        <div class="field">
+          <label for="vgFirma">Firma oder Büro</label>
+          <input id="vgFirma" type="text" placeholder="optional">
+        </div>
+        <div class="field wide">
+          <label for="vgAdresse">Adresse des Objekts</label>
+          <input id="vgAdresse" type="text" placeholder="Straße, Hausnummer, PLZ, Ort">
+        </div>
+        <div class="field">
+          <label for="vgLeistung">Gewünschte Leistung</label>
+          <select id="vgLeistung">
+            <option>Dachbefund kompakt — 290 €</option>
+            <option>Dachbefund vollständig — 450 €</option>
+            <option>Beweissicherung vor Bauarbeiten — 590 €</option>
+            <option>Photovoltaik-Thermografie — 390 €</option>
+            <option>Dachthermografie — 490 €</option>
+            <option>Weiß ich noch nicht</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="vgZeitraum">Wunschzeitraum</label>
+          <input id="vgZeitraum" type="text" placeholder="z. B. zweite Oktoberhälfte">
+        </div>
+        <div class="field wide">
+          <label for="vgMail">E-Mail</label>
+          <input id="vgMail" type="email" placeholder="name@buero.de">
+        </div>
+        <div class="field wide">
+          <label for="vgNotiz">Worum geht es?</label>
+          <textarea id="vgNotiz" placeholder="Kurz zum Anlass — Sturmschaden, geplante Sanierung, Beweissicherung, Zustandsaufnahme."></textarea>
+        </div>
+        <div class="field wide">
+          <button class="btn btn-primary" type="submit">Anfrage senden</button>
+        </div>
+      </form>
+
+      <p class="legal">
+        Wir speichern die Anfrage, um sie zu beantworten, und löschen sie nach zwölf Monaten,
+        wenn kein Auftrag zustande kommt. Kein Newsletter, keine Weitergabe.
+        Aufnahmen aus durchgeführten Aufträgen werden nach 90 Tagen gelöscht, sofern nichts
+        anderes vereinbart ist.
+      </p>
+    </div>
+
+    <p class="concept">
+      <strong>Konzeptentwurf.</strong> VISIOGRAF ist eine Gründungsidee, kein aktiv tätiges
+      Unternehmen. Preise, Fristen und Leistungsumfang sind kalkulierte Planwerte aus dem
+      zugehörigen Betriebskonzept. Das Befundblatt im Kopf der Seite ist eine schematische
+      Darstellung des Berichtsformats, keine reale Aufnahme. Der Name ist vor einer Anmeldung
+      auf entgegenstehende Marken zu prüfen.
+    </p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <span class="logo" style="font-size:.92rem"><span class="target sm" aria-hidden="true"></span>VISIOGRAF</span>
+      <span>DACHBEFUNDUNG AUS DER LUFT · KÖLN</span>
+      <span>EINZELUNTERNEHMEN · IMPRESSUM · DATENSCHUTZ · AGB</span>
+    </div>
+  </div>
+</footer>
