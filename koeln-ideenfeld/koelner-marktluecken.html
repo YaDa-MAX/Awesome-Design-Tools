@@ -1,0 +1,795 @@
+<title>Kölner Marktlücken</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&family=JetBrains+Mono:wght@400;500&family=Newsreader:opsz,wght@6..72,400..600&display=swap">
+
+<style>
+/* ============================================================
+   Vollständige Hell-Palette auf blankem :root.
+   Kölnrot als sequenzielle Rampe (ein Farbton, hell -> dunkel)
+   für die Nachfrage-Härte. Dunkel nur auf Token-Ebene neu gesetzt.
+   ============================================================ */
+:root {
+  color-scheme: light;
+  --bg:         #EDEEEF;
+  --surface:    #FBFBFB;
+  --surface-2:  #E3E5E7;
+  --ink:        #191C20;
+  --ink-mid:    #3E4750;
+  --ink-mute:   #6C7A86;
+  --line:       #D5D9DC;
+  --line-soft:  #E2E5E7;
+  --rhein:      #5A6B78;
+
+  /* Nachfrage-Härte, Stufe 1..3 */
+  --h1-fill:    transparent;
+  --h1-line:    #D9A8AE;
+  --h1-ink:     #99414C;
+  --h2-fill:    #F6DFE2;
+  --h2-line:    #E3AEB5;
+  --h2-ink:     #8E1420;
+  --h3-fill:    #C8102E;
+  --h3-line:    #C8102E;
+  --h3-ink:     #FFFFFF;
+  --accent:     #C8102E;
+  --accent-ink: #A50D26;
+
+  --display: "Bricolage Grotesque", "Helvetica Neue", Arial, sans-serif;
+  --prose:   "Newsreader", Georgia, "Times New Roman", serif;
+  --mono:    "JetBrains Mono", ui-monospace, "SFMono-Regular", monospace;
+  --max: 1240px;
+  --pad: clamp(18px, 4.5vw, 56px);
+  --shadow: 0 1px 2px rgba(25,28,32,.05), 0 10px 28px -16px rgba(25,28,32,.22);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --bg:        #14171A;
+    --surface:   #1B1F23;
+    --surface-2: #232930;
+    --ink:       #EDEFF1;
+    --ink-mid:   #B6C0C8;
+    --ink-mute:  #8593A0;
+    --line:      #2C333A;
+    --line-soft: #232930;
+    --rhein:     #93A5B3;
+    --h1-fill:   transparent;
+    --h1-line:   #7A4149;
+    --h1-ink:    #D9959D;
+    --h2-fill:   #46212A;
+    --h2-line:   #6B303B;
+    --h2-ink:    #F0B6BC;
+    --h3-fill:   #E0475C;
+    --h3-line:   #E0475C;
+    --h3-ink:    #14171A;
+    --accent:    #E0475C;
+    --accent-ink:#E0475C;
+    --shadow: 0 1px 2px rgba(0,0,0,.4), 0 14px 34px -18px rgba(0,0,0,.75);
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg:        #14171A;
+  --surface:   #1B1F23;
+  --surface-2: #232930;
+  --ink:       #EDEFF1;
+  --ink-mid:   #B6C0C8;
+  --ink-mute:  #8593A0;
+  --line:      #2C333A;
+  --line-soft: #232930;
+  --rhein:     #93A5B3;
+  --h1-fill:   transparent;
+  --h1-line:   #7A4149;
+  --h1-ink:    #D9959D;
+  --h2-fill:   #46212A;
+  --h2-line:   #6B303B;
+  --h2-ink:    #F0B6BC;
+  --h3-fill:   #E0475C;
+  --h3-line:   #E0475C;
+  --h3-ink:    #14171A;
+  --accent:    #E0475C;
+  --accent-ink:#E0475C;
+  --shadow: 0 1px 2px rgba(0,0,0,.4), 0 14px 34px -18px rgba(0,0,0,.75);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink);
+  font-family: var(--prose); font-size: 17px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+p, h1, h2, h3, h4, ul, ol, figure { margin: 0; }
+ul, ol { padding: 0; list-style: none; }
+button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 3px; }
+
+h1, h2, h3 { font-family: var(--display); font-weight: 700;
+  font-variation-settings: "wdth" 92; letter-spacing: -.02em; line-height: 1.05; text-wrap: balance; }
+h1 { font-size: clamp(2.2rem, 5.6vw, 3.9rem); font-weight: 800; }
+h2 { font-size: clamp(1.4rem, 2.6vw, 1.95rem); }
+h3 { font-size: 1.04rem; letter-spacing: -.012em; }
+
+.label { font-family: var(--mono); font-size: .67rem; letter-spacing: .16em;
+  text-transform: uppercase; color: var(--accent-ink); font-weight: 500; }
+.lede { font-size: clamp(1.02rem, 1.5vw, 1.2rem); color: var(--ink-mid); max-width: 64ch; }
+.mute { color: var(--ink-mute); }
+.small { font-size: .88rem; }
+.xs { font-size: .79rem; }
+
+.wrap { max-width: var(--max); margin-inline: auto; padding-inline: var(--pad); }
+.stack { display: flex; flex-direction: column; }
+.g8{gap:8px}.g12{gap:12px}.g16{gap:16px}.g24{gap:24px}.g32{gap:32px}.g48{gap:48px}
+
+/* ---------- Kopf ---------- */
+header.top { padding-block: clamp(40px, 6vw, 76px) clamp(24px, 3vw, 36px); }
+.head-grid { display: grid; grid-template-columns: minmax(0,1.45fr) minmax(0,1fr);
+  gap: clamp(28px, 5vw, 56px); align-items: end; }
+@media (max-width: 900px) { .head-grid { grid-template-columns: 1fr; align-items: start; } }
+
+.caveat { border: 1px solid var(--line); background: var(--surface);
+  border-left: 3px solid var(--accent); border-radius: 3px; padding: 18px 20px;
+  font-size: .92rem; color: var(--ink-mid); box-shadow: var(--shadow); }
+.caveat b { color: var(--ink); font-weight: 600; }
+
+/* ---------- Legende & Filter ---------- */
+.controls { position: sticky; top: 0; z-index: 30; padding-block: 14px;
+  background: color-mix(in srgb, var(--bg) 92%, transparent);
+  backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+.ctl-row { display: flex; flex-wrap: wrap; gap: 7px; align-items: center; }
+.ctl-row + .ctl-row { margin-top: 10px; }
+.ctl-lbl { font-family: var(--mono); font-size: .63rem; letter-spacing: .13em;
+  text-transform: uppercase; color: var(--ink-mute); margin-right: 6px; min-width: 92px; }
+.fbtn { font-family: var(--display); font-size: .81rem; font-weight: 600;
+  font-variation-settings: "wdth" 90; padding: 5px 11px; border-radius: 2px;
+  border: 1px solid var(--line); color: var(--ink-mid); background: var(--surface);
+  transition: border-color .15s ease, color .15s ease, background-color .15s ease; }
+.fbtn:hover { border-color: var(--rhein); color: var(--ink); }
+.fbtn[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.fbtn .cnt { font-family: var(--mono); font-size: .72em; opacity: .6; margin-left: 5px; }
+
+/* ---------- Ideenfeld ---------- */
+.field-grid { display: grid; grid-template-columns: minmax(0,1fr) 366px;
+  gap: clamp(24px, 3.5vw, 48px); align-items: start; padding-block: clamp(28px, 4vw, 44px); }
+@media (max-width: 1040px) { .field-grid { grid-template-columns: 1fr; } }
+
+.cloud { display: flex; flex-wrap: wrap; gap: 9px; align-items: baseline; }
+.idea {
+  font-family: var(--display); font-variation-settings: "wdth" 88;
+  border-radius: 3px; padding: 6px 13px; line-height: 1.22;
+  border: 1px solid transparent; text-align: left;
+  transition: opacity .2s ease, transform .12s ease, box-shadow .15s ease;
+}
+.idea:hover { transform: translateY(-1px); box-shadow: var(--shadow); }
+.idea.h1 { font-size: .89rem; font-weight: 500; background: var(--h1-fill); border-color: var(--h1-line); color: var(--h1-ink); }
+.idea.h2 { font-size: 1.06rem; font-weight: 600; background: var(--h2-fill); border-color: var(--h2-line); color: var(--h2-ink); }
+.idea.h3 { font-size: 1.26rem; font-weight: 700; background: var(--h3-fill); border-color: var(--h3-line); color: var(--h3-ink); }
+.idea.dim { opacity: .16; pointer-events: none; }
+.idea[aria-pressed="true"] { box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px var(--accent); }
+
+/* ---------- Detailpanel ---------- */
+.detail { position: sticky; top: 132px; background: var(--surface);
+  border: 1px solid var(--line); border-radius: 4px; box-shadow: var(--shadow); overflow: hidden; }
+@media (max-width: 1040px) { .detail { position: static; } }
+.detail-head { padding: 20px 22px 16px; border-bottom: 1px solid var(--line-soft); display: grid; gap: 9px; }
+.detail-head .cl { font-family: var(--mono); font-size: .64rem; letter-spacing: .13em;
+  text-transform: uppercase; color: var(--ink-mute); }
+.detail-head h3 { font-size: 1.24rem; font-weight: 700; }
+.pill { justify-self: start; font-family: var(--mono); font-size: .62rem; letter-spacing: .1em;
+  text-transform: uppercase; padding: 4px 9px; border-radius: 2px; border: 1px solid; }
+.pill.h1 { background: var(--h1-fill); border-color: var(--h1-line); color: var(--h1-ink); }
+.pill.h2 { background: var(--h2-fill); border-color: var(--h2-line); color: var(--h2-ink); }
+.pill.h3 { background: var(--h3-fill); border-color: var(--h3-line); color: var(--h3-ink); }
+.detail-body { display: grid; }
+.dfield { padding: 16px 22px; border-bottom: 1px solid var(--line-soft); display: grid; gap: 6px; }
+.dfield:last-child { border-bottom: 0; }
+.dfield .dk { font-family: var(--mono); font-size: .62rem; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--ink-mute); }
+.dfield .dv { font-size: .95rem; color: var(--ink-mid); }
+.dfield.test { background: var(--surface-2); }
+.dfield.test .dk { color: var(--accent-ink); }
+.dfield.test .dv { color: var(--ink); }
+.detail-empty { padding: 30px 22px; color: var(--ink-mute); font-size: .93rem; }
+
+/* ---------- Kurzliste ---------- */
+section.band { padding-block: clamp(44px, 6vw, 76px); border-top: 1px solid var(--line); }
+.shortlist { display: grid; gap: 0; border: 1px solid var(--line); border-radius: 4px;
+  background: var(--surface); overflow: hidden; box-shadow: var(--shadow); }
+.sl-row { display: grid; grid-template-columns: 34px minmax(0,1.5fr) minmax(0,1.7fr) minmax(0,1fr);
+  gap: 18px; padding: 16px 22px; border-bottom: 1px solid var(--line-soft); align-items: start; }
+.sl-row:last-child { border-bottom: 0; }
+@media (max-width: 860px) { .sl-row { grid-template-columns: 28px 1fr; } .sl-row .sl-c, .sl-row .sl-d { grid-column: 2; } }
+.sl-row .sl-n { font-family: var(--mono); font-size: .8rem; color: var(--accent-ink); padding-top: 3px; }
+.sl-row .sl-t { font-family: var(--display); font-weight: 700; font-variation-settings: "wdth" 90; font-size: 1rem; }
+.sl-row .sl-c { font-size: .9rem; color: var(--ink-mid); }
+.sl-row .sl-d { font-size: .82rem; color: var(--ink-mute); }
+.sl-row .sl-d b { color: var(--ink-mid); font-weight: 600; }
+
+.notes { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 20px; }
+@media (max-width: 860px) { .notes { grid-template-columns: 1fr; } }
+.note { background: var(--surface); border: 1px solid var(--line); border-radius: 4px;
+  padding: 20px 22px; display: grid; gap: 9px; box-shadow: var(--shadow); }
+.note p { font-size: .93rem; color: var(--ink-mid); }
+.note b { color: var(--ink); font-weight: 600; }
+
+footer.doc { border-top: 1px solid var(--line); padding-block: 30px 56px; }
+.disc { background: var(--surface-2); border: 1px dashed var(--line); border-radius: 4px;
+  padding: 16px 18px; font-size: .84rem; color: var(--ink-mute); max-width: 80ch; }
+</style>
+
+<header class="top">
+  <div class="wrap head-grid">
+    <div class="stack g16">
+      <span class="label">Ideenfeld · Wirtschaftsraum Köln</span>
+      <h1>Was in Köln kaum<br>jemand anbietet.</h1>
+      <p class="lede">
+        48 Geschäftsideen, hergeleitet aus dem, was Köln als Standort strukturell ausmacht:
+        Messegelände, Medienbetriebe, Versicherungscluster, Gründerzeitbestand, Karneval,
+        alternde Innenstadt. Gewichtet danach, wie hart die Nachfrage ist — nicht danach,
+        wie originell die Idee klingt.
+      </p>
+    </div>
+    <div class="caveat">
+      <b>Was das hier nicht ist.</b> Ich habe keine Wettbewerbszählung für Köln durchgeführt.
+      Das sind begründete Vermutungen, keine erhobenen Zahlen. Ob eine Nische wirklich dünn
+      besetzt ist, entscheidet nur die Prüfung vor Ort — deshalb steht bei jeder Idee ein
+      konkreter Test, den du an einem Nachmittag machen kannst.
+    </div>
+  </div>
+</header>
+
+<div class="controls">
+  <div class="wrap">
+    <div class="ctl-row" id="rowHaerte">
+      <span class="ctl-lbl">Nachfrage</span>
+      <button class="fbtn" data-h="all" aria-pressed="true">Alle Stufen</button>
+      <button class="fbtn" data-h="3" aria-pressed="false">Gesetzlich erzwungen <span class="cnt">10</span></button>
+      <button class="fbtn" data-h="2" aria-pressed="false">Struktureller Treiber <span class="cnt">25</span></button>
+      <button class="fbtn" data-h="1" aria-pressed="false">Zyklisch oder Nische <span class="cnt">13</span></button>
+    </div>
+    <div class="ctl-row" id="rowCluster">
+      <span class="ctl-lbl">Feld</span>
+      <button class="fbtn" data-c="all" aria-pressed="true">Alle Felder</button>
+    </div>
+  </div>
+</div>
+
+<div class="wrap field-grid">
+  <div class="cloud" id="cloud" role="group" aria-label="Ideenfeld — jede Schaltfläche öffnet die Begründung rechts"></div>
+
+  <aside class="detail" id="detail" aria-live="polite">
+    <div class="detail-empty" id="detailEmpty">
+      Eine Idee anklicken. Rechts stehen dann: warum die Nachfrage besteht, was sie mit Köln
+      zu tun hat, was der Einstieg voraussetzt — und der Test, mit dem du in zwanzig Minuten
+      prüfst, ob das Feld wirklich frei ist.
+    </div>
+    <div id="detailFull" hidden>
+      <div class="detail-head">
+        <span class="cl" id="dCluster"></span>
+        <h3 id="dTitle"></h3>
+        <span class="pill" id="dPill"></span>
+      </div>
+      <div class="detail-body">
+        <div class="dfield"><span class="dk">Warum die Nachfrage bleibt</span><span class="dv" id="dWarum"></span></div>
+        <div class="dfield"><span class="dk">Warum ausgerechnet Köln</span><span class="dv" id="dKoeln"></span></div>
+        <div class="dfield"><span class="dk">Voraussetzung zum Einstieg</span><span class="dv" id="dHuerde"></span></div>
+        <div class="dfield test"><span class="dk">Der 20-Minuten-Test</span><span class="dv" id="dTest"></span></div>
+      </div>
+    </div>
+  </aside>
+</div>
+
+<!-- ============ KURZLISTE ============ -->
+<section class="band">
+  <div class="wrap stack g32">
+    <div class="stack g16">
+      <span class="label">Kurzliste</span>
+      <h2>Sieben, bei denen alle drei Bedingungen zusammenkommen</h2>
+      <p class="lede">
+        Erzwungene oder gesetzlich finanzierte Nachfrage, wiederkehrender Umsatz statt Einmalgeschäft,
+        und ein Einstieg, der ohne Meisterbrief und ohne sechsstelliges Kapital möglich ist.
+      </p>
+    </div>
+
+    <div class="shortlist">
+      <div class="sl-row">
+        <span class="sl-n">01</span>
+        <span class="sl-t">Digitale Barrierefreiheit nach BFSG</span>
+        <span class="sl-c">Reines Wissensgeschäft, kein Gerät, kein Lager. Prüfbericht, Umsetzungsbegleitung, jährliche Nachkontrolle.</span>
+        <span class="sl-d"><b>Kapital:</b> unter 3.000 €<br><b>Wiederkehrend:</b> ja</span>
+      </div>
+      <div class="sl-row">
+        <span class="sl-n">02</span>
+        <span class="sl-t">Legionellenprüfung &amp; Trinkwasserhygiene</span>
+        <span class="sl-c">Fester Dreijahreszyklus, Hausverwaltungen bündeln viele Objekte in einem Auftrag.</span>
+        <span class="sl-d"><b>Kapital:</b> 5.000–15.000 €<br><b>Wiederkehrend:</b> ja, terminiert</span>
+      </div>
+      <div class="sl-row">
+        <span class="sl-n">03</span>
+        <span class="sl-t">DGUV-V3-Prüfung für Büros und Praxen</span>
+        <span class="sl-c">Prüfpflicht in jedem Betrieb, planbare Wiederholung, kalkulierbare Preise je Gerät.</span>
+        <span class="sl-d"><b>Kapital:</b> 8.000–20.000 €<br><b>Voraussetzung:</b> Elektrofachkraft</span>
+      </div>
+      <div class="sl-row">
+        <span class="sl-n">04</span>
+        <span class="sl-t">Barrierefreie Dokumente für Versicherer</span>
+        <span class="sl-c">Laufende Dokumentenproduktion statt Projektgeschäft. Von zu Hause aus möglich.</span>
+        <span class="sl-d"><b>Kapital:</b> unter 2.000 €<br><b>Wiederkehrend:</b> ja, laufend</span>
+      </div>
+      <div class="sl-row">
+        <span class="sl-n">05</span>
+        <span class="sl-t">Alltagsbegleitung nach §45a SGB XI</span>
+        <span class="sl-c">Der Entlastungsbetrag steht jedem Pflegebedürftigen monatlich zu und verfällt millionenfach ungenutzt.</span>
+        <span class="sl-d"><b>Kapital:</b> unter 5.000 €<br><b>Voraussetzung:</b> Anerkennung nach NRW-Recht</span>
+      </div>
+      <div class="sl-row">
+        <span class="sl-n">06</span>
+        <span class="sl-t">Hydraulischer Abgleich als Spezialdienst</span>
+        <span class="sl-c">Heizungsbauer lehnen ab, weil die Marge in der Montage liegt. Die Rechnung bleibt liegen.</span>
+        <span class="sl-d"><b>Kapital:</b> 4.000–10.000 €<br><b>Wiederkehrend:</b> teilweise</span>
+      </div>
+      <div class="sl-row">
+        <span class="sl-n">07</span>
+        <span class="sl-t">Balkonkraftwerk-Montage für Mieter</span>
+        <span class="sl-c">Das Gerät kaufen alle selbst. Die Montage in der dritten Etage übernimmt niemand.</span>
+        <span class="sl-d"><b>Kapital:</b> unter 4.000 €<br><b>Wiederkehrend:</b> nein, aber hohes Volumen</span>
+      </div>
+    </div>
+
+    <div class="notes">
+      <div class="note">
+        <h3>Warum „gesetzlich erzwungen“ die stärkste Kategorie ist</h3>
+        <p>
+          Eine Nachfrage, die aus einer Pflicht entsteht, verhandelt nicht über das Ob, sondern nur
+          über den Preis — und sie kommt im festen Turnus wieder. <b>Wer eine Prüfpflicht bedient,
+          verkauft einmal und liefert zehn Jahre.</b> Das ist der Gegenentwurf zum Eventgeschäft,
+          bei dem jeder Auftrag neu gewonnen werden muss.
+        </p>
+        <p>
+          Die Kehrseite: Diese Felder sind selten spannend und oft an einen Nachweis gebunden.
+          Genau deshalb sind sie dünn besetzt.
+        </p>
+      </div>
+      <div class="note">
+        <h3>Die Hürde, die man vorher prüfen muss</h3>
+        <p>
+          Deutschland reguliert den Marktzutritt über die Handwerksordnung, Sachkundenachweise und
+          Anerkennungsverfahren. <b>Bevor du eine Idee weiterverfolgst, kläre zuerst, ob du sie
+          überhaupt anbieten darfst</b> — das ist häufiger das Ausschlusskriterium als fehlende
+          Nachfrage.
+        </p>
+        <p>
+          Erste Anlaufstelle für alles Handwerkliche ist die Handwerkskammer zu Köln, für alles
+          andere die IHK Köln. Beide beraten Gründer kostenlos und sagen dir in einem Gespräch,
+          was du brauchst.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="doc">
+  <div class="wrap">
+    <p class="disc">
+      <b>Methode und Grenzen.</b> Die Ideen sind aus Standortmerkmalen Kölns abgeleitet — Messewirtschaft,
+      Medien- und Versicherungscluster, hoher Gründerzeitbestand, Hochschulen, Karnevalsstrukturen,
+      Altersverteilung der Innenstadt. Die Einstufung der Nachfrage-Härte ist eine Einschätzung, keine
+      Messung; Wettbewerberzahlen wurden nicht erhoben, Marktvolumina nicht beziffert. Rechtliche
+      Angaben sind Orientierung und kein Ersatz für eine Prüfung im Einzelfall — Pflichten, Fristen und
+      Fördersätze ändern sich. Vor jeder Entscheidung gehören drei Dinge geprüft: ob du die Leistung
+      erbringen darfst, ob im Umkreis wirklich niemand sie anbietet, und ob die Zahlungsbereitschaft
+      dort liegt, wo du sie vermutest.
+    </p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  "use strict";
+
+  var CLUSTER = {
+    recht:      "Recht & Pflicht",
+    gebaeude:   "Gebäude & Energie",
+    messe:      "Messe & Kongress",
+    medien:     "Medien & Produktion",
+    finanz:     "Versicherung & Finanz",
+    pflege:     "Alter & Pflege",
+    handwerk:   "Handwerk-Lücken",
+    karneval:   "Karneval & Vereine",
+    logistik:   "Stadt & Logistik",
+    hochschule: "Hochschule & Sport"
+  };
+  var HAERTE = { 3: "Gesetzlich erzwungen", 2: "Struktureller Treiber", 1: "Zyklisch oder Nische" };
+
+  // w = warum die Nachfrage bleibt · k = Köln-Bezug · e = Einstiegshürde · t = 20-Minuten-Test
+  var IDEAS = [
+    /* --- Recht & Pflicht --- */
+    { n: "Digitale Barrierefreiheit nach BFSG", c: "recht", h: 3,
+      w: "Seit Mitte 2025 müssen Onlineshops und viele digitale Dienstleistungen barrierefrei sein. Wer nicht liefert, riskiert Abmahnungen — und muss danach trotzdem umbauen.",
+      k: "Versicherer, Banken, Medienhäuser und ein dichter Mittelstand sitzen auf engem Raum. Betroffene Unternehmen sind hier fußläufig erreichbar.",
+      e: "Kein Nachweis vorgeschrieben. Reines Wissensgeschäft: WCAG-Kriterien, Screenreader-Bedienung, Testwerkzeuge.",
+      t: "Zehn Websites Kölner Mittelständler mit einem kostenlosen Prüfwerkzeug durchlaufen lassen und zählen, wie viele durchfallen." },
+    { n: "Barrierefreie Dokumente (PDF/UA)", c: "recht", h: 3,
+      w: "Policen, Bedingungswerke, Bescheide und Geschäftsberichte müssen barrierefrei ausgeliefert werden. Das ist keine Kampagne, sondern laufende Produktion.",
+      k: "Die Versicherungsstadt produziert Dokumente in Serie — und hat dafür intern niemanden.",
+      e: "Keine Zulassung nötig. Adobe-Kenntnisse plus Prüfsoftware, von zu Hause aus machbar.",
+      t: "Bei drei Kölner Versicherern nach dem Ansprechpartner für Dokumentenbarrierefreiheit fragen. Wenn es keinen gibt, ist das die Antwort." },
+    { n: "Übersetzungsbüro Leichte Sprache", c: "recht", h: 3,
+      w: "Für öffentliche Stellen vorgeschrieben, für Sozialverbände faktisch erwartet. Jeder neue Bescheid, jede neue Broschüre erzeugt Bedarf.",
+      k: "Stadtverwaltung, Landschaftsverband und große Sozialträger sitzen hier mit erheblichem Textausstoß.",
+      e: "Keine geschützte Berufsbezeichnung, aber Fortbildung und Prüfgruppe aus der Zielgruppe sind Standard.",
+      t: "Das Vergabeportal des Landes nach „Leichte Sprache“ durchsuchen und schauen, wer regelmäßig bietet." },
+    { n: "DGUV-V3-Prüfung für Büros und Praxen", c: "recht", h: 3,
+      w: "Ortsveränderliche Betriebsmittel müssen in jedem Betrieb wiederkehrend geprüft werden. Die Frist läuft weiter, ob es jemandem passt oder nicht.",
+      k: "Sehr hohe Dichte an Kanzleien, Praxen, Agenturen und Büros — viele kleine Kunden mit gleichem Bedarf.",
+      e: "Elektrofachkraft erforderlich. Das ist die eigentliche Markteintrittsbarriere — und der Grund für die dünne Besetzung.",
+      t: "Zwanzig Kölner Arztpraxen anrufen und fragen, wann zuletzt geprüft wurde. Zähle die Zahl der Ratlosen." },
+    { n: "NIS2- und DORA-Umsetzung für den Mittelstand", c: "recht", h: 3,
+      w: "Neue EU-Vorgaben zur IT-Sicherheit nehmen die Geschäftsführung persönlich in die Pflicht. Der Beratungsbedarf zieht sich über Jahre.",
+      k: "Finanz- und Versicherungscluster plus deren Zulieferer — beide Regelwerke greifen hier gleichzeitig.",
+      e: "Kein Zertifikat vorgeschrieben, aber ohne belastbare IT-Sicherheitserfahrung nicht seriös anzubieten.",
+      t: "Den Veranstaltungskalender der IHK Köln nach NIS2 durchsehen. Ausgebuchte Termine sind der Nachfrageindikator." },
+
+    /* --- Gebäude & Energie --- */
+    { n: "Legionellenprüfung & Trinkwasserhygiene", c: "gebaeude", h: 3,
+      w: "Mehrfamilienhäuser mit Großanlage müssen im festen Turnus untersucht werden. Planbarer wird Nachfrage nicht.",
+      k: "Sehr hoher Anteil an Mehrfamilienhäusern im Gründerzeitbestand, verwaltet von wenigen großen Hausverwaltungen.",
+      e: "Geschulte Probenahme und Zusammenarbeit mit einem akkreditierten Labor. Machbar, aber nicht voraussetzungsfrei.",
+      t: "Fünf Kölner Hausverwaltungen anrufen und fragen, wer aktuell prüft und ob sie zufrieden sind." },
+    { n: "Hydraulischer Abgleich als Spezialdienst", c: "gebaeude", h: 3,
+      w: "Für viele Bestandsgebäude vorgeschrieben und Voraussetzung für Förderungen. Heizungsbauer schieben es, weil die Marge in der Montage liegt.",
+      k: "Riesiger Altbaubestand mit gewachsenen Heizungsanlagen und vielen Parteien je Haus.",
+      e: "Technisches Verständnis und Messtechnik. Die reine Berechnung und Einregulierung ist nicht meisterpflichtig — vorher mit der Handwerkskammer klären.",
+      t: "Drei Heizungsbetriebe fragen, ob sie Abgleiche selbst durchführen oder solche Anfragen ablehnen." },
+    { n: "Aufzugsnotruf und Leitungsumstellung", c: "gebaeude", h: 3,
+      w: "Die Abschaltung alter Telefon- und Mobilfunkstandards zwingt zur Umrüstung jeder Notrufeinrichtung. Ohne funktionierenden Notruf steht der Aufzug.",
+      k: "Sehr viele kleine Aufzüge in Mehrfamilienhäusern, verstreut über den ganzen Bestand.",
+      e: "Elektro- und Fernmeldekenntnisse, Zusammenarbeit mit einer Notrufleitstelle.",
+      t: "Drei Hausverwaltungen fragen, wie viele ihrer Anlagen noch auf alte Leitungen laufen." },
+    { n: "Balkonkraftwerk-Montage für Mietwohnungen", c: "gebaeude", h: 2,
+      w: "Steckersolargeräte sind seit 2024 rechtlich privilegiert — Vermieter und Eigentümergemeinschaften können sie kaum noch verweigern. Gekauft wird online, montiert wird nicht.",
+      k: "Hoher Mieteranteil, viele Balkone im Altbau, wenig Zugang zu Werkzeug und Leiter.",
+      e: "Sehr niedrig. Kein Meisterzwang für die Steckermontage — die elektrische Seite vorher sauber klären.",
+      t: "Im Baumarkt das Personal fragen, wie oft Kunden nach jemandem für die Montage fragen." },
+    { n: "Thermografie und Blower-Door-Messung", c: "gebaeude", h: 2,
+      w: "Voraussetzung für Sanierungsplanung, Förderanträge und Streitfälle. Der Messdienst ist ein eigenes Geschäft, kein Nebenprodukt.",
+      k: "Ein Altbaubestand, dessen tatsächlicher Zustand meistens niemand kennt.",
+      e: "Messtechnik ist die Hauptinvestition, dazu eine Schulung. Kein Meisterbrief nötig.",
+      t: "Drei Energieberater fragen, wer für sie misst und wie lange sie darauf warten." },
+    { n: "Individueller Sanierungsfahrplan", c: "gebaeude", h: 2,
+      w: "Er hebt den Fördersatz für Folgemaßnahmen und ist deshalb fast immer der erste Schritt. Die Wartezeiten bei Energieberatern sind lang.",
+      k: "Sanierungsstau im Gründerzeitbestand trifft auf Eigentümer, die Fördermittel mitnehmen wollen.",
+      e: "Eintrag in die Energieeffizienz-Expertenliste — der eigentliche Aufwand liegt vor dem ersten Auftrag.",
+      t: "Bei fünf Kölner Energieberatern nach dem nächsten freien Termin fragen." },
+    { n: "Wärmepumpen-Einregulierung und Nachbetreuung", c: "gebaeude", h: 2,
+      w: "Zehntausende neu eingebaute Anlagen laufen ineffizient, weil nach dem Einbau niemand zuständig ist. Die Rechnung merkt der Betreiber erst im zweiten Winter.",
+      k: "Die Förderwelle der letzten Jahre hat Stadt und Umland flächendeckend Anlagen beschert.",
+      e: "Kältetechnik-Kenntnisse und Messtechnik. Fachlich anspruchsvoll, dafür kaum besetzt.",
+      t: "In lokalen Wärmepumpen-Gruppen nach Kölner Beiträgen suchen — die Beschwerden sind der Markt." },
+    { n: "Fassaden- und Dachbegrünung mit Förderabwicklung", c: "gebaeude", h: 2,
+      w: "Hitze- und Starkregenvorsorge ist von einem Nice-to-have zu einer geförderten Standardmaßnahme geworden. Am Förderantrag scheitern die meisten.",
+      k: "Die Stadt fördert Begrünung und Entsiegelung mit eigenen Programmen — das Geld liegt bereit.",
+      e: "Gartenbauliche Kenntnisse plus Statik-Partner. Der Förderantrag ist der eigentliche Verkaufsvorteil.",
+      t: "Die städtische Förderrichtlinie lesen und zählen, wie viele Fachbetriebe dort auftauchen." },
+    { n: "Zisternen und Entsiegelung im Bestandsgarten", c: "gebaeude", h: 2,
+      w: "Starkregen hat die Nachfrage strukturell verschoben — Regenwasser soll auf dem Grundstück bleiben, nicht in den Kanal.",
+      k: "Die Erinnerung an das Hochwasser von 2021 sitzt in der Region tief und wirkt bis in private Bauentscheidungen.",
+      e: "Garten- und Landschaftsbau ist zulassungsfrei; Tiefbaugerät ist die Investition.",
+      t: "Zwei Garten- und Landschaftsbaubetriebe nach ihrer aktuellen Wartezeit fragen." },
+    { n: "Schimmelsanierung mit gerichtsfestem Protokoll", c: "gebaeude", h: 2,
+      w: "Knapp ist nicht der Anstrich, sondern die belastbare Ursachendokumentation, die vor Gericht hält.",
+      k: "Feuchter Altbau, angespannter Mietmarkt und entsprechend viele Streitfälle zwischen Mieter und Eigentümer.",
+      e: "Sachkunde und Messtechnik; als Gutachter ist eine Zertifizierung faktisch Pflicht.",
+      t: "Einen Kölner Mieterverein fragen, wen er für Feuchtegutachten empfiehlt — und wie lang die Warteliste ist." },
+
+    /* --- Messe & Kongress --- */
+    { n: "Messe-Zwischenlager mit Just-in-time-Andienung", c: "messe", h: 2,
+      w: "Anlieferzeitfenster sind das Nadelöhr jeder Messe. Wer Material zwischenlagert und auf die Minute anliefert, verkauft gelöste Nerven.",
+      k: "Eines der größten Messegelände der Welt mit dutzenden Großveranstaltungen im Jahr.",
+      e: "Hallenfläche in Geländenähe und ein Fahrzeug. Kapitalintensiv beim Start.",
+      t: "Fünf Standbauer fragen, wo ihr Material zwischen zwei Messen steht und was das kostet." },
+    { n: "Standbau-Rückbau und Materialverwertung", c: "messe", h: 2,
+      w: "Nachhaltigkeitsvorgaben der Veranstalter treffen auf Messemüllberge. Wiederverwenden statt entsorgen wird zunehmend eingefordert.",
+      k: "Die Menge entsteht hier konzentriert an wenigen Tagen im Jahr — planbar und lokal.",
+      e: "Transport, Lagerfläche und Entsorgungsfachbetrieb-Status je nach Abfallart.",
+      t: "Am Abbautag einer Großmesse ans Gelände fahren und schauen, was in den Container geht." },
+    { n: "Standpersonal mit seltenen Sprachen", c: "messe", h: 2,
+      w: "Internationale Einkäufer treffen auf Personal, das Deutsch und Englisch spricht. Bei einem Abschluss über sechsstellige Summen ist das teuer.",
+      k: "Ernährungs-, Werkzeug- und Möbelmessen ziehen Einkäufer aus Asien, Nahost und Lateinamerika.",
+      e: "Vermittlungsgeschäft, kaum Kapital. Der Aufbau des Sprecherpools ist die Arbeit.",
+      t: "Drei bestehende Hostessenagenturen nach Mandarin oder Arabisch fragen und die Antwort notieren." },
+    { n: "Akku-Stromversorgung für Außenstände", c: "messe", h: 2,
+      w: "Dieselaggregate werden auf Veranstaltungsgeländen zunehmend unerwünscht oder untersagt. Ersatz braucht trotzdem jeder.",
+      k: "Große Freiflächen und Außenstände gehören hier zu vielen Messeformaten dazu.",
+      e: "Speicher sind die Investition; Elektrofachkraft für die Einspeisung erforderlich.",
+      t: "Bei der Technikabteilung des Messeveranstalters nach den aktuellen Auflagen für Aggregate fragen." },
+    { n: "Lead-Nachbereitung binnen 48 Stunden", c: "messe", h: 2,
+      w: "Kleine Aussteller fahren mit einem Stapel Visitenkarten nach Hause — und tun damit nichts. Die Messe war dann eine Spende.",
+      k: "Sehr viele kleine und mittlere Aussteller ohne eigene Vertriebsabteilung.",
+      e: "Kein Kapital, kein Nachweis. Reines Prozess- und Softwaregeschäft.",
+      t: "Zehn kleine Aussteller vier Wochen nach einer Messe fragen, was aus den Kontakten geworden ist." },
+    { n: "Möblierte Kurzzeitwohnungen für Ausstellerteams", c: "messe", h: 2,
+      w: "Ein bis zwei Wochen, vier bis acht Personen, Küche statt Restaurant. Hotels sind zur Messe unbezahlbar und unpraktisch.",
+      k: "Die Kölner Messehotelpreise sind unter Ausstellern ein stehender Witz.",
+      e: "Wohnungen und Zweckentfremdungsrecht — der rechtliche Rahmen ist hier die Hürde, nicht der Markt.",
+      t: "Zimmerpreise während einer Großmesse mit einer normalen Woche vergleichen. Der Faktor ist die Geschäftsidee." },
+
+    /* --- Medien & Produktion --- */
+    { n: "Audiodeskription und Untertitelung", c: "medien", h: 3,
+      w: "Barrierefreiheitspflichten und Plattformanforderungen wachsen gleichzeitig. Jede Produktion braucht es, kaum eine hat es im Haus.",
+      k: "Öffentlich-rechtliche und private Sender plus ein dichtes Produktionsumfeld auf kurzer Distanz.",
+      e: "Kein Nachweis, aber echtes Handwerk. Einstieg über Untertitel, Ausbau zur Audiodeskription.",
+      t: "Bei drei Produktionsfirmen fragen, an wen sie Untertitel vergeben und wie zufrieden sie sind." },
+    { n: "Drehgenehmigungs-Management", c: "medien", h: 2,
+      w: "Produktionen verlieren Drehtage an Behördengängen, Sondernutzung und Anwohnerabstimmung. Ein Drehtag kostet mehr als der Dienstleister.",
+      k: "Es wird viel gedreht, und die Verwaltungswege gelten als zäh — das ist genau die Reibung, die man verkauft.",
+      e: "Kein Kapital. Der Wert ist die Kenntnis der Ämter und der richtigen Ansprechpartner.",
+      t: "Eine Aufnahmeleitung fragen, wie lange sie zuletzt auf eine Drehgenehmigung gewartet hat." },
+    { n: "Selbstbedienungs-Tonstudio, rund um die Uhr buchbar", c: "medien", h: 2,
+      w: "Podcast- und Videoproduktion ist Alltag geworden, professioneller Raumzugang nicht. Die meisten Studios wollen ein Telefonat und eine Tagesbuchung.",
+      k: "Sehr viele Medienfreiberufler ohne eigenen akustisch brauchbaren Raum.",
+      e: "Raum plus Akustik ist die Investition. Betrieb läuft danach personalarm über Schließsystem.",
+      t: "Zählen, wie viele Kölner Studios sich online ohne Anruf für zwei Stunden buchen lassen." },
+    { n: "Requisiten- und Kostümfundus mit Online-Katalog", c: "medien", h: 1,
+      w: "Die Bestände existieren, aber sie sind nicht durchsuchbar. Wer nicht findet, was da ist, kauft neu.",
+      k: "Historisch gewachsene Fundusbestände im Produktionsumfeld, meist analog verwaltet.",
+      e: "Entweder eigener Bestand oder Digitalisierungsdienst für fremde Fundi — die zweite Variante ist kapitalarm.",
+      t: "Versuchen, online in einem Kölner Fundus nach einem konkreten Gegenstand zu suchen." },
+    { n: "Games-Lokalisierung und Sprachaufnahme", c: "medien", h: 1,
+      w: "Der deutschsprachige Markt ist für internationale Titel Pflichtlokalisierung. Die Arbeit fällt kontinuierlich an, nicht nur zur Messe.",
+      k: "Die weltgrößte Spielemesse und die zugehörige Entwicklerkonferenz bringen das Ökosystem einmal jährlich an einen Ort.",
+      e: "Aufnahmeraum und Sprecherkontakte; Einstieg über Textlokalisierung ohne Studio möglich.",
+      t: "Auf der Entwicklerkonferenz gezielt nach Lokalisierungsdienstleistern aus der Region suchen." },
+
+    /* --- Versicherung & Finanz --- */
+    { n: "Schadendokumentation per Drohne und 360-Grad-Aufnahme", c: "finanz", h: 2,
+      w: "Sturm- und Starkregenschäden nehmen zu, Regulierer sind knapp, und ein Dach zu besteigen dauert.",
+      k: "Die großen Gebäudeversicherer haben ihre Schadenabteilungen hier sitzen.",
+      e: "Drohnenführerschein und Versicherungsschutz; die Auswertung ist das eigentliche Produkt.",
+      t: "Einen Schadenregulierer fragen, wie lange eine Dachbesichtigung von der Meldung bis zum Bericht dauert." },
+    { n: "Softwaretest als Dienstleistung für Versicherer", c: "finanz", h: 2,
+      w: "Regulatorische Änderungen erzwingen ständige Releases, und getestet werden muss vor jedem einzelnen.",
+      k: "Ungewöhnlich hohe Dichte an IT-Abteilungen von Versicherern auf kleinem Raum.",
+      e: "Kein Kapital, aber fachliche Tiefe. Einstieg meist über einen Erstkunden aus dem eigenen Netzwerk.",
+      t: "Stellenanzeigen Kölner Versicherer nach Testrollen zählen — offene Stellen sind unerfüllter Bedarf." },
+    { n: "Aktendigitalisierung mit zertifizierter Vernichtung", c: "finanz", h: 2,
+      w: "Papierbestände blockieren teure Flächen, und der Datenschutz verlangt einen Nachweis über den Verbleib.",
+      k: "Große, alte Verwaltungsgebäude, deren Kellergeschosse seit Jahrzehnten gefüllt werden.",
+      e: "Scanstraße und zertifizierter Vernichtungspartner; mittleres Kapital.",
+      t: "Bei zwei Versicherern nach dem aktuellen Dienstleister fragen und ob das Thema überhaupt bearbeitet wird." },
+
+    /* --- Alter & Pflege --- */
+    { n: "Alltagsbegleitung nach §45a SGB XI", c: "pflege", h: 3,
+      w: "Der monatliche Entlastungsbetrag steht jedem Pflegebedürftigen zu und verfällt millionenfach ungenutzt, weil es zu wenige anerkannte Anbieter gibt.",
+      k: "Alternde Innenstadtbevölkerung mit vielen Alleinlebenden — und ein Anerkennungsverfahren in NRW, das machbar ist.",
+      e: "Anerkennung nach Landesrecht ist zwingend. Das ist die Hürde — und der Grund für die dünne Besetzung.",
+      t: "Die Landesliste anerkannter Angebote nach Kölner Postleitzahlen filtern und die Treffer zählen." },
+    { n: "Wohnraumanpassung mit Zuschussabwicklung", c: "pflege", h: 2,
+      w: "Für wohnumfeldverbessernde Maßnahmen gibt es einen erheblichen Zuschuss je Maßnahme. Es scheitert am Antrag, nicht am Geld.",
+      k: "Viele Ältere in Gründerzeitwohnungen ohne Aufzug, mit Wanne statt Dusche und schmalen Türen.",
+      e: "Handwerkliche Umsetzung je nach Gewerk zulassungspflichtig; die Antragsabwicklung ist es nicht.",
+      t: "Zwei Pflegestützpunkte fragen, an wen sie Umbauten vermitteln — und ob die Liste lang ist." },
+    { n: "Seniorenumzug mit Haushaltsauflösung", c: "pflege", h: 1,
+      w: "Der Umzug ins Kleinere ist logistisch und emotional überfordernd. Bezahlt wird für Entscheidungshilfe, nicht fürs Tragen.",
+      k: "Große Altbauwohnungen ohne Aufzug, oft nach Jahrzehnten Bewohnung.",
+      e: "Fahrzeug und Personal; Umzugsgewerbe ist erlaubnispflichtig — vorher klären.",
+      t: "Zwei Umzugsfirmen fragen, ob sie Haushaltsauflösungen mitmachen oder nur Kisten fahren." },
+    { n: "Digitale Begleitung für Senioren im Abo", c: "pflege", h: 1,
+      w: "Behördengänge, Bank und Arzttermine wandern ins Netz, die Zielgruppe nicht mit. Einmalige Kurse helfen nicht, laufende Begleitung schon.",
+      k: "Die Stadt digitalisiert ihre Dienste schneller, als ein Teil der Bevölkerung mitkommt.",
+      e: "Kein Kapital, kein Nachweis. Vertrauen ist die Währung — Vertrieb läuft über Empfehlung.",
+      t: "Eine Volkshochschule fragen, wie schnell die Smartphone-Kurse ausgebucht sind." },
+    { n: "Sensorik-Hausnotruf statt Knopf", c: "pflege", h: 1,
+      w: "Der klassische Notrufknopf wird im Ernstfall nicht gedrückt — bei Sturz, Schlaganfall oder nachts nicht getragen.",
+      k: "Hoher Anteil Alleinlebender in der Innenstadt, oft ohne Angehörige in der Nähe.",
+      e: "Technikpartner und eine 24/7-Leitstelle; ohne Leitstellenanbindung nicht seriös.",
+      t: "Drei Anbieter vergleichen: Wer verkauft mehr als einen Knopf am Band?" },
+
+    /* --- Handwerk-Lücken --- */
+    { n: "Möbelaufarbeitung und Polsterei mit Abholung", c: "handwerk", h: 1,
+      w: "Reparieren statt neu kaufen wächst, aber niemand bekommt allein ein Sofa aus dem dritten Stock.",
+      k: "Viel Altbau ohne Aufzug, viele geerbte Möbel, wenig Transportmöglichkeit.",
+      e: "Polsterhandwerk ist zulassungsfrei; Werkstatt und Transporter sind die Investition.",
+      t: "Zählen, wie viele Kölner Polstereien einen Abhol- und Bringdienst überhaupt erwähnen." },
+    { n: "Kleinstauftrag zum Festpreis, per App gebucht", c: "handwerk", h: 2,
+      w: "Für zwei Stunden Arbeit kommt kein Betrieb. Der Bedarf verschwindet dadurch nicht, er bleibt nur unerledigt.",
+      k: "Sehr viele kleine Mietwohnungen mit sehr vielen kleinen Problemen.",
+      e: "Je nach Tätigkeit zulassungspflichtig — die Abgrenzung zu meisterpflichtigen Arbeiten ist zwingend vorab zu klären.",
+      t: "Fünf Betriebe um ein Angebot für eine 90-Minuten-Aufgabe bitten und die Absagen zählen." },
+    { n: "Aufmaß per 3D-Scan als Zulieferdienst", c: "handwerk", h: 1,
+      w: "Betriebe verlieren Stunden am Aufmaß, nicht am Einbau. Wer das Aufmaß liefert, verkauft ihnen Kapazität.",
+      k: "Verwinkelte Altbaugrundrisse, in denen kein Winkel rechtwinklig ist.",
+      e: "Scanner und Software sind die Investition; kein Nachweis nötig.",
+      t: "Drei Betriebe fragen, wie viele Stunden sie pro Auftrag fürs Aufmaß rechnen." },
+    { n: "Osmose-Fensterreinigung für Sprossenfenster", c: "handwerk", h: 1,
+      w: "Altbausprossen sind Handarbeit und werden von den meisten Reinigungsfirmen deshalb schlicht ausgelassen.",
+      k: "Gründerzeitfassaden prägen ganze Veedel — der Bestand ist konzentriert und wiederkehrend.",
+      e: "Sehr niedrig. Gebäudereinigung ist zulassungsfrei ausübbar, Ausrüstung überschaubar.",
+      t: "Bei drei Reinigungsfirmen nach einem Angebot für Sprossenfenster fragen und die Ausreden sammeln." },
+
+    /* --- Karneval & Vereine --- */
+    { n: "Vereinsverwaltung als Dienstleistung", c: "karneval", h: 2,
+      w: "Kassenführung, Datenschutz, Steuerpflichten und Abgaben überfordern ehrenamtliche Vorstände zunehmend — und die Haftung ist persönlich.",
+      k: "Hunderte Karnevals-, Schützen- und Sportvereine auf engem Raum, viele mit denselben Problemen.",
+      e: "Kein Kapital. Buchhaltungs- und Vereinsrechtskenntnisse; Grenzen der Steuerberatung beachten.",
+      t: "Drei Vereinsvorstände fragen, wer die Kasse macht — und wie lange derjenige das noch will." },
+    { n: "Wagenbau-Lager und Materialverleih", c: "karneval", h: 1,
+      w: "Vereine brauchen Fläche, Gerüst und Technik nur saisonal, zahlen aber ganzjährig für die Miete.",
+      k: "Der Zugweg ist ein jährliches Großprojekt mit fester Logistik und vielen kleinen Beteiligten.",
+      e: "Halle ist die Investition — nur sinnvoll, wenn sie außerhalb der Session anderweitig läuft.",
+      t: "Eine Karnevalsgesellschaft fragen, wo ihr Wagen im Sommer steht und was das kostet." },
+    { n: "Plastikfreies Wurfmaterial als Beschaffungsdienst", c: "karneval", h: 1,
+      w: "Der öffentliche Druck auf Müllmengen wächst jedes Jahr, aber die Beschaffung läuft über gewachsene Kanäle.",
+      k: "Wurfmaterial ist hier Institution — und das Müllbild danach ist es leider auch.",
+      e: "Handelsgeschäft, Kapital steckt im Warenbestand. Lieferantensuche ist die eigentliche Arbeit.",
+      t: "Zwei Gesellschaften fragen, woher sie beschaffen und ob Nachhaltigkeit im Vorstand Thema ist." },
+    { n: "Ganzjähriger Kostümfundus mit Reinigung", c: "karneval", h: 1,
+      w: "Karneval ist die Spitze, aber Film, Theater und Motto-Events tragen den Rest des Jahres.",
+      k: "Beide Nachfragen existieren hier gleichzeitig — anderswo gibt es nur eine davon.",
+      e: "Bestand und Lagerfläche sind kapitalintensiv; Reinigung als Partnerleistung.",
+      t: "Im Juli versuchen, in Köln ein ordentliches Kostüm zu mieten. Notiere, wie weit du kommst." },
+
+    /* --- Stadt & Logistik --- */
+    { n: "Lastenrad-Flotte für Handwerk mit Wartung", c: "logistik", h: 2,
+      w: "Innenstadtzufahrt wird enger und teurer. Räder ersetzen Transporter nur, wenn jemand sie wartet und ersetzt.",
+      k: "Die Stadt baut Radinfrastruktur aus und beschränkt Kfz-Zufahrten schrittweise.",
+      e: "Flotte ist die Investition; Zweiradmechanik als Partner oder eigene Werkstatt.",
+      t: "Einen Innenstadt-Handwerksbetrieb fragen, was Parken und Strafzettel pro Tag kosten." },
+    { n: "Mikrodepot für die letzte Meile", c: "logistik", h: 2,
+      w: "Paketmengen steigen, Halteflächen verschwinden. Die Zustellung aus einem Depot im Viertel ist die einzige Antwort, die skaliert.",
+      k: "Enge Veedel-Straßen mit Lieferverkehr in zweiter Reihe — jeden Vormittag zu besichtigen.",
+      e: "Fläche in Innenstadtlage ist teuer und knapp; ohne Vertrag mit einem Zusteller nicht tragfähig.",
+      t: "In einer Innenstadtstraße zwanzig Minuten stehen und Lieferwagen in zweiter Reihe zählen." },
+    { n: "Sperrmüll-Sortierung und Wiederverkauf", c: "logistik", h: 1,
+      w: "Wiederverwendung wird politisch gefördert, aber der Engpass ist die Abholung vor der Entsorgung.",
+      k: "Hohe Umzugsfrequenz durch Studierende und Berufseinsteiger produziert brauchbaren Sperrmüll im Wochentakt.",
+      e: "Transport und Lagerfläche; abfallrechtliche Einordnung vorher klären.",
+      t: "Am Sperrmülltag durch ein Veedel gehen und schätzen, was davon verkäuflich wäre." },
+    { n: "Speisereste-Logistik für die Gastronomie", c: "logistik", h: 2,
+      w: "Getrennte Sammlung ist Pflicht, aber kleine Betriebe organisieren sie schlecht und riskieren Beanstandungen.",
+      k: "Sehr hohe Gastronomiedichte in Innenstadt und Veedeln, überwiegend kleine Betriebe.",
+      e: "Fahrzeug, Behälter und Zulassung als Transporteur; hygienerechtliche Auflagen beachten.",
+      t: "Drei Kneipen fragen, was abends mit Speiseresten passiert und wer sie abholt." },
+
+    /* --- Hochschule & Sport --- */
+    { n: "Leistungsdiagnostik für Freizeitsportler", c: "hochschule", h: 1,
+      w: "Ambitionierte Amateure zahlen für Messwerte, die ihnen kein Verein liefert — und sie kommen zur Kontrolle wieder.",
+      k: "Die einzige Sporthochschule Deutschlands sitzt hier und bildet genau die Fachkräfte aus, die man dafür braucht.",
+      e: "Messtechnik ist die Investition; ärztliche Begleitung je nach Testumfang erforderlich.",
+      t: "Zählen, wie viele Kölner Anbieter Laktat- oder Spiroergometrie an Privatkunden verkaufen." },
+    { n: "Möbliertes Wohnen als Verwaltungsdienst", c: "hochschule", h: 2,
+      w: "Eigentümer wollen die höhere Rendite möblierter Vermietung, aber nicht den Aufwand mit Wechseln, Übergaben und Schäden.",
+      k: "Die größte Universität Deutschlands, eine große Technische Hochschule und eine dauerhaft angespannte Wohnlage.",
+      e: "Kein Kapital nötig, wenn man verwaltet statt selbst mietet. Mietrechtliche Kenntnisse sind Pflicht.",
+      t: "Zehn möblierte Inserate prüfen: Wie viele wirken professionell verwaltet, wie viele privat improvisiert?" }
+  ];
+
+  // Kurzform fürs Feld — die Wolke braucht Marken, keine Sätze.
+  // Der volle Titel bleibt im Panel stehen.
+  var KURZ = {
+    "Digitale Barrierefreiheit nach BFSG": "Barrierefreiheit BFSG",
+    "Barrierefreie Dokumente (PDF/UA)": "Barrierefreie PDF",
+    "Übersetzungsbüro Leichte Sprache": "Leichte Sprache",
+    "DGUV-V3-Prüfung für Büros und Praxen": "DGUV-V3-Prüfung",
+    "NIS2- und DORA-Umsetzung für den Mittelstand": "NIS2 & DORA",
+    "Legionellenprüfung & Trinkwasserhygiene": "Legionellenprüfung",
+    "Hydraulischer Abgleich als Spezialdienst": "Hydraulischer Abgleich",
+    "Aufzugsnotruf und Leitungsumstellung": "Aufzugsnotruf",
+    "Balkonkraftwerk-Montage für Mietwohnungen": "Balkonkraftwerk-Montage",
+    "Thermografie und Blower-Door-Messung": "Thermografie & Blower-Door",
+    "Individueller Sanierungsfahrplan": "Sanierungsfahrplan",
+    "Wärmepumpen-Einregulierung und Nachbetreuung": "Wärmepumpen-Einregulierung",
+    "Fassaden- und Dachbegrünung mit Förderabwicklung": "Fassaden- & Dachbegrünung",
+    "Zisternen und Entsiegelung im Bestandsgarten": "Zisternen & Entsiegelung",
+    "Schimmelsanierung mit gerichtsfestem Protokoll": "Schimmelgutachten",
+    "Messe-Zwischenlager mit Just-in-time-Andienung": "Messe-Zwischenlager",
+    "Standbau-Rückbau und Materialverwertung": "Standbau-Rückbau",
+    "Standpersonal mit seltenen Sprachen": "Seltene Sprachen am Stand",
+    "Akku-Stromversorgung für Außenstände": "Akku-Strom für Stände",
+    "Lead-Nachbereitung binnen 48 Stunden": "Lead-Nachbereitung",
+    "Möblierte Kurzzeitwohnungen für Ausstellerteams": "Messe-Kurzzeitwohnen",
+    "Audiodeskription und Untertitelung": "Audiodeskription & Untertitel",
+    "Drehgenehmigungs-Management": "Drehgenehmigungen",
+    "Selbstbedienungs-Tonstudio, rund um die Uhr buchbar": "Tonstudio rund um die Uhr",
+    "Requisiten- und Kostümfundus mit Online-Katalog": "Fundus online",
+    "Games-Lokalisierung und Sprachaufnahme": "Games-Lokalisierung",
+    "Schadendokumentation per Drohne und 360-Grad-Aufnahme": "Schadendoku per Drohne",
+    "Softwaretest als Dienstleistung für Versicherer": "Softwaretest für Versicherer",
+    "Aktendigitalisierung mit zertifizierter Vernichtung": "Aktendigitalisierung",
+    "Alltagsbegleitung nach §45a SGB XI": "Alltagsbegleitung §45a",
+    "Wohnraumanpassung mit Zuschussabwicklung": "Wohnraumanpassung",
+    "Seniorenumzug mit Haushaltsauflösung": "Seniorenumzug",
+    "Digitale Begleitung für Senioren im Abo": "Digitalhilfe für Senioren",
+    "Sensorik-Hausnotruf statt Knopf": "Sensorik-Hausnotruf",
+    "Möbelaufarbeitung und Polsterei mit Abholung": "Polsterei mit Abholung",
+    "Kleinstauftrag zum Festpreis, per App gebucht": "Handwerk-Kleinstauftrag",
+    "Aufmaß per 3D-Scan als Zulieferdienst": "Aufmaß per 3D-Scan",
+    "Osmose-Fensterreinigung für Sprossenfenster": "Sprossenfenster-Reinigung",
+    "Vereinsverwaltung als Dienstleistung": "Vereinsverwaltung",
+    "Wagenbau-Lager und Materialverleih": "Wagenbau-Lager",
+    "Plastikfreies Wurfmaterial als Beschaffungsdienst": "Plastikfreie Kamelle",
+    "Ganzjähriger Kostümfundus mit Reinigung": "Kostümfundus ganzjährig",
+    "Lastenrad-Flotte für Handwerk mit Wartung": "Lastenrad-Flotte",
+    "Mikrodepot für die letzte Meile": "Mikrodepot letzte Meile",
+    "Sperrmüll-Sortierung und Wiederverkauf": "Sperrmüll-Wiederverkauf",
+    "Speisereste-Logistik für die Gastronomie": "Speisereste-Logistik",
+    "Leistungsdiagnostik für Freizeitsportler": "Leistungsdiagnostik",
+    "Möbliertes Wohnen als Verwaltungsdienst": "Möbliertes Wohnen"
+  };
+
+  /* ---------- Aufbau ---------- */
+  var cloud = document.getElementById('cloud');
+  var state = { h: 'all', c: 'all', sel: null };
+  var nodes = [];
+
+  IDEAS.forEach(function (d, i) {
+    var b = document.createElement('button');
+    b.className = 'idea h' + d.h;
+    b.type = 'button';
+    b.textContent = KURZ[d.n] || d.n;
+    b.title = d.n;
+    b.setAttribute('aria-pressed', 'false');
+    b.dataset.i = i;
+    b.addEventListener('click', function () { select(i); });
+    cloud.appendChild(b);
+    nodes.push(b);
+  });
+
+  // Cluster-Filter aus den tatsächlich belegten Feldern aufbauen
+  var counts = {};
+  IDEAS.forEach(function (d) { counts[d.c] = (counts[d.c] || 0) + 1; });
+  var rowC = document.getElementById('rowCluster');
+  Object.keys(CLUSTER).forEach(function (key) {
+    if (!counts[key]) return;
+    var b = document.createElement('button');
+    b.className = 'fbtn';
+    b.type = 'button';
+    b.dataset.c = key;
+    b.setAttribute('aria-pressed', 'false');
+    b.innerHTML = CLUSTER[key] + ' <span class="cnt">' + counts[key] + '</span>';
+    rowC.appendChild(b);
+  });
+
+  function wire(rowId, key) {
+    var row = document.getElementById(rowId);
+    row.addEventListener('click', function (e) {
+      var btn = e.target.closest('.fbtn');
+      if (!btn) return;
+      state[key] = btn.dataset[key];
+      Array.prototype.forEach.call(row.querySelectorAll('.fbtn'), function (b) {
+        b.setAttribute('aria-pressed', String(b === btn));
+      });
+      apply();
+    });
+  }
+  wire('rowHaerte', 'h');
+  wire('rowCluster', 'c');
+
+  function apply() {
+    nodes.forEach(function (b, i) {
+      var d = IDEAS[i];
+      var ok = (state.h === 'all' || String(d.h) === state.h) &&
+               (state.c === 'all' || d.c === state.c);
+      b.classList.toggle('dim', !ok);
+    });
+  }
+
+  var empty = document.getElementById('detailEmpty');
+  var full = document.getElementById('detailFull');
+  function select(i) {
+    var d = IDEAS[i];
+    state.sel = i;
+    nodes.forEach(function (b, j) { b.setAttribute('aria-pressed', String(j === i)); });
+    document.getElementById('dCluster').textContent = CLUSTER[d.c];
+    document.getElementById('dTitle').textContent = d.n;
+    var pill = document.getElementById('dPill');
+    pill.className = 'pill h' + d.h;
+    pill.textContent = HAERTE[d.h];
+    document.getElementById('dWarum').textContent = d.w;
+    document.getElementById('dKoeln').textContent = d.k;
+    document.getElementById('dHuerde').textContent = d.e;
+    document.getElementById('dTest').textContent = d.t;
+    empty.hidden = true;
+    full.hidden = false;
+    if (window.matchMedia('(max-width: 1040px)').matches) {
+      document.getElementById('detail').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+  }
+})();
+</script>
