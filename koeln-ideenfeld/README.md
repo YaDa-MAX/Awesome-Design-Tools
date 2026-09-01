@@ -107,7 +107,7 @@ Rechtsform ist **Einzelunternehmen** — eine GbR setzt mindestens zwei Gesellsc
 und ist mit dem Ein-Personen-Konzept nicht vereinbar. Die Website spricht in neutraler
 Wir-Form, was zulässig ist und die Rechtsform nicht falsch darstellt.
 
-Alle drei Dateien sind als Artifact-Seiten geschrieben (ohne `<html>`/`<head>`/`<body>`-Gerüst)
+Alle vier Dateien sind als Artifact-Seiten geschrieben (ohne `<html>`/`<head>`/`<body>`-Gerüst)
 und werden beim Veröffentlichen eingebettet. Zum lokalen Öffnen genügt ein minimaler Wrapper.
 
 ## Redlichkeit der Marktlücken-Liste
