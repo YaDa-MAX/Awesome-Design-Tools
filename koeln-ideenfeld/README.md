@@ -10,6 +10,7 @@ Betriebskonzept aus dieser Liste.
 | `koelner-marktluecken.html` | 48 Geschäftsideen in zehn Feldern, gewichtet nach Nachfrage-Härte. Je Idee: Begründung, Köln-Bezug, Einstiegshürde und ein Prüftest. Filterbar, mit Kurzliste der sieben aussichtsreichsten |
 | `visiograf-betriebskonzept.html` | Betriebskonzept VISIOGRAF — Drohnen-Dachbefundung als Nebenerwerb ohne Personal. 14 Kapitel mit drei Diagrammen und einer Schnittmengen-Grafik |
 | `visiograf-website.html` | Landingpage als Scroll-Erzählung in drei Akten — Warum, Wie, Was. Danach Prinzipien, Befundblatt, Leistungskatalog, Zielgruppen, Ablauf und Anfrageformular |
+| `visiograf-musterbericht.html` | Der Befundbericht selbst — sieben A4-Bogen, druckbar über `@page`: Abgrenzung, Aufnahmeprotokoll, kartierte Fundstellen, Einzelbefunde, Wärmebilder mit gemessenem ΔT, Vollständigkeitsplan |
 
 ## Dramaturgie der Website — goldener Kreis nach Simon Sinek
 
@@ -61,6 +62,35 @@ trägt auf der Website aber das gesamte Kapitel „Wie". Sie ist deshalb ins ers
 vorgezogen und die Fünf-Jahres-Rechnung entsprechend neu aufgestellt worden — siehe
 [Thermografie ab Jahr 1](#thermografie-ab-jahr-1). Die Verfügbarkeitshinweise sind aus der
 Preisliste entfernt; dort stehen jetzt die echten Saisongrenzen.
+
+## Der Musterbericht
+
+Das Konzept nennt ihn an fünf Stellen als das eine Vertriebswerkzeug — „30 Sachverständige
+anschreiben, mit einem echten Musterbericht als Anhang" — und stellt fest: *verkauft wird
+der Bericht, nicht der Flug.* Deshalb existiert er jetzt.
+
+Sieben A4-Bogen, über `@page` druckbar; die Fußzeilen „Seite X von 7" stimmen mit dem
+tatsächlichen PDF überein (maschinell gegengeprüft).
+
+| Bogen | Inhalt |
+|---|---|
+| 1 | Deckblatt mit Objekt, Auftragsnummer, Fernpilot, Betreibernummer |
+| 2 | Auftrag und Abgrenzung — was der Bericht leistet und was ausdrücklich nicht |
+| 3 | Aufnahmeprotokoll: Randbedingungen und Geräteeinstellungen |
+| 4 | Übersicht Dachfläche mit kartierten Fundstellen |
+| 5 | Einzelbefunde 1–4 mit Detailzeichnungen |
+| 6 | Wärmebilder Dach und Fassade, ΔT-Tabelle mit Referenzwerten |
+| 7 | Vollständigkeitsplan, Datenschutz, Grenzen des Verfahrens, Unterschrift |
+
+**Die Fachdetails sind der Punkt.** Ein Sachverständiger erkennt an drei Angaben, ob jemand
+sein Handwerk kann: der angesetzte **Emissionsgrad** (0,95 für Ziegel und Putz), die
+**reflektierte Temperatur**, und die **Referenzfläche**, gegen die das ΔT gemessen wurde.
+Alle drei stehen im Protokoll. Dazu der Hinweis, dass metallische Bauteile wegen ihres
+niedrigen Emissionsgrades **nicht** ausgewertet wurden — der klassische Anfängerfehler.
+
+Jede Temperaturangabe ist als Differenz gegen eine ungestörte Referenzfläche derselben
+Bauteilart ausgewiesen, nie absolut. Das hält die Aussage innerhalb der Abgrenzung: eine
+Messung ist eine Tatsache, ihre Deutung nicht Gegenstand des Berichts.
 
 ## Zum Namen
 

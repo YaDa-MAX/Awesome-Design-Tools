@@ -1,0 +1,842 @@
+<title>VISIOGRAF Musterbericht</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400..700&family=Public+Sans:wght@400;500;600&family=Roboto+Mono:wght@400;500&display=swap">
+
+<style>
+/* ============================================================
+   VISIOGRAF — Musterbericht.
+   Das Vertriebswerkzeug des Konzepts: der Befundbericht selbst.
+   Als Stapel A4-Bogen aufgebaut, druckbar über @page.
+   Thermalfarben sind absolut, nicht themenabhängig.
+   ============================================================ */
+:root {
+  color-scheme: light;
+  --bg:        #E6E9E8;
+  --paper:     #FCFDFC;
+  --tint:      #F0F3F1;
+  --ink:       #15191B;
+  --ink-mid:   #3D474B;
+  --ink-mute:  #6B787D;
+  --line:      #CFD6D3;
+  --line-soft: #E2E7E5;
+  --accent:    #A32A72;
+  --accent-ink:#8C2462;
+  --accent-soft: rgba(163,42,114,.08);
+  --grid:      #DDE3E1;
+  --roof-fill: #E9EDEB;
+  --shadow: 0 1px 2px rgba(21,25,27,.06), 0 16px 40px -22px rgba(21,25,27,.4);
+
+  --display: "Familjen Grotesk", "Helvetica Neue", Arial, sans-serif;
+  --body:    "Public Sans", "Segoe UI", system-ui, sans-serif;
+  --mono:    "Roboto Mono", ui-monospace, "SFMono-Regular", monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --bg:        #0D1012; --paper: #14181A; --tint: #1B2124;
+    --ink:       #ECEFEE; --ink-mid: #B2BDBF; --ink-mute: #83908F;
+    --line:      #2A3235; --line-soft: #212829;
+    --accent:    #C4569A; --accent-ink: #C4569A; --accent-soft: rgba(196,86,154,.11);
+    --grid:      #232B2E; --roof-fill: #1B2124;
+    --shadow: 0 1px 2px rgba(0,0,0,.5), 0 18px 44px -24px rgba(0,0,0,.9);
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg:        #0D1012; --paper: #14181A; --tint: #1B2124;
+  --ink:       #ECEFEE; --ink-mid: #B2BDBF; --ink-mute: #83908F;
+  --line:      #2A3235; --line-soft: #212829;
+  --accent:    #C4569A; --accent-ink: #C4569A; --accent-soft: rgba(196,86,154,.11);
+  --grid:      #232B2E; --roof-fill: #1B2124;
+  --shadow: 0 1px 2px rgba(0,0,0,.5), 0 18px 44px -24px rgba(0,0,0,.9);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink);
+  font-family: var(--body); font-size: 14px; line-height: 1.55;
+  -webkit-font-smoothing: antialiased; padding: clamp(16px, 4vw, 44px) 0 60px; }
+p, h1, h2, h3, h4, ul, ol, figure, table { margin: 0; }
+ul, ol { padding: 0; list-style: none; }
+
+h1, h2, h3 { font-family: var(--display); font-weight: 700; letter-spacing: -.018em; line-height: 1.1; }
+h1 { font-size: 2.1rem; letter-spacing: -.026em; }
+h2 { font-size: 1.12rem; }
+h3 { font-size: .93rem; }
+
+.mono { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+.mute { color: var(--ink-mute); }
+.sm { font-size: .82rem; }
+.xs { font-size: .74rem; }
+
+/* ---------- Bogen ---------- */
+.sheet { background: var(--paper); border: 1px solid var(--line); box-shadow: var(--shadow);
+  width: min(820px, 94vw); min-height: calc(min(820px, 94vw) * 1.414);
+  margin: 0 auto 28px; padding: 34px 42px 54px;
+  display: flex; flex-direction: column; position: relative; }
+@media (max-width: 620px) { .sheet { padding: 24px 20px 46px; min-height: 0; } }
+
+.sheet-hd { display: flex; justify-content: space-between; align-items: center; gap: 16px;
+  padding-bottom: 11px; border-bottom: 1.5px solid var(--ink); margin-bottom: 24px; }
+.brand { display: flex; align-items: center; gap: 9px; font-family: var(--display);
+  font-weight: 700; font-size: .95rem; letter-spacing: .04em; }
+.mark { width: 14px; height: 14px; flex: none; border-radius: 2px;
+  background: conic-gradient(var(--accent) 0 25%, var(--ink) 0 50%, var(--accent) 0 75%, var(--ink) 0); }
+.sheet-hd .ref { font-family: var(--mono); font-size: .68rem; letter-spacing: .08em; color: var(--ink-mute); }
+.sheet-ft { position: absolute; left: 42px; right: 42px; bottom: 22px;
+  display: flex; justify-content: space-between; gap: 16px;
+  padding-top: 9px; border-top: 1px solid var(--line-soft);
+  font-family: var(--mono); font-size: .64rem; letter-spacing: .07em; color: var(--ink-mute); }
+@media (max-width: 620px) { .sheet-ft { left: 20px; right: 20px; } }
+
+.eyebrow { font-family: var(--mono); font-size: .64rem; letter-spacing: .16em;
+  text-transform: uppercase; color: var(--accent-ink); }
+.stack { display: flex; flex-direction: column; }
+.g8{gap:8px}.g12{gap:12px}.g18{gap:18px}.g26{gap:26px}
+
+/* ---------- Deckblatt ---------- */
+.cover-main { flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 30px; }
+.cover-main h1 { max-width: 18ch; }
+.cover-obj { font-family: var(--display); font-weight: 700; font-size: 1.3rem; letter-spacing: -.018em; }
+.kv { display: grid; grid-template-columns: 190px 1fr; gap: 3px 18px; font-size: .86rem; }
+@media (max-width: 620px) { .kv { grid-template-columns: 130px 1fr; } }
+.kv dt { font-family: var(--mono); font-size: .68rem; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--ink-mute); padding-top: 3px; }
+.kv dd { margin: 0; color: var(--ink); }
+
+/* ---------- Blöcke ---------- */
+.block { border: 1px solid var(--line); border-radius: 2px; background: var(--tint);
+  padding: 18px 20px; display: grid; gap: 10px; }
+.block.plain { background: transparent; }
+.block h3 { color: var(--ink); }
+.block p { color: var(--ink-mid); font-size: .87rem; }
+.rule { height: 0; border-top: 1px solid var(--line); }
+
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+@media (max-width: 620px) { .two { grid-template-columns: 1fr; } }
+
+.tick { display: grid; gap: 7px; font-size: .86rem; color: var(--ink-mid); }
+.tick li { display: grid; grid-template-columns: 15px 1fr; gap: 9px; align-items: start; }
+.tick li::before { content: "—"; color: var(--accent-ink); font-family: var(--mono); font-size: .74rem; line-height: 1.5; }
+.tick.no li::before { content: "×"; color: var(--ink-mute); }
+.tick b { color: var(--ink); font-weight: 600; }
+
+/* ---------- Tabellen ---------- */
+table { border-collapse: collapse; width: 100%; font-size: .82rem; }
+th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line-soft); vertical-align: top; }
+thead th { font-family: var(--mono); font-size: .62rem; letter-spacing: .09em; text-transform: uppercase;
+  font-weight: 500; color: var(--ink-mute); background: var(--tint);
+  border-bottom: 1px solid var(--line); }
+td.n, th.n { text-align: right; font-family: var(--mono); font-variant-numeric: tabular-nums; white-space: nowrap; }
+tbody tr:last-child > * { border-bottom: 0; }
+.tw { overflow-x: auto; border: 1px solid var(--line); border-radius: 2px; }
+.idc { font-family: var(--mono); font-weight: 500; color: var(--accent-ink); white-space: nowrap; }
+
+/* ---------- Zeichnungen ---------- */
+.fig { border: 1px solid var(--line); border-radius: 2px; background: var(--paper); overflow: hidden; }
+.fig figcaption { padding: 8px 12px; border-top: 1px solid var(--line-soft); background: var(--tint);
+  font-family: var(--mono); font-size: .64rem; letter-spacing: .07em; color: var(--ink-mute); }
+.plan { display: block; width: 100%; height: auto; }
+.plan .grid-l   { stroke: var(--grid); stroke-width: 1; }
+.plan .roof     { fill: var(--roof-fill); stroke: var(--ink-mid); stroke-width: 1.6; }
+.plan .roof-in  { fill: none; stroke: var(--ink-mute); stroke-width: 1.1; }
+.plan .roof-el  { fill: var(--paper); stroke: var(--ink-mid); stroke-width: 1.3; }
+.plan .lead     { stroke: var(--accent); stroke-width: 1.1; stroke-dasharray: 3 3; }
+.plan .pin      { fill: var(--accent); }
+.plan .pin-ring { fill: none; stroke: var(--paper); stroke-width: 2.2; }
+.plan .pin-no   { fill: #FFFFFF; font-family: var(--mono); font-size: 12px; font-weight: 500; }
+.plan .anno     { fill: var(--ink-mute); font-family: var(--mono); font-size: 10.5px; }
+.plan .bar      { stroke: var(--ink-mid); stroke-width: 1.4; }
+.plan .arrow    { fill: var(--ink-mid); }
+.plan .hatch-r  { fill: url(#mbHatch); stroke: var(--accent); stroke-width: 1.1; stroke-dasharray: 5 4; }
+.plan .hatch-l  { stroke: var(--accent); stroke-width: 1; }
+.plan .det      { fill: none; stroke: var(--ink-mid); stroke-width: 1.5; }
+.plan .det-f    { fill: var(--roof-fill); stroke: var(--ink-mid); stroke-width: 1.4; }
+.plan .det-x    { stroke: var(--accent); stroke-width: 2.2; }
+.thermal-field  { filter: blur(6px); }
+.plan .callout rect { fill: #FFF3CF; stroke: #8A6A1E; stroke-width: 1; }
+.plan .callout text { fill: #33240A; font-family: var(--mono); font-size: 10.5px; font-weight: 500; }
+.plan .callout line { stroke: #FFF3CF; stroke-width: 1.3; stroke-dasharray: 3 3; }
+
+.legend-bar { height: 9px; border-radius: 5px;
+  background: linear-gradient(90deg, #16224E, #3B1E6E, #A32A72, #E85A2A, #F4A93B, #FFF0B8); }
+.legend-row { display: flex; justify-content: space-between;
+  font-family: var(--mono); font-size: .62rem; letter-spacing: .06em; color: var(--ink-mute); margin-top: 5px; }
+
+.detgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+@media (max-width: 620px) { .detgrid { grid-template-columns: 1fr; } }
+.det-card { border: 1px solid var(--line); border-radius: 2px; overflow: hidden; display: grid; }
+.det-card .dhead { display: flex; gap: 10px; align-items: baseline; padding: 10px 12px;
+  background: var(--tint); border-bottom: 1px solid var(--line); }
+.det-card .dhead .t { font-family: var(--display); font-weight: 700; font-size: .9rem; }
+.det-card .dbody { padding: 12px; display: grid; gap: 9px; }
+.det-card p { font-size: .81rem; color: var(--ink-mid); }
+.det-card .dref { font-family: var(--mono); font-size: .64rem; color: var(--ink-mute); }
+
+.note { border-left: 2.5px solid var(--accent); padding: 2px 0 2px 14px;
+  font-size: .85rem; color: var(--ink-mid); }
+.note b { color: var(--ink); font-weight: 600; }
+
+.sig { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 8px; }
+@media (max-width: 620px) { .sig { grid-template-columns: 1fr; } }
+.sig div { border-top: 1px solid var(--ink-mute); padding-top: 7px;
+  font-family: var(--mono); font-size: .66rem; letter-spacing: .07em; color: var(--ink-mute); }
+
+.disc { border: 1px dashed var(--line); border-radius: 2px; padding: 14px 16px;
+  font-size: .76rem; color: var(--ink-mute); }
+.disc b { color: var(--ink-mid); }
+
+/* ---------- Druck ---------- */
+@page { size: A4; margin: 14mm 13mm; }
+@media print {
+  /* rem-Groessen haengen an html, nicht an body — die Verkleinerung
+     muss deshalb auf der Wurzel sitzen, sonst wirkt sie nicht. */
+  html { font-size: 10pt; }
+  body { background: #fff; padding: 0; }
+  /* Ein Bogen muss auf eine A4-Seite passen, sonst stimmt die Seitenzahl nicht */
+  .g26 { gap: 15px; } .g18 { gap: 11px; } .g12 { gap: 8px; }
+  .two { gap: 16px; } .detgrid { gap: 12px; }
+  h1 { font-size: 1.7rem; } h2 { font-size: 1rem; }
+  th, td { padding: 5px 8px; }
+  .block { padding: 12px 14px; }
+  .disc { padding: 10px 12px; }
+  .sheet-ft { margin-top: 6mm; }
+  .tick { gap: 5px; line-height: 1.42; }
+  .note, .block p { line-height: 1.45; }
+  .sheet { width: auto; min-height: 0; margin: 0; border: 0; box-shadow: none;
+    padding: 0 0 4mm; break-after: page; }
+  .sheet:last-child { break-after: auto; }
+  .sheet-ft { position: static; left: auto; right: auto; bottom: auto; margin-top: 10mm; }
+  .toolbar { display: none; }
+  .det-card, .block, .fig, .tw { break-inside: avoid; }
+  .fig { max-width: 148mm; margin-inline: auto; }
+  .two .fig { max-width: none; }
+}
+
+.toolbar { width: min(820px, 94vw); margin: 0 auto 18px; display: flex; flex-wrap: wrap;
+  gap: 12px; align-items: center; justify-content: space-between;
+  font-family: var(--mono); font-size: .68rem; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--ink-mute); }
+.toolbar button { font: inherit; color: var(--ink); background: var(--paper);
+  border: 1px solid var(--line); border-radius: 2px; padding: 8px 14px; cursor: pointer;
+  letter-spacing: .08em; transition: border-color .16s ease, transform .16s ease; }
+.toolbar button:hover { border-color: var(--ink-mute); transform: translateY(-1px); }
+.toolbar button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+</style>
+
+<div class="toolbar">
+  <span>Musterbericht · Konzeptentwurf · 7 Seiten</span>
+  <button type="button" id="printBtn">Als PDF drucken</button>
+</div>
+
+<!-- ================= SEITE 1 — DECKBLATT ================= -->
+<section class="sheet">
+  <div class="sheet-hd">
+    <span class="brand"><span class="mark" aria-hidden="true"></span>VISIOGRAF</span>
+    <span class="ref">VG-2026-0147</span>
+  </div>
+
+  <div class="cover-main">
+    <div class="stack g12">
+      <span class="eyebrow">Befundbericht · Dach und Fassade</span>
+      <h1>Dokumentation aus der Luft, visuell und thermisch</h1>
+    </div>
+
+    <div class="stack g8">
+      <span class="cover-obj">Musterstraße 14, 50733 Köln-Nippes</span>
+      <span class="sm mute">Mehrfamilienhaus, Baujahr 1958 · Satteldach, rund 195 m² Dachfläche · Südfassade</span>
+    </div>
+
+    <dl class="kv">
+      <dt>Auftraggeber</dt><dd>Sachverständigenbüro (Muster), Köln</dd>
+      <dt>Auftragsnummer</dt><dd class="mono">VG-2026-0147</dd>
+      <dt>Aufnahme am</dt><dd class="mono">14.02.2026, 07:20 – 08:05 Uhr</dd>
+      <dt>Bericht erstellt am</dt><dd class="mono">17.02.2026</dd>
+      <dt>Fernpilot</dt><dd>M. Beispiel · EU-Fernpilotenzeugnis A2</dd>
+      <dt>Betreibernummer</dt><dd class="mono">DEuas000000xxxxxxx</dd>
+      <dt>Umfang</dt><dd>4 sichtbare Fundstellen · 6 thermische Auffälligkeiten</dd>
+    </dl>
+  </div>
+
+  <div class="note">
+    <b>Dieser Bericht dokumentiert, er bewertet nicht.</b> Er enthält keine Aussage zur
+    Schadensursache, zur Schadenhöhe, zur Eintrittspflicht einer Versicherung und keine
+    Beurteilung der Standsicherheit. Die Auswertung obliegt dem Auftraggeber.
+    Einzelheiten auf Seite 2.
+  </div>
+
+  <div class="sheet-ft"><span>VISIOGRAF · Musterbericht</span><span>Seite 1 von 7</span></div>
+</section>
+
+<!-- ================= SEITE 2 — AUFTRAG, ABGRENZUNG, PROTOKOLL ================= -->
+<section class="sheet">
+  <div class="sheet-hd">
+    <span class="brand"><span class="mark" aria-hidden="true"></span>VISIOGRAF</span>
+    <span class="ref">VG-2026-0147 · Musterstraße 14</span>
+  </div>
+
+  <div class="stack g26">
+    <div class="stack g12">
+      <span class="eyebrow">1 — Auftrag und Abgrenzung</span>
+      <h2>Was dieser Bericht leistet und was nicht</h2>
+    </div>
+
+    <div class="two">
+      <div class="block plain stack g12">
+        <h3>Gegenstand des Auftrags</h3>
+        <ul class="tick">
+          <li><b>Bildbefund</b> von Dachfläche und Südfassade, in Übersicht und Detail.</li>
+          <li><b>Kartierung</b> jeder Auffälligkeit, fortlaufend nummeriert.</li>
+          <li><b>Wärmebild</b> beider Flächen mit gemessener Differenz je Fundstelle.</li>
+          <li><b>Aufnahmeprotokoll</b> mit den Randbedingungen der Messung.</li>
+          <li><b>Vollständigkeitsplan</b>: was erfasst wurde und was nicht, mit Grund.</li>
+        </ul>
+      </div>
+      <div class="block plain stack g12">
+        <h3>Ausdrücklich nicht Gegenstand</h3>
+        <ul class="tick no">
+          <li><b>Keine Schadensursache.</b> Alterung, Witterung oder Ausführung werden nicht unterschieden.</li>
+          <li><b>Keine Schadenhöhe.</b> Keine Kosten, keine Mengen, keine Sanierungsempfehlung.</li>
+          <li><b>Keine Eintrittspflicht.</b> Keine Aussage zur Regulierung.</li>
+          <li><b>Keine Standsicherheit.</b> Keine statische Beurteilung.</li>
+          <li><b>Kein Innenraum.</b> Kein Betreten, keine Bauteilöffnung.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="note">
+      <b>Zur Thermografie im Besonderen.</b> Eine gemessene Temperaturdifferenz ist eine
+      Tatsache, keine Diagnose. Ob eine Auffälligkeit auf fehlende Dämmung, Durchfeuchtung,
+      Luftundichtheit oder auf die Bauweise selbst zurückgeht, lässt sich aus dem Wärmebild
+      allein nicht entscheiden. Diese Zuordnung trifft der Energieberater oder Sachverständige,
+      in der Regel unter Einbeziehung einer Messung von innen.
+    </div>
+
+  </div>
+
+  <div class="sheet-ft"><span>VISIOGRAF · Musterbericht</span><span>Seite 2 von 7</span></div>
+</section>
+
+<!-- ================= SEITE 3 — AUFNAHMEPROTOKOLL ================= -->
+<section class="sheet">
+  <div class="sheet-hd">
+    <span class="brand"><span class="mark" aria-hidden="true"></span>VISIOGRAF</span>
+    <span class="ref">VG-2026-0147 · Musterstraße 14</span>
+  </div>
+
+  <div class="stack g26">
+    <div class="stack g12">
+      <span class="eyebrow">2 — Aufnahmeprotokoll</span>
+      <h2>Randbedingungen der Messung</h2>
+      <p class="sm mute" style="max-width:66ch">
+        Ohne diese Angaben ist ein Wärmebild nicht nachvollziehbar und im Streitfall wertlos.
+        Sie gehören deshalb in jeden Bericht, auch in einen rein visuellen.
+      </p>
+    </div>
+
+    <div class="two">
+        <div class="tw">
+          <table>
+            <caption class="xs mute" style="text-align:left;padding:8px 10px 0">Randbedingungen</caption>
+            <tbody>
+              <tr><th scope="row">Datum, Uhrzeit</th><td class="n">14.02.2026, 07:20–08:05</td></tr>
+              <tr><th scope="row">Außentemperatur</th><td class="n">2,0 °C</td></tr>
+              <tr><th scope="row">Innentemperatur (Angabe AG)</th><td class="n">19,0 °C</td></tr>
+              <tr><th scope="row">Differenz innen / außen</th><td class="n">17 K</td></tr>
+              <tr><th scope="row">Bewölkung</th><td class="n">bedeckt, 8/8</td></tr>
+              <tr><th scope="row">Wind</th><td class="n">3 m/s aus West</td></tr>
+              <tr><th scope="row">Niederschlag letzte 12 h</th><td class="n">keiner</td></tr>
+              <tr><th scope="row">Oberfläche</th><td class="n">trocken</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="tw">
+          <table>
+            <caption class="xs mute" style="text-align:left;padding:8px 10px 0">Gerät und Einstellungen</caption>
+            <tbody>
+              <tr><th scope="row">Flughöhe über Grund, max.</th><td class="n">28 m</td></tr>
+              <tr><th scope="row">Wärmebildauflösung</th><td class="n">640 × 512</td></tr>
+              <tr><th scope="row">Emissionsgrad angesetzt</th><td class="n">0,95</td></tr>
+              <tr><th scope="row">Reflektierte Temperatur</th><td class="n">2,0 °C</td></tr>
+              <tr><th scope="row">Aufnahmeabstand</th><td class="n">12 – 26 m</td></tr>
+              <tr><th scope="row">Referenzfläche Dach</th><td class="n">2,0 °C</td></tr>
+              <tr><th scope="row">Luftraum</th><td class="n">außerhalb Kontrollzone</td></tr>
+              <tr><th scope="row">Anzahl Aufnahmen</th><td class="n">142 visuell, 38 thermisch</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <p class="xs mute">
+        Der Emissionsgrad ist für Dachziegel und Putz mit 0,95 angesetzt. Metallische Bauteile —
+        Anschlussbleche, Rinnen, Kaminabdeckung — erscheinen im Wärmebild wegen ihres niedrigen
+        Emissionsgrades kälter, als sie sind; an diesen Stellen wurde keine Temperatur ausgewertet.
+      </p>
+    </div>
+  </div>
+
+  <div class="sheet-ft"><span>VISIOGRAF · Musterbericht</span><span>Seite 2 von 6</span></div>
+</section>
+
+<!-- ================= SEITE 3 — ÜBERSICHT DACH ================= -->
+<section class="sheet">
+  <div class="sheet-hd">
+    <span class="brand"><span class="mark" aria-hidden="true"></span>VISIOGRAF</span>
+    <span class="ref">VG-2026-0147 · Musterstraße 14</span>
+  </div>
+
+  <div class="stack g26">
+    <div class="stack g12">
+      <span class="eyebrow">3 — Übersicht Dachfläche</span>
+      <h2>Sichtbare Fundstellen, kartiert</h2>
+    </div>
+
+    <figure class="fig">
+      <svg class="plan" viewBox="0 0 520 384" role="img" aria-label="Draufsicht der Dachfläche mit First, Gaube und Schornstein. Vier nummerierte Fundstellen sind eingetragen, dazu die schraffierte nicht einsehbare Fläche im Nordwesten, Nordpfeil und Maßstabsbalken.">
+        <defs>
+          <pattern id="mbGrid" width="26" height="26" patternUnits="userSpaceOnUse">
+            <path class="grid-l" d="M26 0 L0 0 0 26" fill="none"/>
+          </pattern>
+          <pattern id="mbHatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+            <line class="hatch-l" x1="0" y1="0" x2="0" y2="8"/>
+          </pattern>
+        </defs>
+        <rect x="0" y="0" width="520" height="384" fill="url(#mbGrid)"/>
+        <rect class="roof" x="66" y="62" width="388" height="248"/>
+        <line class="roof-in" x1="66" y1="186" x2="454" y2="186"/>
+        <text class="anno" x="74" y="180">FIRST</text>
+        <rect class="roof-el" x="132" y="110" width="76" height="48"/>
+        <line class="roof-in" x1="132" y1="134" x2="208" y2="134"/>
+        <text class="anno" x="136" y="104">Gaube</text>
+        <rect class="roof-el" x="336" y="104" width="38" height="38"/>
+        <text class="anno" x="330" y="98">Kamin</text>
+
+        <rect class="hatch-r" x="66" y="246" width="118" height="64"/>
+        <text class="anno" x="74" y="270">nicht einsehbar</text>
+        <text class="anno" x="74" y="286">Bewuchs, ca. 23 m²</text>
+
+        <line class="lead" x1="170" y1="158" x2="170" y2="166"/>
+        <circle class="pin" cx="170" cy="180" r="14"/><circle class="pin-ring" cx="170" cy="180" r="14"/>
+        <text class="pin-no" x="170" y="185" text-anchor="middle">1</text>
+        <line class="lead" x1="355" y1="142" x2="355" y2="152"/>
+        <circle class="pin" cx="355" cy="166" r="14"/><circle class="pin-ring" cx="355" cy="166" r="14"/>
+        <text class="pin-no" x="355" y="171" text-anchor="middle">2</text>
+        <circle class="pin" cx="256" cy="186" r="14"/><circle class="pin-ring" cx="256" cy="186" r="14"/>
+        <text class="pin-no" x="256" y="191" text-anchor="middle">3</text>
+        <circle class="pin" cx="418" cy="310" r="14"/><circle class="pin-ring" cx="418" cy="310" r="14"/>
+        <text class="pin-no" x="418" y="315" text-anchor="middle">4</text>
+
+        <path class="arrow" d="M474 34 L480 52 L474 48 L468 52 Z"/>
+        <text class="anno" x="474" y="68" text-anchor="middle">N</text>
+        <line class="bar" x1="66" y1="352" x2="144" y2="352"/>
+        <line class="bar" x1="66" y1="346" x2="66" y2="358"/>
+        <line class="bar" x1="144" y1="346" x2="144" y2="358"/>
+        <text class="anno" x="152" y="356">5 m</text>
+      </svg>
+      <figcaption>Bild 1 · Übersicht Dachfläche, Blick senkrecht nach unten, Flughöhe 28 m</figcaption>
+    </figure>
+
+    <div class="tw">
+      <table>
+        <thead>
+          <tr><th>Nr.</th><th>Ort</th><th>Beobachtung</th><th class="n">Bilder</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="idc">1</td><td>Gaubenanschluss, Westwange</td>
+            <td>Anschlussblech liegt auf rund 40 cm Länge nicht an, durchgehender Spalt sichtbar.</td>
+            <td class="n">3, 4</td>
+          </tr>
+          <tr>
+            <td class="idc">2</td><td>Kaminkopf</td>
+            <td>Verfugung an zwei Seiten ausgewaschen, Fehlstellen bis rund 2 cm Tiefe.</td>
+            <td class="n">5, 6</td>
+          </tr>
+          <tr>
+            <td class="idc">3</td><td>First, mittleres Drittel</td>
+            <td>Drei Firstziegel gegenüber der Flucht verschoben, Firstband an einer Stelle offen.</td>
+            <td class="n">7, 8</td>
+          </tr>
+          <tr>
+            <td class="idc">4</td><td>Traufe Südost</td>
+            <td>Rinne auf rund 1,5 m mit Laub und Moos gefüllt, Ablauf von oben nicht einsehbar.</td>
+            <td class="n">9</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="xs mute">
+      Die Nummerierung ist fortlaufend und bleibt über alle Folgeaufträge am selben Objekt
+      erhalten. Eine Fundstelle ist eine Beobachtung, keine Bewertung ihrer Bedeutung.
+    </p>
+  </div>
+
+  <div class="sheet-ft"><span>VISIOGRAF · Musterbericht</span><span>Seite 4 von 7</span></div>
+</section>
+
+<!-- ================= SEITE 4 — EINZELBEFUNDE ================= -->
+<section class="sheet">
+  <div class="sheet-hd">
+    <span class="brand"><span class="mark" aria-hidden="true"></span>VISIOGRAF</span>
+    <span class="ref">VG-2026-0147 · Musterstraße 14</span>
+  </div>
+
+  <div class="stack g26">
+    <div class="stack g12">
+      <span class="eyebrow">4 — Einzelbefunde</span>
+      <h2>Detailaufnahmen der vier Fundstellen</h2>
+    </div>
+
+    <div class="detgrid">
+      <article class="det-card">
+        <div class="dhead"><span class="idc">1</span><span class="t">Gaubenanschluss, Westwange</span></div>
+        <svg class="plan" viewBox="0 0 300 170" role="img" aria-label="Schemazeichnung: Gaubenwange trifft auf die Dachfläche, das Anschlussblech liegt auf einem Abschnitt nicht an.">
+          <rect x="0" y="0" width="300" height="170" fill="var(--roof-fill)"/>
+          <path class="det-f" d="M20 130 L150 130 L150 48 L20 62 Z"/>
+          <path class="det" d="M150 130 L280 130 L280 60 L150 48"/>
+          <path class="det" d="M150 48 L150 130"/>
+          <path class="det" d="M140 44 L160 44 L160 134 L140 134 Z"/>
+          <path class="det-x" d="M148 66 L148 104"/>
+          <text class="anno" x="20" y="150">Gaubenwange</text>
+          <text class="anno" x="200" y="150">Dachfläche</text>
+          <text class="anno" x="168" y="86">Spalt rund 40 cm</text>
+        </svg>
+        <div class="dbody">
+          <p>Das Anschlussblech zwischen Gaubenwange und Dachfläche liegt auf rund 40 cm Länge nicht an. Der Spalt ist über die gesamte Länge durchgehend, Unterspannbahn dahinter nicht einsehbar.</p>
+          <span class="dref">Bild 3, 4 · Aufnahmeabstand 12 m</span>
+        </div>
+      </article>
+
+      <article class="det-card">
+        <div class="dhead"><span class="idc">2</span><span class="t">Kaminkopf</span></div>
+        <svg class="plan" viewBox="0 0 300 170" role="img" aria-label="Schemazeichnung: Schornsteinkopf mit ausgewaschenen Fugen an zwei Lagen.">
+          <rect x="0" y="0" width="300" height="170" fill="var(--roof-fill)"/>
+          <rect class="det-f" x="96" y="34" width="108" height="106"/>
+          <path class="det" d="M88 34 L212 34 L212 24 L88 24 Z"/>
+          <g class="det"><path d="M96 60 H204"/><path d="M96 86 H204"/><path d="M96 112 H204"/></g>
+          <path class="det" d="M150 34 V140"/>
+          <path class="det-x" d="M100 60 H144"/>
+          <path class="det-x" d="M156 86 H200"/>
+          <text class="anno" x="96" y="158">Fehlstellen bis 2 cm tief</text>
+        </svg>
+        <div class="dbody">
+          <p>Die Verfugung ist an der West- und der Südseite in zwei Lagerfugen ausgewaschen. Fehlstellen reichen bis rund 2 cm in den Querschnitt. Kaminabdeckung sitzt auf, keine sichtbare Verformung.</p>
+          <span class="dref">Bild 5, 6 · Aufnahmeabstand 14 m</span>
+        </div>
+      </article>
+
+      <article class="det-card">
+        <div class="dhead"><span class="idc">3</span><span class="t">First, mittleres Drittel</span></div>
+        <svg class="plan" viewBox="0 0 300 170" role="img" aria-label="Schemazeichnung: Firstziegelreihe, drei Ziegel aus der Flucht verschoben, Firstband an einer Stelle offen.">
+          <rect x="0" y="0" width="300" height="170" fill="var(--roof-fill)"/>
+          <path class="det" d="M14 118 H286"/>
+          <g class="det-f">
+            <path d="M28 96 a20 20 0 0 1 40 0 v22 H28 Z"/>
+            <path d="M72 96 a20 20 0 0 1 40 0 v22 H72 Z"/>
+          </g>
+          <g class="det-f" transform="translate(0,-9)">
+            <path d="M116 96 a20 20 0 0 1 40 0 v22 H116 Z"/>
+            <path d="M160 96 a20 20 0 0 1 40 0 v22 H160 Z"/>
+            <path d="M204 96 a20 20 0 0 1 40 0 v22 H204 Z"/>
+          </g>
+          <path class="det-x" d="M116 82 H244"/>
+          <text class="anno" x="112" y="54">3 Ziegel verschoben</text>
+          <text class="anno" x="14" y="146">Firstband</text>
+          <path class="det" d="M14 130 H286"/>
+          <path class="det-x" d="M170 130 H210"/>
+        </svg>
+        <div class="dbody">
+          <p>Drei Firstziegel stehen gegenüber der Flucht der übrigen Reihe um rund 2 cm hoch. Unter dem mittleren Ziegel ist das Firstband auf rund 40 cm offen. Keine gebrochenen Ziegel erkennbar.</p>
+          <span class="dref">Bild 7, 8 · Aufnahmeabstand 18 m</span>
+        </div>
+      </article>
+
+      <article class="det-card">
+        <div class="dhead"><span class="idc">4</span><span class="t">Traufe Südost</span></div>
+        <svg class="plan" viewBox="0 0 300 170" role="img" aria-label="Schemazeichnung: Dachrinne im Schnitt, auf einem Abschnitt mit Laub und Moos gefüllt.">
+          <rect x="0" y="0" width="300" height="170" fill="var(--roof-fill)"/>
+          <path class="det" d="M20 54 L200 84"/>
+          <path class="det" d="M20 66 L200 96"/>
+          <path class="det-f" d="M196 82 a26 26 0 0 0 52 0 v-24 h-52 Z"/>
+          <path class="det" d="M196 58 h52"/>
+          <g class="det-x"><path d="M204 74 h36"/><path d="M206 84 h32"/></g>
+          <text class="anno" x="20" y="40">Dachfläche</text>
+          <text class="anno" x="196" y="130">Rinne, gefüllt</text>
+          <text class="anno" x="20" y="150">Füllung auf 1,5 m Länge</text>
+        </svg>
+        <div class="dbody">
+          <p>Die Rinne ist auf rund 1,5 m Länge mit Laub und Moos gefüllt. Der Ablauftrichter liegt unter der Füllung und war von oben nicht einsehbar. Rinneneisen und Gefälle nicht beurteilbar.</p>
+          <span class="dref">Bild 9 · Aufnahmeabstand 16 m</span>
+        </div>
+      </article>
+    </div>
+
+    <p class="xs mute">
+      Die Abbildungen auf dieser Seite sind Schemazeichnungen des Berichtsaufbaus. Im
+      ausgelieferten Bericht stehen an dieser Stelle die Detailfotografien in voller Auflösung.
+    </p>
+  </div>
+
+  <div class="sheet-ft"><span>VISIOGRAF · Musterbericht</span><span>Seite 5 von 7</span></div>
+</section>
+
+<!-- ================= SEITE 5 — THERMOGRAFIE ================= -->
+<section class="sheet">
+  <div class="sheet-hd">
+    <span class="brand"><span class="mark" aria-hidden="true"></span>VISIOGRAF</span>
+    <span class="ref">VG-2026-0147 · Musterstraße 14</span>
+  </div>
+
+  <div class="stack g26">
+    <div class="stack g12">
+      <span class="eyebrow">5 — Thermografie</span>
+      <h2>Wärmebild Dach und Südfassade</h2>
+      <p class="sm mute" style="max-width:66ch">
+        Aufnahme von außen bei 17 K Differenz zwischen innen und außen. Warme Bereiche zeigen
+        Stellen, an denen mehr Wärme nach außen gelangt als in der umgebenden Fläche.
+      </p>
+    </div>
+
+    <div class="two">
+      <figure class="fig">
+        <svg class="plan" viewBox="0 0 520 384" role="img" aria-label="Wärmebild der Dachfläche in Falschfarben. Warme Bereiche am Gaubenanschluss, am First und in vier ungedämmten Sparrenfeldern.">
+          <defs>
+            <clipPath id="mbRoofClip"><rect x="66" y="62" width="388" height="248"/></clipPath>
+            <linearGradient id="mbCool" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#16224E"/><stop offset="1" stop-color="#22336B"/>
+            </linearGradient>
+            <radialGradient id="mbHot">
+              <stop offset="0" stop-color="#FFF0B8"/><stop offset=".35" stop-color="#F4A93B"/>
+              <stop offset=".65" stop-color="#E85A2A"/><stop offset=".85" stop-color="#A32A72"/>
+              <stop offset="1" stop-color="#A32A72" stop-opacity="0"/>
+            </radialGradient>
+            <linearGradient id="mbBandH" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#A32A72" stop-opacity="0"/>
+              <stop offset=".5" stop-color="#F4A93B"/>
+              <stop offset="1" stop-color="#A32A72" stop-opacity="0"/>
+            </linearGradient>
+            <linearGradient id="mbBandV" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0" stop-color="#A32A72" stop-opacity="0"/>
+              <stop offset=".5" stop-color="#E85A2A"/>
+              <stop offset="1" stop-color="#A32A72" stop-opacity="0"/>
+            </linearGradient>
+          </defs>
+          <g clip-path="url(#mbRoofClip)">
+            <g class="thermal-field">
+              <rect x="66" y="62" width="388" height="248" fill="url(#mbCool)"/>
+              <rect x="296" y="188" width="16" height="124" fill="url(#mbBandV)"/>
+              <rect x="332" y="188" width="16" height="124" fill="url(#mbBandV)"/>
+              <rect x="368" y="188" width="16" height="124" fill="url(#mbBandV)"/>
+              <rect x="404" y="188" width="16" height="124" fill="url(#mbBandV)"/>
+              <rect x="66" y="176" width="388" height="20" fill="url(#mbBandH)" opacity=".85"/>
+              <rect x="120" y="98" width="100" height="72" fill="none" stroke="#F4A93B" stroke-width="11" opacity=".9"/>
+              <circle cx="355" cy="123" r="30" fill="url(#mbHot)" opacity=".9"/>
+              <rect x="66" y="296" width="388" height="16" fill="url(#mbBandH)" opacity=".6"/>
+            </g>
+          </g>
+          <g class="callout">
+            <line x1="170" y1="134" x2="118" y2="72"/>
+            <rect x="6" y="56" width="126" height="20" rx="3"/>
+            <text x="13" y="70">T1 +4,8 K</text>
+          </g>
+          <g class="callout">
+            <line x1="256" y1="186" x2="352" y2="62"/>
+            <rect x="330" y="44" width="126" height="20" rx="3"/>
+            <text x="337" y="58">T2 +3,1 K</text>
+          </g>
+          <g class="callout">
+            <line x1="350" y1="252" x2="300" y2="330"/>
+            <rect x="180" y="336" width="126" height="20" rx="3"/>
+            <text x="187" y="350">T3 +5,6 K</text>
+          </g>
+        </svg>
+        <figcaption>Bild 10 · Wärmebild Dachfläche, Emissionsgrad 0,95</figcaption>
+      </figure>
+
+      <figure class="fig">
+        <svg class="plan" viewBox="0 0 520 384" role="img" aria-label="Wärmebild der Südfassade in Falschfarben. Warme Bereiche über allen Fenstern, an den Geschossdecken und an der auskragenden Balkonplatte.">
+          <defs>
+            <clipPath id="mbFacClip"><rect x="100" y="44" width="320" height="306"/></clipPath>
+          </defs>
+          <g clip-path="url(#mbFacClip)">
+            <g class="thermal-field">
+              <rect x="100" y="44" width="320" height="306" fill="url(#mbCool)"/>
+              <rect x="118" y="52" width="58" height="20" fill="url(#mbBandH)"/>
+              <rect x="184" y="52" width="58" height="20" fill="url(#mbBandH)"/>
+              <rect x="250" y="52" width="58" height="20" fill="url(#mbBandH)"/>
+              <rect x="316" y="52" width="58" height="20" fill="url(#mbBandH)"/>
+              <rect x="118" y="154" width="58" height="20" fill="url(#mbBandH)"/>
+              <rect x="184" y="154" width="58" height="20" fill="url(#mbBandH)"/>
+              <rect x="250" y="154" width="58" height="20" fill="url(#mbBandH)"/>
+              <rect x="316" y="154" width="58" height="20" fill="url(#mbBandH)"/>
+              <rect x="118" y="256" width="58" height="20" fill="url(#mbBandH)"/>
+              <rect x="184" y="256" width="58" height="20" fill="url(#mbBandH)"/>
+              <rect x="250" y="256" width="58" height="20" fill="url(#mbBandH)"/>
+              <rect x="100" y="138" width="320" height="16" fill="url(#mbBandH)" opacity=".7"/>
+              <rect x="100" y="240" width="320" height="16" fill="url(#mbBandH)" opacity=".7"/>
+              <rect x="176" y="236" width="176" height="22" fill="#FFF0B8" opacity=".95"/>
+              <g stroke="#E85A2A" stroke-width="7" fill="none" opacity=".55">
+                <rect x="124" y="70" width="46" height="52"/><rect x="190" y="70" width="46" height="52"/>
+                <rect x="256" y="70" width="46" height="52"/><rect x="322" y="70" width="46" height="52"/>
+                <rect x="124" y="172" width="46" height="52"/><rect x="190" y="172" width="46" height="52"/>
+                <rect x="256" y="172" width="46" height="52"/><rect x="322" y="172" width="46" height="52"/>
+                <rect x="124" y="274" width="46" height="52"/><rect x="190" y="274" width="46" height="52"/>
+                <rect x="256" y="274" width="46" height="52"/>
+              </g>
+            </g>
+          </g>
+          <g class="callout">
+            <line x1="147" y1="62" x2="76" y2="30"/>
+            <rect x="6" y="14" width="126" height="20" rx="3"/>
+            <text x="13" y="28">T4 +6,2 K</text>
+          </g>
+          <g class="callout">
+            <line x1="352" y1="246" x2="418" y2="212"/>
+            <rect x="384" y="194" width="126" height="20" rx="3"/>
+            <text x="391" y="208">T5 +7,4 K</text>
+          </g>
+          <g class="callout">
+            <line x1="120" y1="146" x2="70" y2="118"/>
+            <rect x="6" y="100" width="126" height="20" rx="3"/>
+            <text x="13" y="114">T6 +3,9 K</text>
+          </g>
+        </svg>
+        <figcaption>Bild 11 · Wärmebild Südfassade, Emissionsgrad 0,95</figcaption>
+      </figure>
+    </div>
+
+    <div>
+      <div class="legend-bar"></div>
+      <div class="legend-row"><span>−2 °C</span><span>Oberflächentemperatur</span><span>+9 °C</span></div>
+    </div>
+
+    <div class="tw">
+      <table>
+        <thead>
+          <tr><th>Nr.</th><th>Fläche</th><th>Ort</th><th class="n">Oberfläche</th><th class="n">Referenz</th><th class="n">ΔT</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="idc">T1</td><td>Dach</td><td>Gaubenanschluss, umlaufend</td><td class="n">6,8 °C</td><td class="n">2,0 °C</td><td class="n">+4,8 K</td></tr>
+          <tr><td class="idc">T2</td><td>Dach</td><td>Firstanschluss, über gesamte Länge</td><td class="n">5,1 °C</td><td class="n">2,0 °C</td><td class="n">+3,1 K</td></tr>
+          <tr><td class="idc">T3</td><td>Dach</td><td>Sparrenfelder 4 bis 7, Südostfläche</td><td class="n">7,6 °C</td><td class="n">2,0 °C</td><td class="n">+5,6 K</td></tr>
+          <tr><td class="idc">T4</td><td>Fassade</td><td>Rollladenkästen, alle acht Fenster OG1 und OG2</td><td class="n">8,2 °C</td><td class="n">2,0 °C</td><td class="n">+6,2 K</td></tr>
+          <tr><td class="idc">T5</td><td>Fassade</td><td>Balkonplatte auskragend, OG2</td><td class="n">9,4 °C</td><td class="n">2,0 °C</td><td class="n">+7,4 K</td></tr>
+          <tr><td class="idc">T6</td><td>Fassade</td><td>Geschossdecken-Auflager, umlaufend</td><td class="n">5,9 °C</td><td class="n">2,0 °C</td><td class="n">+3,9 K</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="note">
+      <b>Was diese Werte sind und was nicht.</b> Angegeben ist die gemessene Oberflächentemperatur
+      gegenüber einer ungestörten Referenzfläche derselben Bauteilart. Die Differenz beschreibt,
+      wie stark eine Stelle vom Umfeld abweicht — sie ist kein Maß für den Wärmeverlust in
+      Kilowattstunden und keine Aussage über die Ursache.
+    </div>
+  </div>
+
+  <div class="sheet-ft"><span>VISIOGRAF · Musterbericht</span><span>Seite 6 von 7</span></div>
+</section>
+
+<!-- ================= SEITE 6 — VOLLSTÄNDIGKEIT UND SCHLUSS ================= -->
+<section class="sheet">
+  <div class="sheet-hd">
+    <span class="brand"><span class="mark" aria-hidden="true"></span>VISIOGRAF</span>
+    <span class="ref">VG-2026-0147 · Musterstraße 14</span>
+  </div>
+
+  <div class="stack g26">
+    <div class="stack g12">
+      <span class="eyebrow">6 — Vollständigkeitsplan</span>
+      <h2>Was erfasst wurde und was nicht</h2>
+    </div>
+
+    <div class="tw">
+      <table>
+        <thead>
+          <tr><th>Fläche</th><th class="n">Erfasst</th><th>Nicht erfasst</th><th>Grund</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Dachfläche gesamt, rund 195 m²</td><td class="n">88 %</td>
+            <td>Nordwestliche Teilfläche, rund 23 m²</td>
+            <td>Verdeckt durch Baumkrone auf dem Nachbargrundstück</td>
+          </tr>
+          <tr>
+            <td>Südfassade</td><td class="n">100 %</td><td>—</td><td>—</td>
+          </tr>
+          <tr>
+            <td>Nord-, Ost- und Westfassade</td><td class="n">0 %</td>
+            <td>vollständig</td><td>Nicht beauftragt</td>
+          </tr>
+          <tr>
+            <td>Innenraum</td><td class="n">0 %</td>
+            <td>vollständig</td><td>Nicht Gegenstand des Auftrags, kein Betreten</td>
+          </tr>
+          <tr>
+            <td>Ablauftrichter Rinne Südost</td><td class="n">0 %</td>
+            <td>vollständig</td><td>Unter der Füllung, von oben nicht einsehbar</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="note">
+      Die nicht erfassten Flächen sind im Übersichtsbild auf Seite 3 schraffiert eingetragen.
+      <b>Über den Zustand dieser Flächen enthält der Bericht keine Aussage</b> — auch keine
+      stillschweigende.
+    </div>
+
+    <div class="rule"></div>
+
+    <div class="two">
+      <div class="block plain stack g12">
+        <h3>Datenschutz und Aufbewahrung</h3>
+        <ul class="tick">
+          <li>Der Flug erfolgte mit festgelegter Blickrichtung auf das Auftragsobjekt.</li>
+          <li>Nachbargrundstücke und erkennbare Personen sind unkenntlich gemacht.</li>
+          <li>Die Rohdaten werden am <b class="mono">15.05.2026</b> gelöscht, 90 Tage nach der Aufnahme.</li>
+          <li>Längere Aufbewahrung ist bis dahin schriftlich vereinbar.</li>
+        </ul>
+      </div>
+      <div class="block plain stack g12">
+        <h3>Grenzen des Verfahrens</h3>
+        <ul class="tick">
+          <li>Metallische Bauteile wurden wegen niedrigem Emissionsgrad nicht ausgewertet.</li>
+          <li>Aufnahme bei bedecktem Himmel vor Sonnenaufgang, keine Einstrahlungseinflüsse.</li>
+          <li>Die Zuordnung zu Dämmung, Feuchte oder Undichtheit erfordert eine Messung von innen.</li>
+          <li>Hinterlüftete Bauteile können Auffälligkeiten verdecken.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="rule"></div>
+
+    <div class="stack g12">
+      <h3>Anlagen</h3>
+      <p class="sm mute">
+        142 visuelle Einzelaufnahmen und 38 Wärmebilder in voller Auflösung, Übersichtsbild
+        als PNG, Fundstellenverzeichnis als CSV. Übergabe über einen Downloadlink mit
+        30 Tagen Laufzeit.
+      </p>
+    </div>
+
+    <div class="sig">
+      <div>Ort, Datum</div>
+      <div>Fernpilot und Ersteller</div>
+    </div>
+
+    <div class="disc">
+      <b>Konzeptentwurf.</b> Dieser Musterbericht gehört zum Betriebskonzept VISIOGRAF, einer
+      Gründungsidee. Objekt, Auftraggeber, Auftragsnummer, Messwerte und Befunde sind erfunden
+      und stellen keine reale Begutachtung dar. Die Abbildungen sind Schemazeichnungen, die
+      Wärmebilder nachgestellt. Zweck des Dokuments ist es, den Aufbau und den Umfang des
+      Berichtsformats zu zeigen.
+    </div>
+  </div>
+
+  <div class="sheet-ft"><span>VISIOGRAF · Musterbericht</span><span>Seite 7 von 7</span></div>
+</section>
+
+<script>
+  document.getElementById('printBtn').addEventListener('click', function () { window.print(); });
+</script>
