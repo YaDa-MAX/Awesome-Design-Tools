@@ -17,6 +17,8 @@
     var PF=(typeof window.PFADE!=="undefined")?window.PFADE:[];
     var lp=get("heiben-lernpfad",{}), verlauf=get("heiben-verlauf",[]);
     var readSet={}; (verlauf||[]).forEach(function(h){var m=String(h.u||"").match(/[?&]id=([^&]+)/);if(m)readSet[decodeURIComponent(m[1])]=1;});
+    /* Besuchte Kompendium-Stationen zaehlen mit (Welle 22). */
+    Object.keys(get("heiben-stationen",{})).forEach(function(id){readSet[id]=1;});
     function isDone(id){ if(lp[id]===true)return true; if(lp[id]===false)return false; return !!readSet[id]; }
     var pfDone=0, artDone={};
     PF.forEach(function(p){ var d=0; (p.steps||[]).forEach(function(s){ if(isDone(s[0])){d++;artDone[s[0]]=1;} }); if(p.steps&&d===p.steps.length)pfDone++; });

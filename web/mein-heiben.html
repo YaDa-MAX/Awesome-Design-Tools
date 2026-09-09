@@ -261,7 +261,7 @@ el("greet").textContent=(h<11?"Guten Morgen":h<18?"Guten Tag":"Guten Abend")+" Â
   el("continueSec").style.display="";
   el("continue").innerHTML=items.map(function(it){
     var kc=it.k?'var(--'+it.k+')':'var(--lw)';
-    var tag=it.ty==='lw'?'Artikel':(it.ty||'');
+    var tag=it.ty==='lw'?'Artikel':(it.ty==='kb'?'Steckbrief':(it.ty||''));
     return '<a class="row" href="'+esc(it.u)+'" style="--kc:'+kc+'"><span class="dot"></span>'+
       '<span class="rt">'+esc(it.n||'')+'</span><span class="rv">'+esc(tag)+'</span><span class="arr">â†’</span></a>';
   }).join('');

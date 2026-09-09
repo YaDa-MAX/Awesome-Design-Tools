@@ -2415,3 +2415,88 @@ auseinanderzuziehen hiesse, auf 21 Seiten Markup umzubenennen — eine eigene We
 eine mit wenig Ertrag: jede dieser Seiten ist für sich stimmig, der Konflikt tut nur
 weh, wo eine Seite die Klasse **ohne** eigene Regel benutzt. Genau diese sechs Stellen
 sind jetzt versorgt.
+
+---
+
+### WELLE 22: KOMPENDIUM-STATIONEN ABHAKEN (SW -3025)
+
+Backlog-Punkt eingelöst: „Kompendium-Stationen automatisch abhaken (Deep-Link-Besuch in
+localStorage vermerken und in `isDone` einbeziehen)".
+
+**Der Befund war größer als die Backlog-Zeile.** Gemessen über `lernpfade-daten.js`:
+
+| | |
+|---|---|
+| Lernpfade | 16 |
+| Schritte gesamt | 91 |
+| Schritte, die auf einen Lebenswissen-Artikel zeigen | 43 |
+| **Schritte, die auf einen Kompendium-Steckbrief zeigen** | **48** |
+
+`isDone()` erkennt nur `?id=`-Adressen im Verlauf. Ein Steckbrief wird über `#marke`
+erreicht und schrieb **überhaupt nichts**. **Über die Hälfte jedes Säulen-Pfads war damit
+tot** — man konnte die Station lesen, sie blieb ungehakt, und die acht Säulen-Pfade waren
+nie zu Ende zu bringen.
+
+**Zweiter Befund, beim Lesen des Codes gefunden:** ein Klick auf eine Steckbriefkarte
+setzte die Adresse **nicht**. Deep-Links waren einseitig — man konnte auf `#tomate`
+ankommen, aber nicht teilen, was man gerade liest.
+
+#### Geliefert
+
+| Datei | Was |
+|---|---|
+| `web/hb-stationen.js` | merkt besuchte Stationen, 3,8 KB — schreibt nur |
+| 8 Kompendien | `showDetail()` setzt die Adresse und meldet die Station |
+| `lernpfade.html`, `heiben-stand.js`, `heiben-rueckblick.js` | lesen den neuen Bestand mit |
+| `heiben-speicher.js` | neuer Schlüssel im Register |
+| `mein-heiben.html` | Verlaufseintrag heißt „Steckbrief", nicht „kb" |
+
+**Warum ein eigener Schlüssel.** `heiben-verlauf` ist auf **10 Einträge gekappt**
+(`H.slice(0,10)`) — als Gedächtnis für „gelesen" reicht das nicht, der elfte Besuch löscht
+den ersten. `heiben-stationen` hält den Bestand als `{ "<stationId>": <zeit> }`. Der
+Verlauf wird zusätzlich gefüttert, damit „Zuletzt angesehen" den Steckbrief auch wirklich
+öffnet. Neuer Schlüssel nach den Präfixregeln in `heiben-speicher.js` eingetragen (→ Welt
+„wissen"), die 88 bestehenden bleiben unangetastet.
+
+**Die Kennung** entsteht aus Datei und Sprungmarke, genau wie sie in `lernpfade-daten.js`
+vergeben wurde: `pflanzen.html#tomate` → `k8-pflanzen-tomate`. Die Ableitung steht **an
+einer Stelle** (im Schreiber); die drei Leser holen sich nur `Object.keys(...)` — keine
+Kopie von Logik.
+
+**`replaceState` statt `location.hash`** — bewusst: kein zusätzlicher Eintrag im
+Browserverlauf (der Zurück-Knopf soll die Seite verlassen, nicht durch Steckbriefe
+blättern) und kein Sprung des Browsers zur Sprungmarke, der mit dem eigenen
+`scrollIntoView` stritte. Weil `replaceState` kein `hashchange` auslöst, meldet
+`showDetail()` die Station von Hand.
+
+#### Zwei Fallen
+
+1. **Der Deep-Link beim Laden wird vom Inline-Skript geöffnet — vor der `defer`-Datei.**
+   Die Seite ruft `showDetail(hash)` in einem Inline-Skript am Ende des Bodys auf; das
+   läuft **vor** `hb-stationen.js`, `window.HB_STATIONEN` gibt es dort noch nicht. Ohne
+   Nachtrag bliebe ausgerechnet der geteilte Link ungemerkt. `hb-stationen.js` trägt ihn
+   bei `DOMContentLoaded` nach.
+2. **Der erste Wächter dafür griff nicht.** Ich prüfte auf `#detail .dcard` — der Test
+   meldete auch bei `#gibtesnicht` „offen", die Station wurde als
+   `k8-pflanzen-gibtesnicht` gemerkt. Der Grund war nicht wichtig genug, um ihn zu
+   verfolgen: die richtige Frage ist nicht „ist etwas offen", sondern **„gibt es diese
+   Station"**. Jetzt entscheidet das Vorhandensein der Karte `[data-id="…"]`. Nachgemessen:
+   `#tomate` merkt, `#gibtesnicht` merkt nichts.
+
+#### Nachweis
+
+| Prüfung | Ergebnis |
+|---|---|
+| Kompendien: Klick öffnet Steckbrief, setzt Adresse, merkt Station, schreibt Verlauf | **8 / 8** |
+| Deep-Link `#tomate` gemerkt · `#gibtesnicht` nicht gemerkt | beides wie gewollt |
+| Lernpfade nach 8 Besuchen | 4 der Besuche sind Pfadschritte → Schritte haken auf |
+| Verlauf in „Mein HeiBen": Etikett, Farbe, funktionierender Link | geprüft |
+| PageErrors über alle 109 Seiten | **0 / 109** |
+
+**Anschlussfehler mitbehoben:** der Verlaufseintrag hätte sein Etikett als „kb" gezeigt und
+seinen Farbpunkt verloren — `var(--pflanzen)` gibt es nicht. Jedes Kompendium liegt jetzt
+auf der Lebenswissen-Kategorie, in die es gehört (`haushalt` → `wohnen`, `papierkram` →
+`buero`, `erstehilfe` → `gesundheit` …).
+
+**Backlog danach:** `gen_tagesdosis_daten.py` bei der nächsten Kartencharge neu schreiben ·
+Behördengänge-Kompendium · Brutto-Netto-Rechner.

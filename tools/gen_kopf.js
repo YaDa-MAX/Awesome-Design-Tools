@@ -53,6 +53,9 @@ const PFLICHT = [
     nurWenn: (e, text) => e.typ === 'intern' || /data-hb-(intern|weltseiten)/.test(text) },
   /* Gemeinsamer Fuss (Welle 18). Nicht auf Standalone-Seiten und nicht dort, wo
      der Abschluss bewusst eigen ist (data-hb-fuss="aus" am body). */
+  /* Besuchte Steckbriefe merken (Welle 22). Nur die Kompendien haben welche. */
+  { datei: 'hb-stationen.js', tag: '<script src="hb-stationen.js" defer></script>',
+    nurWenn: (e) => e.typ === 'kompendium' },
   /* Bewegung (Welle 21). Zwingend, sobald eine Seite etwas ansagt: das
      Stylesheet setzt angesagte Elemente auf opacity:0, sichtbar macht sie
      erst das Skript. Stylesheet ohne Skript hiesse unsichtbarer Inhalt. */

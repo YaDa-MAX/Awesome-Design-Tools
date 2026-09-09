@@ -16,7 +16,7 @@ Statisches HTML/JS/CSS-**PWA ohne Build-Schritt**, offline-fähig, localStorage.
 ## Pflicht-Workflow nach JEDER Änderung unter web/
 1. **Precache + Service-Worker-Version**: `cd web && node ../tools/gen_sw.js` — erzeugt die
    `PRECACHE`-Liste aus dem Dateibestand (Referenzen aus HTML **und** `url()` in Stylesheets,
-   inline `<style>` eingeschlossen) UND zählt die Cache-Version hoch (aktuell **-3024**).
+   inline `<style>` eingeschlossen) UND zählt die Cache-Version hoch (aktuell **-3025**).
    Nie von Hand pflegen. Standalone-Seiten (`typ` in `tools/seiten.json`) bleiben automatisch
    draußen; `vendor/` und Dateien > 150 KB kommen zur Laufzeit in den Cache (der fetch-Handler
    macht stale-while-revalidate). Wer nur die Version braucht, bumpt trotzdem über den Generator.
@@ -212,6 +212,17 @@ Statisches HTML/JS/CSS-**PWA ohne Build-Schritt**, offline-fähig, localStorage.
   Ausserdem: `.note` trug vier Bedeutungen; die sechs Stellen mit ≥100 Zeichen Fließtext
   im Mono-Kapitälchen bekamen `.note.note-lang`. **Achtung `\bnote\b` trifft auch in
   `mg-note`** — Klassen als Token vergleichen, nicht als Teilzeichenkette.
+  V3-W22 fertig: **Kompendium-Stationen haken sich ab**. 48 der 91 Lernpfad-Schritte
+  zeigen auf Steckbriefe (`pflanzen.html#tomate`); die konnten nie abgehakt werden, weil
+  `isDone()` nur `?id=` im Verlauf erkennt und ein Steckbrief gar nichts schrieb.
+  `web/hb-stationen.js` merkt sie in **`heiben-stationen`** = `{ "k8-<datei>-<marke>": zeit }`
+  — eigener Schlüssel, weil `heiben-verlauf` auf 10 Einträge gekappt ist. Kennung
+  `pflanzen.html#tomate` → `k8-pflanzen-tomate`, abgeleitet **nur im Schreiber**; die drei
+  Leser (`lernpfade.html`, `heiben-stand.js`, `heiben-rueckblick.js`) holen `Object.keys`.
+  `showDetail()` setzt jetzt zusätzlich die Adresse (**`replaceState`**, kein `hashchange`,
+  kein Verlaufseintrag) — Steckbrief-Links sind damit teilbar. **Der Deep-Link beim Laden
+  wird vom Inline-Skript geöffnet, also VOR der `defer`-Datei** — `hb-stationen.js` trägt
+  ihn bei `DOMContentLoaded` nach, aber nur wenn die Karte `[data-id]` existiert.
 - `web/startseite-klassisch.html` = **die Startseite bis W10**, archiviert (standalone, nicht
   verlinkt, nicht precached). Sie ist die einzige Seite, die `hb-menue.css` und `hb-suche-nav.js`
   noch braucht.

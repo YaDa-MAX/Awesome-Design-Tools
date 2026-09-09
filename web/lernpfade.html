@@ -105,6 +105,11 @@ var state={}; try{state=JSON.parse(localStorage.getItem(SK))||{};}catch(e){state
 var verlauf=new Set();
 try{(JSON.parse(localStorage.getItem("heiben-verlauf"))||[]).forEach(function(h){
   var m=String(h.u||"").match(/[?&]id=([^&]+)/); if(m)verlauf.add(decodeURIComponent(m[1]));});}catch(e){}
+/* Kompendium-Stationen (Welle 22): 48 der 91 Schritte zeigen auf Steckbriefe.
+   Die tragen keine ?id=-Adresse und passen nicht in den auf 10 Eintraege
+   gekappten Verlauf — hb-stationen.js fuehrt darum einen eigenen Bestand. */
+try{Object.keys(JSON.parse(localStorage.getItem("heiben-stationen"))||{})
+  .forEach(function(id){verlauf.add(id);});}catch(e){}
 var openSet={};
 
 function isDone(id){ if(state[id]===true)return true; if(state[id]===false)return false; return verlauf.has(id); }

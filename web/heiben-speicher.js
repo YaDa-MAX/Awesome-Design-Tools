@@ -120,7 +120,7 @@
     [/^heiben-(reise|reisen)|^heiben_reise/, 'reisen'],
     [/^heiben-(lw-|magazin|redaktion|schaufenster)/, 'studio'],
     [/^heiben-(konto|abo|bundle|invoices|pay|orders|shop-)|^heiben_(orders|leads)/, 'konto'],
-    [/^heiben-(lernpfad|verlauf|tagesdosis|erfolge)|^heiben_(karten|quiz|results)/, 'wissen'],
+    [/^heiben-(lernpfad|verlauf|tagesdosis|erfolge|stationen)|^heiben_(karten|quiz|results)/, 'wissen'],
   ];
 
   var WELTNAME = {

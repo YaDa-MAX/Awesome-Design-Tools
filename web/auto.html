@@ -57,6 +57,7 @@
 <script src="heiben-menue.js" defer></script>
 <link rel="stylesheet" href="hb-fuss.css">
 <script src="hb-fuss.js" defer></script>
+<script src="hb-stationen.js" defer></script>
 </head>
 <body data-hb-welt="wissen" data-hb-seite="kompendium">
 <div class="wrap">
@@ -160,6 +161,14 @@ function detail(p){
 
 function showDetail(id){
   var p=P.filter(function(x){return x.id===id;})[0]; if(!p)return;
+  /* Die Adresse zeigt jetzt, was man liest — der Link ist damit teilbar.
+     Bewusst replaceState statt location.hash: kein zusätzlicher Eintrag im
+     Browserverlauf (der Zurück-Knopf soll die Seite verlassen, nicht durch
+     Steckbriefe blättern) und kein Sprung des Browsers zur Sprungmarke, der
+     mit dem eigenen scrollIntoView stritte. Gemeldet wird darum von Hand. */
+  try{ if(location.hash.slice(1)!==encodeURIComponent(id)){
+    history.replaceState(null,"","#"+encodeURIComponent(id)); }
+    if(window.HB_STATIONEN) window.HB_STATIONEN.merken(id); }catch(e){}
   var d=document.getElementById("detail");
   d.innerHTML=detail(p);
   document.getElementById("dClose").addEventListener("click",function(){d.innerHTML="";});
