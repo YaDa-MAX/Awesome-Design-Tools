@@ -189,7 +189,14 @@ function render(){
 render();
 
 /* Deep-Link aus wissen.html: seite.html#eintrags-id öffnet den Steckbrief direkt */
-(function(){var h=decodeURIComponent((location.hash||"").slice(1));if(h){try{showDetail(h);}catch(e){}}})();
+(function(){
+  function ausHash(){var h=decodeURIComponent((location.hash||"").slice(1));if(h){try{showDetail(h);}catch(e){}}}
+  ausHash();
+  /* Auch ein von Hand eingefügter oder aus einer Nachricht geöffneter Link
+     soll wirken, wenn die Seite schon offen ist. showDetail setzt die Adresse
+     per replaceState — das löst kein hashchange aus, also keine Schleife. */
+  window.addEventListener("hashchange",ausHash);
+})();
 </script>
 </body>
 </html>

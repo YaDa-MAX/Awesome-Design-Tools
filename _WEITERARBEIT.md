@@ -2500,3 +2500,84 @@ auf der Lebenswissen-Kategorie, in die es gehört (`haushalt` → `wohnen`, `pap
 
 **Backlog danach:** `gen_tagesdosis_daten.py` bei der nächsten Kartencharge neu schreiben ·
 Behördengänge-Kompendium · Brutto-Netto-Rechner.
+
+---
+
+### WELLE 23: DAS NEUNTE KOMPENDIUM — BEHÖRDENGÄNGE (SW -3026)
+
+Backlog-Punkt eingelöst: „Behördengänge-Kompendium".
+
+**Warum jetzt die richtige Welle:** W19 hat die Kompendien-Maschinerie zentralisiert,
+W22 das Abhaken der Stationen gebaut. Ein neues Kompendium ist seither fast reine
+Inhaltsarbeit — der Beweis, dass sich die vier Entdopplungswellen gelohnt haben.
+`gen_kopf.js` hat der neuen Seite **acht Pflichtdateien von selbst angehängt**, darunter
+`hb-stationen.js` und den gemeinsamen Fuß. Kein Handgriff im Kopf, keine Kopie.
+
+#### Der Inhalt
+
+**34 Steckbriefe** in sieben Lebenslagen, je mit: wohin, was mitnehmen, was es kostet,
+wie lange es dauert, wie es abläuft, was schiefgeht, ein Tipp.
+
+| Lebenslage | Stück |
+|---|---|
+| Umzug & Meldung | 5 |
+| Ausweise & Urkunden | 6 |
+| Familie & Standesamt | 6 |
+| Arbeit & Selbständigkeit | 6 |
+| Fahrzeug & Führerschein | 4 |
+| Geld vom Staat | 4 |
+| Vorsorge & Todesfall | 3 |
+
+**20 davon mit benannter Frist**, 34 mit einem „Achtung" — dem Fehler, der wirklich
+passiert. Die teuersten drei stehen dick da: die Meldung „arbeitsuchend" drei Monate vor
+Vertragsende (sonst Sperrzeit), Elterngeld rückwirkend nur drei Monate, Kindergeld nur
+sechs.
+
+**Zur Genauigkeit — bewusst zweigeteilt.** Fristen sind Bundesrecht und stehen konkret
+mit Norm (§ 17 BMG, § 18 PStG, § 38 SGB III, § 7 BEEG). Gebühren und Bearbeitungszeiten
+setzen Länder und Kommunen — die stehen als typische Werte, und ein sichtbarer Hinweis
+auf der Seite sagt das auch. Jeder Steckbrief nennt das zuständige Amt, damit die
+Nachfrage möglich ist statt nötig.
+
+#### Angeschlossen, nicht angehängt
+
+| Wo | Was |
+|---|---|
+| `tools/seiten.json` | Eintrag `typ:"kompendium"` — mehr brauchte der Kopf nicht |
+| `wissen.html` | neunte Kachel, Volltextindex zieht die 34 Einträge mit |
+| `tools/gen_kennzahlen.js` | kannte nur acht Kompendien — ergänzt |
+| `lernpfade-daten.js` | neuer Säulenpfad `s8-behoerden` mit sechs Stationen |
+| Kennzahlen | 8 → **9 Kompendien**, 370 → **404 Steckbriefe**, 16 → 17 Pfade, 91 → 97 Stationen |
+
+Die Kennzahl „Acht Kompendien, 370 Steckbriefe" stand an **fünf** Stellen in
+`wissen.html` plus in der Registry-Beschreibung — alle berichtigt.
+
+#### Mitgefunden: Deep-Links wirkten nur beim Laden
+
+Beim Prüfen fiel auf, dass ein gewechselter Hash auf einer **schon offenen** Seite nichts
+bewirkt: `pflanzen.html#tomate` zeigt „Tomate", danach `#basilikum` — immer noch „Tomate".
+Der Inline-Aufruf läuft nur einmal beim Laden.
+
+Das war immer so, fiel aber nie auf, **weil es vor W22 gar keine teilbaren Links gab**.
+Erst seit `showDetail()` die Adresse setzt, verschickt man solche Links — und dann muss
+ein eingefügter Link auch wirken, wenn die Seite schon offen ist. Ein `hashchange`-Hörer
+auf allen **neun** Kompendien schließt den Vertrag, den W22 aufgemacht hat. Keine
+Schleifengefahr: `showDetail()` nutzt `replaceState`, das löst kein `hashchange` aus.
+
+Gemessen über alle neun: erster Steckbrief per Deep-Link, dann Hash auf die zweite
+Karte — **9/9 wechseln**.
+
+#### Nachweis
+
+| Prüfung | Ergebnis |
+|---|---|
+| PageErrors über alle Seiten | **0 / 110** |
+| Fuß, Weltpunkte, Rechts-Links, kein Überlauf | **110 / 110** |
+| 34 Karten, 7 Lebenslagen, 5 Dringlichkeits-Chips, Frist-Filter (17 Treffer) | wie gewollt |
+| Suche greift auch auf Amt und Unterlagen („eVB" → Fahrzeug zulassen) | ja |
+| Steckbrief: Adresse gesetzt, Station gemerkt, Frist- und Achtung-Kasten | ja |
+| Lernpfade: 17 Pfade, `s8-behoerden` dabei, alle sechs Ziele leben | ja |
+| tote Links auf der neuen Seite | keine |
+
+**Backlog danach:** `gen_tagesdosis_daten.py` bei der nächsten Kartencharge ·
+Brutto-Netto-Rechner.

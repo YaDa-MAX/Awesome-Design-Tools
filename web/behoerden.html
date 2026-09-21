@@ -4,9 +4,9 @@
 <!-- hb:kopf — erzeugt von tools/gen_kopf.js aus tools/seiten.json. Nicht von Hand ändern. -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Papierkram · HeiBen</title>
-<meta name="description" content="Was hebe ich wie lange auf, reicht ein Scan, welche Frist läuft mir davon? 31 Dokumente im Steckbrief — vom Kassenbon bis zum Notfallordner.">
-<link rel="canonical" href="https://www.heiben.de/papierkram.html">
+<title>Behördengänge · HeiBen</title>
+<meta name="description" content="Welches Amt, welche Frist, welche Unterlagen — 34 Behördengänge im Steckbrief. Vom Ummelden über Elterngeld bis zur Sterbeurkunde, mit Kosten, Dauer und dem teuersten Fehler.">
+<link rel="canonical" href="https://www.heiben.de/behoerden.html">
 <meta name="theme-color" content="#f3eee5">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
@@ -20,15 +20,15 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="HeiBen">
 <meta property="og:locale" content="de_DE">
-<meta property="og:url" content="https://www.heiben.de/papierkram.html">
-<meta property="og:title" content="Papierkram · HeiBen">
-<meta property="og:description" content="Was hebe ich wie lange auf, reicht ein Scan, welche Frist läuft mir davon? 31 Dokumente im Steckbrief — vom Kassenbon bis zum Notfallordner.">
+<meta property="og:url" content="https://www.heiben.de/behoerden.html">
+<meta property="og:title" content="Behördengänge · HeiBen">
+<meta property="og:description" content="Welches Amt, welche Frist, welche Unterlagen — 34 Behördengänge im Steckbrief. Vom Ummelden über Elterngeld bis zur Sterbeurkunde, mit Kosten, Dauer und dem teuersten Fehler.">
 <meta property="og:image" content="assets/hero-light.png">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Papierkram · HeiBen">
-<meta name="twitter:description" content="Was hebe ich wie lange auf, reicht ein Scan, welche Frist läuft mir davon? 31 Dokumente im Steckbrief — vom Kassenbon bis zum Notfallordner.">
+<meta name="twitter:title" content="Behördengänge · HeiBen">
+<meta name="twitter:description" content="Welches Amt, welche Frist, welche Unterlagen — 34 Behördengänge im Steckbrief. Vom Ummelden über Elterngeld bis zur Sterbeurkunde, mit Kosten, Dauer und dem teuersten Fehler.">
 <meta name="twitter:image" content="assets/hero-light.png">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Papierkram · HeiBen","description":"Was hebe ich wie lange auf, reicht ein Scan, welche Frist läuft mir davon? 31 Dokumente im Steckbrief — vom Kassenbon bis zum Notfallordner.","url":"https://www.heiben.de/papierkram.html","inLanguage":"de-DE","isPartOf":{"@type":"WebSite","name":"HeiBen","url":"https://www.heiben.de/"},"publisher":{"@type":"Organization","name":"HeiBen Studio GmbH"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Behördengänge · HeiBen","description":"Welches Amt, welche Frist, welche Unterlagen — 34 Behördengänge im Steckbrief. Vom Ummelden über Elterngeld bis zur Sterbeurkunde, mit Kosten, Dauer und dem teuersten Fehler.","url":"https://www.heiben.de/behoerden.html","inLanguage":"de-DE","isPartOf":{"@type":"WebSite","name":"HeiBen","url":"https://www.heiben.de/"},"publisher":{"@type":"Organization","name":"HeiBen Studio GmbH"}}</script>
 <!-- /hb:kopf -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;1,400&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
@@ -46,33 +46,41 @@
 .box.weg .bt{color:var(--moss)}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:.7rem}
 .pc .meta .frist{color:var(--terra);font-weight:700}
+/* Der Ablauf ist auf dieser Seite die Hauptsache: er bekommt eine eigene Spur. */
+.ablauf{border-left:2px solid var(--ochre);padding-left:.8rem;margin-top:.3rem}
+.mitliste{background:var(--bg2);border-radius:12px;padding:.7rem .9rem;margin-top:.3rem;font-size:.95rem}
+.zahlen{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.7rem}
+.zahl{background:var(--paper);border:1px solid var(--rule);border-radius:12px;padding:.5rem .8rem;flex:1 1 11rem}
+.zahl .zl{font-family:'JetBrains Mono',monospace;font-size:.55rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ochre);display:block;margin-bottom:.15rem}
+.zahl .zv{font-size:.93rem}
 </style>
 <link rel="stylesheet" href="heiben-design.css">
 <script src="heiben-nav.js" defer></script>
+<script src="heiben-menue.js" defer></script>
 <script src="heiben-legal.js" defer></script>
 <script id="hb-pwa" src="hb-pwa.js" defer></script>
-<script src="heiben-menue.js" defer></script>
+<script src="hb-stationen.js" defer></script>
 <link rel="stylesheet" href="hb-fuss.css">
 <script src="hb-fuss.js" defer></script>
-<script src="hb-stationen.js" defer></script>
 </head>
 <body data-hb-welt="wissen" data-hb-seite="kompendium">
 <div class="wrap">
   <div class="eyebrow">HeiBen · Wissen für Zuhause</div>
-  <h1><svg class="leaf" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#b04a31" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M3 10h18"/></svg>Ordnung im <em>Papierkram</em></h1>
-  <p class="lead">Was hebe ich wie lange auf, reicht ein Scan, und welche Kündigungsfrist läuft mir gerade davon? 31 Dokumente und Verträge im Steckbrief — vom Kassenbon bis zum Notfallordner, mit ehrlichen Fristen und dem Schredder-Gebot für alles mit Namen darauf.</p>
+  <h1><svg class="leaf" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#b04a31" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V8l8-5 8 5v13"/><path d="M9 21v-6h6v6"/><path d="M4 12h16"/></svg>Der Gang <em>zum Amt</em></h1>
+  <p class="lead">Welches Amt, welche Frist, welche Unterlagen — 34 Behördengänge im Steckbrief. Vom Ummelden über Elterngeld bis zur Sterbeurkunde: was mitzubringen ist, was es kostet, wie lange es dauert und welcher Fehler am teuersten wird.</p>
 
   <div class="controls">
-    <div class="row"><span class="lbl">Wie lange aufheben</span>
+    <div class="row"><span class="lbl">Wie dringend</span>
       <button class="chip on" data-f="typ" data-v="alle">Alle</button>
-      <button class="chip" data-f="typ" data-v="lebenslang">Lebenslang</button>
-      <button class="chip" data-f="typ" data-v="jahre">Mehrere Jahre</button>
-      <button class="chip" data-f="typ" data-v="laufend">Solange es läuft</button>
+      <button class="chip" data-f="typ" data-v="frist">Frist läuft</button>
+      <button class="chip" data-f="typ" data-v="termin">Termin nötig</button>
+      <button class="chip" data-f="typ" data-v="online">Geht digital</button>
+      <button class="chip" data-f="typ" data-v="jederzeit">Ohne Frist</button>
     </div>
-    <div class="row"><span class="lbl">Kategorie &amp; Suche</span>
+    <div class="row"><span class="lbl">Lebenslage &amp; Suche</span>
       <button class="chip" id="fristChip">⏰ Frist beachten</button>
       <select id="kat" class="chip" style="padding-right:.5rem"></select>
-      <input id="q" type="search" placeholder="Suchen: Testament, Kassenbon, Kfz …" aria-label="Dokumente durchsuchen">
+      <input id="q" type="search" placeholder="Suchen: Ummelden, Elterngeld, Führerschein …" aria-label="Behördengänge durchsuchen">
     </div>
   </div>
 
@@ -81,27 +89,29 @@
   <div class="empty" id="empty"></div>
   <div class="grid" id="grid"></div>
 
-  <div class="hb-box welt" style="--wf:#1f1c17;max-width:1100px;margin:1.6rem auto 0"><span class="hb-bt">Aus der HeiBen-Welt</span>Vom Wissen zum Ordner: der <a style="color:inherit" href="zuhause-ordner.html">HeiBen Zuhause-Ordner</a> — den Notfall- &amp; Familienordner digital anlegen, abhaken und als Register ausdrucken.</div>
+  <p class="note note-lang">Fristen sind Bundesrecht und hier konkret benannt. Gebühren und Bearbeitungszeiten setzen Länder und Kommunen — sie stehen als typische Werte. Was im Einzelfall gilt, sagt das eigene Amt; jeder Steckbrief nennt, welches das ist.</p>
+
+  <div class="hb-box welt" style="--wf:#1f1c17;max-width:1100px;margin:1.6rem auto 0"><span class="hb-bt">Aus der HeiBen-Welt</span>Was das Amt verlangt, liegt im Ordner: der <a style="color:inherit" href="zuhause-ordner.html">HeiBen Zuhause-Ordner</a> sammelt Urkunden, Nachweise und Vollmachten — und <a style="color:inherit" href="papierkram.html">Ordnung im Papierkram</a> sagt, was davon wie lange bleibt.</div>
 
 <p class="foot">HeiBen GmbH i. G. · „Heimat leben" · <a href="mein-heiben.html">Mein HeiBen</a> · <a href="wissen.html">Alle Kompendien</a> · <a href="index.html">Zur Startseite</a></p>
 </div>
 
-<script src="papierkram-daten.js"></script>
+<script src="behoerden-daten.js"></script>
 <script>
-var P=window.PAPIERKRAM, KAT=window.PK_KAT, TYP=window.PK_TYP;
+var P=window.BEHOERDEN, KAT=window.BH_KAT, TYP=window.BH_TYP;
 var state={typ:"alle",kat:"alle",q:"",frist:false};
 function esc(s){return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
 
 /* Kategorie-Auswahl füllen */
 (function(){
   var sel=document.getElementById("kat");
-  var html='<option value="alle">Alle Kategorien</option>';
+  var html='<option value="alle">Alle Lebenslagen</option>';
   Object.keys(KAT).forEach(function(k){html+='<option value="'+k+'">'+esc(KAT[k])+'</option>';});
   sel.innerHTML=html;
   sel.addEventListener("change",function(){state.kat=sel.value;render();});
 })();
 
-/* Dauer-Chips */
+/* Dringlichkeits-Chips */
 Array.prototype.forEach.call(document.querySelectorAll('.chip[data-f]'),function(btn){
   btn.addEventListener("click",function(){
     var f=btn.getAttribute("data-f"), v=btn.getAttribute("data-v");
@@ -126,7 +136,9 @@ function match(p){
   if(state.kat!=="alle" && p.kat!==state.kat) return false;
   if(state.frist && !p.frist) return false;
   if(state.q){
-    var hay=(p.n+" "+(KAT[p.kat]||"")).toLowerCase();
+    /* Auch im Amt und in den Unterlagen suchen: Wer „Zulassungsstelle" oder
+       „eVB" tippt, weiss oft den Namen des Gangs noch gar nicht. */
+    var hay=(p.n+" "+(KAT[p.kat]||"")+" "+p.wo+" "+p.mit).toLowerCase();
     if(hay.indexOf(state.q)<0) return false;
   }
   return true;
@@ -142,28 +154,30 @@ function card(p){
 function detail(p){
   var fristB=p.frist?'<span class="b frist">⏰ Frist</span>':'';
   var frist=p.frist?'<div class="box frist"><span class="bt">⏰ Frist</span>'+esc(p.frist)+'</div>':'';
-  var warn=p.warn?'<div class="box warn"><span class="bt">⚠ Achtung</span>'+esc(p.warn)+'</div>':'';
-  var weg=p.entsorgen?'<div class="box weg"><span class="bt">Richtig entsorgen</span>'+esc(p.entsorgen)+'</div>':'';
+  var warn=p.achtung?'<div class="box warn"><span class="bt">⚠ Achtung</span>'+esc(p.achtung)+'</div>':'';
+  var dig=p.digital?'<div class="box weg"><span class="bt">Geht digital</span>'+esc(p.digital)+'</div>':'';
   return '<div class="dcard">'+
     '<div class="dhead"><div><h2>'+esc(p.n)+'</h2><div class="sub">'+esc(KAT[p.kat]||"")+'</div></div>'+
       '<button class="close" id="dClose">Schließen ✕</button></div>'+
     '<div class="badges"><span class="b typ">'+esc(TYP[p.typ]||"")+'</span><span class="b kat">'+esc(KAT[p.kat]||"")+'</span>'+fristB+'</div>'+
-    '<div class="sec">Wie lange aufheben</div><div class="stext"><b>'+esc(p.dauer)+'</b></div>'+
-    '<div class="sec">Warum es zählt</div><div class="stext">'+esc(p.warum)+'</div>'+
-    '<div class="sec">Ablage</div><div class="stext">'+esc(p.ablage)+'</div>'+
-    '<div class="sec">Digital oder Original?</div><div class="stext">'+esc(p.digital)+'</div>'+
-    frist+warn+weg+
+    frist+
+    '<div class="sec">Wohin</div><div class="stext">'+esc(p.wo)+'</div>'+
+    '<div class="sec">Was mitnehmen</div><div class="mitliste">'+esc(p.mit)+'</div>'+
+    '<div class="zahlen">'+
+      '<div class="zahl"><span class="zl">Kosten</span><span class="zv">'+esc(p.kosten)+'</span></div>'+
+      '<div class="zahl"><span class="zl">Dauer</span><span class="zv">'+esc(p.dauer)+'</span></div>'+
+    '</div>'+
+    '<div class="sec">So läuft es ab</div><div class="stext ablauf">'+esc(p.ablauf)+'</div>'+
+    warn+dig+
     '<div class="tip"><span class="bt">HeiBen-Tipp</span>'+esc(p.tipp)+'</div>'+
   '</div>';
 }
 
 function showDetail(id){
   var p=P.filter(function(x){return x.id===id;})[0]; if(!p)return;
-  /* Die Adresse zeigt jetzt, was man liest — der Link ist damit teilbar.
-     Bewusst replaceState statt location.hash: kein zusätzlicher Eintrag im
-     Browserverlauf (der Zurück-Knopf soll die Seite verlassen, nicht durch
-     Steckbriefe blättern) und kein Sprung des Browsers zur Sprungmarke, der
-     mit dem eigenen scrollIntoView stritte. Gemeldet wird darum von Hand. */
+  /* Wie in allen Kompendien seit Welle 22: Adresse teilbar machen, Station
+     melden. replaceState, damit weder ein Verlaufseintrag noch ein Sprung des
+     Browsers entsteht, der mit dem eigenen scrollIntoView stritte. */
   try{ if(location.hash.slice(1)!==encodeURIComponent(id)){
     history.replaceState(null,"","#"+encodeURIComponent(id)); }
     if(window.HB_STATIONEN) window.HB_STATIONEN.merken(id); }catch(e){}
@@ -175,7 +189,7 @@ function showDetail(id){
 
 function render(){
   var list=P.filter(match);
-  document.getElementById("count").textContent=list.length+" von "+P.length+" Dokumenten";
+  document.getElementById("count").textContent=list.length+" von "+P.length+" Behördengängen";
   var g=document.getElementById("grid");
   var emptyEl=document.getElementById("empty");
   emptyEl.style.display=list.length?"none":"block";
@@ -188,7 +202,7 @@ function render(){
 }
 render();
 
-/* Deep-Link aus wissen.html: seite.html#eintrags-id öffnet den Steckbrief direkt */
+/* Deep-Link aus wissen.html: behoerden.html#eintrags-id öffnet den Steckbrief direkt */
 (function(){
   function ausHash(){var h=decodeURIComponent((location.hash||"").slice(1));if(h){try{showDetail(h);}catch(e){}}}
   ausHash();

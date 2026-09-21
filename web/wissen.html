@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Wissen für Zuhause · HeiBen</title>
-<meta name="description" content="Acht Kompendien, ein Suchfeld: 370 Steckbriefe von der Tomate bis zur Tilgung. Tippe, was dich beschäftigt — jeder Treffer springt direkt hin.">
+<meta name="description" content="Neun Kompendien, ein Suchfeld: 404 Steckbriefe von der Tomate bis zum Amt. Tippe, was dich beschäftigt — jeder Treffer springt direkt hin.">
 <link rel="canonical" href="https://www.heiben.de/wissen.html">
 <meta name="theme-color" content="#f3eee5">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
@@ -22,13 +22,13 @@
 <meta property="og:locale" content="de_DE">
 <meta property="og:url" content="https://www.heiben.de/wissen.html">
 <meta property="og:title" content="Wissen für Zuhause · HeiBen">
-<meta property="og:description" content="Acht Kompendien, ein Suchfeld: 370 Steckbriefe von der Tomate bis zur Tilgung. Tippe, was dich beschäftigt — jeder Treffer springt direkt hin.">
+<meta property="og:description" content="Neun Kompendien, ein Suchfeld: 404 Steckbriefe von der Tomate bis zum Amt. Tippe, was dich beschäftigt — jeder Treffer springt direkt hin.">
 <meta property="og:image" content="assets/hero-light.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Wissen für Zuhause · HeiBen">
-<meta name="twitter:description" content="Acht Kompendien, ein Suchfeld: 370 Steckbriefe von der Tomate bis zur Tilgung. Tippe, was dich beschäftigt — jeder Treffer springt direkt hin.">
+<meta name="twitter:description" content="Neun Kompendien, ein Suchfeld: 404 Steckbriefe von der Tomate bis zum Amt. Tippe, was dich beschäftigt — jeder Treffer springt direkt hin.">
 <meta name="twitter:image" content="assets/hero-light.png">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Wissen für Zuhause · HeiBen","description":"Acht Kompendien, ein Suchfeld: 370 Steckbriefe von der Tomate bis zur Tilgung. Tippe, was dich beschäftigt — jeder Treffer springt direkt hin.","url":"https://www.heiben.de/wissen.html","inLanguage":"de-DE","isPartOf":{"@type":"WebSite","name":"HeiBen","url":"https://www.heiben.de/"},"publisher":{"@type":"Organization","name":"HeiBen Studio GmbH"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Wissen für Zuhause · HeiBen","description":"Neun Kompendien, ein Suchfeld: 404 Steckbriefe von der Tomate bis zum Amt. Tippe, was dich beschäftigt — jeder Treffer springt direkt hin.","url":"https://www.heiben.de/wissen.html","inLanguage":"de-DE","isPartOf":{"@type":"WebSite","name":"HeiBen","url":"https://www.heiben.de/"},"publisher":{"@type":"Organization","name":"HeiBen Studio GmbH"}}</script>
 <!-- /hb:kopf -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;1,400&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
@@ -61,7 +61,7 @@ a.kt .kd{color:var(--ink2);font-size:.9rem;margin-top:.4rem}
 <div class="wrap">
   <div class="eyebrow">HeiBen Studio · Wissen für Zuhause</div>
   <h1><svg class="leaf" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#b04a31" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/><path d="M9 7h7M9 10.5h5"/></svg>Wissen für <em>Zuhause</em></h1>
-  <p class="lead">Acht Kompendien, ein Suchfeld: 370 Steckbriefe von der Tomate bis zur Tilgung. Tippe, was dich beschäftigt — jeder Treffer springt direkt zum passenden Steckbrief im richtigen Kompendium.</p>
+  <p class="lead">Neun Kompendien, ein Suchfeld: 404 Steckbriefe von der Tomate bis zum Amt. Tippe, was dich beschäftigt — jeder Treffer springt direkt zum passenden Steckbrief im richtigen Kompendium.</p>
 
   <div class="controls">
     <div class="row">
@@ -104,6 +104,7 @@ a.kt .kd{color:var(--ink2);font-size:.9rem;margin-top:.4rem}
 <script src="erstehilfe-daten.js"></script>
 <script src="auto-daten.js"></script>
 <script src="finanzen-daten.js"></script>
+<script src="behoerden-daten.js"></script>
 <script>
 function esc(s){return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
 
@@ -115,7 +116,8 @@ var KOMP=[
  {key:"digital",     label:"Sicher im Netz",     url:"digital.html",     farbe:"#4a5c39", arr:window.DIGITAL,      kat:window.DS_KAT,  desc:"Betrug erkennen, Konten & Familie schützen."},
  {key:"erstehilfe",  label:"Erste Hilfe",        url:"erstehilfe.html",  farbe:"#792d29", arr:window.ERSTEHILFE,   kat:window.EH_KAT,  desc:"Ruhig & richtig handeln — vom Pflaster bis zur 112."},
  {key:"auto",        label:"Rund ums Auto",      url:"auto.html",        farbe:"#524a3e", arr:window.AUTO,         kat:window.AU_KAT,  desc:"Panne, Wartung, Kosten — souverän statt hilflos."},
- {key:"finanzen",    label:"Finanz-Grundwissen", url:"finanzen.html",    farbe:"#1f1c17", arr:window.FINANZEN,     kat:window.FG_KAT,  desc:"Geld verstehen, Wohnen entscheiden — mit Faustregeln."}
+ {key:"finanzen",    label:"Finanz-Grundwissen", url:"finanzen.html",    farbe:"#1f1c17", arr:window.FINANZEN,     kat:window.FG_KAT,  desc:"Geld verstehen, Wohnen entscheiden — mit Faustregeln."},
+ {key:"behoerden",   label:"Behördengänge",      url:"behoerden.html",   farbe:"#a97a1d", arr:window.BEHOERDEN,    kat:window.BH_KAT,  desc:"Welches Amt, welche Frist, welche Unterlagen."}
 ];
 
 /* Volltext-Index: alle String-Felder (auch in Arrays) jedes Eintrags */

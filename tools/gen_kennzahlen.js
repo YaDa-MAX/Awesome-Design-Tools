@@ -6,7 +6,7 @@ const fs=require('fs'), vm=require('vm');
 const sb={window:{},document:{addEventListener(){}},location:{hash:'',search:''},
   localStorage:{getItem(){return null},setItem(){}},console};
 sb.window=sb; vm.createContext(sb);
-for(const f of ['pflanzen','haushalt','lebensmittel','papierkram','digital','erstehilfe','auto','finanzen','lebenswissen','lernpfade'])
+for(const f of ['pflanzen','haushalt','lebensmittel','papierkram','digital','erstehilfe','auto','finanzen','behoerden','lebenswissen','lernpfade'])
   vm.runInContext(fs.readFileSync(f+'-daten.js','utf8'), sb, {filename:f});
 let steck=0,komp=0;
 for(const k of Object.keys(sb)){const v=sb[k];

@@ -1,5 +1,5 @@
 /* HeiBen Service-Worker — Offline-Fähigkeit & App-Shell (v20260615-1323) */
-const CACHE='heiben-v20260622-3025';
+const CACHE='heiben-v20260622-3026';
 const PRECACHE=[
   /* GENERIERT von tools/gen_sw.js — nicht von Hand pflegen.
      Kaltstart-Huelle; Grosses und vendor/ kommt zur Laufzeit in den Cache. */
@@ -9,6 +9,7 @@ const PRECACHE=[
   "api.html",
   "auto.html",
   "begriffskarten.html",
+  "behoerden.html",
   "bestellverwaltung.html",
   "datenschutz.html",
   "designsystem.html",
@@ -119,6 +120,7 @@ const PRECACHE=[
   "assets/wordmark-holding.png",
   "assets/wordmark-on-dark.png",
   "auto-daten.js",
+  "behoerden-daten.js",
   "digital-daten.js",
   "erstehilfe-daten.js",
   "finanzen-daten.js",

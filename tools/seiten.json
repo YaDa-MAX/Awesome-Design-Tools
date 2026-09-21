@@ -1,8 +1,8 @@
 {
  "_hinweis": "Registry fuer tools/gen_kopf.js. Von Hand pflegen: neue Seite hier eintragen, dann `node ../tools/gen_kopf.js` in web/ laufen lassen.",
  "_basis": "https://www.heiben.de/",
- "_typen": "start | welt | weltseite | kompendium | werkzeug | wissen | konto | holding | legal | intern (noindex) | standalone (wird ausgelassen) · werkzeug-Eintraege tragen zusaetzlich 'gruppe' fuer das Register"
-  ,"_felder": "Pflicht: welt, typ, titel, beschreibung. Optional: gruppe (werkzeug) · nav:false (Seite bringt eigene Navigation mit) · farbe (theme-color, Vorgabe #f3eee5) · bild (Vorschaubild beim Teilen, Vorgabe assets/hero-light.png)",
+ "_typen": "start | welt | weltseite | kompendium | werkzeug | wissen | konto | holding | legal | intern (noindex) | standalone (wird ausgelassen) · werkzeug-Eintraege tragen zusaetzlich 'gruppe' fuer das Register",
+ "_felder": "Pflicht: welt, typ, titel, beschreibung. Optional: gruppe (werkzeug) · nav:false (Seite bringt eigene Navigation mit) · farbe (theme-color, Vorgabe #f3eee5) · bild (Vorschaubild beim Teilen, Vorgabe assets/hero-light.png)",
  "seiten": {
   "404.html": {
    "welt": "holding",
@@ -39,6 +39,12 @@
    "typ": "wissen",
    "titel": "Begriffskarten · HeiBen",
    "beschreibung": "Begriff lesen, kurz überlegen, umdrehen: 544 Karten mit Allgemein- und Alltagswissen. Fällige Karten kommen genau dann wieder, wenn es nötig ist."
+  },
+  "behoerden.html": {
+   "welt": "wissen",
+   "typ": "kompendium",
+   "titel": "Behördengänge · HeiBen",
+   "beschreibung": "Welches Amt, welche Frist, welche Unterlagen — 34 Behördengänge im Steckbrief. Vom Ummelden über Elterngeld bis zur Sterbeurkunde, mit Kosten, Dauer und dem teuersten Fehler."
   },
   "bestellverwaltung.html": {
    "welt": "holding",
@@ -642,7 +648,7 @@
    "welt": "wissen",
    "typ": "wissen",
    "titel": "Wissen für Zuhause · HeiBen",
-   "beschreibung": "Acht Kompendien, ein Suchfeld: 370 Steckbriefe von der Tomate bis zur Tilgung. Tippe, was dich beschäftigt — jeder Treffer springt direkt hin."
+   "beschreibung": "Neun Kompendien, ein Suchfeld: 404 Steckbriefe von der Tomate bis zum Amt. Tippe, was dich beschäftigt — jeder Treffer springt direkt hin."
   },
   "wissensquiz.html": {
    "welt": "wissen",

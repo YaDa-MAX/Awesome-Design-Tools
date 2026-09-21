@@ -16,7 +16,7 @@ Statisches HTML/JS/CSS-**PWA ohne Build-Schritt**, offline-fähig, localStorage.
 ## Pflicht-Workflow nach JEDER Änderung unter web/
 1. **Precache + Service-Worker-Version**: `cd web && node ../tools/gen_sw.js` — erzeugt die
    `PRECACHE`-Liste aus dem Dateibestand (Referenzen aus HTML **und** `url()` in Stylesheets,
-   inline `<style>` eingeschlossen) UND zählt die Cache-Version hoch (aktuell **-3025**).
+   inline `<style>` eingeschlossen) UND zählt die Cache-Version hoch (aktuell **-3026**).
    Nie von Hand pflegen. Standalone-Seiten (`typ` in `tools/seiten.json`) bleiben automatisch
    draußen; `vendor/` und Dateien > 150 KB kommen zur Laufzeit in den Cache (der fetch-Handler
    macht stale-while-revalidate). Wer nur die Version braucht, bumpt trotzdem über den Generator.
@@ -223,6 +223,16 @@ Statisches HTML/JS/CSS-**PWA ohne Build-Schritt**, offline-fähig, localStorage.
   kein Verlaufseintrag) — Steckbrief-Links sind damit teilbar. **Der Deep-Link beim Laden
   wird vom Inline-Skript geöffnet, also VOR der `defer`-Datei** — `hb-stationen.js` trägt
   ihn bei `DOMContentLoaded` nach, aber nur wenn die Karte `[data-id]` existiert.
+  V3-W23 fertig: **neuntes Kompendium „Behördengänge"** (`behoerden.html`,
+  `behoerden-daten.js`) — 34 Steckbriefe in sieben Lebenslagen, 20 mit benannter Frist.
+  Fristen mit Norm (§ 17 BMG, § 38 SGB III …), Gebühren bewusst als typische Werte mit
+  sichtbarem Hinweis. Registry-Eintrag genügte: `gen_kopf.js` hängte **acht Pflichtdateien
+  selbst an**. Mitgezogen: neunte Kachel in `wissen.html`, Säulenpfad `s8-behoerden`,
+  `gen_kennzahlen.js` kannte nur acht Kompendien. Kennzahlen 8 → **9 Kompendien**,
+  370 → **404 Steckbriefe** (stand 5× in `wissen.html` + Registry).
+  **Mitgefunden:** ein gewechselter Hash bewirkte auf einer schon offenen Seite nichts —
+  fiel erst auf, seit W22 die Links teilbar machte. Alle **neun** Kompendien haben jetzt
+  einen `hashchange`-Hörer; keine Schleife, weil `showDetail()` `replaceState` nutzt.
 - `web/startseite-klassisch.html` = **die Startseite bis W10**, archiviert (standalone, nicht
   verlinkt, nicht precached). Sie ist die einzige Seite, die `hb-menue.css` und `hb-suche-nav.js`
   noch braucht.
